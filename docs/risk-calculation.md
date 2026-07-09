@@ -41,12 +41,14 @@ Each dimension is computed independently, **clamped to 0–100**, then combined.
 ## Overall score equation
 
 ```
-overall = round(
+overallRaw =
   counterparty × 0.35
 + product      × 0.20
 + route        × 0.15
 + structure    × 0.30
-)
+
+overall = round(overallRaw)   // display only
+tier    = getTier(overallRaw) // tier & financing use unrounded value
 ```
 
 Weights are defined in `DIMENSION_WEIGHTS` (`src/lib/scoring-constants.ts`).
@@ -70,10 +72,12 @@ Sum of four factors, clamped 0–100:
 
 | Factor | Scoring |
 |--------|---------|
-| Years in business | `null` → 15; ≤5 → 10; ≤10 → 20; ≤20 → 30; >20 → **40** |
+| Years in business | `null` → **12**; ≤5 → 10; ≤10 → 20; ≤20 → 30; >20 → **40** |
 | License valid | `true` → 15; `false` → 0; unknown → 8 |
-| Platform completion rate | `null` → 15; else `min(25, rate × 0.25)` |
-| Avg payment delay (days) | `null` → 15; 0 → 20; ≤5 → 15; ≤15 → 8; else → 0 |
+| Platform completion rate | `null` → **3**; else `min(25, rate × 0.25)` |
+| Avg payment delay (days) | `null` → **4**; 0 → 20; ≤5 → 15; ≤15 → 8; else → 0 |
+
+Neutral (`null`) defaults sit between the worst and next-worst confirmed bands so disclosing a bad value always scores worse than leaving unknown.
 
 ### Supplier score
 
@@ -81,9 +85,9 @@ Same structure as buyer, with different caps on two factors:
 
 | Factor | Scoring |
 |--------|---------|
-| Years in business | max **30** (not 40) |
-| Platform completion rate | `min(30, rate × 0.3)` |
-| Quality rejection % | `null` → 13; 0% → 25; ≤3% → 18; ≤8% → 10; else → 0 |
+| Years in business | max **30** (not 40); same `null` → **12** bands as buyer |
+| Platform completion rate | `null` → **4**; else `min(30, rate × 0.3)` |
+| Quality rejection % | `null` → **5**; 0% → 25; ≤3% → 18; ≤8% → 10; else → 0 |
 
 ### Counterparty blend equation
 

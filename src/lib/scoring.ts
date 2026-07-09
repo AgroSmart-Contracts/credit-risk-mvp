@@ -21,15 +21,66 @@ import { DIMENSION_WEIGHTS } from "./scoring-constants";
 const CRAM_PRODUCT_BASE = 70;
 const CRAM_ROUTE_BASE = 70;
 
+export interface ScoreFactor {
+  label: string;
+  input: string;
+  points: number;
+  weightedContribution: number;
+}
+
+export interface DimensionBreakdown {
+  value: number;
+  raw: number;
+  headroom: number;
+  factors: ScoreFactor[];
+}
+
 function clamp(value: number, min = 0, max = 100): number {
   return Math.min(max, Math.max(min, value));
 }
 
+function factor(
+  label: string,
+  input: string,
+  points: number,
+  overallWeight: number,
+): ScoreFactor {
+  return {
+    label,
+    input,
+    points,
+    weightedContribution: points * overallWeight,
+  };
+}
+
+function buildDimensionBreakdown(
+  raw: number,
+  factors: ScoreFactor[],
+): DimensionBreakdown {
+  return {
+    value: Math.round(clamp(raw)),
+    raw,
+    headroom: Math.max(0, 100 - raw),
+    factors,
+  };
+}
+
+function formatYearsInput(years: number | null): string {
+  if (years === null) return "Not disclosed";
+  return `${years} year${years === 1 ? "" : "s"}`;
+}
+
+function formatLicenseInput(valid: boolean | null): string {
+  if (valid === true) return "Valid";
+  if (valid === false) return "Invalid";
+  return "Not confirmed";
+}
+
 function yearsInBusinessScore(years: number | null, max: number): number {
-  if (years === null) return 15;
+  if (years === null) return 12;
   if (years <= 5) return 10;
   if (years <= 10) return 20;
-  if (years <= 20) return max === 30 ? 30 : 30;
+  if (years <= 20) return 30;
   return max;
 }
 
@@ -39,54 +90,120 @@ function licenseScore(valid: boolean | null): number {
   return 8;
 }
 
-export function computeBuyerScore(deal: Deal): number {
+function buyerCompletionScore(rate: number | null): number {
+  if (rate === null) return 3;
+  return Math.min(25, rate * 0.25);
+}
+
+function supplierCompletionScore(rate: number | null): number {
+  if (rate === null) return 4;
+  return Math.min(30, rate * 0.3);
+}
+
+function buyerPaymentDelayScore(days: number | null | undefined): number {
+  if (days === null || days === undefined) return 4;
+  if (days === 0) return 20;
+  if (days <= 5) return 15;
+  if (days <= 15) return 8;
+  return 0;
+}
+
+function supplierQualityScore(rejection: number | null | undefined): number {
+  if (rejection === null || rejection === undefined) return 5;
+  if (rejection === 0) return 25;
+  if (rejection <= 3) return 18;
+  if (rejection <= 8) return 10;
+  return 0;
+}
+
+function formatCompletionInput(rate: number | null): string {
+  if (rate === null) return "Not disclosed";
+  return `${rate}%`;
+}
+
+function formatPaymentDelayInput(days: number | null | undefined): string {
+  if (days === null || days === undefined) return "Not disclosed";
+  if (days === 0) return "0 days (on time)";
+  return `${days} days avg delay`;
+}
+
+function formatRejectionInput(rate: number | null | undefined): string {
+  if (rate === null || rate === undefined) return "Not disclosed";
+  return `${rate}%`;
+}
+
+function computeBuyerScoreDetail(deal: Deal): DimensionBreakdown {
   const { buyer } = deal;
   const years = yearsInBusinessScore(buyer.yearsInBusiness, 40);
   const license = licenseScore(buyer.licenseValid);
-  const completion =
-    buyer.platformCompletionRate === null
-      ? 15
-      : Math.min(25, buyer.platformCompletionRate * 0.25);
-  let paymentDelay: number;
-  if (
-    buyer.avgPaymentDelayDays === null ||
-    buyer.avgPaymentDelayDays === undefined
-  ) {
-    paymentDelay = 15;
-  } else if (buyer.avgPaymentDelayDays === 0) {
-    paymentDelay = 20;
-  } else if (buyer.avgPaymentDelayDays <= 5) {
-    paymentDelay = 15;
-  } else if (buyer.avgPaymentDelayDays <= 15) {
-    paymentDelay = 8;
-  } else {
-    paymentDelay = 0;
-  }
-  return clamp(years + license + completion + paymentDelay);
+  const completion = buyerCompletionScore(buyer.platformCompletionRate);
+  const paymentDelay = buyerPaymentDelayScore(buyer.avgPaymentDelayDays);
+  const raw = years + license + completion + paymentDelay;
+  const weight = DIMENSION_WEIGHTS.counterparty * 0.6;
+
+  return buildDimensionBreakdown(raw, [
+    factor(
+      "Years in business",
+      formatYearsInput(buyer.yearsInBusiness),
+      years,
+      weight,
+    ),
+    factor(
+      "Import/export license",
+      formatLicenseInput(buyer.licenseValid),
+      license,
+      weight,
+    ),
+    factor(
+      "Platform completion rate",
+      formatCompletionInput(buyer.platformCompletionRate),
+      completion,
+      weight,
+    ),
+    factor(
+      "Avg payment delay",
+      formatPaymentDelayInput(buyer.avgPaymentDelayDays),
+      paymentDelay,
+      weight,
+    ),
+  ]);
 }
 
-export function computeSupplierScore(deal: Deal): number {
+function computeSupplierScoreDetail(deal: Deal): DimensionBreakdown {
   const { supplier } = deal;
   const years = yearsInBusinessScore(supplier.yearsInBusiness, 30);
   const license = licenseScore(supplier.licenseValid);
-  const completion =
-    supplier.platformCompletionRate === null
-      ? 15
-      : Math.min(30, supplier.platformCompletionRate * 0.3);
-  const rejection = supplier.qualityRejectionRatePct;
-  let quality: number;
-  if (rejection === null || rejection === undefined) {
-    quality = 13;
-  } else if (rejection === 0) {
-    quality = 25;
-  } else if (rejection <= 3) {
-    quality = 18;
-  } else if (rejection <= 8) {
-    quality = 10;
-  } else {
-    quality = 0;
-  }
-  return clamp(years + license + completion + quality);
+  const completion = supplierCompletionScore(supplier.platformCompletionRate);
+  const quality = supplierQualityScore(supplier.qualityRejectionRatePct);
+  const raw = years + license + completion + quality;
+  const weight = DIMENSION_WEIGHTS.counterparty * 0.4;
+
+  return buildDimensionBreakdown(raw, [
+    factor(
+      "Years in business",
+      formatYearsInput(supplier.yearsInBusiness),
+      years,
+      weight,
+    ),
+    factor(
+      "Export license",
+      formatLicenseInput(supplier.licenseValid),
+      license,
+      weight,
+    ),
+    factor(
+      "Platform completion rate",
+      formatCompletionInput(supplier.platformCompletionRate),
+      completion,
+      weight,
+    ),
+    factor(
+      "Quality rejection rate",
+      formatRejectionInput(supplier.qualityRejectionRatePct),
+      quality,
+      weight,
+    ),
+  ]);
 }
 
 function relationshipAdjustment(deal: Deal): number {
@@ -95,6 +212,21 @@ function relationshipAdjustment(deal: Deal): number {
   else if (deal.priorDealsBetweenParties >= 1) adj += 5;
   if (deal.relationshipAgeMonths > 12) adj += 5;
   return adj;
+}
+
+function relationshipInput(deal: Deal): string {
+  const parts: string[] = [];
+  if (deal.priorDealsBetweenParties >= 4) {
+    parts.push(`${deal.priorDealsBetweenParties} prior deals`);
+  } else if (deal.priorDealsBetweenParties >= 1) {
+    parts.push(`${deal.priorDealsBetweenParties} prior deal(s)`);
+  } else {
+    parts.push("No prior deals");
+  }
+  if (deal.relationshipAgeMonths > 12) {
+    parts.push(`${deal.relationshipAgeMonths} months relationship`);
+  }
+  return parts.join(" · ");
 }
 
 function externalCreditBonus(deal: Deal): number {
@@ -117,38 +249,64 @@ function externalCreditBonus(deal: Deal): number {
   return deal.externalCreditSignal || deal.buyer.creditRating ? 8 : 0;
 }
 
-export function computeCounterpartyScore(deal: Deal): number {
-  const buyer = computeBuyerScore(deal);
-  const supplier = computeSupplierScore(deal);
-  const relationship = relationshipAdjustment(deal);
-  const external = externalCreditBonus(deal);
-  return clamp(buyer * 0.6 + supplier * 0.4 + relationship + external);
+function externalCreditInput(deal: Deal): string {
+  const coface = deal.cofaceCoverage;
+  if (coface?.coveragePct !== null && coface?.coveragePct !== undefined) {
+    return `Coface ${coface.coveragePct}% coverage`;
+  }
+  if (coface?.coverageAmountUSD) {
+    return `Coface USD ${coface.coverageAmountUSD.toLocaleString()} limit`;
+  }
+  if (deal.externalCreditSignal || deal.buyer.creditRating) {
+    return "External credit signal on file";
+  }
+  return "None";
 }
 
-/** CRAM Table 1 — dimension B: perishability + grade */
-export function computeProductScore(deal: Deal): number {
-  const productEntry = lookupProductRisk(deal.product);
-  const perishabilityPts =
-    productEntry?.perishabilityPoints ??
-    getPerishabilityPoints(deal.product);
+function computeCounterpartyScoreDetail(deal: Deal): DimensionBreakdown {
+  const buyerDetail = computeBuyerScoreDetail(deal);
+  const supplierDetail = computeSupplierScoreDetail(deal);
+  const relationship = relationshipAdjustment(deal);
+  const external = externalCreditBonus(deal);
+  const raw =
+    buyerDetail.raw * 0.6 + supplierDetail.raw * 0.4 + relationship + external;
+  const weight = DIMENSION_WEIGHTS.counterparty;
 
-  const coldChainAdj =
-    deal.coldChainRequired && deal.perishabilityClass !== "Non-Perishable"
-      ? -8
-      : 0;
-  const gradeAdj =
-    deal.qualityGrade === "Grade A / Class I"
-      ? 8
-      : deal.qualityGrade === "Grade B / Class II"
-        ? 0
-        : -10;
+  const factors: ScoreFactor[] = [
+    ...buyerDetail.factors.map((f) => ({
+      ...f,
+      label: `Buyer — ${f.label}`,
+      points: f.points * 0.6,
+      weightedContribution: f.points * 0.6 * weight,
+    })),
+    ...supplierDetail.factors.map((f) => ({
+      ...f,
+      label: `Supplier — ${f.label}`,
+      points: f.points * 0.4,
+      weightedContribution: f.points * 0.4 * weight,
+    })),
+    factor("Relationship history", relationshipInput(deal), relationship, weight),
+    factor(
+      "External credit (Coface)",
+      externalCreditInput(deal),
+      external,
+      weight,
+    ),
+  ];
 
-  const eudrAdj =
-    isEudrRequired(deal.product) && isEuDestination(deal.destination) ? -12 : 0;
+  return buildDimensionBreakdown(raw, factors);
+}
 
-  return clamp(
-    CRAM_PRODUCT_BASE + perishabilityPts + coldChainAdj + gradeAdj + eudrAdj,
-  );
+export function computeBuyerScore(deal: Deal): number {
+  return computeBuyerScoreDetail(deal).value;
+}
+
+export function computeSupplierScore(deal: Deal): number {
+  return computeSupplierScoreDetail(deal).value;
+}
+
+export function computeCounterpartyScore(deal: Deal): number {
+  return computeCounterpartyScoreDetail(deal).value;
 }
 
 function isEuDestination(destination: string): boolean {
@@ -164,7 +322,56 @@ function isEuDestination(destination: string): boolean {
   );
 }
 
-/** Incoterm risk allocation per MVP product plan */
+function computeProductScoreDetail(deal: Deal): DimensionBreakdown {
+  const productEntry = lookupProductRisk(deal.product);
+  const perishabilityPts =
+    productEntry?.perishabilityPoints ?? getPerishabilityPoints(deal.product);
+  const coldChainAdj =
+    deal.coldChainRequired && deal.perishabilityClass !== "Non-Perishable"
+      ? -8
+      : 0;
+  const gradeAdj =
+    deal.qualityGrade === "Grade A / Class I"
+      ? 8
+      : deal.qualityGrade === "Grade B / Class II"
+        ? 0
+        : -10;
+  const eudrAdj =
+    isEudrRequired(deal.product) && isEuDestination(deal.destination) ? -12 : 0;
+  const raw =
+    CRAM_PRODUCT_BASE + perishabilityPts + coldChainAdj + gradeAdj + eudrAdj;
+  const weight = DIMENSION_WEIGHTS.product;
+
+  return buildDimensionBreakdown(raw, [
+    factor("CRAM base", "70 (neutral product anchor)", CRAM_PRODUCT_BASE, weight),
+    factor(
+      "Perishability class",
+      productEntry?.perishabilityClass ?? deal.perishabilityClass,
+      perishabilityPts,
+      weight,
+    ),
+    factor(
+      "Cold chain",
+      deal.coldChainRequired ? "Required" : "Not required",
+      coldChainAdj,
+      weight,
+    ),
+    factor("Quality grade", deal.qualityGrade, gradeAdj, weight),
+    factor(
+      "EUDR compliance",
+      isEudrRequired(deal.product) && isEuDestination(deal.destination)
+        ? "EU destination — EUDR applies"
+        : "Not applicable",
+      eudrAdj,
+      weight,
+    ),
+  ]);
+}
+
+export function computeProductScore(deal: Deal): number {
+  return computeProductScoreDetail(deal).value;
+}
+
 function incotermAdjustment(incoterm: string): number {
   const map: Record<string, number> = {
     EXW: -5,
@@ -188,8 +395,7 @@ export function resolveDealCorridorFlag(deal: Deal): CorridorRiskFlag {
   }
 
   const routeEntry = lookupRouteRisk(deal.origin, deal.destination);
-  const corridorDefault =
-    routeEntry?.corridorDefaultRiskFlag ?? "Medium";
+  const corridorDefault = routeEntry?.corridorDefaultRiskFlag ?? "Medium";
 
   return resolveRouteRiskFlag(
     deal.product,
@@ -200,35 +406,58 @@ export function resolveDealCorridorFlag(deal: Deal): CorridorRiskFlag {
   ).flag;
 }
 
-/** CRAM Tables 2+3 — dimension C: transit, pair override, customs */
-export function computeRouteScore(deal: Deal): number {
+function computeRouteScoreDetail(deal: Deal): DimensionBreakdown {
   const routeEntry = lookupRouteRisk(deal.origin, deal.destination);
   const corridorFlag = resolveDealCorridorFlag(deal);
-
   const transitAdj = cramTransitPoints(
     deal.perishabilityClass,
     deal.estimatedTransitDays,
   );
   const flagAdj = cramRouteFlagPoints(corridorFlag);
   const transshipAdj = cramTransshipmentPoints(deal.numberOfTransshipments);
-  const customsAdj = cramCustomsPoints(
-    routeEntry?.customsClearanceDaysMax ?? null,
-  );
-
-  return clamp(
+  const customsClearance = routeEntry?.customsClearanceDaysMax ?? null;
+  const customsAdj = cramCustomsPoints(customsClearance);
+  const incotermAdj = incotermAdjustment(deal.incoterm);
+  const raw =
     CRAM_ROUTE_BASE +
-      transitAdj +
-      flagAdj +
-      transshipAdj +
-      customsAdj +
-      incotermAdjustment(deal.incoterm),
-  );
+    transitAdj +
+    flagAdj +
+    transshipAdj +
+    customsAdj +
+    incotermAdj;
+  const weight = DIMENSION_WEIGHTS.route;
+
+  return buildDimensionBreakdown(raw, [
+    factor("CRAM base", "70 (neutral route anchor)", CRAM_ROUTE_BASE, weight),
+    factor(
+      "Transit vs shelf life",
+      `${deal.estimatedTransitDays} days (${deal.perishabilityClass})`,
+      transitAdj,
+      weight,
+    ),
+    factor("Corridor risk flag", corridorFlag, flagAdj, weight),
+    factor(
+      "Transshipments",
+      String(deal.numberOfTransshipments),
+      transshipAdj,
+      weight,
+    ),
+    factor(
+      "Customs clearance",
+      customsClearance === null
+        ? "Not disclosed"
+        : `≤${customsClearance} days`,
+      customsAdj,
+      weight,
+    ),
+    factor("Incoterm", deal.incoterm || "Not set", incotermAdj, weight),
+  ]);
 }
 
-/**
- * Payment terms adjustment — per MVP plan & banking framework.
- * Extended terms increase default exposure window.
- */
+export function computeRouteScore(deal: Deal): number {
+  return computeRouteScoreDetail(deal).value;
+}
+
 export function paymentTermsAdjustment(paymentTerms: string): number {
   const t = paymentTerms.toLowerCase();
   if (t.includes("cash in advance") || t.includes("prepaid")) return 15;
@@ -248,15 +477,16 @@ function structureRelationshipAdjustment(deal: Deal): number {
   return -8;
 }
 
-export function computeStructureScore(deal: Deal): number {
-  let base: number;
-  const adv = deal.advancePaymentPct;
-  if (adv === 0) base = 20;
-  else if (adv <= 19) base = 35;
-  else if (adv <= 39) base = 55;
-  else if (adv <= 59) base = 75;
-  else base = 90;
+function advanceBaseScore(advancePct: number): number {
+  if (advancePct === 0) return 20;
+  if (advancePct <= 19) return 35;
+  if (advancePct <= 39) return 55;
+  if (advancePct <= 59) return 75;
+  return 90;
+}
 
+function computeStructureScoreDetail(deal: Deal): DimensionBreakdown {
+  const base = advanceBaseScore(deal.advancePaymentPct);
   const collateralBonus: Record<string, number> = {
     None: 0,
     "Personal Guarantee": 5,
@@ -265,38 +495,69 @@ export function computeStructureScore(deal: Deal): number {
     "Bank Guarantee": 15,
     "Letter of Credit": 15,
   };
-
   const insuranceBonus: Record<string, number> = {
     None: 0,
     Basic: 5,
     Comprehensive: 10,
     "All Risk": 15,
   };
+  const collateralPts = collateralBonus[deal.collateralType] ?? 0;
+  const insurancePts = insuranceBonus[deal.insuranceCoverage] ?? 0;
+  const paymentAdj = paymentTermsAdjustment(deal.paymentTerms);
+  const relationshipAdj = structureRelationshipAdjustment(deal);
+  const raw = base + collateralPts + insurancePts + paymentAdj + relationshipAdj;
+  const weight = DIMENSION_WEIGHTS.structure;
 
-  return clamp(
-    base +
-      (collateralBonus[deal.collateralType] ?? 0) +
-      (insuranceBonus[deal.insuranceCoverage] ?? 0) +
-      paymentTermsAdjustment(deal.paymentTerms) +
-      structureRelationshipAdjustment(deal),
-  );
+  return buildDimensionBreakdown(raw, [
+    factor(
+      "Advance payment",
+      `${deal.advancePaymentPct}%`,
+      base,
+      weight,
+    ),
+    factor("Collateral", deal.collateralType, collateralPts, weight),
+    factor("Insurance", deal.insuranceCoverage, insurancePts, weight),
+    factor(
+      "Payment terms",
+      deal.paymentTerms || "Not set",
+      paymentAdj,
+      weight,
+    ),
+    factor(
+      "Deal history between parties",
+      deal.priorDealsBetweenParties >= 5
+        ? `${deal.priorDealsBetweenParties} prior deals`
+        : deal.priorDealsBetweenParties >= 1
+          ? `${deal.priorDealsBetweenParties} prior deal(s)`
+          : "First deal",
+      relationshipAdj,
+      weight,
+    ),
+  ]);
 }
 
-export function getTier(overall: number): RiskTier {
-  if (overall >= 75) return "Low Risk";
-  if (overall >= 60) return "Medium-Low Risk";
-  if (overall >= 45) return "Medium-High Risk";
+export function computeStructureScore(deal: Deal): number {
+  return computeStructureScoreDetail(deal).value;
+}
+
+export function getTier(overallRaw: number): RiskTier {
+  if (overallRaw >= 75) return "Low Risk";
+  if (overallRaw >= 60) return "Medium-Low Risk";
+  if (overallRaw >= 45) return "Medium-High Risk";
   return "High Risk";
 }
 
 export interface ScoreBreakdown {
   buyer: number;
   supplier: number;
-  counterparty: number;
-  product: number;
-  route: number;
-  structure: number;
+  buyerDetail: DimensionBreakdown;
+  supplierDetail: DimensionBreakdown;
+  counterparty: DimensionBreakdown;
+  product: DimensionBreakdown;
+  route: DimensionBreakdown;
+  structure: DimensionBreakdown;
   overall: number;
+  overallRaw: number;
   tier: RiskTier;
   externalCreditBonus: number;
   paymentTermsAdj: number;
@@ -306,31 +567,33 @@ export interface ScoreBreakdown {
 }
 
 export function computeOverallScore(deal: Deal): ScoreBreakdown {
-  const buyer = Math.round(computeBuyerScore(deal));
-  const supplier = Math.round(computeSupplierScore(deal));
-  const counterparty = Math.round(computeCounterpartyScore(deal));
-  const product = Math.round(computeProductScore(deal));
-  const route = Math.round(computeRouteScore(deal));
-  const structure = Math.round(computeStructureScore(deal));
+  const buyerDetail = computeBuyerScoreDetail(deal);
+  const supplierDetail = computeSupplierScoreDetail(deal);
+  const counterparty = computeCounterpartyScoreDetail(deal);
+  const product = computeProductScoreDetail(deal);
+  const route = computeRouteScoreDetail(deal);
+  const structure = computeStructureScoreDetail(deal);
   const corridorFlag = resolveDealCorridorFlag(deal);
   const productEntry = lookupProductRisk(deal.product);
 
-  const overall = Math.round(
-    counterparty * DIMENSION_WEIGHTS.counterparty +
-      product * DIMENSION_WEIGHTS.product +
-      route * DIMENSION_WEIGHTS.route +
-      structure * DIMENSION_WEIGHTS.structure,
-  );
+  const overallRaw =
+    counterparty.raw * DIMENSION_WEIGHTS.counterparty +
+    product.raw * DIMENSION_WEIGHTS.product +
+    route.raw * DIMENSION_WEIGHTS.route +
+    structure.raw * DIMENSION_WEIGHTS.structure;
 
   return {
-    buyer,
-    supplier,
+    buyer: buyerDetail.value,
+    supplier: supplierDetail.value,
+    buyerDetail,
+    supplierDetail,
     counterparty,
     product,
     route,
     structure,
-    overall,
-    tier: getTier(overall),
+    overall: Math.round(overallRaw),
+    overallRaw,
+    tier: getTier(overallRaw),
     externalCreditBonus: externalCreditBonus(deal),
     paymentTermsAdj: paymentTermsAdjustment(deal.paymentTerms),
     corridorFlag,
@@ -344,9 +607,15 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
   };
 }
 
-/** Expose normalized 3-level flag for legacy consumers */
 export function getNormalizedRouteRiskFlag(
   deal: Deal,
 ): "Low" | "Medium" | "High" {
   return normalizeRouteRiskFlag(resolveDealCorridorFlag(deal));
+}
+
+if (import.meta.env?.DEV) {
+  (globalThis as { __printScoreBreakdown?: (deal: Deal) => void }).__printScoreBreakdown =
+    (deal: Deal) => {
+      console.log(JSON.stringify(computeOverallScore(deal), null, 2));
+    };
 }

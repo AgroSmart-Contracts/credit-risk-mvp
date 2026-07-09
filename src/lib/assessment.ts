@@ -96,34 +96,69 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
   const scores = computeOverallScore(deal);
   const factors = analyzeRiskFactors(deal, scores);
 
+  if (import.meta.env.DEV) {
+    console.group(`[score] ${deal.dealRef}`);
+    console.log("overallRaw:", scores.overallRaw.toFixed(2), "→ display:", scores.overall);
+    console.log("tier:", scores.tier);
+    for (const key of ["counterparty", "product", "route", "structure"] as const) {
+      const dim = scores[key];
+      console.log(
+        `${key}: raw=${dim.raw.toFixed(1)} clamped=${dim.value} headroom=${dim.headroom.toFixed(1)}`,
+      );
+      console.table(dim.factors);
+    }
+    console.groupEnd();
+  }
+
   return {
     counterparty: {
       label: "Counterparty",
-      score: scores.counterparty,
+      score: scores.counterparty.value,
       weight: DIMENSION_WEIGHTS.counterparty,
       why: counterpartyWhy(deal, scores.externalCreditBonus),
+      headroom: scores.counterparty.headroom,
+      breakdown: scores.counterparty,
     },
     product: {
       label: "Product",
-      score: scores.product,
+      score: scores.product.value,
       weight: DIMENSION_WEIGHTS.product,
       why: productWhy(deal),
+      headroom: scores.product.headroom,
+      breakdown: scores.product,
     },
     route: {
       label: "Trade Route",
-      score: scores.route,
+      score: scores.route.value,
       weight: DIMENSION_WEIGHTS.route,
       why: routeWhy(deal, scores),
+      headroom: scores.route.headroom,
+      breakdown: scores.route,
     },
     structure: {
       label: "Deal Structure",
-      score: scores.structure,
+      score: scores.structure.value,
       weight: DIMENSION_WEIGHTS.structure,
       why: structureWhy(deal, scores.paymentTermsAdj),
+      headroom: scores.structure.headroom,
+      breakdown: scores.structure,
     },
-    buyer: { label: "Buyer", score: scores.buyer, why: "" },
-    supplier: { label: "Supplier", score: scores.supplier, why: "" },
+    buyer: {
+      label: "Buyer",
+      score: scores.buyer,
+      why: "",
+      headroom: scores.buyerDetail.headroom,
+      breakdown: scores.buyerDetail,
+    },
+    supplier: {
+      label: "Supplier",
+      score: scores.supplier,
+      why: "",
+      headroom: scores.supplierDetail.headroom,
+      breakdown: scores.supplierDetail,
+    },
     overall: scores.overall,
+    overallRaw: scores.overallRaw,
     tier: scores.tier,
     concerns: factors.concerns,
     mitigating: factors.mitigating,

@@ -1,5 +1,6 @@
 import type { AnalyzeDocumentsResult } from "./lib/document-analysis/types";
 import type { CorridorRiskFlag } from "./lib/route-risk-tables";
+import type { DimensionBreakdown } from "./lib/scoring";
 
 export interface CofaceCoverage {
   coveragePct: number | null;
@@ -88,12 +89,16 @@ export interface SubScore {
   score: number;
   why: string;
   weight?: number;
+  headroom?: number;
+  breakdown?: DimensionBreakdown;
 }
 
 export interface PartyScore {
   label: string;
   score: number;
   why: string;
+  headroom?: number;
+  breakdown?: DimensionBreakdown;
 }
 
 export interface RiskAssessment {
@@ -104,6 +109,7 @@ export interface RiskAssessment {
   buyer: PartyScore;
   supplier: PartyScore;
   overall: number;
+  overallRaw: number;
   tier: RiskTier;
   concerns: string[];
   mitigating: string[];
