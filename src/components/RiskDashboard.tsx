@@ -64,6 +64,11 @@ export function RiskDashboard({
             Overall risk score
           </p>
           <ScoreGauge score={assessment.overall} tier={assessment.tier} />
+          {import.meta.env.DEV && (
+            <p className="mt-2 text-center text-[11px] text-tm-text-muted">
+              raw {assessment.overallRaw.toFixed(2)} → display {assessment.overall}
+            </p>
+          )}
           <span
             className={`mt-4 inline-flex rounded-full border px-3 py-1 text-sm font-semibold ${tierColors.badge}`}
           >
@@ -89,16 +94,22 @@ export function RiskDashboard({
                 score={dim.data.score}
                 why={dim.data.why}
                 weight={dim.data.weight}
+                headroom={dim.data.headroom}
+                breakdown={dim.data.breakdown}
               >
                 {dim.key === "counterparty" && (
                   <div className="mt-2 space-y-1 rounded-lg bg-tm-neutral-light px-3 py-2">
                     <SubScoreBar.Party
                       label="Buyer"
                       score={assessment.buyer.score}
+                      headroom={assessment.buyer.headroom}
+                      breakdown={assessment.buyer.breakdown}
                     />
                     <SubScoreBar.Party
                       label="Supplier"
                       score={assessment.supplier.score}
+                      headroom={assessment.supplier.headroom}
+                      breakdown={assessment.supplier.breakdown}
                     />
                   </div>
                 )}
@@ -112,6 +123,31 @@ export function RiskDashboard({
         concerns={assessment.concerns}
         mitigating={assessment.mitigating}
       />
+
+      {import.meta.env.DEV && (
+        <details className="rounded-lg border border-dashed border-tm-border bg-tm-surface px-4 py-3 text-xs">
+          <summary className="cursor-pointer font-medium text-tm-text">
+            Dev: full score breakdown
+          </summary>
+          <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap text-[11px] text-tm-text-muted">
+            {JSON.stringify(
+              {
+                overallRaw: assessment.overallRaw,
+                overallDisplay: assessment.overall,
+                tier: assessment.tier,
+                dimensions: {
+                  counterparty: assessment.counterparty.breakdown,
+                  product: assessment.product.breakdown,
+                  route: assessment.route.breakdown,
+                  structure: assessment.structure.breakdown,
+                },
+              },
+              null,
+              2,
+            )}
+          </pre>
+        </details>
+      )}
 
       <div className="flex justify-end">
         <button
