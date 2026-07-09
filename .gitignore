@@ -1,3 +1,32 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+*.tsbuildinfo
+
+# Local env and secrets (never commit)
+.env
+.env.*
+!.env.example
+!.env*.sample
+!.env*.template
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+credentials.json
+secrets.json
+secrets.yaml
+secrets.yml
+service-account*.json
+
+# Vercel
+.vercel
+
 # Logs
 logs
 *.log
@@ -7,12 +36,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Test / tooling caches
+coverage
+.cache
+.turbo
 
-# Editor directories and files
+# Editor and OS
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,4 +51,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.vercel
+
+# Vite / local overrides
+*.local
