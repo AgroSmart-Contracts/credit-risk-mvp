@@ -2,13 +2,21 @@
 
 This document describes how credit risk is calculated in the TruMarket credit-risk MVP.
 
-Risk is expressed as a **weighted composite score from 0–100**, where **higher = safer**. The logic lives in:
+Risk is expressed as a **weighted composite score from 0–100**, where **higher = safer**. The model is **rule-based** (not ML), aligned with the CRAM reference tables (`tm-cram-reference-tables-2026-07.md`).
 
-- `src/lib/scoring.ts` — score computation
-- `src/lib/scoring-constants.ts` — dimension weights
-- `src/lib/assessment.ts` — assessment assembly for the UI
-- `src/lib/risk-factors.ts` — narrative concerns and mitigating factors
-- `src/lib/financing.ts` — financing terms derived from the overall score
+## Source files
+
+| File | Role |
+|------|------|
+| `src/lib/scoring.ts` | Main score computation |
+| `src/lib/scoring-constants.ts` | Dimension weights |
+| `src/lib/cram-scoring.ts` | CRAM transit / flag / customs / transshipment point tables |
+| `src/lib/product-risk-tables.ts` | CRAM Table 1 — product perishability inputs |
+| `src/lib/route-risk-tables.ts` | CRAM Table 2 — corridor defaults |
+| `src/lib/product-market-pair-table.ts` | CRAM Table 3 — product×market flag overrides |
+| `src/lib/assessment.ts` | Assessment assembly for the UI |
+| `src/lib/risk-factors.ts` | Narrative concerns and mitigating factors |
+| `src/lib/financing.ts` | Financing terms derived from the overall score |
 
 ## Overview
 
@@ -26,128 +34,216 @@ flowchart TD
     Overall --> Finance[Financing terms]
 ```
 
-### Overall score formula
+Each dimension is computed independently, **clamped to 0–100**, then combined.
+
+---
+
+## Overall score equation
 
 ```
-overall = counterparty × 0.35 + product × 0.20 + route × 0.15 + structure × 0.30
+overall = round(
+  counterparty × 0.35
++ product      × 0.20
++ route        × 0.15
++ structure    × 0.30
+)
 ```
 
-Each dimension is clamped to 0–100 before weighting.
+Weights are defined in `DIMENSION_WEIGHTS` (`src/lib/scoring-constants.ts`).
 
-### Dimension weights
-
-| Dimension    | Weight | Description |
-|--------------|--------|-------------|
-| Counterparty | 35%    | Buyer & supplier creditworthiness, platform history, relationship depth |
-| Product      | 20%    | Perishability, cold chain, quality grade |
-| Route        | 15%    | Transit time, transshipments, incoterms, geographic risk |
-| Structure    | 30%    | Payment terms, advance, collateral, insurance |
+| Dimension    | Weight | What it captures |
+|--------------|--------|------------------|
+| Counterparty | 35%    | Buyer & supplier creditworthiness, platform history, relationship depth, external credit |
+| Product      | 20%    | Perishability (CRAM), cold chain, quality grade, EUDR |
+| Route        | 15%    | Transit time vs shelf life, corridor risk, transshipments, customs, incoterm |
+| Structure    | 30%    | Advance %, collateral, insurance, payment terms, deal history |
 
 ---
 
 ## 1. Counterparty risk (35%)
 
-Built from buyer and supplier sub-scores, then blended.
+Built from buyer and supplier sub-scores, then blended with relationship and external-credit bonuses.
 
 ### Buyer score
 
+Sum of four factors, clamped 0–100:
+
 | Factor | Scoring |
 |--------|---------|
-| Years in business | `null` → 15; ≤5 → 10; ≤10 → 20; ≤20 → 30; >20 → 40 |
+| Years in business | `null` → 15; ≤5 → 10; ≤10 → 20; ≤20 → 30; >20 → **40** |
 | License valid | `true` → 15; `false` → 0; unknown → 8 |
 | Platform completion rate | `null` → 15; else `min(25, rate × 0.25)` |
 | Avg payment delay (days) | `null` → 15; 0 → 20; ≤5 → 15; ≤15 → 8; else → 0 |
 
 ### Supplier score
 
-Same structure as buyer, with different caps:
+Same structure as buyer, with different caps on two factors:
 
 | Factor | Scoring |
 |--------|---------|
-| Years in business | max 30 instead of 40 |
+| Years in business | max **30** (not 40) |
 | Platform completion rate | `min(30, rate × 0.3)` |
 | Quality rejection % | `null` → 13; 0% → 25; ≤3% → 18; ≤8% → 10; else → 0 |
 
-### Counterparty blend
+### Counterparty blend equation
 
 ```
-counterparty = buyer × 0.6 + supplier × 0.4 + relationship bonus + external credit bonus
+counterparty = clamp(
+  buyer   × 0.6
++ supplier × 0.4
++ relationshipBonus
++ externalCreditBonus
+)
 ```
 
-**Relationship bonus:**
+**Relationship bonus** (`relationshipAdjustment`):
 
-- +5 if ≥1 prior deal between parties
-- +10 if ≥4 prior deals
-- +5 if relationship age > 12 months
+| Condition | Bonus |
+|-----------|-------|
+| ≥4 prior deals between parties | +10 |
+| ≥1 prior deal | +5 |
+| Relationship age > 12 months | +5 |
 
-**External credit bonus:**
+**External credit bonus** (`externalCreditBonus`) — Coface / buyer rating:
 
-- +8 if `externalCreditSignal` or buyer `creditRating` is present (e.g. Coface)
+| Condition | Bonus |
+|-----------|-------|
+| Coface coverage ≥ 80% of deal | +12 |
+| Coface coverage ≥ 50% | +8 |
+| Any positive Coface coverage % | +5 |
+| Coface amount ≥ 80% of deal value (when % missing) | +12 |
+| Coface amount ≥ 50% of deal value | +8 |
+| Any positive Coface amount | +5 |
+| Legacy `externalCreditSignal` or buyer `creditRating` on file | +8 |
+| None of the above | 0 |
 
 ---
 
-## 2. Product risk (20%)
+## 2. Product risk (20%) — CRAM dimension B
 
-Product risk uses a **lookup table** by commodity (`src/lib/product-risk-tables.ts`). Base scores are then adjusted for cold chain and quality grade.
+Product risk uses a **CRAM base of 70** plus perishability and deal-specific adjustments. It does **not** use the display `baseScore` column from the product table directly.
 
-### Product base score table
+### Product score equation
 
-| Product | Base score | Perishability |
-|---------|------------|---------------|
-| Dried Fruit | 90 | Non-Perishable |
-| Frozen Berries | 85 | Non-Perishable |
-| Mandarin | 72 | Semi-Perishable |
-| Avocado | 65 | Perishable |
-| Grapes | 60 | Perishable |
-| Mango | 55 | Perishable |
-| Blueberries | 48 | Perishable |
-| Asparagus | 40 | Ultra-Perishable |
-| Strawberries | 35 | Ultra-Perishable |
-| Unknown product | 50 | (default) |
+```
+product = clamp(
+  70
++ perishabilityPoints
++ coldChainAdj
++ gradeAdj
++ eudrAdj
+)
+```
 
-Product names are matched after stripping a `Fresh ` prefix (e.g. "Fresh Mandarin" → Mandarin).
+**Perishability points** (CRAM Table 1, `PERISHABILITY_POINTS`):
 
-**Adjustments (applied on top of table base):**
+| Perishability class | Points |
+|---------------------|--------|
+| Non-Perishable | +18 |
+| Semi-Perishable | +9 |
+| Perishable | −4 |
+| Ultra-Perishable | −12 |
 
-- Cold chain required: **−8**
-- Grade A / Class I: **+8**
-- Grade B / Class II: **0**
-- Industrial: **−10**
+Points come from `lookupProductRisk(product).perishabilityPoints`, or default to Perishable (−4) for unknown products.
+
+**Adjustments:**
+
+| Factor | Adjustment |
+|--------|------------|
+| Cold chain required (and not Non-Perishable) | −8 |
+| Grade A / Class I | +8 |
+| Grade B / Class II | 0 |
+| Industrial (any other grade) | −10 |
+| EUDR product → EU destination | −12 |
+
+EUDR applies when the product is flagged `eudrRequired` in the product table **and** the destination matches an EU market (Spain, Portugal, Netherlands, Germany, Rotterdam, Valencia, Lisbon).
+
+### Supported products (CRAM Table 1)
+
+| Product | AC risk group | Perishability | Shelf life (days) | EUDR |
+|---------|---------------|---------------|-------------------|------|
+| Asparagus | G1 | Ultra-Perishable | 10–21 | No |
+| Grapes | G1 | Perishable | 30–60 | No |
+| Blueberries | G1 | Perishable | 30–45 | No |
+| Avocado | G2 | Perishable | 25–35 | No |
+| Mandarin | G3 | Perishable | 30–60 | No |
+| Ginger | G3 | Semi-Perishable | 60–120 | No |
+| Coffee | G4 | Non-Perishable | 365+ | Yes |
+| Cacao | G4 | Non-Perishable | 180–365 | Yes |
+
+Product names are matched after stripping a `Fresh ` prefix (e.g. "Fresh Mandarin" → Mandarin). Unknown products use perishability default −4.
 
 ---
 
-## 3. Trade route risk (15%)
+## 3. Trade route risk (15%) — CRAM dimensions C + C4
 
-Route risk uses a **lookup table** by origin → destination (`src/lib/route-risk-tables.ts`), with fallbacks for unlisted corridors.
+Route risk uses a **CRAM base of 70** plus transit, corridor flag, transshipment, customs, and incoterm adjustments.
 
-### Route base score table
+### Route score equation
 
-| Route | Base score | Transit (days) | Risk flag |
-|-------|------------|----------------|-----------|
-| Peru → Colombia | 88 | 7 | Low |
-| Mexico → USA | 82 | 5 | Low |
-| Chile → USA | 75 | 14 | Low |
-| South Africa → UK | 58 | 16 | Medium |
-| Peru → UAE | 50 | 18 | Medium |
-| Peru → Netherlands | 45 | 22 | Medium |
-| Peru → Taiwan | 42 | 35 | Medium |
-| Unknown route | 55 | (default) | — |
+```
+route = clamp(
+  70
++ cramTransitPoints(perishabilityClass, estimatedTransitDays)
++ cramRouteFlagPoints(corridorFlag)
++ cramTransshipmentPoints(numberOfTransshipments)
++ cramCustomsPoints(customsClearanceDaysMax)
++ incotermAdjustment(incoterm)
+)
+```
 
-Routes are matched by country (last segment of origin/destination) or exact corridor key.
+### Resolving the corridor flag (C4)
 
-### Adjustments (on top of table base)
+Before scoring, the corridor flag is resolved in this order (`resolveRouteRiskFlag`):
+
+1. **Product×market pair override** — CRAM Table 3 (`product-market-pair-table.ts`) if commodity group + product + destination match a row
+2. **Corridor default** — from CRAM Table 2 (`route-risk-tables.ts`) for the origin→destination pair
+3. **35-day rule** — if product is Ultra-/Perishable/Semi-Perishable **and** transit > 35 days → flag floors at **High**
+
+Examples of pair overrides:
+
+| Product | Market | Override flag | Rationale |
+|---------|--------|---------------|-----------|
+| Mandarin | Colombia | Medium | Short transit but thin market depth |
+| Blueberries / Grapes | Israel | High | Long transit, thin resale on rejection |
+| Coffee / Cacao | EU | Low (+ EUDR gate) | Physically low-risk; EUDR compliance required |
+| Any fresh G1–G3 | Egypt / Jordan | High | Long transshipped transit + customs variability |
+
+### CRAM point tables (`cram-scoring.ts`)
+
+**Transit points** — depend on perishability class:
+
+| Class | Transit ≤14d / ≤21d / ≤30d / ≤60d / >60d |
+|-------|------------------------------------------|
+| Non-Perishable | — / — / +12 / 0 / −8 |
+| Fresh (all other classes) | +14 / +6 / −10 / −10 / −10 |
+
+**Corridor flag points:**
+
+| Flag | Points |
+|------|--------|
+| Low | +12 |
+| Low-Med | +8 |
+| Medium | +3 |
+| Med-High | −5 |
+| High | −15 |
 
 **Transshipments:**
 
-- 0 → +10
-- 1 → 0
-- 2+ → −15
+| Count | Points |
+|-------|--------|
+| 0 | +10 |
+| 1 | 0 |
+| 2+ | −15 |
 
-**Route risk flag:**
+**Customs clearance (max days):**
 
-- Low → 0
-- Medium → −10
-- High → −25
+| Days | Points |
+|------|--------|
+| `null` (unknown) | 0 |
+| ≤3 | +5 |
+| 4–7 | 0 |
+| >7 | −8 |
 
 **Incoterm** (risk allocation — more seller obligation → higher score):
 
@@ -160,11 +256,44 @@ Routes are matched by country (last segment of origin/destination) or exact corr
 | CIF, CIP | +8 |
 | DAP, DPU, DDP | +10 |
 
+### Supported corridors (CRAM Table 2)
+
+| Route | Transit (days) | Default flag |
+|-------|----------------|--------------|
+| Peru → Colombia | 4 | Low-Med |
+| Peru → USA (East) | 13 | Low |
+| Peru → USA (West) | 14 | Low |
+| Peru → Spain | 19 | Low |
+| Peru → Portugal | 20 | Low |
+| Peru → Netherlands | 21 | Low |
+| Peru → Israel | 36 | High |
+| Peru → Egypt | 28 | Med-High |
+| Peru → Jordan | 33 | Med-High |
+| Peru → Thailand | 34 | Medium |
+| Peru → Taiwan | 30 | Medium |
+| Peru → China | 25 | Medium |
+| Peru → UAE | 31 | Medium |
+| Unknown route | — | Medium (default flag), score base 55 for display |
+
+Routes are matched by country (last segment of origin/destination) or exact corridor key.
+
 ---
 
 ## 4. Transaction structure risk (30%)
 
-### Base score (advance payment %)
+### Structure score equation
+
+```
+structure = clamp(
+  advanceBaseScore
++ collateralBonus
++ insuranceBonus
++ paymentTermsAdjustment(paymentTerms)
++ structureRelationshipAdjustment
+)
+```
+
+### Advance payment base
 
 | Advance % | Base score |
 |-----------|------------|
@@ -196,10 +325,10 @@ Routes are matched by country (last segment of origin/destination) or exact corr
 
 ### Payment terms adjustment
 
-| Terms | Adjustment |
-|-------|------------|
+| Terms (substring match) | Adjustment |
+|-------------------------|------------|
 | Cash in advance / prepaid | +15 |
-| Letter of credit | +12 |
+| Letter of credit / L/C | +12 |
 | Against B/L or documents | +8 |
 | 30 days | +5 |
 | 60 days | 0 |
@@ -208,9 +337,11 @@ Routes are matched by country (last segment of origin/destination) or exact corr
 
 ### Structure relationship adjustment
 
-- ≥5 prior deals between parties: **+7**
-- ≥1 prior deal: **+5**
-- No prior deals: **−8**
+| Condition | Adjustment |
+|-----------|------------|
+| ≥5 prior deals between parties | +7 |
+| ≥1 prior deal | +5 |
+| No prior deals | −8 |
 
 ---
 
@@ -229,36 +360,50 @@ Mapped from the overall score via `getTier()`:
 
 ## Narrative risk factors
 
-Beyond the numeric score, `analyzeRiskFactors()` in `src/lib/risk-factors.ts` generates up to **5 concerns** and **5 mitigating factors** for the dashboard. Examples:
+Beyond the numeric score, `analyzeRiskFactors()` in `src/lib/risk-factors.ts` generates up to **5 concerns** and **5 mitigating factors** for the dashboard.
 
-**Concerns:** no advance payment, no collateral, extended payment terms, ultra-perishable shelf life, unconfirmed licenses
+**Example concerns:** first-time platform relationship, unconfirmed licenses, ultra-perishable shelf life, cold chain dependency, extended payment terms, no advance/collateral, high corridor risk (35-day rule or Med-High/High flag).
 
-**Mitigating:** Coface credit insurance, Grade A quality, direct short-haul route, prior deals between parties, FOB incoterm
+**Example mitigating factors:** Coface coverage on file, Grade A quality, direct route with no transshipment, prior deals between parties, FOB incoterm, strong advance payment %.
 
 ---
 
 ## Financing recommendations
 
-`recommendFinancingTerms()` in `src/lib/financing.ts` maps the overall score to commercial terms:
+`recommendFinancingTerms()` in `src/lib/financing.ts` maps the overall score to commercial terms.
 
-| Overall score | Max financing | Required advance | Risk premium | Decision |
-|---------------|---------------|------------------|--------------|----------|
-| ≥ 80 | 100% | 0% | +0.5% | AUTO-APPROVE |
-| 70–79 | 80% | 0% | +1.5% | AUTO-APPROVE |
+**Base interest rate:** 6.0%. **Final rate** = base rate + risk premium.
+
+### Max financing & advance
+
+| Overall score | Max financing % | Required advance % | Risk premium | Decision |
+|---------------|-----------------|--------------------|--------------|----------|
+| ≥ 80 | 100% | 0%* | +0.5% | AUTO-APPROVE |
+| 70–79 | 80% | 0%* | +1.5% | AUTO-APPROVE |
 | 60–69 | 70% | 10% | +2.5% | MANUAL REVIEW |
 | 50–59 | 50% | 20% | +4.0% | SENIOR APPROVAL |
 | < 50 | 0% | 30% | +6.0% | RECOMMEND REJECT |
 
-Base interest rate: **6.0%**. Final rate = base rate + risk premium.
+\*Required advance is 0% when overall ≥ 75; 10% when ≥ 65; 20% when ≥ 55; else 30%.
 
-Approval levels: Automated (≥75), Credit Manager (60–74), Credit Director (45–59), Executive Override Only (<45).
+### Collateral guidance
 
-**External credit bonus** (Coface):
+| Overall score | Collateral required |
+|---------------|---------------------|
+| ≥ 80 | None |
+| 70–79 | Optional (reduces rate by 0.5%) |
+| 60–69 | Warehouse receipt OR buyer guarantee |
+| 50–59 | Inventory pledge + insurance |
+| < 50 | Full collateral (>100% deal value) |
 
-- Coverage ≥ 80% of deal (or amount ≥ 80% of value): **+12**
-- Coverage ≥ 50%: **+8**
-- Any positive coverage: **+5**
-- Legacy Coface signal / credit rating on file: **+8**
+### Approval routing
+
+| Overall score | Approval level |
+|---------------|----------------|
+| ≥ 75 | Automated |
+| 60–74 | Credit Manager |
+| 45–59 | Credit Director |
+| < 45 | Executive Override Only |
 
 ---
 
@@ -266,10 +411,12 @@ Approval levels: Automated (≥75), Credit Manager (60–74), Credit Director (4
 
 Users can start a **New deal assessment** from the home screen:
 
-1. Upload deal documentation (PDF, Word, Excel, image)
-2. Enter **Coface coverage %** and/or **coverage amount (USD)**, or upload a Coface document
-3. Confirm product (from product table), route (from route table), parties, and deal value
+1. Upload trade documents (PDF) — fields auto-fill via `pdf-parse` extraction
+2. Enter **Coface coverage %** and/or **coverage amount (USD)**, or upload a Coface PDF
+3. Confirm product (CRAM Table 1), route (CRAM Table 2), parties, and deal value
 4. Continue through document ingestion → risk dashboard → financing recommendation
+
+Document analysis runs via Vite dev middleware locally and Vercel serverless handlers (`api/analyze-documents`, `api/analyze-coface`) in production.
 
 ---
 
@@ -281,4 +428,13 @@ When counterparty fields are `null` or unknown, the model assigns **neutral defa
 
 ## Summary
 
-Risk is **not** a machine-learning model in this MVP. It is a **rule-based scorecard** across four trade-finance dimensions, with counterparty and deal structure weighted most heavily (35% + 30%).
+```
+overall = 0.35 × counterparty + 0.20 × product + 0.15 × route + 0.30 × structure
+
+counterparty = clamp(0.6×buyer + 0.4×supplier + relationship + externalCredit)
+product      = clamp(70 + perishabilityPts + coldChain + grade + eudr)
+route        = clamp(70 + transit + flag + transship + customs + incoterm)
+structure    = clamp(advanceBase + collateral + insurance + paymentTerms + relationship)
+```
+
+Counterparty and deal structure are weighted most heavily (35% + 30%). Product and route scores follow the CRAM reference tables with a neutral base of 70, not fixed per-row lookup scores.
