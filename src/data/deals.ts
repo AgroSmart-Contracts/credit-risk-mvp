@@ -78,11 +78,7 @@ export const deals: Deal[] = [
         extractionHint: "Buyer credit limit verified — EUR 40,000",
       },
     ],
-    fieldsNeedingConfirmation: [
-      "Buyer years in business",
-      "Supplier years in business",
-      "Import/export license validity",
-    ],
+    fieldsNeedingConfirmation: [],
     teaser: "Coface-backed buyer, short direct route",
   },
   {
@@ -148,11 +144,7 @@ export const deals: Deal[] = [
         extractionHint: "Payment terms: 70% against docs extracted",
       },
     ],
-    fieldsNeedingConfirmation: [
-      "Buyer years in business",
-      "Buyer import license validity",
-      "Supplier export license validity",
-    ],
+    fieldsNeedingConfirmation: [],
     teaser: "Long-haul ultra-perishable, first platform deal",
   },
   {

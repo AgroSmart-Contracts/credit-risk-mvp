@@ -164,13 +164,7 @@ export function buildDealFromInput(input: CreateDealInput): Deal {
               type: "contract",
             },
           ],
-    fieldsNeedingConfirmation: [
-      ...(analysis && analysis.docCoveragePct >= 70
-        ? []
-        : ["Buyer years in business"]),
-      "Supplier years in business",
-      "Import/export license validity",
-    ],
+    fieldsNeedingConfirmation: [],
     teaser: hasCoface
       ? analysis
         ? `Extracted ${analysis.filledFields.length} fields from Spanish trade docs with Coface coverage`

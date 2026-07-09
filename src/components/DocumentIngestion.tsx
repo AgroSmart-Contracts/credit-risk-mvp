@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -13,12 +13,18 @@ import {
 } from "lucide-react";
 import type { Deal } from "../types";
 import { formatUSDDetailed } from "../lib/assessment";
+import {
+  applyConfirmations,
+  listConfirmationFields,
+  type ConfirmationField,
+  type ConfirmationValues,
+} from "../lib/confirmation-fields";
 import { formatCofaceSignal } from "../lib/create-deal";
 
 interface DocumentIngestionProps {
   deal: Deal;
   onBack: () => void;
-  onRunAssessment: () => void;
+  onRunAssessment: (deal: Deal) => void;
 }
 
 const docIcons: Record<string, typeof FileText> = {
@@ -28,6 +34,10 @@ const docIcons: Record<string, typeof FileText> = {
   sales_order: FileCheck,
 };
 
+function fieldKey(field: ConfirmationField): string {
+  return field.kind === "scoring" ? field.id : field.key;
+}
+
 export function DocumentIngestion({
   deal,
   onBack,
@@ -36,15 +46,18 @@ export function DocumentIngestion({
   const [processedCount, setProcessedCount] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const [confirmedFields, setConfirmedFields] = useState<
-    Record<string, string | boolean>
-  >({});
+  const [confirmedFields, setConfirmedFields] = useState<ConfirmationValues>({});
 
   const analysis = deal.documentAnalysis;
   const docCoveragePct = analysis?.docCoveragePct ?? 82;
   const extractedFieldCount =
     analysis?.filledFields.length ??
     Math.max(6, deal.sourceDocuments.length * 2);
+
+  const confirmationFields = useMemo(
+    () => listConfirmationFields(deal),
+    [deal],
+  );
 
   useEffect(() => {
     setProcessedCount(0);
@@ -73,7 +86,12 @@ export function DocumentIngestion({
   }, [deal]);
 
   const allProcessed = processedCount >= deal.sourceDocuments.length;
-  const confirmationCount = deal.fieldsNeedingConfirmation.length;
+  const confirmationCount = confirmationFields.length;
+
+  const handleRunAssessment = () => {
+    const updatedDeal = applyConfirmations(deal, confirmedFields);
+    onRunAssessment(updatedDeal);
+  };
 
   return (
     <div className="space-y-6">
@@ -237,51 +255,25 @@ export function DocumentIngestion({
               />
             </dl>
 
-            {deal.fieldsNeedingConfirmation.length > 0 && (
+            {confirmationCount > 0 && (
               <div className="mt-5 border-t border-tm-border pt-4">
                 <p className="mb-3 text-xs text-tm-text-muted">
                   Not found in documents — confirm or estimate (model does not
                   silently guess)
                 </p>
                 <div className="space-y-3">
-                  {deal.fieldsNeedingConfirmation.map((field) => (
-                    <div key={field}>
-                      <label className="mb-1 block text-sm font-medium text-tm-text">
-                        {field}
-                      </label>
-                      {isBooleanConfirmationField(field) ? (
-                        <YesNoToggle
-                          value={
-                            typeof confirmedFields[field] === "boolean"
-                              ? confirmedFields[field]
-                              : null
-                          }
-                          onChange={(value) =>
-                            setConfirmedFields((prev) => ({
-                              ...prev,
-                              [field]: value,
-                            }))
-                          }
-                        />
-                      ) : (
-                        <input
-                          type="text"
-                          placeholder="Enter value or estimate"
-                          value={
-                            typeof confirmedFields[field] === "string"
-                              ? confirmedFields[field]
-                              : ""
-                          }
-                          onChange={(e) =>
-                            setConfirmedFields((prev) => ({
-                              ...prev,
-                              [field]: e.target.value,
-                            }))
-                          }
-                          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black placeholder:text-tm-text-muted focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
-                        />
-                      )}
-                    </div>
+                  {confirmationFields.map((field) => (
+                    <ConfirmationFieldInput
+                      key={fieldKey(field)}
+                      field={field}
+                      value={confirmedFields[fieldKey(field)]}
+                      onChange={(value) =>
+                        setConfirmedFields((prev) => ({
+                          ...prev,
+                          [fieldKey(field)]: value,
+                        }))
+                      }
+                    />
                   ))}
                 </div>
               </div>
@@ -299,7 +291,7 @@ export function DocumentIngestion({
           >
             <button
               type="button"
-              onClick={onRunAssessment}
+              onClick={handleRunAssessment}
               className="rounded-lg bg-tm-primary px-6 py-3 font-semibold text-white shadow-tm-md transition-colors hover:bg-tm-primary-dark"
             >
               Run risk assessment
@@ -311,8 +303,70 @@ export function DocumentIngestion({
   );
 }
 
-function isBooleanConfirmationField(field: string): boolean {
-  return field.toLowerCase().includes("license validity");
+function ConfirmationFieldInput({
+  field,
+  value,
+  onChange,
+}: {
+  field: ConfirmationField;
+  value: string | boolean | undefined;
+  onChange: (value: string | boolean) => void;
+}) {
+  if (field.kind === "freeText") {
+    return (
+      <div>
+        <label className="mb-1 block text-sm font-medium text-tm-text">
+          {field.label}
+        </label>
+        <input
+          type="text"
+          placeholder={field.placeholder ?? "Enter value or estimate"}
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black placeholder:text-tm-text-muted focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
+        />
+      </div>
+    );
+  }
+
+  if (field.type === "boolean") {
+    return (
+      <div>
+        <label className="mb-1 block text-sm font-medium text-tm-text">
+          {field.label}
+        </label>
+        <YesNoToggle
+          value={typeof value === "boolean" ? value : null}
+          onChange={onChange}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <label className="mb-1 block text-sm font-medium text-tm-text">
+        {field.label}
+      </label>
+      <div className="relative">
+        <input
+          type="number"
+          min={0}
+          max={field.type === "percent" ? 100 : undefined}
+          step={field.type === "percent" ? 0.1 : 1}
+          placeholder={field.placeholder ?? "Enter value or estimate"}
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 pr-14 text-sm text-tm-black placeholder:text-tm-text-muted focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
+        />
+        {field.suffix && (
+          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-tm-text-muted">
+            {field.suffix}
+          </span>
+        )}
+      </div>
+    </div>
+  );
 }
 
 function YesNoToggle({

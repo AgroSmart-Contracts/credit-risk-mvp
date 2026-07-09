@@ -39,12 +39,12 @@ function App() {
     setStep(2);
   };
 
-  const handleRunAssessment = () => {
-    if (!selectedDeal) return;
-    const result = buildRiskAssessment(selectedDeal);
+  const handleRunAssessment = (deal: Deal) => {
+    setSelectedDeal(deal);
+    const result = buildRiskAssessment(deal);
     const terms = recommendFinancingTerms(
-      result.overall,
-      selectedDeal.dealValueUSD,
+      result.overallRaw,
+      deal.dealValueUSD,
     );
     setAssessment(result);
     setFinancing(terms);
