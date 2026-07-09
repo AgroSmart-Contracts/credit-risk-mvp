@@ -1,4 +1,4 @@
-import type { DealFieldSuggestions } from '../src/lib/document-analysis/types';
+import type { DealFieldSuggestions } from '../src/lib/document-analysis/types.js';
 
 const KEYS: (keyof DealFieldSuggestions)[] = [
   'dealRef',

@@ -1,6 +1,6 @@
-import type { ExtractedDocumentFields } from './pdf-trade-classifier';
-import type { DealFieldSuggestions } from '../src/lib/document-analysis/types';
-import { inferProductFromText } from './product-inference';
+import type { ExtractedDocumentFields } from './pdf-trade-classifier/index.js';
+import type { DealFieldSuggestions } from '../src/lib/document-analysis/types.js';
+import { inferProductFromText } from './product-inference.js';
 
 function nonEmpty(value: string | null | undefined): string | undefined {
   const trimmed = value?.trim();

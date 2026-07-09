@@ -1,7 +1,7 @@
 import Busboy from 'busboy';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { analyzeUploadedPdfs, type UploadedPdfFile } from './analyze-uploaded-pdfs';
+import { analyzeUploadedPdfs, type UploadedPdfFile } from './analyze-uploaded-pdfs.js';
 
 const MAX_FILE_BYTES = 30 * 1024 * 1024;
 

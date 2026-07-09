@@ -1,15 +1,15 @@
-import type { ClassifiedPdf } from './pdf-trade-classifier';
-import { mapExtractedFieldsToDealSuggestions } from './map-extracted-to-deal';
+import type { ClassifiedPdf } from './pdf-trade-classifier/index.js';
+import { mapExtractedFieldsToDealSuggestions } from './map-extracted-to-deal.js';
 import {
   estimateDocCoveragePct,
   listFilledDealFieldKeys,
   mergeDealFieldSuggestions,
-} from './merge-suggestions';
+} from './merge-suggestions.js';
 import type {
   AnalyzeDocumentsResult,
   AnalyzedDocument,
   DealFieldSuggestions,
-} from '../src/lib/document-analysis/types';
+} from '../src/lib/document-analysis/types.js';
 
 export type UploadedPdfFile = {
   fileName: string;
@@ -76,7 +76,7 @@ export async function analyzeUploadedPdfs(
     throw new Error('At least one file is required');
   }
 
-  const { classifyAndExtractPdfBuffer } = await import('./pdf-trade-classifier');
+  const { classifyAndExtractPdfBuffer } = await import('./pdf-trade-classifier/index.js');
 
   const sorted = [...files].sort((a, b) =>
     a.fileName.localeCompare(b.fileName, undefined, { sensitivity: 'base' }),

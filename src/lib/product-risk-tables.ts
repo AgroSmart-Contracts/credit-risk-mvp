@@ -5,7 +5,7 @@
  * Perishability points per spec §4.B:
  * Non-perishable +18 · Semi (+30d) +9 · Perishable (7–30d) −4 · Ultra (<7d) −12
  */
-import { CRAM_REFERENCE_TABLES_VERSION } from "./cram-reference-version";
+import { CRAM_REFERENCE_TABLES_VERSION } from "./cram-reference-version.js";
 
 export type PerishabilityClass =
   | "Ultra-Perishable"

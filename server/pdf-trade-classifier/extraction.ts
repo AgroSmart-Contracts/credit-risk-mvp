@@ -1,4 +1,4 @@
-import type { ClassifiedDocumentType, ParsedPdfResult } from './types';
+import type { ClassifiedDocumentType, ParsedPdfResult } from './types.js';
 
 type NullableString = string | null;
 type NullableNumber = number | null;

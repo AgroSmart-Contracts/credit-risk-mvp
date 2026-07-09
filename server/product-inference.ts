@@ -1,4 +1,4 @@
-import { PRODUCT_OPTIONS } from '../src/lib/product-risk-tables';
+import { PRODUCT_OPTIONS } from '../src/lib/product-risk-tables.js';
 
 /** Map extracted product text to CRAM Table 1 product names */
 const PRODUCT_ALIASES: Array<[RegExp, string]> = [

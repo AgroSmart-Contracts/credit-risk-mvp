@@ -5,7 +5,7 @@ export default async function handler(
   res: VercelResponse,
 ): Promise<void> {
   const { handleAnalyzeDocuments } = await import(
-    '../server/analyze-documents'
+    '../server/analyze-documents.js'
   );
   await handleAnalyzeDocuments(req, res);
 }

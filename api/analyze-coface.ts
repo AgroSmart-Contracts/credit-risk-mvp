@@ -5,7 +5,7 @@ export default async function handler(
   res: VercelResponse,
 ): Promise<void> {
   const { handleAnalyzeCofaceDocument } = await import(
-    '../server/analyze-coface-document'
+    '../server/analyze-coface-document.js'
   );
   await handleAnalyzeCofaceDocument(req, res);
 }

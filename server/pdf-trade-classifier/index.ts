@@ -1,13 +1,13 @@
-import { classifyByKeywords } from './classifier';
+import { classifyByKeywords } from './classifier.js';
 import {
   type ExtractedDocumentFields,
   extractStructuredFields,
-} from './extraction';
-import { parsePdfBuffer } from './parser';
-import type { ClassifiedDocumentType, ParsedPdfResult } from './types';
+} from './extraction.js';
+import { parsePdfBuffer } from './parser.js';
+import type { ClassifiedDocumentType, ParsedPdfResult } from './types.js';
 
-export type { ExtractedDocumentFields } from './extraction';
-export { extractBoxCount, isPlausibleCompanyName } from './extraction';
+export type { ExtractedDocumentFields } from './extraction.js';
+export { extractBoxCount, isPlausibleCompanyName } from './extraction.js';
 export {
   parseDealDateFromIso,
   parseTradeDocumentDate,
@@ -15,7 +15,7 @@ export {
   pickEarliestParsedDate,
   pickFirstParsedDate,
   pickLatestParsedDateAfter,
-} from './trade-document-dates';
+} from './trade-document-dates.js';
 
 export type ClassificationResult = {
   type: ClassifiedDocumentType;

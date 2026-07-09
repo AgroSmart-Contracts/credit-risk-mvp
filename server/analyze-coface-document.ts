@@ -1,7 +1,7 @@
 import Busboy from 'busboy';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { extractCofaceFromPdfBuffer } from './coface-extraction';
+import { extractCofaceFromPdfBuffer } from './coface-extraction.js';
 
 const MAX_FILE_BYTES = 30 * 1024 * 1024;
 

@@ -3,7 +3,7 @@ import {
   type ClassifiedDocumentType,
   DOCUMENT_TYPES,
   DocumentType,
-} from './types';
+} from './types.js';
 
 export const defaultRules: ClassificationRule[] = [
   {

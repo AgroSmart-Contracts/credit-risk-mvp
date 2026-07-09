@@ -1,6 +1,6 @@
 import { createRequire } from 'node:module';
 
-import type { CofaceExtractionResult } from '../src/lib/coface-analysis/types';
+import type { CofaceExtractionResult } from '../src/lib/coface-analysis/types.js';
 
 const require = createRequire(import.meta.url);
 const pdfParse = require('pdf-parse') as (

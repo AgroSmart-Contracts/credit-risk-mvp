@@ -2,7 +2,7 @@ import { createRequire } from 'node:module';
 import fs from 'node:fs/promises';
 import { basename } from 'node:path';
 
-import type { ParsedPdfResult } from './types';
+import type { ParsedPdfResult } from './types.js';
 
 const require = createRequire(import.meta.url);
 
