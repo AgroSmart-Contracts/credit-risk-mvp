@@ -4,6 +4,8 @@ export type DealFieldSuggestions = {
   variety?: string;
   quantityLabel?: string;
   dealValueUSD?: number;
+  purchaseTotalUSD?: number;
+  supplierRuc?: string;
   origin?: string;
   destination?: string;
   incoterm?: string;

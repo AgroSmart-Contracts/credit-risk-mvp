@@ -6,6 +6,8 @@ const KEYS: (keyof DealFieldSuggestions)[] = [
   'variety',
   'quantityLabel',
   'dealValueUSD',
+  'purchaseTotalUSD',
+  'supplierRuc',
   'origin',
   'destination',
   'incoterm',
@@ -20,6 +22,16 @@ export function mergeDealFieldSuggestions(
   parts: DealFieldSuggestions[],
 ): DealFieldSuggestions {
   const merged: DealFieldSuggestions = {};
+  const extractedTotals: number[] = [];
+
+  for (const part of parts) {
+    if (part.dealValueUSD != null && part.dealValueUSD > 0) {
+      extractedTotals.push(part.dealValueUSD);
+    }
+    if (part.purchaseTotalUSD != null && part.purchaseTotalUSD > 0) {
+      extractedTotals.push(part.purchaseTotalUSD);
+    }
+  }
 
   for (const key of KEYS) {
     if (key === 'dealValueUSD') {
@@ -30,7 +42,27 @@ export function mergeDealFieldSuggestions(
           best = value;
         }
       }
+      if (best == null && extractedTotals.length >= 2) {
+        best = Math.max(...extractedTotals);
+      }
       if (best != null) merged.dealValueUSD = best;
+      continue;
+    }
+
+    if (key === 'purchaseTotalUSD') {
+      let best: number | undefined;
+      for (const part of parts) {
+        const value = part.purchaseTotalUSD;
+        if (value != null && value > 0 && (best == null || value < best)) {
+          best = value;
+        }
+      }
+      if (best == null && extractedTotals.length >= 2) {
+        const maxTotal = Math.max(...extractedTotals);
+        const minTotal = Math.min(...extractedTotals);
+        if (minTotal < maxTotal) best = minTotal;
+      }
+      if (best != null) merged.purchaseTotalUSD = best;
       continue;
     }
 
@@ -71,6 +103,7 @@ export function estimateDocCoveragePct(
     ['product', 12],
     ['variety', 8],
     ['dealValueUSD', 15],
+    ['purchaseTotalUSD', 10],
     ['buyerName', 12],
     ['supplierName', 12],
     ['origin', 10],

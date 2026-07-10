@@ -109,12 +109,16 @@ export async function analyzeUploadedPdfs(
         new Uint8Array(file.buffer),
         file.fileName,
       );
-      const suggestions = mapExtractedFieldsToDealSuggestions(result.extracted);
+      const docType = mapDocumentType(result.classification.type, file.fileName);
+      const suggestions = mapExtractedFieldsToDealSuggestions(
+        result.extracted,
+        { documentType: docType, fileName: file.fileName },
+      );
       suggestionParts.push(suggestions);
 
       documents.push({
         fileName: file.fileName,
-        detectedType: mapDocumentType(result.classification.type, file.fileName),
+        detectedType: docType,
         extractionHint: buildExtractionHint(result),
         requiresOcr: result.extracted.common.requiresOcr,
         extractionQuality: result.extracted.common.extractionQuality,

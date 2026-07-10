@@ -7,6 +7,7 @@ const CORE_FIELD_LABELS: Record<string, string> = {
   variety: "Variety",
   route: "Route",
   dealValueUSD: "Deal value (USD)",
+  purchaseTotalUSD: "Purchase total (USD)",
   buyerName: "Buyer",
   supplierName: "Supplier",
   incoterm: "Incoterm",
@@ -41,6 +42,13 @@ export function formatDetectedDealFields(
 
   if (suggestions.dealValueUSD != null) {
     push("dealValueUSD", Math.round(suggestions.dealValueUSD).toLocaleString("en-US"));
+  }
+
+  if (suggestions.purchaseTotalUSD != null) {
+    push(
+      "purchaseTotalUSD",
+      Math.round(suggestions.purchaseTotalUSD).toLocaleString("en-US"),
+    );
   }
 
   push("buyerName", suggestions.buyerName);

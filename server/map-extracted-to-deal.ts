@@ -78,8 +78,52 @@ function mapQualityGrade(extracted: ExtractedDocumentFields): string | undefined
   return undefined;
 }
 
+function isSalesAgreement(
+  fileName?: string,
+  rawText?: string,
+): boolean {
+  const lower = (fileName ?? '').toLowerCase();
+  if (/\b(venta|sales)\b/.test(lower)) return true;
+  if (!rawText) return false;
+  if (/\bacuerdo de ventas\b/i.test(rawText)) return true;
+  if (/\bsales agreement\b/i.test(rawText)) return true;
+  // TM sales contracts list TRU MARKET as seller ("Vendedor").
+  if (
+    /\bTRU\s*MARKET[\s\S]{0,240}["(]\s*Vendedor\s*[")]/i.test(rawText) ||
+    /["(]\s*Vendedor\s*[")][\s\S]{0,240}\bTRU\s*MARKET/i.test(rawText)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function isPurchaseDocument(
+  documentType?: string,
+  fileName?: string,
+  rawText?: string,
+): boolean {
+  if (isSalesAgreement(fileName, rawText)) return false;
+
+  const lower = (fileName ?? '').toLowerCase();
+  if (documentType === 'purchase_order') return true;
+  if (lower.includes('orden') && lower.includes('compra')) return true;
+  if (lower.includes('purchase') && lower.includes('order')) return true;
+  // Match document titles/headers only — boilerplate often mentions "esta orden de compra".
+  if (rawText && /^\s*orden\s+de\s+compra\b/im.test(rawText)) return true;
+  if (rawText && /^\s*purchase\s+order\b/im.test(rawText)) return true;
+  if (rawText && /\bacuerdo de compra\b/i.test(rawText)) return true;
+  return false;
+}
+
+function normalizeRuc(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const digits = value.replace(/\D/g, '');
+  return digits.length === 11 ? digits : undefined;
+}
+
 export function mapExtractedFieldsToDealSuggestions(
   extracted: ExtractedDocumentFields,
+  options?: { documentType?: string; fileName?: string },
 ): DealFieldSuggestions {
   const { common, contract } = extracted;
 
@@ -119,12 +163,24 @@ export function mapExtractedFieldsToDealSuggestions(
     nonEmpty(contract?.paymentTerms) ??
     nonEmpty(extracted.invoice?.paymentTerms);
 
+  const supplierRuc =
+    normalizeRuc(contract?.supplierTaxId) ??
+    normalizeRuc(common.exporterTaxId);
+
+  const purchaseDoc = isPurchaseDocument(
+    options?.documentType,
+    options?.fileName,
+    common.rawText ?? undefined,
+  );
+
   return {
     dealRef: nonEmpty(contract?.orderNumber),
     product,
     variety,
     quantityLabel: formatQuantityLabel(extracted),
-    dealValueUSD: total ?? undefined,
+    dealValueUSD: !purchaseDoc && total != null ? total : undefined,
+    purchaseTotalUSD: purchaseDoc && total != null ? total : undefined,
+    supplierRuc,
     origin,
     destination,
     incoterm: nonEmpty(contract?.incoterm) ?? nonEmpty(common.incoterm),
