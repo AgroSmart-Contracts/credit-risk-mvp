@@ -20,6 +20,12 @@ import {
   type ConfirmationValues,
 } from "../lib/confirmation-fields";
 import { formatCofaceSignal } from "../lib/create-deal";
+import {
+  attachMarketIntel,
+  fetchMarketIntelForDeal,
+  resolveSupplierRuc,
+} from "../lib/market-intel";
+import { ProcessingMascot } from "./ProcessingMascot";
 
 interface DocumentIngestionProps {
   deal: Deal;
@@ -47,6 +53,7 @@ export function DocumentIngestion({
   const [showSummary, setShowSummary] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [confirmedFields, setConfirmedFields] = useState<ConfirmationValues>({});
+  const [assessing, setAssessing] = useState(false);
 
   const analysis = deal.documentAnalysis;
   const docCoveragePct = analysis?.docCoveragePct ?? 82;
@@ -57,6 +64,31 @@ export function DocumentIngestion({
   const confirmationFields = useMemo(
     () => listConfirmationFields(deal),
     [deal],
+  );
+
+  const counterpartyFields = useMemo(
+    () =>
+      confirmationFields.filter(
+        (field) =>
+          field.kind === "scoring" && field.section === "counterparty",
+      ),
+    [confirmationFields],
+  );
+
+  const structureFields = useMemo(
+    () =>
+      confirmationFields.filter(
+        (field) => field.kind === "scoring" && field.section === "structure",
+      ),
+    [confirmationFields],
+  );
+
+  const otherFields = useMemo(
+    () =>
+      confirmationFields.filter(
+        (field) => field.kind === "freeText" && field.section === "other",
+      ),
+    [confirmationFields],
   );
 
   useEffect(() => {
@@ -88,10 +120,22 @@ export function DocumentIngestion({
   const allProcessed = processedCount >= deal.sourceDocuments.length;
   const confirmationCount = confirmationFields.length;
 
-  const handleRunAssessment = () => {
+  const handleRunAssessment = async () => {
     const updatedDeal = applyConfirmations(deal, confirmedFields);
-    onRunAssessment(updatedDeal);
+    setAssessing(true);
+    try {
+      let enriched = updatedDeal;
+      if (resolveSupplierRuc(updatedDeal)) {
+        const payload = await fetchMarketIntelForDeal(updatedDeal);
+        enriched = attachMarketIntel(updatedDeal, payload);
+      }
+      onRunAssessment(enriched);
+    } finally {
+      setAssessing(false);
+    }
   };
+
+  const isReadingDocs = !showSummary;
 
   return (
     <div className="space-y-6">
@@ -129,7 +173,30 @@ export function DocumentIngestion({
         )}
       </div>
 
-      <div className="space-y-3">
+      {(isReadingDocs || assessing) && (
+        <div
+          className="rounded-xl border border-tm-border bg-tm-surface px-4 py-6"
+          aria-busy="true"
+        >
+          <ProcessingMascot
+            size={assessing ? 220 : 200}
+            messages={
+              assessing
+                ? [
+                    "Scoring counterparty risk…",
+                    "Checking trade route…",
+                    "Structuring deal terms…",
+                    "Preparing risk dashboard…",
+                  ]
+                : undefined
+            }
+          />
+        </div>
+      )}
+
+      <div
+        className={`space-y-3 transition-opacity duration-300 ${isReadingDocs ? "opacity-80" : "opacity-100"}`}
+      >
         {deal.sourceDocuments.map((doc, index) => {
           const Icon = docIcons[doc.type] ?? FileText;
           const isDone = index < processedCount;
@@ -253,6 +320,20 @@ export function DocumentIngestion({
                 value={String(deal.supplier.platformDealsCompleted)}
                 source="platform"
               />
+              {deal.supplierRuc && (
+                <Field
+                  label="Supplier RUC"
+                  value={deal.supplierRuc}
+                  source="document"
+                />
+              )}
+              {deal.marketIntel && (
+                <Field
+                  label="Peru customs intel"
+                  value={`Data as of ${deal.marketIntel.meta.data_as_of} · ${deal.marketIntel.dim_a_supplier.confidence ?? "—"} confidence`}
+                  source="platform"
+                />
+              )}
             </dl>
 
             {confirmationCount > 0 && (
@@ -261,20 +342,48 @@ export function DocumentIngestion({
                   Not found in documents — confirm or estimate (model does not
                   silently guess)
                 </p>
-                <div className="space-y-3">
-                  {confirmationFields.map((field) => (
-                    <ConfirmationFieldInput
-                      key={fieldKey(field)}
-                      field={field}
-                      value={confirmedFields[fieldKey(field)]}
-                      onChange={(value) =>
+                <div className="space-y-5">
+                  {counterpartyFields.length > 0 && (
+                    <ConfirmationSection
+                      title="Counterparty"
+                      description="License validity, track record, and platform history"
+                      fields={counterpartyFields}
+                      confirmedFields={confirmedFields}
+                      onChange={(key, value) =>
                         setConfirmedFields((prev) => ({
                           ...prev,
-                          [fieldKey(field)]: value,
+                          [key]: value,
                         }))
                       }
                     />
-                  ))}
+                  )}
+                  {structureFields.length > 0 && (
+                    <ConfirmationSection
+                      title="Transaction structure"
+                      description="Payment schedule and cash-flow inputs — usually require both purchase and sale contracts"
+                      fields={structureFields}
+                      confirmedFields={confirmedFields}
+                      onChange={(key, value) =>
+                        setConfirmedFields((prev) => ({
+                          ...prev,
+                          [key]: value,
+                        }))
+                      }
+                    />
+                  )}
+                  {otherFields.length > 0 && (
+                    <ConfirmationSection
+                      title="Other"
+                      fields={otherFields}
+                      confirmedFields={confirmedFields}
+                      onChange={(key, value) =>
+                        setConfirmedFields((prev) => ({
+                          ...prev,
+                          [key]: value,
+                        }))
+                      }
+                    />
+                  )}
                 </div>
               </div>
             )}
@@ -283,7 +392,7 @@ export function DocumentIngestion({
       </AnimatePresence>
 
       <AnimatePresence>
-        {showButton && (
+        {showButton && !assessing && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -299,6 +408,39 @@ export function DocumentIngestion({
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function ConfirmationSection({
+  title,
+  description,
+  fields,
+  confirmedFields,
+  onChange,
+}: {
+  title: string;
+  description?: string;
+  fields: ConfirmationField[];
+  confirmedFields: ConfirmationValues;
+  onChange: (key: string, value: string | boolean) => void;
+}) {
+  return (
+    <div>
+      <h4 className="text-sm font-semibold text-tm-black">{title}</h4>
+      {description && (
+        <p className="mt-0.5 text-xs text-tm-text-muted">{description}</p>
+      )}
+      <div className="mt-3 space-y-3">
+        {fields.map((field) => (
+          <ConfirmationFieldInput
+            key={fieldKey(field)}
+            field={field}
+            value={confirmedFields[fieldKey(field)]}
+            onChange={(value) => onChange(fieldKey(field), value)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -335,10 +477,38 @@ function ConfirmationFieldInput({
         <label className="mb-1 block text-sm font-medium text-tm-text">
           {field.label}
         </label>
+        {field.helpText && (
+          <p className="mb-1.5 text-xs text-tm-text-muted">{field.helpText}</p>
+        )}
         <YesNoToggle
           value={typeof value === "boolean" ? value : null}
           onChange={onChange}
         />
+      </div>
+    );
+  }
+
+  if (field.type === "select" && field.options) {
+    return (
+      <div>
+        <label className="mb-1 block text-sm font-medium text-tm-text">
+          {field.label}
+        </label>
+        {field.helpText && (
+          <p className="mb-1.5 text-xs text-tm-text-muted">{field.helpText}</p>
+        )}
+        <select
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
+        >
+          <option value="">Select…</option>
+          {field.options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
     );
   }
@@ -348,6 +518,9 @@ function ConfirmationFieldInput({
       <label className="mb-1 block text-sm font-medium text-tm-text">
         {field.label}
       </label>
+      {field.helpText && (
+        <p className="mb-1.5 text-xs text-tm-text-muted">{field.helpText}</p>
+      )}
       <div className="relative">
         <input
           type="number"

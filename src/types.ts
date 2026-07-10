@@ -1,6 +1,8 @@
 import type { AnalyzeDocumentsResult } from "./lib/document-analysis/types";
 import type { CorridorRiskFlag } from "./lib/route-risk-tables";
 import type { DimensionBreakdown } from "./lib/scoring";
+import type { TransactionStructureInput } from "./lib/transaction-structure/types";
+import type { MarketIntelPayload } from "./lib/market-intel/types";
 
 export interface CofaceCoverage {
   coveragePct: number | null;
@@ -32,6 +34,8 @@ export interface Deal {
   incoterm: string;
   buyer: CounterpartyInput;
   supplier: CounterpartyInput;
+  /** Peruvian supplier RUC (11 digits) for customs market-intel lookup */
+  supplierRuc?: string | null;
   paymentTerms: string;
   advancePaymentPct: number;
   contractType: "Spot" | "Forward" | "Seasonal";
@@ -75,6 +79,10 @@ export interface Deal {
   }[];
   fieldsNeedingConfirmation: string[];
   documentAnalysis?: AnalyzeDocumentsResult;
+  /** Cash-flow schedule + structure inputs for CRAM Transaction Structure scoring */
+  transactionStructure?: TransactionStructureInput;
+  /** Peru customs market-intel payload (dim A/B/C/D.3) */
+  marketIntel?: MarketIntelPayload;
   teaser: string;
 }
 

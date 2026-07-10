@@ -2,6 +2,7 @@ import type { Deal, RiskAssessment } from "../types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
 import { computeOverallScore, type ScoreBreakdown } from "./scoring";
 import { analyzeRiskFactors } from "./risk-factors";
+import { computeTransactionStructureScore } from "./transaction-structure/scoring";
 
 export function formatUSD(amount: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -41,9 +42,6 @@ function counterpartyWhy(deal: Deal, externalBonus: number): string {
   ) {
     return "Both parties new to platform, no track record";
   }
-  if (deal.buyer.licenseValid === null) {
-    return "First deal on platform, license not confirmed";
-  }
   return "Established counterparty profile on platform";
 }
 
@@ -73,23 +71,16 @@ function routeWhy(deal: Deal, scores: ScoreBreakdown): string {
   return `${deal.estimatedTransitDays}-day transit, ${transship}, ${flagLabel} corridor${sourceNote}`;
 }
 
-function structureWhy(deal: Deal, paymentAdj: number): string {
-  if (paymentAdj < 0) {
-    return `${deal.paymentTerms} — no advance or collateral`;
+function structureWhy(deal: Deal): string {
+  const result = computeTransactionStructureScore(deal);
+  if (!result.complete) {
+    return `Confirm payment schedule and purchase/sale totals (${result.missingFields.length} field(s) missing)`;
   }
-  if (deal.advancePaymentPct > 0) {
-    return `${deal.advancePaymentPct}% advance, ${deal.collateralType.toLowerCase()}`;
-  }
-  if (
-    deal.paymentTerms.toLowerCase().includes("against") &&
-    deal.insuranceCoverage === "None"
-  ) {
-    return "Documentary terms, no insurance on file";
-  }
-  if (deal.insuranceCoverage === "None" && deal.collateralType === "None") {
-    return "No advance payment, no collateral yet";
-  }
-  return "Standard spot structure, limited mitigants";
+  const ratioNote =
+    result.cashFlow.upsideDownsideRatio !== null
+      ? `upside:downside ${result.cashFlow.upsideDownsideRatio.toFixed(2)}`
+      : "no loss even if buyer final tranche is unpaid";
+  return `${result.tier} structure — ${result.exposureDuration}d exposure, ${ratioNote}`;
 }
 
 export function buildRiskAssessment(deal: Deal): RiskAssessment {
@@ -139,7 +130,7 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
       label: "Deal Structure",
       score: scores.structure.value,
       weight: DIMENSION_WEIGHTS.structure,
-      why: structureWhy(deal, scores.paymentTermsAdj),
+      why: structureWhy(deal),
       headroom: scores.structure.headroom,
       breakdown: scores.structure,
     },
