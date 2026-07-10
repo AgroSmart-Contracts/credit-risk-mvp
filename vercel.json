@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/market-intel-rate.py": {
+      "includeFiles": "docs/market-intel-peru-2025-2026-07-10/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",

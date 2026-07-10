@@ -1,0 +1,92 @@
+{
+  "version": "0.1-DRAFT",
+  "source": "vault: 1-Notes/Projects/TruMarket/tm-cram-reference-tables-2026-07.md",
+  "as_of": "2026-07-09",
+  "confidential": true,
+  "note": "Encoded lookup values only. Rationale + rating narrative live in the vault.",
+
+  "commodity_to_group": {
+    "ASPARAGUS": 1,
+    "GRAPE": 1,
+    "BLUEBERRY": 1,
+    "AVOCADO": 2,
+    "MANDARIN": 3,
+    "GINGER": 3,
+    "COFFEE": 4,
+    "CACAO": 4,
+    "COCOA": 4
+  },
+
+  "perishability": {
+    "ASPARAGUS":  {"class": "PERISHABLE_OR_ULTRA", "pts": -12, "open": true, "note": "Ultra vs Perishable pending AC decision; possibly freight-type-conditional"},
+    "GRAPE":      {"class": "PERISHABLE",          "pts": -4,  "open": true, "note": "Semi with SO2/CA pending AC decision"},
+    "BLUEBERRY":  {"class": "PERISHABLE",          "pts": -4,  "open": false},
+    "AVOCADO":    {"class": "PERISHABLE",          "pts": -4,  "open": false},
+    "MANDARIN":   {"class": "PERISHABLE",          "pts": -4,  "open": false},
+    "GINGER":     {"class": "SEMI_PERISHABLE",     "pts": 9,   "open": false},
+    "COFFEE":     {"class": "NON_PERISHABLE",      "pts": 18,  "open": false},
+    "CACAO":      {"class": "NON_PERISHABLE",      "pts": 18,  "open": false}
+  },
+
+  "season_windows": {
+    "ASPARAGUS":  "year-round, peak Sep-Dec",
+    "GRAPE":      "Oct-Feb",
+    "BLUEBERRY":  "Aug-Dec (campaign peak)",
+    "AVOCADO":    "Mar-Aug",
+    "MANDARIN":   "Jun-Sep",
+    "GINGER":     "broad, peak Aug-Feb",
+    "COFFEE":     "harvest Apr-Sep",
+    "CACAO":      "main Apr-Jul + minor"
+  },
+
+  "corridor_defaults": {
+    "PE->COLOMBIA":       {"ocean_transit_days_typ": [3, 5],   "customs_norm_days": null, "flag": "LOW_MED", "direct_ocean": true,  "confirmed": true},
+    "PE->ESTADOS UNIDOS": {"ocean_transit_days_typ": [11, 16], "customs_norm_days": 3,    "flag": "LOW",     "direct_ocean": true,  "confirmed": false},
+    "PE->ESPAÑA":         {"ocean_transit_days_typ": [17, 21], "customs_norm_days": [3, 5], "flag": "LOW",   "direct_ocean": true,  "confirmed": false},
+    "PE->PORTUGAL":       {"ocean_transit_days_typ": [18, 22], "customs_norm_days": [3, 5], "flag": "LOW",   "direct_ocean": false, "confirmed": false},
+    "PE->PAISES BAJOS":   {"ocean_transit_days_typ": [19, 22], "customs_norm_days": 3,    "flag": "LOW",     "direct_ocean": true,  "confirmed": true,  "note": "corridor default; asparagus pair overrides to HIGH"},
+    "PE->ALEMANIA":       {"ocean_transit_days_typ": [19, 22], "customs_norm_days": 3,    "flag": "LOW",     "direct_ocean": true,  "confirmed": false, "note": "same EU-north gateway; asparagus pair overrides to HIGH"},
+    "PE->ISRAEL":         {"ocean_transit_days_typ": [35, 40], "predominant_transport": "AIR", "cold_treatment_required": true, "customs_norm_days": [4, 7], "flag": "HIGH",  "direct_ocean": false, "confirmed": true,  "note": "AIR-dominant lane (95.7% observed). Cold treatment required at origin (phyto). Air transit + hub transshipment = high cold-chain break risk. Ocean 35d rule not the primary driver — air+cold-treatment stack is."},
+    "PE->EGIPTO":         {"ocean_transit_days_typ": [25, 30], "customs_norm_days": null, "flag": "MED_HIGH", "direct_ocean": false, "confirmed": false},
+    "PE->JORDANIA":       {"ocean_transit_days_typ": [30, 36], "customs_norm_days": [5, 7], "flag": "MED_HIGH", "direct_ocean": false, "confirmed": false},
+    "PE->TAILANDIA":      {"ocean_transit_days_typ": [30, 38], "customs_norm_days": [3, 5], "flag": "MED",   "direct_ocean": false, "confirmed": false},
+    "PE->TAIWAN":         {"ocean_transit_days_typ": [30, 30], "customs_norm_days": [3, 5], "flag": "MED",   "direct_ocean": false, "confirmed": true},
+    "PE->CHINA":          {"ocean_transit_days_typ": [25, 25], "customs_norm_days": [3, 5], "flag": "MED",   "direct_ocean": true,  "confirmed": true},
+    "PE->EMIRATOS ARABES UNIDOS": {"ocean_transit_days_typ": [28, 34], "customs_norm_days": 3, "flag": "MED", "direct_ocean": false, "confirmed": false}
+  },
+
+  "product_x_market_pairs": {
+    "G1|ISRAEL":         {"flag": "HIGH",     "confirmed": true,  "reason_short": "AC-confirmed 2026-07-09. AIR-dominant + cold treatment required at origin: extra cost/delay pre-shipment PLUS near-certain cold-chain break at air hub during transshipment. The cold-treatment investment at origin is undermined mid-transit — high spoilage/reject probability + thin resale market on rejection."},
+    "G1|ALEMANIA":       {"flag": "HIGH",     "confirmed": true,  "reason_short": "AC-confirmed. Ocean 19-22d eats shelf life; strict quality culture; hard to re-place rejects. Overrides Rotterdam Low."},
+    "G1|PAISES BAJOS":   {"flag": "HIGH",     "confirmed": true,  "reason_short": "AC-confirmed. Same drivers as Germany."},
+    "G1|ESPAÑA":         {"flag": "LOW_MED",  "confirmed": false, "reason_short": "Asparagus benefits from air-dominant + deep resale (Mercamadrid). Applies best to asparagus specifically."},
+    "G1|ESTADOS UNIDOS": {"flag": "LOW_MED",  "confirmed": false, "reason_short": "Short transit + deep market; fruit-fly protocol compliance is binding"},
+    "G1|TAILANDIA":      {"flag": "MED_HIGH", "confirmed": false, "reason_short": "Long transit near CA ceiling; moderate resale depth"},
+    "G1|TAIWAN":         {"flag": "MED_HIGH", "confirmed": false, "reason_short": "Same as Thailand"},
+    "G2|EU":             {"flag": "LOW_MED",  "confirmed": false, "reason_short": "Robust demand + ripening infra; DM/maturity claims are main friction"},
+    "G3|COLOMBIA":       {"flag": "MED",      "confirmed": false, "reason_short": "TM-2026-012 lane: short transit but thin market depth + first-time counterparties"},
+    "G3|ESTADOS UNIDOS": {"flag": "MED",      "confirmed": false, "reason_short": "Cold-treatment protocol mandatory; protocol certification gates the deal"},
+    "G3|EU":             {"flag": "LOW",      "confirmed": false, "reason_short": "Ginger: semi-perishable + deep spot market"},
+    "G4|EU":             {"flag": "LOW",      "confirmed": false, "reason_short": "Physically low-risk; EUDR DDS is the gating item"},
+    "G4|ESTADOS UNIDOS": {"flag": "LOW",      "confirmed": false, "reason_short": "Non-perishable, standard dry logistics"},
+    "GX|EGIPTO":         {"flag": "HIGH",     "confirmed": false, "reason_short": "Long transshipped transit + customs variability + payment-rail friction (fresh only)"},
+    "GX|JORDANIA":       {"flag": "HIGH",     "confirmed": false, "reason_short": "Long transshipped transit + customs variability + payment-rail friction (fresh only)"}
+  },
+
+  "flag_to_cram_pts": {
+    "LOW":      12,
+    "LOW_MED":  7,
+    "MED":      3,
+    "MED_HIGH": -8,
+    "HIGH":     -15
+  },
+
+  "rules": {
+    "perishable_ocean_transit_ceiling_days": 35,
+    "perishable_ocean_transit_floor_flag": "HIGH",
+    "non_perishable_exempt_from_35d_rule": ["G4"],
+    "cold_treatment_missing_deduction": -5,
+    "air_cold_treatment_stack_floor_flag": "HIGH",
+    "air_cold_treatment_stack_note": "Independent rule from the 35d ocean rule. A corridor whose predominant transport is AIR AND requires cold treatment at origin for the commodity has near-certain cold-chain break during air-hub transshipment. Floors the C4 flag at HIGH for perishables (G1-G3 fresh) regardless of ocean transit norms."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "variety": "MANGO",
+  "destination_country": "ESTADOS UNIDOS",
+  "deal_week": "2025-10-20/2025-10-26",
+  "window_start": "2025-09-22/2025-09-28",
+  "window_end": "2025-10-13/2025-10-19",
+  "window_weeks": 4,
+  "n_shipments": 71,
+  "n_exporters": 13,
+  "kg_shipped": 1202266.4900000002,
+  "p10": 1.4111605443801996,
+  "p25": 1.5872153983110098,
+  "p50": 1.900000125029017,
+  "p75": 2.147720707348849,
+  "p90": 2.872793876685552,
+  "confidence": "HIGH",
+  "fallback_note": null,
+  "deal_price_usd_per_kg": 1.85,
+  "deal_vs_p50_pct": -2.63,
+  "deal_vs_p50_band": "WITHIN_BAND"
+}

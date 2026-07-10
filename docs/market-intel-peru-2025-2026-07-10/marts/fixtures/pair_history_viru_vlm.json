@@ -1,0 +1,22 @@
+{
+  "exporter_id": "20610799869",
+  "exporter_name": "VIRU S.A.",
+  "importer_id": "aee9a347",
+  "importer_name": "VLM FOODS USA LTD.",
+  "destination_country": "ESTADOS UNIDOS",
+  "as_of": "2025-12-31",
+  "first_shipment": "2025-01-26",
+  "last_shipment": "2025-12-19",
+  "months_since_last": 0,
+  "n_prior_shipments": 199,
+  "n_prior_last_12mo": 199,
+  "months_active_together": 11,
+  "cumulative_kg_net": 4372591.59,
+  "cumulative_fob_usd": 10596801.270000003,
+  "avg_ticket_kg": 21972.8,
+  "price_stability_cv": 0.161,
+  "primary_variety": "STRAWBERRY",
+  "primary_destination": "ESTADOS UNIDOS",
+  "d3_indicative_pts": 15,
+  "relationship_signal": "MODERATE"
+}

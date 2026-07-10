@@ -44,6 +44,25 @@ function analyzeDocumentsApiPlugin(): Plugin {
             .catch(next)
         },
       )
+
+      server.middlewares.use(
+        '/api/market-intel-rate',
+        (req, res, next) => {
+          if (req.method !== 'POST') {
+            next()
+            return
+          }
+
+          void import('./server/market-intel-rate')
+            .then(({ handleMarketIntelRate }) =>
+              handleMarketIntelRate(
+                req as IncomingMessage,
+                res as ServerResponse,
+              ),
+            )
+            .catch(next)
+        },
+      )
     },
   }
 }

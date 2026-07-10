@@ -1,0 +1,118 @@
+{
+  "variety": "MANGO",
+  "destination_country": "ESTADOS UNIDOS",
+  "period_label": "2025-01-01 .. 2025-12-27",
+  "n_shipments": 1932,
+  "n_exporters": 36,
+  "n_importers": 71,
+  "kg_net": 36722734.36,
+  "fob_usd": 69758502.03,
+  "lane_share_of_variety_pct": 41.79,
+  "green_channel_pct": 97.5,
+  "orange_channel_pct": 0.0,
+  "red_channel_pct": 2.5,
+  "transport_mode_mix": {
+    "MARÍTIMO": 96.6,
+    "AÉREO": 3.4
+  },
+  "exporter_hhi": 782.0,
+  "importer_hhi": 577.0,
+  "top_exporters": [
+    {
+      "exporter_id": "20610799869",
+      "exporter_name": "VIRU S.A.",
+      "share_pct": 18.6
+    },
+    {
+      "exporter_id": "20606844159",
+      "exporter_name": "AGROINDUSTRIA FRUTOS DE ORO S.A.C.",
+      "share_pct": 10.8
+    },
+    {
+      "exporter_id": "20117751954",
+      "exporter_name": "PROCESADORA PERU SOCIEDAD ANONIMA CERRADA",
+      "share_pct": 7.7
+    },
+    {
+      "exporter_id": "20481065799",
+      "exporter_name": "DOMINUS S.A.C",
+      "share_pct": 7.3
+    },
+    {
+      "exporter_id": "20402805294",
+      "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+      "share_pct": 6.7
+    }
+  ],
+  "top_importers": [
+    {
+      "importer_id": "14f381cb",
+      "importer_name": "SUPERIOR FOODS INTERNATIONAL",
+      "share_pct": 10.7
+    },
+    {
+      "importer_id": "d994d13c",
+      "importer_name": "DOLE PACKAGED FOODS. LLC",
+      "share_pct": 10.6
+    },
+    {
+      "importer_id": "36ccccee",
+      "importer_name": "PATAGONIA FOOD GROUP. LLC",
+      "share_pct": 9.9
+    },
+    {
+      "importer_id": "2454d293",
+      "importer_name": "LAMEX AGRIFOODS. INC.",
+      "share_pct": 6.8
+    },
+    {
+      "importer_id": "fdff0a7d",
+      "importer_name": "NEW ALASKO FOODS. LLC C/O FREEZPAK LOGISTICS",
+      "share_pct": 6.1
+    }
+  ],
+  "monthly_kg": {
+    "2025-01": 6575085.09,
+    "2025-02": 7959895.43,
+    "2025-03": 7151124.58,
+    "2025-04": 3710951.87,
+    "2025-05": 2656570.54,
+    "2025-06": 1569005.9,
+    "2025-07": 1193324.77,
+    "2025-08": 1473313.43,
+    "2025-09": 1467990.58,
+    "2025-10": 1279397.3699999999,
+    "2025-11": 871601.86,
+    "2025-12": 814472.94
+  },
+  "peak_month": "2025-02",
+  "off_peak_month": "2025-12",
+  "peak_off_ratio": 9.8,
+  "in_season_weeks": [
+    "2025-01-06/2025-01-12",
+    "2025-01-13/2025-01-19",
+    "2025-01-20/2025-01-26",
+    "2025-01-27/2025-02-02",
+    "2025-02-03/2025-02-09",
+    "2025-02-10/2025-02-16",
+    "2025-02-17/2025-02-23",
+    "2025-02-24/2025-03-02",
+    "2025-03-03/2025-03-09",
+    "2025-03-10/2025-03-16",
+    "2025-03-17/2025-03-23",
+    "2025-03-24/2025-03-30",
+    "2025-03-31/2025-04-06",
+    "2025-04-14/2025-04-20",
+    "2025-05-19/2025-05-25",
+    "2025-05-26/2025-06-01"
+  ],
+  "lane_maturity": "DEEP",
+  "deal_week": "2025-10-20/2025-10-26",
+  "commercial_window_alignment": "OFF_SEASON",
+  "route_signal_inferred": "MED",
+  "caveats": [
+    "Customs channel is Peru-side (SUNAT green/orange/red) — does not capture destination-country customs friction.",
+    "Route signal is INFERRED from lane maturity + Peru-side ops + seasonality. It does NOT include destination phyto interception history, geopolitical risk, or payment-rail reliability.",
+    "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+  ]
+}

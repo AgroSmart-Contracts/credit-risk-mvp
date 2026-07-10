@@ -1,0 +1,165 @@
+{
+  "entity_id": "aee9a347",
+  "entity_side": "importer",
+  "entity_name": "VLM FOODS USA LTD.",
+  "destination_country": "ESTADOS UNIDOS",
+  "as_of": "2025-12-31",
+  "first_seen": "2025-01-05",
+  "last_seen": "2025-12-19",
+  "vintage_months": 11,
+  "months_active_12mo": 12,
+  "total_shipments": 364,
+  "total_kg_net": 8071972.27,
+  "total_fob_usd": 18147989.03,
+  "avg_monthly_kg_last_6mo": 1064572.0,
+  "avg_monthly_kg_last_12mo": 672664.0,
+  "peak_monthly_kg": 2092002.0,
+  "peak_monthly_kg_month": "2025-10",
+  "wavg_usd_per_kg": 2.248,
+  "peru_variety_share_pct": {
+    "AVOCADO": 0.69,
+    "BLUEBERRY": 1.61,
+    "MANGO": 1.13,
+    "STRAWBERRY": 18.95
+  },
+  "variety_mix": [
+    {
+      "variety": "STRAWBERRY",
+      "share_pct": 79.6,
+      "wavg_usd_kg": 2.23
+    },
+    {
+      "variety": "MANGO",
+      "share_pct": 12.3,
+      "wavg_usd_kg": 1.833
+    },
+    {
+      "variety": "BLUEBERRY",
+      "share_pct": 4.8,
+      "wavg_usd_kg": 2.825
+    },
+    {
+      "variety": "AVOCADO",
+      "share_pct": 3.3,
+      "wavg_usd_kg": 3.403
+    }
+  ],
+  "top_partners": [
+    {
+      "partner_id": "20610799869",
+      "partner_name": "VIRU S.A.",
+      "kg_net": 4372591.59,
+      "share_pct": 54.2
+    },
+    {
+      "partner_id": "20402805294",
+      "partner_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+      "kg_net": 1230910.78,
+      "share_pct": 15.2
+    },
+    {
+      "partner_id": "20373860736",
+      "partner_name": "VIRÚ GROUP PERÚ S.A.",
+      "kg_net": 777406.89,
+      "share_pct": 9.6
+    },
+    {
+      "partner_id": "20481065799",
+      "partner_name": "DOMINUS S.A.C",
+      "kg_net": 707367.38,
+      "share_pct": 8.8
+    },
+    {
+      "partner_id": "20601199557",
+      "partner_name": "MEBOL GF S.A.C.",
+      "kg_net": 671916.28,
+      "share_pct": 8.3
+    }
+  ],
+  "top_destinations": null,
+  "price_positioning": {
+    "AVOCADO": {
+      "entity_wavg_usd_kg": 3.403,
+      "peru_wavg_usd_kg": 3.004,
+      "variance_pct": 13.3,
+      "position": "PREMIUM"
+    },
+    "BLUEBERRY": {
+      "entity_wavg_usd_kg": 2.825,
+      "peru_wavg_usd_kg": 2.395,
+      "variance_pct": 18.0,
+      "position": "PREMIUM"
+    },
+    "MANGO": {
+      "entity_wavg_usd_kg": 1.833,
+      "peru_wavg_usd_kg": 1.833,
+      "variance_pct": 0.0,
+      "position": "AT_MARKET"
+    },
+    "STRAWBERRY": {
+      "entity_wavg_usd_kg": 2.23,
+      "peru_wavg_usd_kg": 1.954,
+      "variance_pct": 14.1,
+      "position": "PREMIUM"
+    }
+  },
+  "corridor_positioning": [
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 275,
+      "entity_kg": 6425315.609999999,
+      "entity_wavg_usd_kg": 2.23,
+      "peru_wavg_usd_kg": 1.996,
+      "corridor_kg_market": 19950598.099999998,
+      "entity_share_of_corridor_pct": 32.21,
+      "variance_pct": 11.7,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 46,
+      "entity_kg": 991703.0499999999,
+      "entity_wavg_usd_kg": 1.833,
+      "peru_wavg_usd_kg": 1.9,
+      "corridor_kg_market": 36722734.36,
+      "entity_share_of_corridor_pct": 2.7,
+      "variance_pct": -3.5,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 20,
+      "entity_kg": 387973.32999999996,
+      "entity_wavg_usd_kg": 2.825,
+      "peru_wavg_usd_kg": 2.715,
+      "corridor_kg_market": 3029811.7199999997,
+      "entity_share_of_corridor_pct": 12.81,
+      "variance_pct": 4.1,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 23,
+      "entity_kg": 266980.27999999997,
+      "entity_wavg_usd_kg": 3.403,
+      "peru_wavg_usd_kg": 3.067,
+      "corridor_kg_market": 2379296.47,
+      "entity_share_of_corridor_pct": 11.22,
+      "variance_pct": 10.9,
+      "position": "PREMIUM"
+    }
+  ],
+  "capacity_check": {
+    "deal_kg": 500000.0,
+    "baseline_monthly_kg": 672664.0,
+    "deal_vs_baseline_pct": 74.3,
+    "peak_monthly_kg": 2092002.0,
+    "deal_vs_peak_pct": 23.9,
+    "flag": "STRETCH"
+  },
+  "confidence": "HIGH"
+}

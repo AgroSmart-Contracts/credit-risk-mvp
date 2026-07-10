@@ -1,0 +1,16 @@
+{
+  "ruc": "20535747424",
+  "resolved": false,
+  "razon_social": null,
+  "estado": null,
+  "condicion": null,
+  "fecha_inscripcion": null,
+  "years_in_business": null,
+  "ubigeo": null,
+  "direccion": null,
+  "tipo": null,
+  "actividad_economica": null,
+  "fetched_at": "2026-07-10T15:44:34",
+  "source": "https://api.apis.net.pe/v1/ruc?numero=20535747424",
+  "error": "URLError: <urlopen error timed out>"
+}

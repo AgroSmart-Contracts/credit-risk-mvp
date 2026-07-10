@@ -1,0 +1,775 @@
+{
+  "entity_id": "20610799869",
+  "entity_side": "exporter",
+  "entity_name": "VIRU S.A.",
+  "destination_country": null,
+  "as_of": "2025-12-31",
+  "first_seen": "2025-01-05",
+  "last_seen": "2025-12-24",
+  "vintage_months": 11,
+  "months_active_12mo": 12,
+  "total_shipments": 1874,
+  "total_kg_net": 26342792.16,
+  "total_fob_usd": 63661826.879999995,
+  "avg_monthly_kg_last_6mo": 2682728.0,
+  "avg_monthly_kg_last_12mo": 2195233.0,
+  "peak_monthly_kg": 3842214.0,
+  "peak_monthly_kg_month": "2025-10",
+  "wavg_usd_per_kg": 2.417,
+  "peru_variety_share_pct": {
+    "AVOCADO": 18.02,
+    "BLACKBERRY": 87.09,
+    "BLUEBERRY": 5.14,
+    "CHERRY": 100.0,
+    "GRAPE": 52.24,
+    "MANGO": 13.32,
+    "PINEAPPLE": 4.5,
+    "RASPBERRY": 0.99,
+    "STRAWBERRY": 17.21
+  },
+  "variety_mix": [
+    {
+      "variety": "MANGO",
+      "share_pct": 44.4,
+      "wavg_usd_kg": 1.98
+    },
+    {
+      "variety": "AVOCADO",
+      "share_pct": 26.3,
+      "wavg_usd_kg": 3.151
+    },
+    {
+      "variety": "STRAWBERRY",
+      "share_pct": 22.1,
+      "wavg_usd_kg": 2.35
+    },
+    {
+      "variety": "BLUEBERRY",
+      "share_pct": 4.7,
+      "wavg_usd_kg": 2.721
+    },
+    {
+      "variety": "GRAPE",
+      "share_pct": 1.7,
+      "wavg_usd_kg": 2.184
+    },
+    {
+      "variety": "UNCLASSIFIED",
+      "share_pct": 0.3,
+      "wavg_usd_kg": 2.566
+    },
+    {
+      "variety": "PINEAPPLE",
+      "share_pct": 0.3,
+      "wavg_usd_kg": 3.447
+    },
+    {
+      "variety": "CHERRY",
+      "share_pct": 0.1,
+      "wavg_usd_kg": 4.656
+    },
+    {
+      "variety": "BLACKBERRY",
+      "share_pct": 0.0,
+      "wavg_usd_kg": 3.887
+    },
+    {
+      "variety": "RASPBERRY",
+      "share_pct": 0.0,
+      "wavg_usd_kg": 0.385
+    }
+  ],
+  "top_partners": [
+    {
+      "partner_id": "aee9a347",
+      "partner_name": "VLM FOODS USA LTD.",
+      "kg_net": 4372591.59,
+      "share_pct": 16.6
+    },
+    {
+      "partner_id": "14f381cb",
+      "partner_name": "SUPERIOR FOODS INTERNATIONAL",
+      "kg_net": 3316886.45,
+      "share_pct": 12.6
+    },
+    {
+      "partner_id": "809bd689",
+      "partner_name": "VIRU IBERICA. S.L.",
+      "kg_net": 2564352.53,
+      "share_pct": 9.7
+    },
+    {
+      "partner_id": "d99a0033",
+      "partner_name": "SALUD FOODGROUP EUROPE BV",
+      "kg_net": 1414801.91,
+      "share_pct": 5.4
+    },
+    {
+      "partner_id": "d994d13c",
+      "partner_name": "DOLE PACKAGED FOODS. LLC",
+      "kg_net": 1206836.14,
+      "share_pct": 4.6
+    }
+  ],
+  "top_destinations": [
+    {
+      "destination_country": "ESTADOS UNIDOS",
+      "kg_net": 13616313.41,
+      "share_pct": 51.7
+    },
+    {
+      "destination_country": "ESPAÑA",
+      "kg_net": 2882440.53,
+      "share_pct": 10.9
+    },
+    {
+      "destination_country": "PAÍSES BAJOS",
+      "kg_net": 2072616.45,
+      "share_pct": 7.9
+    },
+    {
+      "destination_country": "FRANCIA",
+      "kg_net": 1589105.42,
+      "share_pct": 6.0
+    },
+    {
+      "destination_country": "MÉXICO",
+      "kg_net": 1425186.44,
+      "share_pct": 5.4
+    }
+  ],
+  "price_positioning": {
+    "AVOCADO": {
+      "entity_wavg_usd_kg": 3.151,
+      "peru_wavg_usd_kg": 3.004,
+      "variance_pct": 4.9,
+      "position": "AT_MARKET"
+    },
+    "BLACKBERRY": {
+      "entity_wavg_usd_kg": 3.887,
+      "peru_wavg_usd_kg": 3.827,
+      "variance_pct": 1.6,
+      "position": "AT_MARKET"
+    },
+    "BLUEBERRY": {
+      "entity_wavg_usd_kg": 2.721,
+      "peru_wavg_usd_kg": 2.395,
+      "variance_pct": 13.6,
+      "position": "PREMIUM"
+    },
+    "CHERRY": {
+      "entity_wavg_usd_kg": 4.656,
+      "peru_wavg_usd_kg": 4.656,
+      "variance_pct": 0.0,
+      "position": "AT_MARKET"
+    },
+    "GRAPE": {
+      "entity_wavg_usd_kg": 2.184,
+      "peru_wavg_usd_kg": 1.889,
+      "variance_pct": 15.6,
+      "position": "PREMIUM"
+    },
+    "MANGO": {
+      "entity_wavg_usd_kg": 1.98,
+      "peru_wavg_usd_kg": 1.833,
+      "variance_pct": 8.0,
+      "position": "PREMIUM"
+    },
+    "PINEAPPLE": {
+      "entity_wavg_usd_kg": 3.447,
+      "peru_wavg_usd_kg": 2.93,
+      "variance_pct": 17.6,
+      "position": "PREMIUM"
+    },
+    "RASPBERRY": {
+      "entity_wavg_usd_kg": 0.385,
+      "peru_wavg_usd_kg": 4.152,
+      "variance_pct": -90.7,
+      "position": "DISCOUNT"
+    },
+    "STRAWBERRY": {
+      "entity_wavg_usd_kg": 2.35,
+      "peru_wavg_usd_kg": 1.954,
+      "variance_pct": 20.3,
+      "position": "PREMIUM"
+    }
+  },
+  "corridor_positioning": [
+    {
+      "variety": "MANGO",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 389,
+      "entity_kg": 6837552.740000001,
+      "entity_wavg_usd_kg": 1.944,
+      "peru_wavg_usd_kg": 1.9,
+      "corridor_kg_market": 36722734.36,
+      "entity_share_of_corridor_pct": 18.62,
+      "variance_pct": 2.3,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 287,
+      "entity_kg": 5039461.18,
+      "entity_wavg_usd_kg": 2.355,
+      "peru_wavg_usd_kg": 1.996,
+      "corridor_kg_market": 19950598.099999998,
+      "entity_share_of_corridor_pct": 25.26,
+      "variance_pct": 18.0,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "ESPAÑA",
+      "n_shipments": 123,
+      "entity_kg": 1786741.6099999999,
+      "entity_wavg_usd_kg": 3.274,
+      "peru_wavg_usd_kg": 3.028,
+      "corridor_kg_market": 3479718.71,
+      "entity_share_of_corridor_pct": 51.35,
+      "variance_pct": 8.1,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "PAÍSES BAJOS",
+      "n_shipments": 125,
+      "entity_kg": 1236568.4700000002,
+      "entity_wavg_usd_kg": 3.193,
+      "peru_wavg_usd_kg": 2.917,
+      "corridor_kg_market": 6766551.18,
+      "entity_share_of_corridor_pct": 18.27,
+      "variance_pct": 9.5,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "FRANCIA",
+      "n_shipments": 68,
+      "entity_kg": 1075984.31,
+      "entity_wavg_usd_kg": 2.882,
+      "peru_wavg_usd_kg": 2.875,
+      "corridor_kg_market": 2320788.04,
+      "entity_share_of_corridor_pct": 46.36,
+      "variance_pct": 0.2,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "ESPAÑA",
+      "n_shipments": 84,
+      "entity_kg": 1025560.2,
+      "entity_wavg_usd_kg": 2.108,
+      "peru_wavg_usd_kg": 1.893,
+      "corridor_kg_market": 2484145.96,
+      "entity_share_of_corridor_pct": 41.28,
+      "variance_pct": 11.3,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 83,
+      "entity_kg": 1025177.4,
+      "entity_wavg_usd_kg": 3.146,
+      "peru_wavg_usd_kg": 3.067,
+      "corridor_kg_market": 2379296.47,
+      "entity_share_of_corridor_pct": 43.09,
+      "variance_pct": 2.6,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "SUECIA",
+      "n_shipments": 59,
+      "entity_kg": 780659.75,
+      "entity_wavg_usd_kg": 3.261,
+      "peru_wavg_usd_kg": 3.269,
+      "corridor_kg_market": 963590.75,
+      "entity_share_of_corridor_pct": 81.02,
+      "variance_pct": -0.3,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "PAÍSES BAJOS",
+      "n_shipments": 41,
+      "entity_kg": 766892.98,
+      "entity_wavg_usd_kg": 1.907,
+      "peru_wavg_usd_kg": 1.43,
+      "corridor_kg_market": 6928922.65,
+      "entity_share_of_corridor_pct": 11.07,
+      "variance_pct": 33.4,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "MÉXICO",
+      "n_shipments": 30,
+      "entity_kg": 696234.8400000001,
+      "entity_wavg_usd_kg": 2.138,
+      "peru_wavg_usd_kg": 1.964,
+      "corridor_kg_market": 1739148.9200000004,
+      "entity_share_of_corridor_pct": 40.03,
+      "variance_pct": 8.9,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 73,
+      "entity_kg": 590011.33,
+      "entity_wavg_usd_kg": 2.725,
+      "peru_wavg_usd_kg": 2.715,
+      "corridor_kg_market": 3029811.7199999997,
+      "entity_share_of_corridor_pct": 19.47,
+      "variance_pct": 0.4,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "FRANCIA",
+      "n_shipments": 30,
+      "entity_kg": 513079.01,
+      "entity_wavg_usd_kg": 1.817,
+      "peru_wavg_usd_kg": 1.739,
+      "corridor_kg_market": 1464890.5399999998,
+      "entity_share_of_corridor_pct": 35.03,
+      "variance_pct": 4.5,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "GRAPE",
+      "destination_country": "MÉXICO",
+      "n_shipments": 19,
+      "entity_kg": 455118.3999999999,
+      "entity_wavg_usd_kg": 2.184,
+      "peru_wavg_usd_kg": 1.924,
+      "corridor_kg_market": 790896.3999999999,
+      "entity_share_of_corridor_pct": 57.54,
+      "variance_pct": 13.5,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "POLONIA",
+      "n_shipments": 20,
+      "entity_kg": 430000.0,
+      "entity_wavg_usd_kg": 1.944,
+      "peru_wavg_usd_kg": 1.864,
+      "corridor_kg_market": 2185075.04,
+      "entity_share_of_corridor_pct": 19.68,
+      "variance_pct": 4.3,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "SUECIA",
+      "n_shipments": 26,
+      "entity_kg": 415062.39999999997,
+      "entity_wavg_usd_kg": 2.015,
+      "peru_wavg_usd_kg": 2.01,
+      "corridor_kg_market": 566657.4,
+      "entity_share_of_corridor_pct": 73.25,
+      "variance_pct": 0.3,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "ALEMANIA",
+      "n_shipments": 18,
+      "entity_kg": 386020.29,
+      "entity_wavg_usd_kg": 2.553,
+      "peru_wavg_usd_kg": 2.549,
+      "corridor_kg_market": 492831.57,
+      "entity_share_of_corridor_pct": 78.33,
+      "variance_pct": 0.2,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "BÉLGICA",
+      "n_shipments": 20,
+      "entity_kg": 321532.08999999997,
+      "entity_wavg_usd_kg": 2.855,
+      "peru_wavg_usd_kg": 2.839,
+      "corridor_kg_market": 6779168.289999999,
+      "entity_share_of_corridor_pct": 4.74,
+      "variance_pct": 0.6,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "COREA DEL SUR",
+      "n_shipments": 15,
+      "entity_kg": 312000.0,
+      "entity_wavg_usd_kg": 2.142,
+      "peru_wavg_usd_kg": 2.043,
+      "corridor_kg_market": 5726269.119999999,
+      "entity_share_of_corridor_pct": 5.45,
+      "variance_pct": 4.8,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "POLONIA",
+      "n_shipments": 13,
+      "entity_kg": 297900.0,
+      "entity_wavg_usd_kg": 2.813,
+      "peru_wavg_usd_kg": 2.336,
+      "corridor_kg_market": 4188805.5300000003,
+      "entity_share_of_corridor_pct": 7.11,
+      "variance_pct": 20.4,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "REINO UNIDO",
+      "n_shipments": 15,
+      "entity_kg": 259851.4,
+      "entity_wavg_usd_kg": 2.858,
+      "peru_wavg_usd_kg": 2.859,
+      "corridor_kg_market": 3897342.6,
+      "entity_share_of_corridor_pct": 6.67,
+      "variance_pct": -0.0,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "MÉXICO",
+      "n_shipments": 10,
+      "entity_kg": 225926.0,
+      "entity_wavg_usd_kg": 2.098,
+      "peru_wavg_usd_kg": 1.816,
+      "corridor_kg_market": 1385600.8299999998,
+      "entity_share_of_corridor_pct": 16.31,
+      "variance_pct": 15.5,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "JAPÓN",
+      "n_shipments": 14,
+      "entity_kg": 179085.5,
+      "entity_wavg_usd_kg": 3.295,
+      "peru_wavg_usd_kg": 3.427,
+      "corridor_kg_market": 2503893.84,
+      "entity_share_of_corridor_pct": 7.15,
+      "variance_pct": -3.8,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "REINO UNIDO",
+      "n_shipments": 8,
+      "entity_kg": 176080.0,
+      "entity_wavg_usd_kg": 1.972,
+      "peru_wavg_usd_kg": 1.869,
+      "corridor_kg_market": 710887.0,
+      "entity_share_of_corridor_pct": 24.77,
+      "variance_pct": 5.5,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "JAPÓN",
+      "n_shipments": 13,
+      "entity_kg": 161524.74999999997,
+      "entity_wavg_usd_kg": 2.293,
+      "peru_wavg_usd_kg": 2.358,
+      "corridor_kg_market": 3146557.3099999996,
+      "entity_share_of_corridor_pct": 5.13,
+      "variance_pct": -2.8,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "COREA DEL SUR",
+      "n_shipments": 10,
+      "entity_kg": 138339.9,
+      "entity_wavg_usd_kg": 3.573,
+      "peru_wavg_usd_kg": 3.284,
+      "corridor_kg_market": 2185936.52,
+      "entity_share_of_corridor_pct": 6.33,
+      "variance_pct": 8.8,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "BÉLGICA",
+      "n_shipments": 7,
+      "entity_kg": 137865.25,
+      "entity_wavg_usd_kg": 2.006,
+      "peru_wavg_usd_kg": 1.74,
+      "corridor_kg_market": 5777781.760000001,
+      "entity_share_of_corridor_pct": 2.39,
+      "variance_pct": 15.3,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "JAPÓN",
+      "n_shipments": 16,
+      "entity_kg": 134191.72999999998,
+      "entity_wavg_usd_kg": 2.172,
+      "peru_wavg_usd_kg": 2.136,
+      "corridor_kg_market": 2255382.39,
+      "entity_share_of_corridor_pct": 5.95,
+      "variance_pct": 1.7,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "REINO UNIDO",
+      "n_shipments": 5,
+      "entity_kg": 120000.0,
+      "entity_wavg_usd_kg": 2.85,
+      "peru_wavg_usd_kg": 2.402,
+      "corridor_kg_market": 4467194.78,
+      "entity_share_of_corridor_pct": 2.69,
+      "variance_pct": 18.7,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "ALEMANIA",
+      "n_shipments": 4,
+      "entity_kg": 87960.0,
+      "entity_wavg_usd_kg": 1.875,
+      "peru_wavg_usd_kg": 1.644,
+      "corridor_kg_market": 3095209.8499999996,
+      "entity_share_of_corridor_pct": 2.84,
+      "variance_pct": 14.1,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "PAÍSES BAJOS",
+      "n_shipments": 6,
+      "entity_kg": 69150.0,
+      "entity_wavg_usd_kg": 2.067,
+      "peru_wavg_usd_kg": 2.442,
+      "corridor_kg_market": 2003085.8,
+      "entity_share_of_corridor_pct": 3.45,
+      "variance_pct": -15.3,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "PINEAPPLE",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 25,
+      "entity_kg": 68899.11,
+      "entity_wavg_usd_kg": 3.452,
+      "peru_wavg_usd_kg": 3.151,
+      "corridor_kg_market": 894662.61,
+      "entity_share_of_corridor_pct": 7.7,
+      "variance_pct": 9.5,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "ESPAÑA",
+      "n_shipments": 9,
+      "entity_kg": 68116.85,
+      "entity_wavg_usd_kg": 2.93,
+      "peru_wavg_usd_kg": 2.037,
+      "corridor_kg_market": 136928.18,
+      "entity_share_of_corridor_pct": 49.75,
+      "variance_pct": 43.8,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "NORUEGA",
+      "n_shipments": 3,
+      "entity_kg": 52871.36,
+      "entity_wavg_usd_kg": 2.913,
+      "peru_wavg_usd_kg": 2.187,
+      "corridor_kg_market": 566672.9599999998,
+      "entity_share_of_corridor_pct": 9.33,
+      "variance_pct": 33.2,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "CHILE",
+      "n_shipments": 4,
+      "entity_kg": 50008.229999999996,
+      "entity_wavg_usd_kg": 3.15,
+      "peru_wavg_usd_kg": 2.67,
+      "corridor_kg_market": 1588396.08,
+      "entity_share_of_corridor_pct": 3.15,
+      "variance_pct": 17.9,
+      "position": "PREMIUM"
+    },
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "CANADÁ",
+      "n_shipments": 5,
+      "entity_kg": 46023.72,
+      "entity_wavg_usd_kg": 1.852,
+      "peru_wavg_usd_kg": 1.771,
+      "corridor_kg_market": 7451994.73,
+      "entity_share_of_corridor_pct": 0.62,
+      "variance_pct": 4.6,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "CHERRY",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 5,
+      "entity_kg": 16611.2,
+      "entity_wavg_usd_kg": 4.656,
+      "peru_wavg_usd_kg": 4.656,
+      "corridor_kg_market": 16611.2,
+      "entity_share_of_corridor_pct": 100.0,
+      "variance_pct": 0.0,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "BLACKBERRY",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 4,
+      "entity_kg": 12248.0,
+      "entity_wavg_usd_kg": 3.887,
+      "peru_wavg_usd_kg": 3.827,
+      "corridor_kg_market": 14064.0,
+      "entity_share_of_corridor_pct": 87.09,
+      "variance_pct": 1.6,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "STRAWBERRY",
+      "destination_country": "ESPAÑA",
+      "n_shipments": 10,
+      "entity_kg": 1924.47,
+      "entity_wavg_usd_kg": 2.679,
+      "peru_wavg_usd_kg": 2.566,
+      "corridor_kg_market": 2294.4700000000003,
+      "entity_share_of_corridor_pct": 83.87,
+      "variance_pct": 4.4,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "GRAPE",
+      "destination_country": "ESTADOS UNIDOS",
+      "n_shipments": 8,
+      "entity_kg": 48.120000000000005,
+      "entity_wavg_usd_kg": 0.324,
+      "peru_wavg_usd_kg": 1.943,
+      "corridor_kg_market": 14008.119999999999,
+      "entity_share_of_corridor_pct": 0.34,
+      "variance_pct": -83.3,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "PINEAPPLE",
+      "destination_country": "JAPÓN",
+      "n_shipments": 4,
+      "entity_kg": 41.32,
+      "entity_wavg_usd_kg": 0.218,
+      "peru_wavg_usd_kg": 0.421,
+      "corridor_kg_market": 50.14,
+      "entity_share_of_corridor_pct": 82.41,
+      "variance_pct": -48.3,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "CANADÁ",
+      "n_shipments": 4,
+      "entity_kg": 27.92,
+      "entity_wavg_usd_kg": 0.358,
+      "peru_wavg_usd_kg": 1.741,
+      "corridor_kg_market": 8284947.58,
+      "entity_share_of_corridor_pct": 0.0,
+      "variance_pct": -79.4,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "MANGO",
+      "destination_country": "DINAMARCA",
+      "n_shipments": 5,
+      "entity_kg": 26.490000000000002,
+      "entity_wavg_usd_kg": 0.264,
+      "peru_wavg_usd_kg": 0.418,
+      "corridor_kg_market": 33.49,
+      "entity_share_of_corridor_pct": 79.1,
+      "variance_pct": -36.8,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "PINEAPPLE",
+      "destination_country": "CANADÁ",
+      "n_shipments": 3,
+      "entity_kg": 21.92,
+      "entity_wavg_usd_kg": 0.365,
+      "peru_wavg_usd_kg": 3.128,
+      "corridor_kg_market": 21534.23,
+      "entity_share_of_corridor_pct": 0.1,
+      "variance_pct": -88.3,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "AVOCADO",
+      "destination_country": "DINAMARCA",
+      "n_shipments": 4,
+      "entity_kg": 21.450000000000003,
+      "entity_wavg_usd_kg": 0.28,
+      "peru_wavg_usd_kg": 3.63,
+      "corridor_kg_market": 335968.44999999995,
+      "entity_share_of_corridor_pct": 0.01,
+      "variance_pct": -92.3,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "PINEAPPLE",
+      "destination_country": "DINAMARCA",
+      "n_shipments": 4,
+      "entity_kg": 19.97,
+      "entity_wavg_usd_kg": 0.3,
+      "peru_wavg_usd_kg": 0.3,
+      "corridor_kg_market": 19.97,
+      "entity_share_of_corridor_pct": 100.0,
+      "variance_pct": 0.0,
+      "position": "AT_MARKET"
+    },
+    {
+      "variety": "PINEAPPLE",
+      "destination_country": "ESPAÑA",
+      "n_shipments": 3,
+      "entity_kg": 11.92,
+      "entity_wavg_usd_kg": 0.497,
+      "peru_wavg_usd_kg": 1.94,
+      "corridor_kg_market": 2346.92,
+      "entity_share_of_corridor_pct": 0.51,
+      "variance_pct": -74.4,
+      "position": "DISCOUNT"
+    },
+    {
+      "variety": "BLUEBERRY",
+      "destination_country": "SUECIA",
+      "n_shipments": 3,
+      "entity_kg": 10.28,
+      "entity_wavg_usd_kg": 19.553,
+      "peru_wavg_usd_kg": 14.146,
+      "corridor_kg_market": 15.28,
+      "entity_share_of_corridor_pct": 67.28,
+      "variance_pct": 38.2,
+      "position": "PREMIUM"
+    }
+  ],
+  "activity_consistency": 1.091,
+  "consecutive_month_streak": 12,
+  "capacity_check": {
+    "deal_kg": 300000.0,
+    "baseline_monthly_kg": 2195233.0,
+    "deal_vs_baseline_pct": 13.7,
+    "peak_monthly_kg": 3842214.0,
+    "deal_vs_peak_pct": 7.8,
+    "flag": "WITHIN_CAPACITY"
+  },
+  "confidence": "HIGH",
+  "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup)."
+}
