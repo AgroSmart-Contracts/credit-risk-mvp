@@ -285,67 +285,90 @@ Routes are matched by country (last segment of origin/destination) or exact corr
 
 ## 4. Transaction structure risk (30%)
 
-### Structure score equation
+Implements the Kanato Foley CRAM **Transaction Structure** model (calibration 2026-07-11). Source: `src/lib/transaction-structure/`.
+
+### Composite
 
 ```
-structure = clamp(
-  advanceBaseScore
-+ collateralBonus
-+ insuranceBonus
-+ paymentTermsAdjustment(paymentTerms)
-+ structureRelationshipAdjustment
-)
+structure = Sub-A × 50% + Sub-D × 50%
 ```
 
-### Advance payment base
+Sub-B (collateral & security) is computed for reference but weighted **0%**.
 
-| Advance % | Base score |
-|-----------|------------|
-| 0% | 20 |
-| 1–19% | 35 |
-| 20–39% | 55 |
-| 40–59% | 75 |
-| 60%+ | 90 |
+### Cash-flow engine
 
-### Collateral bonus
+Four signed events drive exposure duration and downside resilience:
 
-| Collateral type | Bonus |
-|-----------------|-------|
-| None | 0 |
-| Personal Guarantee | +5 |
-| Warehouse Receipt | +10 |
-| Inventory Pledge | +10 |
-| Bank Guarantee | +15 |
-| Letter of Credit | +15 |
+```
+Supplier Advance : −supAdvPct × purchaseTotal  @ supAdvDay
+Supplier Final   : −supFinPct × purchaseTotal  @ supFinDay
+Buyer First      : +buyFirstPct × saleTotal    @ buyFirstDay
+Buyer Final      : +buyFinalPct × saleTotal    @ buyFinalDay
+```
 
-### Insurance bonus
+```
+Exposure Duration = buyFinalDay − supAdvDay
+Best Case Margin  = cum4
+Worst Case Margin = cum3 + BuyerFinal × (1 − severity)   [severity = 100%]
+```
 
-| Coverage | Bonus |
-|----------|-------|
-| None | 0 |
-| Basic | +5 |
-| Comprehensive | +10 |
-| All Risk | +15 |
+### Sub-A — Payment terms & cash flow (50% of structure)
 
-### Payment terms adjustment
+```
+Sub-A = PaymentTermsPts × 60%
+      + AdvancePts      × 10%    [clamp(advancePaymentPct, 0, 100)]
+      + ContractTypePts × 15%    [Spot=100, Forward=60, Seasonal=40]
+      + DealPurposePts  × 15%    [Export=100, Retail=80, Processing=60, Resale=40]
+```
 
-| Terms (substring match) | Adjustment |
-|-------------------------|------------|
-| Cash in advance / prepaid | +15 |
-| Letter of credit / L/C | +12 |
-| Against B/L or documents | +8 |
-| 30 days | +5 |
-| 60 days | 0 |
-| 90 days | −12 |
-| 120 days | −20 |
+**Payment terms buckets** (floor match on exposure duration):
 
-### Structure relationship adjustment
+| Min days | Points |
+|----------|--------|
+| 0 | 100 |
+| 30 | 80 |
+| 35 | 60 |
+| 45 | 40 |
+| 60 | 20 |
+| 91 | 0 |
 
-| Condition | Adjustment |
-|-----------|------------|
-| ≥5 prior deals between parties | +7 |
-| ≥1 prior deal | +5 |
-| No prior deals | −8 |
+### Sub-D — Downside resilience (50% of structure)
+
+If worst-case margin ≥ 0 → **100 pts** (no downside).
+
+Otherwise `Sub-D = bucket(Upside:Downside ratio)` where ratio = bestCaseMargin / |worstCaseMargin|.
+
+### Structure tiers
+
+| Tier | Min score | Protocol |
+|------|-----------|----------|
+| Strong | 80 | Standard terms, fast-track routing |
+| Adequate | 60 | Policy-minimum collateral/advance |
+| Weak | 40 | Additional collateral/insurance required |
+| Insufficient | 0 | Restructure or escalate |
+
+### Required inputs (many not on a single contract)
+
+| Field | Notes |
+|-------|-------|
+| `purchaseTotalUSD`, `saleTotalUSD` | Often split across purchase + sale docs |
+| `supAdvDay/Pct`, `supFinDay/Pct` | Supplier payment schedule |
+| `buyFirstDay/Pct`, `buyFinalDay/Pct` | Buyer payment schedule |
+| `dealPurpose` | Export / Retail / Processing / Resale |
+| `tmProductOwnership`, `collectionRights` | TM title & CISG collection rights |
+
+Buyer tranches may be partially inferred from `paymentTerms` text. **Purchase total** is extracted from purchase orders / supplier contracts when detected; if two documents carry different totals, the lower maps to purchase and the higher to sale. Supplier payment schedule still typically requires user confirmation.
+
+**Defaults (not prompted):** buyer & supplier licenses assumed valid; TM product ownership and CISG collection rights assumed `true`.
+
+### Worked examples (seed deals)
+
+| Deal | Sub-A | Sub-D | Composite | Tier |
+|------|-------|-------|-----------|------|
+| TM-2026-014 Mandarin | 78 | 30 | **54** | Weak |
+| TM-2026-015 Blueberries | 66 | 100 | **83** | Strong |
+
+If structure fields are incomplete, structure scores **50** (neutral) until the user confirms missing inputs.
 
 ---
 
@@ -428,6 +451,13 @@ Document analysis runs via Vite dev middleware locally and Vercel serverless han
 
 When counterparty fields are `null` or unknown, the model assigns **neutral default scores** rather than failing the assessment. This keeps the MVP usable with partial document extraction.
 
+| Field | Default when undisclosed |
+|-------|--------------------------|
+| Buyer / supplier license | Valid (full license points) |
+| TM product ownership | `true` |
+| CISG collection rights | `true` |
+| Purchase total | Extracted from uploaded purchase order when possible; otherwise prompted |
+
 ---
 
 ## Summary
@@ -438,7 +468,7 @@ overall = 0.35 × counterparty + 0.20 × product + 0.15 × route + 0.30 × struc
 counterparty = clamp(0.6×buyer + 0.4×supplier + relationship + externalCredit)
 product      = clamp(70 + perishabilityPts + coldChain + grade + eudr)
 route        = clamp(70 + transit + flag + transship + customs + incoterm)
-structure    = clamp(advanceBase + collateral + insurance + paymentTerms + relationship)
+structure    = Sub-A × 50% + Sub-D × 50%   (CRAM Transaction Structure model)
 ```
 
 Counterparty and deal structure are weighted most heavily (35% + 30%). Product and route scores follow the CRAM reference tables with a neutral base of 70, not fixed per-row lookup scores.
