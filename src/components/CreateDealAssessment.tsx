@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ArrowLeft, FileUp, Loader2, Shield, Upload } from "lucide-react";
+import { ArrowLeft, FileUp, Shield, Upload } from "lucide-react";
 import type { Deal } from "../types";
 import { analyzeDealDocuments } from "../lib/document-analysis/analyze-documents-client";
 import { applySuggestionsToForm } from "../lib/document-analysis/apply-suggestions";
@@ -15,6 +15,7 @@ import { PRODUCT_OPTIONS } from "../lib/product-risk-tables";
 import { ROUTE_OPTIONS } from "../lib/route-risk-tables";
 import { PRODUCT_RISK_TABLE } from "../lib/product-risk-tables";
 import { ROUTE_RISK_TABLE } from "../lib/route-risk-tables";
+import { ProcessingMascot } from "./ProcessingMascot";
 
 interface CreateDealAssessmentProps {
   onBack: () => void;
@@ -246,6 +247,29 @@ export function CreateDealAssessment({
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {(analyzing || analyzingCoface) && (
+          <div
+            className="rounded-xl border border-tm-border bg-tm-surface px-4 py-6"
+            aria-busy="true"
+          >
+            <ProcessingMascot
+              size={180}
+              messages={
+                analyzingCoface
+                  ? [
+                      "Reading Coface notification…",
+                      "Extracting coverage limit…",
+                    ]
+                  : [
+                      "Reading deal documents…",
+                      "Extracting parties and terms…",
+                      "Mapping product and route…",
+                    ]
+              }
+            />
+          </div>
+        )}
+
         <section className="rounded-xl border border-tm-border bg-tm-surface p-5">
           <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-tm-black">
             <FileUp className="h-4 w-4 text-tm-primary" />
@@ -264,13 +288,10 @@ export function CreateDealAssessment({
           <button
             type="button"
             onClick={() => dealFileRef.current?.click()}
-            className="flex w-full flex-col items-center gap-2 rounded-lg border-2 border-dashed border-tm-border bg-tm-neutral/40 px-4 py-8 transition-colors hover:border-tm-primary/50 hover:bg-tm-primary/5"
+            disabled={analyzing}
+            className="flex w-full flex-col items-center gap-2 rounded-lg border-2 border-dashed border-tm-border bg-tm-neutral/40 px-4 py-8 transition-colors hover:border-tm-primary/50 hover:bg-tm-primary/5 disabled:cursor-wait disabled:opacity-70"
           >
-            {analyzing ? (
-              <Loader2 className="h-8 w-8 animate-spin text-tm-primary" />
-            ) : (
-              <Upload className="h-8 w-8 text-tm-text-muted" />
-            )}
+            <Upload className="h-8 w-8 text-tm-text-muted" />
             <span className="text-sm font-medium text-tm-text">
               Upload sales agreement, orden de compra, or invoice (PDF)
             </span>
@@ -484,13 +505,9 @@ export function CreateDealAssessment({
             type="button"
             onClick={() => cofaceFileRef.current?.click()}
             disabled={analyzingCoface}
-            className="mt-3 inline-flex items-center gap-2 rounded-lg border border-tm-border px-3 py-2 text-sm text-tm-text transition-colors hover:border-tm-blue hover:text-tm-blue disabled:opacity-60"
+            className="mt-3 inline-flex items-center gap-2 rounded-lg border border-tm-border px-3 py-2 text-sm text-tm-text transition-colors hover:border-tm-blue hover:text-tm-blue disabled:cursor-wait disabled:opacity-60"
           >
-            {analyzingCoface ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Upload className="h-4 w-4" />
-            )}
+            <Upload className="h-4 w-4" />
             Upload Coface document
           </button>
           {cofaceFile && (

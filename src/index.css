@@ -1,25 +1,39 @@
 @import "tailwindcss";
 
+:root {
+  --color-primary: #4e8c37;
+  --color-primary-hover: #3a6b2a;
+  --color-accent: #f2a007;
+  --color-accent-secondary: #f28705;
+  --color-text-body: #2d3e57;
+  --color-text-heading: #1f2d42;
+  --color-bg-page: #f2f2f2;
+  --color-bg-card: #ffffff;
+  --color-danger: #f25e6b;
+  --color-mascot-skin: #e8b48c;
+  --font-family: "Inter", sans-serif;
+}
+
 @theme {
-  --color-tm-primary: #4e8c37;
-  --color-tm-primary-dark: #3a6b2a;
+  --color-tm-primary: var(--color-primary);
+  --color-tm-primary-dark: var(--color-primary-hover);
   --color-tm-primary-light: #5fa84a;
-  --color-tm-accent: #f2a007;
+  --color-tm-accent: var(--color-accent);
   --color-tm-accent-dark: #d48806;
-  --color-tm-secondary: #f28705;
-  --color-tm-danger: #f25e6b;
+  --color-tm-secondary: var(--color-accent-secondary);
+  --color-tm-danger: var(--color-danger);
   --color-tm-danger-dark: #d9486e;
   --color-tm-blue: #4ea4d9;
-  --color-tm-neutral: #f2f2f2;
+  --color-tm-neutral: var(--color-bg-page);
   --color-tm-neutral-light: #fafafa;
-  --color-tm-black: #1f2d42;
-  --color-tm-text: #2d3e57;
+  --color-tm-black: var(--color-text-heading);
+  --color-tm-text: var(--color-text-body);
   --color-tm-text-light: #6b7280;
   --color-tm-text-muted: #9ca3af;
   --color-tm-border: #e5e7eb;
-  --color-tm-surface: #ffffff;
+  --color-tm-surface: var(--color-bg-card);
 
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-family), system-ui, -apple-system, sans-serif;
   --font-display: "DM Serif Display", Georgia, serif;
 
   --shadow-tm-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -29,9 +43,9 @@
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-family), system-ui, -apple-system, sans-serif;
   background-color: var(--color-tm-neutral-light);
-  color: var(--color-tm-text);
+  color: var(--color-text-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
