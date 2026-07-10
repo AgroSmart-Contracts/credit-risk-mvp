@@ -54,3 +54,6 @@ coverage
 
 # Vite / local overrides
 *.local
+
+# Local reference spreadsheets (not part of the app)
+docs/*.xlsx
