@@ -1,9 +1,13 @@
-/** Dimension weights per banking framework — counterparty is primary default driver */
+/**
+ * Dimension weights — synced to tm-cram-engine-spec-2026-06.md §2
+ * Composite = A(Counterparty)×0.40 + B(Product)×0.25 + C(Route)×0.20 + D(Structure)×0.15
+ * Post-harvest mode only; a pre-season variant with different weights is out of scope for now.
+ */
 export const DIMENSION_WEIGHTS = {
-  counterparty: 0.35,
-  product: 0.2,
-  route: 0.15,
-  structure: 0.3,
+  counterparty: 0.4,
+  product: 0.25,
+  route: 0.2,
+  structure: 0.15,
 } as const;
 
 export const DIMENSION_LABELS = {

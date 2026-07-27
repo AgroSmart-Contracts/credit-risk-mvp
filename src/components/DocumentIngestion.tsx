@@ -1,31 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowLeft,
-  CheckCircle2,
-  FileText,
-  FileCheck,
-  Shield,
-  ShoppingCart,
-  Database,
-  FileSearch,
-  AlertTriangle,
-} from "lucide-react";
+import { ArrowLeft, FileSearch, Shield, Upload } from "lucide-react";
 import type { Deal } from "../types";
 import { formatUSDDetailed } from "../lib/assessment";
 import {
-  applyConfirmations,
-  listConfirmationFields,
-  type ConfirmationField,
-  type ConfirmationValues,
-} from "../lib/confirmation-fields";
-import { formatCofaceSignal } from "../lib/create-deal";
-import {
-  attachMarketIntel,
-  fetchMarketIntelForDeal,
-  resolveSupplierRuc,
-} from "../lib/market-intel";
-import { ProcessingMascot } from "./ProcessingMascot";
+  applyCofaceExtractToDraft,
+  buildDealFromDraft,
+  buildSourceDocumentsFromUploads,
+  type DealDraftInput,
+} from "../lib/deal-builder";
+import { analyzeCofaceDocument } from "../lib/coface-analysis/analyze-coface-client";
+import { analyzeDealDocuments } from "../lib/document-analysis/analyze-documents-client";
+import { PRODUCT_RISK_TABLE } from "../lib/product-risk-tables";
+import { ROUTE_OPTIONS } from "../lib/route-risk-tables";
 
 interface DocumentIngestionProps {
   deal: Deal;
@@ -33,15 +19,38 @@ interface DocumentIngestionProps {
   onRunAssessment: (deal: Deal) => void;
 }
 
-const docIcons: Record<string, typeof FileText> = {
-  contract: FileText,
-  purchase_order: ShoppingCart,
-  credit_insurance: Shield,
-  sales_order: FileCheck,
-};
+interface DealFormState {
+  product: string;
+  variety: string;
+  dealValueUSD: string;
+  buyerName: string;
+  supplierName: string;
+  paymentTerms: string;
+  advancePaymentPct: string;
+  incoterm: string;
+  qualityGrade: Deal["qualityGrade"];
+  origin: string;
+  destination: string;
+}
 
-function fieldKey(field: ConfirmationField): string {
-  return field.kind === "scoring" ? field.id : field.key;
+function initialForm(deal: Deal): DealFormState {
+  return {
+    product: deal.product,
+    variety: deal.variety,
+    dealValueUSD: deal.dealValueUSD > 0 ? String(deal.dealValueUSD) : "",
+    buyerName: deal.buyer.name,
+    supplierName: deal.supplier.name,
+    paymentTerms: deal.paymentTerms,
+    advancePaymentPct: String(deal.advancePaymentPct),
+    incoterm: deal.incoterm,
+    qualityGrade: deal.qualityGrade,
+    origin: deal.origin,
+    destination: deal.destination,
+  };
+}
+
+function routeLabel(origin: string, destination: string): string {
+  return `${origin} → ${destination}`;
 }
 
 export function DocumentIngestion({
@@ -49,93 +58,205 @@ export function DocumentIngestion({
   onBack,
   onRunAssessment,
 }: DocumentIngestionProps) {
-  const [processedCount, setProcessedCount] = useState(0);
-  const [showSummary, setShowSummary] = useState(false);
-  const [showButton, setShowButton] = useState(false);
-  const [confirmedFields, setConfirmedFields] = useState<ConfirmationValues>({});
-  const [assessing, setAssessing] = useState(false);
-
-  const analysis = deal.documentAnalysis;
-  const docCoveragePct = analysis?.docCoveragePct ?? 82;
-  const extractedFieldCount =
-    analysis?.filledFields.length ??
-    Math.max(6, deal.sourceDocuments.length * 2);
-
-  const confirmationFields = useMemo(
-    () => listConfirmationFields(deal),
-    [deal],
+  const [form, setForm] = useState<DealFormState>(() => initialForm(deal));
+  const [dealFiles, setDealFiles] = useState<File[]>([]);
+  const [cofaceFile, setCofaceFile] = useState<File | null>(null);
+  const [cofaceCoverageAmountUSD, setCofaceCoverageAmountUSD] = useState(
+    deal.cofaceCoverageAmountUSD != null ? String(deal.cofaceCoverageAmountUSD) : "",
   );
-
-  const counterpartyFields = useMemo(
-    () =>
-      confirmationFields.filter(
-        (field) =>
-          field.kind === "scoring" && field.section === "counterparty",
-      ),
-    [confirmationFields],
+  const [cofaceCoveragePct, setCofaceCoveragePct] = useState(
+    deal.cofaceCoveragePct != null ? String(deal.cofaceCoveragePct) : "",
   );
-
-  const structureFields = useMemo(
-    () =>
-      confirmationFields.filter(
-        (field) => field.kind === "scoring" && field.section === "structure",
-      ),
-    [confirmationFields],
-  );
-
-  const otherFields = useMemo(
-    () =>
-      confirmationFields.filter(
-        (field) => field.kind === "freeText" && field.section === "other",
-      ),
-    [confirmationFields],
-  );
+  const [docStatus, setDocStatus] = useState<string>("");
+  const [cofaceStatus, setCofaceStatus] = useState<string>("");
+  const [busy, setBusy] = useState<"docs" | "coface" | null>(null);
+  const [cofaceExtractFields, setCofaceExtractFields] = useState({
+    cofaceRequestCountry: deal.cofaceRequestCountry ?? null,
+    cofaceRequestBuyerName: deal.cofaceRequestBuyerName ?? null,
+    cofaceRequestedCoverageAmountUSD:
+      deal.cofaceRequestedCoverageAmountUSD ?? null,
+    cofaceCountryRiskGrade: deal.cofaceCountryRiskGrade ?? null,
+    cofaceCompanyRiskGrade: deal.cofaceCompanyRiskGrade ?? null,
+  });
 
   useEffect(() => {
-    setProcessedCount(0);
-    setShowSummary(false);
-    setShowButton(false);
-    setConfirmedFields({});
-
-    const docCount = deal.sourceDocuments.length;
-    const staggerMs = Math.min(400, Math.floor(2000 / Math.max(docCount, 1)));
-    const timers: ReturnType<typeof setTimeout>[] = [];
-
-    for (let i = 0; i < docCount; i++) {
-      timers.push(
-        setTimeout(() => setProcessedCount(i + 1), (i + 1) * staggerMs),
-      );
-    }
-
-    timers.push(
-      setTimeout(() => setShowSummary(true), docCount * staggerMs + 200),
+    setForm(initialForm(deal));
+    setCofaceCoverageAmountUSD(
+      deal.cofaceCoverageAmountUSD != null ? String(deal.cofaceCoverageAmountUSD) : "",
     );
-    timers.push(
-      setTimeout(() => setShowButton(true), docCount * staggerMs + 500),
+    setCofaceCoveragePct(
+      deal.cofaceCoveragePct != null ? String(deal.cofaceCoveragePct) : "",
     );
-
-    return () => timers.forEach(clearTimeout);
+    setDealFiles([]);
+    setCofaceFile(null);
+    setDocStatus("");
+    setCofaceStatus("");
+    setCofaceExtractFields({
+      cofaceRequestCountry: deal.cofaceRequestCountry ?? null,
+      cofaceRequestBuyerName: deal.cofaceRequestBuyerName ?? null,
+      cofaceRequestedCoverageAmountUSD:
+        deal.cofaceRequestedCoverageAmountUSD ?? null,
+      cofaceCountryRiskGrade: deal.cofaceCountryRiskGrade ?? null,
+      cofaceCompanyRiskGrade: deal.cofaceCompanyRiskGrade ?? null,
+    });
   }, [deal]);
 
-  const allProcessed = processedCount >= deal.sourceDocuments.length;
-  const confirmationCount = confirmationFields.length;
+  const selectedProduct = useMemo(
+    () => PRODUCT_RISK_TABLE.find((entry) => entry.product === form.product) ?? null,
+    [form.product],
+  );
 
-  const handleRunAssessment = async () => {
-    const updatedDeal = applyConfirmations(deal, confirmedFields);
-    setAssessing(true);
+  const selectedRoute = useMemo(
+    () =>
+      ROUTE_OPTIONS.find(
+        (entry) =>
+          entry.origin === form.origin && entry.destination === form.destination,
+      ) ?? null,
+    [form.origin, form.destination],
+  );
+
+  const handleAnalyzeDocs = async () => {
+    if (!dealFiles.length) return;
+    setBusy("docs");
+    setDocStatus("");
     try {
-      let enriched = updatedDeal;
-      if (resolveSupplierRuc(updatedDeal)) {
-        const payload = await fetchMarketIntelForDeal(updatedDeal);
-        enriched = attachMarketIntel(updatedDeal, payload);
-      }
-      onRunAssessment(enriched);
+      const result = await analyzeDealDocuments(dealFiles);
+      setDocStatus(
+        `Analyzed ${result.documents.length} file(s) · ${result.docCoveragePct}% field coverage`,
+      );
+      setForm((current) => ({
+        ...current,
+        product: result.suggestions.product ?? current.product,
+        variety: result.suggestions.variety ?? current.variety,
+        dealValueUSD:
+          result.suggestions.dealValueUSD != null
+            ? String(Math.round(result.suggestions.dealValueUSD))
+            : current.dealValueUSD,
+        buyerName: result.suggestions.buyerName ?? current.buyerName,
+        supplierName: result.suggestions.supplierName ?? current.supplierName,
+        paymentTerms: result.suggestions.paymentTerms ?? current.paymentTerms,
+        advancePaymentPct:
+          result.suggestions.advancePaymentPct != null
+            ? String(result.suggestions.advancePaymentPct)
+            : current.advancePaymentPct,
+        incoterm: result.suggestions.incoterm ?? current.incoterm,
+        qualityGrade:
+          result.suggestions.qualityGrade === "Grade A / Class I" ||
+          result.suggestions.qualityGrade === "Grade B / Class II" ||
+          result.suggestions.qualityGrade === "Industrial"
+            ? result.suggestions.qualityGrade
+            : current.qualityGrade,
+        origin: result.suggestions.origin ?? current.origin,
+        destination: result.suggestions.destination ?? current.destination,
+      }));
+    } catch (error) {
+      setDocStatus(error instanceof Error ? error.message : "Document analysis failed");
     } finally {
-      setAssessing(false);
+      setBusy(null);
     }
   };
 
-  const isReadingDocs = !showSummary;
+  const handleAnalyzeCoface = async () => {
+    if (!cofaceFile) return;
+    setBusy("coface");
+    setCofaceStatus("");
+    try {
+      const result = await analyzeCofaceDocument(cofaceFile);
+      const dealValueUSD = Number(form.dealValueUSD || 0);
+      const merged = applyCofaceExtractToDraft(
+        {
+          product: form.product,
+          variety: form.variety,
+          dealValueUSD,
+          buyerName: form.buyerName,
+          supplierName: form.supplierName,
+          paymentTerms: form.paymentTerms,
+          advancePaymentPct: Number(form.advancePaymentPct || 0),
+          incoterm: form.incoterm,
+          qualityGrade: form.qualityGrade,
+          origin: form.origin,
+          destination: form.destination,
+          cofaceCoverageAmountUSD: null,
+          cofaceCoveragePct: null,
+          sourceDocuments: [],
+        },
+        result,
+        dealValueUSD,
+      );
+      setCofaceCoverageAmountUSD(
+        String(Math.round(merged.cofaceCoverageAmountUSD ?? 0)),
+      );
+      if (merged.cofaceCoveragePct != null) {
+        setCofaceCoveragePct(String(merged.cofaceCoveragePct));
+      }
+      if (merged.buyerName?.trim()) {
+        setForm((current) => ({ ...current, buyerName: merged.buyerName }));
+      }
+      setCofaceExtractFields({
+        cofaceRequestCountry: merged.cofaceRequestCountry ?? null,
+        cofaceRequestBuyerName: merged.cofaceRequestBuyerName ?? null,
+        cofaceRequestedCoverageAmountUSD:
+          merged.cofaceRequestedCoverageAmountUSD ?? null,
+        cofaceCountryRiskGrade: merged.cofaceCountryRiskGrade ?? null,
+        cofaceCompanyRiskGrade: merged.cofaceCompanyRiskGrade ?? null,
+      });
+      const gradeNote = [
+        merged.cofaceCountryRiskGrade
+          ? `country ${merged.cofaceCountryRiskGrade}`
+          : null,
+        merged.cofaceCompanyRiskGrade
+          ? `company ${merged.cofaceCompanyRiskGrade}`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(", ");
+      setCofaceStatus(
+        `Extracted Coface cover ${formatUSDDetailed(result.coverageAmountUSD)}${merged.cofaceCoveragePct != null ? ` (${merged.cofaceCoveragePct}%)` : ""}${gradeNote ? ` · ${gradeNote}` : ""}`,
+      );
+    } catch (error) {
+      setCofaceStatus(error instanceof Error ? error.message : "Coface analysis failed");
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const handleRouteChange = (value: string) => {
+    const route = ROUTE_OPTIONS.find(
+      (entry) => `${entry.origin}__${entry.destination}` === value,
+    );
+    if (!route) return;
+    setForm((current) => ({
+      ...current,
+      origin: route.origin,
+      destination: route.destination,
+    }));
+  };
+
+  const handleRun = () => {
+    const draft: DealDraftInput = {
+      product: form.product,
+      variety: form.variety,
+      dealValueUSD: Number(form.dealValueUSD || 0),
+      buyerName: form.buyerName,
+      supplierName: form.supplierName,
+      paymentTerms: form.paymentTerms,
+      advancePaymentPct: Number(form.advancePaymentPct || 0),
+      incoterm: form.incoterm,
+      qualityGrade: form.qualityGrade,
+      origin: form.origin,
+      destination: form.destination,
+      cofaceCoverageAmountUSD:
+        cofaceCoverageAmountUSD.trim() === ""
+          ? null
+          : Number(cofaceCoverageAmountUSD),
+      cofaceCoveragePct:
+        cofaceCoveragePct.trim() === "" ? null : Number(cofaceCoveragePct),
+      ...cofaceExtractFields,
+      sourceDocuments: buildSourceDocumentsFromUploads(dealFiles, cofaceFile),
+    };
+
+    onRunAssessment(buildDealFromDraft(deal, draft));
+  };
 
   return (
     <div className="space-y-6">
@@ -150,430 +271,279 @@ export function DocumentIngestion({
 
       <div>
         <h2 className="font-display text-2xl text-tm-black sm:text-3xl">
-          Document ingestion
+          {deal.isCustom ? "Create deal assessment" : "Document ingestion"}
         </h2>
         <p className="mt-1 text-tm-text-light">
-          {deal.dealRef} — {deal.product}
-        </p>
-        <p className="mt-2 text-xs text-tm-text-muted">
-          ~{docCoveragePct}% of risk variables sourced from trade
-          documentation · platform metrics auto-populated where available
+          Upload deal documents, choose the product and route from the scoring
+          tables, and attach manual or document-derived Coface cover.
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        <SourceBadge icon={FileSearch} label="From documents" />
-        <SourceBadge icon={Database} label="Platform auto-fill" />
-        {confirmationCount > 0 && (
-          <SourceBadge
-            icon={FileText}
-            label={`${confirmationCount} field(s) need confirmation`}
-            variant="warn"
+      <div className="grid gap-6 lg:grid-cols-2">
+        <section className="space-y-4 rounded-xl border border-tm-border bg-tm-surface p-5 shadow-tm-sm">
+          <div className="flex items-center gap-2">
+            <Upload className="h-4 w-4 text-tm-primary" />
+            <h3 className="font-semibold text-tm-black">Deal documents</h3>
+          </div>
+          <input
+            type="file"
+            multiple
+            accept=".pdf,application/pdf"
+            onChange={(event) => setDealFiles(Array.from(event.target.files ?? []))}
+            className="block w-full text-sm text-tm-text-light file:mr-3 file:rounded-lg file:border-0 file:bg-tm-primary file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
           />
-        )}
+          <button
+            type="button"
+            disabled={!dealFiles.length || busy !== null}
+            onClick={handleAnalyzeDocs}
+            className="inline-flex items-center gap-2 rounded-lg border border-tm-border px-4 py-2 text-sm font-medium text-tm-text transition-colors hover:border-tm-primary hover:text-tm-primary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <FileSearch className="h-4 w-4" />
+            {busy === "docs" ? "Analyzing..." : "Analyze deal docs"}
+          </button>
+          <p className="text-xs text-tm-text-muted">
+            {docStatus ||
+              `${deal.sourceDocuments.length} reference document(s) already available on the selected deal.`}
+          </p>
+          {!!dealFiles.length && (
+            <ul className="space-y-1 text-xs text-tm-text-light">
+              {dealFiles.map((file) => (
+                <li key={file.name}>{file.name}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section className="space-y-4 rounded-xl border border-tm-border bg-tm-surface p-5 shadow-tm-sm">
+          <div className="flex items-center gap-2">
+            <Shield className="h-4 w-4 text-tm-primary" />
+            <h3 className="font-semibold text-tm-black">Coface coverage</h3>
+          </div>
+          <input
+            type="file"
+            accept=".pdf,application/pdf"
+            onChange={(event) => setCofaceFile(event.target.files?.[0] ?? null)}
+            className="block w-full text-sm text-tm-text-light file:mr-3 file:rounded-lg file:border-0 file:bg-tm-primary file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
+          />
+          <button
+            type="button"
+            disabled={!cofaceFile || busy !== null}
+            onClick={handleAnalyzeCoface}
+            className="inline-flex items-center gap-2 rounded-lg border border-tm-border px-4 py-2 text-sm font-medium text-tm-text transition-colors hover:border-tm-primary hover:text-tm-primary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Shield className="h-4 w-4" />
+            {busy === "coface" ? "Extracting..." : "Analyze Coface file"}
+          </button>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Input
+              label="Coverage amount (USD)"
+              value={cofaceCoverageAmountUSD}
+              onChange={setCofaceCoverageAmountUSD}
+              placeholder="40000"
+            />
+            <Input
+              label="Coverage %"
+              value={cofaceCoveragePct}
+              onChange={setCofaceCoveragePct}
+              placeholder="80"
+            />
+          </div>
+          <p className="text-xs text-tm-text-muted">
+            {cofaceStatus || "Enter coverage manually or upload a Coface notification PDF."}
+          </p>
+        </section>
       </div>
 
-      {(isReadingDocs || assessing) && (
-        <div
-          className="rounded-xl border border-tm-border bg-tm-surface px-4 py-6"
-          aria-busy="true"
-        >
-          <ProcessingMascot
-            size={assessing ? 220 : 200}
-            messages={
-              assessing
-                ? [
-                    "Scoring counterparty risk…",
-                    "Checking trade route…",
-                    "Structuring deal terms…",
-                    "Preparing risk dashboard…",
-                  ]
-                : undefined
+      <section className="rounded-xl border border-tm-border bg-tm-surface p-5 shadow-tm-sm">
+        <h3 className="font-semibold text-tm-black">Assessment inputs</h3>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <Select
+            label="Product score table"
+            value={form.product}
+            onChange={(value) => setForm((current) => ({ ...current, product: value }))}
+            options={PRODUCT_RISK_TABLE.map((entry) => ({
+              value: entry.product,
+              label: `${entry.product} · score ${entry.score}`,
+            }))}
+          />
+          <Select
+            label="Route score table"
+            value={`${form.origin}__${form.destination}`}
+            onChange={handleRouteChange}
+            options={ROUTE_OPTIONS.map((entry) => ({
+              value: `${entry.origin}__${entry.destination}`,
+              label: `${routeLabel(entry.origin, entry.destination)} · score ${entry.score}`,
+            }))}
+          />
+          <Input
+            label="Variety"
+            value={form.variety}
+            onChange={(value) => setForm((current) => ({ ...current, variety: value }))}
+            placeholder="Hass / W. Murcott / San Andreas"
+          />
+          <Input
+            label="Deal value (USD)"
+            value={form.dealValueUSD}
+            onChange={(value) => setForm((current) => ({ ...current, dealValueUSD: value }))}
+            placeholder="36047"
+          />
+          <Input
+            label="Buyer"
+            value={form.buyerName}
+            onChange={(value) => setForm((current) => ({ ...current, buyerName: value }))}
+            placeholder="Buyer company"
+          />
+          <Input
+            label="Supplier"
+            value={form.supplierName}
+            onChange={(value) => setForm((current) => ({ ...current, supplierName: value }))}
+            placeholder="Supplier company"
+          />
+          <Input
+            label="Payment terms"
+            value={form.paymentTerms}
+            onChange={(value) => setForm((current) => ({ ...current, paymentTerms: value }))}
+            placeholder="70% against docs, 30% on arrival"
+          />
+          <Input
+            label="Advance payment %"
+            value={form.advancePaymentPct}
+            onChange={(value) =>
+              setForm((current) => ({ ...current, advancePaymentPct: value }))
             }
+            placeholder="0"
+          />
+          <Input
+            label="Incoterm"
+            value={form.incoterm}
+            onChange={(value) => setForm((current) => ({ ...current, incoterm: value }))}
+            placeholder="FOB"
+          />
+          <Select
+            label="Quality grade"
+            value={form.qualityGrade}
+            onChange={(value) =>
+              setForm((current) => ({
+                ...current,
+                qualityGrade: value as Deal["qualityGrade"],
+              }))
+            }
+            options={[
+              { value: "Grade A / Class I", label: "Grade A / Class I" },
+              { value: "Grade B / Class II", label: "Grade B / Class II" },
+              { value: "Industrial", label: "Industrial" },
+            ]}
           />
         </div>
-      )}
+      </section>
 
-      <div
-        className={`space-y-3 transition-opacity duration-300 ${isReadingDocs ? "opacity-80" : "opacity-100"}`}
-      >
-        {deal.sourceDocuments.map((doc, index) => {
-          const Icon = docIcons[doc.type] ?? FileText;
-          const isDone = index < processedCount;
-          const analyzed = analysis?.documents.find(
-            (item) => item.fileName === doc.label,
-          );
-          return (
-            <motion.div
-              key={doc.label}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="flex items-center gap-4 rounded-lg border border-tm-border bg-tm-surface px-4 py-3"
-            >
-              <div
-                className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors duration-300 ${
-                  isDone
-                    ? "bg-tm-primary/10 text-tm-primary"
-                    : "bg-tm-neutral text-tm-text-muted"
-                }`}
-              >
-                {isDone ? (
-                  analyzed?.requiresOcr ? (
-                    <AlertTriangle className="h-5 w-5 text-tm-accent" />
-                  ) : (
-                    <CheckCircle2 className="h-5 w-5" />
-                  )
-                ) : (
-                  <Icon className="h-5 w-5" />
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="font-medium text-tm-black">{doc.label}</p>
-                {isDone && doc.extractionHint && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-xs text-tm-primary"
-                  >
-                    {doc.extractionHint}
-                  </motion.p>
-                )}
-              </div>
-              <span className="shrink-0 text-[10px] uppercase tracking-wide text-tm-text-muted">
-                {doc.type.replace("_", " ")}
-              </span>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      <AnimatePresence>
-        {showSummary && allProcessed && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl border border-tm-border bg-tm-neutral/60 p-5"
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-tm-text-light">
-                Extracted fields
-              </h3>
-              <span className="text-xs text-tm-primary">
-                {extractedFieldCount} fields from docs
-              </span>
-            </div>
-            <dl className="grid gap-3 sm:grid-cols-2">
-              <Field
-                label="Product"
-                value={`${deal.product}, ${deal.variety}`}
-                source="document"
-              />
-              <Field label="Buyer" value={deal.buyer.name} source="document" />
-              <Field
-                label="Supplier"
-                value={deal.supplier.name}
-                source="document"
-              />
-              <Field label="Incoterm" value={deal.incoterm} source="document" />
-              <Field
-                label="Payment terms"
-                value={deal.paymentTerms}
-                source="document"
-              />
-              <Field
-                label="Deal value"
-                value={formatUSDDetailed(deal.dealValueUSD)}
-                source="document"
-              />
-              <Field
-                label="Quantity"
-                value={deal.quantityLabel}
-                source="document"
-              />
-              <Field
-                label="Perishability"
-                value={deal.perishabilityClass}
-                source="document"
-              />
-              <Field
-                label="Transit estimate"
-                value={`${deal.estimatedTransitDays} days`}
-                source="document"
-              />
-              {deal.cofaceCoverage &&
-                (deal.cofaceCoverage.coveragePct !== null ||
-                  deal.cofaceCoverage.coverageAmountUSD !== null) && (
-                  <Field
-                    label="Coface coverage"
-                    value={formatCofaceSignal(deal.cofaceCoverage)}
-                    source="document"
-                  />
-                )}
-              <Field
-                label="Platform deals (buyer)"
-                value={String(deal.buyer.platformDealsCompleted)}
-                source="platform"
-              />
-              <Field
-                label="Platform deals (supplier)"
-                value={String(deal.supplier.platformDealsCompleted)}
-                source="platform"
-              />
-              {deal.supplierRuc && (
-                <Field
-                  label="Supplier RUC"
-                  value={deal.supplierRuc}
-                  source="document"
-                />
-              )}
-              {deal.marketIntel && (
-                <Field
-                  label="Peru customs intel"
-                  value={`Data as of ${deal.marketIntel.meta.data_as_of} · ${deal.marketIntel.dim_a_supplier.confidence ?? "—"} confidence`}
-                  source="platform"
-                />
-              )}
-            </dl>
-
-            {confirmationCount > 0 && (
-              <div className="mt-5 border-t border-tm-border pt-4">
-                <p className="mb-3 text-xs text-tm-text-muted">
-                  Not found in documents — confirm or estimate (model does not
-                  silently guess)
-                </p>
-                <div className="space-y-5">
-                  {counterpartyFields.length > 0 && (
-                    <ConfirmationSection
-                      title="Counterparty"
-                      description="License validity, track record, and platform history"
-                      fields={counterpartyFields}
-                      confirmedFields={confirmedFields}
-                      onChange={(key, value) =>
-                        setConfirmedFields((prev) => ({
-                          ...prev,
-                          [key]: value,
-                        }))
-                      }
-                    />
-                  )}
-                  {structureFields.length > 0 && (
-                    <ConfirmationSection
-                      title="Transaction structure"
-                      description="Payment schedule and cash-flow inputs — usually require both purchase and sale contracts"
-                      fields={structureFields}
-                      confirmedFields={confirmedFields}
-                      onChange={(key, value) =>
-                        setConfirmedFields((prev) => ({
-                          ...prev,
-                          [key]: value,
-                        }))
-                      }
-                    />
-                  )}
-                  {otherFields.length > 0 && (
-                    <ConfirmationSection
-                      title="Other"
-                      fields={otherFields}
-                      confirmedFields={confirmedFields}
-                      onChange={(key, value) =>
-                        setConfirmedFields((prev) => ({
-                          ...prev,
-                          [key]: value,
-                        }))
-                      }
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showButton && !assessing && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex justify-end pt-2"
-          >
-            <button
-              type="button"
-              onClick={handleRunAssessment}
-              className="rounded-lg bg-tm-primary px-6 py-3 font-semibold text-white shadow-tm-md transition-colors hover:bg-tm-primary-dark"
-            >
-              Run risk assessment
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-function ConfirmationSection({
-  title,
-  description,
-  fields,
-  confirmedFields,
-  onChange,
-}: {
-  title: string;
-  description?: string;
-  fields: ConfirmationField[];
-  confirmedFields: ConfirmationValues;
-  onChange: (key: string, value: string | boolean) => void;
-}) {
-  return (
-    <div>
-      <h4 className="text-sm font-semibold text-tm-black">{title}</h4>
-      {description && (
-        <p className="mt-0.5 text-xs text-tm-text-muted">{description}</p>
-      )}
-      <div className="mt-3 space-y-3">
-        {fields.map((field) => (
-          <ConfirmationFieldInput
-            key={fieldKey(field)}
-            field={field}
-            value={confirmedFields[fieldKey(field)]}
-            onChange={(value) => onChange(fieldKey(field), value)}
+      <section className="rounded-xl border border-tm-border bg-tm-neutral/60 p-5">
+        <h3 className="font-semibold text-tm-black">Selected table entries</h3>
+        <dl className="mt-3 grid gap-3 sm:grid-cols-2">
+          <Field
+            label="Product table"
+            value={
+              selectedProduct
+                ? `${selectedProduct.product} · score ${selectedProduct.score}`
+                : "Select a product"
+            }
+            source="document"
           />
-        ))}
-      </div>
-    </div>
-  );
-}
+          <Field
+            label="Route table"
+            value={
+              selectedRoute
+                ? `${routeLabel(selectedRoute.origin, selectedRoute.destination)} · score ${selectedRoute.score}`
+                : "Select a route"
+            }
+            source="document"
+          />
+          <Field
+            label="Deal value"
+            value={
+              form.dealValueUSD
+                ? formatUSDDetailed(Number(form.dealValueUSD))
+                : "Not entered"
+            }
+            source="document"
+          />
+          <Field
+            label="Coface cover"
+            value={
+              cofaceCoverageAmountUSD || cofaceCoveragePct
+                ? `${cofaceCoverageAmountUSD || "0"} USD / ${cofaceCoveragePct || "0"}%`
+                : "Not provided"
+            }
+            source="document"
+          />
+        </dl>
+      </section>
 
-function ConfirmationFieldInput({
-  field,
-  value,
-  onChange,
-}: {
-  field: ConfirmationField;
-  value: string | boolean | undefined;
-  onChange: (value: string | boolean) => void;
-}) {
-  if (field.kind === "freeText") {
-    return (
-      <div>
-        <label className="mb-1 block text-sm font-medium text-tm-text">
-          {field.label}
-        </label>
-        <input
-          type="text"
-          placeholder={field.placeholder ?? "Enter value or estimate"}
-          value={typeof value === "string" ? value : ""}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black placeholder:text-tm-text-muted focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
-        />
-      </div>
-    );
-  }
-
-  if (field.type === "boolean") {
-    return (
-      <div>
-        <label className="mb-1 block text-sm font-medium text-tm-text">
-          {field.label}
-        </label>
-        {field.helpText && (
-          <p className="mb-1.5 text-xs text-tm-text-muted">{field.helpText}</p>
-        )}
-        <YesNoToggle
-          value={typeof value === "boolean" ? value : null}
-          onChange={onChange}
-        />
-      </div>
-    );
-  }
-
-  if (field.type === "select" && field.options) {
-    return (
-      <div>
-        <label className="mb-1 block text-sm font-medium text-tm-text">
-          {field.label}
-        </label>
-        {field.helpText && (
-          <p className="mb-1.5 text-xs text-tm-text-muted">{field.helpText}</p>
-        )}
-        <select
-          value={typeof value === "string" ? value : ""}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
+      <div className="flex justify-end pt-2">
+        <button
+          type="button"
+          onClick={handleRun}
+          className="rounded-lg bg-tm-primary px-6 py-3 font-semibold text-white shadow-tm-md transition-colors hover:bg-tm-primary-dark"
         >
-          <option value="">Select…</option>
-          {field.options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <label className="mb-1 block text-sm font-medium text-tm-text">
-        {field.label}
-      </label>
-      {field.helpText && (
-        <p className="mb-1.5 text-xs text-tm-text-muted">{field.helpText}</p>
-      )}
-      <div className="relative">
-        <input
-          type="number"
-          min={0}
-          max={field.type === "percent" ? 100 : undefined}
-          step={field.type === "percent" ? 0.1 : 1}
-          placeholder={field.placeholder ?? "Enter value or estimate"}
-          value={typeof value === "string" ? value : ""}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 pr-14 text-sm text-tm-black placeholder:text-tm-text-muted focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
-        />
-        {field.suffix && (
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-tm-text-muted">
-            {field.suffix}
-          </span>
-        )}
+          Run risk assessment
+        </button>
       </div>
     </div>
   );
 }
 
-function YesNoToggle({
+function Input({
+  label,
   value,
   onChange,
+  placeholder,
 }: {
-  value: boolean | null;
-  onChange: (value: boolean) => void;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
 }) {
   return (
-    <div className="inline-flex rounded-lg border border-tm-border bg-tm-surface p-1">
-      <button
-        type="button"
-        onClick={() => onChange(true)}
-        className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
-          value === true
-            ? "bg-tm-primary text-white shadow-sm"
-            : "text-tm-text-light hover:text-tm-black"
-        }`}
+    <label className="block">
+      <span className="mb-1 block text-sm font-medium text-tm-text">{label}</span>
+      <input
+        type="text"
+        value={value}
+        placeholder={placeholder}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black placeholder:text-tm-text-muted focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
+      />
+    </label>
+  );
+}
+
+function Select({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: Array<{ value: string; label: string }>;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-sm font-medium text-tm-text">{label}</span>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm text-tm-black focus:border-tm-primary focus:outline-none focus:ring-2 focus:ring-tm-primary/20"
       >
-        Yes
-      </button>
-      <button
-        type="button"
-        onClick={() => onChange(false)}
-        className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
-          value === false
-            ? "bg-tm-primary text-white shadow-sm"
-            : "text-tm-text-light hover:text-tm-black"
-        }`}
-      >
-        No
-      </button>
-    </div>
+        <option value="">Select...</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 
@@ -602,28 +572,5 @@ function Field({
       </dt>
       <dd className="mt-0.5 text-sm font-medium text-tm-black">{value}</dd>
     </div>
-  );
-}
-
-function SourceBadge({
-  icon: Icon,
-  label,
-  variant = "default",
-}: {
-  icon: typeof FileText;
-  label: string;
-  variant?: "default" | "warn";
-}) {
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs ${
-        variant === "warn"
-          ? "bg-tm-accent/10 text-tm-accent-dark"
-          : "bg-tm-neutral text-tm-text-light"
-      }`}
-    >
-      <Icon className="h-3 w-3" />
-      {label}
-    </span>
   );
 }

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShieldAlert } from "lucide-react";
 import type { Deal, RiskAssessment } from "../types";
 import { formatUSDDetailed } from "../lib/assessment";
 import { DIMENSION_LABELS } from "../lib/scoring-constants";
@@ -53,6 +53,22 @@ export function RiskDashboard({
         </p>
       </div>
 
+      {assessment.vetoed && (
+        <div className="flex items-start gap-3 rounded-xl border border-tm-danger-dark bg-tm-danger-dark/10 px-5 py-4">
+          <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-tm-danger-dark" />
+          <div>
+            <p className="text-sm font-semibold text-tm-danger-dark">
+              Veto — spec §6 hard stop, does not auto-proceed regardless of composite score
+            </p>
+            <ul className="mt-1 list-inside list-disc text-xs text-tm-danger-dark/90">
+              {assessment.vetoReasons.map((reason) => (
+                <li key={reason}>{reason}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col gap-8 rounded-xl border border-tm-border bg-tm-surface p-6 shadow-tm-sm lg:flex-row lg:items-start">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -64,11 +80,6 @@ export function RiskDashboard({
             Overall risk score
           </p>
           <ScoreGauge score={assessment.overall} tier={assessment.tier} />
-          {import.meta.env.DEV && (
-            <p className="mt-2 text-center text-[11px] text-tm-text-muted">
-              raw {assessment.overallRaw.toFixed(2)} → display {assessment.overall}
-            </p>
-          )}
           <span
             className={`mt-4 inline-flex rounded-full border px-3 py-1 text-sm font-semibold ${tierColors.badge}`}
           >
@@ -94,22 +105,16 @@ export function RiskDashboard({
                 score={dim.data.score}
                 why={dim.data.why}
                 weight={dim.data.weight}
-                headroom={dim.data.headroom}
-                breakdown={dim.data.breakdown}
               >
                 {dim.key === "counterparty" && (
                   <div className="mt-2 space-y-1 rounded-lg bg-tm-neutral-light px-3 py-2">
                     <SubScoreBar.Party
                       label="Buyer"
                       score={assessment.buyer.score}
-                      headroom={assessment.buyer.headroom}
-                      breakdown={assessment.buyer.breakdown}
                     />
                     <SubScoreBar.Party
                       label="Supplier"
                       score={assessment.supplier.score}
-                      headroom={assessment.supplier.headroom}
-                      breakdown={assessment.supplier.breakdown}
                     />
                   </div>
                 )}
@@ -124,29 +129,27 @@ export function RiskDashboard({
         mitigating={assessment.mitigating}
       />
 
-      {import.meta.env.DEV && (
-        <details className="rounded-lg border border-dashed border-tm-border bg-tm-surface px-4 py-3 text-xs">
-          <summary className="cursor-pointer font-medium text-tm-text">
-            Dev: full score breakdown
-          </summary>
-          <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap text-[11px] text-tm-text-muted">
-            {JSON.stringify(
-              {
-                overallRaw: assessment.overallRaw,
-                overallDisplay: assessment.overall,
-                tier: assessment.tier,
-                dimensions: {
-                  counterparty: assessment.counterparty.breakdown,
-                  product: assessment.product.breakdown,
-                  route: assessment.route.breakdown,
-                  structure: assessment.structure.breakdown,
-                },
-              },
-              null,
-              2,
-            )}
-          </pre>
-        </details>
+      {deal.fieldsNeedingConfirmation.length > 0 && (
+        <div className="rounded-xl border border-dashed border-tm-border bg-tm-surface p-5 shadow-tm-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-tm-text-muted">
+            Unfilled fields for this deal
+          </p>
+          <p className="mt-1 text-sm text-tm-text-light">
+            Still missing from platform enrichment — scoring used assumed
+            defaults where noted (license valid, 0 payment delay, 0% quality
+            rejection).
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-1.5">
+            {deal.fieldsNeedingConfirmation.map((field) => (
+              <li
+                key={field}
+                className="rounded-md bg-tm-neutral px-2 py-1 text-xs text-tm-text"
+              >
+                {field}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
       <div className="flex justify-end">

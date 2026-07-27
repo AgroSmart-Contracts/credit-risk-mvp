@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruMarket — Risk Assessment Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F7FB;
+    --card-bg:#FFFFFF;
+    --ink:#0F1E3C;
+    --gray:#64748B;
+    --gray-soft:#94A3B8;
+    --border:#E3E7EF;
+    --blue:#2F6FED;
+    --blue-soft:#EAF1FE;
+    --green:#12946B;
+    --green-soft:#E6F6F0;
+    --navy:#0F1E3C;
+    --navy-soft:#EEF2FA;
+    --gold:#C9922E;
+    --gold-soft:#FDF3DE;
+    --purple:#7C4DE0;
+    --gray-line:#9AA3B2;
+    --fade-text:#CBCFD8;
+    --fade-border:#EAECF1;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'Roboto Mono',monospace;}
+
+  main{max-width:1560px;margin:0 auto;padding:44px 24px 90px;}
+
+  .page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap;margin-bottom:22px;}
+  .page-head h1{font-size:clamp(24px,3.2vw,34px);font-weight:800;margin:0 0 10px;letter-spacing:-0.02em;}
+  .page-head p{max-width:660px;color:var(--gray);font-size:14.5px;line-height:1.6;margin:0;}
+  .head-controls{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+  .seg-toggle{display:inline-flex;background:#E9ECF3;border-radius:999px;padding:4px;gap:2px;}
+  .seg-toggle button{appearance:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;padding:9px 18px;border-radius:999px;background:transparent;color:var(--gray);transition:all .25s ease;}
+  .seg-toggle button.active{background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(15,30,60,.25);}
+  .mode-note{font-size:12px;color:var(--gray-soft);max-width:300px;text-align:right;line-height:1.5;}
+
+  .canvas-card{position:relative;background:var(--card-bg);border:1px solid var(--border);border-radius:22px;box-shadow:0 8px 30px rgba(15,30,60,.06);padding:26px 26px 20px;}
+  .canvas-hint{position:absolute;top:20px;right:28px;font-size:12px;color:var(--gray-soft);z-index:5;}
+  .graph-wrap{position:relative;width:100%;aspect-ratio:1700/1160;}
+  .graph-wrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+
+  .node{position:absolute;background:var(--card-bg);border:1.5px solid var(--border);border-radius:12px;padding:10px 13px;box-shadow:0 2px 8px rgba(15,30,60,.05);cursor:pointer;transition:opacity .35s ease, filter .35s ease, border-color .3s ease;overflow:hidden;}
+  .node:hover{border-color:var(--blue);box-shadow:0 4px 14px rgba(47,111,237,.16);}
+  .node h4{margin:0 0 2px;font-size:12.8px;font-weight:700;color:var(--ink);line-height:1.25;}
+  .node p{margin:0;font-size:10.5px;color:var(--gray);line-height:1.35;}
+  .node ul{margin:4px 0 0;padding-left:14px;font-size:10px;color:var(--gray);line-height:1.4;}
+  .node .badge{position:absolute;top:8px;right:9px;font-family:'Roboto Mono',monospace;font-size:7.5px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:2px 6px;}
+  .node .badge.api{color:var(--blue);border:1px solid var(--blue);}
+  .node .badge.q{color:var(--gray-soft);border:1px solid var(--gray-soft);}
+
+  .node.dim-style{background:#FAFBFC;border-color:var(--fade-border);}
+  .node.dim-style h4,.node.dim-style p{color:var(--gray-soft);}
+
+  .node.gate{background:var(--navy-soft);border-style:dashed;border-width:2px;border-color:#C3D0EC;}
+  .node.gate h4{color:var(--navy);font-size:13.5px;}
+
+  .node.insurance{background:var(--gold-soft);border-style:dashed;border-width:2px;border-color:#E8CE8F;}
+  .node.insurance h4{color:#8A6A1F;}
+
+  .node.office{background:#F5F6F8;border-style:dashed;border-color:var(--gray-line);}
+
+  .node.engine{background:var(--navy);border:none;color:#fff;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:16px;}
+  .node.engine h4{color:#fff;font-size:16px;margin-bottom:2px;}
+  .node.engine>p{color:#B9C6E6;font-size:11.5px;margin-bottom:8px;}
+  .module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .module-grid span{font-family:'Roboto Mono',monospace;font-size:8.7px;background:rgba(255,255,255,.1);padding:5px 4px;border-radius:7px;color:#E8EDFB;text-align:center;line-height:1.25;}
+
+  .node.deals{background:#fff;border-color:#B9E4CE;border-width:1.5px;}
+  .node.deals h4{color:var(--ink);font-size:14px;}
+  .node.deals ul{color:var(--gray);}
+
+  .node.output{text-align:left;}
+  .node.output ul{padding-left:14px;}
+
+  .tag-row{display:flex;flex-direction:column;gap:3px;margin-top:6px;}
+  .tag{font-family:'Roboto Mono',monospace;font-size:8.6px;padding:3px 6px 3px 7px;border-radius:5px;border-left:3px solid;line-height:1.35;transition:opacity .3s ease, color .3s ease;}
+  .tag.pre{border-color:var(--blue);background:var(--blue-soft);color:#1E4FBF;}
+  .tag.post{border-color:var(--green);background:var(--green-soft);color:#0B6B4E;}
+  .tag.dimmed{opacity:.35;background:transparent;border-color:var(--fade-border);color:var(--gray-soft);}
+
+  .edge-label{position:absolute;font-family:'Roboto Mono',monospace;font-size:9px;background:#fff;padding:2px 6px;border-radius:5px;border:1px solid var(--border);color:var(--gray);white-space:nowrap;transform:translate(-50%,-50%);pointer-events:none;transition:opacity .3s ease;z-index:3;}
+
+  .legend-row{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--gray);}
+  .legend-item{display:flex;align-items:center;gap:7px;}
+  .legend-line{width:24px;height:0;border-top:3px solid;}
+  .legend-line.blue{border-color:var(--blue);}
+  .legend-line.green{border-color:var(--green);}
+  .legend-line.navy-dash{border-top-style:dashed;border-color:var(--navy);}
+  .legend-line.gold-dash{border-top-style:dashed;border-color:var(--gold);}
+  .legend-line.purple-dash{border-top-style:dashed;border-color:var(--purple);}
+  .legend-line.gray-dash{border-top-style:dashed;border-color:var(--gray-line);}
+  .legend-note{margin-left:auto;font-size:11.5px;color:var(--gray-soft);}
+
+  .detail-bar{margin-top:14px;background:var(--navy-soft);border:1px solid #D7E0F3;border-radius:12px;padding:12px 16px;font-size:12.5px;color:var(--ink);min-height:18px;}
+  .detail-bar b{font-weight:700;}
+  .detail-bar .placeholder{color:var(--gray-soft);font-style:italic;}
+
+  .scope-note{margin-top:18px;font-size:12px;color:var(--gray-soft);line-height:1.6;max-width:900px;}
+
+  footer{text-align:center;padding:36px 20px 10px;font-family:'Roboto Mono',monospace;font-size:11px;color:var(--gray-soft);}
+</style>
+</head>
+<body data-mode="pre">
+
+<main>
+
+  <div class="page-head">
+    <div>
+      <h1>The TruMarket Risk Assessment Model</h1>
+      <p>One engine, two phases. Pre-harvest builds the deal — counterparty, product, market and financial-structure data feed the TM/CRAM Engine. Post-harvest executes it — deal aggregation and repayment feed back to improve the model. Click any box for detail.</p>
+    </div>
+    <div class="head-controls">
+      <div class="seg-toggle" role="tablist" aria-label="Deal stage mode">
+        <button type="button" data-mode-btn="pre" class="active" role="tab" aria-selected="true">Pre-Harvest</button>
+        <button type="button" data-mode-btn="post" role="tab" aria-selected="false">Post-Harvest</button>
+      </div>
+      <div class="mode-note" id="modeNote"></div>
+    </div>
+  </div>
+
+  <div class="canvas-card">
+    <div class="canvas-hint">Click any element for detail</div>
+
+    <div class="graph-wrap" id="graphWrap">
+      <svg viewBox="0 0 1700 1160" preserveAspectRatio="none" id="edgeSvg">
+        <defs>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6FED"/></marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#12946B"/></marker>
+          <marker id="arrow-navy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F1E3C"/></marker>
+          <marker id="arrow-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C9922E"/></marker>
+          <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7C4DE0"/></marker>
+          <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA3B2"/></marker>
+        </defs>
+        <g id="edgeLayer" fill="none" stroke-width="2.25"></g>
+      </svg>
+
+      <!-- ===== Row 0: product data feeders ===== -->
+      <div class="node" id="perishability" data-phase="pre" style="left:1.18%;top:1.72%;width:11.76%;height:6.90%;"
+           data-title="Perishability" data-desc="Shelf-life class of the product — Non-Perishable / Semi / Perishable / Ultra-Perishable. Feeds Product Matrix.">
+        <h4>Perishability</h4><p>Shelf-life class</p>
+      </div>
+      <div class="node" id="phytosanitary" data-phase="pre" style="left:14.12%;top:1.72%;width:11.76%;height:6.90%;"
+           data-title="Phytosanitary" data-desc="Plant-health / export certification requirements for the product. Feeds Product Matrix; also the basis for post-harvest quality-rejection risk.">
+        <h4>Phytosanitary</h4><p>Export certification</p>
+      </div>
+      <div class="node" id="histPrices" data-phase="pre" style="left:27.06%;top:1.72%;width:12.35%;height:6.90%;"
+           data-title="Historical Prices" data-desc="Product price history by market. Feeds Product Matrix and Destination Markets — prices depend heavily on destination.">
+        <h4>Historical Prices</h4><p>Product price history</p>
+      </div>
+      <div class="node" id="histProduction" data-phase="pre" style="left:40.59%;top:1.72%;width:12.35%;height:6.90%;"
+           data-title="Historical Production" data-desc="Historical yield / export volumes for the product-origin pair. Feeds Product Matrix.">
+        <h4>Historical Production</h4><p>Yield · export volumes</p>
+      </div>
+
+      <!-- ===== Row 1: product / market synthesis ===== -->
+      <div class="node" id="productMatrix" data-phase="common" style="left:8.24%;top:12.07%;width:25.29%;height:9.48%;"
+           data-title="Product Matrix" data-desc="Composite product-risk profile: perishability + phytosanitary + price history + production history. Feeds the Engine directly and the post-harvest Deals aggregation.">
+        <h4>Product Matrix</h4><p>Crop type · grade · export eligibility</p>
+        <div class="tag-row">
+          <div class="tag post" data-phase="post">Quality rejection — spec + inspection + phyto</div>
+        </div>
+      </div>
+      <div class="node" id="destinationMarkets" data-phase="common" style="left:35.88%;top:12.07%;width:13.53%;height:9.48%;"
+           data-title="Destination Markets" data-desc="Volume, FX exposure, demand and price by market. Also feeds back into Product Matrix as market risk.">
+        <h4>Destination Markets</h4><p>Volume · FX · demand</p>
+        <div class="tag-row">
+          <div class="tag post" data-phase="post">FX / regulatory — payment corridor + docs</div>
+        </div>
+      </div>
+      <div class="node" id="routeLogistics" data-phase="common" style="left:51.76%;top:12.07%;width:13.53%;height:9.48%;"
+           data-title="Route &amp; Logistics Risk" data-desc="Corridor / transit / carrier risk (previously labeled 'Logistical Runs' in one sketch and 'Route' in the other — standardized here). Feeds the Engine and Imports Validated.">
+        <h4>Route &amp; Logistics Risk</h4><p>Corridor · transit · carrier</p>
+        <div class="tag-row">
+          <div class="tag pre" data-phase="pre">Conversion — harvest execution · packing · phenology</div>
+          <div class="tag post" data-phase="post">Cargo / transit — cargo insurance + route table</div>
+        </div>
+      </div>
+      <div class="node" id="customs" data-phase="common" style="left:67.65%;top:12.07%;width:13.53%;height:9.48%;"
+           data-title="Customs" data-desc="Export history, shipment frequency, commodity codes, destination countries. Feeds Destination Markets. Link to Financial Structure is flagged unconfirmed in the source sketch.">
+        <h4>Customs</h4><p>Export history · commodity codes</p>
+      </div>
+      <div class="node" id="importsValidated" data-phase="post" style="left:84.12%;top:12.07%;width:13.53%;height:9.48%;"
+           data-title="Imports Validated" data-desc="Validated shipment against Product Matrix and Route & Logistics Risk. Triggers Repayment — not the other way around.">
+        <h4>Imports Validated</h4><p>Shipment cleared against spec</p>
+      </div>
+
+      <!-- ===== Row 2 ===== -->
+      <div class="node" id="counterparty" data-phase="common" style="left:1.18%;top:25.86%;width:12.94%;height:7.76%;"
+           data-title="Counterparty" data-desc="Root identity record for the deal. Feeds Buyer and Supplier Network independently and in parallel — not sequentially.">
+        <h4>Counterparty</h4><p>Buyer + supplier identity</p>
+      </div>
+      <div class="node" id="network" data-phase="pre" style="left:15.88%;top:25.86%;width:12.94%;height:7.76%;"
+           data-title="Network" data-desc="Marketplace / trust graph of verified participants. Feeds KYB Verification independently.">
+        <h4>Network</h4><p>Verified participant graph</p>
+      </div>
+      <div class="node" id="contract" data-phase="pre" style="left:30.59%;top:25.86%;width:11.76%;height:7.76%;"
+           data-title="Contract" data-desc="Signed trade contract. Feeds KYB Verification. Relationship to Financial Structure is ambiguous in the source sketch — direction not confirmed.">
+        <h4>Contract</h4><p>Signed trade agreement</p>
+      </div>
+      <div class="node insurance" id="financialStructure" data-phase="common" style="left:44.71%;top:25.86%;width:15.29%;height:9.48%;"
+           data-title="Financial Structure" data-desc="Advance %, collateral, insurance, payment terms. Assessed for suitability. Feeds the Engine, feeds post-harvest Deals aggregation, and has an unconfirmed link to Customs.">
+        <span class="badge q">Suitability</span>
+        <h4>Financial Structure</h4><p>Advance · collateral · terms</p>
+      </div>
+      <div class="node insurance" id="coface" data-phase="common" style="left:62.35%;top:25.86%;width:15.29%;height:9.48%;"
+           data-title="Coface Insurance" data-desc="Buyer credit insurance. Coverage ≥80% of deal value adds +12 to the counterparty score; ≥50% adds +8; any positive coverage adds +5. This is where 'buyer collection risk' lives — not repeated elsewhere.">
+        <h4>Coface Insurance</h4><p>Buyer credit cover · external score bonus</p>
+      </div>
+      <div class="node" id="repayment" data-phase="post" style="left:84.12%;top:25.86%;width:13.53%;height:8.62%;"
+           data-title="Repayment" data-desc="Deal closes out on validated imports. Feeds back to the Engine to update and improve future scoring — supplier reliability, buyer reliability, default history.">
+        <h4>Repayment</h4><p>↻ updates the model</p>
+      </div>
+
+      <!-- ===== Row 3 ===== -->
+      <div class="node" id="buyer" data-phase="common" style="left:1.18%;top:37.07%;width:12.94%;height:8.62%;"
+           data-title="Buyer" data-desc="Destination counterparty. Active in both phases — pre-harvest for commercial risk, post-harvest for collection risk (via Coface).">
+        <h4>Buyer</h4><p>Destination counterparty</p>
+        <div class="tag-row">
+          <div class="tag pre" data-phase="pre">Commercial — forward-cover % · buyer diversification</div>
+        </div>
+      </div>
+      <div class="node" id="supplierNetwork" data-phase="common" style="left:15.88%;top:37.07%;width:14.12%;height:8.62%;"
+           data-title="Supplier Network" data-desc="Onboarded suppliers, all required to pass the same KYB. Active in both phases — feeds the Engine directly, distinct from the post-harvest Deals aggregation path.">
+        <span class="badge api">API</span>
+        <h4>Supplier Network</h4><p>Pass/Fail KYB required</p>
+        <div class="tag-row">
+          <div class="tag pre" data-phase="pre">Behavioral — siphoning/misuse · operator discipline</div>
+        </div>
+      </div>
+      <div class="node office" id="office" data-phase="pre" style="left:31.76%;top:37.07%;width:11.18%;height:6.90%;"
+           data-title="Office" data-desc="Role not confirmed in the source sketch — shown feeding Buyer. Flagged here as an open question rather than guessed at.">
+        <span class="badge q">?</span>
+        <h4>Office</h4><p>Role unconfirmed</p>
+      </div>
+
+      <!-- ===== Row 4: KYB gate ===== -->
+      <div class="node gate" id="kyb" data-phase="pre" style="left:1.18%;top:50.00%;width:41.76%;height:7.76%;"
+           data-title="KYB Verification" data-desc="Pass/Fail gate. Buyer, Supplier Network, Network and Contract each verify independently — not a sequential chain. Only cleared parties reach the Engine.">
+        <h4>KYB Verification — Pass / Fail gate</h4><p>Buyer · Supplier Network · Network · Contract verify independently</p>
+      </div>
+
+      <!-- ===== Row 5: Engine + Deals ===== -->
+      <div class="node engine" id="engine" data-phase="common" style="left:14.71%;top:62.07%;width:50.00%;height:18.97%;"
+           data-title="TM / CRAM Engine" data-desc="Not a black box — the composite risk engine is broken into eight modules. Receives KYB-verified relationship data, Product Matrix, Route & Logistics Risk, Financial Structure, Coface and, post-harvest, the aggregated Deals profile.">
+        <h4>TM / CRAM Engine</h4>
+        <p>Risk + pricing + matching — rule-based, not a black box</p>
+        <div class="module-grid">
+          <span>Counterparty Scoring</span><span>Product Risk</span><span>Market Risk</span><span>Country Risk</span>
+          <span>Financial Structuring</span><span>Expected Default</span><span>Pricing Engine</span><span>Recommendation Engine</span>
+        </div>
+      </div>
+
+      <div class="node deals" id="deals" data-phase="post" style="left:67.65%;top:62.07%;width:28.24%;height:18.97%;"
+           data-title="Deals (Portfolio)" data-desc="Post-harvest aggregation layer, distinct from the direct Supplier Network / Buyer → Engine relationship path. Combines financial, product and route risk into a single deal profile before it reaches the Engine.">
+        <h4>Deals (Portfolio)</h4>
+        <p>Post-harvest aggregation — parallel to the direct relationship path above</p>
+        <ul>
+          <li>Financial Structure Risk</li>
+          <li>Product Type Risk</li>
+          <li>Route Risk</li>
+        </ul>
+      </div>
+
+      <!-- ===== Row 6: outputs ===== -->
+      <div class="node output" id="claimScore" data-phase="common" style="left:17.65%;top:85.34%;width:16.47%;height:9.48%;"
+           data-title="Claim Score / Risk Grade" data-desc="0–100 composite → risk grade. Also drives Probability of Default and Expected Loss, which feed the Financial Exposure Recommendation.">
+        <h4>Claim Score / Risk Grade</h4>
+        <ul><li>Probability of Default</li><li>Expected Loss</li></ul>
+      </div>
+      <div class="node output" id="financialExposure" data-phase="common" style="left:37.06%;top:85.34%;width:18.82%;height:9.48%;"
+           data-title="Financial Exposure / Reconciliation" data-desc="Bidirectional with the Engine — it is both an output of the score and an input back into it (covenants, structuring feedback). Not a one-way recommendation.">
+        <h4>Financial Exposure / Reconciliation</h4>
+        <ul><li>Capital stack · APY %</li><li>Covenants / collateral</li></ul>
+      </div>
+      <div class="node output" id="loan" data-phase="common" style="left:58.82%;top:85.34%;width:12.94%;height:9.48%;"
+           data-title="Loan" data-desc="Financing issued against the Financial Exposure Recommendation.">
+        <h4>Loan</h4><p>Financing issued</p>
+      </div>
+
+    </div>
+
+    <div class="legend-row">
+      <div class="legend-item"><span class="legend-line blue"></span> data / onboarding flow</div>
+      <div class="legend-item"><span class="legend-line navy-dash"></span> verification gate</div>
+      <div class="legend-item"><span class="legend-line gold-dash"></span> credit insurance</div>
+      <div class="legend-item"><span class="legend-line green"></span> scoring, capital &amp; repayment flow</div>
+      <div class="legend-item"><span class="legend-line purple-dash"></span> bidirectional score ↔ recommendation</div>
+      <div class="legend-item"><span class="legend-line gray-dash"></span> relationship unclear in source sketch</div>
+      <div class="legend-note">dimmed = not part of the active phase</div>
+    </div>
+
+    <div class="detail-bar" id="detailBar"><span class="placeholder">Click any box above for a one-line detail.</span></div>
+  </div>
+
+  <p class="scope-note">Scope note: this pass fixes the merge of both sketches — component naming, the KYB gate, the Engine's internal modules, the Deals aggregation path, and the corrected Imports Validated → Repayment → model-update loop. Not yet modeled: Bank/Investor capital source, Escrow, shipment milestones, payment rails, and external oracle data (weather, FX, commodity prices) — flagged in the walkthrough as open items for a later pass.</p>
+
+</main>
+
+<footer>TruMarket · Risk Assessment Model — internal reference, not for external distribution</footer>
+
+<script>
+  const body = document.body;
+  const wrap = document.getElementById('graphWrap');
+  const svg = document.getElementById('edgeSvg');
+  const edgeLayer = document.getElementById('edgeLayer');
+  const btns = document.querySelectorAll('[data-mode-btn]');
+  const modeNote = document.getElementById('modeNote');
+  const detailBar = document.getElementById('detailBar');
+
+  const notes = {
+    pre: 'Emphasizing deal-formation: onboarding, KYB, historical data collection. Post-harvest-only elements (Deals aggregation, repayment loop) are de-emphasized.',
+    post: 'Emphasizing deal execution: Deals aggregation and the repayment → model-update loop. One-time onboarding elements (KYB, Network, Contract, Office, historical feeders) are de-emphasized.'
+  };
+
+  // color -> marker/stroke map
+  const COLORS = {
+    blue:   {stroke:'#2F6FED', marker:'arrow-blue'},
+    green:  {stroke:'#12946B', marker:'arrow-green'},
+    navy:   {stroke:'#0F1E3C', marker:'arrow-navy'},
+    gold:   {stroke:'#C9922E', marker:'arrow-gold'},
+    purple: {stroke:'#7C4DE0', marker:'arrow-purple'},
+    gray:   {stroke:'#9AA3B2', marker:'arrow-gray'}
+  };
+
+  // edges: from, to, color, dashed, phase(common/pre/post), label, bidirectional, bow(px offset for long loop edges)
+  const EDGES = [
+    ['perishability','productMatrix','blue',false,'pre'],
+    ['phytosanitary','productMatrix','blue',false,'pre'],
+    ['histPrices','productMatrix','blue',false,'pre'],
+    ['histProduction','productMatrix','blue',false,'pre'],
+    ['histPrices','destinationMarkets','blue',false,'pre'],
+    ['customs','destinationMarkets','blue',false,'common'],
+    ['destinationMarkets','productMatrix','blue',false,'common','market feedback'],
+    ['counterparty','buyer','blue',false,'common'],
+    ['counterparty','supplierNetwork','blue',false,'common'],
+    ['office','buyer','gray',true,'pre','role unconfirmed'],
+    ['buyer','kyb','navy',true,'pre'],
+    ['supplierNetwork','kyb','navy',true,'pre'],
+    ['network','kyb','navy',true,'pre'],
+    ['contract','kyb','navy',true,'pre'],
+    ['contract','financialStructure','gray',true,'pre','direction unclear',true],
+    ['financialStructure','customs','gray',true,'common','link unconfirmed'],
+    ['kyb','engine','navy',true,'pre','direct relationship data'],
+    ['productMatrix','engine','blue',false,'common'],
+    ['routeLogistics','engine','blue',false,'common'],
+    ['financialStructure','engine','navy',false,'common'],
+    ['coface','engine','gold',true,'common'],
+    ['financialStructure','deals','green',false,'post','structure risk'],
+    ['productMatrix','deals','green',false,'post','product type risk'],
+    ['routeLogistics','deals','green',false,'post','route risk'],
+    ['deals','engine','green',false,'post','aggregated deal profile'],
+    ['engine','claimScore','green',false,'common'],
+    ['claimScore','financialExposure','green',false,'common'],
+    ['financialExposure','engine','purple',true,'common','score ↔ recommendation',true],
+    ['financialExposure','loan','green',false,'common'],
+    ['productMatrix','importsValidated','blue',false,'post',null,false,120],
+    ['routeLogistics','importsValidated','blue',false,'post',null,false,80],
+    ['importsValidated','repayment','green',false,'post'],
+    ['repayment','engine','green',true,'post','update model / improve scoring',false,-160]
+  ];
+
+  function rectOf(el){
+    const r = el.getBoundingClientRect();
+    const c = wrap.getBoundingClientRect();
+    const x = r.left - c.left, y = r.top - c.top;
+    return {x,y,w:r.width,h:r.height,cx:x+r.width/2,cy:y+r.height/2};
+  }
+  function clip(rect, tx, ty){
+    const dx = tx - rect.cx, dy = ty - rect.cy;
+    if(dx===0 && dy===0) return [rect.cx, rect.cy];
+    const hw = rect.w/2, hh = rect.h/2;
+    const sx = dx!==0 ? hw/Math.abs(dx) : Infinity;
+    const sy = dy!==0 ? hh/Math.abs(dy) : Infinity;
+    const s = Math.min(sx, sy);
+    return [rect.cx + dx*s, rect.cy + dy*s];
+  }
+
+  function drawEdges(){
+    edgeLayer.innerHTML = '';
+    document.querySelectorAll('.edge-label').forEach(n => n.remove());
+    const svgRect = wrap.getBoundingClientRect();
+    const scaleX = 1700 / svgRect.width;
+    const scaleY = 1160 / svgRect.height;
+
+    EDGES.forEach(([fromId,toId,color,dashed,phase,label,bidir,bow]) => {
+      const fromEl = document.getElementById(fromId), toEl = document.getElementById(toId);
+      if(!fromEl || !toEl) return;
+      const A = rectOf(fromEl), B = rectOf(toEl);
+      let [x1,y1] = clip(A, B.cx, B.cy);
+      let [x2,y2] = clip(B, A.cx, A.cy);
+      x1*=scaleX; y1*=scaleY; x2*=scaleX; y2*=scaleY;
+
+      let d;
+      if(bow){
+        const mx = (x1+x2)/2, my = (y1+y2)/2;
+        const dx = x2-x1, dy = y2-y1;
+        const len = Math.hypot(dx,dy) || 1;
+        const nx = -dy/len, ny = dx/len;
+        const cx = mx + nx*bow, cy = my + ny*bow;
+        d = `M${x1},${y1} Q${cx},${cy} ${x2},${y2}`;
+      } else {
+        d = `M${x1},${y1} L${x2},${y2}`;
+      }
+
+      const c = COLORS[color];
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d', d);
+      path.setAttribute('stroke', c.stroke);
+      path.setAttribute('marker-end', `url(#${c.marker})`);
+      if(bidir) path.setAttribute('marker-start', `url(#${c.marker})`);
+      if(dashed) path.setAttribute('stroke-dasharray','6 5');
+      path.dataset.phase = phase;
+      edgeLayer.appendChild(path);
+
+      if(label){
+        const div = document.createElement('div');
+        div.className = 'edge-label';
+        div.dataset.phase = phase;
+        div.textContent = label;
+        const lx = bow ? (x1+x2)/2 + (-(y2-y1)/(Math.hypot(x2-x1,y2-y1)||1))*bow*0.55 : (x1+x2)/2;
+        const ly = bow ? (y1+y2)/2 + ((x2-x1)/(Math.hypot(x2-x1,y2-y1)||1))*bow*0.55 : (y1+y2)/2;
+        div.style.left = (lx/scaleX / svgRect.width * 100) + '%';
+        div.style.top = (ly/scaleY / svgRect.height * 100) + '%';
+        wrap.appendChild(div);
+      }
+    });
+    applyPhaseVisibility();
+  }
+
+  function applyPhaseVisibility(){
+    const mode = body.getAttribute('data-mode');
+    document.querySelectorAll('[data-phase]').forEach(el => {
+      const phase = el.dataset.phase;
+      const dim = (phase === 'pre' && mode === 'post') || (phase === 'post' && mode === 'pre');
+      el.classList.toggle('faded-phase', false);
+      if(el.classList.contains('node')){
+        el.classList.toggle('dim-style', dim);
+        el.style.opacity = dim ? .45 : 1;
+        el.style.filter = dim ? 'grayscale(1)' : 'none';
+      } else if(el.classList.contains('tag')){
+        el.classList.toggle('dimmed', dim);
+      } else if(el.tagName === 'path'){
+        el.style.opacity = dim ? .18 : 1;
+      } else if(el.classList.contains('edge-label')){
+        el.style.opacity = dim ? .25 : 1;
+      }
+    });
+  }
+
+  function setMode(mode){
+    body.setAttribute('data-mode', mode);
+    btns.forEach(b => {
+      const active = b.dataset.modeBtn === mode;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    modeNote.textContent = notes[mode];
+    applyPhaseVisibility();
+  }
+
+  btns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.modeBtn)));
+
+  document.querySelectorAll('.node[data-title]').forEach(n => {
+    n.addEventListener('click', () => {
+      detailBar.innerHTML = `<b>${n.dataset.title}</b> — ${n.dataset.desc}`;
+    });
+  });
+
+  window.addEventListener('resize', () => requestAnimationFrame(drawEdges));
+  window.addEventListener('load', () => { drawEdges(); setMode('pre'); });
+  // fonts loading can shift box sizes slightly — redraw once more shortly after
+  setTimeout(drawEdges, 300);
+  drawEdges();
+  setMode('pre');
+</script>
+
+</body>
+</html>

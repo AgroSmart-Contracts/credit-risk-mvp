@@ -1,0 +1,394 @@
+[
+  {
+    "key": "«ARDZHIES» LLC",
+    "name": "«Ardzhies» LLC",
+    "countries": [
+      "Russian Federation"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "PT517935392"
+    ],
+    "dealCount": 2,
+    "yearsInBusiness": 1,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "Â«ARDZHIESÂ» LLC"
+    ]
+  },
+  {
+    "key": "ASM INTERNATIONAL",
+    "name": "A.S.M International",
+    "countries": [
+      "India"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "100170220006904",
+      "10017022006904"
+    ],
+    "dealCount": 5,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "ASM INTERNATIONAL FSSAI",
+      "A.S.M INTERNATIONAL"
+    ]
+  },
+  {
+    "key": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+    "name": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+    "countries": [
+      "Chile"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "77.394.695-7",
+      "77394695-7"
+    ],
+    "dealCount": 2,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "AGRO SMART CONTRACTS LDA",
+    "name": "AGRO SMART CONTRACTS LDA",
+    "countries": [
+      "Portugal"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "517935392"
+    ],
+    "dealCount": 13,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "AGRO SMART CONTRACTS, LDA.",
+      "AGRO SMART CONTRACTS",
+      "AGROSMART CONTRACTS LDA"
+    ]
+  },
+  {
+    "key": "ANTERRA FARMS GMBH",
+    "name": "ANTERRA FARMS GMBH",
+    "countries": [
+      "Austria"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "ATEOS1000126910"
+    ],
+    "dealCount": 2,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "BC NATURE QUALITY FRUITS SL",
+    "name": "BC NATURE QUALITY FRUITS S.L",
+    "countries": [
+      "Spain"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "B11882909"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+    "name": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+    "countries": [
+      "Brazil"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "CNPJ : 04.052.176 / 0001-48"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "BIO FARMING PERU SAC",
+    "name": "BIO FARMING PERU S.A.C.",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier",
+      "buyer"
+    ],
+    "taxIds": [
+      "20612199974"
+    ],
+    "dealCount": 21,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "BIO FARMIN PERU S.A.C",
+      "BIO FARMING PERU S.A.C"
+    ]
+  },
+  {
+    "key": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+    "name": "Eagle Trading Agriculture Marketing Ltd",
+    "countries": [
+      "Israel",
+      "United Arab Emirates"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "515059509"
+    ],
+    "dealCount": 24,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "Eagle Trading Agriculture Marketing LTD",
+      "EAGLE TRADING AGRICULTURE MARKETING LTD"
+    ]
+  },
+  {
+    "key": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO LTD",
+    "name": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+    "countries": [
+      "Thailand"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "0105548144820"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "HOLY FRUIT PERU",
+    "name": "Holy Fruit Peru",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20602722628"
+    ],
+    "dealCount": 14,
+    "yearsInBusiness": 8,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "HOLY FRUIT PERU"
+    ]
+  },
+  {
+    "key": "KUBA",
+    "name": "Kuba",
+    "countries": [
+      "Poland"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "7584225667"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "LIMAX SP Z OO",
+    "name": "LIMAX SP. Z O.O.",
+    "countries": [
+      "Poland"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "9231585471"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "LIMAX SP ZOO"
+    ]
+  },
+  {
+    "key": "MCORP",
+    "name": "MCORP",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "123123123123"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 16,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "MIKHUNA PERUVIAN FOODS SOLUTIONS SAC",
+    "name": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20611718579"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "OPEN MARKETS CORPORATION",
+    "name": "Open Markets Corporation",
+    "countries": [
+      "United States"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "65-1078039"
+    ],
+    "dealCount": 16,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "TOFF BV",
+    "name": "T.O.F.F. B.V",
+    "countries": [
+      "Netherlands"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "NL854346533B01"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 1,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "T.O.F.F. B.V."
+    ]
+  },
+  {
+    "key": "TRU MARKET BLOCKCHAIN SAC",
+    "name": "TRU MARKET BLOCKCHAIN S.A.C.",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20608082281"
+    ],
+    "dealCount": 37,
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "TRU MARKET BLOCKCHAIN S.A.C",
+      "TRU MARKET BLOCKCHAIN"
+    ]
+  },
+  {
+    "key": "VILLAVENTURA PERU SAC",
+    "name": "Villaventura Peru SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20610491104"
+    ],
+    "dealCount": 16,
+    "yearsInBusiness": 3,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "VILLAVENTURA PERU SAC",
+      "Villaventura Produce Sac"
+    ]
+  }
+]

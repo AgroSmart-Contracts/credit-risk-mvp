@@ -1,0 +1,66 @@
+
+
+ 
+ 
+TRU MARKET BLOCKCHAIN  
+TRU MARKET BLOCKCHAIN S.A.C.  
+CAL. JUAN GRIS 113 URB. SAN BORJA SUR  
+SAN BORJA - LIMA - LIMA 
+FACTURA ELECTRONICA
+RUC: 20608082281 
+E001-37 
+Fecha de Emisión:
+08/08/2025
+Señor(es):
+HOLY FRUIT PERU S.A.C  
+RUC :20602722628 
+Dirección del Receptor de la factura
+:
+JR. JUAN GRIS 113 INT. 201 LIMA
+LIMA SAN BORJA 
+Dirección del Cliente :
+JR. JUAN GRIS 113 INT. 201 LIMA-
+LIMA-SAN BORJA 
+Tipo de Moneda:
+DOLAR AMERICANO 
+Observación:
+ 
+Forma de pago: Crédito
+GUIA DE REMISION REMITENTE  : EG07 - 90 
+ 
+CantidadUnidad MedidaDescripciónValor Unitario
+5462.00KILOGRAMOARANDANO FRESCO SELECCIONADO CALIBRE 18MM
+VARIEDAD VENTURA DE EXPORTACION PARA EMPAQUE DE
+3641 CAJAS DE 1.5KG NETOS
+7.00
+ 
+Valor de Venta de Operaciones Gratuitas:$0.00 
+ 
+ 
+ 
+SON: TREINTA Y OCHO MIL DOSCIENTOS TREINTA Y CUATRO Y
+00/100 DOLAR AMERICANO
+ 
+ 
+ 
+Sub Total Ventas:$ 38,234.00 
+Anticipos:$ 0.00 
+Descuentos:$ 0.00 
+Valor Venta:$ 38,234.00 
+ISC:$ 0.00 
+IGV:$ 0.00 
+Otros Cargos:$ 0.00 
+Otros Tributos:$ 0.00 
+Monto de redondeo:$ 0.00 
+Importe Total:$ 38,234.00 
+Información del crédito: 
+Monto neto pendiente de pago:$ 38,234.00 
+Total de Cuotas:1 
+Nº CuotaFec. Venc.Monto
+130/09/202538,234.00
+Nº CuotaFec. Venc.Monto
+   
+Nº CuotaFec. Venc.Monto
+   
+Esta es una representación impresa de la factura electrónica, generada en el Sistema de SUNAT. Puede
+verificarla utilizando su clave SOL.

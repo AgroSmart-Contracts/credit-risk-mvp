@@ -1,14 +1,7 @@
 import type { AnalyzeDocumentsResult } from "./lib/document-analysis/types";
-import type { CorridorRiskFlag } from "./lib/route-risk-tables";
-import type { DimensionBreakdown } from "./lib/scoring";
-import type { TransactionStructureInput } from "./lib/transaction-structure/types";
+import type { CofaceRiskGrade } from "./lib/coface-analysis/types";
 import type { MarketIntelPayload } from "./lib/market-intel/types";
-
-export interface CofaceCoverage {
-  coveragePct: number | null;
-  coverageAmountUSD: number | null;
-  documentName: string | null;
-}
+import type { TransactionStructureInput } from "./lib/transaction-structure/types";
 
 export interface CounterpartyInput {
   name: string;
@@ -20,6 +13,49 @@ export interface CounterpartyInput {
   avgPaymentDelayDays?: number | null;
   qualityRejectionRatePct?: number | null;
   creditRating?: string;
+}
+
+export interface SourceDocument {
+  label: string;
+  type: string;
+  extractionHint?: string;
+}
+
+export interface ProductRiskProfile {
+  product: string;
+  score: number;
+  acRiskGroup?: number;
+  /** ERD `Product.productCategory`. Drives Deal.productCategory — was hardcoded "Fresh Produce" for every platform deal until 2026-07-24, which was wrong for the frozen/IQF products. */
+  productCategory: "Fresh Produce" | "Frozen" | "Dried" | "Processed";
+  perishabilityClass:
+    | "Ultra-Perishable"
+    | "Perishable"
+    | "Semi-Perishable"
+    | "Non-Perishable";
+  shelfLifeDays: number | null;
+  coldChainRequired: boolean;
+  rationale: string;
+  /**
+   * false = this row exists so the deal can be scored at all, but the score
+   * itself is a provisional fallback (perishability-bucket estimate), not an
+   * AC-confirmed table value. Surfaced in the Product Risk Table tab.
+   * Added 2026-07-24 when Mango / Asparagus / Mixed Berries–Tropical (IQF) /
+   * Frozen Tropical Fruits were added to cover real deal-book products that
+   * had no table row at all.
+   */
+  scoreConfirmed: boolean;
+}
+
+export interface RouteRiskProfile {
+  origin: string;
+  destination: string;
+  score: number;
+  estimatedTransitDays: number;
+  numberOfTransshipments: number;
+  routeRiskFlag: "Low" | "Medium" | "High";
+  rationale: string;
+  /** false = provisional/estimated corridor (not sourced from confirmed BL history or an AC-reviewed table). */
+  scoreConfirmed: boolean;
 }
 
 export interface Deal {
@@ -34,8 +70,6 @@ export interface Deal {
   incoterm: string;
   buyer: CounterpartyInput;
   supplier: CounterpartyInput;
-  /** Peruvian supplier RUC (11 digits) for customs market-intel lookup */
-  supplierRuc?: string | null;
   paymentTerms: string;
   advancePaymentPct: number;
   contractType: "Spot" | "Forward" | "Seasonal";
@@ -61,52 +95,57 @@ export interface Deal {
   estimatedTransitDays: number;
   numberOfTransshipments: number;
   routeRiskFlag: "Low" | "Medium" | "High";
-  routeRiskResolution?: {
-    resolvedFlag: CorridorRiskFlag;
-    source: "pair-override" | "corridor-default" | "35-day-rule";
-    rationale?: string;
-    eudrGate?: boolean;
-    cramTablesVersion?: string;
-  };
+  /** Freight mode — spec §4.C differentiates transit-time/transshipment points by air vs ocean, and §6's veto register only fires on air transshipments. null = unknown (spec variables default neutral). */
+  transportMode: "air" | "sea" | null;
+  /** Deal Register `offerUnitPrice`, USD. Feeds spec §4.B "Price vs market" (30% of Product weight) — see lib/price-benchmarks.ts. null = not captured. */
+  offerUnitPriceUSD: number | null;
   priorDealsBetweenParties: number;
   relationshipAgeMonths: number;
   externalCreditSignal?: string;
-  cofaceCoverage?: CofaceCoverage;
-  sourceDocuments: {
-    label: string;
-    type: string;
-    extractionHint?: string;
-  }[];
-  fieldsNeedingConfirmation: string[];
+  supplierRuc?: string;
+  /** Coface response: approved guaranteed limit (USD-equivalent in MVP). */
+  cofaceCoverageAmountUSD?: number | null;
+  /** % of deal value covered; manual or derived from approved ÷ dealValueUSD. */
+  cofaceCoveragePct?: number | null;
+  /** Coface request: buyer country on the credit application / notification. */
+  cofaceRequestCountry?: string | null;
+  /** Coface request: buyer (debtor) name on the notification. */
+  cofaceRequestBuyerName?: string | null;
+  /** Coface request: coverage or deal amount requested (`You requested:` line). */
+  cofaceRequestedCoverageAmountUSD?: number | null;
+  /** Coface response: country risk assessment grade A–D. */
+  cofaceCountryRiskGrade?: CofaceRiskGrade | null;
+  /** Coface response: company (debtor) risk assessment grade A–D. */
+  cofaceCompanyRiskGrade?: CofaceRiskGrade | null;
+  productRiskProfile?: ProductRiskProfile;
+  routeRiskProfile?: RouteRiskProfile;
   documentAnalysis?: AnalyzeDocumentsResult;
-  /** Cash-flow schedule + structure inputs for CRAM Transaction Structure scoring */
-  transactionStructure?: TransactionStructureInput;
-  /** Peru customs market-intel payload (dim A/B/C/D.3) */
   marketIntel?: MarketIntelPayload;
+  transactionStructure?: TransactionStructureInput;
+  sourceDocuments: SourceDocument[];
+  fieldsNeedingConfirmation: string[];
   teaser: string;
+  isCustom?: boolean;
 }
 
 export type RiskTier =
   | "Low Risk"
   | "Medium-Low Risk"
   | "Medium-High Risk"
-  | "High Risk";
+  | "High Risk"
+  | "Veto";
 
 export interface SubScore {
   label: string;
   score: number;
   why: string;
   weight?: number;
-  headroom?: number;
-  breakdown?: DimensionBreakdown;
 }
 
 export interface PartyScore {
   label: string;
   score: number;
   why: string;
-  headroom?: number;
-  breakdown?: DimensionBreakdown;
 }
 
 export interface RiskAssessment {
@@ -117,8 +156,10 @@ export interface RiskAssessment {
   buyer: PartyScore;
   supplier: PartyScore;
   overall: number;
-  overallRaw: number;
   tier: RiskTier;
+  /** Spec §6 single-veto register — true if any hard-stop condition fired, overriding the composite-based tier. */
+  vetoed: boolean;
+  vetoReasons: string[];
   concerns: string[];
   mitigating: string[];
 }

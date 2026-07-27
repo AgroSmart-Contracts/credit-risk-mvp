@@ -1,0 +1,55 @@
+
+
+ 
+ 
+ 
+GLOBAL G Y P S.A.C.  
+RES. RENACER MZA. 26 LOTE. 481 A 3CDRAS DEL COLEGIO
+COPRODELI  
+PISCO - PISCO - ICA 
+FACTURA ELECTRONICA
+RUC: 20605294147 
+E001-373 
+Fecha de Emisión:
+30/07/2025
+Señor(es):
+TRU MARKET BLOCKCHAIN S.A.C.  
+RUC 
+:20608082281  
+Establecimiento del Emisor :
+RES. RENACER MZA. 26 LOTE. 481 A
+3CDRAS DEL COLEGIO COPRODELI
+ICA-PISCO-PISCO 
+Tipo de Moneda:
+SOLES 
+Observación:
+ 
+Forma de pago: Contado
+GUIA DE REMISION REMITENTE :EG07 46 
+CantidadUnidad MedidaDescripciónValor UnitarioICBPER
+496.40KILOGRAMOARANDANOS FRESCOS21.000.00
+Valor de Venta de Operaciones Gratuitas:S/ 0.00 
+ 
+ 
+SON: DIEZ MIL CUATROCIENTOS VEINTICUATRO Y 40/100 SOLES
+ 
+ 
+Sub Total Ventas:S/ 10,424.40 
+Anticipos:S/ 0.00 
+Descuentos:S/ 0.00 
+Valor Venta:S/ 10,424.40 
+ISC:S/ 0.00 
+IGV:S/ 0.00 
+ICBPER:
+S/ 0.00 
+Otros Cargos:S/ 0.00 
+Otros Tributos:S/ 0.00 
+Monto de redondeo:S/ 0.00 
+Importe Total:S/ 10,424.40 
+Información de la detracción
+Leyenda:Operación sujeta al Sistema de Pago de Obligaciones Tributarias con el Gobierno Central
+Bien o Servicio:035  Bienes exonerados del IGV
+Medio de pago:001  Depósito en cuenta
+Nro. Cta. Banco de la Nación:00561068054Porcentaje de detracción:1.50Monto detracción:S/ 156.00
+Esta es una representación impresa de la factura electrónica, generada en el Sistema de SUNAT. Puede
+verificarla utilizando su clave SOL.

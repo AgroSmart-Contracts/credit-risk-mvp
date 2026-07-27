@@ -42,6 +42,14 @@ export function getTierColors(tier: RiskTier): TierColors {
         badgeText: "#d9486e",
         bar: "bg-tm-danger",
       };
+    case "Veto":
+      return {
+        arc: "#8b1e2e",
+        badge: "border-tm-danger-dark bg-tm-danger-dark/15 text-tm-danger-dark",
+        badgeBg: "#8b1e2e20",
+        badgeText: "#8b1e2e",
+        bar: "bg-tm-danger-dark",
+      };
   }
 }
 

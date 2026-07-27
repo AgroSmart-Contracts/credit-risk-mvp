@@ -1,0 +1,55 @@
+
+
+ 
+ 
+BIO FARMING PERU S.A.C.
+CAL. RICARDO PALMA 284 URB. SAN JOAQUIN
+PROV. CONST. DEL CALLAO - PROV. CONST. DEL CALLAO - 
+BELLAVISTA - PERU
+FACTURA ELECTRONICA
+RUC: 20612199974 
+E001-195 
+Fecha de Emisión:
+01/04/2026
+Señor(es):
+GRUPO QSP SRL 
+Establecimiento del Emisor :
+CAL. RICARDO PALMA 284 URB.
+SAN JOAQUIN PROV. CONST. DEL
+CALLAO-PROV. CONST. DEL
+CALLAO-BELLAVISTA 
+Tipo de Moneda:
+DOLAR AMERICANO 
+Observación:
+DIREC:CALLE BRAULIA DE PAULA
+#3, LOS CASABES, DUQUESA
+SANTO DOMINGO NORTE, SANTO
+DOMINGO/CTN:OERU4170956/BK:64
+48936350/DEST:CAUCEDO/ICTM:FO
+B/PAGO COND:50% ADELANTO CON
+LA OC Y 50% AL ARRIBO EN
+DESTINO 
+Forma de pago: Crédito
+GUIA DE REMISION REMITENTE :EG07 00000378 
+CantidadUnidad MedidaDescripciónValor UnitarioICBPER
+40.00UNIDADNARANJA VALENCIA CAL. S-M-L EN BINES DE 620 KG460.000.00
+Valor de Venta de Operaciones Gratuitas:  $0.00 
+ 
+ 
+SON: DIECIOCHO MIL CUATROCIENTOS Y 00/100 DOLAR AMERICANO
+ 
+ 
+Sub Total Ventas:$ 18,400.00 
+Anticipos:$ 0.00 
+Descuentos:$ 0.00 
+Valor Venta:$ 18,400.00 
+ISC:$ 0.00 
+IGV:$ 0.00 
+ICBPER:
+$ 0.00 
+Otros Cargos:$ 0.00 
+Otros Tributos:$ 0.00 
+Monto de redondeo:$ 0.00 
+Importe Total:$ 18,400.00 
+Esta es una representación impresa de la factura electrónica, generada en el Sistema de SUNAT. Puede
+verificarla utilizando su clave SOL.

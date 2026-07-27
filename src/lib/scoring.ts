@@ -1,655 +1,520 @@
 import type { Deal, RiskTier } from "../types";
-import {
-  cramCustomsPoints,
-  cramRouteFlagPoints,
-  cramTransshipmentPoints,
-  cramTransitPoints,
-} from "./cram-scoring";
-import {
-  getPerishabilityPoints,
-  isEudrRequired,
-  lookupProductRisk,
-} from "./product-risk-tables";
-import {
-  lookupRouteRisk,
-  normalizeRouteRiskFlag,
-  type CorridorRiskFlag,
-} from "./route-risk-tables";
-import { resolveRouteRiskFlag } from "./product-market-pair-table";
+import type { CofaceRiskGrade } from "./coface-analysis/types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
-import { computeTransactionStructureScore } from "./transaction-structure/scoring";
-import {
-  marketIntelBuyerBreakdown,
-  marketIntelPriceBenchmarkAdj,
-  marketIntelRelationshipPts,
-  marketIntelRoutePts,
-  marketIntelSupplierBreakdown,
-} from "./market-intel/scoring";
-
-const CRAM_PRODUCT_BASE = 70;
-const CRAM_ROUTE_BASE = 70;
-
-export interface ScoreFactor {
-  label: string;
-  input: string;
-  points: number;
-  weightedContribution: number;
-}
-
-export interface DimensionBreakdown {
-  value: number;
-  raw: number;
-  headroom: number;
-  factors: ScoreFactor[];
-}
+import { lookupProductRisk } from "./product-risk-tables";
+import { lookupRouteRisk } from "./route-risk-tables";
+import { priceVsMarketPoints } from "./price-benchmarks";
 
 function clamp(value: number, min = 0, max = 100): number {
   return Math.min(max, Math.max(min, value));
 }
 
-function factor(
-  label: string,
-  input: string,
-  points: number,
-  overallWeight: number,
-): ScoreFactor {
-  return {
-    label,
-    input,
-    points,
-    weightedContribution: points * overallWeight,
-  };
+/**
+ * Dimension A (Counterparty) — synced to tm-cram-engine-spec-2026-06.md §4.A.
+ * Each sub-score = base 50 + variable point deltas, clamped 0–100.
+ *
+ * Buyer credit rating is sourced from Coface's own CRA/DRA grades
+ * (`deal.cofaceCompanyRiskGrade` / `deal.cofaceCountryRiskGrade`, extracted
+ * from an uploaded Coface limit notification by
+ * `lib/coface-analysis/analyze-coface-client.ts` in the Assess Deal wizard —
+ * see `creditRatingPoints()` below) — decision 2026-07-24, fixing a gap
+ * where these fields existed on `Deal` and were populated by the document
+ * pipeline but never read by this file. They're null (neutral, 0 pts) for
+ * every platform CSV deal today since none of the 84 real deals in the
+ * source dataset have a Coface document on file — the field is live and
+ * ready the moment one is uploaded/analyzed for any deal.
+ *
+ * Three of the ten spec variables (buyer capacity, supplier quality
+ * certifications, supplier capacity) still have **no data source at all**
+ * anywhere in the current TruMarket CSV exports or document pipeline — per
+ * decision 2026-07-24, these keep their spec weight but score at a
+ * **neutral midpoint (0 pts, neither bonus nor penalty)** until a real
+ * source exists, rather than being dropped/redistributed. `NEEDS_DATA_*`
+ * markers below are what to wire up once that data lands.
+ */
+
+const NEEDS_DATA_BUYER_CAPACITY_POINTS = 0; // spec: ≤50% of monthly vol +5 / >2× −10
+const NEEDS_DATA_SUPPLIER_CAPACITY_POINTS = 0; // spec: ≤30% of production +5 / >100% −15
+const NEEDS_DATA_QUALITY_CERT_POINTS = 0; // spec: multiple certs +15 / at least one +10
+
+/**
+ * Maps Coface's own CRA/DRA letter grades onto the spec's credit-rating
+ * point bucket (AAA–AA +15 / A–BBB +10 / BB–B +5 / ≤CCC −15). Coface's scale
+ * isn't literally S&P notches, so this is a best-effort bucket mapping, not
+ * a verified equivalence table — flag to AC if a different mapping is
+ * preferred. Company grade (debtor-specific) is preferred over country
+ * grade (macro) when both are present, since it's the more specific signal.
+ */
+const COFACE_GRADE_POINTS: Record<CofaceRiskGrade, number> = {
+  A1: 15,
+  A2: 15,
+  A3: 10,
+  A4: 10,
+  B: 5,
+  C: -15,
+  D: -15,
+};
+
+function creditRatingPoints(deal: Deal): number {
+  const grade = deal.cofaceCompanyRiskGrade ?? deal.cofaceCountryRiskGrade ?? null;
+  if (!grade) return 0; // neutral — no Coface document analyzed for this deal
+  return COFACE_GRADE_POINTS[grade] ?? 0;
 }
 
-function buildDimensionBreakdown(
-  raw: number,
-  factors: ScoreFactor[],
-): DimensionBreakdown {
-  return {
-    value: Math.round(clamp(raw)),
-    raw,
-    headroom: Math.max(0, 100 - raw),
-    factors,
-  };
+function yearsInBusinessPointsBuyer(years: number | null): number {
+  if (years === null) return 0; // neutral — no data
+  if (years >= 10) return 15;
+  if (years >= 5) return 10;
+  if (years >= 2) return 5;
+  return -5;
 }
 
-function formatYearsInput(years: number | null): string {
-  if (years === null) return "Not disclosed";
-  return `${years} year${years === 1 ? "" : "s"}`;
+function yearsInBusinessPointsSupplier(years: number | null): number {
+  if (years === null) return 0; // neutral — no data
+  if (years >= 10) return 15;
+  if (years >= 5) return 10;
+  if (years >= 2) return 0;
+  return -10;
 }
 
-function formatLicenseInput(valid: boolean | null): string {
-  if (valid === false) return "Invalid";
-  if (valid === true) return "Valid";
-  return "Valid (default)";
+/** Buyer: import license validity. Invalid is veto-grade (handled by the veto register, not here). */
+function licensePointsBuyer(valid: boolean | null): number {
+  if (valid === true) return 10;
+  if (valid === false) return -20;
+  return 0; // neutral — unconfirmed
 }
 
-function yearsInBusinessScore(years: number | null, max: number): number {
-  if (years === null) return 12;
-  if (years <= 5) return 10;
-  if (years <= 10) return 20;
-  if (years <= 20) return 30;
-  return max;
+/** Supplier: export license validity. Invalid is veto-grade (handled by the veto register, not here). */
+function licensePointsSupplier(valid: boolean | null): number {
+  if (valid === true) return 15;
+  if (valid === false) return -25;
+  return 0; // neutral — unconfirmed
 }
 
-function licenseScore(valid: boolean | null): number {
-  if (valid === false) return 0;
-  return 15;
-}
+function platformDealsCompletionPointsBuyer(
+  dealsCompleted: number,
+  completionRate: number | null,
+): number {
+  let dealsPts = 0;
+  if (dealsCompleted >= 10) dealsPts = 20;
+  else if (dealsCompleted >= 5) dealsPts = 10;
+  else if (dealsCompleted >= 1) dealsPts = 5;
 
-function buyerCompletionScore(rate: number | null): number {
-  if (rate === null) return 3;
-  return Math.min(25, rate * 0.25);
-}
-
-function supplierCompletionScore(rate: number | null): number {
-  if (rate === null) return 4;
-  return Math.min(30, rate * 0.3);
-}
-
-function buyerPaymentDelayScore(days: number | null | undefined): number {
-  if (days === null || days === undefined) return 4;
-  if (days === 0) return 20;
-  if (days <= 5) return 15;
-  if (days <= 15) return 8;
-  return 0;
-}
-
-function supplierQualityScore(rejection: number | null | undefined): number {
-  if (rejection === null || rejection === undefined) return 5;
-  if (rejection === 0) return 25;
-  if (rejection <= 3) return 18;
-  if (rejection <= 8) return 10;
-  return 0;
-}
-
-function formatCompletionInput(rate: number | null): string {
-  if (rate === null) return "Not disclosed";
-  return `${rate}%`;
-}
-
-function formatPaymentDelayInput(days: number | null | undefined): string {
-  if (days === null || days === undefined) return "Not disclosed";
-  if (days === 0) return "0 days (on time)";
-  return `${days} days avg delay`;
-}
-
-function formatRejectionInput(rate: number | null | undefined): string {
-  if (rate === null || rate === undefined) return "Not disclosed";
-  return `${rate}%`;
-}
-
-function computeBuyerScoreDetail(deal: Deal): DimensionBreakdown {
-  const { buyer } = deal;
-  const intel = marketIntelBuyerBreakdown(deal);
-
-  const years = intel?.yearsPts ?? yearsInBusinessScore(buyer.yearsInBusiness, 40);
-  const license = intel?.licensePts ?? licenseScore(buyer.licenseValid);
-  const completion =
-    intel?.activityPts ?? buyerCompletionScore(buyer.platformCompletionRate);
-  const paymentDelay =
-    intel?.paymentPts ?? buyerPaymentDelayScore(buyer.avgPaymentDelayDays);
-  const raw = years + license + completion + paymentDelay;
-  const weight = DIMENSION_WEIGHTS.counterparty * 0.6;
-
-  return buildDimensionBreakdown(raw, [
-    factor(
-      "Years in business",
-      intel?.yearsLabel ?? formatYearsInput(buyer.yearsInBusiness),
-      years,
-      weight,
-    ),
-    factor(
-      "Import/export license",
-      intel?.licenseLabel ?? formatLicenseInput(buyer.licenseValid),
-      license,
-      weight,
-    ),
-    factor(
-      "Platform completion rate",
-      intel?.activityLabel ?? formatCompletionInput(buyer.platformCompletionRate),
-      completion,
-      weight,
-    ),
-    factor(
-      "Avg payment delay",
-      intel?.paymentLabel ?? formatPaymentDelayInput(buyer.avgPaymentDelayDays),
-      paymentDelay,
-      weight,
-    ),
-  ]);
-}
-
-function computeSupplierScoreDetail(deal: Deal): DimensionBreakdown {
-  const { supplier } = deal;
-  const intel = marketIntelSupplierBreakdown(deal);
-
-  const years =
-    intel?.yearsPts ?? yearsInBusinessScore(supplier.yearsInBusiness, 30);
-  const license = intel?.licensePts ?? licenseScore(supplier.licenseValid);
-  const completion =
-    intel?.activityPts ?? supplierCompletionScore(supplier.platformCompletionRate);
-  const quality =
-    intel?.capacityPts ?? supplierQualityScore(supplier.qualityRejectionRatePct);
-  const raw = years + license + completion + quality;
-  const weight = DIMENSION_WEIGHTS.counterparty * 0.4;
-
-  return buildDimensionBreakdown(raw, [
-    factor(
-      "Years in business",
-      intel?.yearsLabel ?? formatYearsInput(supplier.yearsInBusiness),
-      years,
-      weight,
-    ),
-    factor(
-      "Export license",
-      intel?.licenseLabel ?? formatLicenseInput(supplier.licenseValid),
-      license,
-      weight,
-    ),
-    factor(
-      intel ? "Customs activity" : "Platform completion rate",
-      intel?.activityLabel ?? formatCompletionInput(supplier.platformCompletionRate),
-      completion,
-      weight,
-    ),
-    factor(
-      intel ? "Capacity vs deal size" : "Quality rejection rate",
-      intel?.capacityLabel ?? formatRejectionInput(supplier.qualityRejectionRatePct),
-      quality,
-      weight,
-    ),
-  ]);
-}
-
-function relationshipAdjustment(deal: Deal): number {
-  const intelRel = marketIntelRelationshipPts(deal);
-  if (intelRel) return intelRel.pts;
-
-  let adj = 0;
-  if (deal.priorDealsBetweenParties >= 4) adj += 10;
-  else if (deal.priorDealsBetweenParties >= 1) adj += 5;
-  if (deal.relationshipAgeMonths > 12) adj += 5;
-  return adj;
-}
-
-function relationshipInput(deal: Deal): string {
-  const intelRel = marketIntelRelationshipPts(deal);
-  if (intelRel) return intelRel.label;
-
-  const parts: string[] = [];
-  if (deal.priorDealsBetweenParties >= 4) {
-    parts.push(`${deal.priorDealsBetweenParties} prior deals`);
-  } else if (deal.priorDealsBetweenParties >= 1) {
-    parts.push(`${deal.priorDealsBetweenParties} prior deal(s)`);
-  } else {
-    parts.push("No prior deals");
+  let completionPts = 0; // neutral when unknown
+  if (completionRate !== null) {
+    if (completionRate >= 95) completionPts = 15;
+    else if (completionRate >= 80) completionPts = 10;
+    else if (completionRate >= 60) completionPts = 5;
+    else completionPts = -10;
   }
-  if (deal.relationshipAgeMonths > 12) {
-    parts.push(`${deal.relationshipAgeMonths} months relationship`);
-  }
-  return parts.join(" · ");
+  return dealsPts + completionPts;
 }
 
-function externalCreditBonus(deal: Deal): number {
-  const coface = deal.cofaceCoverage;
-  if (coface) {
-    const pct = coface.coveragePct ?? 0;
-    if (pct >= 80) return 12;
-    if (pct >= 50) return 8;
-    if (pct > 0) return 5;
-    if (coface.coverageAmountUSD !== null && coface.coverageAmountUSD > 0) {
-      const ratio =
-        deal.dealValueUSD > 0
-          ? coface.coverageAmountUSD / deal.dealValueUSD
-          : 0;
-      if (ratio >= 0.8) return 12;
-      if (ratio >= 0.5) return 8;
-      return 5;
-    }
-  }
-  return deal.externalCreditSignal || deal.buyer.creditRating ? 8 : 0;
-}
+function platformDealsOnTimePointsSupplier(
+  dealsCompleted: number,
+  onTimeRate: number | null,
+): number {
+  let dealsPts = 0;
+  if (dealsCompleted >= 10) dealsPts = 20;
+  else if (dealsCompleted >= 5) dealsPts = 10;
+  else if (dealsCompleted >= 1) dealsPts = 5;
 
-function externalCreditInput(deal: Deal): string {
-  const coface = deal.cofaceCoverage;
-  if (coface?.coveragePct !== null && coface?.coveragePct !== undefined) {
-    return `Coface ${coface.coveragePct}% coverage`;
+  let onTimePts = 0; // neutral when unknown
+  if (onTimeRate !== null) {
+    if (onTimeRate >= 90) onTimePts = 15;
+    else if (onTimeRate >= 75) onTimePts = 10;
+    else if (onTimeRate < 50) onTimePts = -15;
   }
-  if (coface?.coverageAmountUSD) {
-    return `Coface USD ${coface.coverageAmountUSD.toLocaleString()} limit`;
-  }
-  if (deal.externalCreditSignal || deal.buyer.creditRating) {
-    return "External credit signal on file";
-  }
-  return "None";
-}
-
-function computeCounterpartyScoreDetail(deal: Deal): DimensionBreakdown {
-  const buyerDetail = computeBuyerScoreDetail(deal);
-  const supplierDetail = computeSupplierScoreDetail(deal);
-  const relationship = relationshipAdjustment(deal);
-  const external = externalCreditBonus(deal);
-  const raw =
-    buyerDetail.raw * 0.6 + supplierDetail.raw * 0.4 + relationship + external;
-  const weight = DIMENSION_WEIGHTS.counterparty;
-
-  const factors: ScoreFactor[] = [
-    ...buyerDetail.factors.map((f) => ({
-      ...f,
-      label: `Buyer — ${f.label}`,
-      points: f.points * 0.6,
-      weightedContribution: f.points * 0.6 * weight,
-    })),
-    ...supplierDetail.factors.map((f) => ({
-      ...f,
-      label: `Supplier — ${f.label}`,
-      points: f.points * 0.4,
-      weightedContribution: f.points * 0.4 * weight,
-    })),
-    factor("Relationship history", relationshipInput(deal), relationship, weight),
-    factor(
-      "External credit (Coface)",
-      externalCreditInput(deal),
-      external,
-      weight,
-    ),
-  ];
-
-  return buildDimensionBreakdown(raw, factors);
+  return dealsPts + onTimePts;
 }
 
 export function computeBuyerScore(deal: Deal): number {
-  return computeBuyerScoreDetail(deal).value;
-}
-
-export function computeSupplierScore(deal: Deal): number {
-  return computeSupplierScoreDetail(deal).value;
-}
-
-export function computeCounterpartyScore(deal: Deal): number {
-  return computeCounterpartyScoreDetail(deal).value;
-}
-
-function isEuDestination(destination: string): boolean {
-  const d = destination.toLowerCase();
-  return (
-    d.includes("spain") ||
-    d.includes("portugal") ||
-    d.includes("netherlands") ||
-    d.includes("germany") ||
-    d.includes("rotterdam") ||
-    d.includes("valencia") ||
-    d.includes("lisbon")
+  const { buyer } = deal;
+  const yearsPts = yearsInBusinessPointsBuyer(buyer.yearsInBusiness);
+  const licensePts = licensePointsBuyer(buyer.licenseValid);
+  const dealsPts = platformDealsCompletionPointsBuyer(
+    buyer.platformDealsCompleted,
+    buyer.platformCompletionRate,
+  );
+  return clamp(
+    50 +
+      dealsPts +
+      yearsPts +
+      creditRatingPoints(deal) +
+      licensePts +
+      NEEDS_DATA_BUYER_CAPACITY_POINTS,
   );
 }
 
-function computeProductScoreDetail(deal: Deal): DimensionBreakdown {
-  const productEntry = lookupProductRisk(deal.product);
-  const perishabilityPts =
-    productEntry?.perishabilityPoints ?? getPerishabilityPoints(deal.product);
-  const coldChainAdj =
-    deal.coldChainRequired && deal.perishabilityClass !== "Non-Perishable"
-      ? -8
-      : 0;
-  const gradeAdj =
-    deal.qualityGrade === "Grade A / Class I"
-      ? 8
-      : deal.qualityGrade === "Grade B / Class II"
-        ? 0
-        : -10;
-  const eudrAdj =
-    isEudrRequired(deal.product) && isEuDestination(deal.destination) ? -12 : 0;
-  const raw =
-    CRAM_PRODUCT_BASE + perishabilityPts + coldChainAdj + gradeAdj + eudrAdj;
-  const weight = DIMENSION_WEIGHTS.product;
+export function computeSupplierScore(deal: Deal): number {
+  const { supplier } = deal;
+  const yearsPts = yearsInBusinessPointsSupplier(supplier.yearsInBusiness);
+  const licensePts = licensePointsSupplier(supplier.licenseValid);
+  const dealsPts = platformDealsOnTimePointsSupplier(
+    supplier.platformDealsCompleted,
+    supplier.platformCompletionRate,
+  );
+  return clamp(
+    50 +
+      dealsPts +
+      yearsPts +
+      NEEDS_DATA_QUALITY_CERT_POINTS +
+      licensePts +
+      NEEDS_DATA_SUPPLIER_CAPACITY_POINTS,
+  );
+}
 
-  return buildDimensionBreakdown(raw, [
-    factor("CRAM base", "70 (neutral product anchor)", CRAM_PRODUCT_BASE, weight),
-    factor(
-      "Perishability class",
-      productEntry?.perishabilityClass ?? deal.perishabilityClass,
-      perishabilityPts,
-      weight,
-    ),
-    factor(
-      "Cold chain",
-      deal.coldChainRequired ? "Required" : "Not required",
-      coldChainAdj,
-      weight,
-    ),
-    factor("Quality grade", deal.qualityGrade, gradeAdj, weight),
-    factor(
-      "EUDR compliance",
-      isEudrRequired(deal.product) && isEuDestination(deal.destination)
-        ? "EU destination — EUDR applies"
-        : "Not applicable",
-      eudrAdj,
-      weight,
-    ),
-  ]);
+/** Cross-applied relationship signal within Counterparty — spec §4.A. */
+function relationshipAdjustment(deal: Deal): number {
+  if (deal.priorDealsBetweenParties >= 10) return 10;
+  if (deal.priorDealsBetweenParties >= 5) return 7;
+  if (deal.priorDealsBetweenParties >= 1) return 5;
+  return -10;
+}
+
+/**
+ * Coface coverage note — **not a Counterparty (Dimension A) score input.**
+ * Per spec §1, Coface is Gate 1: a pass/fail pre-check evaluated before
+ * `compute_cram` runs at all, not a scored variable inside any of the four
+ * dimensions. Kept here only to drive the counterparty "why" narrative
+ * (`assessment.ts`) — it must not be added into `computeCounterpartyScore`.
+ */
+function externalCreditBonus(deal: Deal): number {
+  const coveragePct = deal.cofaceCoveragePct ?? 0;
+  if (coveragePct >= 80) return 12;
+  if (coveragePct >= 50) return 8;
+  if (coveragePct > 0) return 4;
+  return deal.externalCreditSignal || deal.buyer.creditRating ? 8 : 0;
+}
+
+export function computeCounterpartyScore(deal: Deal): number {
+  const buyer = computeBuyerScore(deal);
+  const supplier = computeSupplierScore(deal);
+  const relationship = relationshipAdjustment(deal);
+  return clamp(buyer * 0.5 + supplier * 0.5 + relationship);
+}
+
+/**
+ * Dimension B (Product) — synced to spec §4.B. base 70 · Perishability 30% /
+ * Price-vs-market 30% / Quality grade 30% / Standardisation & phyto 10%.
+ *
+ * The static product-risk-tables.ts score (when a table row matches) already
+ * encodes the perishability-class judgment for that product type — it stands
+ * in for the "Perishability class" + "Standardisation & phyto" variables
+ * (40% combined) as a pre-computed structural baseline, consistent with how
+ * the ERD's `Product.productRiskScore` field is a stored, AC-reviewed value
+ * rather than something recomputed live per deal (spec §3: reference tables
+ * are Git-sourced, not live-computed). Quality grade and price-vs-market are
+ * genuinely PER-DEAL (this shipment's grade/price, not the product's usual
+ * one), so they're layered on top additively rather than baked into the
+ * table lookup — this also fixes a bug where a matched table row returned
+ * `tableMatch.score` directly and ignored quality grade entirely.
+ */
+function productFallbackStructuralScore(deal: Deal): number {
+  const perishabilityPts: Record<Deal["perishabilityClass"], number> = {
+    "Non-Perishable": 18,
+    "Semi-Perishable": 9,
+    Perishable: -4,
+    "Ultra-Perishable": -12,
+  };
+  return 70 + perishabilityPts[deal.perishabilityClass];
+}
+
+function qualityGradePoints(qualityGrade: Deal["qualityGrade"]): number {
+  if (qualityGrade === "Grade A / Class I") return 18;
+  if (qualityGrade === "Grade B / Class II") return 5;
+  return 8; // Industrial
 }
 
 export function computeProductScore(deal: Deal): number {
-  return computeProductScoreDetail(deal).value;
+  const tableMatch = deal.productRiskProfile ?? lookupProductRisk(deal.product);
+  const structuralScore = tableMatch ? tableMatch.score : productFallbackStructuralScore(deal);
+  const priceAdj = priceVsMarketPoints(deal.product, deal.offerUnitPriceUSD);
+  const gradeAdj = qualityGradePoints(deal.qualityGrade);
+  return clamp(structuralScore + priceAdj + gradeAdj);
 }
 
+/** Incoterms — spec §4.C, 20% weight. */
 function incotermAdjustment(incoterm: string): number {
   const map: Record<string, number> = {
-    EXW: -5,
+    EXW: -8,
     FCA: 0,
     FAS: 0,
-    FOB: 5,
-    CFR: 3,
-    CIF: 8,
-    CPT: 3,
-    CIP: 8,
-    DAP: 10,
-    DPU: 10,
-    DDP: 10,
+    FOB: 8,
+    CFR: 5,
+    CPT: 5,
+    CIF: 12,
+    CIP: 12,
+    DAP: 15,
+    DPU: 15,
+    DDP: 15,
   };
   return map[incoterm.toUpperCase()] ?? 0;
 }
 
-export function resolveDealCorridorFlag(deal: Deal): CorridorRiskFlag {
-  if (deal.routeRiskResolution?.resolvedFlag) {
-    return deal.routeRiskResolution.resolvedFlag;
+/**
+ * Transit time × freight — spec §4.C, 25% weight. Differentiated by freight
+ * mode: air, ocean-reefer (perishable/cold-chain cargo), ocean-non-perishable.
+ * `deal.transportMode` is null for any deal with no source data — neutral 0
+ * in that case (can't tell which curve applies).
+ */
+function transitTimePoints(deal: Deal): number {
+  if (deal.transportMode === "air") {
+    if (deal.estimatedTransitDays <= 2) return 18;
+    if (deal.estimatedTransitDays <= 5) return 12;
+    return -10; // spec only tables ≤2d/2–5d for air; beyond that treated as the risk case
   }
-
-  const routeEntry = lookupRouteRisk(deal.origin, deal.destination);
-  const corridorDefault = routeEntry?.corridorDefaultRiskFlag ?? "Medium";
-
-  return resolveRouteRiskFlag(
-    deal.product,
-    deal.destination,
-    corridorDefault,
-    deal.estimatedTransitDays,
-    deal.perishabilityClass,
-  ).flag;
+  if (deal.transportMode === "sea") {
+    const isReefer = deal.perishabilityClass !== "Non-Perishable";
+    if (isReefer) {
+      if (deal.estimatedTransitDays <= 14) return 14;
+      if (deal.estimatedTransitDays <= 21) return 6;
+      return -10;
+    }
+    if (deal.estimatedTransitDays <= 30) return 12;
+    if (deal.estimatedTransitDays > 60) return -8;
+    return 0; // 31–60d non-perishable: no explicit spec bucket
+  }
+  return 0; // transportMode unknown
 }
 
-function computeRouteScoreDetail(deal: Deal): DimensionBreakdown {
-  const routeEntry = lookupRouteRisk(deal.origin, deal.destination);
-  const corridorFlag = resolveDealCorridorFlag(deal);
-  const transitAdj = cramTransitPoints(
-    deal.perishabilityClass,
-    deal.estimatedTransitDays,
-  );
-  const flagAdj = cramRouteFlagPoints(corridorFlag);
-  const intelRoute = marketIntelRoutePts(deal);
-  const intelRouteAdj = intelRoute?.pts ?? 0;
-  const transshipAdj = cramTransshipmentPoints(deal.numberOfTransshipments);
-  const customsClearance = routeEntry?.customsClearanceDaysMax ?? null;
-  const customsAdj = cramCustomsPoints(customsClearance);
-  const incotermAdj = incotermAdjustment(deal.incoterm);
-  const raw =
-    CRAM_ROUTE_BASE +
-    transitAdj +
-    flagAdj +
-    intelRouteAdj +
-    transshipAdj +
-    customsAdj +
-    incotermAdj;
-  const weight = DIMENSION_WEIGHTS.route;
-
-  const factors = [
-    factor("CRAM base", "70 (neutral route anchor)", CRAM_ROUTE_BASE, weight),
-    factor(
-      "Transit vs shelf life",
-      `${deal.estimatedTransitDays} days (${deal.perishabilityClass})`,
-      transitAdj,
-      weight,
-    ),
-    factor("Corridor risk flag", corridorFlag, flagAdj, weight),
-  ];
-
-  if (intelRoute) {
-    factors.push(
-      factor(
-        "Customs route intel",
-        intelRoute.label,
-        intelRouteAdj,
-        weight,
-      ),
-    );
+/**
+ * Transshipments × freight — spec §4.C, 20% weight. ≥2 air transshipments is
+ * also a spec §6 veto (see checkVetoRegister) — that's evaluated separately
+ * and independently sinks the deal regardless of this point value.
+ */
+function transshipmentPoints(deal: Deal): number {
+  if (deal.transportMode === "air") {
+    if (deal.numberOfTransshipments === 0) return 15;
+    if (deal.numberOfTransshipments === 1) return -10;
+    return -20;
   }
-
-  factors.push(
-    factor(
-      "Transshipments",
-      String(deal.numberOfTransshipments),
-      transshipAdj,
-      weight,
-    ),
-    factor(
-      "Customs clearance",
-      customsClearance === null
-        ? "Not disclosed"
-        : `≤${customsClearance} days`,
-      customsAdj,
-      weight,
-    ),
-    factor("Incoterm", deal.incoterm || "Not set", incotermAdj, weight),
-  );
-
-  return buildDimensionBreakdown(raw, factors);
+  // sea, or unknown mode — spec's ocean table is the more conservative default
+  if (deal.numberOfTransshipments === 0) return 15;
+  if (deal.numberOfTransshipments === 1) return 3;
+  return -10;
 }
+
+function routeFlagPoints(routeRiskFlag: Deal["routeRiskFlag"]): number {
+  if (routeRiskFlag === "Low") return 12;
+  if (routeRiskFlag === "Medium") return 3;
+  return -15;
+}
+
+/**
+ * Structural route score (transit time + transshipments + route-risk flag) —
+ * spec base 70. Matches the ERD's `Route(T2)` design: a per-corridor
+ * pre-computed value (`bestRouteRiskFlag`/`riskOverrideValue`), so when a
+ * route-risk-tables.ts row matches, its static `score` is used directly
+ * instead of recomputing this — same reasoning as the Product dimension.
+ */
+function routeFallbackStructuralScore(deal: Deal): number {
+  return 70 + transitTimePoints(deal) + transshipmentPoints(deal) + routeFlagPoints(deal.routeRiskFlag);
+}
+
+// spec §4.C "Customs clearance time" (5%wt, ≤3d +5 / >7d −8) has no data source —
+// `customsNarrative` is unparsed free text, not a structured clearance-time number.
+// Not implemented; stays out of computeRouteScore entirely rather than guessed at.
 
 export function computeRouteScore(deal: Deal): number {
-  return computeRouteScoreDetail(deal).value;
+  const tableMatch =
+    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination);
+  const structuralScore = tableMatch ? tableMatch.score : routeFallbackStructuralScore(deal);
+
+  // Incoterms (20%wt) and cold-chain requirement (15%wt) are genuinely
+  // per-deal, not baked into either the static table score or the fallback —
+  // fixes a bug where a matched table row skipped incoterm entirely.
+  const incotermAdj = incotermAdjustment(deal.incoterm);
+  // spec: required+documented −5 / required+incomplete −12 / not required 0.
+  // No source distinguishes documented vs incomplete, so "documented" (the
+  // less severe, spec-real value) is assumed when required — same optimistic-
+  // default pattern as license validity / payment delay elsewhere.
+  const coldChainAdj = deal.coldChainRequired ? -5 : 0;
+
+  return clamp(structuralScore + incotermAdj + coldChainAdj);
 }
 
+/**
+ * Payment terms — spec §4.D, 25% weight. Cash-in-advance +25 / LC +20 /
+ * CAD (cash against documents / BL) +15 / 30d +10 / 60d 0 / 90d −10 / 120d+ −18.
+ * Previously ran at roughly half these magnitudes and had no ≥120d bucket
+ * distinct from 90d — resynced 2026-07-24.
+ */
 export function paymentTermsAdjustment(paymentTerms: string): number {
   const t = paymentTerms.toLowerCase();
-  if (t.includes("cash in advance") || t.includes("prepaid")) return 15;
-  if (t.includes("letter of credit") || t.includes(" l/c")) return 12;
+  if (t.includes("cash in advance") || t.includes("prepaid")) return 25;
+  if (t.includes("letter of credit") || t.includes(" l/c")) return 20;
   if (t.includes("against") && (t.includes("bl") || t.includes("doc")))
-    return 8;
-  if (/\b30\s*day/.test(t)) return 5;
-  if (/\b90\s*day/.test(t) || t === "90 days") return -12;
-  if (/\b120/.test(t)) return -20;
+    return 15;
+  if (/\b30\s*day/.test(t)) return 10;
+  if (/\b120/.test(t)) return -18;
+  if (/\b90\s*day/.test(t) || t === "90 days") return -10;
   if (/\b60\s*day/.test(t)) return 0;
   return 0;
 }
 
-function computeStructureScoreDetail(deal: Deal): DimensionBreakdown {
-  const result = computeTransactionStructureScore(deal);
-  const weight = DIMENSION_WEIGHTS.structure;
-
-  if (!result.complete) {
-    return buildDimensionBreakdown(50, [
-      factor(
-        "Transaction structure",
-        `Incomplete — confirm ${result.missingFields.length} field(s): ${result.missingFields.join(", ")}`,
-        50,
-        weight,
-      ),
-    ]);
-  }
-
-  const subAContribution = result.subA * 0.5;
-  const subDContribution = result.subD * 0.5;
-  const priceIntel = marketIntelPriceBenchmarkAdj(deal);
-  const priceAdj = priceIntel?.pts ?? 0;
-  const raw = Math.max(0, Math.min(100, result.composite + priceAdj));
-  const ratioLabel =
-    result.cashFlow.upsideDownsideRatio !== null
-      ? `ratio ${result.cashFlow.upsideDownsideRatio.toFixed(2)}`
-      : "no downside at 100% non-payment";
-
-  const factors = [
-    factor(
-      "Sub-A · Payment exposure",
-      `${result.exposureDuration}d exposure, advance ${result.advancePts}%, ${deal.contractType}`,
-      subAContribution,
-      weight,
-    ),
-    factor(
-      "Sub-D · Downside resilience",
-      ratioLabel,
-      subDContribution,
-      weight,
-    ),
-  ];
-
-  if (priceIntel) {
-    factors.push(
-      factor("Price vs market (customs)", priceIntel.label, priceAdj, weight),
-    );
-  }
-
-  factors.push(
-    factor(
-      "Structure tier",
-      `${result.tier} — ${result.protocol}`,
-      0,
-      weight,
-    ),
-  );
-
-  return buildDimensionBreakdown(raw, factors);
+/**
+ * Relationship history — spec §4.D, 25% weight: ≥10 +15 / ≥5 +12 / ≥1 +8 / 0 −12.
+ * Distinct from Dimension A's cross-applied relationship signal (different
+ * point values, spec explicitly calls for both — see computeCounterpartyScore).
+ * Previously missing the ≥10 tier entirely and used unrelated point values.
+ */
+function structureRelationshipAdjustment(deal: Deal): number {
+  if (deal.priorDealsBetweenParties >= 10) return 15;
+  if (deal.priorDealsBetweenParties >= 5) return 12;
+  if (deal.priorDealsBetweenParties >= 1) return 8;
+  return -12;
 }
 
+/** Advance payment % — spec §4.D, 10% weight: ≥50% +10 / ≥25% +7 / ≥10% +5. */
+function advancePaymentPoints(advancePaymentPct: number): number {
+  if (advancePaymentPct >= 50) return 10;
+  if (advancePaymentPct >= 25) return 7;
+  if (advancePaymentPct >= 10) return 5;
+  return 0;
+}
+
+/**
+ * Collateral structure — spec §4.D, 35% weight: LC +25 / Bank Guarantee +20 /
+ * Warehouse Receipt +15 / Inventory Pledge +10 / Personal Guarantee +5 /
+ * None −5, +5 more if collateral value fully covers the deal value.
+ */
+function collateralPoints(deal: Deal): number {
+  const base: Record<Deal["collateralType"], number> = {
+    "Letter of Credit": 25,
+    "Bank Guarantee": 20,
+    "Warehouse Receipt": 15,
+    "Inventory Pledge": 10,
+    "Personal Guarantee": 5,
+    None: -5,
+  };
+  let pts = base[deal.collateralType];
+  if (
+    deal.collateralType !== "None" &&
+    deal.dealValueUSD > 0 &&
+    deal.collateralValueUSD >= deal.dealValueUSD
+  ) {
+    pts += 5;
+  }
+  return pts;
+}
+
+/**
+ * Insurance — spec §4.D, 5% weight, **mandatory floor**: All-Risk +5 /
+ * Comprehensive +3 / Basic +1 / None → does not execute (veto, see
+ * checkVetoRegister — not a negative point value here, spec treats it as a
+ * hard stop rather than a penalty).
+ */
+function insurancePoints(insuranceCoverage: Deal["insuranceCoverage"]): number {
+  if (insuranceCoverage === "All Risk") return 5;
+  if (insuranceCoverage === "Comprehensive") return 3;
+  if (insuranceCoverage === "Basic") return 1;
+  return 0;
+}
+
+/**
+ * Dimension D (Transaction Structure) — resynced to spec §4.D 2026-07-24.
+ * base 60. Previously: advance-payment-% alone drove a 20–90 base swing (not
+ * a spec concept at all — advance-payment is only a 10%-weight adjustment),
+ * collateral/insurance/payment-terms points ran at roughly half of spec's
+ * magnitudes, "None" collateral/insurance were neutral instead of spec's
+ * penalty/veto, and the relationship sub-formula didn't match §4.D at all.
+ */
 export function computeStructureScore(deal: Deal): number {
-  return computeStructureScoreDetail(deal).value;
+  return clamp(
+    60 +
+      collateralPoints(deal) +
+      paymentTermsAdjustment(deal.paymentTerms) +
+      structureRelationshipAdjustment(deal) +
+      advancePaymentPoints(deal.advancePaymentPct) +
+      insurancePoints(deal.insuranceCoverage),
+  );
 }
 
-export function getTier(overallRaw: number): RiskTier {
-  if (overallRaw >= 75) return "Low Risk";
-  if (overallRaw >= 60) return "Medium-Low Risk";
-  if (overallRaw >= 45) return "Medium-High Risk";
+export function getTier(overall: number): RiskTier {
+  if (overall >= 75) return "Low Risk";
+  if (overall >= 60) return "Medium-Low Risk";
+  if (overall >= 45) return "Medium-High Risk";
   return "High Risk";
+}
+
+/**
+ * Single-veto register — spec §6, evaluated first, hard stops regardless of
+ * composite score. Not implemented before 2026-07-24 (mentioned only in code
+ * comments) — `getTier` could never actually return a veto outcome.
+ *
+ * Two of the spec's four conditions have no data source and are not checked:
+ * "Ultra-perishable + cold-chain execution deficient" needs a per-shipment
+ * "protocol documented vs incomplete" signal that doesn't exist anywhere in
+ * the CSV/document pipeline (same gap noted on the Route dimension's own
+ * cold-chain variable). Fabricating a check would be worse than omitting it.
+ */
+export interface VetoResult {
+  vetoed: boolean;
+  reasons: string[];
+}
+
+export function checkVetoRegister(deal: Deal): VetoResult {
+  const reasons: string[] = [];
+  if (deal.buyer.licenseValid === false) {
+    reasons.push("Buyer import license invalid");
+  }
+  if (deal.supplier.licenseValid === false) {
+    reasons.push("Supplier export license invalid");
+  }
+  if (deal.insuranceCoverage === "None") {
+    reasons.push("No cargo insurance on file (mandatory baseline)");
+  }
+  if (deal.transportMode === "air" && deal.numberOfTransshipments >= 2) {
+    reasons.push(`≥2 transshipments by air (${deal.numberOfTransshipments})`);
+  }
+  return { vetoed: reasons.length > 0, reasons };
 }
 
 export interface ScoreBreakdown {
   buyer: number;
   supplier: number;
-  buyerDetail: DimensionBreakdown;
-  supplierDetail: DimensionBreakdown;
-  counterparty: DimensionBreakdown;
-  product: DimensionBreakdown;
-  route: DimensionBreakdown;
-  structure: DimensionBreakdown;
+  counterparty: number;
+  product: number;
+  route: number;
+  structure: number;
   overall: number;
-  overallRaw: number;
   tier: RiskTier;
+  vetoed: boolean;
+  vetoReasons: string[];
   externalCreditBonus: number;
   paymentTermsAdj: number;
-  corridorFlag: CorridorRiskFlag;
-  perishabilityPoints: number;
-  transitPoints: number;
 }
 
 export function computeOverallScore(deal: Deal): ScoreBreakdown {
-  const buyerDetail = computeBuyerScoreDetail(deal);
-  const supplierDetail = computeSupplierScoreDetail(deal);
-  const counterparty = computeCounterpartyScoreDetail(deal);
-  const product = computeProductScoreDetail(deal);
-  const route = computeRouteScoreDetail(deal);
-  const structure = computeStructureScoreDetail(deal);
-  const corridorFlag = resolveDealCorridorFlag(deal);
-  const productEntry = lookupProductRisk(deal.product);
+  const buyer = Math.round(computeBuyerScore(deal));
+  const supplier = Math.round(computeSupplierScore(deal));
+  const counterparty = Math.round(computeCounterpartyScore(deal));
+  const product = Math.round(computeProductScore(deal));
+  const route = Math.round(computeRouteScore(deal));
+  const structure = Math.round(computeStructureScore(deal));
 
-  const overallRaw =
-    counterparty.raw * DIMENSION_WEIGHTS.counterparty +
-    product.raw * DIMENSION_WEIGHTS.product +
-    route.raw * DIMENSION_WEIGHTS.route +
-    structure.raw * DIMENSION_WEIGHTS.structure;
+  const overall = Math.round(
+    counterparty * DIMENSION_WEIGHTS.counterparty +
+      product * DIMENSION_WEIGHTS.product +
+      route * DIMENSION_WEIGHTS.route +
+      structure * DIMENSION_WEIGHTS.structure,
+  );
+
+  const veto = checkVetoRegister(deal);
 
   return {
-    buyer: buyerDetail.value,
-    supplier: supplierDetail.value,
-    buyerDetail,
-    supplierDetail,
+    buyer,
+    supplier,
     counterparty,
     product,
     route,
     structure,
-    overall: Math.round(overallRaw),
-    overallRaw,
-    tier: getTier(overallRaw),
+    overall,
+    tier: veto.vetoed ? "Veto" : getTier(overall),
+    vetoed: veto.vetoed,
+    vetoReasons: veto.reasons,
     externalCreditBonus: externalCreditBonus(deal),
     paymentTermsAdj: paymentTermsAdjustment(deal.paymentTerms),
-    corridorFlag,
-    perishabilityPoints:
-      productEntry?.perishabilityPoints ??
-      getPerishabilityPoints(deal.product),
-    transitPoints: cramTransitPoints(
-      deal.perishabilityClass,
-      deal.estimatedTransitDays,
-    ),
   };
-}
-
-export function getNormalizedRouteRiskFlag(
-  deal: Deal,
-): "Low" | "Medium" | "High" {
-  return normalizeRouteRiskFlag(resolveDealCorridorFlag(deal));
-}
-
-if (import.meta.env?.DEV) {
-  (globalThis as { __printScoreBreakdown?: (deal: Deal) => void }).__printScoreBreakdown =
-    (deal: Deal) => {
-      console.log(JSON.stringify(computeOverallScore(deal), null, 2));
-    };
 }

@@ -1,4 +1,4 @@
-import { ArrowRight, Cherry, Citrus, Grape, Plus } from "lucide-react";
+import { ArrowRight, Cherry, Citrus, FileUp, Grape } from "lucide-react";
 import type { Deal } from "../types";
 import { formatUSDDetailed } from "../lib/assessment";
 
@@ -20,7 +20,11 @@ function routeLabel(origin: string, destination: string): string {
   return `${from} → ${to}`;
 }
 
-export function DealSelector({ deals, onSelect, onCreateNew }: DealSelectorProps) {
+export function DealSelector({
+  deals,
+  onSelect,
+  onCreateNew,
+}: DealSelectorProps) {
   return (
     <div className="space-y-4">
       <div className="mb-8 text-center">
@@ -36,24 +40,25 @@ export function DealSelector({ deals, onSelect, onCreateNew }: DealSelectorProps
       <button
         type="button"
         onClick={onCreateNew}
-        className="group flex w-full items-center gap-4 rounded-xl border-2 border-dashed border-tm-primary/40 bg-tm-primary/5 p-5 text-left transition-all duration-200 hover:border-tm-primary hover:bg-tm-primary/10"
+        className="group flex w-full items-center gap-4 rounded-xl border border-dashed border-tm-primary/35 bg-tm-surface p-5 text-left shadow-tm-sm transition-all duration-200 hover:border-tm-primary hover:shadow-tm-md"
       >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-tm-primary text-white">
-          <Plus className="h-6 w-6" />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-tm-primary/10 text-tm-primary">
+          <FileUp className="h-6 w-6" />
         </div>
         <div className="min-w-0 flex-1">
-          <span className="font-semibold text-tm-black">
-            New deal assessment
-          </span>
+          <div className="font-semibold text-tm-black">
+            Create deal assessment
+          </div>
           <p className="mt-0.5 text-sm text-tm-text-light">
-            Upload deal file and enter Coface coverage
+            Upload trade documents, select product and route from the risk
+            tables, and add manual or document-based Coface cover.
           </p>
         </div>
-        <ArrowRight className="h-5 w-5 shrink-0 text-tm-primary transition-transform group-hover:translate-x-0.5" />
+        <ArrowRight className="h-5 w-5 shrink-0 text-tm-text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-tm-primary" />
       </button>
 
-      <p className="text-center text-xs uppercase tracking-wide text-tm-text-muted">
-        or choose a sample deal
+      <p className="pt-2 text-center text-[11px] font-semibold uppercase tracking-wide text-tm-text-muted">
+        Or choose a sample deal
       </p>
 
       {deals.map((deal) => {
