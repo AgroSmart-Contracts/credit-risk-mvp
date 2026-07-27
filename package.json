@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate": "tsx scripts/validate-cram-coverage.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@vercel/node": "^5.8.22",
