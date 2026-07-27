@@ -74,10 +74,12 @@ Legend: ✅ stored or directly mapped · ⚙️ derivable with a query (not impl
 
 | CRAM dimension | Weight | Primary deal fields | MongoDB | Trade / drawback PDFs |
 |---|---|---|---|---|
-| **A — Counterparty** | 35% | `buyer.*`, `supplier.*`, relationship, Coface | **Partial** — names, countries, taxId, role; history ⚙️ derivable | **Partial** — names + RUC; Coface PDF |
-| **B — Product** | 20% | `product`, `qualityGrade` → Table 1 | **Partial** — variety, quality, description | **Partial** — product, variety, grade |
-| **C — Route** | 15% | `origin`, `destination`, `incoterm` → Tables 2–3 | **Partial** — origin, destination, ports *(no incoterm column)* | **Partial** — origin, destination, incoterm |
-| **D — Transaction structure** | 30% | totals, payment terms, cash-flow schedule | **Partial** — sale total only | **Partial** — sale + purchase totals, payment text |
+| **A — Counterparty** | 40% | `buyer.*`, `supplier.*`, relationship, Coface | **Partial** — names, countries, taxId, role; history ⚙️ derivable | **Partial** — names + RUC; Coface PDF |
+| **B — Product** | 25% | `product`, `qualityGrade` → Table 1 | **Partial** — variety, quality, description | **Partial** — product, variety, grade |
+| **C — Route** | 20% | `origin`, `destination`, `incoterm` → Tables 2–3 | **Partial** — origin, destination, ports *(no incoterm column)* | **Partial** — origin, destination, incoterm |
+| **D — Transaction structure** | 15% | totals, payment terms, cash-flow schedule | **Partial** — sale total only | **Partial** — sale + purchase totals, payment text |
+
+*(Weights corrected 2026-07-27 to match `scoring-constants.ts` — this table previously showed the pre-2026-07-24 weights.)*
 
 ---
 

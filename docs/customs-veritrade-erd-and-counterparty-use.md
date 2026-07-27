@@ -95,13 +95,15 @@ Mapped in `src/lib/market-intel/scoring.ts` toward buyer/supplier-style points (
 
 ### What the main MVP scorecard does today
 
-From `docs/risk-calculation.md` / `src/lib/scoring.ts`:
+From `src/lib/scoring.ts` (weights corrected 2026-07-24, this section corrected 2026-07-27 — see `cram-defaults-and-formula-2026-07.md`):
 
 ```
-counterparty = buyer×0.6 + supplier×0.4 + relationship + Coface/external bonus
+counterparty = buyer×0.5 + supplier×0.5 + relationship
 ```
 
-Buyer/supplier points use **manual / deal fields**: years, license, platform completion, payment delay, quality rejection — **not** raw customs columns. Coface coverage is a separate external bonus.
+Coface coverage % is **not** part of this formula — it's a spec §1 Gate 1 pass/fail pre-check, kept only for narrative "why" text (`externalCreditBonus()` in `scoring.ts`).
+
+Buyer/supplier points use **manual / deal fields**: years, license, platform completion, credit rating — **not** raw customs columns.
 
 ### Practical status today
 
@@ -125,6 +127,6 @@ For counterparty scoring, prioritize storing (or marting) **RUC + date + kg_net 
 
 - [`cram-field-extraction-reference.md`](./cram-field-extraction-reference.md) — `marketIntel.*` / RUC gate
 - [`cram-trumarket-coverage-and-gaps.md`](./cram-trumarket-coverage-and-gaps.md) — coverage matrix
-- [`risk-calculation.md`](./risk-calculation.md) — counterparty blend formula
+- [`tm-cram-engine-spec-2026-06.md`](./tm-cram-engine-spec-2026-06.md) — counterparty blend formula (spec §4.A)
 - [`market-intel-peru-2025-2026-07-10/README.md`](./market-intel-peru-2025-2026-07-10/README.md) — Dim A/B/C/D.3 feeds
 - [`trumarket/docs/trumarket-database-erd.drawio`](../../trumarket/docs/trumarket-database-erd.drawio) — `customs_export_records` target shape

@@ -131,7 +131,7 @@ Separate from trade PDF merge. Full mapping: [`cram-field-extraction-reference.m
 | Response | Company risk assessment (**DRA**, A1–D) | `cofaceCompanyRiskGrade` |
 | Response | Coverage approved amount | `cofaceCoverageAmountUSD` |
 
-Derived: `cofaceCoveragePct` from approved amount ÷ `dealValueUSD`. Grades are stored for review; numeric counterparty score uses coverage % bands only (see `risk-calculation.md`).
+Derived: `cofaceCoveragePct` from approved amount ÷ `dealValueUSD`. Coface is **not** a counterparty-score input at all (corrected 2026-07-27) — it's spec §1 Gate 1, a pass/fail pre-check evaluated before the composite runs, kept only to drive narrative "why" text (`externalCreditBonus()` in `src/lib/scoring.ts`). `cofaceCompanyRiskGrade`/`cofaceCountryRiskGrade` *do* feed `computeBuyerScore()` via `creditRatingPoints()` — see `cram-defaults-and-formula-2026-07.md`.
 
 ---
 
