@@ -22,10 +22,12 @@ export interface DataCorrections {
   yearsInBusinessByCompany: Record<string, number>;
   /** Keyed by mongoId (stable across rebuilds, unlike the synthetic `id`). */
   insuranceCoverageByDeal: Record<string, Deal["insuranceCoverage"]>;
+  /** Keyed by company-master.json's `name` field. Free-text — not format-validated here, since a non-Peru company's real tax ID legitimately isn't an 11-digit RUC; extractValidRuc() is what decides whether a given value actually unlocks market-intel. */
+  taxIdByCompany: Record<string, string>;
 }
 
 function emptyCorrections(): DataCorrections {
-  return { yearsInBusinessByCompany: {}, insuranceCoverageByDeal: {} };
+  return { yearsInBusinessByCompany: {}, insuranceCoverageByDeal: {}, taxIdByCompany: {} };
 }
 
 function load(): DataCorrections {
@@ -82,6 +84,13 @@ export function useDataCorrections() {
       else next.insuranceCoverageByDeal[mongoId] = coverage;
       setState(next);
     },
+    setTaxId(companyName: string, taxId: string | null): void {
+      const next = { ...state, taxIdByCompany: { ...state.taxIdByCompany } };
+      const trimmed = taxId?.trim();
+      if (!trimmed) delete next.taxIdByCompany[companyName];
+      else next.taxIdByCompany[companyName] = trimmed;
+      setState(next);
+    },
     clearAll(): void {
       setState(emptyCorrections());
     },
@@ -107,6 +116,20 @@ function downloadCsv(filename: string, header: string, rows: Array<Array<string 
 export function downloadYibCorrectionsCsv(corrections: DataCorrections): void {
   const rows = Object.entries(corrections.yearsInBusinessByCompany).map(([name, years]) => [name, years]);
   downloadCsv("yib-corrections.csv", "name,yearsInBusiness", rows);
+}
+
+/** One row per company with ANY correction (YIB and/or taxId) — merges the two so an admin only has to download once. Blank cell = no correction entered for that field. */
+export function downloadCompanyCorrectionsCsv(corrections: DataCorrections): void {
+  const names = new Set([
+    ...Object.keys(corrections.yearsInBusinessByCompany),
+    ...Object.keys(corrections.taxIdByCompany),
+  ]);
+  const rows = [...names].map((name) => [
+    name,
+    corrections.yearsInBusinessByCompany[name] ?? "",
+    corrections.taxIdByCompany[name] ?? "",
+  ]);
+  downloadCsv("company-corrections.csv", "name,yearsInBusiness,taxId", rows);
 }
 
 export function downloadInsuranceCorrectionsCsv(
