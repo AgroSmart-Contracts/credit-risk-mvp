@@ -12,6 +12,8 @@ import { platformDealsBlocked, platformDealsSynthetic } from "../data/platform-d
 import { platformDealToDeal } from "../lib/platform-deal-mapper";
 import { buildRiskAssessment, formatUSD } from "../lib/assessment";
 import { getTierColors } from "../lib/risk-colors";
+import { useDataCorrections, downloadYibCorrectionsCsv } from "../lib/data-corrections";
+import { CargoInsuranceSection } from "./CargoInsuranceSection";
 
 interface DealMissingFieldsTabProps {
   onViewDeal?: (dealId: string) => void;
@@ -22,34 +24,12 @@ export function DealMissingFieldsTab({
 }: DealMissingFieldsTabProps) {
   const [query, setQuery] = useState("");
   /** Admin-entered years-in-business, keyed by company name — shared across every
-   * deal row for that company (YIB is per-company, not per-deal). Session-only:
-   * nothing here persists past a page refresh — see the CSV download below to
-   * carry it into company-master.csv for real. */
-  const [yibEdits, setYibEdits] = useState<Map<string, string>>(new Map());
-
-  const setYibEdit = (companyName: string, value: string) => {
-    setYibEdits((prev) => {
-      const next = new Map(prev);
-      if (value.trim() === "") next.delete(companyName);
-      else next.set(companyName, value);
-      return next;
-    });
-  };
-
-  const downloadYibCorrections = () => {
-    const header = "name,yearsInBusiness\n";
-    const body = [...yibEdits.entries()]
-      .filter(([, v]) => v.trim() !== "" && Number.isFinite(Number(v)))
-      .map(([name, v]) => `"${name.replace(/"/g, '""')}",${Number(v)}`)
-      .join("\n");
-    const blob = new Blob([header + body + "\n"], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "yib-corrections.csv";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+   * deal row for that company (YIB is per-company, not per-deal). Persisted to
+   * localStorage (survives a refresh) via the shared corrections store — see
+   * lib/data-corrections.ts — but still preview-only: the officially displayed
+   * scores elsewhere don't read this until it's merged into company-master.csv
+   * and rebuilt. */
+  const { corrections, setYearsInBusiness } = useDataCorrections();
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -177,6 +157,8 @@ export function DealMissingFieldsTab({
         />
       </div>
 
+      <CargoInsuranceSection query={query} />
+
       <div className="space-y-3">
         {rows.map(({ deal, assessment }) => (
           <article
@@ -253,14 +235,15 @@ export function DealMissingFieldsTab({
                 enter it once per company.
               </p>
             </div>
-            {yibEdits.size > 0 && (
+            {Object.keys(corrections.yearsInBusinessByCompany).length > 0 && (
               <button
                 type="button"
-                onClick={downloadYibCorrections}
+                onClick={() => downloadYibCorrectionsCsv(corrections)}
                 className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-tm-primary bg-tm-primary/10 px-3 py-1.5 text-xs font-medium text-tm-primary-dark hover:bg-tm-primary/20"
               >
                 <Download className="h-3.5 w-3.5" />
-                Download {yibEdits.size} correction{yibEdits.size === 1 ? "" : "s"} (CSV)
+                Download {Object.keys(corrections.yearsInBusinessByCompany).length} correction
+                {Object.keys(corrections.yearsInBusinessByCompany).length === 1 ? "" : "s"} (CSV)
               </button>
             )}
           </div>
@@ -268,18 +251,10 @@ export function DealMissingFieldsTab({
             const buyerMissing = deal.buyer.yearsInBusiness === null;
             const supplierMissing = deal.supplier.yearsInBusiness === null;
 
-            const buyerEdit = yibEdits.get(deal.buyer.name) ?? "";
-            const supplierEdit = yibEdits.get(deal.supplier.name) ?? "";
-            const buyerEffective = buyerMissing
-              ? buyerEdit.trim() !== "" && Number.isFinite(Number(buyerEdit))
-                ? Number(buyerEdit)
-                : null
-              : deal.buyer.yearsInBusiness;
-            const supplierEffective = supplierMissing
-              ? supplierEdit.trim() !== "" && Number.isFinite(Number(supplierEdit))
-                ? Number(supplierEdit)
-                : null
-              : deal.supplier.yearsInBusiness;
+            const buyerEdit = corrections.yearsInBusinessByCompany[deal.buyer.name];
+            const supplierEdit = corrections.yearsInBusinessByCompany[deal.supplier.name];
+            const buyerEffective = buyerMissing ? buyerEdit ?? null : deal.buyer.yearsInBusiness;
+            const supplierEffective = supplierMissing ? supplierEdit ?? null : deal.supplier.yearsInBusiness;
 
             const complete = buyerEffective !== null && supplierEffective !== null;
             const preview = complete
@@ -347,8 +322,14 @@ export function DealMissingFieldsTab({
                             min={0}
                             step={1}
                             placeholder="e.g. 5"
-                            value={buyerEdit}
-                            onChange={(e) => setYibEdit(deal.buyer.name, e.target.value)}
+                            value={buyerEdit ?? ""}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setYearsInBusiness(
+                                deal.buyer.name,
+                                v.trim() !== "" && Number.isFinite(Number(v)) ? Number(v) : null,
+                              );
+                            }}
                             className="w-28 rounded-lg border border-tm-border bg-tm-surface px-2 py-1 text-sm outline-none focus:border-tm-primary"
                           />
                         </label>
@@ -363,8 +344,14 @@ export function DealMissingFieldsTab({
                             min={0}
                             step={1}
                             placeholder="e.g. 5"
-                            value={supplierEdit}
-                            onChange={(e) => setYibEdit(deal.supplier.name, e.target.value)}
+                            value={supplierEdit ?? ""}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setYearsInBusiness(
+                                deal.supplier.name,
+                                v.trim() !== "" && Number.isFinite(Number(v)) ? Number(v) : null,
+                              );
+                            }}
                             className="w-28 rounded-lg border border-tm-border bg-tm-surface px-2 py-1 text-sm outline-none focus:border-tm-primary"
                           />
                         </label>

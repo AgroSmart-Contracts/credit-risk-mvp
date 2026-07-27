@@ -141,33 +141,82 @@ function monthsBetween(a: Date, b: Date): number {
 
 // --- Defaults-applied CSV export ---------------------------------------------
 
-/** Every value here is what actually reaches the scoring engine, defaults included — nothing hidden at runtime. */
+/**
+ * Every CRAM-scored field, per deal — real value where one exists, the exact
+ * default the scoring engine substitutes where it doesn't, and a `*Source`
+ * column next to any field with more than one possible provenance so nothing
+ * is hidden at runtime. Expanded 2026-07-27 from an 18-column partial export
+ * (Dimension A/some-of-C/D only) to cover all four dimensions + the veto
+ * register, once the insurance-coverage veto finding made clear that a
+ * narrower export could hide the single biggest gap in the whole pipeline.
+ * "source" values used throughout: csv | default | sunat | market-intel |
+ * table-confirmed | table-provisional | no-data-source.
+ */
 const DEFAULTS_CSV_HEADER = [
   "dealRef",
   "mongoId",
   "product",
   "origin",
   "destination",
+  "dealValueUSD",
+  "status",
+  // --- Dimension A: Counterparty (40%) ---
   "buyerName",
   "buyerYearsInBusiness",
   "buyerYearsInBusinessSource",
   "buyerLicenseValid",
-  "buyerAvgPaymentDelayDays",
+  "buyerLicenseValidSource",
+  "buyerCapacityFlag",
+  "buyerCapacityFlagSource",
   "supplierName",
   "supplierYearsInBusiness",
   "supplierYearsInBusinessSource",
   "supplierLicenseValid",
-  "supplierQualityRejectionRatePct",
-  "dealValueUSD",
+  "supplierLicenseValidSource",
+  "supplierCapacityFlag",
+  "supplierCapacityFlagSource",
+  "supplierQualityCertifications",
+  "supplierQualityCertificationsSource",
+  "cofaceCompanyRiskGrade",
+  "cofaceCountryRiskGrade",
+  "creditRatingSource",
+  "priorDealsBetweenParties",
+  "relationshipAgeMonths",
+  // --- Dimension B: Product (25%) ---
   "offerUnitPriceUSD",
+  "qualityGrade",
+  "qualityGradeSource",
+  "perishabilityClass",
+  "productRiskTableSource",
+  // --- Dimension C: Route (20%) ---
   "transportMode",
+  "estimatedTransitDays",
+  "numberOfTransshipments",
+  "routeRiskFlag",
+  "routeRiskTableSource",
+  "incoterm",
+  "incotermSource",
+  "coldChainRequired",
+  "coldChainProtocolStatus",
+  "coldChainProtocolStatusSource",
+  "customsClearanceDays",
+  "customsClearanceDaysSource",
+  "customsNarrative",
+  // --- Dimension D: Transaction Structure (15%) ---
+  "collateralType",
+  "collateralTypeSource",
+  "collateralValueUSD",
+  "paymentTerms",
+  "paymentTermsSource",
+  "advancePaymentPct",
+  "advancePaymentPctSource",
+  "insuranceCoverage",
+  "insuranceCoverageSource",
+  "insuranceValueUSD",
+  // --- Coface Gate 1 (pre-check, not a scored dimension) ---
   "cofaceCoverageAmountUSD",
   "cofaceCoveragePct",
   "cofaceIsDefaulted",
-  "priorDealsBetweenParties",
-  "relationshipAgeMonths",
-  "status",
-  "customsNarrative",
 ];
 
 function csvEscape(value: string | number | boolean | null): string {
@@ -178,9 +227,23 @@ function csvEscape(value: string | number | boolean | null): string {
   return s;
 }
 
+function capacityFlagOf(intel: PlatformDealRecord["marketIntel"], side: "buyer" | "supplier"): string | null {
+  if (!intel) return null;
+  const profile = side === "buyer" ? intel.dim_a_buyer : intel.dim_a_supplier;
+  if (!("capacity_check" in profile)) return null;
+  return profile.capacity_check?.flag ?? null;
+}
+
 function buildDefaultsCsv(records: PlatformDealRecord[]): string {
   const lines = [DEFAULTS_CSV_HEADER.join(",")];
   for (const r of records) {
+    const supplierSunatResolved = r.marketIntel?.dim_a_supplier.sunat?.resolved ?? false;
+    const supplierSunat = r.marketIntel?.dim_a_supplier.sunat;
+    const buyerCapacityFlag = capacityFlagOf(r.marketIntel, "buyer");
+    const supplierCapacityFlag = capacityFlagOf(r.marketIntel, "supplier");
+    const productTableConfirmed = !r.missingFields.some((f) => f.startsWith("product risk table"));
+    const routeTableConfirmed = !r.missingFields.some((f) => f.startsWith("route risk table"));
+
     lines.push(
       [
         r.dealRef,
@@ -188,26 +251,68 @@ function buildDefaultsCsv(records: PlatformDealRecord[]): string {
         r.product,
         r.origin,
         r.destination,
+        r.dealValueUSD,
+        r.status,
+        // Dimension A
         r.buyerName,
         r.buyerYib,
         r.buyerYibSource,
-        true, // DEFAULT (decision 2026-07-24): platform-deal-mapper.ts hardcodes licenseValid=true for every buyer
-        0, // DEFAULT: avgPaymentDelayDays=0
+        true, // DEFAULT (decision 2026-07-24): no license/KYC source for buyers anywhere — always assumed valid
+        "default",
+        buyerCapacityFlag,
+        buyerCapacityFlag ? "market-intel" : "no-data-source (quantity has no kg/carton unit — see docs)",
         r.supplierName,
         r.supplierYib,
         r.supplierYibSource,
-        true, // DEFAULT: platform-deal-mapper.ts hardcodes licenseValid=true for every supplier
-        0, // DEFAULT: qualityRejectionRatePct=0
-        r.dealValueUSD,
+        supplierSunatResolved
+          ? (supplierSunat?.estado === "ACTIVO" || !supplierSunat?.estado) &&
+            (supplierSunat?.condicion === "HABIDO" || !supplierSunat?.condicion)
+          : true, // DEFAULT when SUNAT didn't resolve: assumed valid
+        supplierSunatResolved ? "sunat" : "default",
+        supplierCapacityFlag,
+        supplierCapacityFlag ? "market-intel" : "no-data-source (quantity has no kg/carton unit — see docs)",
+        null, // DEFAULT: no certification data source exists anywhere (CSV, docs, or market-intel)
+        "no-data-source",
+        null, // DEFAULT: Coface grades never populated by the CSV pipeline (only via manual document-upload flow)
+        null,
+        "no-data-source (0 of 84 real deals have a Coface document on file)",
+        r.priorDealsBetweenParties,
+        r.relationshipAgeMonths,
+        // Dimension B
         r.offerUnitPriceUSD,
+        "Grade A / Class I", // DEFAULT (platform-deal-mapper.ts): no per-deal quality-grade source
+        "default",
+        r.perishabilityClass,
+        productTableConfirmed ? "table-confirmed" : "table-provisional (perishability-bucket fallback)",
+        // Dimension C
         r.transportMode,
+        r.estimatedTransitDays,
+        r.numberOfTransshipments,
+        r.routeRiskFlag,
+        routeTableConfirmed ? "table-confirmed" : "table-provisional (transport-mode fallback)",
+        "FOB", // DEFAULT (platform-deal-mapper.ts): no incoterm column in the source CSV
+        "default",
+        r.coldChainRequired,
+        r.coldChainRequired ? "documented" : null, // DEFAULT: optimistic default whenever cold-chain is required — no source distinguishes documented vs incomplete
+        r.coldChainRequired ? "default (optimistic — no per-shipment signal exists)" : null,
+        null, // DEFAULT: customsNarrative is unparsed free text, not a structured day count
+        "no-data-source",
+        r.customsNarrative,
+        // Dimension D
+        "None", // DEFAULT (platform-deal-mapper.ts): no collateral source in any CSV
+        "default",
+        0,
+        "Documentary / against BL (platform default)",
+        "default",
+        0,
+        "default",
+        "None", // DEFAULT — also the spec §6 veto trigger. See CargoInsuranceSection.tsx / npm run validate.
+        "default (⚠ triggers mandatory veto)",
+        0,
+        // Coface Gate 1
         r.cofaceCoverageAmountUSD,
         r.cofaceCoveragePct,
         r.cofaceIsDefaulted,
-        r.priorDealsBetweenParties,
-        r.relationshipAgeMonths,
-        r.status,
-        r.customsNarrative,
       ]
         .map(csvEscape)
         .join(","),
@@ -346,6 +451,12 @@ function main() {
     // gap. cofaceIsDefaulted still distinguishes the two cases on the record itself.
     if (!productProfile?.scoreConfirmed) missingFields.push("product risk table row (provisional, not AC-confirmed)");
     if (!routeProfile) missingFields.push("route risk table row (transport-mode fallback used)");
+    // No source anywhere in the CSV — platform-deal-mapper.ts hardcodes
+    // "None", which is also a spec §6 veto trigger (mandatory insurance
+    // floor). Surfaced here (not just cofaceIsDefaulted-style silent
+    // default) since it forces every real deal to the "Veto" tier — decision
+    // 2026-07-27, see npm run validate.
+    if (!isSynthetic) missingFields.push("cargo insurance coverage (defaults to None — triggers veto)");
 
     const status = row.status;
     const currentMilestone = normalizeDealMilestone(status, parseNumber(row.currentMilestone));

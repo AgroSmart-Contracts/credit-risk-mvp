@@ -37,21 +37,26 @@ quality-cert points + license points + capacity points, clamped 0–100.
 
 ### Variables with zero data source anywhere (decision: keep spec weight, score neutral)
 
-Four of the ten spec variables have no source column in any current TruMarket export.
-Per the 2026-07-24 decision, these are **not dropped or redistributed** — they keep
-their place in the point table and contribute exactly `0` (neither bonus nor penalty)
-until a real source lands:
+**Update 2026-07-27**: buyer/supplier credit-rating and capacity are no longer
+permanently neutral — see §13. Only supplier quality certifications remains a true
+zero-data-source gap. Original 2026-07-24 status, for history:
 
-| Variable | Spec points | Status |
-|---|---|---|
-| Buyer credit rating | AAA–AA +15 / A–BBB +10 / BB–B +5 / ≤CCC −15 | `NEEDS_DATA_CREDIT_RATING_POINTS = 0` |
-| Buyer capacity vs. monthly volume | ≤50% +5 / >2× −10 | `NEEDS_DATA_BUYER_CAPACITY_POINTS = 0` |
-| Supplier quality certifications | multiple +15 / at least one +10 | `NEEDS_DATA_QUALITY_CERT_POINTS = 0` |
-| Supplier capacity vs. production | ≤30% +5 / >100% −15 | `NEEDS_DATA_SUPPLIER_CAPACITY_POINTS = 0` |
+Four of the ten spec variables had no source column in any current TruMarket export.
+Per the 2026-07-24 decision, these were **not dropped or redistributed** — they kept
+their place in the point table and contributed exactly `0` (neither bonus nor penalty)
+until a real source landed:
 
-These are marked with `NEEDS_DATA_*` constants at the top of `src/lib/scoring.ts` —
-wire them up in place once buyer credit ratings, capacity figures, and supplier
-certifications become available from a real source.
+| Variable | Spec points | Status as of 2026-07-24 | Status as of 2026-07-27 |
+|---|---|---|---|
+| Buyer credit rating | AAA–AA +15 / A–BBB +10 / BB–B +5 / ≤CCC −15 | `NEEDS_DATA_CREDIT_RATING_POINTS = 0` | Wired to Coface CRA/DRA (§9) — still 0/84 populated (no Coface doc uploaded for any CSV deal) |
+| Buyer capacity vs. monthly volume | ≤50% +5 / >2× −10 | `NEEDS_DATA_BUYER_CAPACITY_POINTS = 0` | Wired to market-intel (§13) — real mechanism, but 0/84 populated (quantity has no kg/carton unit) |
+| Supplier quality certifications | multiple +15 / at least one +10 | `NEEDS_DATA_QUALITY_CERT_POINTS = 0` | **Still unwired** — no source anywhere (CSV, docs, or market-intel); also absent from the target ERD entirely (no field on `Counterparty` or `Product`) |
+| Supplier capacity vs. production | ≤30% +5 / >100% −15 | `NEEDS_DATA_SUPPLIER_CAPACITY_POINTS = 0` | Wired to market-intel (§13) — same quantity-unit blocker as buyer capacity |
+
+`NEEDS_DATA_QUALITY_CERT_POINTS` is the one constant still at the top of
+`src/lib/scoring.ts` — the other three are now real functions (`creditRatingPoints()`,
+`buyerCapacityPoints()`, `supplierCapacityPoints()`), just still returning 0 in
+practice for every deal in the current dataset.
 
 ### Coface coverage is NOT a Counterparty input
 
@@ -228,7 +233,48 @@ is a full audit artifact — nothing about what the formula actually consumes is
 in code; it's all visible in one flat file. Regenerate it any time by re-running
 `npx tsx scripts/build-platform-deals.ts`.
 
-## 12. Not built (explicitly out of scope for this round)
+## 12. Market-intel wiring + the insurance-veto discovery (2026-07-27)
+
+**Market-intel wiring.** `docs/market-intel-peru-2025-2026-07-10` (Peru customs +
+SUNAT enrichment, previously built but never called from the bulk CSV pipeline — only
+reachable via a live per-deal HTTP request in the manual Assess Deal wizard) is now
+called in batch by `scripts/build-platform-deals.ts` for every real deal, via
+`scripts/lib/market-intel-cli.ts` shelling out to `rate-json.py`. RUC resolution uses
+`company-master.json`'s existing `taxIds`, filtered to the 11-digit-numeric ones that
+are plausibly real Peru RUCs (`extractValidRuc()`) — 82 of 84 real deals resolve one.
+
+This closes, mechanically, 2 of the 3 previously-hardcoded-neutral capacity/cert
+variables from §2 (buyer/supplier capacity) plus supplements supplier license validity
+with SUNAT's `estado`/`condicion` (ACTIVO/HABIDO) instead of the hardcoded `true`
+default. **But real-world coverage today is 0% for capacity** — `capacity_check`
+requires `deal_kg`, and the source CSV's `quantity` column has no unit label (kg vs.
+cartons vs. boxes), so `parseDealKg()` can never resolve one. This is a genuine,
+separate data gap (quantity unit of measure), not a wiring bug — confirmed by reading
+the pipeline's own dataclass comment (`capacity_check: dict | None  # populated if
+deal_kg provided`). License validity fares better: 51/84 deals get a real SUNAT
+resolution today.
+
+**The insurance-veto discovery.** Running `npm run validate` (new this session — see
+`scripts/validate-cram-coverage.ts`) surfaced that **100% of real deals are currently
+forced to the "Veto" tier**, regardless of their composite score. Cause:
+`insuranceCoverage` is hardcoded `"None"` in `platform-deal-mapper.ts` (no source
+anywhere — same class of gap as license validity used to be), and `"None"` is a
+mandatory spec §6 veto trigger. This predates today's session (the veto register was
+implemented 2026-07-24, per §6 of `cram-formula-erd-audit-2026-07.md`) but was not
+previously visible without reading `scoring.ts` by hand — the tier badge shown in the
+UI just said "Veto" per-deal, with no aggregate view surfacing that this was **every**
+deal. This is now the single highest-priority data gap in the whole pipeline — worse
+than any of the §2 variables, since it makes every deal's tier non-actionable today.
+An admin-facing correction UI (`CargoInsuranceSection.tsx`, in the Missing fields tab)
+lets someone preview the corrected outcome per deal and export a corrections CSV; nothing
+is silently auto-corrected in the checked-in data.
+
+**Expanded defaults-applied CSV.** §11's export only covered 18 fields (Dimension
+A/some-of-C/D only). Expanded to cover all four dimensions + the veto register — see
+`DEFAULTS_CSV_HEADER` in `build-platform-deals.ts` — once the insurance finding made
+clear a narrower export could hide the biggest gap in the pipeline.
+
+## 13. Not built (explicitly out of scope for this round)
 
 Two items from the original discussion were only explained, not approved, and remain
 unbuilt:

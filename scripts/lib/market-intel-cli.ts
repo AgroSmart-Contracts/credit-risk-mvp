@@ -30,11 +30,16 @@ export function extractValidRuc(taxIds: string[]): string | null {
 }
 
 /**
- * Once spawn itself fails (ENOENT — no python3 on PATH at all), every
- * subsequent call would fail the exact same way, so stop trying rather than
- * eating a fresh process-spawn attempt (or worse, a 15s timeout) per deal.
- * A non-zero exit or bad-JSON response, by contrast, might be deal-specific
- * (e.g. a malformed request), so those don't trip this bail-out.
+ * Only ENOENT (no python3 binary on PATH at all) is a permanent condition —
+ * every subsequent call would fail the exact same way, so it's worth
+ * bailing out entirely rather than eating a fresh process-spawn attempt per
+ * deal. ETIMEDOUT is NOT permanent: it fires per-call whenever a RUC isn't
+ * already in sunat_lookup.py's cache and the live SUNAT API is slow to
+ * respond (confirmed cause of a real regression — one slow network call
+ * incorrectly silenced market-intel for every remaining deal in the batch,
+ * dropping 11/82 responses that should have succeeded). Any other error
+ * (bad request, non-zero exit, bad JSON) is deal-specific and shouldn't
+ * trip any bail-out either.
  */
 let spawnUnavailable = false;
 let warnedUnavailable = false;
@@ -42,10 +47,11 @@ let warnedUnavailable = false;
 /**
  * Shells out once per call — rate-json.py reloads fact_shipments.parquet
  * fresh each invocation (no server/cache to keep warm), so this is safe to
- * call in a loop but costs ~1-2s per call. Fails safe: any spawn/parse
- * error returns null (deal just gets no market-intel enrichment) rather
- * than aborting the whole build, matching the pipeline's own NEEDS_INPUT
- * philosophy of never fabricating data it doesn't have.
+ * call in a loop but costs ~1-2s per call (or longer on a SUNAT cache miss —
+ * see the 30s timeout below). Fails safe: any spawn/parse error returns
+ * null (deal just gets no market-intel enrichment) rather than aborting the
+ * whole build, matching the pipeline's own NEEDS_INPUT philosophy of never
+ * fabricating data it doesn't have.
  */
 export function fetchMarketIntelSync(
   request: MarketIntelRateRequest,
@@ -55,7 +61,7 @@ export function fetchMarketIntelSync(
   const result = spawnSync("python3", [RATE_JSON_SCRIPT], {
     input: JSON.stringify(request),
     encoding: "utf-8",
-    timeout: 15_000,
+    timeout: 30_000,
     maxBuffer: 16 * 1024 * 1024,
     // sunat_lookup.py's cache path (`Path("marts/sunat_cache")`) is relative
     // to cwd, not to the script's own location — same reason
@@ -67,10 +73,17 @@ export function fetchMarketIntelSync(
   });
 
   if (result.error) {
-    spawnUnavailable = true;
-    console.warn(
-      `[market-intel] python3 unavailable (${result.error.message}) — skipping market-intel enrichment for all deals.`,
-    );
+    const isPermanent = (result.error as NodeJS.ErrnoException).code === "ENOENT";
+    if (isPermanent) {
+      spawnUnavailable = true;
+      console.warn(
+        `[market-intel] python3 unavailable (${result.error.message}) — skipping market-intel enrichment for all remaining deals.`,
+      );
+    } else {
+      console.warn(
+        `[market-intel] spawn error for RUC ${request.exporterRuc} (${result.error.message}) — skipping this deal only.`,
+      );
+    }
     return null;
   }
 

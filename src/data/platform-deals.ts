@@ -39,7 +39,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:29",
+        "generated_at": "2026-07-27T17:56:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -144,7 +144,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -190,7 +191,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -236,7 +238,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "supplier.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -276,7 +279,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:31",
+        "generated_at": "2026-07-27T17:56:15",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -469,7 +472,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -509,7 +513,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:32",
+        "generated_at": "2026-07-27T17:56:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -702,7 +706,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -742,7 +747,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:37",
+        "generated_at": "2026-07-27T17:56:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -951,7 +956,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-04T19:11:21.445Z"
   },
@@ -991,7 +997,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:42",
+        "generated_at": "2026-07-27T17:56:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1200,7 +1206,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-06T22:17:03.103Z"
   },
@@ -1240,7 +1247,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:47",
+        "generated_at": "2026-07-27T17:56:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1639,7 +1646,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-11T16:08:52.011Z"
   },
@@ -1679,7 +1687,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:52",
+        "generated_at": "2026-07-27T17:56:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1983,7 +1991,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-11T22:49:08.282Z"
   },
@@ -2023,7 +2032,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:57",
+        "generated_at": "2026-07-27T17:56:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2324,7 +2333,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-12T22:14:43.520Z"
   },
@@ -2364,7 +2374,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:02",
+        "generated_at": "2026-07-27T17:56:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2665,7 +2675,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-12T23:23:59.174Z"
   },
@@ -2705,7 +2716,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:07",
+        "generated_at": "2026-07-27T17:56:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3006,7 +3017,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-12T23:58:10.517Z"
   },
@@ -3046,7 +3058,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:11",
+        "generated_at": "2026-07-27T17:56:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3347,7 +3359,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-13T00:02:35.993Z"
   },
@@ -3387,7 +3400,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:16",
+        "generated_at": "2026-07-27T17:56:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3689,7 +3702,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-17T16:54:51.326Z"
   },
@@ -3729,7 +3743,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:20",
+        "generated_at": "2026-07-27T17:56:58",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4030,7 +4044,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-19T16:29:05.939Z"
   },
@@ -4070,7 +4085,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:25",
+        "generated_at": "2026-07-27T17:57:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4279,7 +4294,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-19T18:09:16.362Z"
   },
@@ -4319,7 +4335,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:29",
+        "generated_at": "2026-07-27T17:57:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4531,7 +4547,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-06T19:14:18.308Z"
   },
@@ -4571,7 +4588,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:33",
+        "generated_at": "2026-07-27T17:57:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4783,7 +4800,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-06T20:34:28.700Z"
   },
@@ -4823,7 +4841,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:39",
+        "generated_at": "2026-07-27T17:57:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5217,7 +5235,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-08T18:34:54.134Z"
   },
@@ -5257,7 +5276,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:44",
+        "generated_at": "2026-07-27T17:57:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5557,7 +5576,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "buyer.yearsInBusiness"
+      "buyer.yearsInBusiness",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-14T18:03:21.213Z"
   },
@@ -5597,7 +5617,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:48",
+        "generated_at": "2026-07-27T17:57:26",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5897,7 +5917,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "buyer.yearsInBusiness"
+      "buyer.yearsInBusiness",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-27T17:19:32.692Z"
   },
@@ -5937,7 +5958,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:54",
+        "generated_at": "2026-07-27T17:57:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6238,7 +6259,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-02-06T14:39:33.895Z"
   },
@@ -6278,7 +6300,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:58",
+        "generated_at": "2026-07-27T17:57:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6402,7 +6424,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-03-11T20:00:21.994Z"
   },
@@ -6442,7 +6465,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:03",
+        "generated_at": "2026-07-27T17:57:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6753,7 +6776,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-03-27T14:43:59.093Z"
   },
@@ -6793,7 +6817,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:07",
+        "generated_at": "2026-07-27T17:57:43",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6917,7 +6941,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-03-27T14:47:24.436Z"
   },
@@ -6957,7 +6982,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:12",
+        "generated_at": "2026-07-27T17:57:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7354,7 +7379,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
-    "missingFields": [],
+    "missingFields": [
+      "cargo insurance coverage (defaults to None — triggers veto)"
+    ],
     "createdAt": "2025-04-01T16:21:34.543Z"
   },
   {
@@ -7393,7 +7420,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:16",
+        "generated_at": "2026-07-27T17:57:52",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7517,7 +7544,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-04-04T01:43:09.527Z"
   },
@@ -7557,7 +7585,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:21",
+        "generated_at": "2026-07-27T17:57:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7763,7 +7791,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-04-07T18:49:45.830Z"
   },
@@ -7803,7 +7832,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:25",
+        "generated_at": "2026-07-27T17:58:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8105,7 +8134,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-04-08T16:59:09.789Z"
   },
@@ -8145,7 +8175,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:29",
+        "generated_at": "2026-07-27T17:58:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8269,7 +8299,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:31:33.349Z"
   },
@@ -8309,7 +8340,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:33",
+        "generated_at": "2026-07-27T17:58:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8433,7 +8464,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:35:28.626Z"
   },
@@ -8473,7 +8505,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:38",
+        "generated_at": "2026-07-27T17:58:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8597,7 +8629,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:36:53.697Z"
   },
@@ -8637,7 +8670,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:42",
+        "generated_at": "2026-07-27T17:58:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8761,7 +8794,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:37:58.130Z"
   },
@@ -8801,7 +8835,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:47",
+        "generated_at": "2026-07-27T17:58:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8925,7 +8959,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:38:53.795Z"
   },
@@ -8965,7 +9000,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:52",
+        "generated_at": "2026-07-27T17:58:32",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9089,7 +9124,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:54:27.038Z"
   },
@@ -9129,7 +9165,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:57",
+        "generated_at": "2026-07-27T17:58:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9253,7 +9289,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:55:42.228Z"
   },
@@ -9293,7 +9330,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:02",
+        "generated_at": "2026-07-27T17:58:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9417,7 +9454,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:57:16.666Z"
   },
@@ -9457,7 +9495,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:07",
+        "generated_at": "2026-07-27T17:58:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9581,7 +9619,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:58:08.724Z"
   },
@@ -9621,7 +9660,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:12",
+        "generated_at": "2026-07-27T17:58:48",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9745,7 +9784,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:58:46.310Z"
   },
@@ -9785,7 +9825,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:16",
+        "generated_at": "2026-07-27T17:58:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9909,7 +9949,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T16:59:12.778Z"
   },
@@ -9949,7 +9990,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:20",
+        "generated_at": "2026-07-27T17:58:58",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10073,7 +10114,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:03:16.523Z"
   },
@@ -10113,7 +10155,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:25",
+        "generated_at": "2026-07-27T17:59:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10237,7 +10279,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:16:45.506Z"
   },
@@ -10277,7 +10320,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:29",
+        "generated_at": "2026-07-27T17:59:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10401,7 +10444,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:17:25.028Z"
   },
@@ -10441,7 +10485,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:33",
+        "generated_at": "2026-07-27T17:59:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10565,7 +10609,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:19:31.353Z"
   },
@@ -10605,7 +10650,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:37",
+        "generated_at": "2026-07-27T17:59:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10729,7 +10774,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:20:16.579Z"
   },
@@ -10769,7 +10815,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:42",
+        "generated_at": "2026-07-27T17:59:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10893,7 +10939,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-06-02T17:36:27.306Z"
   },
@@ -10933,7 +10980,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:46",
+        "generated_at": "2026-07-27T17:59:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11058,7 +11105,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-06-19T01:10:21.988Z"
   },
@@ -11098,7 +11146,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:52",
+        "generated_at": "2026-07-27T17:59:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11497,7 +11545,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-23T17:49:38.109Z"
   },
@@ -11537,7 +11586,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:57",
+        "generated_at": "2026-07-27T17:59:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11936,7 +11985,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:48:56.800Z"
   },
@@ -11976,7 +12026,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:02",
+        "generated_at": "2026-07-27T17:59:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12375,7 +12425,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:52:01.069Z"
   },
@@ -12415,7 +12466,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:09",
+        "generated_at": "2026-07-27T17:59:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12814,7 +12865,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:54:37.797Z"
   },
@@ -12854,7 +12906,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:14",
+        "generated_at": "2026-07-27T17:59:46",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13253,7 +13305,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:57:37.036Z"
   },
@@ -13293,7 +13346,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:19",
+        "generated_at": "2026-07-27T17:59:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13590,7 +13643,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-08-04T18:35:34.946Z"
   },
@@ -13630,7 +13684,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:23",
+        "generated_at": "2026-07-27T17:59:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13927,7 +13981,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-08-04T18:37:36.353Z"
   },
@@ -13967,7 +14022,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:24",
+        "generated_at": "2026-07-27T17:59:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14130,7 +14185,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-08-04T19:07:52.273Z"
   },
@@ -14170,7 +14226,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:28",
+        "generated_at": "2026-07-27T18:00:00",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14380,7 +14436,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-09-24T15:17:44.813Z"
   },
@@ -14420,7 +14477,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:33",
+        "generated_at": "2026-07-27T18:00:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14630,7 +14687,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-09-24T15:30:20.287Z"
   },
@@ -14670,7 +14728,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:37",
+        "generated_at": "2026-07-27T18:00:12",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14969,7 +15027,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "buyer.yearsInBusiness"
+      "buyer.yearsInBusiness",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-06T19:35:26.471Z"
   },
@@ -15009,7 +15068,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:42",
+        "generated_at": "2026-07-27T18:00:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15218,7 +15277,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-06T19:48:50.727Z"
   },
@@ -15258,7 +15318,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:46",
+        "generated_at": "2026-07-27T18:00:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15467,7 +15527,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-06T19:53:26.521Z"
   },
@@ -15507,7 +15568,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:51",
+        "generated_at": "2026-07-27T18:00:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15716,7 +15777,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-13T13:04:58.601Z"
   },
@@ -15756,7 +15818,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:56",
+        "generated_at": "2026-07-27T18:00:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15965,7 +16027,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-13T14:42:48.825Z"
   },
@@ -16005,7 +16068,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:01",
+        "generated_at": "2026-07-27T18:00:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16305,7 +16368,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-14T21:56:27.780Z"
   },
@@ -16345,7 +16409,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:06",
+        "generated_at": "2026-07-27T18:00:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16537,7 +16601,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:25:50.821Z"
   },
@@ -16577,7 +16642,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:10",
+        "generated_at": "2026-07-27T18:00:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16769,7 +16834,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:31:13.167Z"
   },
@@ -16809,7 +16875,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:15",
+        "generated_at": "2026-07-27T18:00:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17001,7 +17067,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:42:13.417Z"
   },
@@ -17041,7 +17108,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:19",
+        "generated_at": "2026-07-27T18:00:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17233,7 +17300,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:46:36.395Z"
   },
@@ -17273,7 +17341,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:23",
+        "generated_at": "2026-07-27T18:00:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17465,7 +17533,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:55:12.590Z"
   },
@@ -17505,7 +17574,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:28",
+        "generated_at": "2026-07-27T18:00:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17697,7 +17766,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:07:23.818Z"
   },
@@ -17737,7 +17807,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:32",
+        "generated_at": "2026-07-27T18:01:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17929,7 +17999,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:34:19.854Z"
   },
@@ -17969,7 +18040,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:36",
+        "generated_at": "2026-07-27T18:01:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18161,7 +18232,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:47:33.161Z"
   },
@@ -18201,7 +18273,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:41",
+        "generated_at": "2026-07-27T18:01:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18393,7 +18465,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:56:42.373Z"
   },
@@ -18433,7 +18506,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:45",
+        "generated_at": "2026-07-27T18:01:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18625,7 +18698,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T16:03:24.595Z"
   },
@@ -18665,7 +18739,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:50",
+        "generated_at": "2026-07-27T18:01:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18857,7 +18931,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-12-02T13:32:27.112Z"
   },
@@ -18897,7 +18972,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:56",
+        "generated_at": "2026-07-27T18:01:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19089,7 +19164,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-12-02T13:34:37.517Z"
   },
@@ -19129,7 +19205,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:01",
+        "generated_at": "2026-07-27T18:01:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19321,7 +19397,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-12-02T15:43:35.425Z"
   },
@@ -19361,7 +19438,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:05",
+        "generated_at": "2026-07-27T18:01:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19554,7 +19631,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-01-23T00:56:37.083Z"
   },
@@ -19594,7 +19672,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:10",
+        "generated_at": "2026-07-27T18:01:44",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19718,7 +19796,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T12:52:18.327Z"
   },
@@ -19758,7 +19837,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:14",
+        "generated_at": "2026-07-27T18:01:48",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19882,7 +19961,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:37:54.951Z"
   },
@@ -19922,7 +20002,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:18",
+        "generated_at": "2026-07-27T18:01:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20046,7 +20126,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:46:10.207Z"
   },
@@ -20086,7 +20167,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:22",
+        "generated_at": "2026-07-27T18:01:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20210,7 +20291,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:52:57.914Z"
   },
@@ -20250,7 +20332,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:26",
+        "generated_at": "2026-07-27T18:02:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20374,7 +20456,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:54:26.108Z"
   },
@@ -20414,7 +20497,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:30",
+        "generated_at": "2026-07-27T18:02:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20538,7 +20621,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:55:01.043Z"
   },
@@ -20578,7 +20662,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:34",
+        "generated_at": "2026-07-27T18:02:12",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20702,7 +20786,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:55:53.974Z"
   }
@@ -21022,7 +21107,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -21256,7 +21342,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -21418,7 +21505,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -21580,7 +21668,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -21725,6 +21814,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer.yearsInBusiness"
     ]
   },
@@ -21816,7 +21906,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -21897,7 +21988,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -21970,7 +22062,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22006,7 +22099,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22044,7 +22138,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22071,7 +22166,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22098,7 +22194,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22128,7 +22225,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22155,7 +22253,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22184,7 +22283,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22211,7 +22311,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   },
   {
@@ -22241,7 +22342,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ]
   }
 ];

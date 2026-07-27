@@ -35,7 +35,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:29",
+        "generated_at": "2026-07-27T17:56:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -140,7 +140,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -186,7 +187,8 @@
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -232,7 +234,8 @@
       "buyer.yearsInBusiness",
       "supplier.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -272,7 +275,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:31",
+        "generated_at": "2026-07-27T17:56:15",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -465,7 +468,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -505,7 +509,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:32",
+        "generated_at": "2026-07-27T17:56:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -698,7 +702,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": ""
   },
@@ -738,7 +743,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:37",
+        "generated_at": "2026-07-27T17:56:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -947,7 +952,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-04T19:11:21.445Z"
   },
@@ -987,7 +993,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:42",
+        "generated_at": "2026-07-27T17:56:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1196,7 +1202,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-06T22:17:03.103Z"
   },
@@ -1236,7 +1243,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:47",
+        "generated_at": "2026-07-27T17:56:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1635,7 +1642,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-11T16:08:52.011Z"
   },
@@ -1675,7 +1683,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:52",
+        "generated_at": "2026-07-27T17:56:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1979,7 +1987,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-11T22:49:08.282Z"
   },
@@ -2019,7 +2028,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:53:57",
+        "generated_at": "2026-07-27T17:56:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2320,7 +2329,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-12T22:14:43.520Z"
   },
@@ -2360,7 +2370,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:02",
+        "generated_at": "2026-07-27T17:56:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2661,7 +2671,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-12T23:23:59.174Z"
   },
@@ -2701,7 +2712,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:07",
+        "generated_at": "2026-07-27T17:56:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3002,7 +3013,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-12T23:58:10.517Z"
   },
@@ -3042,7 +3054,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:11",
+        "generated_at": "2026-07-27T17:56:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3343,7 +3355,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-13T00:02:35.993Z"
   },
@@ -3383,7 +3396,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:16",
+        "generated_at": "2026-07-27T17:56:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3685,7 +3698,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-17T16:54:51.326Z"
   },
@@ -3725,7 +3739,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:20",
+        "generated_at": "2026-07-27T17:56:58",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4026,7 +4040,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-19T16:29:05.939Z"
   },
@@ -4066,7 +4081,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:25",
+        "generated_at": "2026-07-27T17:57:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4275,7 +4290,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2024-12-19T18:09:16.362Z"
   },
@@ -4315,7 +4331,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:29",
+        "generated_at": "2026-07-27T17:57:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4527,7 +4543,8 @@
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-06T19:14:18.308Z"
   },
@@ -4567,7 +4584,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:33",
+        "generated_at": "2026-07-27T17:57:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4779,7 +4796,8 @@
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-06T20:34:28.700Z"
   },
@@ -4819,7 +4837,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:39",
+        "generated_at": "2026-07-27T17:57:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5213,7 +5231,8 @@
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)"
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-08T18:34:54.134Z"
   },
@@ -5253,7 +5272,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:44",
+        "generated_at": "2026-07-27T17:57:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5553,7 +5572,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "buyer.yearsInBusiness"
+      "buyer.yearsInBusiness",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-14T18:03:21.213Z"
   },
@@ -5593,7 +5613,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:48",
+        "generated_at": "2026-07-27T17:57:26",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5893,7 +5913,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "buyer.yearsInBusiness"
+      "buyer.yearsInBusiness",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-01-27T17:19:32.692Z"
   },
@@ -5933,7 +5954,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:54",
+        "generated_at": "2026-07-27T17:57:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6234,7 +6255,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-02-06T14:39:33.895Z"
   },
@@ -6274,7 +6296,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:54:58",
+        "generated_at": "2026-07-27T17:57:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6398,7 +6420,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-03-11T20:00:21.994Z"
   },
@@ -6438,7 +6461,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:03",
+        "generated_at": "2026-07-27T17:57:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6749,7 +6772,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-03-27T14:43:59.093Z"
   },
@@ -6789,7 +6813,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:07",
+        "generated_at": "2026-07-27T17:57:43",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6913,7 +6937,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-03-27T14:47:24.436Z"
   },
@@ -6953,7 +6978,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:12",
+        "generated_at": "2026-07-27T17:57:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7350,7 +7375,9 @@
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
-    "missingFields": [],
+    "missingFields": [
+      "cargo insurance coverage (defaults to None — triggers veto)"
+    ],
     "createdAt": "2025-04-01T16:21:34.543Z"
   },
   {
@@ -7389,7 +7416,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:16",
+        "generated_at": "2026-07-27T17:57:52",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7513,7 +7540,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-04-04T01:43:09.527Z"
   },
@@ -7553,7 +7581,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:21",
+        "generated_at": "2026-07-27T17:57:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7759,7 +7787,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-04-07T18:49:45.830Z"
   },
@@ -7799,7 +7828,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:25",
+        "generated_at": "2026-07-27T17:58:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8101,7 +8130,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-04-08T16:59:09.789Z"
   },
@@ -8141,7 +8171,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:29",
+        "generated_at": "2026-07-27T17:58:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8265,7 +8295,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:31:33.349Z"
   },
@@ -8305,7 +8336,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:33",
+        "generated_at": "2026-07-27T17:58:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8429,7 +8460,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:35:28.626Z"
   },
@@ -8469,7 +8501,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:38",
+        "generated_at": "2026-07-27T17:58:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8593,7 +8625,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:36:53.697Z"
   },
@@ -8633,7 +8666,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:42",
+        "generated_at": "2026-07-27T17:58:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8757,7 +8790,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:37:58.130Z"
   },
@@ -8797,7 +8831,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:47",
+        "generated_at": "2026-07-27T17:58:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8921,7 +8955,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:38:53.795Z"
   },
@@ -8961,7 +8996,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:52",
+        "generated_at": "2026-07-27T17:58:32",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9085,7 +9120,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:54:27.038Z"
   },
@@ -9125,7 +9161,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:55:57",
+        "generated_at": "2026-07-27T17:58:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9249,7 +9285,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:55:42.228Z"
   },
@@ -9289,7 +9326,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:02",
+        "generated_at": "2026-07-27T17:58:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9413,7 +9450,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:57:16.666Z"
   },
@@ -9453,7 +9491,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:07",
+        "generated_at": "2026-07-27T17:58:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9577,7 +9615,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:58:08.724Z"
   },
@@ -9617,7 +9656,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:12",
+        "generated_at": "2026-07-27T17:58:48",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9741,7 +9780,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-28T21:58:46.310Z"
   },
@@ -9781,7 +9821,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:16",
+        "generated_at": "2026-07-27T17:58:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9905,7 +9945,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T16:59:12.778Z"
   },
@@ -9945,7 +9986,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:20",
+        "generated_at": "2026-07-27T17:58:58",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10069,7 +10110,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:03:16.523Z"
   },
@@ -10109,7 +10151,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:25",
+        "generated_at": "2026-07-27T17:59:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10233,7 +10275,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:16:45.506Z"
   },
@@ -10273,7 +10316,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:29",
+        "generated_at": "2026-07-27T17:59:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10397,7 +10440,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:17:25.028Z"
   },
@@ -10437,7 +10481,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:33",
+        "generated_at": "2026-07-27T17:59:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10561,7 +10605,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:19:31.353Z"
   },
@@ -10601,7 +10646,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:37",
+        "generated_at": "2026-07-27T17:59:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10725,7 +10770,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-05-30T17:20:16.579Z"
   },
@@ -10765,7 +10811,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:42",
+        "generated_at": "2026-07-27T17:59:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10889,7 +10935,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-06-02T17:36:27.306Z"
   },
@@ -10929,7 +10976,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:46",
+        "generated_at": "2026-07-27T17:59:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11054,7 +11101,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-06-19T01:10:21.988Z"
   },
@@ -11094,7 +11142,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:52",
+        "generated_at": "2026-07-27T17:59:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11493,7 +11541,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-23T17:49:38.109Z"
   },
@@ -11533,7 +11582,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:56:57",
+        "generated_at": "2026-07-27T17:59:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11932,7 +11981,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:48:56.800Z"
   },
@@ -11972,7 +12022,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:02",
+        "generated_at": "2026-07-27T17:59:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12371,7 +12421,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:52:01.069Z"
   },
@@ -12411,7 +12462,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:09",
+        "generated_at": "2026-07-27T17:59:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12810,7 +12861,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:54:37.797Z"
   },
@@ -12850,7 +12902,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:14",
+        "generated_at": "2026-07-27T17:59:46",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13249,7 +13301,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-07-25T14:57:37.036Z"
   },
@@ -13289,7 +13342,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:19",
+        "generated_at": "2026-07-27T17:59:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13586,7 +13639,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-08-04T18:35:34.946Z"
   },
@@ -13626,7 +13680,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:23",
+        "generated_at": "2026-07-27T17:59:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13923,7 +13977,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-08-04T18:37:36.353Z"
   },
@@ -13963,7 +14018,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:24",
+        "generated_at": "2026-07-27T17:59:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14126,7 +14181,8 @@
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)"
+      "route risk table row (transport-mode fallback used)",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-08-04T19:07:52.273Z"
   },
@@ -14166,7 +14222,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:28",
+        "generated_at": "2026-07-27T18:00:00",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14376,7 +14432,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-09-24T15:17:44.813Z"
   },
@@ -14416,7 +14473,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:33",
+        "generated_at": "2026-07-27T18:00:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14626,7 +14683,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-09-24T15:30:20.287Z"
   },
@@ -14666,7 +14724,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:37",
+        "generated_at": "2026-07-27T18:00:12",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14965,7 +15023,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "buyer.yearsInBusiness"
+      "buyer.yearsInBusiness",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-06T19:35:26.471Z"
   },
@@ -15005,7 +15064,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:42",
+        "generated_at": "2026-07-27T18:00:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15214,7 +15273,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-06T19:48:50.727Z"
   },
@@ -15254,7 +15314,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:46",
+        "generated_at": "2026-07-27T18:00:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15463,7 +15523,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-06T19:53:26.521Z"
   },
@@ -15503,7 +15564,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:51",
+        "generated_at": "2026-07-27T18:00:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15712,7 +15773,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-13T13:04:58.601Z"
   },
@@ -15752,7 +15814,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:57:56",
+        "generated_at": "2026-07-27T18:00:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15961,7 +16023,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-13T14:42:48.825Z"
   },
@@ -16001,7 +16064,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:01",
+        "generated_at": "2026-07-27T18:00:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16301,7 +16364,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-14T21:56:27.780Z"
   },
@@ -16341,7 +16405,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:06",
+        "generated_at": "2026-07-27T18:00:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16533,7 +16597,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:25:50.821Z"
   },
@@ -16573,7 +16638,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:10",
+        "generated_at": "2026-07-27T18:00:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16765,7 +16830,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:31:13.167Z"
   },
@@ -16805,7 +16871,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:15",
+        "generated_at": "2026-07-27T18:00:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16997,7 +17063,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:42:13.417Z"
   },
@@ -17037,7 +17104,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:19",
+        "generated_at": "2026-07-27T18:00:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17229,7 +17296,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:46:36.395Z"
   },
@@ -17269,7 +17337,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:23",
+        "generated_at": "2026-07-27T18:00:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17461,7 +17529,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-23T12:55:12.590Z"
   },
@@ -17501,7 +17570,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:28",
+        "generated_at": "2026-07-27T18:00:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17693,7 +17762,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:07:23.818Z"
   },
@@ -17733,7 +17803,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:32",
+        "generated_at": "2026-07-27T18:01:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17925,7 +17995,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:34:19.854Z"
   },
@@ -17965,7 +18036,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:36",
+        "generated_at": "2026-07-27T18:01:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18157,7 +18228,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:47:33.161Z"
   },
@@ -18197,7 +18269,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:41",
+        "generated_at": "2026-07-27T18:01:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18389,7 +18461,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T15:56:42.373Z"
   },
@@ -18429,7 +18502,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:45",
+        "generated_at": "2026-07-27T18:01:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18621,7 +18694,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-11-25T16:03:24.595Z"
   },
@@ -18661,7 +18735,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:50",
+        "generated_at": "2026-07-27T18:01:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18853,7 +18927,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-12-02T13:32:27.112Z"
   },
@@ -18893,7 +18968,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:58:56",
+        "generated_at": "2026-07-27T18:01:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19085,7 +19160,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-12-02T13:34:37.517Z"
   },
@@ -19125,7 +19201,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:01",
+        "generated_at": "2026-07-27T18:01:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19317,7 +19393,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2025-12-02T15:43:35.425Z"
   },
@@ -19357,7 +19434,7 @@
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:05",
+        "generated_at": "2026-07-27T18:01:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19550,7 +19627,8 @@
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-01-23T00:56:37.083Z"
   },
@@ -19590,7 +19668,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:10",
+        "generated_at": "2026-07-27T18:01:44",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19714,7 +19792,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T12:52:18.327Z"
   },
@@ -19754,7 +19833,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:14",
+        "generated_at": "2026-07-27T18:01:48",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19878,7 +19957,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:37:54.951Z"
   },
@@ -19918,7 +19998,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:18",
+        "generated_at": "2026-07-27T18:01:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20042,7 +20122,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:46:10.207Z"
   },
@@ -20082,7 +20163,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:22",
+        "generated_at": "2026-07-27T18:01:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20206,7 +20287,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:52:57.914Z"
   },
@@ -20246,7 +20328,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:26",
+        "generated_at": "2026-07-27T18:02:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20370,7 +20452,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:54:26.108Z"
   },
@@ -20410,7 +20493,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:30",
+        "generated_at": "2026-07-27T18:02:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20534,7 +20617,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:55:01.043Z"
   },
@@ -20574,7 +20658,7 @@
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T16:59:34",
+        "generated_at": "2026-07-27T18:02:12",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20698,7 +20782,8 @@
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative"
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)"
     ],
     "createdAt": "2026-03-27T15:55:53.974Z"
   }
