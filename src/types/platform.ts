@@ -1,5 +1,7 @@
 /** Platform CSV / CRAM enrichment types (credit-risk-mvp only — does not alter TruMarket Mongo schemas). */
 
+import type { MarketIntelPayload } from "../lib/market-intel/types";
+
 /**
  * "real" / "unverified" / "likely real" pass through to scoring with a badge.
  * "likely_test" rows are excluded from platform-deals.generated.json entirely
@@ -61,6 +63,16 @@ export interface PlatformDealRecord {
   /** true whenever the two fields above are the 90%-default, not a real Coface record. */
   cofaceIsDefaulted: boolean;
   counterpartyReady: boolean;
+  /**
+   * Batch-fetched at build time (scripts/lib/market-intel-cli.ts) from Peru
+   * customs + SUNAT data, only when the supplier resolves to a valid Peru
+   * RUC via company-master.json's taxIds — decision 2026-07-27. null means
+   * either no valid RUC resolved, or the supplier has no shipment history in
+   * this data bundle (HS 0810/0811, 2025 only) — not necessarily "no data
+   * exists at all". Feeds computeBuyerScore()/computeSupplierScore()'s
+   * capacity variables in src/lib/scoring.ts.
+   */
+  marketIntel: MarketIntelPayload | null;
   htmlFormulaScore: number | null;
   htmlFormulaBase: number | null;
   htmlFormulaBonus: number | null;

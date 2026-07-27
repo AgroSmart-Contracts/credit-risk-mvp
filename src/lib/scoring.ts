@@ -1,5 +1,6 @@
 import type { Deal, RiskTier } from "../types";
 import type { CofaceRiskGrade } from "./coface-analysis/types";
+import type { MarketIntelCapacityCheck } from "./market-intel/types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
@@ -24,18 +25,55 @@ function clamp(value: number, min = 0, max = 100): number {
  * source dataset have a Coface document on file — the field is live and
  * ready the moment one is uploaded/analyzed for any deal.
  *
- * Three of the ten spec variables (buyer capacity, supplier quality
- * certifications, supplier capacity) still have **no data source at all**
- * anywhere in the current TruMarket CSV exports or document pipeline — per
- * decision 2026-07-24, these keep their spec weight but score at a
+ * Buyer/supplier capacity (vs. monthly volume/production) are wired to
+ * `deal.marketIntel` (Peru customs + SUNAT enrichment, batch-fetched at
+ * build time by scripts/lib/market-intel-cli.ts whenever the supplier
+ * resolves to a valid Peru RUC — see `capacityPoints()` below) — decision
+ * 2026-07-27. Coverage is real but partial: only Peru-based suppliers with
+ * shipment history in that pipeline's data bundle (HS 0810/0811, 2025) get
+ * a non-null `capacity_check`; everyone else scores neutral (0 pts), same
+ * as before this was wired up.
+ *
+ * Supplier quality certifications still have **no data source at all**
+ * anywhere in the current TruMarket CSV exports, document pipeline, or the
+ * market-intel pipeline (customs/SUNAT don't carry certification data) —
+ * per decision 2026-07-24, this keeps its spec weight but scores at a
  * **neutral midpoint (0 pts, neither bonus nor penalty)** until a real
- * source exists, rather than being dropped/redistributed. `NEEDS_DATA_*`
- * markers below are what to wire up once that data lands.
+ * source exists, rather than being dropped/redistributed.
  */
 
-const NEEDS_DATA_BUYER_CAPACITY_POINTS = 0; // spec: ≤50% of monthly vol +5 / >2× −10
-const NEEDS_DATA_SUPPLIER_CAPACITY_POINTS = 0; // spec: ≤30% of production +5 / >100% −15
 const NEEDS_DATA_QUALITY_CERT_POINTS = 0; // spec: multiple certs +15 / at least one +10
+
+/**
+ * Buyer/supplier capacity — spec §4.A: buyer ≤50% of monthly volume +5 />2×
+ * −10; supplier ≤30% of production +5 />100% −15. `market-intel`'s own
+ * `_capacity_flag()` (analysis.py) already encodes these exact same
+ * thresholds (confirmed by reading its source, not a coincidence — both
+ * were built against the same spec), so its flag is used directly rather
+ * than recomputing a ratio from `deal_vs_baseline_pct` here. `STRETCH` and
+ * `NO_BASELINE`/missing both score neutral — the spec has no explicit band
+ * for "in between" or "no data".
+ */
+function capacityPoints(
+  check: MarketIntelCapacityCheck | null | undefined,
+  withinPts: number,
+  overPts: number,
+): number {
+  if (!check) return 0;
+  if (check.flag === "WITHIN_CAPACITY") return withinPts;
+  if (check.flag === "OVER_CAPACITY_FLAG") return overPts;
+  return 0;
+}
+
+function buyerCapacityPoints(deal: Deal): number {
+  const buyerIntel = deal.marketIntel?.dim_a_buyer;
+  const check = buyerIntel && "capacity_check" in buyerIntel ? buyerIntel.capacity_check : null;
+  return capacityPoints(check, 5, -10);
+}
+
+function supplierCapacityPoints(deal: Deal): number {
+  return capacityPoints(deal.marketIntel?.dim_a_supplier.capacity_check, 5, -15);
+}
 
 /**
  * Maps Coface's own CRA/DRA letter grades onto the spec's credit-rating
@@ -142,7 +180,7 @@ export function computeBuyerScore(deal: Deal): number {
       yearsPts +
       creditRatingPoints(deal) +
       licensePts +
-      NEEDS_DATA_BUYER_CAPACITY_POINTS,
+      buyerCapacityPoints(deal),
   );
 }
 
@@ -160,7 +198,7 @@ export function computeSupplierScore(deal: Deal): number {
       yearsPts +
       NEEDS_DATA_QUALITY_CERT_POINTS +
       licensePts +
-      NEEDS_DATA_SUPPLIER_CAPACITY_POINTS,
+      supplierCapacityPoints(deal),
   );
 }
 

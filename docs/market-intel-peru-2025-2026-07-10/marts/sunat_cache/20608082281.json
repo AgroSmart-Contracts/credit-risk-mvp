@@ -1,0 +1,16 @@
+{
+  "ruc": "20608082281",
+  "resolved": true,
+  "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+  "estado": "ACTIVO",
+  "condicion": "HABIDO",
+  "fecha_inscripcion": null,
+  "years_in_business": null,
+  "ubigeo": "150130",
+  "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+  "tipo": null,
+  "actividad_economica": null,
+  "fetched_at": "2026-07-27T16:53:31",
+  "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+  "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)"
+}

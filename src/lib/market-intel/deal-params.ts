@@ -56,7 +56,10 @@ export function customsVariety(product: string, variety?: string): string | null
   return null;
 }
 
-export function parseDealKg(deal: Deal): number | null {
+/** Narrowed from `Deal` so the batch build pipeline (which works with `PlatformDealRecord`, not `Deal`) can reuse these without constructing a full Deal object — both shapes carry `quantityLabel`/`dealValueUSD`. */
+type DealQuantityFields = { quantityLabel: string; dealValueUSD: number };
+
+export function parseDealKg(deal: DealQuantityFields): number | null {
   const label = deal.quantityLabel;
   const kgMatch = label.match(/([\d,]+(?:\.\d+)?)\s*kg/i);
   if (kgMatch) {
@@ -71,21 +74,25 @@ export function parseDealKg(deal: Deal): number | null {
   return null;
 }
 
-export function dealPricePerKg(deal: Deal): number | null {
+export function dealPricePerKg(deal: DealQuantityFields): number | null {
   const kg = parseDealKg(deal);
   if (!kg || deal.dealValueUSD <= 0) return null;
   return deal.dealValueUSD / kg;
 }
 
-export function defaultDealWeek(): string {
-  const now = new Date();
-  const day = now.getUTCDay();
-  const monday = new Date(now);
-  monday.setUTCDate(now.getUTCDate() - ((day + 6) % 7));
+/** W-SUN week string (Monday–Sunday) containing `date` — the format the market-intel pipeline's price/route lookups expect. */
+export function dealWeekFor(date: Date): string {
+  const day = date.getUTCDay();
+  const monday = new Date(date);
+  monday.setUTCDate(date.getUTCDate() - ((day + 6) % 7));
   const sunday = new Date(monday);
   sunday.setUTCDate(monday.getUTCDate() + 6);
   const fmt = (d: Date) => d.toISOString().slice(0, 10);
   return `${fmt(monday)}/${fmt(sunday)}`;
+}
+
+export function defaultDealWeek(): string {
+  return dealWeekFor(new Date());
 }
 
 export function resolveSupplierRuc(deal: Deal): string | null {

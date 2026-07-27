@@ -26,6 +26,22 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
     fieldsNeedingConfirmation.unshift("Supplier years in business");
   }
 
+  /**
+   * SUNAT `estado`/`condicion` (ACTIVO/HABIDO — active & not delinquent) is a
+   * real license/good-standing signal, batch-fetched at build time whenever
+   * the supplier resolves to a Peru RUC (see scripts/lib/market-intel-cli.ts)
+   * — decision 2026-07-27. Falls back to the true-default (documented gap:
+   * no license/KYC source otherwise) when SUNAT didn't resolve. This feeds
+   * both licensePointsSupplier() and the veto register (an inactive/
+   * delinquent SUNAT status is exactly what the veto register's "invalid
+   * export license" check means) — computed once here, not duplicated.
+   */
+  const supplierSunat = record.marketIntel?.dim_a_supplier.sunat;
+  const supplierLicenseValid = supplierSunat?.resolved
+    ? (!supplierSunat.estado || supplierSunat.estado === "ACTIVO") &&
+      (!supplierSunat.condicion || supplierSunat.condicion === "HABIDO")
+    : true;
+
   return {
     id: record.id,
     dealRef: record.dealRef,
@@ -56,8 +72,7 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       name: record.supplierName,
       role: "supplier",
       yearsInBusiness: record.supplierYib,
-      /** DEFAULT (decision 2026-07-24, unchanged): assumed true for all platform users — no license/KYC source in any CSV. See docs/cram-defaults-and-formula-2026-07.md. */
-      licenseValid: true,
+      licenseValid: supplierLicenseValid,
       platformDealsCompleted: record.priorDealsBetweenParties,
       platformCompletionRate:
         milestone >= 7
@@ -102,6 +117,7 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
      */
     cofaceCoverageAmountUSD: record.cofaceCoverageAmountUSD,
     cofaceCoveragePct: record.cofaceCoveragePct,
+    marketIntel: record.marketIntel ?? undefined,
     productRiskProfile: productProfile ?? undefined,
     routeRiskProfile: routeProfile ?? undefined,
     sourceDocuments: record.customsNarrative

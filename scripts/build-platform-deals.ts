@@ -28,11 +28,19 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseCsvRecords } from "./lib/csv";
 import { normalizeCompanyName, companyGroupKey } from "./lib/company-name";
+import { extractValidRuc, fetchMarketIntelSync } from "./lib/market-intel-cli";
 import { lookupProductRisk } from "../src/lib/product-risk-tables";
 import { lookupRouteRisk } from "../src/lib/route-risk-tables";
 import { normalizeDealMilestone } from "../src/lib/deal-milestone";
 import { platformDealToDeal } from "../src/lib/platform-deal-mapper";
 import { computeBuyerScore, computeSupplierScore } from "../src/lib/scoring";
+import {
+  customsDestinationCountry,
+  customsVariety,
+  parseDealKg,
+  dealPricePerKg,
+  dealWeekFor,
+} from "../src/lib/market-intel/deal-params";
 import type {
   PlatformDealRecord,
   PlatformCounterpartyScore,
@@ -50,6 +58,7 @@ interface CompanyMasterEntry {
   name: string;
   yearsInBusiness: number | null;
   yearsInBusinessSource: "csv" | "default";
+  taxIds: string[];
 }
 
 function safeJsonParse(raw: string): Record<string, unknown> | null {
@@ -306,6 +315,28 @@ function main() {
     const buyerYib = buyerMaster?.yearsInBusiness ?? null;
     const supplierYib = supplierMaster?.yearsInBusiness ?? null;
 
+    // Market-intel (Peru customs + SUNAT) enrichment — real rows only, and
+    // only when the supplier resolves to a valid Peru RUC. See
+    // scripts/lib/market-intel-cli.ts. Feeds buyer/supplier capacity points
+    // in computeBuyerScore()/computeSupplierScore() (src/lib/scoring.ts).
+    const quantityLabel = row.quantity ? `${row.quantity} units` : "";
+    let marketIntel = null;
+    if (!isSynthetic) {
+      const supplierRuc = supplierMaster ? extractValidRuc(supplierMaster.taxIds) : null;
+      if (supplierRuc) {
+        const dealKg = parseDealKg({ quantityLabel, dealValueUSD }) ?? undefined;
+        marketIntel = fetchMarketIntelSync({
+          exporterRuc: supplierRuc,
+          importerName: buyerName,
+          destinationCountry: customsDestinationCountry(destStr) ?? undefined,
+          variety: customsVariety(product, row.variety) ?? undefined,
+          dealWeek: row.createdAt ? dealWeekFor(new Date(row.createdAt)) : undefined,
+          dealKg,
+          dealPriceUsdPerKg: dealPricePerKg({ quantityLabel, dealValueUSD }) ?? undefined,
+        });
+      }
+    }
+
     const missingFields: string[] = [];
     if (buyerYib === null) missingFields.push("buyer.yearsInBusiness");
     if (supplierYib === null) missingFields.push("supplier.yearsInBusiness");
@@ -325,7 +356,7 @@ function main() {
       dealRef: row.name || row._id,
       product,
       variety: row.variety || "",
-      quantityLabel: row.quantity ? `${row.quantity} units` : "",
+      quantityLabel,
       dealValueUSD,
       origin: originStr,
       destination: destStr,
@@ -356,6 +387,7 @@ function main() {
       // keeps them out of platformDealsReadyForCounterparty/Blocked entirely
       // even if a fake company name happens to collide with a real one.
       counterpartyReady: !isSynthetic && buyerYib !== null && supplierYib !== null,
+      marketIntel,
       // Retired 2026-07-24: the old "HTML formula tester" pre-computation
       // this fed is gone. Real counterparty/overall scores are computed live
       // via computeCounterpartyScore()/computeOverallScore() through
@@ -507,9 +539,14 @@ export const platformDealsSynthetic: PlatformDealRecord[] = ${JSON.stringify(syn
   writeFileSync(join(OUT_DIR, "platform-deals.ts"), tsFile);
 
   const readyCount = records.filter((r) => r.counterpartyReady).length;
+  const marketIntelCount = records.filter((r) => r.marketIntel !== null).length;
+  const supplierCapacityKnown = records.filter(
+    (r) => r.marketIntel?.dim_a_supplier.capacity_check,
+  ).length;
   console.log(`Excluded ${excludedTestCount} likely_test rows out of ${allRows.length} total (still built into platformDealsSynthetic).`);
   console.log(`Kept ${records.length} real/unverified deals; ${readyCount} counterparty-ready.`);
   console.log(`${counterpartyScores.length} scored (company, role, product) counterparty profiles; ${counterpartyBlocked.length} blocked (missing YIB).`);
+  console.log(`Market-intel: ${marketIntelCount}/${records.length} deals got a response (valid Peru supplier RUC resolved); ${supplierCapacityKnown} of those have a usable supplier capacity_check (shipment history in this data bundle).`);
   console.log(`Products with no confirmed table row (deal count): ${[...productMissCount.entries()].map(([p, n]) => `${p}=${n}`).join(", ") || "none"}`);
   console.log(`Distinct unmatched routes (${routeMissCount.size}):`);
   for (const [route, n] of routeMissCount) console.log(`  ${route} (${n} deals)`);
