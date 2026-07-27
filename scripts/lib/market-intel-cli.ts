@@ -13,21 +13,11 @@ import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { MarketIntelPayload, MarketIntelRateRequest } from "../../src/lib/market-intel/types";
+export { extractValidRuc } from "../../src/lib/market-intel/ruc";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MI_DIR = join(__dirname, "..", "..", "docs", "market-intel-peru-2025-2026-07-10");
 const RATE_JSON_SCRIPT = join(MI_DIR, "scripts", "rate-json.py");
-
-/**
- * company-master.json's `taxIds` mixes formats from every country in the
- * deal book (Russian, Indian, Portuguese IDs alongside real Peru RUCs) —
- * only an 11-digit numeric string is a plausible Peru RUC. One entry
- * (`MCORP`) carries an obvious placeholder (`123123123123`, 12 digits),
- * confirming this filter is load-bearing, not decorative.
- */
-export function extractValidRuc(taxIds: string[]): string | null {
-  return taxIds.find((id) => /^\d{11}$/.test(id)) ?? null;
-}
 
 /**
  * Only ENOENT (no python3 binary on PATH at all) is a permanent condition —

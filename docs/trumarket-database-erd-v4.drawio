@@ -1,0 +1,538 @@
+<mxfile host="app.diagrams.net" agent="Cursor">
+  <diagram id="trumarket-prod-erd" name="TruMarket prod ERD">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="2000" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=16;" value="TruMarket MongoDB — prod database (TruMarket-dev cluster)&#xa;14 collections · string FK refs unless noted" vertex="1">
+          <mxGeometry height="50" width="800" x="450" y="-830" as="geometry" />
+        </mxCell>
+        <mxCell id="users" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;users&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;email (unique sparse)&lt;br&gt;accountType (buyer|supplier|investor)&lt;br&gt;walletAddress (unique)&lt;br&gt;walletType&lt;br&gt;role&lt;br&gt;createdAt&lt;br&gt;desktopNotifications {…}&lt;br&gt;emailNotifications {…}&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;companies via user_companies (M:N)&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="205" width="240" x="-30" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="bankaccounts" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;bankaccounts&lt;/b&gt;&#xa;────────────────&#xa;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&#xa;userId &lt;font color=&quot;#006600&quot;&gt;FK→users&lt;/font&gt;&#xa;accountType (buyer|supplier)&#xa;provider (OSN|LEGACY)&#xa;providerAccountId&#xa;status (ACTIVE|PENDING)&#xa;currencyCode, countryCode&#xa;bankName, accountHolderName&#xa;accountNumberEncrypted&#xa;accountLast4, swiftBic&#xa;isDefault, archived&#xa;createdAt, updatedAt" vertex="1">
+          <mxGeometry height="240" width="240" x="-430" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kyc" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;kybverifications&lt;/b&gt;&lt;div&gt;&lt;i&gt;companies are verified, not users&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;companyId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;attempts&lt;br&gt;status (notStarted|inProgress|complete)&lt;br&gt;result (pass|fail|manualReview)&lt;br&gt;licenseValidity&lt;br&gt;createdAt, updatedAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="165" width="240" x="-30" y="-1060" as="geometry" />
+        </mxCell>
+        <mxCell id="deals" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;deals&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;productId &lt;font color=&quot;#6600cc&quot;&gt;FK→Product&lt;/font&gt;&lt;br&gt;name, description&lt;br&gt;contractId (on-chain #)&lt;br&gt;contractAddress, nftID&lt;br&gt;origin, destination&lt;br&gt;portOfOrigin, portOfDestination&lt;br&gt;offerUnitPrice, quantity,&lt;br&gt;transport, variety, quality - qualityGrade&lt;br&gt;shippingStartDate&lt;br&gt;expectedShippingEndDate&lt;br&gt;originManual, destinationManual&lt;br&gt;portOfOriginManual, portOfDestinationManual&lt;br&gt;offerUnitPriceManual, quantityManual&lt;br&gt;transportManual, varietyManual, qualityManual - qualityGrade&lt;br&gt;shippingStartDateManual&lt;br&gt;expectedShippingEndDateManual&lt;br&gt;currentMilestone, milestones[]&lt;br&gt;status (proposal|confirmed|finished|repaid)&lt;br&gt;investmentAmount, revenue, roi&lt;br&gt;buyers[] →users&lt;br&gt;suppliers[] →users&lt;br&gt;payments[] →payments&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;buyerCompanyId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;supplierCompanyId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;docs[], whitelist[]&lt;br&gt;drawbackStatus*&lt;br&gt;createdAt&lt;br&gt;computed: totalValue, duration&lt;/div&gt;" vertex="1">
+          <mxGeometry height="480" width="300" x="1080" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="milestone" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;dashed=1;dashPattern=8 8;" value="&lt;b&gt;«embedded» Milestone&lt;/b&gt;&lt;div&gt;&lt;i&gt;in deals.milestones[]&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id&lt;br&gt;description&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;fundsDistribution (0-100) &lt;i&gt;⚠ still used?&lt;/i&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;updatedAt&lt;/font&gt;&lt;br&gt;docs[] → Document&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="200" x="1020" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="document" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;dashed=1;dashPattern=8 8;" value="&lt;b&gt;«embedded» Document&lt;/b&gt;&#xa;deals.docs[] / milestone.docs[]&#xa;payments.paymentDocuments[]&#xa;────────────────&#xa;description, url&#xa;documentUploadMode&#xa;tradePdfClassification&#xa;peruDrawbackClassification&#xa;verifiedByAdmin, publiclyVisible" vertex="1">
+          <mxGeometry height="130" width="220" x="690" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="payments" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;payments&lt;/b&gt;&#xa;────────────────&#xa;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&#xa;dealId &lt;font color=&quot;#006600&quot;&gt;FK→deals&lt;/font&gt;&#xa;buyerId &lt;font color=&quot;#006600&quot;&gt;FK→users&lt;/font&gt;&#xa;supplierId &lt;font color=&quot;#006600&quot;&gt;FK→users&lt;/font&gt;&#xa;supplierEmail&#xa;sequence, dueDate&#xa;method, amount, currency&#xa;feeQuote&#xa;bankDetails {…}&#xa;status&#xa;providerTransfers[]&#xa;paymentDocuments[]&#xa;isOfframpRequested&#xa;createdAt + workflow timestamps" vertex="1">
+          <mxGeometry height="280" width="260" x="710" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ppt" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;paymentprovidertransfers&lt;/b&gt;&#xa;────────────────&#xa;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&#xa;paymentId &lt;font color=&quot;#006600&quot;&gt;FK→payments&lt;/font&gt;&#xa;actorUserId &lt;font color=&quot;#006600&quot;&gt;FK→users&lt;/font&gt;&#xa;provider (OSN)&#xa;type (OSN_MINT)&#xa;request, response&#xa;providerMintRequestId&#xa;providerPaymentId&#xa;depositInstructions&#xa;estimatedFees&#xa;createdAt, updatedAt" vertex="1">
+          <mxGeometry height="220" width="260" x="710" y="-760" as="geometry" />
+        </mxCell>
+        <mxCell id="dealslogs" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="&lt;b&gt;dealslogs&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;contractId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;→deals.contractId&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;(on-chain number, NOT Mongo _id)&lt;/i&gt;&lt;/font&gt;&lt;br&gt;event, args&lt;br&gt;blockNumber&lt;br&gt;blockTimestamp&lt;br&gt;txHash, message&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="280" x="1050" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="syncjobs" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="&lt;b&gt;syncdealslogsjobs&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;type (DealsManager|Vault)&lt;br&gt;contract (address)&lt;br&gt;lastBlock, lastExecution&lt;br&gt;lastStatus, error, active&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;contractId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;→deals.contractId&lt;/font&gt; (optional)&lt;br&gt;createdAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="155" width="280" x="1380" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="config_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=12;" value="Configuration (keyed by provider — no FKs)" vertex="1">
+          <mxGeometry height="30" width="280" x="1590" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fee_settings" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="&lt;b&gt;fee_settings&lt;/b&gt;&#xa;────────────────&#xa;_id PK · provider (OSN)&#xa;buyerFeePercent&#xa;supplierFeePercent&#xa;absorbProviderFeeByBuyer&#xa;absorbProviderFeeBySupplier&#xa;active&#xa;updatedByAdminUserId&#xa;createdAt, updatedAt" vertex="1">
+          <mxGeometry height="170" width="240" x="1610" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="onramp" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="&lt;b&gt;onramp_general_settings&lt;/b&gt;&#xa;────────────────&#xa;_id PK · provider (TRUMARKET)&#xa;platformMarkupBps&#xa;promoCodes[]&#xa;productionEnabledPartners[]&#xa;buyerFeePercent&#xa;supplierFeePercent&#xa;absorbProviderFee*&#xa;active&#xa;createdAt, updatedAt" vertex="1">
+          <mxGeometry height="190" width="240" x="1610" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="tm_settings" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="&lt;b&gt;trumarket_settings&lt;/b&gt;&#xa;(admin-dashboard)&#xa;────────────────&#xa;_id PK · provider (OSN)&#xa;organizationId&#xa;defaultOrganizationBankId&#xa;defaultWalletId&#xa;defaultRecipientId&#xa;defaultCurrencyCode&#xa;defaultChainId&#xa;supportedChainIds[] …&#xa;createdAt, updatedAt" vertex="1">
+          <mxGeometry height="190" width="240" x="1610" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="dup_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=2" value="trumarket_settings ↔ trumarketsettings&#xa;Same logical OSN runtime config — confirm canonical collection in prod" vertex="1">
+          <mxGeometry height="60" width="240" x="1610" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_ub" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;fontSize=10;" target="bankaccounts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-120" y="180" />
+              <mxPoint x="-120" y="180" />
+            </Array>
+            <mxPoint x="-190" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_ub_l" connectable="0" parent="rel_ub" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="userId" vertex="1">
+          <mxGeometry relative="1" x="-0.2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_uk" edge="1" parent="1" source="companies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="kyc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="-700" />
+              <mxPoint x="90" y="-700" />
+            </Array>
+            <mxPoint x="-10" y="200" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_uk_l" connectable="0" parent="rel_uk" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="companyId" vertex="1">
+          <mxGeometry relative="1" x="-0.2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dp" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;" target="payments">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_dp_l" connectable="0" parent="rel_dp" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="dealId" vertex="1">
+          <mxGeometry relative="1" x="-0.1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_up_b" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;dashed=1;" target="payments">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="160" />
+              <mxPoint x="340" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_up_b_l" connectable="0" parent="rel_up_b" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="buyerId" vertex="1">
+          <mxGeometry relative="1" x="0.1" as="geometry">
+            <mxPoint x="10" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_up_s" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERzeroToOne;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;dashed=1;" target="payments">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="190" />
+              <mxPoint x="660" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_up_s_l" connectable="0" parent="rel_up_s" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="supplierId?" vertex="1">
+          <mxGeometry relative="1" x="0.1" as="geometry">
+            <mxPoint x="5" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_du" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;dashed=1;strokeColor=#006600;exitX=-0.002;exitY=0.286;exitDx=0;exitDy=0;exitPerimeter=0;" target="users">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="147.3" />
+              <mxPoint x="1040" y="120.09" />
+            </Array>
+            <mxPoint x="1040" y="179.9988235294117" as="sourcePoint" />
+            <mxPoint x="230" y="89.99882352941171" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_du_l" connectable="0" parent="rel_du" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="buyers[] / suppliers[]&#xa;id | email" vertex="1">
+          <mxGeometry relative="1" x="-0.1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_pp" edge="1" parent="1" source="payments" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;" target="ppt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pp_l" connectable="0" parent="rel_pp" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="paymentId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_u_ppt" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ppt">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="110.07" y="-639.93" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_u_ppt_l" connectable="0" parent="rel_u_ppt" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="actorUserId" vertex="1">
+          <mxGeometry relative="1" x="0.5" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dn" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;" target="notifications">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1320" y="780" />
+              <mxPoint x="1320" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dn_l" connectable="0" parent="rel_dn" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="dealId?" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_un" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;dashed=1;" target="notifications">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90.07" y="580.07" />
+              <mxPoint x="1060.07" y="580.07" />
+              <mxPoint x="1060.07" y="920.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_un_l" connectable="0" parent="rel_un" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="userId (email)" vertex="1">
+          <mxGeometry relative="1" x="0.3" as="geometry">
+            <mxPoint y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_ddl" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;strokeColor=#9673a6;" target="dealslogs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="160" />
+              <mxPoint x="1200" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_ddl_l" connectable="0" parent="rel_ddl" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#6600cc;" value="contractId → dealId&#xa;(on-chain number)" vertex="1">
+          <mxGeometry relative="1" x="0.2" as="geometry">
+            <mxPoint x="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dj" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERzeroToOne;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;strokeColor=#9673a6;dashed=1;" target="syncjobs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1530" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dj_l" connectable="0" parent="rel_dj" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#6600cc;" value="dealId? (contractId)" vertex="1">
+          <mxGeometry relative="1" x="0.3" as="geometry">
+            <mxPoint x="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dm" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamond;endArrow=none;startFill=1;endFill=0;strokeWidth=1;strokeColor=#82b366;dashed=1;" target="milestone">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1120" y="570" />
+              <mxPoint x="1120" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dm_l" connectable="0" parent="rel_dm" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="embeds" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_md" edge="1" parent="1" source="milestone" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamond;endArrow=none;startFill=1;endFill=0;strokeWidth=1;strokeColor=#82b366;dashed=1;" target="document">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="760" />
+              <mxPoint x="970" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dd" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamond;endArrow=none;startFill=1;endFill=0;strokeWidth=1;strokeColor=#82b366;dashed=1;" target="document">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dd_l" connectable="0" parent="rel_dd" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="docs[]" vertex="1">
+          <mxGeometry relative="1" x="0.5" as="geometry">
+            <mxPoint y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_pd" edge="1" parent="1" source="payments" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamond;endArrow=none;startFill=1;endFill=0;strokeWidth=1;strokeColor=#82b366;dashed=1;" target="document">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="580" />
+              <mxPoint x="760" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_pd_l" connectable="0" parent="rel_pd" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" value="paymentDocuments[]" vertex="1">
+          <mxGeometry relative="1" x="0.4" as="geometry">
+            <mxPoint y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dpay" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;strokeColor=#999999;dashed=1;" target="payments">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1230.04" y="520" />
+              <mxPoint x="700.04" y="520" />
+              <mxPoint x="700.04" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_dpay_l" connectable="0" parent="rel_dpay" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#666666;" value="payments[] (id list)" vertex="1">
+          <mxGeometry relative="1" x="0.6" as="geometry">
+            <mxPoint x="10" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="notifications" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;notifications&lt;/b&gt;&#xa;────────────────&#xa;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&#xa;userId &lt;font color=&quot;#006600&quot;&gt;FK→users (often email)&lt;/font&gt;&#xa;dealId &lt;font color=&quot;#006600&quot;&gt;FK→deals&lt;/font&gt;&#xa;subject, message&#xa;redirectUrl, read&#xa;createdAt" vertex="1">
+          <mxGeometry height="150" width="260" x="1260" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="NRzvWBgIwWhj0jHyNVB4-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;Customs&lt;/b&gt;&lt;div&gt;&lt;i&gt;grain: 1 row per DUA declaration&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;userId &lt;font color=&quot;#6600cc&quot;&gt;FK→users&lt;/font&gt; (optional)&lt;br&gt;exporterName, importerName&lt;br&gt;declarationNumber (DUA)&lt;br&gt;tariffCode, tariffDescription&lt;br&gt;shipmentDate&lt;br&gt;grossWeight, netWeight&lt;br&gt;fobValueTotal&lt;br&gt;destinationCountry, destinationPort&lt;br&gt;lastPortOfLoading, transportMode&lt;br&gt;shippingLine, customsBroker&lt;br&gt;freightForwarders&lt;br&gt;inspectionChannel&lt;br&gt;createdAt, updatedAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="300" width="250" x="280" y="-1200" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;Counterparty&lt;/b&gt;&lt;div&gt;&lt;i&gt;score per company × product&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;companyId &lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;productId &lt;font color=&quot;#6600cc&quot;&gt;FK→Product&lt;/font&gt;&lt;br&gt;UNIQUE (companyId, productId)&lt;br&gt;shipmentsCount, distinctBuyersCount&lt;br&gt;firstShipmentDate, lastShipmentDate&lt;br&gt;yearsActiveWithProduct&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;dataWindowStart, dataWindowEnd&lt;/font&gt;&lt;br&gt;totalNetWeightKg, totalFobUsd&lt;br&gt;avgShipmentFobUsd, maxShipmentFobUsd&lt;br&gt;destinationMarkets[]&lt;br&gt;qualityRejectionRatePct &lt;i&gt;(this product)&lt;/i&gt;&lt;br&gt;avgPaymentDelayDays &lt;i&gt;(this product)&lt;/i&gt;&lt;br&gt;platformDealsCount, completionRatePct&lt;br&gt;experienceScore 0–100&lt;br&gt;confidenceWeight 0–1 &lt;i&gt;(n-based)&lt;/i&gt;&lt;br&gt;source (VERITRADE|SUNAT|PLATFORM)&lt;br&gt;computedAt, engineVersion&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;— cofaceBuyerRatingId / userId removed —&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="350" width="240.16" x="-270.16" y="717.5" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;CofaceBuyerRating&lt;/b&gt;&lt;div&gt;&lt;i&gt;buyers only · append-only, never updated in place&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;companyId &lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;companyRiskGrade (DRA)&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;observedAt&lt;/font&gt;&lt;br&gt;source&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;UNIQUE (companyId, observedAt)&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;— countryRiskGrade → CountryRisk —&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="175" width="240.16" x="139.84" y="615" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;CRAM Assessment&lt;/b&gt;&lt;div&gt;&lt;i&gt;grain: (dealId, runSeq) · deal is single-product&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;dealId &lt;font color=&quot;#6600cc&quot;&gt;FK→deals&lt;/font&gt;&lt;br&gt;runSeq, supersedesRunId&lt;br&gt;status (PROVISIONAL|FINAL|&lt;br&gt;&amp;#160;&amp;#160;SUPERSEDED|VETO)&lt;br&gt;engineVersion, referenceTablesVersion&lt;br&gt;computedAt, asOf&lt;br&gt;───── snapshotted inputs ─────&lt;br&gt;buyerCounterpartyId &lt;font color=&quot;#6600cc&quot;&gt;FK→Counterparty&lt;/font&gt;&lt;br&gt;supplierCounterpartyId &lt;font color=&quot;#6600cc&quot;&gt;FK→Counterparty&lt;/font&gt;&lt;br&gt;productId &lt;font color=&quot;#6600cc&quot;&gt;FK→Product&lt;/font&gt;&lt;br&gt;routeId &lt;font color=&quot;#6600cc&quot;&gt;FK→Route&lt;/font&gt;&lt;br&gt;transactionStructureId &lt;font color=&quot;#6600cc&quot;&gt;FK→TxStructure&lt;/font&gt;&lt;br&gt;cofaceDealDecisionId &lt;font color=&quot;#6600cc&quot;&gt;FK&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;buyerCofaceRatingId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;FK→CofaceBuyerRating&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;countryRiskId &lt;/font&gt;&lt;font color=&quot;#6600cc&quot;&gt;FK→CountryRisk&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;───── snapshotted values ─────&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;buyerExperienceScore&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;supplierExperienceScore&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;confidenceWeight&lt;/font&gt;&lt;br&gt;requestedFinancingUsd&lt;br&gt;exposureToAnnualSalesPct&lt;br&gt;exposureToMaxTicketX&lt;br&gt;──────────────────&lt;br&gt;overallScore&lt;/div&gt;" vertex="1">
+          <mxGeometry height="430" width="295" x="520" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-8" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="480" width="760" x="450" y="1740" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-9" parent="jPfcLwfYIzK7OQ5M1FgJ-8" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;Product&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;tariffCode&lt;br&gt;tariffDescription / product name&lt;br&gt;product type (in case of non agro fields)&lt;br&gt;productRiskScore&lt;br&gt;shelfLifeDays&lt;br&gt;perishability_class&lt;br&gt;productCategory&lt;br&gt;coldChain&lt;br&gt;productPriceRange&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;effectiveFrom, effectiveTo&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="204.08" x="-20" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-10" connectable="0" parent="jPfcLwfYIzK7OQ5M1FgJ-8" style="group" value="" vertex="1">
+          <mxGeometry height="270" width="495" x="265" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-16" parent="jPfcLwfYIzK7OQ5M1FgJ-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Reference tables (versioned · ref-vA.B)" vertex="1">
+          <mxGeometry height="30" width="520" x="-170" y="18" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-7" parent="jPfcLwfYIzK7OQ5M1FgJ-10" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;Route(T2)&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;originCountry, destinationCountry&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;originPortLocode, destinationPortLocode&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;ports null = country-level fallback&lt;/i&gt;&lt;/font&gt;&lt;br&gt;transitDays&lt;br&gt;bestRouteRiskFlag&lt;br&gt;riskOverrideValue&lt;br&gt;effectiveFrom, effectiveTo&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="204.08" x="-25" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;TxStructure&lt;/b&gt;&lt;div&gt;&lt;i&gt;deal-owned — NOT reference data&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;dealId &lt;font color=&quot;#6600cc&quot;&gt;FK→deals&lt;/font&gt; UNIQUE&lt;br&gt;advancePaymentPct, paymentTerms&lt;br&gt;collateralType, collateralValueUsd&lt;br&gt;insuranceCoverage, insuranceValueUsd&lt;br&gt;priorDealsBetweenParties&lt;br&gt;contractType&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;— leg removed —&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="185" width="250" x="1450" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_cram_deal" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;endArrow=ERone;startFill=0;endFill=0;strokeWidth=2;strokeColor=#00897B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1230" y="1430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cram_deal_l" connectable="0" parent="rel_cram_deal" style="edgeLabel;html=1;fontSize=9;fontStyle=1" value="dealId · 1:N (runs)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cram_prod" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#00897B;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="593.8" y="1820" />
+              <mxPoint x="583.1" y="1820" />
+            </Array>
+            <mxPoint x="440" y="1450" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cram_prod_l" connectable="0" parent="rel_cram_prod" style="edgeLabel;html=1;fontSize=9;" value="productId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cram_route" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#00897B;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="741.29" y="1950" />
+              <mxPoint x="792" y="1950" />
+            </Array>
+            <mxPoint x="618.5" y="1530" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cram_route_l" connectable="0" parent="rel_cram_route" style="edgeLabel;html=1;fontSize=9;" value="routeId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cram_ts" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#00897B;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_cram_ts_l" connectable="0" parent="rel_cram_ts" style="edgeLabel;html=1;fontSize=9;" value="transactionStructureId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_prod" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#00897B;dashed=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="1800" />
+              <mxPoint x="481" y="1800" />
+            </Array>
+            <mxPoint x="1080" y="500" as="sourcePoint" />
+            <mxPoint x="-400" y="1559.1" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_prod_l" connectable="0" parent="rel_deals_prod" style="edgeLabel;html=1;fontSize=9;" value="productId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="companies" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;companies&lt;/b&gt;&lt;div&gt;&lt;i&gt;canonical legal entity · no user required&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;taxIdType (RUC|NIT|EIN|…)&lt;br&gt;taxId&lt;br&gt;country ISO 3166-1 α-2&lt;br&gt;UNIQUE (taxIdType, taxId, country)&lt;br&gt;legalName, tradeName&lt;br&gt;yearsInBusiness&lt;br&gt;registryStatus, registeredAt&lt;br&gt;source (SUNAT|KYB|MANUAL)&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;──── exposure denominators ────&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;annualSalesUsd, salesSource&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;salesPeriod, salesAsOf&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;maxHistoricalTicketUsd&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;────────────────&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;customsIds[] &lt;i&gt;customs history&lt;/i&gt;&lt;/font&gt;&lt;br&gt;createdAt, updatedAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="320" width="260" x="275" y="-430" as="geometry" />
+        </mxCell>
+        <mxCell id="coface_cover" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;CofaceDealDecision&lt;/b&gt;&lt;div&gt;&lt;i&gt;deal-scoped cover decision&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;dealId &lt;font color=&quot;#6600cc&quot;&gt;FK→deals&lt;/font&gt;&lt;br&gt;buyerRatingId &lt;font color=&quot;#6600cc&quot;&gt;FK→CofaceBuyerRating&lt;/font&gt;&lt;br&gt;requestedAmount, approvedAmount&lt;br&gt;coveragePct&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;coverCurrency&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;policyholderEntity&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;validFrom, validTo, claimWindowDays&lt;/font&gt;&lt;br&gt;decisionDate&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200" width="250" x="130" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_a_cover" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.1;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="coface_cover">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_a_cover_l" connectable="0" parent="rel_a_cover" style="edgeLabel;html=1;fontSize=9;" value="cofaceDealDecisionId (snapshot)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_txs" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=1;exitY=0.95;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1580" y="466" />
+              <mxPoint x="1580" y="1410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_txs_l" connectable="0" parent="rel_deals_txs" style="edgeLabel;html=1;fontSize=9;fontStyle=1" value="dealId UNIQUE 1:1" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-30" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user_companies" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#B85C00;strokeWidth=2;fontSize=11;" value="&lt;b&gt;user_companies&lt;/b&gt;&lt;div&gt;&lt;i&gt;a user may hold several companies&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;userId &lt;font color=&quot;#6600cc&quot;&gt;FK→users&lt;/font&gt;&lt;br&gt;companyId &lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;relationship (owner|signatory|&lt;br&gt;&amp;#160;&amp;#160;employee)&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;UNIQUE (userId, companyId)&lt;/font&gt;&lt;br&gt;createdAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="250" x="-230" y="-450" as="geometry" />
+        </mxCell>
+        <mxCell id="country_risk" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;CountryRisk&lt;/b&gt;&lt;div&gt;&lt;i&gt;append-only · one fact per country&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;countryCode ISO 3166-1 α-2&lt;br&gt;countryRiskGrade (CRA)&lt;br&gt;observedAt&lt;br&gt;source&lt;br&gt;UNIQUE (countryCode, observedAt)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="145" width="225" x="610" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_u_uc" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.15;exitY=0;exitDx=0;exitDy=0;entryX=0.921;entryY=1.012;entryDx=0;entryDy=0;entryPerimeter=0;" target="user_companies">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_u_uc_l" connectable="0" parent="rel_u_uc" style="edgeLabel;html=1;fontSize=9;" value="userId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_uc" edge="1" parent="1" source="companies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0;exitY=0.15;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="user_companies">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_co_uc_l" connectable="0" parent="rel_co_uc" style="edgeLabel;html=1;fontSize=9;" value="companyId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cus" edge="1" parent="1" source="companies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="NRzvWBgIwWhj0jHyNVB4-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="405" y="-490" />
+              <mxPoint x="405" y="-490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cus_l" connectable="0" parent="rel_co_cus" style="edgeLabel;html=1;fontSize=9;" value="customsIds[]" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cpt" edge="1" parent="1" source="companies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="405" y="490" />
+              <mxPoint x="-150" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cpt_l" connectable="0" parent="rel_co_cpt" style="edgeLabel;html=1;fontSize=9;" value="companyId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_prd_cpt" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-90" y="2095" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_prd_cpt_l" connectable="0" parent="rel_prd_cpt" style="edgeLabel;html=1;fontSize=9;" value="productId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cfr" edge="1" parent="1" source="companies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=1;entryY=0.35;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="-158" />
+              <mxPoint x="620" y="701.33" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cfr_l" connectable="0" parent="rel_co_cfr" style="edgeLabel;html=1;fontSize=9;" value="companyId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cfr_cover" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;" target="coface_cover">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_cfr_cover_l" connectable="0" parent="rel_cfr_cover" style="edgeLabel;html=1;fontSize=9;" value="buyerRatingId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cover_deal" edge="1" parent="1" source="coface_cover" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=1;exitY=0.1;exitDx=0;exitDy=0;entryX=0;entryY=0.95;entryDx=0;entryDy=0;" target="deals">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010.07" y="910.07" />
+              <mxPoint x="1010.07" y="466.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_cover_deal_l" connectable="0" parent="rel_cover_deal" style="edgeLabel;html=1;fontSize=9;" value="dealId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_co_b" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;dashed=1;exitX=0;exitY=0.05;exitDx=0;exitDy=0;entryX=1;entryY=0.1;entryDx=0;entryDy=0;" target="companies">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_deals_co_b_l" connectable="0" parent="rel_deals_co_b" style="edgeLabel;html=1;fontSize=9;" value="buyerCompanyId /&amp;#xa;supplierCompanyId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_asm_cpt_b" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=0.15;entryY=1;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-234.12" y="1379.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_asm_cpt_b_l" connectable="0" parent="rel_asm_cpt_b" style="edgeLabel;html=1;fontSize=9;" value="buyerCounterpartyId /&amp;#xa;supplierCounterpartyId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_asm_cfr" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.15;exitY=0;exitDx=0;exitDy=0;entryX=1.018;entryY=0.804;entryDx=0;entryDy=0;entryPerimeter=0;" target="jPfcLwfYIzK7OQ5M1FgJ-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="564.33" y="755.67" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_asm_cfr_l" connectable="0" parent="rel_asm_cfr" style="edgeLabel;html=1;fontSize=9;" value="buyerCofaceRatingId (snapshot)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_asm_cr" edge="1" parent="1" source="jPfcLwfYIzK7OQ5M1FgJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0.6;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="country_risk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_asm_cr_l" connectable="0" parent="rel_asm_cr" style="edgeLabel;html=1;fontSize=9;" value="countryRiskId (snapshot)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_rte" edge="1" parent="1" source="deals" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;dashed=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1155" y="1600" />
+              <mxPoint x="1230" y="1600" />
+              <mxPoint x="1230" y="2030" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_deals_rte_l" connectable="0" parent="rel_deals_rte" style="edgeLabel;html=1;fontSize=9;" value="routeId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -14,6 +14,7 @@ import { buildRiskAssessment, formatUSD } from "../lib/assessment";
 import { getTierColors } from "../lib/risk-colors";
 import { useDataCorrections, downloadYibCorrectionsCsv } from "../lib/data-corrections";
 import { CargoInsuranceSection } from "./CargoInsuranceSection";
+import { CompanyTaxIdSection } from "./CompanyTaxIdSection";
 
 interface DealMissingFieldsTabProps {
   onViewDeal?: (dealId: string) => void;
@@ -158,6 +159,8 @@ export function DealMissingFieldsTab({
       </div>
 
       <CargoInsuranceSection query={query} />
+
+      <CompanyTaxIdSection />
 
       <div className="space-y-3">
         {rows.map(({ deal, assessment }) => (

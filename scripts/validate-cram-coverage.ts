@@ -16,6 +16,18 @@ import {
 } from "../src/data/platform-deals";
 import { platformDealToDeal } from "../src/lib/platform-deal-mapper";
 import { checkVetoRegister, computeOverallScore } from "../src/lib/scoring";
+import { extractValidRuc } from "../src/lib/market-intel/ruc";
+import companyMasterRaw from "../src/data/company-master.json";
+
+interface CompanyMasterEntry {
+  key: string;
+  name: string;
+  countries: string[];
+  roles: string[];
+  taxIds: string[];
+  dealCount: number;
+}
+const companyMaster = companyMasterRaw as CompanyMasterEntry[];
 
 function pct(n: number, total: number): string {
   if (total === 0) return "n/a";
@@ -108,6 +120,41 @@ function main() {
         "  see docs/cram-defaults-and-formula-2026-07.md for what's already wired vs still missing.\n",
     );
   }
+
+  // --- Tax ID / RUC coverage (company-master.json) -------------------------
+  // Not itself a CRAM scoring input, but a valid Peru RUC is the sole gate
+  // for market-intel enrichment (buyer/supplier capacity + real SUNAT
+  // license status) — see scripts/lib/market-intel-cli.ts. ERD v4's
+  // `companies` entity also keys company identity on
+  // UNIQUE(taxIdType, taxId, country), so completeness matters for DB
+  // standardization independent of scoring.
+  console.log("Tax ID / RUC coverage (company-master.json)");
+  const companiesTotal = companyMaster.length;
+  const validRucCount = companyMaster.filter((c) => extractValidRuc(c.taxIds)).length;
+  const peruNoValidRuc = companyMaster.filter(
+    (c) => !extractValidRuc(c.taxIds) && c.countries.includes("Peru"),
+  );
+  const notPeruCount = companyMaster.filter(
+    (c) => !extractValidRuc(c.taxIds) && !c.countries.includes("Peru"),
+  ).length;
+  const duplicateTaxIds = companyMaster.filter((c) => c.taxIds.length > 1);
+
+  line("Companies with a valid Peru RUC", validRucCount, companiesTotal);
+  console.log(
+    `  Peru-based companies with NO valid RUC          ${String(peruNoValidRuc.length).padStart(3)}/${companiesTotal}` +
+      (peruNoValidRuc.length > 0
+        ? `  — ⚠ ${peruNoValidRuc.map((c) => `${c.name} (taxIds: ${JSON.stringify(c.taxIds)})`).join(", ")}`
+        : ""),
+  );
+  console.log(
+    `  Non-Peru companies (RUC not applicable)          ${String(notPeruCount).padStart(3)}/${companiesTotal}  — already carry their own country's tax ID instead; unverified against that country's format`,
+  );
+  if (duplicateTaxIds.length > 0) {
+    console.log(
+      `  Companies with >1 tax ID on file (needs reconciliation): ${duplicateTaxIds.map((c) => `${c.name} ${JSON.stringify(c.taxIds)}`).join("; ")}`,
+    );
+  }
+  console.log();
 }
 
 main();
