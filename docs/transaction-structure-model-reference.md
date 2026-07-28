@@ -3,6 +3,25 @@
 **Prepared by:** Kanato Foley (TruMarket) · **Last updated:** 2026-07-11
 **Purpose:** complete, precise reference to the Transaction Structure scoring model's formulas, calibration, and data shape — for whoever is integrating this with the other three CRAM dimensions (Counterparty, Product, Trade Route).
 
+> **Integrated 2026-07-28**: this model is now live as the real Dimension D
+> (`src/lib/transaction-structure/compute.ts`), resolving §2's open question —
+> it's a **weighted component** feeding the CRAM composite (not standalone),
+> replacing the previous flat category-lookup formula in `scoring.ts`.
+> Formulas/calibration below (§4–§9) were transcribed verbatim and verified
+> against both worked examples in §10 (exact match on every figure). Extended
+> with `deal-sensitivity-playbook.md`'s legs/cost-stack/insurance-overlay
+> model — multiple supply legs, itemized cost lines, and an insurance
+> recovery overlay all feed into this model's `purchaseTotal`/`saleTotal`
+> before the cash-flow engine runs, so Peak Negative Position / Upside:Downside
+> Ratio / tier automatically reflect the itemized costs. UI:
+> `src/components/TransactionStructureBuilder.tsx`, embedded in the Assess
+> Deal wizard (`DocumentIngestion.tsx`) and surfaced in the final report
+> (`RiskDashboard.tsx`). Falls back to the old flat formula when a deal has no
+> transaction-structure input at all (true for every platform-CSV-sourced
+> deal today — that data was never captured for the bulk deal book).
+> Sub-B stays 0%-weighted per this doc's own calibration decision (§6, §9) —
+> not reactivated.
+
 ---
 
 ## 1. What this model is
@@ -51,6 +70,15 @@ Every deal is a flat record with these fields (types match the dashboard's inter
 | `collectionRights` | enum: Yes / No | Vienna Convention / CISG collection rights |
 
 Note on units: in the dashboard's UI, the four `*Pct` cash-flow fields and the severity assumption are displayed to the user as whole numbers (0–100) but stored/computed internally as 0–1 fractions. `advancePct` is the one exception — it's both displayed *and* stored as 0–100, because it's used directly as points (see §6).
+
+**Extended 2026-07-28** (`src/lib/transaction-structure/types.ts`) — `purchaseTotal`/`saleTotal` become optional and are instead *derived* when `legs` are supplied:
+
+| Field | Type | Notes |
+|---|---|---|
+| `legs` | `DealLeg[]` | Supply legs — `legType` (sourcing/exw/fob_ready), `grossKg`, `discardPct` (sourcing only), `kgPerCarton`, `priceBasis` (gross_kg/packed_kg), `purchasePricePerKg`, `variableCosts` (per-leg cost lines). |
+| `fixedCosts` | `DealFixedCost[]` | Per-deal fixed costs (port logistics, opex, money transfer) — diluted pro-rata across all legs' pooled `netKg`. |
+| `salePricePerKg` | number | FOB sale price — combined with legs' total kg to derive `saleTotal` when not entered directly. |
+| `insurance` | `InsuranceOverlay \| null` | `indemnityPct`, `coverageCapUSD`, `policyValidityDate`, `policyholder` — `recovery = min(shortfall × indemnity%, cap)`, reported as a supplementary before/after-insurance margin figure, **not** folded into Sub-D's score (Sub-D stays the documented 100%-severity worst case per §7 — insurance was explicitly removed from the composite formula, see §8, and this extension doesn't reverse that decision). |
 
 ---
 

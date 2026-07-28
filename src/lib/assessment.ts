@@ -1,6 +1,6 @@
 import type { Deal, RiskAssessment } from "../types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
-import { computeOverallScore } from "./scoring";
+import { computeOverallScore, type ScoreBreakdown } from "./scoring";
 import { analyzeRiskFactors } from "./risk-factors";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
@@ -60,7 +60,7 @@ function productWhy(deal: Deal): string {
 
 function routeWhy(deal: Deal): string {
   const tableMatch =
-    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination);
+    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination, deal.product);
   if (tableMatch) {
     const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
     return `Table score ${tableMatch.score} for ${tableMatch.origin} → ${tableMatch.destination}${provisional} — ${tableMatch.rationale}`;
@@ -75,7 +75,19 @@ function routeWhy(deal: Deal): string {
   return `${deal.estimatedTransitDays}-day transit, ${transship}`;
 }
 
-function structureWhy(deal: Deal, paymentAdj: number): string {
+function structureWhy(
+  deal: Deal,
+  paymentAdj: number,
+  structureReport: ScoreBreakdown["structureReport"],
+): string {
+  if (structureReport) {
+    const { tier, composite, cashFlow } = structureReport.score;
+    const downside =
+      cashFlow.worstCaseMargin >= 0
+        ? "no downside on total non-payment"
+        : `upside:downside ${cashFlow.upsideDownsideRatio?.toFixed(2) ?? "n/a"}`;
+    return `${tier} (${composite}/100) — ${cashFlow.exposureDuration}-day exposure, ${downside}`;
+  }
   if (paymentAdj < 0) {
     return `${deal.paymentTerms} — no advance or collateral`;
   }
@@ -121,7 +133,7 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
       label: "Deal Structure",
       score: scores.structure,
       weight: DIMENSION_WEIGHTS.structure,
-      why: structureWhy(deal, scores.paymentTermsAdj),
+      why: structureWhy(deal, scores.paymentTermsAdj, scores.structureReport),
     },
     buyer: { label: "Buyer", score: scores.buyer, why: "" },
     supplier: { label: "Supplier", score: scores.supplier, why: "" },
@@ -131,5 +143,6 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
     vetoReasons: scores.vetoReasons,
     concerns: factors.concerns,
     mitigating: factors.mitigating,
+    structureReport: scores.structureReport,
   };
 }

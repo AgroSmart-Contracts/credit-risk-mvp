@@ -1,5 +1,6 @@
 import type { CofaceExtractionResult } from "./coface-analysis/types";
 import type { Deal, RouteRiskProfile, SourceDocument } from "../types";
+import type { TransactionStructureInput } from "./transaction-structure/types";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
 
@@ -23,6 +24,7 @@ export interface DealDraftInput {
   cofaceCountryRiskGrade?: Deal["cofaceCountryRiskGrade"];
   cofaceCompanyRiskGrade?: Deal["cofaceCompanyRiskGrade"];
   sourceDocuments: SourceDocument[];
+  transactionStructure?: TransactionStructureInput;
 }
 
 export function applyCofaceExtractToDraft(
@@ -155,7 +157,7 @@ function buildTeaser(
 
 export function buildDealFromDraft(baseDeal: Deal, draft: DealDraftInput): Deal {
   const productProfile = lookupProductRisk(draft.product);
-  const routeProfile = lookupRouteRisk(draft.origin, draft.destination);
+  const routeProfile = lookupRouteRisk(draft.origin, draft.destination, draft.product);
 
   return {
     ...baseDeal,
@@ -211,5 +213,6 @@ export function buildDealFromDraft(baseDeal: Deal, draft: DealDraftInput): Deal 
       : baseDeal.sourceDocuments,
     teaser: buildTeaser(draft.product, routeProfile, draft.cofaceCoveragePct),
     isCustom: baseDeal.isCustom ?? false,
+    transactionStructure: draft.transactionStructure ?? baseDeal.transactionStructure,
   };
 }

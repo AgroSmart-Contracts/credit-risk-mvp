@@ -34,13 +34,53 @@
       "10017022006904"
     ],
     "dealCount": 5,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": [
       "ASM INTERNATIONAL FSSAI",
       "A.S.M INTERNATIONAL"
+    ]
+  },
+  {
+    "key": "AGRICOLA MEDANO AZUL SAC",
+    "name": "AGRICOLA MEDANO AZUL SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20602492191"
+    ],
+    "dealCount": 10,
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "AGRICOLA VIÑASOL SAC",
+    "name": "AGRICOLA VIÑASOL SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20534208008"
+    ],
+    "dealCount": 12,
+    "yearsInBusiness": 15,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "AGRICOLA VIÃASOL SAC"
     ]
   },
   {
@@ -57,8 +97,8 @@
       "77394695-7"
     ],
     "dealCount": 2,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "yearsInBusiness": 8,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -76,14 +116,54 @@
       "517935392"
     ],
     "dealCount": 13,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": [
       "AGRO SMART CONTRACTS, LDA.",
       "AGRO SMART CONTRACTS",
       "AGROSMART CONTRACTS LDA"
+    ]
+  },
+  {
+    "key": "ALBORAN COMEX SL",
+    "name": "ALBORAN COMEX SL",
+    "countries": [
+      "Spain"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "B75320598"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "ALLIED TRADE GLOBAL",
+    "name": "Allied Trade Global",
+    "countries": [
+      "Taiwan, Province of China"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "54354228"
+    ],
+    "dealCount": 18,
+    "yearsInBusiness": 14,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": [
+      "ALLIED TRADE GLOBAL CORP"
     ]
   },
   {
@@ -99,8 +179,8 @@
       "ATEOS1000126910"
     ],
     "dealCount": 2,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "yearsInBusiness": 4,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -156,7 +236,7 @@
     "taxIds": [
       "20612199974"
     ],
-    "dealCount": 21,
+    "dealCount": 33,
     "yearsInBusiness": 2,
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
@@ -165,6 +245,63 @@
       "BIO FARMIN PERU S.A.C",
       "BIO FARMING PERU S.A.C"
     ]
+  },
+  {
+    "key": "BIOFRESHI BV",
+    "name": "BIOFRESHI BV",
+    "countries": [
+      "Netherlands"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "NL853825828B01"
+    ],
+    "dealCount": 6,
+    "yearsInBusiness": 17,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "BLUE PACIFIC FOODS SAC",
+    "name": "BLUE PACIFIC FOODS SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20600326464"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": 22,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "DAVIS GLOBAL BV",
+    "name": "DAVIS GLOBAL BV",
+    "countries": [
+      "Netherlands"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "NL861363103B01"
+    ],
+    "dealCount": 12,
+    "yearsInBusiness": 6,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
   },
   {
     "key": "EAGLE TRADING AGRICULTURE MARKETING LTD",
@@ -190,6 +327,63 @@
     ]
   },
   {
+    "key": "FRESH EXPRESS LLC",
+    "name": "FRESH EXPRESS LLC",
+    "countries": [
+      "United Arab Emirates"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "100295133600003"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": 33,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "FUNDO LAS LOMAS SAC",
+    "name": "FUNDO LAS LOMAS SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20535311210"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": 16,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "GIDDINS PERU SAC",
+    "name": "GIDDINS PERU SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20601552557"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": 12,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
     "key": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO LTD",
     "name": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
     "countries": [
@@ -204,6 +398,44 @@
     "dealCount": 1,
     "yearsInBusiness": 2,
     "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+    "name": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+    "countries": [
+      "China"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "91440101MA59L8UW3L"
+    ],
+    "dealCount": 4,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "HACIENDA SOTOMAYOR SL",
+    "name": "HACIENDA SOTOMAYOR SL",
+    "countries": [
+      "Spain"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "B19277867"
+    ],
+    "dealCount": 9,
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -230,20 +462,78 @@
     ]
   },
   {
-    "key": "KUBA",
-    "name": "Kuba",
+    "key": "ICA BLUEBERRIES SAC",
+    "name": "ICA BLUEBERRIES SAC",
     "countries": [
-      "Poland"
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20601449837"
+    ],
+    "dealCount": 4,
+    "yearsInBusiness": 9,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "INDUSTRIAS SOLIMAR SAC",
+    "name": "INDUSTRIAS SOLIMAR SAC",
+    "countries": [
+      "Peru"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "20526450851"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 8,
+    "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "JUHINEJ LTD",
+    "name": "JUHINEJ LTD",
+    "countries": [
+      "Chile"
+    ],
+    "roles": [
+      "supplier",
+      "buyer"
+    ],
+    "taxIds": [
+      "76.476.953-2"
+    ],
+    "dealCount": 8,
+    "yearsInBusiness": 19,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "KHI INTERNATIONAL CORP",
+    "name": "KHI INTERNATIONAL CORP",
+    "countries": [
+      "Hong Kong"
     ],
     "roles": [
       "buyer"
     ],
     "taxIds": [
-      "7584225667"
+      "1794711"
     ],
-    "dealCount": 1,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "dealCount": 4,
+    "yearsInBusiness": 12,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -270,8 +560,8 @@
     ]
   },
   {
-    "key": "MCORP",
-    "name": "MCORP",
+    "key": "MIKHUNA FOODS SAC",
+    "name": "MIKHUNA FOODS SAC",
     "countries": [
       "Peru"
     ],
@@ -279,10 +569,10 @@
       "supplier"
     ],
     "taxIds": [
-      "123123123123"
+      "20602283088"
     ],
-    "dealCount": 1,
-    "yearsInBusiness": 16,
+    "dealCount": 9,
+    "yearsInBusiness": 2,
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
     "licenseValidSource": "default",
@@ -308,6 +598,25 @@
     "nameVariantsSeen": []
   },
   {
+    "key": "NATURAL SOUTH FRUIT LTD",
+    "name": "NATURAL SOUTH FRUIT LTD",
+    "countries": [
+      "Chile"
+    ],
+    "roles": [
+      "supplier"
+    ],
+    "taxIds": [
+      "76.537.404-3"
+    ],
+    "dealCount": 4,
+    "yearsInBusiness": 8,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
     "key": "OPEN MARKETS CORPORATION",
     "name": "Open Markets Corporation",
     "countries": [
@@ -322,6 +631,25 @@
     "dealCount": 16,
     "yearsInBusiness": 2,
     "yearsInBusinessSource": "csv",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "SHANGHAI GREEN CHAIN TRADING CO LTD",
+    "name": "SHANGHAI GREEN CHAIN TRADING CO LTD",
+    "countries": [
+      "China"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "91310115MA1H83UR0Q"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": null,
+    "yearsInBusinessSource": "default",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -346,6 +674,25 @@
     "nameVariantsSeen": [
       "T.O.F.F. B.V."
     ]
+  },
+  {
+    "key": "TRADE CULTIVATORS LLC",
+    "name": "TRADE CULTIVATORS LLC",
+    "countries": [
+      "United Arab Emirates"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "100412431700003"
+    ],
+    "dealCount": 7,
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
   },
   {
     "key": "TRU MARKET BLOCKCHAIN SAC",
@@ -379,9 +726,10 @@
       "supplier"
     ],
     "taxIds": [
-      "20610491104"
+      "20610491104",
+      "20601777273"
     ],
-    "dealCount": 16,
+    "dealCount": 22,
     "yearsInBusiness": 3,
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
@@ -390,5 +738,24 @@
       "VILLAVENTURA PERU SAC",
       "Villaventura Produce Sac"
     ]
+  },
+  {
+    "key": "XARKI SL",
+    "name": "XARKI SL",
+    "countries": [
+      "Spain"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "B65792942"
+    ],
+    "dealCount": 10,
+    "yearsInBusiness": 66,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
   }
 ]

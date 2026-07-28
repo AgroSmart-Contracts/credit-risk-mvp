@@ -5,6 +5,10 @@ import { DIMENSION_WEIGHTS } from "./scoring-constants";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
 import { priceVsMarketPoints } from "./price-benchmarks";
+import {
+  buildTransactionStructureReport,
+  hasTransactionStructureInput,
+} from "./transaction-structure/compute";
 
 function clamp(value: number, min = 0, max = 100): number {
   return Math.min(max, Math.max(min, value));
@@ -129,77 +133,259 @@ function licensePointsSupplier(valid: boolean | null): number {
   return 0; // neutral — unconfirmed
 }
 
-function platformDealsCompletionPointsBuyer(
-  dealsCompleted: number,
-  completionRate: number | null,
-): number {
-  let dealsPts = 0;
-  if (dealsCompleted >= 10) dealsPts = 20;
-  else if (dealsCompleted >= 5) dealsPts = 10;
-  else if (dealsCompleted >= 1) dealsPts = 5;
-
-  let completionPts = 0; // neutral when unknown
-  if (completionRate !== null) {
-    if (completionRate >= 95) completionPts = 15;
-    else if (completionRate >= 80) completionPts = 10;
-    else if (completionRate >= 60) completionPts = 5;
-    else completionPts = -10;
-  }
-  return dealsPts + completionPts;
+function buyerPlatformDealsPts(dealsCompleted: number): number {
+  if (dealsCompleted >= 10) return 20;
+  if (dealsCompleted >= 5) return 10;
+  if (dealsCompleted >= 1) return 5;
+  return 0;
 }
 
-function platformDealsOnTimePointsSupplier(
-  dealsCompleted: number,
-  onTimeRate: number | null,
-): number {
-  let dealsPts = 0;
-  if (dealsCompleted >= 10) dealsPts = 20;
-  else if (dealsCompleted >= 5) dealsPts = 10;
-  else if (dealsCompleted >= 1) dealsPts = 5;
+function buyerCompletionPts(completionRate: number | null): number {
+  if (completionRate === null) return 0;
+  if (completionRate >= 95) return 15;
+  if (completionRate >= 80) return 10;
+  if (completionRate >= 60) return 5;
+  return -10;
+}
 
-  let onTimePts = 0; // neutral when unknown
-  if (onTimeRate !== null) {
-    if (onTimeRate >= 90) onTimePts = 15;
-    else if (onTimeRate >= 75) onTimePts = 10;
-    else if (onTimeRate < 50) onTimePts = -15;
+function supplierPlatformDealsPts(dealsCompleted: number): number {
+  if (dealsCompleted >= 10) return 20;
+  if (dealsCompleted >= 5) return 10;
+  if (dealsCompleted >= 1) return 5;
+  return 0;
+}
+
+function supplierOnTimePts(onTimeRate: number | null): number {
+  if (onTimeRate === null) return 0;
+  if (onTimeRate >= 90) return 15;
+  if (onTimeRate >= 75) return 10;
+  if (onTimeRate < 50) return -15;
+  return 0;
+}
+
+/** One scored variable in a buyer/supplier audit trail — for auditor UI. */
+export interface PartyScoreLine {
+  id: string;
+  label: string;
+  points: number;
+  detail: string;
+  /** Max points this variable can contribute under the current formula. */
+  maxPoints: number;
+}
+
+/** Line-item audit of a single buyer or supplier sub-score (Dimension A). */
+export interface PartyScoreAudit {
+  role: "buyer" | "supplier";
+  base: number;
+  lines: PartyScoreLine[];
+  rawTotal: number;
+  score: number;
+  /** Human reasons this score is below 100 (empty when score === 100). */
+  whyBelow100: string[];
+}
+
+function formatPts(n: number): string {
+  return n > 0 ? `+${n}` : `${n}`;
+}
+
+function buyerYearsDetail(years: number | null): string {
+  if (years === null) return "No years-in-business on file → neutral 0 (bands: ≥10 +15 / ≥5 +10 / ≥2 +5 / <2 −5)";
+  if (years >= 10) return `${years} years → ≥10 band (+15)`;
+  if (years >= 5) return `${years} years → ≥5 band (+10); next band ≥10 for +15`;
+  if (years >= 2) return `${years} years → ≥2 band (+5); next band ≥5 for +10`;
+  return `${years} year${years === 1 ? "" : "s"} → <2 band (−5)`;
+}
+
+function supplierYearsDetail(years: number | null): string {
+  if (years === null) return "No years-in-business on file → neutral 0 (bands: ≥10 +15 / ≥5 +10 / ≥2 0 / <2 −10)";
+  if (years >= 10) return `${years} years → ≥10 band (+15)`;
+  if (years >= 5) return `${years} years → ≥5 band (+10); next band ≥10 for +15`;
+  if (years >= 2) return `${years} years → ≥2 band (0); next band ≥5 for +10`;
+  return `${years} year${years === 1 ? "" : "s"} → <2 band (−10)`;
+}
+
+function capacityDetail(
+  check: MarketIntelCapacityCheck | null | undefined,
+  withinPts: number,
+  overPts: number,
+): string {
+  if (!check) return `No capacity signal → neutral 0 (within capacity ${formatPts(withinPts)} / over ${formatPts(overPts)})`;
+  if (check.flag === "WITHIN_CAPACITY") return `Within capacity (${check.flag}) → ${formatPts(withinPts)}`;
+  if (check.flag === "OVER_CAPACITY_FLAG") return `Over capacity (${check.flag}) → ${formatPts(overPts)}`;
+  return `Capacity flag ${check.flag} → neutral 0`;
+}
+
+/**
+ * Auditor trail for Dimension A buyer/supplier sub-scores — same math as
+ * computeBuyerScore / computeSupplierScore, with per-variable detail for
+ * why a score landed below 100.
+ */
+export function explainPartyScore(
+  deal: Deal,
+  role: "buyer" | "supplier",
+): PartyScoreAudit {
+  const base = 50;
+  const lines: PartyScoreLine[] = [];
+
+  if (role === "buyer") {
+    const { buyer } = deal;
+    const dealsPts = buyerPlatformDealsPts(buyer.platformDealsCompleted);
+    const completionPts = buyerCompletionPts(buyer.platformCompletionRate);
+    const yearsPts = yearsInBusinessPointsBuyer(buyer.yearsInBusiness);
+    const creditPts = creditRatingPoints(deal);
+    const licensePts = licensePointsBuyer(buyer.licenseValid);
+    const capacityPts = buyerCapacityPoints(deal);
+    const buyerIntel = deal.marketIntel?.dim_a_buyer;
+    const capacityCheck =
+      buyerIntel && "capacity_check" in buyerIntel ? buyerIntel.capacity_check : null;
+
+    lines.push({
+      id: "platform-deals",
+      label: "Platform deals completed",
+      points: dealsPts,
+      maxPoints: 20,
+      detail:
+        buyer.platformDealsCompleted >= 10
+          ? `${buyer.platformDealsCompleted} prior deals with this pair → ≥10 band (+20)`
+          : buyer.platformDealsCompleted >= 5
+            ? `${buyer.platformDealsCompleted} prior deals with this pair → ≥5 band (+10); next band ≥10 for +20`
+            : buyer.platformDealsCompleted >= 1
+              ? `${buyer.platformDealsCompleted} prior deals with this pair → ≥1 band (+5); next band ≥5 for +10`
+              : "0 prior deals with this pair → 0",
+    });
+    lines.push({
+      id: "completion",
+      label: "Completion rate",
+      points: completionPts,
+      maxPoints: 15,
+      detail:
+        buyer.platformCompletionRate === null
+          ? "Completion rate unknown → neutral 0"
+          : `${buyer.platformCompletionRate}% completion → ${formatPts(completionPts)} (bands: ≥95 +15 / ≥80 +10 / ≥60 +5 / <60 −10)`,
+    });
+    lines.push({
+      id: "years",
+      label: "Years in business",
+      points: yearsPts,
+      maxPoints: 15,
+      detail: buyerYearsDetail(buyer.yearsInBusiness),
+    });
+    lines.push({
+      id: "credit",
+      label: "Credit rating (Coface CRA/DRA)",
+      points: creditPts,
+      maxPoints: 15,
+      detail: deal.cofaceCompanyRiskGrade
+        ? `Company grade ${deal.cofaceCompanyRiskGrade} → ${formatPts(creditPts)}`
+        : deal.cofaceCountryRiskGrade
+          ? `Country grade ${deal.cofaceCountryRiskGrade} → ${formatPts(creditPts)}`
+          : "No Coface document analyzed → neutral 0",
+    });
+    lines.push({
+      id: "license",
+      label: "Import license",
+      points: licensePts,
+      maxPoints: 10,
+      detail:
+        buyer.licenseValid === true
+          ? "Valid → +10"
+          : buyer.licenseValid === false
+            ? "Invalid → −20"
+            : "Unconfirmed → neutral 0",
+    });
+    lines.push({
+      id: "capacity",
+      label: "Capacity vs monthly volume",
+      points: capacityPts,
+      maxPoints: 5,
+      detail: capacityDetail(capacityCheck, 5, -10),
+    });
+  } else {
+    const { supplier } = deal;
+    const dealsPts = supplierPlatformDealsPts(supplier.platformDealsCompleted);
+    const onTimePts = supplierOnTimePts(supplier.platformCompletionRate);
+    const yearsPts = yearsInBusinessPointsSupplier(supplier.yearsInBusiness);
+    const licensePts = licensePointsSupplier(supplier.licenseValid);
+    const capacityPts = supplierCapacityPoints(deal);
+    const qualityPts = NEEDS_DATA_QUALITY_CERT_POINTS;
+
+    lines.push({
+      id: "platform-deals",
+      label: "Platform deals completed",
+      points: dealsPts,
+      maxPoints: 20,
+      detail:
+        supplier.platformDealsCompleted >= 10
+          ? `${supplier.platformDealsCompleted} prior deals with this pair → ≥10 band (+20)`
+          : supplier.platformDealsCompleted >= 5
+            ? `${supplier.platformDealsCompleted} prior deals with this pair → ≥5 band (+10); next band ≥10 for +20`
+            : supplier.platformDealsCompleted >= 1
+              ? `${supplier.platformDealsCompleted} prior deals with this pair → ≥1 band (+5); next band ≥5 for +10`
+              : "0 prior deals with this pair → 0",
+    });
+    lines.push({
+      id: "on-time",
+      label: "On-time rate",
+      points: onTimePts,
+      maxPoints: 15,
+      detail:
+        supplier.platformCompletionRate === null
+          ? "On-time rate unknown → neutral 0"
+          : `${supplier.platformCompletionRate}% on-time → ${formatPts(onTimePts)} (bands: ≥90 +15 / ≥75 +10 / <50 −15)`,
+    });
+    lines.push({
+      id: "years",
+      label: "Years in business",
+      points: yearsPts,
+      maxPoints: 15,
+      detail: supplierYearsDetail(supplier.yearsInBusiness),
+    });
+    lines.push({
+      id: "quality-cert",
+      label: "Quality certifications",
+      points: qualityPts,
+      maxPoints: 15,
+      detail: "No certification source anywhere yet → neutral 0 (spec: multiple +15 / at least one +10)",
+    });
+    lines.push({
+      id: "license",
+      label: "Export license",
+      points: licensePts,
+      maxPoints: 15,
+      detail:
+        supplier.licenseValid === true
+          ? "Valid → +15"
+          : supplier.licenseValid === false
+            ? "Invalid → −25"
+            : "Unconfirmed → neutral 0",
+    });
+    lines.push({
+      id: "capacity",
+      label: "Capacity vs production",
+      points: capacityPts,
+      maxPoints: 5,
+      detail: capacityDetail(deal.marketIntel?.dim_a_supplier.capacity_check, 5, -15),
+    });
   }
-  return dealsPts + onTimePts;
+
+  const rawTotal = base + lines.reduce((sum, line) => sum + line.points, 0);
+  const score = clamp(rawTotal);
+  const whyBelow100 =
+    score >= 100
+      ? []
+      : lines
+          .filter((line) => line.points < line.maxPoints)
+          .map((line) => `${line.label}: ${formatPts(line.points)} of max ${formatPts(line.maxPoints)} — ${line.detail}`);
+
+  return { role, base, lines, rawTotal, score, whyBelow100 };
 }
 
 export function computeBuyerScore(deal: Deal): number {
-  const { buyer } = deal;
-  const yearsPts = yearsInBusinessPointsBuyer(buyer.yearsInBusiness);
-  const licensePts = licensePointsBuyer(buyer.licenseValid);
-  const dealsPts = platformDealsCompletionPointsBuyer(
-    buyer.platformDealsCompleted,
-    buyer.platformCompletionRate,
-  );
-  return clamp(
-    50 +
-      dealsPts +
-      yearsPts +
-      creditRatingPoints(deal) +
-      licensePts +
-      buyerCapacityPoints(deal),
-  );
+  return explainPartyScore(deal, "buyer").score;
 }
 
 export function computeSupplierScore(deal: Deal): number {
-  const { supplier } = deal;
-  const yearsPts = yearsInBusinessPointsSupplier(supplier.yearsInBusiness);
-  const licensePts = licensePointsSupplier(supplier.licenseValid);
-  const dealsPts = platformDealsOnTimePointsSupplier(
-    supplier.platformDealsCompleted,
-    supplier.platformCompletionRate,
-  );
-  return clamp(
-    50 +
-      dealsPts +
-      yearsPts +
-      NEEDS_DATA_QUALITY_CERT_POINTS +
-      licensePts +
-      supplierCapacityPoints(deal),
-  );
+  return explainPartyScore(deal, "supplier").score;
 }
 
 /** Cross-applied relationship signal within Counterparty — spec §4.A. */
@@ -267,7 +453,7 @@ function qualityGradePoints(qualityGrade: Deal["qualityGrade"]): number {
 export function computeProductScore(deal: Deal): number {
   const tableMatch = deal.productRiskProfile ?? lookupProductRisk(deal.product);
   const structuralScore = tableMatch ? tableMatch.score : productFallbackStructuralScore(deal);
-  const priceAdj = priceVsMarketPoints(deal.product, deal.offerUnitPriceUSD);
+  const priceAdj = priceVsMarketPoints(deal);
   const gradeAdj = qualityGradePoints(deal.qualityGrade);
   return clamp(structuralScore + priceAdj + gradeAdj);
 }
@@ -356,18 +542,18 @@ function routeFallbackStructuralScore(deal: Deal): number {
 
 export function computeRouteScore(deal: Deal): number {
   const tableMatch =
-    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination);
+    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination, deal.product);
   const structuralScore = tableMatch ? tableMatch.score : routeFallbackStructuralScore(deal);
 
-  // Incoterms (20%wt) and cold-chain requirement (15%wt) are genuinely
-  // per-deal, not baked into either the static table score or the fallback —
-  // fixes a bug where a matched table row skipped incoterm entirely.
+  // Incoterms (20%wt) is genuinely per-deal, not baked into either the
+  // static table score or the fallback.
   const incotermAdj = incotermAdjustment(deal.incoterm);
-  // spec: required+documented −5 / required+incomplete −12 / not required 0.
-  // No source distinguishes documented vs incomplete, so "documented" (the
-  // less severe, spec-real value) is assumed when required — same optimistic-
-  // default pattern as license validity / payment delay elsewhere.
-  const coldChainAdj = deal.coldChainRequired ? -5 : 0;
+  // Cold-chain requirement (15%wt): spec's flat rule (required+documented −5)
+  // only applies in the fallback path. When a route-risk-tables.ts row
+  // matches, its adjustedScore already bakes in a route+product-specific
+  // cold-chain penalty (decision 2026-07-28 — see route-risk-tables.ts) —
+  // applying the flat −5 on top would double-count the same risk factor.
+  const coldChainAdj = tableMatch ? 0 : deal.coldChainRequired ? -5 : 0;
 
   return clamp(structuralScore + incotermAdj + coldChainAdj);
 }
@@ -451,14 +637,27 @@ function insurancePoints(insuranceCoverage: Deal["insuranceCoverage"]): number {
 }
 
 /**
- * Dimension D (Transaction Structure) — resynced to spec §4.D 2026-07-24.
- * base 60. Previously: advance-payment-% alone drove a 20–90 base swing (not
- * a spec concept at all — advance-payment is only a 10%-weight adjustment),
- * collateral/insurance/payment-terms points ran at roughly half of spec's
- * magnitudes, "None" collateral/insurance were neutral instead of spec's
- * penalty/veto, and the relationship sub-formula didn't match §4.D at all.
+ * Dimension D (Transaction Structure) — replaced 2026-07-28 with the Kanato
+ * CRAM Transaction Structure model (docs/transaction-structure-model-reference.md),
+ * extended with the deal-sensitivity-playbook.md's legs/cost-stack/insurance
+ * overlay (src/lib/transaction-structure/compute.ts) — a real cash-flow
+ * engine (peak negative position, upside:downside ratio, tiers) instead of
+ * the flat category-lookup formula below. Falls back to that flat formula
+ * when the deal has no transaction-structure input at all (e.g. every
+ * platform-CSV-sourced deal today — that data was never captured for the
+ * bulk deal book, only for hand-modeled deals), same "matched vs fallback"
+ * convention used throughout scoring.ts for Product/Route.
  */
 export function computeStructureScore(deal: Deal): number {
+  if (hasTransactionStructureInput(deal.transactionStructure)) {
+    const report = buildTransactionStructureReport(
+      deal.transactionStructure,
+      deal.dealValueUSD,
+      deal.advancePaymentPct,
+      deal.contractType,
+    );
+    return report.score.composite;
+  }
   return clamp(
     60 +
       collateralPoints(deal) +
@@ -506,6 +705,17 @@ export function checkVetoRegister(deal: Deal): VetoResult {
   if (deal.transportMode === "air" && deal.numberOfTransshipments >= 2) {
     reasons.push(`≥2 transshipments by air (${deal.numberOfTransshipments})`);
   }
+  // Decision 2026-07-28: route-risk-tables.ts rows carry a per-(route,product)
+  // vetoCandidate flag when estimated transit time meaningfully exceeds this
+  // product's shelf life — a shipment that's structurally likely to arrive
+  // spoiled, independent of the composite score.
+  const routeMatch =
+    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination, deal.product);
+  if (routeMatch?.vetoCandidate) {
+    reasons.push(
+      `Estimated transit time exceeds ${deal.product}'s shelf life on this corridor (${deal.origin} → ${deal.destination})`,
+    );
+  }
   return { vetoed: reasons.length > 0, reasons };
 }
 
@@ -522,6 +732,8 @@ export interface ScoreBreakdown {
   vetoReasons: string[];
   externalCreditBonus: number;
   paymentTermsAdj: number;
+  /** Populated only when deal.transactionStructure has real input — see computeStructureScore. */
+  structureReport: ReturnType<typeof buildTransactionStructureReport> | null;
 }
 
 export function computeOverallScore(deal: Deal): ScoreBreakdown {
@@ -530,7 +742,10 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
   const counterparty = Math.round(computeCounterpartyScore(deal));
   const product = Math.round(computeProductScore(deal));
   const route = Math.round(computeRouteScore(deal));
-  const structure = Math.round(computeStructureScore(deal));
+  const structureReport = hasTransactionStructureInput(deal.transactionStructure)
+    ? buildTransactionStructureReport(deal.transactionStructure, deal.dealValueUSD, deal.advancePaymentPct, deal.contractType)
+    : null;
+  const structure = Math.round(structureReport ? structureReport.score.composite : computeStructureScore(deal));
 
   const overall = Math.round(
     counterparty * DIMENSION_WEIGHTS.counterparty +
@@ -554,5 +769,6 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
     vetoReasons: veto.reasons,
     externalCreditBonus: externalCreditBonus(deal),
     paymentTermsAdj: paymentTermsAdjustment(deal.paymentTerms),
+    structureReport,
   };
 }

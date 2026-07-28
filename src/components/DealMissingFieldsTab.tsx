@@ -8,7 +8,7 @@ import {
   Search,
 } from "lucide-react";
 import { prescoredPlatformDeals } from "../data/prescored-deals";
-import { platformDealsBlocked, platformDealsSynthetic } from "../data/platform-deals";
+import { platformDealsBlocked } from "../data/platform-deals";
 import { platformDealToDeal } from "../lib/platform-deal-mapper";
 import { buildRiskAssessment, formatUSD } from "../lib/assessment";
 import { getTierColors } from "../lib/risk-colors";
@@ -88,8 +88,7 @@ export function DealMissingFieldsTab({
       });
   }, [query]);
 
-  const totalRows =
-    prescoredPlatformDeals.length + platformDealsBlocked.length + platformDealsSynthetic.length;
+  const totalRows = prescoredPlatformDeals.length + platformDealsBlocked.length;
 
   return (
     <div className="space-y-6">
@@ -103,7 +102,7 @@ export function DealMissingFieldsTab({
           0 payment delay days, and 0% quality rejection.{" "}
           {platformDealsBlocked.length > 0 && (
             <>
-              {platformDealsBlocked.length} more real deals are blocked from
+              {platformDealsBlocked.length} more deals are blocked from
               scoring entirely — missing buyer and/or supplier years-in-business
               — see below.
             </>
@@ -111,9 +110,8 @@ export function DealMissingFieldsTab({
         </p>
         <p className="mt-1 text-xs text-tm-text-muted">
           All {totalRows} rows from the source CSV accounted for: {prescoredPlatformDeals.length}{" "}
-          scoreable + {platformDealsBlocked.length} blocked + {platformDealsSynthetic.length}{" "}
-          flagged <code className="text-[10px]">likely_test</code> (synthetic seed data, excluded
-          from all scoring — see the Test data tab).
+          scoreable + {platformDealsBlocked.length} blocked. (<code className="text-[10px]">likely_test</code>{" "}
+          rows are merged into scoring like every other deal, not tracked separately.)
         </p>
       </div>
 

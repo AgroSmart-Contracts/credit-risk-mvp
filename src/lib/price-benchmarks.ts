@@ -1,64 +1,45 @@
 /**
  * Price-vs-market benchmark — spec §4.B "Price vs market" (30% of Product weight,
- * called out in §3 as "the single highest-signal fraud variable"). Was entirely
- * unimplemented before 2026-07-24 — the static product-risk-tables.ts score has no
- * per-deal price signal at all.
+ * called out in §3 as "the single highest-signal fraud variable").
  *
- * Only one product has a real benchmark: `docs/pricing-intelligence.xlsx` is a
- * 2025 Peru customs export dataset (36,288 real declarations, tariff code
- * 0810400000 — fresh blueberries only) with a real `US$ FOB UNIT` column. The
- * benchmark below is the median USD/kg computed from that file (rows with
- * UNIDAD MEDIDA = KILOGRAMO, price 0.5–50 USD/kg to exclude data-entry errors):
- * n=35,491, median $5.56/kg, P25 $4.17, P75 $7.64, P10 $2.10, P90 $9.28.
+ * Rebuilt 2026-07-28 to read the real market-intel price benchmark
+ * (`deal.marketIntel.dim_b_price_benchmark`, from
+ * `docs/market-intel-peru-2025-2026-07-10`'s `price_benchmark()` — kg-weighted
+ * P10–P90 percentiles per (variety × destination × adaptive time window),
+ * backed by 60,466 real Peru customs shipment records) instead of the prior
+ * single hardcoded per-product median. That data was already computed and
+ * persisted onto every deal record at build time (see
+ * scripts/lib/market-intel-cli.ts) but never read by scoring — this wires it
+ * in. Covers blueberry/mango/avocado/strawberry/tropical varieties; still
+ * returns neutral for products with no customs HS data ingested at all
+ * (mandarin, ginger, asparagus) or no resolvable benchmark (`NEEDS_INPUT`,
+ * missing p50, or no deal price extracted).
  *
- * No benchmark exists for the other 11 products — fabricating one would mean
- * presenting invented market data as real, so `priceVsMarketPoints` returns 0
- * (neutral) for anything not in this table, exactly like the other NEEDS_DATA
- * spec variables in scoring.ts.
+ * Direction, per explicit decision: MONOTONIC, not symmetric. TruMarket is
+ * the investor/financer side of these deals — paying meaningfully MORE than
+ * the real going rate for this product on this corridor is the actual risk
+ * (overpaying erodes margin and resale value); paying at or below the going
+ * rate is not penalized. This intentionally reverses the pre-2026-07-28
+ * version, which also penalized suspiciously-low prices (a fraud-detection
+ * read on "too cheap to be real"). If that read is wanted again later, it's
+ * a one-line change back to a symmetric band using the same
+ * `deal_vs_p50_pct` value.
  */
-
-export interface PriceBenchmark {
-  product: string;
-  medianUsdPerUnit: number;
-  source: string;
-  scoreConfirmed: boolean;
-}
-
-export const PRICE_BENCHMARKS: PriceBenchmark[] = [
-  {
-    product: "Fresh Blueberries",
-    medianUsdPerUnit: 5.56,
-    source:
-      "docs/pricing-intelligence.xlsx — Peru 2025 customs exports, tariff 0810400000, n=35,491, median USD/kg",
-    scoreConfirmed: true,
-  },
-];
-
-function normalizeProductName(value: string): string {
-  return value.toLowerCase().replace(/\s+/g, " ").trim();
-}
-
-export function lookupPriceBenchmark(product: string): PriceBenchmark | null {
-  const normalized = normalizeProductName(product);
-  return (
-    PRICE_BENCHMARKS.find((b) => normalizeProductName(b.product) === normalized) ?? null
-  );
-}
+import type { Deal } from "../types";
 
 /**
- * spec §4.B: within ±5–15% +20 / >+30% −22 / <−30% −18. Spec's "±5–15%" band is
- * read here as "within ±15% of benchmark" (the safe zone); the 15–30% band either
- * side has no explicit spec rule, so it's treated as neutral (0) rather than
- * guessed at.
+ * spec §4.B bands, reinterpreted monotonically: at/below +15% over median
+ * (i.e. anything at or below market, or only slightly over) is the safe
+ * zone (+20, same magnitude as the original spec's ±15% safe band); 15–30%
+ * over has no explicit spec rule (neutral, 0); >30% over is the spec's
+ * over-market penalty (−22). No penalty is ever applied for being cheap.
  */
-export function priceVsMarketPoints(product: string, offerUnitPriceUSD: number | null): number {
-  if (offerUnitPriceUSD === null || offerUnitPriceUSD <= 0) return 0;
-  const benchmark = lookupPriceBenchmark(product);
-  if (!benchmark) return 0; // neutral — no benchmark data for this product
-  const deviationPct =
-    ((offerUnitPriceUSD - benchmark.medianUsdPerUnit) / benchmark.medianUsdPerUnit) * 100;
-  if (Math.abs(deviationPct) <= 15) return 20;
-  if (deviationPct > 30) return -22;
-  if (deviationPct < -30) return -18;
-  return 0;
+export function priceVsMarketPoints(deal: Deal): number {
+  const benchmark = deal.marketIntel?.dim_b_price_benchmark;
+  if (!benchmark || "status" in benchmark) return 0; // no market-intel, or NEEDS_INPUT (too few shipments even variety-only)
+  const pct = benchmark.deal_vs_p50_pct;
+  if (pct === null || pct === undefined) return 0; // benchmark resolved but no deal price could be extracted to compare
+  if (pct <= 15) return 20;
+  if (pct <= 30) return 0;
+  return -22;
 }

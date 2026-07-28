@@ -3,10 +3,10 @@
 import type { MarketIntelPayload } from "../lib/market-intel/types";
 
 /**
- * "real" / "unverified" / "likely real" pass through to scoring with a badge.
- * "likely_test" rows are excluded from platform-deals.generated.json entirely
- * (decision 2026-07-24) — kept here only so the type covers what the source
- * CSV's `likely_test` column can contain, for anything that inspects the raw feed.
+ * Raw passthrough of the source CSV's `likely_test` column. All values,
+ * including "likely_test", pass through to scoring identically — this is a
+ * provenance label only, not an inclusion/exclusion gate (decision
+ * 2026-07-28, reversing the 2026-07-24/27 exclusion).
  */
 export type DataQualityFlag = "real" | "unverified" | "likely real" | "likely_test";
 
@@ -41,7 +41,7 @@ export interface PlatformDealRecord {
   transportMode: "air" | "sea" | null;
   /** Raw CSV `offerUnitPrice`, USD. Feeds Product dimension price-vs-market (spec §4.B). */
   offerUnitPriceUSD: number | null;
-  /** Real count from company-trade-profiles-2026-07-21.csv / this same CSV, grouped by buyer+supplier pair (likely_test rows excluded from the count). */
+  /** Count from company-trade-profiles-2026-07-21.csv / this same CSV, grouped by buyer+supplier pair (all rows, likely_test included per decision 2026-07-28). */
   priorDealsBetweenParties: number;
   /** Derived from (latest − earliest) createdAt for that buyer+supplier pair, in months. 0 when createdAt is missing on all of the pair's rows. */
   relationshipAgeMonths: number;
@@ -149,6 +149,5 @@ export type AppView =
   | "counterparties"
   | "platform"
   | "missing"
-  | "test-data"
   | "product-table"
   | "route-table";

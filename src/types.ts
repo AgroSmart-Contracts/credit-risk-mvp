@@ -1,7 +1,7 @@
 import type { AnalyzeDocumentsResult } from "./lib/document-analysis/types";
 import type { CofaceRiskGrade } from "./lib/coface-analysis/types";
 import type { MarketIntelPayload } from "./lib/market-intel/types";
-import type { TransactionStructureInput } from "./lib/transaction-structure/types";
+import type { TransactionStructureInput, TransactionStructureReport } from "./lib/transaction-structure/types";
 
 export interface CounterpartyInput {
   name: string;
@@ -49,12 +49,16 @@ export interface ProductRiskProfile {
 export interface RouteRiskProfile {
   origin: string;
   destination: string;
+  /** Added 2026-07-28: route risk is now scored per (origin, destination, product) — a route's adjustedScore depends on this product's shelf life / cold-chain need on this corridor. */
+  product: string;
   score: number;
   estimatedTransitDays: number;
   numberOfTransshipments: number;
   routeRiskFlag: "Low" | "Medium" | "High";
+  /** true when this (route, product) combination's freshness ratio (transit days ÷ shelf-life days) meaningfully exceeds 1.0 — fed into checkVetoRegister() as an additional veto reason, alongside the existing cargo-insurance veto. */
+  vetoCandidate: boolean;
   rationale: string;
-  /** false = provisional/estimated corridor (not sourced from confirmed BL history or an AC-reviewed table). */
+  /** false = provisional/estimated corridor or product (not sourced from confirmed BL history or an AC-reviewed table for both the route and the product). */
   scoreConfirmed: boolean;
 }
 
@@ -162,6 +166,8 @@ export interface RiskAssessment {
   vetoReasons: string[];
   concerns: string[];
   mitigating: string[];
+  /** Full cash-flow/legs/sensitivity report — populated only when deal.transactionStructure has real input (see computeStructureScore). */
+  structureReport: TransactionStructureReport | null;
 }
 
 export interface FinancingRecommendation {

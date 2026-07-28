@@ -7,6 +7,13 @@ import { ScoreGauge } from "./ScoreGauge";
 import { SubScoreBar } from "./SubScoreBar";
 import { KeyRiskFactors } from "./KeyRiskFactors";
 import { getTierColors } from "../lib/risk-colors";
+import {
+  KpiStrip,
+  CashTimeline,
+  LegComparison,
+  ScoreBreakdownPanel,
+  SensitivityTableView,
+} from "./TransactionStructureBuilder";
 
 interface RiskDashboardProps {
   deal: Deal;
@@ -123,6 +130,31 @@ export function RiskDashboard({
           ))}
         </div>
       </div>
+
+      {assessment.structureReport && (
+        <div className="space-y-6 rounded-xl border border-tm-border bg-tm-surface p-6 shadow-tm-sm">
+          <div>
+            <h3 className="font-display text-xl text-tm-black">Transaction structure analysis</h3>
+            <p className="mt-1 text-xs text-tm-text-light">
+              Cash-flow, capital-need, and sensitivity results driving the Deal Structure score above —
+              deal-sensitivity-playbook.md Module 4.
+            </p>
+          </div>
+          <KpiStrip report={assessment.structureReport} />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <CashTimeline report={assessment.structureReport} />
+            <ScoreBreakdownPanel report={assessment.structureReport} />
+          </div>
+          {assessment.structureReport.legResults.length > 0 && (
+            <LegComparison report={assessment.structureReport} />
+          )}
+          {assessment.structureReport.sensitivity.length > 0 && (
+            <div className="space-y-6">
+              <SensitivityTableView table={assessment.structureReport.sensitivity[0]} />
+            </div>
+          )}
+        </div>
+      )}
 
       <KeyRiskFactors
         concerns={assessment.concerns}

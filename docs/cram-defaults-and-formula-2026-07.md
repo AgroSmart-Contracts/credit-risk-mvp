@@ -71,14 +71,14 @@ counterparty "why" narrative text in `assessment.ts`; it is never added into
 
 Per decision ("it's per company, and it should be in the company details csv file"),
 years-in-business is no longer treated as a per-deal-row field. `scripts/build-company-master.ts`
-groups all non-`likely_test` deal rows by normalized counterparty name (handling
-spelling/mojibake variants via `scripts/lib/company-name.ts`), computes a canonical YIB
-per company (mode across observed values, ties resolved to the max), and writes
-`src/data/company-master.json` / `.csv`.
+groups deal rows by normalized counterparty name (handling spelling/mojibake variants
+via `scripts/lib/company-name.ts`), computes a canonical YIB per company (mode across
+observed values, ties resolved to the max), and writes `src/data/company-master.json` / `.csv`.
 
-Result: **19 real companies** (86 of 170 deal rows are synthetic `likely_test` rows and
-were excluded — see §5). **7 of the 19 have no YIB source anywhere** and fall back to
-the `default` provenance below.
+> **Updated 2026-07-28**: `likely_test` rows are no longer excluded from this build —
+> see §6, which documents the reversal. The "19 real companies" figure below predates
+> that change; re-run `npx tsx scripts/build-company-master.ts` for the current count
+> (38 companies as of the 2026-07-28 merge).
 
 Each platform deal record carries `buyerYibSource` / `supplierYibSource: "csv" | "default"`
 so the UI and mapper can distinguish a real company-master value from a fallback.
@@ -120,18 +120,24 @@ kept alongside so defaulted rows remain distinguishable from real Coface records
 any exist. `fieldsNeedingConfirmation` on the mapped `Deal` includes a `"coface"`-tagged
 entry for every such row.
 
-## 6. Synthetic/test row exclusion
+## 6. Synthetic/test row exclusion — RETRACTED 2026-07-28
 
-86 of the 170 rows in the source CSV are synthetic seed data (`likely_test = true`,
+**This section described a policy that has since been reversed. Kept for historical
+record only — do not treat anything below as current behavior.**
+
+~~86 of the 170 rows in the source CSV are synthetic seed data (`likely_test = true`,
 detected via round `10:00:00.000Z` `createdAt` timestamps and Mongo ObjectIds decoding
 to impossible years) and are excluded from all scoring, aggregation, and the
-company-master build. Regenerating the dataset now reports:
+company-master build.~~
 
-```
-Excluded 86 likely_test rows out of 170 total.
-Kept 84 real/unverified deals; 52 counterparty-ready.
-8 scored buyer<->supplier pairs.
-```
+**2026-07-28 decision: `likely_test` rows are merged into the same scoring/aggregation
+pipeline as every other row.** `row.likely_test` is retained on each record purely as a
+provenance label (`likelyTest` field, surfaced as `rowType` in
+`platform-deals-with-defaults.csv`) — it no longer gates company-master inclusion,
+`pairAgg`/relationship signals, market-intel enrichment, `counterpartyReady`, or any
+`platformDeals`/`platformCounterparties` aggregation. Re-run
+`npx tsx scripts/build-company-master.ts && npx tsx scripts/build-platform-deals.ts &&
+npm run validate` for current counts.
 
 ## 7. Relationship signal — computed, not defaulted
 

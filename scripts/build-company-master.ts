@@ -1,7 +1,9 @@
 /**
- * Builds a company-level master table (one row per real company) from
- * full-deals-dataset-2026-07 (1).csv — decision 2026-07-24: years-in-business
- * and license validity belong on the company, not repeated/duplicated per deal.
+ * Builds a company-level master table (one row per company, including
+ * likely_test rows since the 2026-07-28 merge decision — see
+ * build-platform-deals.ts) from full-deals-dataset-2026-07 (1).csv —
+ * decision 2026-07-24: years-in-business and license validity belong on the
+ * company, not repeated/duplicated per deal.
  *
  * Source of truth for company identity: the embedded `buyerCompany` /
  * `supplierCompany` JSON objects (name+country+taxId), not the flatter
@@ -63,6 +65,33 @@ const YIB_OVERRIDE_BY_KEY: Record<string, { years: number; source: string }> = {
   // NIP 9231585471 / KRS 0000125530, founded 2002 (Wolsztyn, Poland).
   // https://polskiedane.pl/limax-sp-z-o-o-nip-9231585471-krs-0000125530/ · https://www.bizraport.pl/krs/0000125530/limax-spolka-z-ograniczona-odpowiedzialnoscia
   "LIMAX SP Z OO": { years: 24, source: "verified" },
+  // User-provided figure (2026-07-28), no public registry citation on file.
+  "AGRICOLA Y COMERCIAL VALLES DEL NUBLE": { years: 8, source: "verified" },
+  // User-provided figure (2026-07-28), no public registry citation on file.
+  "ASM INTERNATIONAL": { years: 5, source: "verified" },
+  // User-provided figure (2026-07-28), no public registry citation on file.
+  "TRADE CULTIVATORS LLC": { years: 2, source: "verified" },
+  // User-provided figure (2026-07-28), no public registry citation on file.
+  "KHI INTERNATIONAL CORP": { years: 12, source: "verified" },
+  // User-provided figure (2026-07-28), no public registry citation on file.
+  "NATURAL SOUTH FRUIT LTD": { years: 8, source: "verified" },
+  // Filled by admin in ~/Desktop/platform-deals-with-defaults.csv (2026-07-28).
+  // Repo regenerations from company-master were wiping these because the Desktop
+  // source CSV never had buyersYearsinBusiness/suppliersYearsinBusiness for them
+  // — promoting into this override table so rebuilds keep them.
+  "AGRICOLA MEDANO AZUL SAC": { years: 5, source: "verified" },
+  "AGRICOLA VIÑASOL SAC": { years: 15, source: "verified" },
+  "AGRO SMART CONTRACTS LDA": { years: 2, source: "verified" },
+  "ALBORAN COMEX SL": { years: 2, source: "verified" },
+  "ANTERRA FARMS GMBH": { years: 4, source: "verified" },
+  "ALLIED TRADE GLOBAL": { years: 14, source: "verified" },
+  "BIOFRESHI BV": { years: 17, source: "verified" },
+  "BLUE PACIFIC FOODS SAC": { years: 22, source: "verified" },
+  "DAVIS GLOBAL BV": { years: 6, source: "verified" },
+  "FRESH EXPRESS LLC": { years: 33, source: "verified" },
+  "HACIENDA SOTOMAYOR SL": { years: 5, source: "verified" },
+  "JUHINEJ LTD": { years: 19, source: "verified" },
+  "XARKI SL": { years: 66, source: "verified" },
 };
 
 function pickCanonicalYib(samples: number[]): number | null {
@@ -122,7 +151,8 @@ function main() {
   }
 
   for (const row of rows) {
-    if (row.likely_test === "likely_test") continue; // synthetic rows excluded from company master too
+    // 2026-07-28 decision: likely_test rows are no longer excluded — merged
+    // in with the rest so their companies get real YIB/license treatment too.
 
     const buyerCompany = safeJsonParse(row.buyerCompany);
     const supplierCompany = safeJsonParse(row.supplierCompany);

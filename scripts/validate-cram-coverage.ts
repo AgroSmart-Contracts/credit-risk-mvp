@@ -1,17 +1,17 @@
 /**
- * Data-coverage report — scans every real platform deal and reports how
- * much of the CRAM composite is running on real data vs. neutral defaults,
- * per dimension, plus a veto-register breakdown. Meant to be re-run after
- * every CSV refresh (`npx tsx scripts/build-platform-deals.ts` first, then
- * this) so an admin can see at a glance what's actually missing without
- * reading code — decision 2026-07-27.
+ * Data-coverage report — scans every platform deal (likely_test rows merged
+ * in per decision 2026-07-28, no longer a separate excluded population) and
+ * reports how much of the CRAM composite is running on real data vs. neutral
+ * defaults, per dimension, plus a veto-register breakdown. Meant to be
+ * re-run after every CSV refresh (`npx tsx scripts/build-platform-deals.ts`
+ * first, then this) so an admin can see at a glance what's actually missing
+ * without reading code — decision 2026-07-27.
  *
  * Run: npm run validate
  */
 import {
   platformDeals,
   platformDealsBlocked,
-  platformDealsSynthetic,
   platformCounterpartiesBlocked,
 } from "../src/data/platform-deals";
 import { platformDealToDeal } from "../src/lib/platform-deal-mapper";
@@ -43,7 +43,7 @@ function main() {
   const total = deals.length;
 
   console.log(`\n=== CRAM data-coverage report ===`);
-  console.log(`${total} real deals (${platformDealsBlocked.length} of them blocked from scoring entirely, ${platformDealsSynthetic.length} synthetic/test rows excluded).\n`);
+  console.log(`${total} deals (${platformDealsBlocked.length} of them blocked from scoring entirely — missing YIB). likely_test rows are merged in, not excluded — decision 2026-07-28.\n`);
 
   // --- Dimension A: Counterparty ---------------------------------------
   console.log("Dimension A — Counterparty (40% weight)");
@@ -99,7 +99,7 @@ function main() {
     if (v.vetoed) vetoedCount++;
     for (const r of v.reasons) reasonCounts.set(r, (reasonCounts.get(r) ?? 0) + 1);
   }
-  line("Deals forced to Veto tier", vetoedCount, total, vetoedCount === total ? "⚠ EVERY real deal — see reason below" : "");
+  line("Deals forced to Veto tier", vetoedCount, total, vetoedCount === total ? "⚠ EVERY deal — see reason below" : "");
   for (const [reason, count] of reasonCounts) {
     console.log(`    - ${reason}: ${count}/${total}`);
   }
@@ -115,7 +115,7 @@ function main() {
 
   if (vetoedCount === total) {
     console.log(
-      "⚠ ACTION NEEDED: every real deal is currently non-actionable (forced Veto tier) because cargo insurance\n" +
+      "⚠ ACTION NEEDED: every deal is currently non-actionable (forced Veto tier) because cargo insurance\n" +
         "  has no data source anywhere in the pipeline. This is the single highest-priority gap to close —\n" +
         "  see docs/cram-defaults-and-formula-2026-07.md for what's already wired vs still missing.\n",
     );

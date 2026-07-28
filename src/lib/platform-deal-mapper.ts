@@ -7,7 +7,7 @@ import { lookupRouteRisk } from "./route-risk-tables";
 /** Map a CSV-backed platform deal into the MVP Deal shape for scoring / wizard. */
 export function platformDealToDeal(record: PlatformDealRecord): Deal {
   const productProfile = lookupProductRisk(record.product);
-  const routeProfile = lookupRouteRisk(record.origin, record.destination);
+  const routeProfile = lookupRouteRisk(record.origin, record.destination, record.product);
   const milestone = normalizeDealMilestone(
     record.status,
     record.currentMilestone,

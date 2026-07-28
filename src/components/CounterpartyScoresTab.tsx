@@ -4,17 +4,26 @@ import {
   Ban,
   Building2,
   Calculator,
+  ClipboardList,
   ShoppingCart,
   Truck,
 } from "lucide-react";
-import { platformCounterparties, platformCounterpartiesBlocked } from "../data/platform-deals";
+import { platformCounterparties, platformCounterpartiesBlocked, platformDeals } from "../data/platform-deals";
 import { formatUSD } from "../lib/assessment";
-import type { PlatformCounterpartyBlocked, PlatformCounterpartyScore } from "../types/platform";
+import { platformDealToDeal } from "../lib/platform-deal-mapper";
+import { explainPartyScore, type PartyScoreAudit } from "../lib/scoring";
+import type {
+  PlatformCounterpartyBlocked,
+  PlatformCounterpartyDealRef,
+  PlatformCounterpartyScore,
+} from "../types/platform";
 
 interface CounterpartyScoresTabProps {
   onAssessDealId?: (mongoId: string) => void;
   onGoToMissingFields?: () => void;
 }
+
+const platformDealByMongoId = new Map(platformDeals.map((d) => [d.mongoId, d]));
 
 function ScorePill({
   label,
@@ -39,6 +48,10 @@ function ScorePill({
       <p className="font-display text-xl">{value}</p>
     </div>
   );
+}
+
+function formatPts(n: number): string {
+  return n > 0 ? `+${n}` : `${n}`;
 }
 
 function FormulaPanel() {
@@ -86,6 +99,12 @@ function FormulaPanel() {
             <span className="font-medium">Supplier</span> = base 50 +
             platform deals & on-time rate + years-in-business band + quality
             certifications + license validity + capacity
+          </li>
+          <li>
+            <span className="font-medium">Platform deal count</span> is counted
+            per buyer↔supplier pair on that deal (`priorDealsBetweenParties`),
+            not the company's total book — so the same supplier can score 85
+            with a thin pair history and 100 with a thicker one.
           </li>
           <li>
             <span className="font-medium">Buyer credit rating</span> = Coface
@@ -141,15 +160,183 @@ function FormulaPanel() {
   );
 }
 
+function ScoreBandSummary({ cp }: { cp: PlatformCounterpartyScore }) {
+  const bands = useMemo(() => {
+    const map = new Map<number, { score: number; count: number; priorDeals: number[] }>();
+    for (const d of cp.deals) {
+      const row = map.get(d.score) ?? { score: d.score, count: 0, priorDeals: [] };
+      row.count += 1;
+      row.priorDeals.push(d.priorDeals);
+      map.set(d.score, row);
+    }
+    return [...map.values()].sort((a, b) => a.score - b.score);
+  }, [cp.deals]);
+
+  if (cp.avgScore >= 100) return null;
+
+  return (
+    <div className="mt-4 rounded-lg border border-tm-border bg-tm-neutral-light/60 px-3 py-3">
+      <div className="flex items-center gap-2">
+        <ClipboardList className="h-3.5 w-3.5 text-tm-primary" />
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-primary">
+          Why avg {cp.avgScore} &lt; 100
+        </p>
+      </div>
+      <p className="mt-1.5 text-xs leading-relaxed text-tm-text">
+        Avg is the mean of this company's per-deal {cp.role} scores. Scores vary
+        because platform-history points use{" "}
+        <span className="font-medium">prior deals with that specific counterparty</span>
+        , not company-wide volume.
+      </p>
+      <ul className="mt-2 space-y-1">
+        {bands.map((b) => {
+          const minPrior = Math.min(...b.priorDeals);
+          const maxPrior = Math.max(...b.priorDeals);
+          const priorLabel =
+            minPrior === maxPrior ? `${minPrior} prior` : `${minPrior}–${maxPrior} prior`;
+          return (
+            <li key={b.score} className="flex items-baseline justify-between gap-2 text-xs">
+              <span className="text-tm-text">
+                <span className="font-medium">{b.count}</span> deal{b.count === 1 ? "" : "s"} ·{" "}
+                {priorLabel} with pair
+              </span>
+              <span className="shrink-0 font-medium text-tm-black">score {b.score}</span>
+            </li>
+          );
+        })}
+      </ul>
+      {cp.yearsInBusiness < 5 && (
+        <p className="mt-2 text-[11px] leading-relaxed text-tm-text-muted">
+          Years in business = {cp.yearsInBusiness}
+          {cp.role === "supplier"
+            ? " → supplier ≥2 band is 0 pts (need ≥5 for +10). Deals with ≥10 prior still reach 100 via platform history + license."
+            : " → buyer ≥2 band is +5 (need ≥5 for +10)."}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function AuditorBreakdown({
+  audit,
+  deal,
+  onAssess,
+}: {
+  audit: PartyScoreAudit;
+  deal: PlatformCounterpartyDealRef;
+  onAssess?: (mongoId: string) => void;
+}) {
+  const belowCeiling = audit.whyBelow100.length > 0;
+
+  return (
+    <div
+      className={`rounded-lg border px-3 py-3 ${
+        belowCeiling
+          ? "border-tm-accent/30 bg-tm-accent/[0.04]"
+          : "border-tm-primary/20 bg-tm-primary/[0.03]"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <p className="truncate text-xs font-medium text-tm-black">{deal.name}</p>
+          <p className="text-[11px] text-tm-text-muted">
+            {formatUSD(deal.dealValue)} · {deal.priorDeals} prior deals with this pair ·{" "}
+            {audit.role}
+          </p>
+        </div>
+        <div className="shrink-0 text-right">
+          <p
+            className={`font-display text-xl ${
+              belowCeiling ? "text-tm-accent-dark" : "text-tm-primary"
+            }`}
+          >
+            {audit.score}
+          </p>
+          {onAssess && (
+            <button
+              type="button"
+              onClick={() => onAssess(deal.mongoId)}
+              className="mt-0.5 inline-flex items-center gap-0.5 text-[10px] font-medium text-tm-primary hover:underline"
+            >
+              Open
+              <ArrowRight className="h-3 w-3" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-3 space-y-1">
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-tm-text-muted">Base</span>
+          <span className="font-medium tabular-nums text-tm-black">{audit.base}</span>
+        </div>
+        {audit.lines.map((line) => (
+          <div key={line.id} className="border-t border-tm-border/50 pt-1">
+            <div className="flex items-baseline justify-between gap-2 text-xs">
+              <span className="text-tm-text">{line.label}</span>
+              <span
+                className={`shrink-0 tabular-nums font-medium ${
+                  line.points < line.maxPoints ? "text-tm-accent-dark" : "text-tm-primary"
+                }`}
+              >
+                {formatPts(line.points)}
+                <span className="ml-1 text-[10px] font-normal text-tm-text-muted">
+                  / {formatPts(line.maxPoints)}
+                </span>
+              </span>
+            </div>
+            <p className="mt-0.5 text-[11px] leading-snug text-tm-text-light">{line.detail}</p>
+          </div>
+        ))}
+        <div className="flex items-center justify-between border-t border-tm-border pt-1.5 text-xs">
+          <span className="font-semibold text-tm-black">
+            Total{audit.rawTotal !== audit.score ? ` (raw ${audit.rawTotal}, clamped)` : ""}
+          </span>
+          <span className="font-medium tabular-nums text-tm-black">{audit.score}</span>
+        </div>
+      </div>
+
+      {belowCeiling ? (
+        <div className="mt-2.5 rounded-md bg-tm-accent/10 px-2.5 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-accent-dark">
+            Why {audit.score}, not 100
+          </p>
+          <ul className="mt-1.5 space-y-1">
+            {audit.whyBelow100.map((reason) => (
+              <li key={reason} className="text-[11px] leading-snug text-tm-text">
+                {reason}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p className="mt-2.5 text-[11px] text-tm-primary">
+          Hit the 100 ceiling — band maxes and/or clamp filled every available point.
+        </p>
+      )}
+    </div>
+  );
+}
+
 function CounterpartyCard({
   cp,
   onAssess,
 }: {
   cp: PlatformCounterpartyScore;
-  onAssess?: () => void;
+  onAssess?: (mongoId: string) => void;
 }) {
   const tone = cp.avgScore >= 70 ? "good" : cp.avgScore >= 40 ? "warn" : "default";
   const RoleIcon = cp.role === "buyer" ? ShoppingCart : Truck;
+
+  const dealAudits = useMemo(() => {
+    return cp.deals.map((deal) => {
+      const record = platformDealByMongoId.get(deal.mongoId);
+      const audit = record
+        ? explainPartyScore(platformDealToDeal(record), cp.role)
+        : null;
+      return { deal, audit };
+    });
+  }, [cp.deals, cp.role]);
 
   return (
     <article className="rounded-xl border border-tm-border bg-tm-surface p-5 shadow-tm-sm">
@@ -198,35 +385,32 @@ function CounterpartyCard({
         </p>
       )}
 
-      <div className="mt-4 max-h-40 space-y-1 overflow-y-auto">
-        {cp.deals.slice(0, 8).map((d) => (
-          <div
-            key={d.mongoId}
-            className="flex items-center justify-between gap-2 rounded-md px-2 py-1.5 text-xs hover:bg-tm-neutral-light"
-          >
-            <span className="truncate text-tm-text">{d.name}</span>
-            <span className="shrink-0 text-tm-text-muted">
-              {formatUSD(d.dealValue)} · score {d.score}
-            </span>
-          </div>
-        ))}
-        {cp.deals.length > 8 && (
-          <p className="px-2 text-[10px] text-tm-text-muted">
-            +{cp.deals.length - 8} more deals
-          </p>
-        )}
-      </div>
+      <ScoreBandSummary cp={cp} />
 
-      {onAssess && (
-        <button
-          type="button"
-          onClick={onAssess}
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-tm-primary px-3 py-2 text-sm font-medium text-white hover:bg-tm-primary-dark"
-        >
-          View scored deal
-          <ArrowRight className="h-4 w-4" />
-        </button>
-      )}
+      <div className="mt-4">
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-tm-text-muted">
+          Auditor detail — all {cp.deals.length} scored deal{cp.deals.length === 1 ? "" : "s"}
+        </p>
+        <div className="max-h-[40rem] space-y-3 overflow-y-auto pr-1">
+          {dealAudits.map(({ deal, audit }) =>
+            audit ? (
+              <AuditorBreakdown
+                key={deal.mongoId}
+                audit={audit}
+                deal={deal}
+                onAssess={onAssess}
+              />
+            ) : (
+              <div
+                key={deal.mongoId}
+                className="rounded-lg border border-dashed border-tm-border px-3 py-2 text-xs text-tm-text-muted"
+              >
+                {deal.name} — score {deal.score} (source deal record missing)
+              </div>
+            ),
+          )}
+        </div>
+      </div>
     </article>
   );
 }
@@ -327,8 +511,8 @@ export function CounterpartyScoresTab({
           {buyers.length + blockedBuyers.length} buyer profiles ({buyers.length} scored,{" "}
           {blockedBuyers.length} blocked) + {suppliers.length + blockedSuppliers.length} supplier
           profiles ({suppliers.length} scored, {blockedSuppliers.length} blocked), each scored on
-          its own — per company, per role, per product — not as buyer↔supplier pairs. See the
-          formula panel for why.
+          its own — per company, per role, per product. Every scored deal under a counterparty
+          shows the full auditor point breakdown.
         </p>
       </div>
 
@@ -364,11 +548,7 @@ export function CounterpartyScoresTab({
             <CounterpartyCard
               key={cp.id}
               cp={cp}
-              onAssess={
-                cp.deals[0] && onAssessDealId
-                  ? () => onAssessDealId(cp.deals[0].mongoId)
-                  : undefined
-              }
+              onAssess={onAssessDealId}
             />
           ))}
           {visible.length === 0 && blockedVisible.length === 0 && (

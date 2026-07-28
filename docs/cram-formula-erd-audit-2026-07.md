@@ -128,6 +128,15 @@ the softer NEEDS_DATA gaps documented earlier.
 
 ## All 170 source rows now reported (2026-07-27 follow-up)
 
+> **Superseded 2026-07-28**: the exclusion described in this section was
+> reversed. `likely_test` rows are now merged into `platformDeals` /
+> `platformCounterparties` / scoring like every other row — there is no
+> longer a separate `platformDealsSynthetic` export, no `SyntheticRowsTab`,
+> and `counterpartyReady` is no longer forced `false` for synthetic rows. The
+> "52 scoreable + 32 blocked + 86 synthetic = 170" reconciliation below is
+> stale; re-run `npm run validate` for current numbers. Kept for historical
+> context on why the split existed, not as current behavior.
+
 Previously `build-platform-deals.ts` excluded the 86 `likely_test` (synthetic/seed)
 rows from the generated dataset entirely — they never became `PlatformDealRecord`
 objects, so nothing in the app could report on them. Combined with the fact that

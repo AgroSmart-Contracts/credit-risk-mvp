@@ -1,5 +1,12 @@
 # Product & Route risk table gaps — 2026-07-24
 
+> **2026-07-28 update**: `likely_test` rows are now merged into scoring like every
+> other deal (see `docs/cram-defaults-and-formula-2026-07.md` §6). Every "real
+> (non-`likely_test`) deal book" phrase below now effectively means "the whole deal
+> book" — the distinction no longer changes which deals count toward a table row's
+> confidence. This also surfaced new route gaps not present when synthetic rows were
+> excluded — see the end of the Route risk table section below.
+
 Per decision ("add a tab for product risk table... report those missing fields/table" /
 "expand it yes... report them"), the app now has two dedicated nav tabs — **Product risk
 table** and **Route risk table** (`src/components/ProductRiskTableTab.tsx`,
@@ -26,9 +33,9 @@ table row (deal count): none" — but 4 of those 12 rows are provisional:
 | Product | Score | Status | Gap |
 |---|---|---|---|
 | Fresh Asparagus | 38 | Provisional | Table 1 lists it as Group 1 with a `NEEDS_CONFIRM ❓` on Ultra- vs. Perishable classification. |
-| Fresh Mango | 55 | Provisional | Not in Table 1 at all. Backs 1 real deal (Kuba / MCORP, Poland). |
+| Fresh Mango | 55 | Provisional | Not in Table 1 at all. Backs 0 deals as of 2026-07-28 — its only backing deal (buyer "Kuba" / MCORP, Poland) was removed as a test entry; kept as a table row in case a real Fresh Mango deal appears later. |
 | Mixed Berries / Tropical Fruits (IQF) | 60 | Provisional | Not a tracked Nectora product line, not in Table 1. |
-| Frozen Tropical Fruits | 60 | Provisional | Not a tracked Nectora product line, not in Table 1. Backs 0 real deals — the only referencing deal (Industrias Solimar SAC → Juhinej Ltd) is `likely_test`. |
+| Frozen Tropical Fruits | 60 | Provisional | Not a tracked Nectora product line, not in Table 1. Backs 1 real deal (Frozen Berries from Chile, AGRO SMART CONTRACTS LDA → TRU MARKET BLOCKCHAIN S.A.C.) — as of the 2026-07-28 merge decision, `likely_test` rows are scored the same as any other deal, so this row's confidence is no longer conditioned on real-vs-synthetic provenance either way. |
 
 **To close this gap:** get AC sign-off on Ultra- vs. Perishable for asparagus, and get
 Table 1 rows added for mango and the two frozen/IQF categories (or confirm they should
@@ -51,7 +58,7 @@ deliberately so lookups keep matching the raw data), Algeciras (Spain), San Vice
 (Chile), Vancouver (Canada).
 
 **Distinct routes still unmatched entirely** (fall back to the generic by_air/sea_freight
-transit estimate, not even a provisional corridor-specific row) after the last
+transit estimate, not even a provisional corridor-specific row), as of the 2026-07-24
 regenerator run:
 
 ```
@@ -60,7 +67,29 @@ Peru -> Netherlands (1 deal)
 Callao, Chile -> Vancouver, Netherlands (1 deal)
 ```
 
-These 3 are left unmatched deliberately rather than papered over:
+**Updated after the 2026-07-28 merge** (the `Gdaåsk` row above is gone — that deal, a
+test buyer named "Kuba," was removed entirely as a test entry, not fixed as a mojibake
+match. But merging `likely_test` rows into scoring surfaced 5 new unmatched routes that
+were previously invisible while synthetic rows were excluded):
+
+```
+Peru -> Netherlands (1 deal)
+Callao, Chile -> Vancouver, Netherlands (1 deal)
+SAN Antonio, Chile -> Shanghai, China (7 deals)
+Callao, Peru -> Malaga, China (3 deals)
+Callao, Peru -> Shanghai, China (1 deal)
+Callao, Chile -> Hong Kong, Hong Kong (3 deals)
+SAN Antonio, Chile -> Hong Kong, Hong Kong (1 deal)
+```
+
+The three China/Hong Kong corridors (15 deals total) are new gaps worth AC review —
+they weren't a known gap before the merge because their backing deals were entirely
+`likely_test` rows excluded from the generator's miss-counters. `Callao, Peru ->
+Malaga, China` in particular looks like the same class of data inconsistency flagged
+below for Vancouver/Netherlands (Malaga is a Spanish port, not Chinese) — worth
+checking at the source before building a table row for it.
+
+The original 3 are left unmatched deliberately rather than papered over:
 
 - `Lima, Peru -> Gdaåsk, Poland` — mojibake in the destination city name (`Gdaåsk`
   instead of `Gdansk`) from the source CSV; a real "Gdansk, Poland" row already exists
