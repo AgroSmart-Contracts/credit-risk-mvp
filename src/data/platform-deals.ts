@@ -39,7 +39,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:12:52",
+        "generated_at": "2026-07-28T12:18:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -145,7 +145,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": ""
   },
@@ -192,7 +193,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "route risk table row (transport-mode fallback used)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": ""
   },
@@ -239,7 +241,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "supplier.yearsInBusiness",
       "customs export narrative",
       "route risk table row (transport-mode fallback used)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": ""
   },
@@ -279,7 +282,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:12:53",
+        "generated_at": "2026-07-28T12:18:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -473,7 +476,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": ""
   },
@@ -513,7 +517,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:12:53",
+        "generated_at": "2026-07-28T12:18:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -707,7 +711,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": ""
   },
@@ -747,7 +752,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:12:57",
+        "generated_at": "2026-07-28T12:18:07",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -957,7 +962,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-04T19:11:21.445Z"
   },
@@ -997,7 +1003,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:01",
+        "generated_at": "2026-07-28T12:18:11",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1207,7 +1213,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-06T22:17:03.103Z"
   },
@@ -1247,7 +1254,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:05",
+        "generated_at": "2026-07-28T12:18:15",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1647,7 +1654,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-11T16:08:52.011Z"
   },
@@ -1687,7 +1695,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:09",
+        "generated_at": "2026-07-28T12:18:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1991,7 +1999,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-11T22:49:08.282Z"
   },
@@ -2031,7 +2040,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:13",
+        "generated_at": "2026-07-28T12:18:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2332,7 +2341,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-12T22:14:43.520Z"
   },
@@ -2372,7 +2382,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:17",
+        "generated_at": "2026-07-28T12:18:26",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2673,7 +2683,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-12T23:23:59.174Z"
   },
@@ -2713,7 +2724,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:21",
+        "generated_at": "2026-07-28T12:18:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3014,7 +3025,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-12T23:58:10.517Z"
   },
@@ -3054,7 +3066,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:24",
+        "generated_at": "2026-07-28T12:18:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3355,7 +3367,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-13T00:02:35.993Z"
   },
@@ -3395,7 +3408,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:28",
+        "generated_at": "2026-07-28T12:18:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3698,7 +3711,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-17T16:54:51.326Z"
   },
@@ -3738,7 +3752,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:32",
+        "generated_at": "2026-07-28T12:18:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4039,7 +4053,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-19T16:29:05.939Z"
   },
@@ -4079,7 +4094,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:36",
+        "generated_at": "2026-07-28T12:18:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4289,7 +4304,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2024-12-19T18:09:16.362Z"
   },
@@ -4329,7 +4345,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:40",
+        "generated_at": "2026-07-28T12:18:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4542,7 +4558,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-01-06T19:14:18.308Z"
   },
@@ -4582,7 +4599,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:43",
+        "generated_at": "2026-07-28T12:18:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4795,7 +4812,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-01-06T20:34:28.700Z"
   },
@@ -4835,7 +4853,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:47",
+        "generated_at": "2026-07-28T12:18:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5230,7 +5248,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-01-08T18:34:54.134Z"
   },
@@ -5270,7 +5289,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:51",
+        "generated_at": "2026-07-28T12:19:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5571,7 +5590,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-01-14T18:03:21.213Z"
   },
@@ -5611,7 +5631,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:55",
+        "generated_at": "2026-07-28T12:19:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5912,7 +5932,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-01-27T17:19:32.692Z"
   },
@@ -5952,7 +5973,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:13:58",
+        "generated_at": "2026-07-28T12:19:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6254,7 +6275,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-02-06T14:39:33.895Z"
   },
@@ -6294,7 +6316,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:02",
+        "generated_at": "2026-07-28T12:19:12",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6419,7 +6441,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-03-11T20:00:21.994Z"
   },
@@ -6459,7 +6482,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:06",
+        "generated_at": "2026-07-28T12:19:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6771,7 +6794,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-03-27T14:43:59.093Z"
   },
@@ -6811,7 +6835,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:09",
+        "generated_at": "2026-07-28T12:19:19",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6936,7 +6960,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-03-27T14:47:24.436Z"
   },
@@ -6976,7 +7001,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:13",
+        "generated_at": "2026-07-28T12:19:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7374,7 +7399,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-04-01T16:21:34.543Z"
   },
@@ -7414,7 +7440,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:17",
+        "generated_at": "2026-07-28T12:19:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7539,7 +7565,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-04-04T01:43:09.527Z"
   },
@@ -7579,7 +7606,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:20",
+        "generated_at": "2026-07-28T12:19:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7786,7 +7813,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-04-07T18:49:45.830Z"
   },
@@ -7826,7 +7854,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:24",
+        "generated_at": "2026-07-28T12:19:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8129,7 +8157,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-04-08T16:59:09.789Z"
   },
@@ -8169,7 +8198,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:28",
+        "generated_at": "2026-07-28T12:19:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8294,7 +8323,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:31:33.349Z"
   },
@@ -8334,7 +8364,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:31",
+        "generated_at": "2026-07-28T12:19:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8459,7 +8489,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:35:28.626Z"
   },
@@ -8499,7 +8530,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:35",
+        "generated_at": "2026-07-28T12:19:46",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8624,7 +8655,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:36:53.697Z"
   },
@@ -8664,7 +8696,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:39",
+        "generated_at": "2026-07-28T12:19:50",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8789,7 +8821,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:37:58.130Z"
   },
@@ -8829,7 +8862,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:43",
+        "generated_at": "2026-07-28T12:19:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8954,7 +8987,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:38:53.795Z"
   },
@@ -8994,7 +9028,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:47",
+        "generated_at": "2026-07-28T12:19:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9119,7 +9153,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:54:27.038Z"
   },
@@ -9159,7 +9194,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:51",
+        "generated_at": "2026-07-28T12:20:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9284,7 +9319,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:55:42.228Z"
   },
@@ -9324,7 +9360,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:54",
+        "generated_at": "2026-07-28T12:20:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9449,7 +9485,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:57:16.666Z"
   },
@@ -9489,7 +9526,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:14:58",
+        "generated_at": "2026-07-28T12:20:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9614,7 +9651,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:58:08.724Z"
   },
@@ -9654,7 +9692,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:15:02",
+        "generated_at": "2026-07-28T12:20:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9779,7 +9817,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-28T21:58:46.310Z"
   },
@@ -9819,7 +9858,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:15:05",
+        "generated_at": "2026-07-28T12:20:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9944,7 +9983,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-30T16:59:12.778Z"
   },
@@ -9984,7 +10024,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T22:15:12",
+        "generated_at": "2026-07-28T12:20:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10109,7 +10149,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-30T17:03:16.523Z"
   },
@@ -10147,13 +10188,135 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:24",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20610491104",
+        "importer_name": "Open Markets Corporation",
+        "destination_country": "ESTADOS UNIDOS",
+        "variety": "MANDARIN",
+        "deal_week": "2025-05-26/2025-06-01",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20610491104",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "deal_week": "2025-05-26/2025-06-01",
+        "window_start": "2024-11-25/2024-12-01",
+        "window_end": "2025-05-19/2025-05-25",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-05-26/2025-06-01",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 3,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-30T17:16:45.506Z"
   },
@@ -10191,13 +10354,135 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:27",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20610491104",
+        "importer_name": "Open Markets Corporation",
+        "destination_country": "ESTADOS UNIDOS",
+        "variety": "MANDARIN",
+        "deal_week": "2025-05-26/2025-06-01",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20610491104",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "deal_week": "2025-05-26/2025-06-01",
+        "window_start": "2024-11-25/2024-12-01",
+        "window_end": "2025-05-19/2025-05-25",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-05-26/2025-06-01",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 3,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-30T17:17:25.028Z"
   },
@@ -10235,13 +10520,135 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:31",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20610491104",
+        "importer_name": "Open Markets Corporation",
+        "destination_country": "ESTADOS UNIDOS",
+        "variety": "MANDARIN",
+        "deal_week": "2025-05-26/2025-06-01",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20610491104",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "deal_week": "2025-05-26/2025-06-01",
+        "window_start": "2024-11-25/2024-12-01",
+        "window_end": "2025-05-19/2025-05-25",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-05-26/2025-06-01",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 3,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-30T17:19:31.353Z"
   },
@@ -10279,13 +10686,135 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:34",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20610491104",
+        "importer_name": "Open Markets Corporation",
+        "destination_country": "ESTADOS UNIDOS",
+        "variety": "MANDARIN",
+        "deal_week": "2025-05-26/2025-06-01",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20610491104",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "deal_week": "2025-05-26/2025-06-01",
+        "window_start": "2024-11-25/2024-12-01",
+        "window_end": "2025-05-19/2025-05-25",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-05-26/2025-06-01",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 3,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-05-30T17:20:16.579Z"
   },
@@ -10323,14 +10852,135 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": false,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:39",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20612199974",
+        "importer_name": "AGRO SMART CONTRACTS LDA",
+        "destination_country": "ESPANA",
+        "variety": "AVOCADO",
+        "deal_week": "2025-06-02/2025-06-08",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20612199974",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "AVOCADO",
+        "destination_country": null,
+        "deal_week": "2025-06-02/2025-06-08",
+        "window_start": "2024-12-02/2024-12-08",
+        "window_end": "2025-05-26/2025-06-01",
+        "window_weeks": 26,
+        "n_shipments": 655,
+        "n_exporters": 33,
+        "kg_shipped": 8529735.55,
+        "p10": 2.45,
+        "p25": 2.6359876727562037,
+        "p50": 2.844876004567437,
+        "p75": 3.1,
+        "p90": 3.4,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "AVOCADO",
+        "destination_country": "ESPANA",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-06-02/2025-06-08",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "LOW",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 12,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-06-02T17:36:27.306Z"
   },
@@ -10368,14 +11018,136 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": false,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:42",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20612199974",
+        "importer_name": "AGRO SMART CONTRACTS LDA",
+        "destination_country": "ESTADOS UNIDOS",
+        "variety": "MANDARIN",
+        "deal_week": "2025-06-16/2025-06-22",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20612199974",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "deal_week": "2025-06-16/2025-06-22",
+        "window_start": "2024-12-16/2024-12-22",
+        "window_end": "2025-06-09/2025-06-15",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-06-09/2025-06-15 even at variety-only grain.",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "MANDARIN",
+        "destination_country": "ESTADOS UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-06-16/2025-06-22",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 3,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-06-19T01:10:21.988Z"
   },
@@ -10413,13 +11185,410 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:20:46",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "ISRAEL",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-07-21/2025-07-27",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "entity_id": "6a29186f",
+        "entity_side": "importer",
+        "entity_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+        "destination_country": "ISRAEL",
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-10",
+        "vintage_months": 11,
+        "months_active_12mo": 5,
+        "total_shipments": 16,
+        "total_kg_net": 74079,
+        "total_fob_usd": 855461.44,
+        "avg_monthly_kg_last_6mo": 11626,
+        "avg_monthly_kg_last_12mo": 6173,
+        "peak_monthly_kg": 34728,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.548,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.548
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "20602722628",
+            "partner_name": "HOLY FRUIT PERU S.A.C",
+            "kg_net": 63364.5,
+            "share_pct": 85.5
+          },
+          {
+            "partner_id": "20608082281",
+            "partner_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+            "kg_net": 10714.5,
+            "share_pct": 14.5
+          }
+        ],
+        "top_destinations": null,
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.548,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.6,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 16,
+            "entity_kg": 74079,
+            "entity_wavg_usd_kg": 11.548,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.45,
+            "variance_pct": 138.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.455,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": "ISRAEL",
+        "deal_week": "2025-07-21/2025-07-27",
+        "window_start": "2025-01-20/2025-01-26",
+        "window_end": "2025-07-14/2025-07-20",
+        "window_weeks": 26,
+        "n_shipments": 99,
+        "n_exporters": 8,
+        "kg_shipped": 423882.5,
+        "p10": 0.46312348982022966,
+        "p25": 3.0416363088348763,
+        "p50": 4.231911111111111,
+        "p75": 7.733633876028807,
+        "p90": 8.722672685185184,
+        "confidence": "LOW",
+        "fallback_note": null,
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "ISRAEL",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 392,
+        "n_exporters": 18,
+        "n_importers": 5,
+        "kg_net": 1664358.9,
+        "fob_usd": 8064427.600000001,
+        "lane_share_of_variety_pct": 0.44,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "AEREO": 95.7,
+          "TERRESTRE": 3.8,
+          "MARÍTIMO": 0.5
+        },
+        "exporter_hhi": 1984,
+        "importer_hhi": 2583,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 35
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 23
+          },
+          {
+            "exporter_id": "20609096510",
+            "exporter_name": "HASPE COMPANY S.A.C.",
+            "share_pct": 10.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 5.8
+          },
+          {
+            "exporter_id": "20604582181",
+            "exporter_name": "INVERSIONES YARABAMBA S.A.C.",
+            "share_pct": 5.1
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "395de937",
+            "importer_name": "BLUE WHITE BLUEBERRIES AGRICULTURAL COOPERATIVE SOCIETY LTD",
+            "share_pct": 38.8
+          },
+          {
+            "importer_id": "841535da",
+            "importer_name": "FRUIT BOX LTD",
+            "share_pct": 23.1
+          },
+          {
+            "importer_id": "26c95d53",
+            "importer_name": "NATIV BUSINESS CONSULTING LTD",
+            "share_pct": 18.7
+          },
+          {
+            "importer_id": "6a29186f",
+            "importer_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "share_pct": 11.9
+          },
+          {
+            "importer_id": "8a851810",
+            "importer_name": "DR LOGISTICS LTD HA ORAGIM ST 27 IS",
+            "share_pct": 7.5
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 109800,
+          "2025-02": 140854.5,
+          "2025-03": 148653,
+          "2025-04": 47250,
+          "2025-05": 37319,
+          "2025-06": 3438,
+          "2025-08": 106456,
+          "2025-09": 178247.5,
+          "2025-10": 303004,
+          "2025-11": 247722.5,
+          "2025-12": 341614.4
+        },
+        "peak_month": "2025-12",
+        "off_peak_month": "2025-06",
+        "peak_off_ratio": 99.4,
+        "in_season_weeks": [
+          "2025-01-13/2025-01-19",
+          "2025-01-20/2025-01-26",
+          "2025-02-10/2025-02-16",
+          "2025-02-17/2025-02-23",
+          "2025-02-24/2025-03-02",
+          "2025-03-03/2025-03-09",
+          "2025-03-10/2025-03-16",
+          "2025-03-17/2025-03-23",
+          "2025-03-24/2025-03-30",
+          "2025-05-19/2025-05-25",
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21",
+          "2025-12-22/2025-12-28",
+          "2025-12-29/2026-01-04"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2025-07-21/2025-07-27",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "HIGH",
+        "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
+        "route_signal_pts": -15,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "exporter_id": "20608082281",
+        "exporter_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "importer_id": "6a29186f",
+        "importer_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+        "destination_country": "ISRAEL",
+        "as_of": "2025-12-31",
+        "first_shipment": "2025-01-01",
+        "last_shipment": "2025-11-10",
+        "months_since_last": 1,
+        "n_prior_shipments": 3,
+        "n_prior_last_12mo": 3,
+        "months_active_together": 2,
+        "cumulative_kg_net": 10714.5,
+        "cumulative_fob_usd": 115298.6,
+        "avg_ticket_kg": 3571.5,
+        "price_stability_cv": 0.032,
+        "primary_variety": "BLUEBERRY",
+        "primary_destination": "ISRAEL",
+        "d3_indicative_pts": 8,
+        "relationship_signal": "MODERATE"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-07-23T17:49:38.109Z"
   },
@@ -10459,7 +11628,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T23:54:23",
+        "generated_at": "2026-07-28T12:20:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10859,7 +12028,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-07-25T14:48:56.800Z"
   },
@@ -10899,7 +12069,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T23:54:44",
+        "generated_at": "2026-07-28T12:20:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11299,7 +12469,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-07-25T14:52:01.069Z"
   },
@@ -11339,7 +12510,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T23:54:57",
+        "generated_at": "2026-07-28T12:20:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11739,7 +12910,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-07-25T14:54:37.797Z"
   },
@@ -11779,7 +12951,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-27T23:55:10",
+        "generated_at": "2026-07-28T12:21:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12179,7 +13351,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-07-25T14:57:37.036Z"
   },
@@ -12217,54 +13390,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": false,
-    "marketIntel": null,
-    "htmlFormulaScore": null,
-    "htmlFormulaBase": null,
-    "htmlFormulaBonus": null,
-    "missingFields": [
-      "buyer.yearsInBusiness",
-      "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
-    ],
-    "createdAt": "2025-08-04T18:35:34.946Z"
-  },
-  {
-    "id": "plat-6890fdf0",
-    "mongoId": "6890fdf0438d2534fe4ebc56",
-    "dealRef": "Blueberries EXW Canada E001-42",
-    "product": "Fresh Blueberries",
-    "variety": "Ventura",
-    "quantityLabel": "576 units",
-    "dealValueUSD": 10368,
-    "origin": "Callao, Peru",
-    "destination": "Vancouver, Canada",
-    "buyerName": "AGRO SMART CONTRACTS LDA",
-    "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
-    "buyerYib": null,
-    "supplierYib": 5,
-    "buyerYibSource": "default",
-    "supplierYibSource": "csv",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 21,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 14,
-    "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
-    "offerUnitPriceUSD": 18,
-    "priorDealsBetweenParties": 6,
-    "relationshipAgeMonths": 2,
-    "status": "finished",
-    "likelyTest": "real",
-    "currentMilestone": 7,
-    "customsNarrative": null,
-    "cofaceCoverageAmountUSD": 9331.2,
-    "cofaceCoveragePct": 90,
-    "cofaceIsDefaulted": true,
-    "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T00:12:56",
+        "generated_at": "2026-07-28T12:21:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12562,7 +13690,347 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+    ],
+    "createdAt": "2025-08-04T18:35:34.946Z"
+  },
+  {
+    "id": "plat-6890fdf0",
+    "mongoId": "6890fdf0438d2534fe4ebc56",
+    "dealRef": "Blueberries EXW Canada E001-42",
+    "product": "Fresh Blueberries",
+    "variety": "Ventura",
+    "quantityLabel": "576 units",
+    "dealValueUSD": 10368,
+    "origin": "Callao, Peru",
+    "destination": "Vancouver, Canada",
+    "buyerName": "AGRO SMART CONTRACTS LDA",
+    "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
+    "buyerYib": null,
+    "supplierYib": 5,
+    "buyerYibSource": "default",
+    "supplierYibSource": "csv",
+    "perishabilityClass": "Ultra-Perishable",
+    "shelfLifeDays": 21,
+    "coldChainRequired": true,
+    "estimatedTransitDays": 14,
+    "numberOfTransshipments": 1,
+    "routeRiskFlag": "Medium",
+    "transportMode": "air",
+    "offerUnitPriceUSD": 18,
+    "priorDealsBetweenParties": 6,
+    "relationshipAgeMonths": 2,
+    "status": "finished",
+    "likelyTest": "real",
+    "currentMilestone": 7,
+    "customsNarrative": null,
+    "cofaceCoverageAmountUSD": 9331.2,
+    "cofaceCoveragePct": 90,
+    "cofaceIsDefaulted": true,
+    "counterpartyReady": false,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:12",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "AGRO SMART CONTRACTS LDA",
+        "destination_country": "CANADA",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-08-04/2025-08-10",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": "CANADA",
+        "deal_week": "2025-08-04/2025-08-10",
+        "window_start": "2025-02-03/2025-02-09",
+        "window_end": "2025-07-28/2025-08-03",
+        "window_weeks": 26,
+        "n_shipments": 49,
+        "n_exporters": 5,
+        "kg_shipped": 246126.66000000003,
+        "p10": 4.561570992501215,
+        "p25": 7.191176470588235,
+        "p50": 7.1911764705882355,
+        "p75": 7.1911764705882355,
+        "p90": 8.53116545228764,
+        "confidence": "LOW",
+        "fallback_note": null,
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "CANADA",
+        "period_label": "2025-01-07 .. 2025-12-30",
+        "n_shipments": 525,
+        "n_exporters": 35,
+        "n_importers": 13,
+        "kg_net": 4681882.649999999,
+        "fob_usd": 25284685.799999997,
+        "lane_share_of_variety_pct": 1.23,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {
+          "MARITIMO": 73.7,
+          "AEREO": 26.3
+        },
+        "exporter_hhi": 725,
+        "importer_hhi": 2368,
+        "top_exporters": [
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 15.3
+          },
+          {
+            "exporter_id": "20602842739",
+            "exporter_name": "LARAMA BERRIES S.A.C.",
+            "share_pct": 10.6
+          },
+          {
+            "exporter_id": "20600807685",
+            "exporter_name": "AGROBERRIES PERU S.A.C.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20461642706",
+            "exporter_name": "AGRICOLA CERRO PRIETO S.A.",
+            "share_pct": 6.9
+          },
+          {
+            "exporter_id": "20170040938",
+            "exporter_name": "DANPER TRUJILLO S.A.C.",
+            "share_pct": 6.9
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "1cdbe1d3",
+            "importer_name": "OFFSHORE CANADA LOGISTICS INC",
+            "share_pct": 37.2
+          },
+          {
+            "importer_id": "bba00920",
+            "importer_name": "NORTH BAY PRODUCE INC",
+            "share_pct": 27.1
+          },
+          {
+            "importer_id": "0c177f64",
+            "importer_name": "LOBLAW S INC",
+            "share_pct": 12.7
+          },
+          {
+            "importer_id": "58ca1224",
+            "importer_name": "METRO RICHELIEU INC",
+            "share_pct": 5.7
+          },
+          {
+            "importer_id": "d81f862f",
+            "importer_name": "PROVINCIAL FRUIT CO LTD",
+            "share_pct": 4.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 72776.08,
+          "2025-02": 16329.6,
+          "2025-03": 113932.8,
+          "2025-04": 84452.64,
+          "2025-05": 18977.28,
+          "2025-06": 8916.8,
+          "2025-07": 3517.54,
+          "2025-08": 85239.71,
+          "2025-09": 822896.48,
+          "2025-10": 1457566.95,
+          "2025-11": 1326173.7,
+          "2025-12": 671103.07
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-07",
+        "peak_off_ratio": 414.4,
+        "in_season_weeks": [
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2025-08-04/2025-08-10",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "No corridor row for PE->CANADA and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
+    "htmlFormulaScore": null,
+    "htmlFormulaBase": null,
+    "htmlFormulaBonus": null,
+    "missingFields": [
+      "buyer.yearsInBusiness",
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-08-04T18:37:36.353Z"
   },
@@ -12600,7 +14068,164 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": false,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:12",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "AGRO SMART CONTRACTS LDA",
+        "destination_country": "PAISES BAJOS",
+        "variety": null,
+        "deal_week": "2025-08-04/2025-08-10",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "status": "NEEDS_INPUT",
+        "reason": "variety / destination_country / deal_week required for price benchmark"
+      },
+      "dim_c_route_intelligence": {
+        "status": "NEEDS_INPUT",
+        "reason": "variety / destination_country required for route intelligence"
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
@@ -12609,7 +14234,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "route risk table row (transport-mode fallback used)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-08-04T19:07:52.273Z"
   },
@@ -12649,7 +14275,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T00:16:11",
+        "generated_at": "2026-07-28T12:21:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12860,7 +14486,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-09-24T15:17:44.813Z"
   },
@@ -12898,14 +14525,221 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": false,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:20",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "AGRO SMART CONTRACTS LDA",
+        "destination_country": "TAIWAN",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-09-22/2025-09-28",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-09-22/2025-09-28",
+        "window_start": "2025-03-24/2025-03-30",
+        "window_end": "2025-09-15/2025-09-21",
+        "window_weeks": 26,
+        "n_shipments": 11947,
+        "n_exporters": 147,
+        "kg_shipped": 115820597.71,
+        "p10": 1.5,
+        "p25": 2.705276371034065,
+        "p50": 5.945225151718446,
+        "p75": 8.42,
+        "p90": 10.153333333333334,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "TAIWAN",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-09-22/2025-09-28",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": "MED_HIGH",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": -8,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-09-24T15:30:20.287Z"
   },
@@ -12943,12 +14777,309 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:24",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "LIMAX SP. Z O.O.",
+        "destination_country": "PAISES BAJOS",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-03/2025-11-09",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": "PAISES BAJOS",
+        "deal_week": "2025-11-03/2025-11-09",
+        "window_start": "2025-10-06/2025-10-12",
+        "window_end": "2025-10-27/2025-11-02",
+        "window_weeks": 4,
+        "n_shipments": 1559,
+        "n_exporters": 59,
+        "kg_shipped": 20683936.32,
+        "p10": 1.0204081632653061,
+        "p25": 2.4846938775510203,
+        "p50": 5,
+        "p75": 5.635105475736762,
+        "p90": 7.878496693632246,
+        "confidence": "HIGH",
+        "fallback_note": null,
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "PAISES BAJOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 7436,
+        "n_exporters": 83,
+        "n_importers": 81,
+        "kg_net": 91723076.61000001,
+        "fob_usd": 460800502.76,
+        "lane_share_of_variety_pct": 24.03,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {
+          "MARITIMO": 92.5,
+          "AEREO": 7.5
+        },
+        "exporter_hhi": 707,
+        "importer_hhi": 471,
+        "top_exporters": [
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 14.4
+          },
+          {
+            "exporter_id": "20170040938",
+            "exporter_name": "DANPER TRUJILLO S.A.C.",
+            "share_pct": 10.1
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 7.5
+          },
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 6.2
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "0a78c5b7",
+            "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
+            "share_pct": 11.9
+          },
+          {
+            "importer_id": "6a25b644",
+            "importer_name": "AGROVISION EUROPE B.V.",
+            "share_pct": 7.9
+          },
+          {
+            "importer_id": "f134d3f9",
+            "importer_name": "NORTH BAY EUROPE BV",
+            "share_pct": 6.9
+          },
+          {
+            "importer_id": "e4db5188",
+            "importer_name": "FRUTANIA GMBH",
+            "share_pct": 6.2
+          },
+          {
+            "importer_id": "6d9703d4",
+            "importer_name": "AGROBERRIES EUROPE B.V.",
+            "share_pct": 5.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 5837894.98,
+          "2025-02": 1447713.8,
+          "2025-03": 248877.3,
+          "2025-04": 146041.5,
+          "2025-05": 241126.2,
+          "2025-06": 329772.6,
+          "2025-07": 2210717.08,
+          "2025-08": 9713864.29,
+          "2025-09": 19905401.76,
+          "2025-10": 22785374.94,
+          "2025-11": 19704031.12,
+          "2025-12": 9152261.04
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-04",
+        "peak_off_ratio": 156,
+        "in_season_weeks": [
+          "2025-01-06/2025-01-12",
+          "2025-01-13/2025-01-19",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
+        "deal_week": "2025-11-03/2025-11-09",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "HIGH",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": -15,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-06T19:35:26.471Z"
   },
@@ -12986,53 +15117,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
-    "htmlFormulaScore": null,
-    "htmlFormulaBase": null,
-    "htmlFormulaBonus": null,
-    "missingFields": [
-      "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
-    ],
-    "createdAt": "2025-11-06T19:48:50.727Z"
-  },
-  {
-    "id": "plat-690cfcb6",
-    "mongoId": "690cfcb63d2ca4b63b283ea7",
-    "dealRef": "FRESH BLUEBERRIES E001-49",
-    "product": "Fresh Blueberries",
-    "variety": "FCM 14 057",
-    "quantityLabel": "4320 units",
-    "dealValueUSD": 95040,
-    "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
-    "buyerName": "Eagle Trading Agriculture Marketing Ltd",
-    "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
-    "buyerYib": 2,
-    "supplierYib": 5,
-    "buyerYibSource": "csv",
-    "supplierYibSource": "csv",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 21,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
-    "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
-    "offerUnitPriceUSD": 22,
-    "priorDealsBetweenParties": 10,
-    "relationshipAgeMonths": 11,
-    "status": "finished",
-    "likelyTest": "real",
-    "currentMilestone": 7,
-    "customsNarrative": null,
-    "cofaceCoverageAmountUSD": 85536,
-    "cofaceCoveragePct": 90,
-    "cofaceIsDefaulted": true,
-    "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T01:05:30",
+        "generated_at": "2026-07-28T12:21:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13242,7 +15329,259 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+    ],
+    "createdAt": "2025-11-06T19:48:50.727Z"
+  },
+  {
+    "id": "plat-690cfcb6",
+    "mongoId": "690cfcb63d2ca4b63b283ea7",
+    "dealRef": "FRESH BLUEBERRIES E001-49",
+    "product": "Fresh Blueberries",
+    "variety": "FCM 14 057",
+    "quantityLabel": "4320 units",
+    "dealValueUSD": 95040,
+    "origin": "Callao, Peru",
+    "destination": "Dubai, United Arab Emirates",
+    "buyerName": "Eagle Trading Agriculture Marketing Ltd",
+    "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
+    "buyerYib": 2,
+    "supplierYib": 5,
+    "buyerYibSource": "csv",
+    "supplierYibSource": "csv",
+    "perishabilityClass": "Ultra-Perishable",
+    "shelfLifeDays": 21,
+    "coldChainRequired": true,
+    "estimatedTransitDays": 18,
+    "numberOfTransshipments": 1,
+    "routeRiskFlag": "Medium",
+    "transportMode": "air",
+    "offerUnitPriceUSD": 22,
+    "priorDealsBetweenParties": 10,
+    "relationshipAgeMonths": 11,
+    "status": "finished",
+    "likelyTest": "real",
+    "currentMilestone": 7,
+    "customsNarrative": null,
+    "cofaceCoverageAmountUSD": 85536,
+    "cofaceCoveragePct": 90,
+    "cofaceIsDefaulted": true,
+    "counterpartyReady": true,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:32",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-03/2025-11-09",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-03/2025-11-09",
+        "window_start": "2025-05-05/2025-05-11",
+        "window_end": "2025-10-27/2025-11-02",
+        "window_weeks": 26,
+        "n_shipments": 20832,
+        "n_exporters": 163,
+        "kg_shipped": 221210021.64000002,
+        "p10": 1.2755102040816326,
+        "p25": 2.65,
+        "p50": 5.095108695652174,
+        "p75": 7.6049999999999995,
+        "p90": 9.134615384615385,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-03/2025-11-09",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
+    "htmlFormulaScore": null,
+    "htmlFormulaBase": null,
+    "htmlFormulaBonus": null,
+    "missingFields": [
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-06T19:53:26.521Z"
   },
@@ -13280,13 +15619,220 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:36",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-10/2025-11-16",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-05-12/2025-05-18",
+        "window_end": "2025-11-03/2025-11-09",
+        "window_weeks": 26,
+        "n_shipments": 22170,
+        "n_exporters": 165,
+        "kg_shipped": 238417541.68,
+        "p10": 1.3526381855170324,
+        "p25": 2.705276371034065,
+        "p50": 5.095108695652174,
+        "p75": 7.5,
+        "p90": 9.003784957093082,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-10/2025-11-16",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-13T13:04:58.601Z"
   },
@@ -13324,13 +15870,220 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:40",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-10/2025-11-16",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-05-12/2025-05-18",
+        "window_end": "2025-11-03/2025-11-09",
+        "window_weeks": 26,
+        "n_shipments": 22170,
+        "n_exporters": 165,
+        "kg_shipped": 238417541.68,
+        "p10": 1.3526381855170324,
+        "p25": 2.705276371034065,
+        "p50": 5.095108695652174,
+        "p75": 7.5,
+        "p90": 9.003784957093082,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-10/2025-11-16",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-13T14:42:48.825Z"
   },
@@ -13368,13 +16121,310 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:44",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20608082281",
+        "importer_name": "LIMAX SP. Z O.O.",
+        "destination_country": "PAISES BAJOS",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-10/2025-11-16",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20608082281",
+        "entity_side": "exporter",
+        "entity_name": "TRU MARKET BLOCKCHAIN S.A.C.",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-01-01",
+        "last_seen": "2025-11-17",
+        "vintage_months": 11,
+        "months_active_12mo": 3,
+        "total_shipments": 11,
+        "total_kg_net": 50645.9,
+        "total_fob_usd": 391290.18,
+        "avg_monthly_kg_last_6mo": 5441,
+        "avg_monthly_kg_last_12mo": 4220,
+        "peak_monthly_kg": 32646,
+        "peak_monthly_kg_month": "2025-11",
+        "wavg_usd_per_kg": 7.726,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.01
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.726
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 39931.4,
+            "share_pct": 78.8
+          },
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 10714.5,
+            "share_pct": 21.2
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 22814.5,
+            "share_pct": 45
+          },
+          {
+            "destination_country": "PAISES BAJOS",
+            "kg_net": 19551.4,
+            "share_pct": 38.6
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 8280,
+            "share_pct": 16.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.726,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 50.9,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 5,
+            "entity_kg": 22814.5,
+            "entity_wavg_usd_kg": 9.338,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 1.37,
+            "variance_pct": 92.7,
+            "position": "PREMIUM"
+          },
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "INDIA",
+            "n_shipments": 5,
+            "entity_kg": 8280,
+            "entity_wavg_usd_kg": 7.359,
+            "peru_wavg_usd_kg": 5.97,
+            "corridor_kg_market": 1503591,
+            "entity_share_of_corridor_pct": 0.55,
+            "variance_pct": 23.3,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 0.273,
+        "consecutive_month_streak": 2,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20608082281",
+          "resolved": true,
+          "razon_social": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "CAL. JUAN GRIS NRO 113 URB. SAN BORJA SUR",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:53:31",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20608082281)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": "PAISES BAJOS",
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-10-13/2025-10-19",
+        "window_end": "2025-11-03/2025-11-09",
+        "window_weeks": 4,
+        "n_shipments": 1536,
+        "n_exporters": 60,
+        "kg_shipped": 20254580.02,
+        "p10": 1.1305803090416797,
+        "p25": 2.9577208053691275,
+        "p50": 5,
+        "p75": 5.637906705469858,
+        "p90": 6.895097926948487,
+        "confidence": "HIGH",
+        "fallback_note": null,
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "PAISES BAJOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 7436,
+        "n_exporters": 83,
+        "n_importers": 81,
+        "kg_net": 91723076.61000001,
+        "fob_usd": 460800502.76,
+        "lane_share_of_variety_pct": 24.03,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {
+          "MARITIMO": 92.5,
+          "AEREO": 7.5
+        },
+        "exporter_hhi": 707,
+        "importer_hhi": 471,
+        "top_exporters": [
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 14.4
+          },
+          {
+            "exporter_id": "20170040938",
+            "exporter_name": "DANPER TRUJILLO S.A.C.",
+            "share_pct": 10.1
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 7.5
+          },
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 6.2
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "0a78c5b7",
+            "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
+            "share_pct": 11.9
+          },
+          {
+            "importer_id": "6a25b644",
+            "importer_name": "AGROVISION EUROPE B.V.",
+            "share_pct": 7.9
+          },
+          {
+            "importer_id": "f134d3f9",
+            "importer_name": "NORTH BAY EUROPE BV",
+            "share_pct": 6.9
+          },
+          {
+            "importer_id": "e4db5188",
+            "importer_name": "FRUTANIA GMBH",
+            "share_pct": 6.2
+          },
+          {
+            "importer_id": "6d9703d4",
+            "importer_name": "AGROBERRIES EUROPE B.V.",
+            "share_pct": 5.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 5837894.98,
+          "2025-02": 1447713.8,
+          "2025-03": 248877.3,
+          "2025-04": 146041.5,
+          "2025-05": 241126.2,
+          "2025-06": 329772.6,
+          "2025-07": 2210717.08,
+          "2025-08": 9713864.29,
+          "2025-09": 19905401.76,
+          "2025-10": 22785374.94,
+          "2025-11": 19704031.12,
+          "2025-12": 9152261.04
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-04",
+        "peak_off_ratio": 156,
+        "in_season_weeks": [
+          "2025-01-06/2025-01-12",
+          "2025-01-13/2025-01-19",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
+        "deal_week": "2025-11-10/2025-11-16",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "HIGH",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": -15,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-14T21:56:27.780Z"
   },
@@ -13414,7 +16464,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T01:54:52",
+        "generated_at": "2026-07-28T12:21:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13607,7 +16657,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-23T12:25:50.821Z"
   },
@@ -13645,13 +16696,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:52",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-17/2025-11-23",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
+        "window_weeks": 26,
+        "n_shipments": 23618,
+        "n_exporters": 168,
+        "kg_shipped": 256428773.57,
+        "p10": 1.3616557734204793,
+        "p25": 2.89989522106804,
+        "p50": 5.091666666666667,
+        "p75": 7.356699541091365,
+        "p90": 8.951408768438283,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-17/2025-11-23",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-23T12:31:13.167Z"
   },
@@ -13689,13 +16930,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:55",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-17/2025-11-23",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
+        "window_weeks": 26,
+        "n_shipments": 23618,
+        "n_exporters": 168,
+        "kg_shipped": 256428773.57,
+        "p10": 1.3616557734204793,
+        "p25": 2.89989522106804,
+        "p50": 5.091666666666667,
+        "p75": 7.356699541091365,
+        "p90": 8.951408768438283,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-17/2025-11-23",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-23T12:42:13.417Z"
   },
@@ -13733,13 +17164,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:21:59",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-17/2025-11-23",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
+        "window_weeks": 26,
+        "n_shipments": 23618,
+        "n_exporters": 168,
+        "kg_shipped": 256428773.57,
+        "p10": 1.3616557734204793,
+        "p25": 2.89989522106804,
+        "p50": 5.091666666666667,
+        "p75": 7.356699541091365,
+        "p90": 8.951408768438283,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-17/2025-11-23",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-23T12:46:36.395Z"
   },
@@ -13777,13 +17398,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:22:03",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-17/2025-11-23",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
+        "window_weeks": 26,
+        "n_shipments": 23618,
+        "n_exporters": 168,
+        "kg_shipped": 256428773.57,
+        "p10": 1.3616557734204793,
+        "p25": 2.89989522106804,
+        "p50": 5.091666666666667,
+        "p75": 7.356699541091365,
+        "p90": 8.951408768438283,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-17/2025-11-23",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-23T12:55:12.590Z"
   },
@@ -13821,53 +17632,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
-    "htmlFormulaScore": null,
-    "htmlFormulaBase": null,
-    "htmlFormulaBonus": null,
-    "missingFields": [
-      "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
-    ],
-    "createdAt": "2025-11-25T15:07:23.818Z"
-  },
-  {
-    "id": "plat-6925cc7b",
-    "mongoId": "6925cc7b11cf91e11fc1329f",
-    "dealRef": "FRESH BLUEBERRIES AWB 996-13806144",
-    "product": "Fresh Blueberries",
-    "variety": "VENTURA",
-    "quantityLabel": "2400 units",
-    "dealValueUSD": 55464,
-    "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
-    "buyerName": "Eagle Trading Agriculture Marketing Ltd",
-    "supplierName": "Holy Fruit Peru",
-    "buyerYib": 2,
-    "supplierYib": 8,
-    "buyerYibSource": "csv",
-    "supplierYibSource": "csv",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 21,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
-    "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
-    "offerUnitPriceUSD": 23.11,
-    "priorDealsBetweenParties": 12,
-    "relationshipAgeMonths": 0,
-    "status": "finished",
-    "likelyTest": "real",
-    "currentMilestone": 7,
-    "customsNarrative": null,
-    "cofaceCoverageAmountUSD": 49917.6,
-    "cofaceCoveragePct": 90,
-    "cofaceIsDefaulted": true,
-    "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T03:16:28",
+        "generated_at": "2026-07-28T12:22:07",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14060,7 +17827,242 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+    ],
+    "createdAt": "2025-11-25T15:07:23.818Z"
+  },
+  {
+    "id": "plat-6925cc7b",
+    "mongoId": "6925cc7b11cf91e11fc1329f",
+    "dealRef": "FRESH BLUEBERRIES AWB 996-13806144",
+    "product": "Fresh Blueberries",
+    "variety": "VENTURA",
+    "quantityLabel": "2400 units",
+    "dealValueUSD": 55464,
+    "origin": "Callao, Peru",
+    "destination": "Dubai, United Arab Emirates",
+    "buyerName": "Eagle Trading Agriculture Marketing Ltd",
+    "supplierName": "Holy Fruit Peru",
+    "buyerYib": 2,
+    "supplierYib": 8,
+    "buyerYibSource": "csv",
+    "supplierYibSource": "csv",
+    "perishabilityClass": "Ultra-Perishable",
+    "shelfLifeDays": 21,
+    "coldChainRequired": true,
+    "estimatedTransitDays": 18,
+    "numberOfTransshipments": 1,
+    "routeRiskFlag": "Medium",
+    "transportMode": "air",
+    "offerUnitPriceUSD": 23.11,
+    "priorDealsBetweenParties": 12,
+    "relationshipAgeMonths": 0,
+    "status": "finished",
+    "likelyTest": "real",
+    "currentMilestone": 7,
+    "customsNarrative": null,
+    "cofaceCoverageAmountUSD": 49917.6,
+    "cofaceCoveragePct": 90,
+    "cofaceIsDefaulted": true,
+    "counterpartyReady": true,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:22:10",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-24/2025-11-30",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-24/2025-11-30",
+        "window_start": "2025-05-26/2025-06-01",
+        "window_end": "2025-11-17/2025-11-23",
+        "window_weeks": 26,
+        "n_shipments": 24986,
+        "n_exporters": 169,
+        "kg_shipped": 272842943.09000003,
+        "p10": 1.3793103448275863,
+        "p25": 2.9,
+        "p50": 5.066331054324389,
+        "p75": 7.197671380789959,
+        "p90": 8.931137724550897,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-24/2025-11-30",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
+    "htmlFormulaScore": null,
+    "htmlFormulaBase": null,
+    "htmlFormulaBonus": null,
+    "missingFields": [
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-25T15:34:19.854Z"
   },
@@ -14098,13 +18100,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:22:14",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-24/2025-11-30",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-24/2025-11-30",
+        "window_start": "2025-05-26/2025-06-01",
+        "window_end": "2025-11-17/2025-11-23",
+        "window_weeks": 26,
+        "n_shipments": 24986,
+        "n_exporters": 169,
+        "kg_shipped": 272842943.09000003,
+        "p10": 1.3793103448275863,
+        "p25": 2.9,
+        "p50": 5.066331054324389,
+        "p75": 7.197671380789959,
+        "p90": 8.931137724550897,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-24/2025-11-30",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-25T15:47:33.161Z"
   },
@@ -14142,13 +18334,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:22:18",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-24/2025-11-30",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-24/2025-11-30",
+        "window_start": "2025-05-26/2025-06-01",
+        "window_end": "2025-11-17/2025-11-23",
+        "window_weeks": 26,
+        "n_shipments": 24986,
+        "n_exporters": 169,
+        "kg_shipped": 272842943.09000003,
+        "p10": 1.3793103448275863,
+        "p25": 2.9,
+        "p50": 5.066331054324389,
+        "p75": 7.197671380789959,
+        "p90": 8.931137724550897,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-24/2025-11-30",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-25T15:56:42.373Z"
   },
@@ -14186,13 +18568,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:22:22",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-11-24/2025-11-30",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-11-24/2025-11-30",
+        "window_start": "2025-05-26/2025-06-01",
+        "window_end": "2025-11-17/2025-11-23",
+        "window_weeks": 26,
+        "n_shipments": 24986,
+        "n_exporters": 169,
+        "kg_shipped": 272842943.09000003,
+        "p10": 1.3793103448275863,
+        "p25": 2.9,
+        "p50": 5.066331054324389,
+        "p75": 7.197671380789959,
+        "p90": 8.931137724550897,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-11-24/2025-11-30",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-11-25T16:03:24.595Z"
   },
@@ -14230,13 +18802,203 @@ export const platformDeals: PlatformDealRecord[] = [
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
     "counterpartyReady": true,
-    "marketIntel": null,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-28T12:22:25",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20602722628",
+        "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "variety": "BLUEBERRY",
+        "deal_week": "2025-12-01/2025-12-07",
+        "deal_kg": null,
+        "deal_price_usd_per_kg": null
+      },
+      "dim_a_supplier": {
+        "entity_id": "20602722628",
+        "entity_side": "exporter",
+        "entity_name": "HOLY FRUIT PERU S.A.C",
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": "2025-08-13",
+        "last_seen": "2025-11-03",
+        "vintage_months": 4,
+        "months_active_12mo": 4,
+        "total_shipments": 17,
+        "total_kg_net": 76204.5,
+        "total_fob_usd": 878736.44,
+        "avg_monthly_kg_last_6mo": 12701,
+        "avg_monthly_kg_last_12mo": 6350,
+        "peak_monthly_kg": 37248,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 11.531,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0.02
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 11.531
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "6a29186f",
+            "partner_name": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+            "kg_net": 63364.5,
+            "share_pct": 83.2
+          },
+          {
+            "partner_id": null,
+            "partner_name": "<NA>",
+            "kg_net": 12840,
+            "share_pct": 16.8
+          }
+        ],
+        "top_destinations": [
+          {
+            "destination_country": "ISRAEL",
+            "kg_net": 73684.5,
+            "share_pct": 96.7
+          },
+          {
+            "destination_country": "INDIA",
+            "kg_net": 2520,
+            "share_pct": 3.3
+          }
+        ],
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 11.531,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 125.3,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [
+          {
+            "variety": "BLUEBERRY",
+            "destination_country": "ISRAEL",
+            "n_shipments": 15,
+            "entity_kg": 73684.5,
+            "entity_wavg_usd_kg": 11.613,
+            "peru_wavg_usd_kg": 4.845,
+            "corridor_kg_market": 1664358.9,
+            "entity_share_of_corridor_pct": 4.43,
+            "variance_pct": 139.7,
+            "position": "PREMIUM"
+          }
+        ],
+        "activity_consistency": 1,
+        "consecutive_month_streak": 4,
+        "capacity_check": null,
+        "confidence": "MED",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": {
+          "ruc": "20602722628",
+          "resolved": true,
+          "razon_social": "HOLY FRUIT PERU S.A.C",
+          "estado": "ACTIVO",
+          "condicion": "HABIDO",
+          "fecha_inscripcion": null,
+          "years_in_business": null,
+          "ubigeo": "150130",
+          "direccion": "JR. JUAN GRIS NRO 113 INT. 201",
+          "tipo": null,
+          "actividad_economica": null,
+          "fetched_at": "2026-07-27T16:58:03",
+          "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20602722628)",
+          "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
+          "d2_pts": null,
+          "d2_signal": "NEEDS_INPUT"
+        },
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": "NEEDS_INPUT"
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "BLUEBERRY",
+        "destination_country": null,
+        "deal_week": "2025-12-01/2025-12-07",
+        "window_start": "2025-06-02/2025-06-08",
+        "window_end": "2025-11-24/2025-11-30",
+        "window_weeks": 26,
+        "n_shipments": 26163,
+        "n_exporters": 171,
+        "kg_shipped": 287920004.93,
+        "p10": 1.3739584584843516,
+        "p25": 2.840909090909091,
+        "p50": 5.013333333333334,
+        "p75": 7.019578592115906,
+        "p90": 8.93,
+        "confidence": "SPARSE",
+        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "deal_price_usd_per_kg": null,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
+      },
+      "dim_c_route_intelligence": {
+        "variety": "BLUEBERRY",
+        "destination_country": "UNITED ARAB EMIRATES",
+        "period_label": "2025-01-01 .. 2025-12-31",
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "n_importers": 0,
+        "kg_net": 0,
+        "fob_usd": 0,
+        "lane_share_of_variety_pct": 0,
+        "green_channel_pct": null,
+        "orange_channel_pct": null,
+        "red_channel_pct": null,
+        "transport_mode_mix": {},
+        "exporter_hhi": 0,
+        "importer_hhi": 0,
+        "top_exporters": [],
+        "top_importers": [],
+        "monthly_kg": {},
+        "peak_month": null,
+        "off_peak_month": null,
+        "peak_off_ratio": null,
+        "in_season_weeks": [],
+        "lane_maturity": "SPARSE",
+        "deal_week": "2025-12-01/2025-12-07",
+        "commercial_window_alignment": "NEEDS_INPUT",
+        "route_signal_inferred": "INSUFFICIENT",
+        "route_signal_table": null,
+        "route_signal_driver": "NEEDS_INPUT",
+        "route_signal_pts": null,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "No shipments in this corridor for the period observed.",
+          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
     "htmlFormulaScore": null,
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-12-02T13:32:27.112Z"
   },
@@ -14276,7 +19038,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:13:45",
+        "generated_at": "2026-07-28T12:22:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14469,7 +19231,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-12-02T13:34:37.517Z"
   },
@@ -14509,7 +19272,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:04",
+        "generated_at": "2026-07-28T12:22:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14702,7 +19465,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2025-12-02T15:43:35.425Z"
   },
@@ -14742,7 +19506,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:10",
+        "generated_at": "2026-07-28T12:22:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14936,7 +19700,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-01-23T00:56:37.083Z"
   },
@@ -14976,7 +19741,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:14",
+        "generated_at": "2026-07-28T12:22:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15101,7 +19866,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T12:52:18.327Z"
   },
@@ -15141,7 +19907,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:18",
+        "generated_at": "2026-07-28T12:22:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15266,7 +20032,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T15:37:54.951Z"
   },
@@ -15306,7 +20073,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:21",
+        "generated_at": "2026-07-28T12:22:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15431,7 +20198,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T15:46:10.207Z"
   },
@@ -15471,7 +20239,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:25",
+        "generated_at": "2026-07-28T12:22:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15596,7 +20364,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T15:52:57.914Z"
   },
@@ -15636,7 +20405,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:28",
+        "generated_at": "2026-07-28T12:22:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15761,7 +20530,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T15:54:26.108Z"
   },
@@ -15801,7 +20571,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:32",
+        "generated_at": "2026-07-28T12:23:00",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15926,7 +20696,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T15:55:01.043Z"
   },
@@ -15966,7 +20737,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T04:14:36",
+        "generated_at": "2026-07-28T12:23:04",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16091,7 +20862,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBonus": null,
     "missingFields": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
     "createdAt": "2026-03-27T15:55:53.974Z"
   }
@@ -16412,7 +21184,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -16647,7 +21420,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -16810,7 +21584,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -16973,7 +21748,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17119,6 +21895,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
       "buyer.yearsInBusiness"
     ]
   },
@@ -17211,7 +21988,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17293,7 +22071,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17375,7 +22154,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17449,7 +22229,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17486,7 +22267,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17525,7 +22307,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17553,7 +22336,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17581,7 +22365,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17612,7 +22397,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "route risk table row (transport-mode fallback used)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17640,7 +22426,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17668,7 +22455,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17698,7 +22486,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17726,7 +22515,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ],
     "missingForFullCram": [
       "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
@@ -17757,7 +22547,8 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "route risk table row (transport-mode fallback used)",
-      "cargo insurance coverage (defaults to None — triggers veto)"
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   }
 ];

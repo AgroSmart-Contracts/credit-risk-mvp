@@ -457,6 +457,14 @@ function main() {
     // default) since it forces every real deal to the "Veto" tier — decision
     // 2026-07-27, see npm run validate.
     if (!isSynthetic) missingFields.push("cargo insurance coverage (defaults to None — triggers veto)");
+    // PlatformDealRecord has no field for this at all — cofaceCompanyRiskGrade/
+    // cofaceCountryRiskGrade only ever get set via the manual Assess Deal
+    // wizard's Coface document-upload flow, never by the CSV pipeline. Same
+    // class of gap as cargo insurance above (0/84 real deals have one), just
+    // missed when that entry was added — decision 2026-07-28. Buyer-only:
+    // creditRatingPoints() is read inside computeBuyerScore(), not
+    // computeSupplierScore() — Coface is buyer-default credit insurance.
+    if (!isSynthetic) missingFields.push("buyer credit rating (Coface CRA/DRA — no document uploaded)");
 
     const status = row.status;
     const currentMilestone = normalizeDealMilestone(status, parseNumber(row.currentMilestone));
