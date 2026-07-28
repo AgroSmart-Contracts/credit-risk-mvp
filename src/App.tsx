@@ -4,7 +4,6 @@ import { deals as sampleDeals } from "./data/deals";
 import {
   platformCounterparties,
   platformDealsBlocked,
-  platformDealsSynthetic,
 } from "./data/platform-deals";
 import {
   prescoredByDealId,
@@ -25,7 +24,6 @@ import { FinancingRecommendationPanel } from "./components/FinancingRecommendati
 import { CounterpartyScoresTab } from "./components/CounterpartyScoresTab";
 import { PrescoredDealsTab } from "./components/PrescoredDealsTab";
 import { DealMissingFieldsTab } from "./components/DealMissingFieldsTab";
-import { SyntheticRowsTab } from "./components/SyntheticRowsTab";
 import { ProductRiskTableTab } from "./components/ProductRiskTableTab";
 import { RouteRiskTableTab } from "./components/RouteRiskTableTab";
 
@@ -151,7 +149,6 @@ function App() {
         scoredCount={platformCounterparties.length}
         platformCount={prescoredPlatformDeals.length}
         missingCount={missingDealCount}
-        testDataCount={platformDealsSynthetic.length}
       />
 
       {view === "assess" && <StepIndicator currentStep={step} />}
@@ -194,18 +191,6 @@ function App() {
               transition={{ duration: 0.2 }}
             >
               <DealMissingFieldsTab onViewDeal={openPrescored} />
-            </motion.div>
-          )}
-
-          {view === "test-data" && (
-            <motion.div
-              key="test-data"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <SyntheticRowsTab />
             </motion.div>
           )}
 

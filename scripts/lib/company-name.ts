@@ -34,6 +34,10 @@ const ALIAS_MAP: Record<string, string> = {
   "ALLIED TRADE GLOBAL": "Allied Trade Global",
   "HOLY FRUIT PERU": "Holy Fruit Peru",
   "MANDARINA FRESCA": "Mandarina Fresca", // not a company, guards against accidental match
+  // Windows-1252 Ñ (U+0091) mis-decoded as a control char in the source export.
+  "AGRICOLA VI\u0091ASOL SAC": "AGRICOLA VIÑASOL SAC",
+  "AGRICOLA VIÑASOL SAC": "AGRICOLA VIÑASOL SAC",
+  "AGRICOLA VINASOL SAC": "AGRICOLA VIÑASOL SAC",
 };
 
 function stripDiacriticGarbage(value: string): string {

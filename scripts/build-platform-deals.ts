@@ -4,9 +4,11 @@
  * all future regenerations should point at whichever file supersedes this one).
  *
  * What this does that the old (undated) generator didn't:
- *  - Excludes `likely_test` rows from scoring/aggregates (synthetic/seeded data),
- *    but still builds and exports them separately (`platformDealsSynthetic`) so
- *    all 170 source rows are reported somewhere — decision 2026-07-27
+ *  - `likely_test` rows are merged into the same scoring/aggregate pipeline as
+ *    every other row — decision 2026-07-28 (reverses the 2026-07-27 decision
+ *    to exclude them; see docs/cram-defaults-and-formula-2026-07.md §6 for the
+ *    retracted rationale). `likelyTest` is kept on each record purely as a
+ *    provenance label, not as a scoring/inclusion gate.
  *  - Pulls buyer/supplier years-in-business from the company-master (built by
  *    build-company-master.ts), not per-deal-row duplication
  *  - Computes real priorDealsBetweenParties / relationshipAgeMonths per
@@ -157,13 +159,10 @@ function monthsBetween(a: Date, b: Date): number {
  * "source" values used throughout: csv | verified | default | sunat |
  * market-intel | table-confirmed | table-provisional | no-data-source.
  *
- * Includes all 170 source rows, not just the 84 real ones — `rowType`
- * distinguishes "real" from "likely_test" (synthetic seed data) so every
- * row is accounted for here too, matching the "all 170 rows accounted for"
- * principle the app itself already states (DealMissingFieldsTab). Synthetic
- * rows never enter scoring/market-intel, so their CRAM-derived columns
- * (capacity flags, SUNAT license, etc.) are blank by construction, not
- * because data was lost.
+ * Includes all source rows — `rowType` still distinguishes "real" from
+ * "likely_test" as a provenance label (from the raw CSV's `likely_test`
+ * column), but since the 2026-07-28 merge decision that label no longer
+ * gates scoring/aggregation/market-intel: every row is treated the same.
  */
 const DEFAULTS_CSV_HEADER = [
   // --- ERD v4: deals ---
@@ -319,13 +318,11 @@ function buildCounterpartyCsv(
   return lines.join("\n") + "\n";
 }
 
-function buildDefaultsCsv(records: PlatformDealRecord[], syntheticRecords: PlatformDealRecord[]): string {
+function buildDefaultsCsv(records: PlatformDealRecord[]): string {
   const lines = [DEFAULTS_CSV_HEADER.join(",")];
-  const allRecords = [
-    ...records.map((r) => ({ r, rowType: "real" })),
-    ...syntheticRecords.map((r) => ({ r, rowType: "likely_test" })),
-  ];
-  for (const { r, rowType } of allRecords) {
+  const hasCofaceDoc = records.filter((r) => !r.cofaceIsDefaulted).length;
+  for (const r of records) {
+    const rowType = r.likelyTest === "likely_test" ? "likely_test" : "real";
     const supplierSunatResolved = r.marketIntel?.dim_a_supplier.sunat?.resolved ?? false;
     const supplierSunat = r.marketIntel?.dim_a_supplier.sunat;
     const buyerCapacityFlag = capacityFlagOf(r.marketIntel, "buyer");
@@ -352,7 +349,7 @@ function buildDefaultsCsv(records: PlatformDealRecord[], syntheticRecords: Platf
         buyerCapacityFlag ? "market-intel" : "no-data-source (quantity has no kg/carton unit — see docs)",
         null, // DEFAULT: Coface grades never populated by the CSV pipeline (only via manual document-upload flow)
         null,
-        "no-data-source (0 of 84 real deals have a Coface document on file)",
+        `no-data-source (${hasCofaceDoc} of ${records.length} deals have a Coface document on file)`,
         // kybverifications(supplier) + Counterparty
         r.supplierName,
         r.supplierYib,
@@ -420,15 +417,8 @@ function main() {
   );
   const companyByKey = new Map(companyMaster.map((c) => [c.key, c]));
 
-  const excludedTestCount = allRows.filter((r) => r.likely_test === "likely_test").length;
-  const rows = allRows.filter((r) => r.likely_test !== "likely_test");
-
-  // Group by buyer+supplier pair (real rows only) for relationship signals.
-  // Synthetic/test rows are still built into full records below (so all 170
-  // rows are reported somewhere, per decision 2026-07-27) but never enter
-  // this aggregation, never get counterpartyReady=true, and never appear in
-  // platformDeals/platformCounterparties — only in the separate
-  // platformDealsSynthetic export.
+  // Group by buyer+supplier pair (all rows — merged per decision 2026-07-28)
+  // for relationship signals.
   interface PairAgg {
     dealCount: number;
     createdAtDates: Date[];
@@ -441,7 +431,7 @@ function main() {
     const supplierName = (supplierCompany?.name as string) || row.supplierCompanyNames?.split("|")[0] || "";
     return `${companyGroupKey(buyerName)}::${companyGroupKey(supplierName)}`;
   }
-  for (const row of rows) {
+  for (const row of allRows) {
     const key = pairKeyFor(row);
     let agg = pairAgg.get(key);
     if (!agg) {
@@ -454,12 +444,10 @@ function main() {
   }
 
   const records: PlatformDealRecord[] = [];
-  const syntheticRecords: PlatformDealRecord[] = [];
   const productMissCount = new Map<string, number>();
   const routeMissCount = new Map<string, number>();
 
   for (const row of allRows) {
-    const isSynthetic = row.likely_test === "likely_test";
     const buyerCompany = safeJsonParse(row.buyerCompany);
     const supplierCompany = safeJsonParse(row.supplierCompany);
 
@@ -472,18 +460,15 @@ function main() {
 
     const product = classifyProduct(row._id, row.name, row.description);
     const productProfile = lookupProductRisk(product);
-    // Miss-counters only track real rows — synthetic gaps shouldn't skew what looks worth building a table row for.
-    if (!productProfile && !isSynthetic) productMissCount.set(product, (productMissCount.get(product) ?? 0) + 1);
+    if (!productProfile) productMissCount.set(product, (productMissCount.get(product) ?? 0) + 1);
 
     const originStr = buildLocationString(row.portOfOrigin, row.origin);
     const destStr = buildLocationString(row.portOfDestination, row.destination);
-    const routeProfile = lookupRouteRisk(originStr, destStr);
-    if (!routeProfile && !isSynthetic) routeMissCount.set(`${originStr} -> ${destStr}`, (routeMissCount.get(`${originStr} -> ${destStr}`) ?? 0) + 1);
+    const routeProfile = lookupRouteRisk(originStr, destStr, product);
+    if (!routeProfile) routeMissCount.set(`${originStr} -> ${destStr}`, (routeMissCount.get(`${originStr} -> ${destStr}`) ?? 0) + 1);
     const transportFallback = TRANSPORT_FALLBACK[row.transport] ?? TRANSPORT_FALLBACK.sea_freight;
 
     const pairKey = pairKeyFor(row);
-    // Synthetic rows' pairs usually aren't in pairAgg at all (built from real
-    // rows only) — default to 0 rather than asserting non-null.
     const agg = pairAgg.get(pairKey) ?? { dealCount: 0, createdAtDates: [] };
     // Simplification (documented in docs/product-route-table-gaps-2026-07.md):
     // every deal within a pair gets the same priorDealsBetweenParties value
@@ -510,26 +495,37 @@ function main() {
     const buyerYib = buyerMaster?.yearsInBusiness ?? null;
     const supplierYib = supplierMaster?.yearsInBusiness ?? null;
 
-    // Market-intel (Peru customs + SUNAT) enrichment — real rows only, and
-    // only when the supplier resolves to a valid Peru RUC. See
-    // scripts/lib/market-intel-cli.ts. Feeds buyer/supplier capacity points
-    // in computeBuyerScore()/computeSupplierScore() (src/lib/scoring.ts).
-    const quantityLabel = row.quantity ? `${row.quantity} units` : "";
+    // Market-intel (Peru customs + SUNAT) enrichment — applied to every row
+    // (merged per decision 2026-07-28), only gated on the supplier resolving
+    // to a valid Peru RUC. See scripts/lib/market-intel-cli.ts. Feeds
+    // buyer/supplier capacity points in computeBuyerScore()/computeSupplierScore()
+    // (src/lib/scoring.ts).
+    // Fixed 2026-07-28: was always "<quantity> units", which parseDealKg()
+    // could never match (no "kg"/"carton" token), so dealKg/dealPriceUsdPerKg
+    // were null for 100% of deals. `quantity` is a pack count (cartons/boxes),
+    // not a weight — the real per-pack weight lives in the CSV's free-text
+    // `presentation` column (e.g. "CARTON X 1.5KG"). Embedding both lets
+    // parseDealKg() recover total kg — verified against real DUA customs
+    // records for several deals (e.g. 1,200 × "CARTON X 1.5KG" = 1,800kg,
+    // matching that deal's own customs narrative exactly).
+    const quantityLabel = row.quantity
+      ? row.presentation
+        ? `${row.quantity} x ${row.presentation}`
+        : `${row.quantity} units`
+      : "";
     let marketIntel = null;
-    if (!isSynthetic) {
-      const supplierRuc = supplierMaster ? extractValidRuc(supplierMaster.taxIds) : null;
-      if (supplierRuc) {
-        const dealKg = parseDealKg({ quantityLabel, dealValueUSD }) ?? undefined;
-        marketIntel = fetchMarketIntelSync({
-          exporterRuc: supplierRuc,
-          importerName: buyerName,
-          destinationCountry: customsDestinationCountry(destStr) ?? undefined,
-          variety: customsVariety(product, row.variety) ?? undefined,
-          dealWeek: row.createdAt ? dealWeekFor(new Date(row.createdAt)) : undefined,
-          dealKg,
-          dealPriceUsdPerKg: dealPricePerKg({ quantityLabel, dealValueUSD }) ?? undefined,
-        });
-      }
+    const supplierRuc = supplierMaster ? extractValidRuc(supplierMaster.taxIds) : null;
+    if (supplierRuc) {
+      const dealKg = parseDealKg({ quantityLabel, dealValueUSD }) ?? undefined;
+      marketIntel = fetchMarketIntelSync({
+        exporterRuc: supplierRuc,
+        importerName: buyerName,
+        destinationCountry: customsDestinationCountry(destStr) ?? undefined,
+        variety: customsVariety(product, row.variety) ?? undefined,
+        dealWeek: row.createdAt ? dealWeekFor(new Date(row.createdAt)) : undefined,
+        dealKg,
+        dealPriceUsdPerKg: dealPricePerKg({ quantityLabel, dealValueUSD }) ?? undefined,
+      });
     }
 
     const missingFields: string[] = [];
@@ -544,17 +540,17 @@ function main() {
     // No source anywhere in the CSV — platform-deal-mapper.ts hardcodes
     // "None", which is also a spec §6 veto trigger (mandatory insurance
     // floor). Surfaced here (not just cofaceIsDefaulted-style silent
-    // default) since it forces every real deal to the "Veto" tier — decision
+    // default) since it forces every deal to the "Veto" tier — decision
     // 2026-07-27, see npm run validate.
-    if (!isSynthetic) missingFields.push("cargo insurance coverage (defaults to None — triggers veto)");
+    missingFields.push("cargo insurance coverage (defaults to None — triggers veto)");
     // PlatformDealRecord has no field for this at all — cofaceCompanyRiskGrade/
     // cofaceCountryRiskGrade only ever get set via the manual Assess Deal
     // wizard's Coface document-upload flow, never by the CSV pipeline. Same
-    // class of gap as cargo insurance above (0/84 real deals have one), just
-    // missed when that entry was added — decision 2026-07-28. Buyer-only:
-    // creditRatingPoints() is read inside computeBuyerScore(), not
-    // computeSupplierScore() — Coface is buyer-default credit insurance.
-    if (!isSynthetic) missingFields.push("buyer credit rating (Coface CRA/DRA — no document uploaded)");
+    // class of gap as cargo insurance above, just missed when that entry was
+    // added — decision 2026-07-28. Buyer-only: creditRatingPoints() is read
+    // inside computeBuyerScore(), not computeSupplierScore() — Coface is
+    // buyer-default credit insurance.
+    missingFields.push("buyer credit rating (Coface CRA/DRA — no document uploaded)");
 
     const status = row.status;
     const currentMilestone = normalizeDealMilestone(status, parseNumber(row.currentMilestone));
@@ -592,10 +588,7 @@ function main() {
       cofaceCoverageAmountUSD,
       cofaceCoveragePct,
       cofaceIsDefaulted,
-      // Synthetic/test rows are never counterparty-ready, regardless of YIB —
-      // keeps them out of platformDealsReadyForCounterparty/Blocked entirely
-      // even if a fake company name happens to collide with a real one.
-      counterpartyReady: !isSynthetic && buyerYib !== null && supplierYib !== null,
+      counterpartyReady: buyerYib !== null && supplierYib !== null,
       marketIntel,
       // Retired 2026-07-24: the old "HTML formula tester" pre-computation
       // this fed is gone. Real counterparty/overall scores are computed live
@@ -609,11 +602,7 @@ function main() {
       createdAt: row.createdAt || "",
     };
 
-    if (isSynthetic) {
-      syntheticRecords.push(record);
-    } else {
-      records.push(record);
-    }
+    records.push(record);
   }
 
   // --- PlatformCounterpartyScore aggregation — per (company, role, product),
@@ -726,14 +715,14 @@ function main() {
     .sort((a, b) => b.dealCount - a.dealCount);
 
   writeFileSync(join(OUT_DIR, "platform-deals.generated.json"), JSON.stringify(records, null, 2) + "\n");
-  writeFileSync(join(OUT_DIR, "platform-deals-with-defaults.csv"), buildDefaultsCsv(records, syntheticRecords));
+  writeFileSync(join(OUT_DIR, "platform-deals-with-defaults.csv"), buildDefaultsCsv(records));
   writeFileSync(
     join(OUT_DIR, "counterparty-scores.csv"),
     buildCounterpartyCsv(counterpartyScores, counterpartyBlocked),
   );
 
   const tsFile = `/** Auto-generated by scripts/build-platform-deals.ts from full-deals-dataset-2026-07 (1).csv — do not edit by hand. */
-/** likely_test rows are still fully built (see platformDealsSynthetic below) but never enter platformDeals/platformCounterparties/scoring — decision 2026-07-27. Defaults: buyer/supplier license=true (mapper); coface coverage=90% of dealValueUSD when no real cofaceRecordId (flagged cofaceIsDefaulted). See docs/cram-defaults-and-formula-2026-07.md. */
+/** likely_test rows are merged into platformDeals/platformCounterparties/scoring like every other row — decision 2026-07-28 (reverses the 2026-07-27 exclusion). \`likelyTest\` on each record is a provenance label only. Defaults: buyer/supplier license=true (mapper); coface coverage=90% of dealValueUSD when no real cofaceRecordId (flagged cofaceIsDefaulted). See docs/cram-defaults-and-formula-2026-07.md. */
 import type { PlatformCounterpartyScore, PlatformCounterpartyBlocked, PlatformDealRecord } from "../types/platform";
 
 export const platformDeals: PlatformDealRecord[] = ${JSON.stringify(records, null, 2)};
@@ -745,9 +734,6 @@ export const platformCounterpartiesBlocked: PlatformCounterpartyBlocked[] = ${JS
 
 export const platformDealsReadyForCounterparty = platformDeals.filter((d) => d.counterpartyReady);
 export const platformDealsBlocked = platformDeals.filter((d) => !d.counterpartyReady);
-
-/** The ${syntheticRecords.length} \`likely_test\` rows (synthetic/seed data) — reported for full 170-row transparency (decision 2026-07-27), excluded from all scoring/aggregates. Never counterpartyReady. */
-export const platformDealsSynthetic: PlatformDealRecord[] = ${JSON.stringify(syntheticRecords, null, 2)};
 `;
   writeFileSync(join(OUT_DIR, "platform-deals.ts"), tsFile);
 
@@ -756,8 +742,9 @@ export const platformDealsSynthetic: PlatformDealRecord[] = ${JSON.stringify(syn
   const supplierCapacityKnown = records.filter(
     (r) => r.marketIntel?.dim_a_supplier.capacity_check,
   ).length;
-  console.log(`Excluded ${excludedTestCount} likely_test rows out of ${allRows.length} total (still built into platformDealsSynthetic).`);
-  console.log(`Kept ${records.length} real/unverified deals; ${readyCount} counterparty-ready.`);
+  const likelyTestCount = records.filter((r) => r.likelyTest === "likely_test").length;
+  console.log(`Built ${records.length} deals (${likelyTestCount} likely_test-labeled, merged into scoring per decision 2026-07-28).`);
+  console.log(`${readyCount} counterparty-ready.`);
   console.log(`${counterpartyScores.length} scored (company, role, product) counterparty profiles; ${counterpartyBlocked.length} blocked (missing YIB).`);
   console.log(`Market-intel: ${marketIntelCount}/${records.length} deals got a response (valid Peru supplier RUC resolved); ${supplierCapacityKnown} of those have a usable supplier capacity_check (shipment history in this data bundle).`);
   console.log(`Products with no confirmed table row (deal count): ${[...productMissCount.entries()].map(([p, n]) => `${p}=${n}`).join(", ") || "none"}`);

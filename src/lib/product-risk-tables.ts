@@ -138,7 +138,7 @@ export const PRODUCT_RISK_TABLE: ProductRiskProfile[] = [
     shelfLifeDays: 365,
     coldChainRequired: true,
     rationale:
-      "Provisional — same gap as Mixed Berries/Tropical (IQF): no Nectora product line, no CRAM Table 1 row. Currently backs 0 confirmed real deals in the book (the only deal referencing this product, Industrias Solimar SAC → Juhinej Ltd, is flagged likely_test/synthetic) — kept as a table row so a real deal of this type isn't silently unscored, but there's nothing yet to validate the score against.",
+      "Provisional — same gap as Mixed Berries/Tropical (IQF): no Nectora product line, no CRAM Table 1 row. Backs 1 deal in the book (Industrias Solimar SAC → Juhinej Ltd, flagged likely_test/synthetic — merged into scoring like every other deal per decision 2026-07-28) — kept as a table row so a deal of this type isn't silently unscored, but there's nothing yet to validate the score against.",
     scoreConfirmed: false,
   },
 ];

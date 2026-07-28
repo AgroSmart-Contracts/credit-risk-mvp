@@ -18,11 +18,6 @@ const TABS: { id: AppView; label: string; short: string }[] = [
     short: "Missing",
   },
   {
-    id: "test-data",
-    label: "Test data",
-    short: "Test data",
-  },
-  {
     id: "product-table",
     label: "Product risk table",
     short: "Products",
@@ -40,7 +35,6 @@ interface AppNavProps {
   scoredCount: number;
   platformCount: number;
   missingCount: number;
-  testDataCount: number;
 }
 
 export function AppNav({
@@ -49,13 +43,11 @@ export function AppNav({
   scoredCount,
   platformCount,
   missingCount,
-  testDataCount,
 }: AppNavProps) {
   const badge: Partial<Record<AppView, number>> = {
     counterparties: scoredCount,
     platform: platformCount,
     missing: missingCount,
-    "test-data": testDataCount,
   };
 
   return (

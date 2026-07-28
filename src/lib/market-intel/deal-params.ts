@@ -59,8 +59,67 @@ export function customsVariety(product: string, variety?: string): string | null
 /** Narrowed from `Deal` so the batch build pipeline (which works with `PlatformDealRecord`, not `Deal`) can reuse these without constructing a full Deal object — both shapes carry `quantityLabel`/`dealValueUSD`. */
 type DealQuantityFields = { quantityLabel: string; dealValueUSD: number };
 
+function unitToKg(value: number, unit: string): number | null {
+  if (!Number.isFinite(value)) return null;
+  switch (unit.toLowerCase()) {
+    case "kg":
+      return value;
+    case "g":
+      return value / 1000;
+    case "lb":
+      return value * 0.453592;
+    case "oz":
+      return value * 0.0283495;
+    default:
+      return null;
+  }
+}
+
+/**
+ * Per-unit weight parsed from the source CSV's free-text `presentation`
+ * column (e.g. "CARTON X 1.5KG" → 1.5, "CAJAS DE 10 KG" → 10,
+ * "Carton x 30 lb." → 13.6). Some presentations are themselves a nested
+ * "N x M<unit>" pack description with no larger unit named (e.g. "12 x 6oz" =
+ * 12 packs of 6oz = 72oz total) — checked first, but only when it's the
+ * *entire* string, since the same "N x M<unit>" shape can also appear as a
+ * parenthetical sub-breakdown of an already-stated outer weight (e.g.
+ * "CARTON X 10KG (22 x 450g Bunches)", where 10KG is the real per-carton
+ * total and the 22×450g is just how it's arranged inside, not an extra
+ * multiplier).
+ */
+function parsePerUnitKg(text: string): number | null {
+  const whole = text.trim();
+  const nested = whole.match(/^(\d+)\s*x\s*([\d.]+)\s*(kg|g|lb|oz)$/i);
+  if (nested) {
+    const n = Number(nested[1]);
+    const perPack = unitToKg(Number(nested[2]), nested[3]);
+    if (Number.isFinite(n) && perPack !== null) return n * perPack;
+  }
+  const single = text.match(/([\d.]+)\s*(kg|g|lb|oz)\b/i);
+  if (single) return unitToKg(Number(single[1]), single[2]);
+  return null;
+}
+
 export function parseDealKg(deal: DealQuantityFields): number | null {
   const label = deal.quantityLabel;
+
+  // Platform CSV convention (see scripts/build-platform-deals.ts): quantityLabel
+  // is "<count> x <presentation>", where `count` is the number of packing
+  // units (cartons/boxes/bags) and `presentation` is the source CSV's raw
+  // per-unit weight description — total kg = count × per-unit kg. Confirmed
+  // against real DUA customs records (e.g. 1,200 × "CARTON X 1.5KG" = 1,800kg,
+  // matching that deal's own customs narrative exactly).
+  const countMatch = label.match(/^([\d,]+(?:\.\d+)?)\s*x\s*(.+)$/i);
+  if (countMatch) {
+    const count = Number(countMatch[1].replace(/,/g, ""));
+    const perUnitKg = parsePerUnitKg(countMatch[2]);
+    if (Number.isFinite(count) && count > 0 && perUnitKg !== null && perUnitKg > 0) {
+      return count * perUnitKg;
+    }
+  }
+
+  // Manual/sample-deal convention (Assess Deal wizard / src/data/deals.ts):
+  // a single already-total-kg figure, e.g. "4,000 kg net (~2,667 cartons)".
   const kgMatch = label.match(/([\d,]+(?:\.\d+)?)\s*kg/i);
   if (kgMatch) {
     const kg = Number(kgMatch[1].replace(/,/g, ""));
