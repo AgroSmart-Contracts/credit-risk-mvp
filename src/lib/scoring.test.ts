@@ -8,6 +8,7 @@ import {
   computeRouteScore,
   computeStructureScore,
   computeOverallScore,
+  explainPartyScore,
   paymentTermsAdjustment,
   checkVetoRegister,
   getTier,
@@ -127,6 +128,41 @@ describe("computeSupplierScore — Dimension A supplier sub-score", () => {
   it("2-5 years is neutral for supplier (unlike buyer's +5)", () => {
     const deal = baseDeal({ supplier: { ...baseDeal().supplier, yearsInBusiness: 3 } });
     expect(computeSupplierScore(deal)).toBe(50);
+  });
+});
+
+describe("explainPartyScore — auditor trail", () => {
+  it("matches computeSupplierScore and explains BIO FARMING-style 85", () => {
+    const deal = baseDeal({
+      supplier: {
+        ...baseDeal().supplier,
+        yearsInBusiness: 2,
+        licenseValid: true,
+        platformDealsCompleted: 4,
+        platformCompletionRate: 100,
+      },
+    });
+    const audit = explainPartyScore(deal, "supplier");
+    expect(audit.score).toBe(85);
+    expect(audit.score).toBe(computeSupplierScore(deal));
+    expect(audit.rawTotal).toBe(50 + 5 + 15 + 0 + 0 + 15 + 0);
+    expect(audit.whyBelow100.some((r) => r.includes("Platform deals"))).toBe(true);
+    expect(audit.whyBelow100.some((r) => r.includes("Years in business"))).toBe(true);
+  });
+
+  it("hits 100 when pair history is thick enough despite young YIB", () => {
+    const deal = baseDeal({
+      supplier: {
+        ...baseDeal().supplier,
+        yearsInBusiness: 2,
+        licenseValid: true,
+        platformDealsCompleted: 11,
+        platformCompletionRate: 100,
+      },
+    });
+    const audit = explainPartyScore(deal, "supplier");
+    expect(audit.score).toBe(100);
+    expect(audit.whyBelow100).toEqual([]);
   });
 });
 
