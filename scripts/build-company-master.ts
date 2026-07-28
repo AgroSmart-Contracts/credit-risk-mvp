@@ -16,6 +16,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseCsvRecords } from "./lib/csv";
 import { normalizeCompanyName, companyGroupKey } from "./lib/company-name";
+import { extractValidRuc } from "../src/lib/market-intel/ruc";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DESKTOP = join(process.env.HOME ?? "", "Desktop");
@@ -174,10 +175,19 @@ function main() {
     JSON.stringify(master, null, 2) + "\n",
   );
 
+  // ERD v4: companies.taxId / companies.taxIdType / companies.country —
+  // "valid-ruc" | "peru-no-valid-ruc" | "not-peru-na" mirrors
+  // CompanyTaxIdSection.tsx's RucStatus so the CSV and the app UI never
+  // disagree. No `key`/`_id` column — this is a values worksheet for
+  // filling gaps by hand, not a DB-ready export (that comes later, once
+  // these values are actually loaded and get real IDs).
   const csvHeader = [
     "name",
     "roles",
     "countries",
+    "taxId",
+    "taxIdStatus",
+    "allTaxIdsOnFile",
     "dealCount",
     "yearsInBusiness",
     "yearsInBusinessSource",
@@ -187,11 +197,18 @@ function main() {
   ];
   const csvLines = [csvHeader.join(",")];
   for (const c of master) {
+    const country = c.countries[0] ?? "";
+    const validRuc = extractValidRuc(c.taxIds);
+    const taxId = validRuc ?? c.taxIds[0] ?? "";
+    const taxIdStatus = validRuc ? "valid-ruc" : country === "Peru" ? "peru-no-valid-ruc" : "not-peru-na";
     csvLines.push(
       [
         `"${c.name}"`,
         `"${c.roles.join("|")}"`,
         `"${c.countries.join("|")}"`,
+        taxId,
+        taxIdStatus,
+        `"${c.taxIds.join(" | ")}"`,
         c.dealCount,
         c.yearsInBusiness ?? "",
         c.yearsInBusinessSource,

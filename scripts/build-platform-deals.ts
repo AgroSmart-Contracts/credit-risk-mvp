@@ -143,34 +143,39 @@ function monthsBetween(a: Date, b: Date): number {
 // --- Defaults-applied CSV export ---------------------------------------------
 
 /**
- * The single standardized export — one row per real deal, every CRAM-scored
- * field plus the company-level fields (RUC, RUC status) previously only in
- * company-master.csv, joined in so there's one file instead of two. Real
- * value where one exists, the exact default the scoring engine substitutes
- * where it doesn't, and a `*Source` column next to any field with more than
- * one possible provenance so nothing is hidden at runtime. Column groups are
- * labeled with their target ERD v4 entity (`docs/trumarket-database-erd-v4.drawio`)
- * so this can double as a migration worksheet, not just a scoring audit.
- * Consolidated 2026-07-28 from the deal-only export (2026-07-27) once it
- * became clear "one CSV to standardize the database" meant company-grain
- * data belonged in the same file, not a separate one.
+ * A values worksheet for filling deal-level CRAM gaps by hand — NOT a
+ * database-ready export (no `mongoId`/`_id` column; those get assigned once
+ * these values are actually loaded into a real database — decision
+ * 2026-07-28). Company-level fields (RUC, YIB, license, country) live only
+ * in company-master.csv — cross-reference by buyerName/supplierName — so
+ * they aren't repeated across every deal row a company appears in. One row
+ * per real deal, every CRAM-scored field: real value where one exists, the
+ * exact default the scoring engine substitutes where it doesn't, and a
+ * `*Source` column next to any field with more than one possible
+ * provenance so nothing is hidden at runtime. Column groups are labeled
+ * with their target ERD v4 entity (`docs/trumarket-database-erd-v4.drawio`).
  * "source" values used throughout: csv | verified | default | sunat |
  * market-intel | table-confirmed | table-provisional | no-data-source.
+ *
+ * Includes all 170 source rows, not just the 84 real ones — `rowType`
+ * distinguishes "real" from "likely_test" (synthetic seed data) so every
+ * row is accounted for here too, matching the "all 170 rows accounted for"
+ * principle the app itself already states (DealMissingFieldsTab). Synthetic
+ * rows never enter scoring/market-intel, so their CRAM-derived columns
+ * (capacity flags, SUNAT license, etc.) are blank by construction, not
+ * because data was lost.
  */
 const DEFAULTS_CSV_HEADER = [
   // --- ERD v4: deals ---
+  "rowType",
   "dealRef",
-  "mongoId",
   "product",
   "origin",
   "destination",
   "dealValueUSD",
   "status",
-  // --- ERD v4: companies (buyer) + kybverifications + Counterparty(buyer×product) + CofaceBuyerRating/CountryRisk ---
+  // --- ERD v4: kybverifications(buyer) + Counterparty(buyer×product) + CofaceBuyerRating/CountryRisk — see company-master.csv for buyer identity/RUC/YIB ---
   "buyerName",
-  "buyerCountry",
-  "buyerTaxId",
-  "buyerTaxIdStatus",
   "buyerYearsInBusiness",
   "buyerYearsInBusinessSource",
   "buyerLicenseValid",
@@ -180,11 +185,8 @@ const DEFAULTS_CSV_HEADER = [
   "cofaceCompanyRiskGrade",
   "cofaceCountryRiskGrade",
   "creditRatingSource",
-  // --- ERD v4: companies (supplier) + kybverifications + Counterparty(supplier×product) ---
+  // --- ERD v4: kybverifications(supplier) + Counterparty(supplier×product) — see company-master.csv for supplier identity/RUC/YIB ---
   "supplierName",
-  "supplierCountry",
-  "supplierTaxId",
-  "supplierTaxIdStatus",
   "supplierYearsInBusiness",
   "supplierYearsInBusinessSource",
   "supplierLicenseValid",
@@ -247,45 +249,101 @@ function capacityFlagOf(intel: PlatformDealRecord["marketIntel"], side: "buyer" 
   return profile.capacity_check?.flag ?? null;
 }
 
-/** valid-ruc | peru-no-valid-ruc | not-peru-na — mirrors CompanyTaxIdSection.tsx's RucStatus so the CSV and UI never disagree. */
-function taxIdStatusOf(taxIds: string[], country: string): string {
-  if (extractValidRuc(taxIds)) return "valid-ruc";
-  if (country === "Peru") return "peru-no-valid-ruc";
-  return "not-peru-na";
+/**
+ * ERD v4's `Counterparty` entity is grained by (companyId, productId) — NOT
+ * by company alone (that's `companies`, in company-master.csv). 19 scored +
+ * 11 blocked = 30 rows total — this is what "30 counterparty rows" refers
+ * to; it's a different entity/grain than company-master.csv, not a subset
+ * of it. Decision 2026-07-28, after company-master.csv's 19-row count (one
+ * per unique company) was mistaken for an incomplete version of this.
+ */
+function buildCounterpartyCsv(
+  scored: PlatformCounterpartyScore[],
+  blocked: PlatformCounterpartyBlocked[],
+): string {
+  const header = [
+    "companyName",
+    "role",
+    "product",
+    "status",
+    "dealCount",
+    "finishedDealCount",
+    "yearsInBusiness",
+    "yearsInBusinessSource",
+    "avgScore",
+    "maxScore",
+    "minScore",
+    "missingForFullCram",
+  ];
+  const lines = [header.join(",")];
+  for (const c of scored) {
+    lines.push(
+      [
+        c.companyName,
+        c.role,
+        c.product,
+        "scored",
+        c.dealCount,
+        c.finishedDealCount,
+        c.yearsInBusiness,
+        c.yearsInBusinessSource,
+        c.avgScore,
+        c.maxScore,
+        c.minScore,
+        c.missingForFullCram.join(" | "),
+      ]
+        .map(csvEscape)
+        .join(","),
+    );
+  }
+  for (const c of blocked) {
+    lines.push(
+      [
+        c.companyName,
+        c.role,
+        c.product,
+        "blocked",
+        c.dealCount,
+        c.finishedDealCount,
+        "", // no YIB at all — that's why it's blocked
+        "default",
+        "", // no score computed
+        "",
+        "",
+        `${c.role}.yearsInBusiness`,
+      ]
+        .map(csvEscape)
+        .join(","),
+    );
+  }
+  return lines.join("\n") + "\n";
 }
 
-function buildDefaultsCsv(records: PlatformDealRecord[], companyByKey: Map<string, CompanyMasterEntry>): string {
+function buildDefaultsCsv(records: PlatformDealRecord[], syntheticRecords: PlatformDealRecord[]): string {
   const lines = [DEFAULTS_CSV_HEADER.join(",")];
-  for (const r of records) {
+  const allRecords = [
+    ...records.map((r) => ({ r, rowType: "real" })),
+    ...syntheticRecords.map((r) => ({ r, rowType: "likely_test" })),
+  ];
+  for (const { r, rowType } of allRecords) {
     const supplierSunatResolved = r.marketIntel?.dim_a_supplier.sunat?.resolved ?? false;
     const supplierSunat = r.marketIntel?.dim_a_supplier.sunat;
     const buyerCapacityFlag = capacityFlagOf(r.marketIntel, "buyer");
     const supplierCapacityFlag = capacityFlagOf(r.marketIntel, "supplier");
     const productTableConfirmed = !r.missingFields.some((f) => f.startsWith("product risk table"));
     const routeTableConfirmed = !r.missingFields.some((f) => f.startsWith("route risk table"));
-    const buyerCompany = companyByKey.get(companyGroupKey(r.buyerName));
-    const supplierCompany = companyByKey.get(companyGroupKey(r.supplierName));
-    const buyerCountry = buyerCompany?.countries[0] ?? "";
-    const supplierCountry = supplierCompany?.countries[0] ?? "";
-    const buyerTaxId = buyerCompany ? extractValidRuc(buyerCompany.taxIds) ?? buyerCompany.taxIds[0] ?? null : null;
-    const supplierTaxId = supplierCompany
-      ? extractValidRuc(supplierCompany.taxIds) ?? supplierCompany.taxIds[0] ?? null
-      : null;
 
     lines.push(
       [
+        rowType,
         r.dealRef,
-        r.mongoId,
         r.product,
         r.origin,
         r.destination,
         r.dealValueUSD,
         r.status,
-        // companies (buyer) + kybverifications + Counterparty + CofaceBuyerRating/CountryRisk
+        // kybverifications(buyer) + Counterparty + CofaceBuyerRating/CountryRisk
         r.buyerName,
-        buyerCountry,
-        buyerTaxId,
-        taxIdStatusOf(buyerCompany?.taxIds ?? [], buyerCountry),
         r.buyerYib,
         r.buyerYibSource,
         true, // DEFAULT (decision 2026-07-24): no license/KYC source for buyers anywhere — always assumed valid
@@ -295,11 +353,8 @@ function buildDefaultsCsv(records: PlatformDealRecord[], companyByKey: Map<strin
         null, // DEFAULT: Coface grades never populated by the CSV pipeline (only via manual document-upload flow)
         null,
         "no-data-source (0 of 84 real deals have a Coface document on file)",
-        // companies (supplier) + kybverifications + Counterparty
+        // kybverifications(supplier) + Counterparty
         r.supplierName,
-        supplierCountry,
-        supplierTaxId,
-        taxIdStatusOf(supplierCompany?.taxIds ?? [], supplierCountry),
         r.supplierYib,
         r.supplierYibSource,
         supplierSunatResolved
@@ -671,7 +726,11 @@ function main() {
     .sort((a, b) => b.dealCount - a.dealCount);
 
   writeFileSync(join(OUT_DIR, "platform-deals.generated.json"), JSON.stringify(records, null, 2) + "\n");
-  writeFileSync(join(OUT_DIR, "platform-deals-with-defaults.csv"), buildDefaultsCsv(records, companyByKey));
+  writeFileSync(join(OUT_DIR, "platform-deals-with-defaults.csv"), buildDefaultsCsv(records, syntheticRecords));
+  writeFileSync(
+    join(OUT_DIR, "counterparty-scores.csv"),
+    buildCounterpartyCsv(counterpartyScores, counterpartyBlocked),
+  );
 
   const tsFile = `/** Auto-generated by scripts/build-platform-deals.ts from full-deals-dataset-2026-07 (1).csv — do not edit by hand. */
 /** likely_test rows are still fully built (see platformDealsSynthetic below) but never enter platformDeals/platformCounterparties/scoring — decision 2026-07-27. Defaults: buyer/supplier license=true (mapper); coface coverage=90% of dealValueUSD when no real cofaceRecordId (flagged cofaceIsDefaulted). See docs/cram-defaults-and-formula-2026-07.md. */
