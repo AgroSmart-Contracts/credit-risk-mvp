@@ -11,7 +11,10 @@ import {
 import { analyzeCofaceDocument } from "../lib/coface-analysis/analyze-coface-client";
 import { analyzeDealDocuments } from "../lib/document-analysis/analyze-documents-client";
 import { PRODUCT_RISK_TABLE } from "../lib/product-risk-tables";
-import { ROUTE_OPTIONS } from "../lib/route-risk-tables";
+import { ROUTE_OPTIONS, lookupRouteRisk } from "../lib/route-risk-tables";
+import { blankTransactionStructureInput } from "../lib/transaction-structure/compute";
+import type { TransactionStructureInput } from "../lib/transaction-structure/types";
+import { TransactionStructureBuilder } from "./TransactionStructureBuilder";
 
 interface DocumentIngestionProps {
   deal: Deal;
@@ -67,6 +70,9 @@ export function DocumentIngestion({
   const [cofaceCoveragePct, setCofaceCoveragePct] = useState(
     deal.cofaceCoveragePct != null ? String(deal.cofaceCoveragePct) : "",
   );
+  const [transactionStructure, setTransactionStructure] = useState<TransactionStructureInput>(
+    () => deal.transactionStructure ?? blankTransactionStructureInput(),
+  );
   const [docStatus, setDocStatus] = useState<string>("");
   const [cofaceStatus, setCofaceStatus] = useState<string>("");
   const [busy, setBusy] = useState<"docs" | "coface" | null>(null);
@@ -99,6 +105,7 @@ export function DocumentIngestion({
       cofaceCountryRiskGrade: deal.cofaceCountryRiskGrade ?? null,
       cofaceCompanyRiskGrade: deal.cofaceCompanyRiskGrade ?? null,
     });
+    setTransactionStructure(deal.transactionStructure ?? blankTransactionStructureInput());
   }, [deal]);
 
   const selectedProduct = useMemo(
@@ -106,13 +113,21 @@ export function DocumentIngestion({
     [form.product],
   );
 
+  // route-risk-tables.ts is keyed per (origin, destination, product) since
+  // the 2026-07-28 per-commodity rework — dedupe to distinct corridors for
+  // the dropdown, then resolve the exact per-product row separately.
+  const corridors = useMemo(() => {
+    const seen = new Map<string, { origin: string; destination: string }>();
+    for (const entry of ROUTE_OPTIONS) {
+      const key = `${entry.origin}__${entry.destination}`;
+      if (!seen.has(key)) seen.set(key, { origin: entry.origin, destination: entry.destination });
+    }
+    return [...seen.values()];
+  }, []);
+
   const selectedRoute = useMemo(
-    () =>
-      ROUTE_OPTIONS.find(
-        (entry) =>
-          entry.origin === form.origin && entry.destination === form.destination,
-      ) ?? null,
-    [form.origin, form.destination],
+    () => lookupRouteRisk(form.origin, form.destination, form.product),
+    [form.origin, form.destination, form.product],
   );
 
   const handleAnalyzeDocs = async () => {
@@ -221,7 +236,7 @@ export function DocumentIngestion({
   };
 
   const handleRouteChange = (value: string) => {
-    const route = ROUTE_OPTIONS.find(
+    const route = corridors.find(
       (entry) => `${entry.origin}__${entry.destination}` === value,
     );
     if (!route) return;
@@ -253,6 +268,7 @@ export function DocumentIngestion({
         cofaceCoveragePct.trim() === "" ? null : Number(cofaceCoveragePct),
       ...cofaceExtractFields,
       sourceDocuments: buildSourceDocumentsFromUploads(dealFiles, cofaceFile),
+      transactionStructure,
     };
 
     onRunAssessment(buildDealFromDraft(deal, draft));
@@ -370,9 +386,9 @@ export function DocumentIngestion({
             label="Route score table"
             value={`${form.origin}__${form.destination}`}
             onChange={handleRouteChange}
-            options={ROUTE_OPTIONS.map((entry) => ({
+            options={corridors.map((entry) => ({
               value: `${entry.origin}__${entry.destination}`,
-              label: `${routeLabel(entry.origin, entry.destination)} · score ${entry.score}`,
+              label: routeLabel(entry.origin, entry.destination),
             }))}
           />
           <Input
@@ -478,6 +494,14 @@ export function DocumentIngestion({
           />
         </dl>
       </section>
+
+      <TransactionStructureBuilder
+        value={transactionStructure}
+        onChange={setTransactionStructure}
+        dealValueUSD={Number(form.dealValueUSD || 0)}
+        advancePaymentPct={Number(form.advancePaymentPct || 0)}
+        contractType={deal.contractType}
+      />
 
       <div className="flex justify-end pt-2">
         <button
