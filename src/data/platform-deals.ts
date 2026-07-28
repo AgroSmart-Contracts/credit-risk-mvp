@@ -39,7 +39,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:02",
+        "generated_at": "2026-07-28T12:42:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -282,7 +282,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:03",
+        "generated_at": "2026-07-28T12:42:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -517,7 +517,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:03",
+        "generated_at": "2026-07-28T12:42:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -752,7 +752,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:07",
+        "generated_at": "2026-07-28T12:42:58",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1003,7 +1003,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:11",
+        "generated_at": "2026-07-28T12:43:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1254,7 +1254,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:15",
+        "generated_at": "2026-07-28T12:43:06",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1695,7 +1695,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:18",
+        "generated_at": "2026-07-28T12:43:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2040,7 +2040,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:22",
+        "generated_at": "2026-07-28T12:43:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2382,7 +2382,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:26",
+        "generated_at": "2026-07-28T12:43:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2724,7 +2724,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:30",
+        "generated_at": "2026-07-28T12:43:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3066,7 +3066,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:33",
+        "generated_at": "2026-07-28T12:43:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3408,7 +3408,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:38",
+        "generated_at": "2026-07-28T12:43:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3752,7 +3752,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:42",
+        "generated_at": "2026-07-28T12:43:32",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4094,7 +4094,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:45",
+        "generated_at": "2026-07-28T12:43:36",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4345,7 +4345,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:49",
+        "generated_at": "2026-07-28T12:43:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4599,7 +4599,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:53",
+        "generated_at": "2026-07-28T12:43:44",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4853,7 +4853,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:18:57",
+        "generated_at": "2026-07-28T12:43:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5289,7 +5289,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:01",
+        "generated_at": "2026-07-28T12:43:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5631,7 +5631,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:05",
+        "generated_at": "2026-07-28T12:43:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5973,7 +5973,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:09",
+        "generated_at": "2026-07-28T12:43:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6316,7 +6316,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:12",
+        "generated_at": "2026-07-28T12:44:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6482,7 +6482,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:16",
+        "generated_at": "2026-07-28T12:44:06",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6835,7 +6835,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:19",
+        "generated_at": "2026-07-28T12:44:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7001,7 +7001,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:23",
+        "generated_at": "2026-07-28T12:44:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7440,7 +7440,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:27",
+        "generated_at": "2026-07-28T12:44:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7606,7 +7606,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:30",
+        "generated_at": "2026-07-28T12:44:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7854,7 +7854,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:34",
+        "generated_at": "2026-07-28T12:44:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8198,7 +8198,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:39",
+        "generated_at": "2026-07-28T12:44:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8364,7 +8364,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:42",
+        "generated_at": "2026-07-28T12:44:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8530,7 +8530,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:46",
+        "generated_at": "2026-07-28T12:44:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8696,7 +8696,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:50",
+        "generated_at": "2026-07-28T12:44:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8862,7 +8862,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:54",
+        "generated_at": "2026-07-28T12:44:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9028,7 +9028,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:19:57",
+        "generated_at": "2026-07-28T12:44:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9194,7 +9194,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:01",
+        "generated_at": "2026-07-28T12:44:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9360,7 +9360,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:05",
+        "generated_at": "2026-07-28T12:44:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9526,7 +9526,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:09",
+        "generated_at": "2026-07-28T12:44:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9692,7 +9692,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:13",
+        "generated_at": "2026-07-28T12:44:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9858,7 +9858,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:16",
+        "generated_at": "2026-07-28T12:45:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10024,7 +10024,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:20",
+        "generated_at": "2026-07-28T12:45:06",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10190,7 +10190,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:24",
+        "generated_at": "2026-07-28T12:45:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10356,7 +10356,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:27",
+        "generated_at": "2026-07-28T12:45:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10522,7 +10522,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:31",
+        "generated_at": "2026-07-28T12:45:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10688,7 +10688,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:34",
+        "generated_at": "2026-07-28T12:45:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10854,7 +10854,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:39",
+        "generated_at": "2026-07-28T12:45:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11020,7 +11020,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:42",
+        "generated_at": "2026-07-28T12:45:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11187,7 +11187,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:46",
+        "generated_at": "2026-07-28T12:45:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11628,7 +11628,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:51",
+        "generated_at": "2026-07-28T12:45:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12069,7 +12069,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:55",
+        "generated_at": "2026-07-28T12:45:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12510,7 +12510,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:20:59",
+        "generated_at": "2026-07-28T12:45:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12951,7 +12951,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:03",
+        "generated_at": "2026-07-28T12:45:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13392,7 +13392,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:08",
+        "generated_at": "2026-07-28T12:45:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13731,7 +13731,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:12",
+        "generated_at": "2026-07-28T12:45:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14070,7 +14070,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:12",
+        "generated_at": "2026-07-28T12:45:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14275,7 +14275,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:16",
+        "generated_at": "2026-07-28T12:45:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14527,7 +14527,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:20",
+        "generated_at": "2026-07-28T12:46:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14779,7 +14779,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:24",
+        "generated_at": "2026-07-28T12:46:06",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15119,7 +15119,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:28",
+        "generated_at": "2026-07-28T12:46:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15370,7 +15370,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:32",
+        "generated_at": "2026-07-28T12:46:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15621,7 +15621,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:36",
+        "generated_at": "2026-07-28T12:46:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15872,7 +15872,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:40",
+        "generated_at": "2026-07-28T12:46:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16123,7 +16123,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:44",
+        "generated_at": "2026-07-28T12:46:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16464,7 +16464,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:47",
+        "generated_at": "2026-07-28T12:46:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16698,7 +16698,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:52",
+        "generated_at": "2026-07-28T12:46:32",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16932,7 +16932,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:55",
+        "generated_at": "2026-07-28T12:46:36",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17166,7 +17166,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:21:59",
+        "generated_at": "2026-07-28T12:46:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17400,7 +17400,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:03",
+        "generated_at": "2026-07-28T12:46:44",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17634,7 +17634,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:07",
+        "generated_at": "2026-07-28T12:46:48",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17868,7 +17868,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:10",
+        "generated_at": "2026-07-28T12:46:52",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18102,7 +18102,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:14",
+        "generated_at": "2026-07-28T12:46:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18336,7 +18336,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:18",
+        "generated_at": "2026-07-28T12:46:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18570,7 +18570,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:22",
+        "generated_at": "2026-07-28T12:47:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18804,7 +18804,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:25",
+        "generated_at": "2026-07-28T12:47:06",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19038,7 +19038,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:29",
+        "generated_at": "2026-07-28T12:47:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19272,7 +19272,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:33",
+        "generated_at": "2026-07-28T12:47:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19506,7 +19506,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:37",
+        "generated_at": "2026-07-28T12:47:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19741,7 +19741,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:41",
+        "generated_at": "2026-07-28T12:47:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19907,7 +19907,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:45",
+        "generated_at": "2026-07-28T12:47:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20073,7 +20073,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:49",
+        "generated_at": "2026-07-28T12:47:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20239,7 +20239,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:53",
+        "generated_at": "2026-07-28T12:47:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20405,7 +20405,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:22:56",
+        "generated_at": "2026-07-28T12:47:35",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20571,7 +20571,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:23:00",
+        "generated_at": "2026-07-28T12:47:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20737,7 +20737,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T12:23:04",
+        "generated_at": "2026-07-28T12:47:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [

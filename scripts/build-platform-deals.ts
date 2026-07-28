@@ -56,6 +56,7 @@ const OUT_DIR = join(__dirname, "..", "src", "data");
 interface CompanyMasterEntry {
   key: string;
   name: string;
+  countries: string[];
   yearsInBusiness: number | null;
   yearsInBusinessSource: "csv" | "verified" | "default";
   taxIds: string[];
@@ -142,17 +143,22 @@ function monthsBetween(a: Date, b: Date): number {
 // --- Defaults-applied CSV export ---------------------------------------------
 
 /**
- * Every CRAM-scored field, per deal — real value where one exists, the exact
- * default the scoring engine substitutes where it doesn't, and a `*Source`
- * column next to any field with more than one possible provenance so nothing
- * is hidden at runtime. Expanded 2026-07-27 from an 18-column partial export
- * (Dimension A/some-of-C/D only) to cover all four dimensions + the veto
- * register, once the insurance-coverage veto finding made clear that a
- * narrower export could hide the single biggest gap in the whole pipeline.
- * "source" values used throughout: csv | default | sunat | market-intel |
- * table-confirmed | table-provisional | no-data-source.
+ * The single standardized export — one row per real deal, every CRAM-scored
+ * field plus the company-level fields (RUC, RUC status) previously only in
+ * company-master.csv, joined in so there's one file instead of two. Real
+ * value where one exists, the exact default the scoring engine substitutes
+ * where it doesn't, and a `*Source` column next to any field with more than
+ * one possible provenance so nothing is hidden at runtime. Column groups are
+ * labeled with their target ERD v4 entity (`docs/trumarket-database-erd-v4.drawio`)
+ * so this can double as a migration worksheet, not just a scoring audit.
+ * Consolidated 2026-07-28 from the deal-only export (2026-07-27) once it
+ * became clear "one CSV to standardize the database" meant company-grain
+ * data belonged in the same file, not a separate one.
+ * "source" values used throughout: csv | verified | default | sunat |
+ * market-intel | table-confirmed | table-provisional | no-data-source.
  */
 const DEFAULTS_CSV_HEADER = [
+  // --- ERD v4: deals ---
   "dealRef",
   "mongoId",
   "product",
@@ -160,15 +166,25 @@ const DEFAULTS_CSV_HEADER = [
   "destination",
   "dealValueUSD",
   "status",
-  // --- Dimension A: Counterparty (40%) ---
+  // --- ERD v4: companies (buyer) + kybverifications + Counterparty(buyer×product) + CofaceBuyerRating/CountryRisk ---
   "buyerName",
+  "buyerCountry",
+  "buyerTaxId",
+  "buyerTaxIdStatus",
   "buyerYearsInBusiness",
   "buyerYearsInBusinessSource",
   "buyerLicenseValid",
   "buyerLicenseValidSource",
   "buyerCapacityFlag",
   "buyerCapacityFlagSource",
+  "cofaceCompanyRiskGrade",
+  "cofaceCountryRiskGrade",
+  "creditRatingSource",
+  // --- ERD v4: companies (supplier) + kybverifications + Counterparty(supplier×product) ---
   "supplierName",
+  "supplierCountry",
+  "supplierTaxId",
+  "supplierTaxIdStatus",
   "supplierYearsInBusiness",
   "supplierYearsInBusinessSource",
   "supplierLicenseValid",
@@ -177,18 +193,15 @@ const DEFAULTS_CSV_HEADER = [
   "supplierCapacityFlagSource",
   "supplierQualityCertifications",
   "supplierQualityCertificationsSource",
-  "cofaceCompanyRiskGrade",
-  "cofaceCountryRiskGrade",
-  "creditRatingSource",
   "priorDealsBetweenParties",
   "relationshipAgeMonths",
-  // --- Dimension B: Product (25%) ---
+  // --- ERD v4: Product (reference table) + deal-specific product fields ---
   "offerUnitPriceUSD",
   "qualityGrade",
   "qualityGradeSource",
   "perishabilityClass",
   "productRiskTableSource",
-  // --- Dimension C: Route (20%) ---
+  // --- ERD v4: Route(T2) (reference table) + deal-specific route/customs fields ---
   "transportMode",
   "estimatedTransitDays",
   "numberOfTransshipments",
@@ -202,7 +215,7 @@ const DEFAULTS_CSV_HEADER = [
   "customsClearanceDays",
   "customsClearanceDaysSource",
   "customsNarrative",
-  // --- Dimension D: Transaction Structure (15%) ---
+  // --- ERD v4: TxStructure ---
   "collateralType",
   "collateralTypeSource",
   "collateralValueUSD",
@@ -213,7 +226,7 @@ const DEFAULTS_CSV_HEADER = [
   "insuranceCoverage",
   "insuranceCoverageSource",
   "insuranceValueUSD",
-  // --- Coface Gate 1 (pre-check, not a scored dimension) ---
+  // --- ERD v4: CofaceDealDecision (Gate 1 pre-check, not a scored dimension) ---
   "cofaceCoverageAmountUSD",
   "cofaceCoveragePct",
   "cofaceIsDefaulted",
@@ -234,7 +247,14 @@ function capacityFlagOf(intel: PlatformDealRecord["marketIntel"], side: "buyer" 
   return profile.capacity_check?.flag ?? null;
 }
 
-function buildDefaultsCsv(records: PlatformDealRecord[]): string {
+/** valid-ruc | peru-no-valid-ruc | not-peru-na — mirrors CompanyTaxIdSection.tsx's RucStatus so the CSV and UI never disagree. */
+function taxIdStatusOf(taxIds: string[], country: string): string {
+  if (extractValidRuc(taxIds)) return "valid-ruc";
+  if (country === "Peru") return "peru-no-valid-ruc";
+  return "not-peru-na";
+}
+
+function buildDefaultsCsv(records: PlatformDealRecord[], companyByKey: Map<string, CompanyMasterEntry>): string {
   const lines = [DEFAULTS_CSV_HEADER.join(",")];
   for (const r of records) {
     const supplierSunatResolved = r.marketIntel?.dim_a_supplier.sunat?.resolved ?? false;
@@ -243,6 +263,14 @@ function buildDefaultsCsv(records: PlatformDealRecord[]): string {
     const supplierCapacityFlag = capacityFlagOf(r.marketIntel, "supplier");
     const productTableConfirmed = !r.missingFields.some((f) => f.startsWith("product risk table"));
     const routeTableConfirmed = !r.missingFields.some((f) => f.startsWith("route risk table"));
+    const buyerCompany = companyByKey.get(companyGroupKey(r.buyerName));
+    const supplierCompany = companyByKey.get(companyGroupKey(r.supplierName));
+    const buyerCountry = buyerCompany?.countries[0] ?? "";
+    const supplierCountry = supplierCompany?.countries[0] ?? "";
+    const buyerTaxId = buyerCompany ? extractValidRuc(buyerCompany.taxIds) ?? buyerCompany.taxIds[0] ?? null : null;
+    const supplierTaxId = supplierCompany
+      ? extractValidRuc(supplierCompany.taxIds) ?? supplierCompany.taxIds[0] ?? null
+      : null;
 
     lines.push(
       [
@@ -253,15 +281,25 @@ function buildDefaultsCsv(records: PlatformDealRecord[]): string {
         r.destination,
         r.dealValueUSD,
         r.status,
-        // Dimension A
+        // companies (buyer) + kybverifications + Counterparty + CofaceBuyerRating/CountryRisk
         r.buyerName,
+        buyerCountry,
+        buyerTaxId,
+        taxIdStatusOf(buyerCompany?.taxIds ?? [], buyerCountry),
         r.buyerYib,
         r.buyerYibSource,
         true, // DEFAULT (decision 2026-07-24): no license/KYC source for buyers anywhere — always assumed valid
         "default",
         buyerCapacityFlag,
         buyerCapacityFlag ? "market-intel" : "no-data-source (quantity has no kg/carton unit — see docs)",
+        null, // DEFAULT: Coface grades never populated by the CSV pipeline (only via manual document-upload flow)
+        null,
+        "no-data-source (0 of 84 real deals have a Coface document on file)",
+        // companies (supplier) + kybverifications + Counterparty
         r.supplierName,
+        supplierCountry,
+        supplierTaxId,
+        taxIdStatusOf(supplierCompany?.taxIds ?? [], supplierCountry),
         r.supplierYib,
         r.supplierYibSource,
         supplierSunatResolved
@@ -273,9 +311,6 @@ function buildDefaultsCsv(records: PlatformDealRecord[]): string {
         supplierCapacityFlag ? "market-intel" : "no-data-source (quantity has no kg/carton unit — see docs)",
         null, // DEFAULT: no certification data source exists anywhere (CSV, docs, or market-intel)
         "no-data-source",
-        null, // DEFAULT: Coface grades never populated by the CSV pipeline (only via manual document-upload flow)
-        null,
-        "no-data-source (0 of 84 real deals have a Coface document on file)",
         r.priorDealsBetweenParties,
         r.relationshipAgeMonths,
         // Dimension B
@@ -636,7 +671,7 @@ function main() {
     .sort((a, b) => b.dealCount - a.dealCount);
 
   writeFileSync(join(OUT_DIR, "platform-deals.generated.json"), JSON.stringify(records, null, 2) + "\n");
-  writeFileSync(join(OUT_DIR, "platform-deals-with-defaults.csv"), buildDefaultsCsv(records));
+  writeFileSync(join(OUT_DIR, "platform-deals-with-defaults.csv"), buildDefaultsCsv(records, companyByKey));
 
   const tsFile = `/** Auto-generated by scripts/build-platform-deals.ts from full-deals-dataset-2026-07 (1).csv — do not edit by hand. */
 /** likely_test rows are still fully built (see platformDealsSynthetic below) but never enter platformDeals/platformCounterparties/scoring — decision 2026-07-27. Defaults: buyer/supplier license=true (mapper); coface coverage=90% of dealValueUSD when no real cofaceRecordId (flagged cofaceIsDefaulted). See docs/cram-defaults-and-formula-2026-07.md. */
