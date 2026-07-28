@@ -204,6 +204,15 @@ VARIETY_KEYWORDS = {
     "CHERIMOYA": [r"\bCHIRIMOYA", r"\bCHERIMOYA"],
     "COCONA": [r"\bCOCONA"],
     "AGUAJE": [r"\bAGUAJE"],
+    # Added 2026-07-28: HS0901 (coffee, 9,784 rows) and HS1801 (cacao, 2,734
+    # rows) are already ingested into fact_shipments.parquet but had no
+    # variety keyword at all, so price_benchmark()/counterparty_profile()
+    # could never find them (Tier 5 NEEDS_INPUT regardless of real sample
+    # size). Confirmed against real commercial_description text in the mart:
+    # "CAFE VERDE EN GRANO ... GREEN COFFEE BEANS ..." (coffee) and "CACAO EN
+    # GRANO ... COCOA BEANS ..." (cacao).
+    "COFFEE": [r"\bCAFE\b", r"\bCOFFEE"],
+    "CACAO": [r"\bCACAO", r"\bCOCOA"],
 }
 
 FORM_KEYWORDS = {

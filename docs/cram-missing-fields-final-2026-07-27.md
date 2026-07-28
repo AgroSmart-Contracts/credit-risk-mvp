@@ -1,5 +1,13 @@
 # CRAM missing-fields report — final, grounded in ERD v4 (2026-07-27)
 
+> **Superseded 2026-07-28**: the "84 real deals / 86 excluded `likely_test`
+> rows" split this document is scoped to no longer applies. `likely_test`
+> rows are now merged into scoring/aggregation like every other deal — see
+> `scripts/build-platform-deals.ts`. Every count/percentage below that
+> references "84 real deals" or "19 companies" is stale; re-run
+> `npm run validate` for current numbers. Kept for historical context on the
+> gaps identified, not as a current source of truth for row counts.
+
 Consolidates everything found this session: the ERD v4 field-gap audit, the
 tax ID / RUC completeness check, and a cross-reference against `trumarket`'s
 actual document-extraction pipeline (which of these gaps already have real
