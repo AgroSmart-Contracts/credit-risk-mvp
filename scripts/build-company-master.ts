@@ -47,6 +47,23 @@ function parseYib(raw: string): number | null {
   return raw !== "" && Number.isFinite(n) ? n : null;
 }
 
+/**
+ * Externally-verified years-in-business for companies the source CSV never
+ * recorded a value for — found via public company-registry lookups
+ * (2026-07-27) when the internal SUNAT/market-intel path couldn't reach them
+ * (non-Peru companies; market-intel is Peru-only). `years` computed against
+ * 2026-07-27. Keyed by companyGroupKey(name). Only applied when the CSV
+ * itself has zero samples — never overrides a real CSV-observed value.
+ */
+const YIB_OVERRIDE_BY_KEY: Record<string, { years: number; source: string }> = {
+  // CIF B11882909, incorporated 2010-04-16 (Cadiz, Spain commercial registry).
+  // https://www.iberinform.es/empresa/5021230/bc-nature-quality-fruits · https://www.empresia.es/empresa/bc-nature-quality-fruits/
+  "BC NATURE QUALITY FRUITS SL": { years: 16, source: "verified" },
+  // NIP 9231585471 / KRS 0000125530, founded 2002 (Wolsztyn, Poland).
+  // https://polskiedane.pl/limax-sp-z-o-o-nip-9231585471-krs-0000125530/ · https://www.bizraport.pl/krs/0000125530/limax-spolka-z-ograniczona-odpowiedzialnoscia
+  "LIMAX SP Z OO": { years: 24, source: "verified" },
+};
+
 function pickCanonicalYib(samples: number[]): number | null {
   if (samples.length === 0) return null;
   // Most frequent value wins; ties broken by the largest (more conservative
@@ -131,21 +148,25 @@ function main() {
   }
 
   const master = [...companies.values()]
-    .map((c) => ({
-      key: c.key,
-      name: c.name,
-      countries: [...c.countries],
-      roles: [...c.roles],
-      taxIds: [...c.taxIds],
-      dealCount: c.dealCount,
-      yearsInBusiness: pickCanonicalYib(c.yearsInBusinessSamples),
-      yearsInBusinessSource:
-        c.yearsInBusinessSamples.length > 0 ? "csv" : ("default" as const),
-      /** Decision 2026-07-24: license validity defaults to true (no KYC/license source in any CSV). */
-      licenseValid: true,
-      licenseValidSource: "default" as const,
-      nameVariantsSeen: [...c.namesSeen].filter((n) => n !== c.name),
-    }))
+    .map((c) => {
+      const csvYib = pickCanonicalYib(c.yearsInBusinessSamples);
+      const override = c.yearsInBusinessSamples.length === 0 ? YIB_OVERRIDE_BY_KEY[c.key] : undefined;
+      return {
+        key: c.key,
+        name: c.name,
+        countries: [...c.countries],
+        roles: [...c.roles],
+        taxIds: [...c.taxIds],
+        dealCount: c.dealCount,
+        yearsInBusiness: csvYib ?? override?.years ?? null,
+        yearsInBusinessSource:
+          csvYib !== null ? "csv" : override ? (override.source as "verified") : ("default" as const),
+        /** Decision 2026-07-24: license validity defaults to true (no KYC/license source in any CSV). */
+        licenseValid: true,
+        licenseValidSource: "default" as const,
+        nameVariantsSeen: [...c.namesSeen].filter((n) => n !== c.name),
+      };
+    })
     .sort((a, b) => a.name.localeCompare(b.name));
 
   writeFileSync(

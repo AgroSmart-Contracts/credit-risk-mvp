@@ -24,9 +24,9 @@ export interface PlatformDealRecord {
   supplierName: string;
   buyerYib: number | null;
   supplierYib: number | null;
-  /** "csv" = pulled from that company's own deal rows; "default" = no source, licenseValid-style default applies. */
-  buyerYibSource: "csv" | "default";
-  supplierYibSource: "csv" | "default";
+  /** "csv" = pulled from that company's own deal rows; "verified" = no CSV source, filled from an external company-registry lookup (see YIB_OVERRIDE_BY_KEY in build-company-master.ts); "default" = no source at all, licenseValid-style default applies. */
+  buyerYibSource: "csv" | "verified" | "default";
+  supplierYibSource: "csv" | "verified" | "default";
   perishabilityClass:
     | "Ultra-Perishable"
     | "Perishable"
@@ -134,7 +134,7 @@ export interface PlatformCounterpartyScore {
   role: "buyer" | "supplier";
   product: string;
   yearsInBusiness: number;
-  yearsInBusinessSource: "csv" | "default";
+  yearsInBusinessSource: "csv" | "verified" | "default";
   dealCount: number;
   finishedDealCount: number;
   avgScore: number;

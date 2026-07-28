@@ -12,7 +12,7 @@ interface CompanyMasterEntry {
   taxIds: string[];
   dealCount: number;
   yearsInBusiness: number | null;
-  yearsInBusinessSource: "csv" | "default";
+  yearsInBusinessSource: "csv" | "verified" | "default";
 }
 
 type RucStatus = "valid" | "peru-invalid" | "not-peru";
@@ -158,8 +158,15 @@ export function CompanyTaxIdSection() {
                   <td className="px-2 py-2 text-tm-text-light">{entry.countries.join(", ")}</td>
                   <td className="px-2 py-2 text-tm-text-light">{entry.dealCount}</td>
                   <td className="px-2 py-2">
-                    {entry.yearsInBusinessSource === "csv" ? (
-                      <span className="text-tm-text-light">{entry.yearsInBusiness}</span>
+                    {entry.yearsInBusinessSource !== "default" ? (
+                      <span className="text-tm-text-light">
+                        {entry.yearsInBusiness}
+                        {entry.yearsInBusinessSource === "verified" && (
+                          <span className="ml-1 text-[9px] text-tm-text-muted" title="Filled from an external company-registry lookup, not the deal CSV">
+                            (verified)
+                          </span>
+                        )}
+                      </span>
                     ) : (
                       <input
                         type="number"

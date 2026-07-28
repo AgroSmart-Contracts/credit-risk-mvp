@@ -57,7 +57,7 @@ interface CompanyMasterEntry {
   key: string;
   name: string;
   yearsInBusiness: number | null;
-  yearsInBusinessSource: "csv" | "default";
+  yearsInBusinessSource: "csv" | "verified" | "default";
   taxIds: string[];
 }
 
