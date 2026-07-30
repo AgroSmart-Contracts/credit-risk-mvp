@@ -1,0 +1,4734 @@
+{
+  "formula": "sandbox-weighted-shrink-2026-07-30",
+  "generatedAt": "2026-07-30T15:23:07.378Z",
+  "customsGeneratedAt": "2026-07-30T15:18:39.973569Z",
+  "customsSources": [
+    "Veritrade_UL-20111724_PE_E_20260109105908(new).csv",
+    "10843_20260128213854_20260128213855.xlsx",
+    "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+  ],
+  "counterparties": [
+    {
+      "id": "cp-supplierGIDDINSPERUSACFreshBlueberries",
+      "companyName": "GIDDINS PERU SAC",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 12,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 84.2,
+      "maxScore": 84.2,
+      "minScore": 84.2,
+      "deals": [
+        {
+          "mongoId": "69d3e6fb9e76ea086ca4c1a0",
+          "name": "FRESH BLUEBERRIES TRD-CULT-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 90612,
+          "score": 84.2,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69d3e6fb9e76ea086ca4c1a1",
+          "name": "FRESH BLUEBERRIES TRD-CULT-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 88473.6,
+          "score": 84.2,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "f8292a55b92e31af8119fe8f",
+          "name": "FRESH BLUEBERRIES TRD-CULT-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 88200,
+          "score": 84.2,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "13d1c2e4dd7ce6c8c45a4b75",
+          "name": "FRESH BLUEBERRIES TRD-CULT-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 91080,
+          "score": 84.2,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "f91059110d2720ef1c100c68",
+          "name": "FRESH BLUEBERRIES TRD-CULT-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 89126.4,
+          "score": 84.2,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "02972b2dda4f7b4f3b133010",
+          "name": "FRESH BLUEBERRIES TRD-CULT-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 89011.2,
+          "score": 84.2,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "d1b96035d6c6c32f2d6bb32f",
+          "name": "FRESH BLUEBERRIES TRD-CULT-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 88905.6,
+          "score": 84.2,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 84.2,
+        "coveragePct": 85.7,
+        "rawAverage": 86.4,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 280,
+        "customsVolumeMt": 2472.986,
+        "customsFobUsd": 18814324.45,
+        "customsRoutes": 5,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierAGRICOLAVIASOLSACFreshBlueberries",
+      "companyName": "AGRICOLA VIÑASOL SAC",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 15,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 12,
+      "finishedDealCount": 12,
+      "avgScore": 76.8,
+      "maxScore": 76.8,
+      "minScore": 76.8,
+      "deals": [
+        {
+          "mongoId": "19f4e57b930b0cc3a8609ea7",
+          "name": "FRESH BLUEBERRIES ATG-TWN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55302,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "bf0abb2c4ecfae5bb9ec18a7",
+          "name": "FRESH BLUEBERRIES ATG-TWN-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53820,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "19c67a6fc82122d15b6bd830",
+          "name": "FRESH BLUEBERRIES ATG-TWN-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55926,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "9155f4c191c670a4be1b1ba2",
+          "name": "FRESH BLUEBERRIES ATG-TWN-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55692,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "bfe19ddd3d7c50770df3aac4",
+          "name": "FRESH BLUEBERRIES ATG-TWN-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55848,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "bed0586cf9d24578cd316d76",
+          "name": "FRESH BLUEBERRIES ATG-TWN-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55224,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "f0e79517f24013fc8440d14b",
+          "name": "FRESH BLUEBERRIES ATG-TWN-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54756,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "ef921c5aaee25f373e611b7a",
+          "name": "FRESH BLUEBERRIES ATG-TWN-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53898,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "18400fc8dab9ef9339b20ba5",
+          "name": "FRESH BLUEBERRIES ATG-TWN-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54834,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "d4a8ed1fb760180e4e00b3bf",
+          "name": "FRESH BLUEBERRIES ATG-TWN-010",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55380,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "84eb96572784d5e39a4a647c",
+          "name": "FRESH BLUEBERRIES ATG-TWN-011",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54132,
+          "score": 76.8,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "6ebcc56a39b148ec79c103ec",
+          "name": "FRESH BLUEBERRIES ATG-TWN-012",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56316,
+          "score": 76.8,
+          "priorDeals": 11
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 76.8,
+        "coveragePct": 47.6,
+        "rawAverage": 100,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierFUNDOLASLOMASSACFreshBlueberries",
+      "companyName": "FUNDO LAS LOMAS SAC",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 16,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 75.1,
+      "maxScore": 75.1,
+      "minScore": 75.1,
+      "deals": [
+        {
+          "mongoId": "23e57a6f048a99b2289e172e",
+          "name": "FRESH BLUEBERRIES FXP-UAE-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 93571.2,
+          "score": 75.1,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "45135bc76d452a32a725edec",
+          "name": "FRESH BLUEBERRIES FXP-UAE-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96000,
+          "score": 75.1,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "bea2c0f99ebc8f06cbf904f2",
+          "name": "FRESH BLUEBERRIES FXP-UAE-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 93420,
+          "score": 75.1,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "0bd76140ce4658e133b374a2",
+          "name": "FRESH BLUEBERRIES FXP-UAE-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95760,
+          "score": 75.1,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "3dc9aaaea9df02e3e76ae23f",
+          "name": "FRESH BLUEBERRIES FXP-UAE-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96038.4,
+          "score": 75.1,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "72959fd4f095035fafece109",
+          "name": "FRESH BLUEBERRIES FXP-UAE-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96652.8,
+          "score": 75.1,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "c9626056eb561b65860def70",
+          "name": "FRESH BLUEBERRIES FXP-UAE-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95212.8,
+          "score": 75.1,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 75.1,
+        "coveragePct": 85.7,
+        "rawAverage": 75.8,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 71,
+        "customsVolumeMt": 373.947,
+        "customsFobUsd": 2506291.5,
+        "customsRoutes": 7,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierJUHINEJLTDMixedBerriesTropicalFruitsIQF",
+      "companyName": "JUHINEJ LTD",
+      "role": "supplier",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 19,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 74,
+      "maxScore": 74,
+      "minScore": 74,
+      "deals": [
+        {
+          "mongoId": "64f4e1cb9e4b71a61ed3885a",
+          "name": "FRESH MIXED BERRIES SGC-CHN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 118368,
+          "score": 74,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "a006862cd472eb14e7502a92",
+          "name": "FRESH MIXED BERRIES SGC-CHN-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 120408,
+          "score": 74,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "5713177ae51507ab6fa5ad45",
+          "name": "FRESH MIXED BERRIES SGC-CHN-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 119736,
+          "score": 74,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "ccc54d974ae01e48ae2b0823",
+          "name": "FRESH MIXED BERRIES SGC-CHN-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 118128,
+          "score": 74,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "1d8db98a6819bdc6e2ab0e53",
+          "name": "FRESH MIXED BERRIES SGC-CHN-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 118128,
+          "score": 74,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "58e792e207113dc806c2f1b0",
+          "name": "FRESH MIXED BERRIES SGC-CHN-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 118392,
+          "score": 74,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "652fbae35dc0853a8731b75c",
+          "name": "FRESH MIXED BERRIES SGC-CHN-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 118896,
+          "score": 74,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "buyer.yearsInBusiness",
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 74,
+        "coveragePct": 47.6,
+        "rawAverage": 94,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierBLUEPACIFICFOODSSACFreshGinger",
+      "companyName": "BLUE PACIFIC FOODS SAC",
+      "role": "supplier",
+      "product": "Fresh Ginger",
+      "yearsInBusiness": 22,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 74,
+      "maxScore": 74,
+      "minScore": 74,
+      "deals": [
+        {
+          "mongoId": "5fce0ffb54b19c4c8e53dc2a",
+          "name": "FRESH GINGER BFRSH-NL-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55526.4,
+          "score": 74,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "1d3aa882b64dfc03a7ec2891",
+          "name": "FRESH GINGER BFRSH-NL-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56620.8,
+          "score": 74,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "67353f3c2a7b55259a3d3d21",
+          "name": "FRESH GINGER BFRSH-NL-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56534.4,
+          "score": 74,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "6bf2efd8ce3537b5aa6c50fe",
+          "name": "FRESH GINGER BFRSH-NL-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54475.2,
+          "score": 74,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "dd8e0ccaa0833ca55c023c34",
+          "name": "FRESH GINGER BFRSH-NL-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55368,
+          "score": 74,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "741b7bd8b6cbb503e64046cc",
+          "name": "FRESH GINGER BFRSH-NL-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53784,
+          "score": 74,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "2764e7d7dc151ee27893c05b",
+          "name": "FRESH GINGER - BPOLS-ESP-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 11997,
+          "score": 74,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 74,
+        "coveragePct": 47.6,
+        "rawAverage": 94,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierHOLYFRUITPERUFreshBlueberries",
+      "companyName": "Holy Fruit Peru",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 8,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 14,
+      "finishedDealCount": 14,
+      "avgScore": 70.4,
+      "maxScore": 70.4,
+      "minScore": 70.4,
+      "deals": [
+        {
+          "mongoId": "6922fd4e11cf91e11fbd2f5a",
+          "name": "FRESH BLUEBERRIES E001-38",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98598.28,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6922fe9111cf91e11fbd3178",
+          "name": "FRESH BLUEBERRIES E001-39",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 139661.75,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6923012511cf91e11fbd4971",
+          "name": "FRESH BLUEBERRIES E001-40",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 99086.76,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6923022c11cf91e11fbd5796",
+          "name": "FRESH BLUEBERRIES E001-41",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48556.8,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6923043011cf91e11fbd6a29",
+          "name": "FRESH BLUEBERRIES E001-42",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 101978.68,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925c62b11cf91e11fc0fc68",
+          "name": "FRESH BLUEBERRIES AWB 996-13806111",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 127720.56,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925cc7b11cf91e11fc1329f",
+          "name": "FRESH BLUEBERRIES AWB 996-13806144",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55464,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925cf9511cf91e11fc16b90",
+          "name": "FRESH BLUEBERRIES AWB 996-13806122",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 122443.2,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925d1ba11cf91e11fc193a6",
+          "name": "FRESH BLUEBERRIES AWB996-13810333",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55501.6,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925d34c11cf91e11fc1c847",
+          "name": "FRESH BLUEBERRIES AWB 996-13810355",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95817.6,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "692eea6b89cca3bcb7a1b6ef",
+          "name": "FRESH BLUEBERRIES AWB 996-13810366",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98049,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "692eeaed89cca3bcb7a1c661",
+          "name": "FRESH BLUEBERRIES AWB 996-13810366",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98390.04,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "692f092789cca3bcb7a2357d",
+          "name": "FRESH BLUEBERRIES AWB 996-13810366",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98390.04,
+          "score": 70.4,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6972c74509dd14423e2461eb",
+          "name": "FRESH BLUEBERRIES",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 93600,
+          "score": 70.4,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 70.4,
+        "coveragePct": 85.7,
+        "rawAverage": 70.3,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 35,
+        "customsVolumeMt": 150.847,
+        "customsFobUsd": 1743955.21,
+        "customsRoutes": 2,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierICABLUEBERRIESSACFreshBlueberries",
+      "companyName": "ICA BLUEBERRIES SAC",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 9,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 4,
+      "finishedDealCount": 4,
+      "avgScore": 69.4,
+      "maxScore": 69.4,
+      "minScore": 69.4,
+      "deals": [
+        {
+          "mongoId": "06c34a88f0952a2320f620a8",
+          "name": "FRESH BLUEBERRIES GFL-CHN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 78936,
+          "score": 69.4,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "23e523e46e222d9075058dd8",
+          "name": "FRESH BLUEBERRIES GFL-CHN-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 80106,
+          "score": 69.4,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "aa8a2204db5a02446f0b2d08",
+          "name": "FRESH BLUEBERRIES GFL-CHN-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 80496,
+          "score": 69.4,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "4957b3404f55a8589b9e420e",
+          "name": "FRESH BLUEBERRIES GFL-CHN-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 78078,
+          "score": 69.4,
+          "priorDeals": 3
+        }
+      ],
+      "missingForFullCram": [
+        "buyer.yearsInBusiness",
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 69.4,
+        "coveragePct": 47.6,
+        "rawAverage": 84.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerALLIEDTRADEGLOBALFreshBlueberries",
+      "companyName": "Allied Trade Global",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 14,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 18,
+      "finishedDealCount": 18,
+      "avgScore": 69.3,
+      "maxScore": 69.3,
+      "minScore": 69.3,
+      "deals": [
+        {
+          "mongoId": "19f4e57b930b0cc3a8609ea7",
+          "name": "FRESH BLUEBERRIES ATG-TWN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55302,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "bf0abb2c4ecfae5bb9ec18a7",
+          "name": "FRESH BLUEBERRIES ATG-TWN-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53820,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "19c67a6fc82122d15b6bd830",
+          "name": "FRESH BLUEBERRIES ATG-TWN-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55926,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "9155f4c191c670a4be1b1ba2",
+          "name": "FRESH BLUEBERRIES ATG-TWN-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55692,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "bfe19ddd3d7c50770df3aac4",
+          "name": "FRESH BLUEBERRIES ATG-TWN-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55848,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "bed0586cf9d24578cd316d76",
+          "name": "FRESH BLUEBERRIES ATG-TWN-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55224,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "f0e79517f24013fc8440d14b",
+          "name": "FRESH BLUEBERRIES ATG-TWN-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54756,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "ef921c5aaee25f373e611b7a",
+          "name": "FRESH BLUEBERRIES ATG-TWN-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53898,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "18400fc8dab9ef9339b20ba5",
+          "name": "FRESH BLUEBERRIES ATG-TWN-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54834,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "d4a8ed1fb760180e4e00b3bf",
+          "name": "FRESH BLUEBERRIES ATG-TWN-010",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55380,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "84eb96572784d5e39a4a647c",
+          "name": "FRESH BLUEBERRIES ATG-TWN-011",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54132,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "6ebcc56a39b148ec79c103ec",
+          "name": "FRESH BLUEBERRIES ATG-TWN-012",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56316,
+          "score": 69.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "8805e0ea118aa336eb288425",
+          "name": "FRESH BLUEBERRIES VLV-TWN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54522,
+          "score": 69.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "4c357b6d67d09e395e6a8d9a",
+          "name": "FRESH BLUEBERRIES VLV-TWN-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53352,
+          "score": 69.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "3d9c463212172ea8c28f407a",
+          "name": "FRESH BLUEBERRIES VLV-TWN-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55224,
+          "score": 69.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "3f0bfcf33f54f78137e95ed0",
+          "name": "FRESH BLUEBERRIES VLV-TWN-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54210,
+          "score": 69.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "7eecdd7261421e77ff484443",
+          "name": "FRESH BLUEBERRIES VLV-TWN-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56394,
+          "score": 69.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "2764c42c0a3b1e3a6d89bbce",
+          "name": "FRESH BLUEBERRIES VLV-TWN-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55536,
+          "score": 69.3,
+          "priorDeals": 5
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 69.3,
+        "coveragePct": 32.5,
+        "rawAverage": 100,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerXARKISLFreshAvocado",
+      "companyName": "XARKI SL",
+      "role": "buyer",
+      "product": "Fresh Avocado",
+      "yearsInBusiness": 66,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 10,
+      "finishedDealCount": 10,
+      "avgScore": 69.3,
+      "maxScore": 69.3,
+      "minScore": 69.3,
+      "deals": [
+        {
+          "mongoId": "484986066a7417fcfe592946",
+          "name": "FRESH AVOCADO XRK-ESP-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53568,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "8ba96f6965749c434694263e",
+          "name": "FRESH AVOCADO XRK-ESP-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50016,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "d309a2434ae0d85043332a28",
+          "name": "FRESH AVOCADO XRK-ESP-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53112,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "101ad782e9b05452df4e6de1",
+          "name": "FRESH AVOCADO XRK-ESP-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53304,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "de10bc4c6dc304f27f22c71b",
+          "name": "FRESH AVOCADO XRK-ESP-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50664,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "e3bd45be46c02a03587be9ff",
+          "name": "FRESH AVOCADO XRK-ESP-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52848,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "e5b159d4320d161759a80f86",
+          "name": "FRESH AVOCADO XRK-ESP-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51720,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "d19f70bf1eca33acc81de653",
+          "name": "FRESH AVOCADO XRK-ESP-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51411.2,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "8413cc04d544fe53c0254173",
+          "name": "FRESH AVOCADO XRK-ESP-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51134.2,
+          "score": 69.3,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "fbd21becdccde94e83865585",
+          "name": "FRESH AVOCADO XRK-ESP-010",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50640,
+          "score": 69.3,
+          "priorDeals": 9
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 69.3,
+        "coveragePct": 32.5,
+        "rawAverage": 100,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierAGRICOLAMEDANOAZULSACFreshAvocado",
+      "companyName": "AGRICOLA MEDANO AZUL SAC",
+      "role": "supplier",
+      "product": "Fresh Avocado",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 10,
+      "finishedDealCount": 10,
+      "avgScore": 68.5,
+      "maxScore": 68.5,
+      "minScore": 68.5,
+      "deals": [
+        {
+          "mongoId": "484986066a7417fcfe592946",
+          "name": "FRESH AVOCADO XRK-ESP-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53568,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "8ba96f6965749c434694263e",
+          "name": "FRESH AVOCADO XRK-ESP-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50016,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "d309a2434ae0d85043332a28",
+          "name": "FRESH AVOCADO XRK-ESP-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53112,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "101ad782e9b05452df4e6de1",
+          "name": "FRESH AVOCADO XRK-ESP-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53304,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "de10bc4c6dc304f27f22c71b",
+          "name": "FRESH AVOCADO XRK-ESP-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50664,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "e3bd45be46c02a03587be9ff",
+          "name": "FRESH AVOCADO XRK-ESP-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52848,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "e5b159d4320d161759a80f86",
+          "name": "FRESH AVOCADO XRK-ESP-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51720,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "d19f70bf1eca33acc81de653",
+          "name": "FRESH AVOCADO XRK-ESP-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51411.2,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "8413cc04d544fe53c0254173",
+          "name": "FRESH AVOCADO XRK-ESP-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51134.2,
+          "score": 68.5,
+          "priorDeals": 9
+        },
+        {
+          "mongoId": "fbd21becdccde94e83865585",
+          "name": "FRESH AVOCADO XRK-ESP-010",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50640,
+          "score": 68.5,
+          "priorDeals": 9
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 68.5,
+        "coveragePct": 47.6,
+        "rawAverage": 82.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierNATURALSOUTHFRUITLTDMixedBerriesTropicalFruitsIQF",
+      "companyName": "NATURAL SOUTH FRUIT LTD",
+      "role": "supplier",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 8,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 4,
+      "finishedDealCount": 4,
+      "avgScore": 67.8,
+      "maxScore": 67.8,
+      "minScore": 67.8,
+      "deals": [
+        {
+          "mongoId": "9b5a34548f5eba3c26485d7b",
+          "name": "FRESH MIXED BERRIES KHI-HKG-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 75888,
+          "score": 67.8,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "9f9c08f87f9881cd37132b9f",
+          "name": "FRESH MIXED BERRIES KHI-HKG-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 73296,
+          "score": 67.8,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "08428bc73fc3ccdfc36e7c4a",
+          "name": "FRESH MIXED BERRIES KHI-HKG-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 73176,
+          "score": 67.8,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "1f4444e7365df2ff9ca128c1",
+          "name": "FRESH MIXED BERRIES KHI-HKG-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 75720,
+          "score": 67.8,
+          "priorDeals": 3
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 67.8,
+        "coveragePct": 47.6,
+        "rawAverage": 81,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierTRUMARKETBLOCKCHAINSACFreshBlueberries",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 33,
+      "finishedDealCount": 33,
+      "avgScore": 66.8,
+      "maxScore": 66.8,
+      "minScore": 66.8,
+      "deals": [
+        {
+          "mongoId": "670ed7c83fdd80df80736642",
+          "name": "Fresh Blueberries",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 24085.6,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "670edd033fdd80df80736ef5",
+          "name": "Fresh Blueberries",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 24101,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6750a959b9fa43de6d85c9de",
+          "name": "FRESH BLUEBERRIES E001-26",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 38556,
+          "score": 66.8,
+          "priorDeals": 1
+        },
+        {
+          "mongoId": "675377dfb9fa43de6d861eef",
+          "name": "FRESH BLUEBERRIES E001-22",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 70200,
+          "score": 66.8,
+          "priorDeals": 1
+        },
+        {
+          "mongoId": "6759b914b9fa43de6d86f192",
+          "name": "FRESH BLUEBERRIES E001-27",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 72000,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "675a16e4b9fa43de6d873513",
+          "name": "FRESH BLUEBERRIES E001-23",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 26400,
+          "score": 66.8,
+          "priorDeals": 0
+        },
+        {
+          "mongoId": "675b6053b9fa43de6d879470",
+          "name": "FRESH BLUEBERRIES E001-19",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 29568,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "675b708fb9fa43de6d882fb9",
+          "name": "FRESH BLUEBERRIES E001-18",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 23275.32,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "675b7892b9fa43de6d887afe",
+          "name": "FRESH BLUEBERRIES E001-16",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 40090.47,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "675b799bb9fa43de6d88826b",
+          "name": "FRESH BLUEBERRIES E001-17",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 35270.4,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6761acdbb9fa43de6d8a387f",
+          "name": "FRESH BLUEBERRIES E001-14",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 20284.8,
+          "score": 66.8,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "676449d1b9fa43de6d8bcd7e",
+          "name": "FRESH BLUEBERRIES E001-12",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 26880,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6764614cb9fa43de6d8c1bc2",
+          "name": "FRESH BLUEBERRIES E001-11",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 24101,
+          "score": 66.8,
+          "priorDeals": 0
+        },
+        {
+          "mongoId": "6786a6e9b9fa43de6d94b696",
+          "name": "FRESH BLUEBERRIES E001-29",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21600,
+          "score": 66.8,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "6797c0246b3eee0b06efb2a9",
+          "name": "FRESH BLUEBERRIES E001-30",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 25920,
+          "score": 66.8,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67a4c9a56b3eee0b06f0fb73",
+          "name": "FRESH BLUEBERRIES E001-31",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21600,
+          "score": 66.8,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67ec128e6b3eee0b06f6547b",
+          "name": "FRESH BLUEBERRIES E001-35",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 90000,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "67f555dd6b3eee0b06f815e6",
+          "name": "FRESH BLUEBERRIES E001-33",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 29652,
+          "score": 66.8,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "688120b2953ab2c775d3e679",
+          "name": "Fresh Blueberries PI25E001-38",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839958953ab2c775d51830",
+          "name": "Fresh Blueberries PI25E001-39",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839a11953ab2c775d51f2e",
+          "name": "Fresh Blueberries PI25E001-40",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839aad953ab2c775d523ef",
+          "name": "Fresh Blueberries PI25E001-41",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839b61953ab2c775d53dc7",
+          "name": "Fresh Blueberries PI25E001-40",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6890fd76438d2534fe4eb33c",
+          "name": "Blueberries Export Canada",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 10368,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6890fdf0438d2534fe4ebc56",
+          "name": "Blueberries EXW Canada E001-42",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 10368,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "68d40b987da7cd176486aabb",
+          "name": "Blueberries E001-50",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 85800,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "68d40e8c7da7cd176486c359",
+          "name": "Blueberries E001-50",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 85800,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "690cf87e3d2ca4b63b280e92",
+          "name": "FRESH BLUEBERRIES E001-52",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 156800,
+          "score": 66.8,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "690cfba23d2ca4b63b282e8b",
+          "name": "FRESH BLUEBERRIES E001-50",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "690cfcb63d2ca4b63b283ea7",
+          "name": "FRESH BLUEBERRIES E001-49",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6915d77ae5985f7040b71697",
+          "name": "FRESH BLUEBERRIES E001-49",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6915ee6862ce4b73260d6977",
+          "name": "FRESH BLUEBERRIES E001-49",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 66.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6917a58b62ce4b73260f06f4",
+          "name": "EUROPE BULK",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 107800,
+          "score": 66.8,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 66.8,
+        "coveragePct": 85.7,
+        "rawAverage": 66.1,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 23,
+        "customsVolumeMt": 101.692,
+        "customsFobUsd": 790940.36,
+        "customsRoutes": 4,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerFRESHEXPRESSLLCFreshBlueberries",
+      "companyName": "FRESH EXPRESS LLC",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 33,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 66.3,
+      "maxScore": 66.3,
+      "minScore": 66.3,
+      "deals": [
+        {
+          "mongoId": "23e57a6f048a99b2289e172e",
+          "name": "FRESH BLUEBERRIES FXP-UAE-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 93571.2,
+          "score": 66.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "45135bc76d452a32a725edec",
+          "name": "FRESH BLUEBERRIES FXP-UAE-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96000,
+          "score": 66.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "bea2c0f99ebc8f06cbf904f2",
+          "name": "FRESH BLUEBERRIES FXP-UAE-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 93420,
+          "score": 66.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "0bd76140ce4658e133b374a2",
+          "name": "FRESH BLUEBERRIES FXP-UAE-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95760,
+          "score": 66.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "3dc9aaaea9df02e3e76ae23f",
+          "name": "FRESH BLUEBERRIES FXP-UAE-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96038.4,
+          "score": 66.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "72959fd4f095035fafece109",
+          "name": "FRESH BLUEBERRIES FXP-UAE-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96652.8,
+          "score": 66.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "c9626056eb561b65860def70",
+          "name": "FRESH BLUEBERRIES FXP-UAE-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95212.8,
+          "score": 66.3,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 66.3,
+        "coveragePct": 32.5,
+        "rawAverage": 90.8,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerLIMAXSPZOOFreshBlueberries",
+      "companyName": "LIMAX SP. Z O.O.",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 24,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 65.5,
+      "maxScore": 65.5,
+      "minScore": 65.5,
+      "deals": [
+        {
+          "mongoId": "675b6053b9fa43de6d879470",
+          "name": "FRESH BLUEBERRIES E001-19",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 29568,
+          "score": 65.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "675b708fb9fa43de6d882fb9",
+          "name": "FRESH BLUEBERRIES E001-18",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 23275.32,
+          "score": 65.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "675b7892b9fa43de6d887afe",
+          "name": "FRESH BLUEBERRIES E001-16",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 40090.47,
+          "score": 65.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "675b799bb9fa43de6d88826b",
+          "name": "FRESH BLUEBERRIES E001-17",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 35270.4,
+          "score": 65.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "676449d1b9fa43de6d8bcd7e",
+          "name": "FRESH BLUEBERRIES E001-12",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 26880,
+          "score": 65.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "690cf87e3d2ca4b63b280e92",
+          "name": "FRESH BLUEBERRIES E001-52",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 156800,
+          "score": 65.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6917a58b62ce4b73260f06f4",
+          "name": "EUROPE BULK",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 107800,
+          "score": 65.5,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 65.5,
+        "coveragePct": 72.5,
+        "rawAverage": 67.2,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 20,
+        "customsVolumeMt": 76.817,
+        "customsFobUsd": 540844.67,
+        "customsRoutes": 2,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerBIOFRESHIBVFreshGinger",
+      "companyName": "BIOFRESHI BV",
+      "role": "buyer",
+      "product": "Fresh Ginger",
+      "yearsInBusiness": 17,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 6,
+      "finishedDealCount": 6,
+      "avgScore": 65.3,
+      "maxScore": 65.3,
+      "minScore": 65.3,
+      "deals": [
+        {
+          "mongoId": "5fce0ffb54b19c4c8e53dc2a",
+          "name": "FRESH GINGER BFRSH-NL-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55526.4,
+          "score": 65.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "1d3aa882b64dfc03a7ec2891",
+          "name": "FRESH GINGER BFRSH-NL-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56620.8,
+          "score": 65.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "67353f3c2a7b55259a3d3d21",
+          "name": "FRESH GINGER BFRSH-NL-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56534.4,
+          "score": 65.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "6bf2efd8ce3537b5aa6c50fe",
+          "name": "FRESH GINGER BFRSH-NL-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54475.2,
+          "score": 65.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "dd8e0ccaa0833ca55c023c34",
+          "name": "FRESH GINGER BFRSH-NL-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55368,
+          "score": 65.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "741b7bd8b6cbb503e64046cc",
+          "name": "FRESH GINGER BFRSH-NL-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53784,
+          "score": 65.3,
+          "priorDeals": 5
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 65.3,
+        "coveragePct": 32.5,
+        "rawAverage": 87.7,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierVILLAVENTURAPERUSACFreshMandarin",
+      "companyName": "Villaventura Peru SAC",
+      "role": "supplier",
+      "product": "Fresh Mandarin",
+      "yearsInBusiness": 3,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 16,
+      "finishedDealCount": 16,
+      "avgScore": 65.1,
+      "maxScore": 65.1,
+      "minScore": 65.1,
+      "deals": [
+        {
+          "mongoId": "683780b542a9e57e2b4729d8",
+          "name": "MANDARINA FRESCA",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683781a042a9e57e2b472bad",
+          "name": "MANDARINA FRESCA 241064978",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683781f542a9e57e2b472c5e",
+          "name": "MANDARINA FRESCA 241313022",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837823642a9e57e2b472d18",
+          "name": "MANDARINA FRESCA 241607904",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837826d42a9e57e2b472ddb",
+          "name": "MANDARINA FRESCA 241870809",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837861342a9e57e2b472f8d",
+          "name": "MANDARINA FRESCA 241870858",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837865e42a9e57e2b4731c8",
+          "name": "MANDARINA FRESCA 242024839",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683786bc42a9e57e2b47343c",
+          "name": "MANDARINA FRESCA 242024835",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683786f042a9e57e2b473523",
+          "name": "MANDARINA FRESCA 242381517",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837871642a9e57e2b47360f",
+          "name": "MANDARINA FRESCA 242381425",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e3e042a9e57e2b47a6a5",
+          "name": "MANDARINA FRESCA 242528179",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e4d442a9e57e2b47ac85",
+          "name": "MANDARINA FRESCA 242528179",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e7fd42a9e57e2b47c7c4",
+          "name": "MANDARINA FRESCA 242780372",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e82542a9e57e2b47c915",
+          "name": "MANDARINA FRESCA 242780347",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e8a342a9e57e2b47ca7f",
+          "name": "MANDARINA FRESCA 243039126",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 65.1,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e8d042a9e57e2b47cbe2",
+          "name": "MANDARINA FRESCA 243039123",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 65.1,
+          "priorDeals": 15
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 65.1,
+        "coveragePct": 47.6,
+        "rawAverage": 75.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierINDUSTRIASSOLIMARSACMixedBerriesTropicalFruitsIQF",
+      "companyName": "INDUSTRIAS SOLIMAR SAC",
+      "role": "supplier",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 8,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 64.9,
+      "maxScore": 64.9,
+      "minScore": 64.9,
+      "deals": [
+        {
+          "mongoId": "b6948e52fcced0daf3a48d45",
+          "name": "FROZEN TROPICAL FRUITS - SOLIMAR-JHN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55992,
+          "score": 64.9,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 64.9,
+        "coveragePct": 47.6,
+        "rawAverage": 75,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierBIOFARMINGPERUSACFreshMandarin",
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "role": "supplier",
+      "product": "Fresh Mandarin",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 20,
+      "finishedDealCount": 20,
+      "avgScore": 63.5,
+      "maxScore": 63.5,
+      "minScore": 63.5,
+      "deals": [
+        {
+          "mongoId": "6853637d46f5613e126c952e",
+          "name": "MANDARINA FRESCA -OMC- 5TEU",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 156702,
+          "score": 63.5,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "69c67d820bdf50f1f471aeac",
+          "name": "MANDARINA FRESCA",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a452185ebda6a9c4b47c",
+          "name": "MANDARINA FRESCA 261987687-HUENEME-MNBU0631925",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21789.04,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a642388a149dee8247ae",
+          "name": "MANDARINA FRESCA PER8830115A -MIAMI-SEGU9383086",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21789.04,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a7d9185ebda6a9c4bd82",
+          "name": "MANDARINA FRESCA 261715398-HUENEME-MNBU4360842",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a832c5e900f5ecdcfae0",
+          "name": "MANDARINA FRESCA-PER8823983A-MIAMI-SZLU5010513",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a855388a149dee8250a6",
+          "name": "MANDARINA FRESCA PER8823982A-MIAMI-SMLU5477740",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a889388a149dee825208",
+          "name": "MANDARINA FRESCA 261433095-HUENEME-MNBU0401959",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 22500.8,
+          "score": 63.5,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "2ed7c1b150ad8f4526fa7f4d",
+          "name": "MANDARINA FRESCA DAVIS-NL-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33461.12,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "f5773097d8a8a638caefd256",
+          "name": "MANDARINA FRESCA DAVIS-NL-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31412.92,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "248e0cca105c2c60131599bf",
+          "name": "MANDARINA FRESCA DAVIS-NL-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32469.36,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "ad35696fe45079e585ff4ef1",
+          "name": "MANDARINA FRESCA DAVIS-NL-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31089.52,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "dbe9992e55a45817e0d6b2cd",
+          "name": "MANDARINA FRESCA DAVIS-NL-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33310.2,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "0b42b541b06d1772e862b368",
+          "name": "MANDARINA FRESCA DAVIS-NL-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 30184,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "484be52664c4d034ac0c8bed",
+          "name": "MANDARINA FRESCA DAVIS-NL-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32986.8,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "f476b4d2a714e7a83621aba0",
+          "name": "MANDARINA FRESCA DAVIS-NL-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31887.24,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "4de32d0a8f3a7b07c43e34b3",
+          "name": "MANDARINA FRESCA DAVIS-NL-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32189.08,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "17ab808caeaea4d2a6f9774e",
+          "name": "MANDARINA FRESCA DAVIS-NL-010",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 30507.4,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "846e9a2ebd8357ff396e0dff",
+          "name": "MANDARINA FRESCA DAVIS-NL-011",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33978.56,
+          "score": 63.5,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "84fc96e64a6345f411f92998",
+          "name": "MANDARINA FRESCA DAVIS-NL-012",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33784.52,
+          "score": 63.5,
+          "priorDeals": 11
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 63.5,
+        "coveragePct": 47.6,
+        "rawAverage": 72,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerKHIINTERNATIONALCORPMixedBerriesTropicalFruitsIQF",
+      "companyName": "KHI INTERNATIONAL CORP",
+      "role": "buyer",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 12,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 4,
+      "finishedDealCount": 4,
+      "avgScore": 63.3,
+      "maxScore": 63.3,
+      "minScore": 63.3,
+      "deals": [
+        {
+          "mongoId": "9b5a34548f5eba3c26485d7b",
+          "name": "FRESH MIXED BERRIES KHI-HKG-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 75888,
+          "score": 63.3,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "9f9c08f87f9881cd37132b9f",
+          "name": "FRESH MIXED BERRIES KHI-HKG-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 73296,
+          "score": 63.3,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "08428bc73fc3ccdfc36e7c4a",
+          "name": "FRESH MIXED BERRIES KHI-HKG-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 73176,
+          "score": 63.3,
+          "priorDeals": 3
+        },
+        {
+          "mongoId": "1f4444e7365df2ff9ca128c1",
+          "name": "FRESH MIXED BERRIES KHI-HKG-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 75720,
+          "score": 63.3,
+          "priorDeals": 3
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 63.3,
+        "coveragePct": 32.5,
+        "rawAverage": 81.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierMIKHUNAFOODSSACFreshAsparagus",
+      "companyName": "MIKHUNA FOODS SAC",
+      "role": "supplier",
+      "product": "Fresh Asparagus",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 9,
+      "finishedDealCount": 9,
+      "avgScore": 62.5,
+      "maxScore": 62.5,
+      "minScore": 62.5,
+      "deals": [
+        {
+          "mongoId": "c8dcac5597b0e930ae253eff",
+          "name": "FRESH ASPARAGUS HSM-ESP-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48880,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "7394319c4838862cd229de92",
+          "name": "FRESH ASPARAGUS HSM-ESP-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51920,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "2d19374d4f8331ce5f4051d0",
+          "name": "FRESH ASPARAGUS HSM-ESP-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51120,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "4b8d7a5b4742bbf14f494eaf",
+          "name": "FRESH ASPARAGUS HSM-ESP-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 49380,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "743a2854fbc7fef6e4dea5d3",
+          "name": "FRESH ASPARAGUS HSM-ESP-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48420,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "32897f091183db2f46a577ff",
+          "name": "FRESH ASPARAGUS HSM-ESP-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48380,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "30dc4ee7d54082ca34ad0d59",
+          "name": "FRESH ASPARAGUS HSM-ESP-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 49560,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "e2bf4fbe59c0c5bea91c0b26",
+          "name": "FRESH ASPARAGUS HSM-ESP-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48400,
+          "score": 62.5,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "8d28be47d037080eb35ce5a4",
+          "name": "FRESH ASPARAGUS HSM-ESP-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 49480,
+          "score": 62.5,
+          "priorDeals": 8
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 62.5,
+        "coveragePct": 47.6,
+        "rawAverage": 70,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerDAVISGLOBALBVFreshMandarin",
+      "companyName": "DAVIS GLOBAL BV",
+      "role": "buyer",
+      "product": "Fresh Mandarin",
+      "yearsInBusiness": 6,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 12,
+      "finishedDealCount": 12,
+      "avgScore": 62.3,
+      "maxScore": 62.3,
+      "minScore": 62.3,
+      "deals": [
+        {
+          "mongoId": "2ed7c1b150ad8f4526fa7f4d",
+          "name": "MANDARINA FRESCA DAVIS-NL-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33461.12,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "f5773097d8a8a638caefd256",
+          "name": "MANDARINA FRESCA DAVIS-NL-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31412.92,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "248e0cca105c2c60131599bf",
+          "name": "MANDARINA FRESCA DAVIS-NL-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32469.36,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "ad35696fe45079e585ff4ef1",
+          "name": "MANDARINA FRESCA DAVIS-NL-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31089.52,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "dbe9992e55a45817e0d6b2cd",
+          "name": "MANDARINA FRESCA DAVIS-NL-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33310.2,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "0b42b541b06d1772e862b368",
+          "name": "MANDARINA FRESCA DAVIS-NL-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 30184,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "484be52664c4d034ac0c8bed",
+          "name": "MANDARINA FRESCA DAVIS-NL-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32986.8,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "f476b4d2a714e7a83621aba0",
+          "name": "MANDARINA FRESCA DAVIS-NL-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31887.24,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "4de32d0a8f3a7b07c43e34b3",
+          "name": "MANDARINA FRESCA DAVIS-NL-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32189.08,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "17ab808caeaea4d2a6f9774e",
+          "name": "MANDARINA FRESCA DAVIS-NL-010",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 30507.4,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "846e9a2ebd8357ff396e0dff",
+          "name": "MANDARINA FRESCA DAVIS-NL-011",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33978.56,
+          "score": 62.3,
+          "priorDeals": 11
+        },
+        {
+          "mongoId": "84fc96e64a6345f411f92998",
+          "name": "MANDARINA FRESCA DAVIS-NL-012",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 33784.52,
+          "score": 62.3,
+          "priorDeals": 11
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 62.3,
+        "coveragePct": 32.5,
+        "rawAverage": 78.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierVILLAVENTURAPERUSACFreshBlueberries",
+      "companyName": "Villaventura Peru SAC",
+      "role": "supplier",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 3,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 6,
+      "finishedDealCount": 6,
+      "avgScore": 61.3,
+      "maxScore": 61.3,
+      "minScore": 61.3,
+      "deals": [
+        {
+          "mongoId": "8805e0ea118aa336eb288425",
+          "name": "FRESH BLUEBERRIES VLV-TWN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54522,
+          "score": 61.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "4c357b6d67d09e395e6a8d9a",
+          "name": "FRESH BLUEBERRIES VLV-TWN-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 53352,
+          "score": 61.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "3d9c463212172ea8c28f407a",
+          "name": "FRESH BLUEBERRIES VLV-TWN-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55224,
+          "score": 61.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "3f0bfcf33f54f78137e95ed0",
+          "name": "FRESH BLUEBERRIES VLV-TWN-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 54210,
+          "score": 61.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "7eecdd7261421e77ff484443",
+          "name": "FRESH BLUEBERRIES VLV-TWN-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 56394,
+          "score": 61.3,
+          "priorDeals": 5
+        },
+        {
+          "mongoId": "2764c42c0a3b1e3a6d89bbce",
+          "name": "FRESH BLUEBERRIES VLV-TWN-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55536,
+          "score": 61.3,
+          "priorDeals": 5
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 61.3,
+        "coveragePct": 47.6,
+        "rawAverage": 67.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerJUHINEJLTDMixedBerriesTropicalFruitsIQF",
+      "companyName": "JUHINEJ LTD",
+      "role": "buyer",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 19,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 60.3,
+      "maxScore": 60.3,
+      "minScore": 60.3,
+      "deals": [
+        {
+          "mongoId": "b6948e52fcced0daf3a48d45",
+          "name": "FROZEN TROPICAL FRUITS - SOLIMAR-JHN-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55992,
+          "score": 60.3,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 60.3,
+        "coveragePct": 32.5,
+        "rawAverage": 72.3,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierBIOFARMINGPERUSACFreshAvocado",
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "role": "supplier",
+      "product": "Fresh Avocado",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 6,
+      "finishedDealCount": 6,
+      "avgScore": 59.7,
+      "maxScore": 59.7,
+      "minScore": 59.7,
+      "deals": [
+        {
+          "mongoId": "67d096556b3eee0b06f29d9a",
+          "name": "FRESH AVOCADO - BK LMM0514033",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52800,
+          "score": 59.7,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67e5642f6b3eee0b06f42147",
+          "name": "FRESH AVOCADO BK 6412923740",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 27035.1,
+          "score": 59.7,
+          "priorDeals": 0
+        },
+        {
+          "mongoId": "67e564fc6b3eee0b06f42666",
+          "name": "FRESH AVOCADO - BK 21619266",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52800,
+          "score": 59.7,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67ef392d6b3eee0b06f72d16",
+          "name": "FRESH AVOCADO - BK 27489042",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50400,
+          "score": 59.7,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67f41e496b3eee0b06f7769c",
+          "name": "FRESH AVOCADO - AWB 160-91712386",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 4320,
+          "score": 59.7,
+          "priorDeals": 0
+        },
+        {
+          "mongoId": "683de11b42a9e57e2b48e715",
+          "name": "FRESH AVOCADO - BK 6412923740 2",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52800,
+          "score": 59.7,
+          "priorDeals": 4
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 59.7,
+        "coveragePct": 47.6,
+        "rawAverage": 64,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierTRUMARKETBLOCKCHAINSACFreshAsparagus",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "role": "supplier",
+      "product": "Fresh Asparagus",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 2,
+      "finishedDealCount": 2,
+      "avgScore": 59.2,
+      "maxScore": 59.2,
+      "minScore": 59.2,
+      "deals": [
+        {
+          "mongoId": "677c2b8ab9fa43de6d90a08a",
+          "name": "FRESH ASPARAGUS E001-10",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 17626.8,
+          "score": 59.2,
+          "priorDeals": 1
+        },
+        {
+          "mongoId": "677c3e54b9fa43de6d91291b",
+          "name": "FRESH ASPARAGUS E001-10",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 17626.8,
+          "score": 59.2,
+          "priorDeals": 1
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 59.2,
+        "coveragePct": 85.7,
+        "rawAverage": 57.2,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 23,
+        "customsVolumeMt": 101.692,
+        "customsFobUsd": 790940.36,
+        "customsRoutes": 4,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierTRUMARKETBLOCKCHAINSACMixedBerriesTropicalFruitsIQF",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "role": "supplier",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 58.2,
+      "maxScore": 58.2,
+      "minScore": 58.2,
+      "deals": [
+        {
+          "mongoId": "677ec54eb9fa43de6d931ebd",
+          "name": "IQF TROPICAL FRUITS 40FT",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 41473.6,
+          "score": 58.2,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 58.2,
+        "coveragePct": 85.7,
+        "rawAverage": 56.1,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 23,
+        "customsVolumeMt": 101.692,
+        "customsFobUsd": 790940.36,
+        "customsRoutes": 4,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierTRUMARKETBLOCKCHAINSACFrozenTropicalFruits",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "role": "supplier",
+      "product": "Frozen Tropical Fruits",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 58.2,
+      "maxScore": 58.2,
+      "minScore": 58.2,
+      "deals": [
+        {
+          "mongoId": "68910508438d2534fe4ed31f",
+          "name": "Frozen Berries from Chile",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 10368,
+          "score": 58.2,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 58.2,
+        "coveragePct": 85.7,
+        "rawAverage": 56.1,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 23,
+        "customsVolumeMt": 101.692,
+        "customsFobUsd": 790940.36,
+        "customsRoutes": 4,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "exportLicenseStatus",
+          "productionCapacity",
+          "yearlySales",
+          "annualExportVolume",
+          "routeDiversity",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerBCNATUREQUALITYFRUITSSLFreshBlueberries",
+      "companyName": "BC NATURE QUALITY FRUITS S.L",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 16,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 57.8,
+      "maxScore": 57.8,
+      "minScore": 57.8,
+      "deals": [
+        {
+          "mongoId": "675a16e4b9fa43de6d873513",
+          "name": "FRESH BLUEBERRIES E001-23",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 26400,
+          "score": 57.8,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 57.8,
+        "coveragePct": 72.5,
+        "rawAverage": 56.6,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 5,
+        "customsVolumeMt": 86.4,
+        "customsFobUsd": 435176.81,
+        "customsRoutes": 1,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerAGRICOLAYCOMERCIALVALLESDELNUBLEMixedBerriesTropicalFruitsIQF",
+      "companyName": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "role": "buyer",
+      "product": "Mixed Berries / Tropical Fruits (IQF)",
+      "yearsInBusiness": 8,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 56.8,
+      "maxScore": 56.8,
+      "minScore": 56.8,
+      "deals": [
+        {
+          "mongoId": "677ec54eb9fa43de6d931ebd",
+          "name": "IQF TROPICAL FRUITS 40FT",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 41473.6,
+          "score": 56.8,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 56.8,
+        "coveragePct": 32.5,
+        "rawAverage": 61.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerAGRICOLAYCOMERCIALVALLESDELNUBLEFreshAvocado",
+      "companyName": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "role": "buyer",
+      "product": "Fresh Avocado",
+      "yearsInBusiness": 8,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 56.8,
+      "maxScore": 56.8,
+      "minScore": 56.8,
+      "deals": [
+        {
+          "mongoId": "67e5642f6b3eee0b06f42147",
+          "name": "FRESH AVOCADO BK 6412923740",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 27035.1,
+          "score": 56.8,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 56.8,
+        "coveragePct": 32.5,
+        "rawAverage": 61.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerOPENMARKETSCORPORATIONFreshMandarin",
+      "companyName": "Open Markets Corporation",
+      "role": "buyer",
+      "product": "Fresh Mandarin",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 16,
+      "finishedDealCount": 16,
+      "avgScore": 55.3,
+      "maxScore": 55.3,
+      "minScore": 55.3,
+      "deals": [
+        {
+          "mongoId": "683780b542a9e57e2b4729d8",
+          "name": "MANDARINA FRESCA",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683781a042a9e57e2b472bad",
+          "name": "MANDARINA FRESCA 241064978",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683781f542a9e57e2b472c5e",
+          "name": "MANDARINA FRESCA 241313022",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837823642a9e57e2b472d18",
+          "name": "MANDARINA FRESCA 241607904",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837826d42a9e57e2b472ddb",
+          "name": "MANDARINA FRESCA 241870809",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837861342a9e57e2b472f8d",
+          "name": "MANDARINA FRESCA 241870858",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837865e42a9e57e2b4731c8",
+          "name": "MANDARINA FRESCA 242024839",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683786bc42a9e57e2b47343c",
+          "name": "MANDARINA FRESCA 242024835",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "683786f042a9e57e2b473523",
+          "name": "MANDARINA FRESCA 242381517",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6837871642a9e57e2b47360f",
+          "name": "MANDARINA FRESCA 242381425",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e3e042a9e57e2b47a6a5",
+          "name": "MANDARINA FRESCA 242528179",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e4d442a9e57e2b47ac85",
+          "name": "MANDARINA FRESCA 242528179",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 31661.84,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e7fd42a9e57e2b47c7c4",
+          "name": "MANDARINA FRESCA 242780372",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e82542a9e57e2b47c915",
+          "name": "MANDARINA FRESCA 242780347",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e8a342a9e57e2b47ca7f",
+          "name": "MANDARINA FRESCA 243039126",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 55.3,
+          "priorDeals": 15
+        },
+        {
+          "mongoId": "6839e8d042a9e57e2b47cbe2",
+          "name": "MANDARINA FRESCA 243039123",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 32672.08,
+          "score": 55.3,
+          "priorDeals": 15
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 55.3,
+        "coveragePct": 32.5,
+        "rawAverage": 56.9,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-supplierMIKHUNAPERUVIANFOODSSOLUTIONSSACFreshGinger",
+      "companyName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+      "role": "supplier",
+      "product": "Fresh Ginger",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 54.9,
+      "maxScore": 54.9,
+      "minScore": 54.9,
+      "deals": [
+        {
+          "mongoId": "66670da1ba0490753e565ca0",
+          "name": "Fresh Ginger",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 60800,
+          "score": 54.9,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 54.9,
+        "coveragePct": 47.6,
+        "rawAverage": 54,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "exportLicenseStatus",
+          "platformTransactionHistory",
+          "onTimeDeliveryRate"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerEAGLETRADINGAGRICULTUREMARKETINGLTDFreshBlueberries",
+      "companyName": "Eagle Trading Agriculture Marketing Ltd",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 24,
+      "finishedDealCount": 24,
+      "avgScore": 53.8,
+      "maxScore": 53.8,
+      "minScore": 53.8,
+      "deals": [
+        {
+          "mongoId": "6759b914b9fa43de6d86f192",
+          "name": "FRESH BLUEBERRIES E001-27",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 72000,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "67ec128e6b3eee0b06f6547b",
+          "name": "FRESH BLUEBERRIES E001-35",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 90000,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "688120b2953ab2c775d3e679",
+          "name": "Fresh Blueberries PI25E001-38",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839958953ab2c775d51830",
+          "name": "Fresh Blueberries PI25E001-39",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839a11953ab2c775d51f2e",
+          "name": "Fresh Blueberries PI25E001-40",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839aad953ab2c775d523ef",
+          "name": "Fresh Blueberries PI25E001-41",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "68839b61953ab2c775d53dc7",
+          "name": "Fresh Blueberries PI25E001-40",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 96660,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "690cfba23d2ca4b63b282e8b",
+          "name": "FRESH BLUEBERRIES E001-50",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "690cfcb63d2ca4b63b283ea7",
+          "name": "FRESH BLUEBERRIES E001-49",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6915d77ae5985f7040b71697",
+          "name": "FRESH BLUEBERRIES E001-49",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6915ee6862ce4b73260d6977",
+          "name": "FRESH BLUEBERRIES E001-49",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95040,
+          "score": 53.8,
+          "priorDeals": 10
+        },
+        {
+          "mongoId": "6922fd4e11cf91e11fbd2f5a",
+          "name": "FRESH BLUEBERRIES E001-38",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98598.28,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6922fe9111cf91e11fbd3178",
+          "name": "FRESH BLUEBERRIES E001-39",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 139661.75,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6923012511cf91e11fbd4971",
+          "name": "FRESH BLUEBERRIES E001-40",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 99086.76,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6923022c11cf91e11fbd5796",
+          "name": "FRESH BLUEBERRIES E001-41",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48556.8,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6923043011cf91e11fbd6a29",
+          "name": "FRESH BLUEBERRIES E001-42",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 101978.68,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925c62b11cf91e11fc0fc68",
+          "name": "FRESH BLUEBERRIES AWB 996-13806111",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 127720.56,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925cc7b11cf91e11fc1329f",
+          "name": "FRESH BLUEBERRIES AWB 996-13806144",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55464,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925cf9511cf91e11fc16b90",
+          "name": "FRESH BLUEBERRIES AWB 996-13806122",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 122443.2,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925d1ba11cf91e11fc193a6",
+          "name": "FRESH BLUEBERRIES AWB996-13810333",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 55501.6,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "6925d34c11cf91e11fc1c847",
+          "name": "FRESH BLUEBERRIES AWB 996-13810355",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 95817.6,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "692eea6b89cca3bcb7a1b6ef",
+          "name": "FRESH BLUEBERRIES AWB 996-13810366",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98049,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "692eeaed89cca3bcb7a1c661",
+          "name": "FRESH BLUEBERRIES AWB 996-13810366",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98390.04,
+          "score": 53.8,
+          "priorDeals": 12
+        },
+        {
+          "mongoId": "692f092789cca3bcb7a2357d",
+          "name": "FRESH BLUEBERRIES AWB 996-13810366",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 98390.04,
+          "score": 53.8,
+          "priorDeals": 12
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 53.8,
+        "coveragePct": 72.5,
+        "rawAverage": 51,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 35,
+        "customsVolumeMt": 160.405,
+        "customsFobUsd": 1832165.21,
+        "customsRoutes": 1,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerHACIENDASOTOMAYORSLFreshAsparagus",
+      "companyName": "HACIENDA SOTOMAYOR SL",
+      "role": "buyer",
+      "product": "Fresh Asparagus",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 9,
+      "finishedDealCount": 9,
+      "avgScore": 53,
+      "maxScore": 53,
+      "minScore": 53,
+      "deals": [
+        {
+          "mongoId": "c8dcac5597b0e930ae253eff",
+          "name": "FRESH ASPARAGUS HSM-ESP-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48880,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "7394319c4838862cd229de92",
+          "name": "FRESH ASPARAGUS HSM-ESP-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51920,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "2d19374d4f8331ce5f4051d0",
+          "name": "FRESH ASPARAGUS HSM-ESP-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 51120,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "4b8d7a5b4742bbf14f494eaf",
+          "name": "FRESH ASPARAGUS HSM-ESP-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 49380,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "743a2854fbc7fef6e4dea5d3",
+          "name": "FRESH ASPARAGUS HSM-ESP-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48420,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "32897f091183db2f46a577ff",
+          "name": "FRESH ASPARAGUS HSM-ESP-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48380,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "30dc4ee7d54082ca34ad0d59",
+          "name": "FRESH ASPARAGUS HSM-ESP-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 49560,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "e2bf4fbe59c0c5bea91c0b26",
+          "name": "FRESH ASPARAGUS HSM-ESP-008",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 48400,
+          "score": 53,
+          "priorDeals": 8
+        },
+        {
+          "mongoId": "8d28be47d037080eb35ce5a4",
+          "name": "FRESH ASPARAGUS HSM-ESP-009",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 49480,
+          "score": 53,
+          "priorDeals": 8
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 53,
+        "coveragePct": 72.5,
+        "rawAverage": 50,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 3,
+        "customsVolumeMt": 41.894,
+        "customsFobUsd": 223385.76,
+        "customsRoutes": 1,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerAGROSMARTCONTRACTSLDAFreshBlueberries",
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 52.3,
+      "maxScore": 52.3,
+      "minScore": 52.3,
+      "deals": [
+        {
+          "mongoId": "670ed7c83fdd80df80736642",
+          "name": "Fresh Blueberries",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 24085.6,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "670edd033fdd80df80736ef5",
+          "name": "Fresh Blueberries",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 24101,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6890fd76438d2534fe4eb33c",
+          "name": "Blueberries Export Canada",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 10368,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6890fdf0438d2534fe4ebc56",
+          "name": "Blueberries EXW Canada E001-42",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 10368,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "68d40b987da7cd176486aabb",
+          "name": "Blueberries E001-50",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 85800,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "68d40e8c7da7cd176486c359",
+          "name": "Blueberries E001-50",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 85800,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "6972c74509dd14423e2461eb",
+          "name": "FRESH BLUEBERRIES",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 93600,
+          "score": 52.3,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 52.3,
+        "coveragePct": 32.5,
+        "rawAverage": 47.7,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerBIOFARMINGPERUSACFreshMandarin",
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "role": "buyer",
+      "product": "Fresh Mandarin",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 52.3,
+      "maxScore": 52.3,
+      "minScore": 52.3,
+      "deals": [
+        {
+          "mongoId": "69c67d820bdf50f1f471aeac",
+          "name": "MANDARINA FRESCA",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a452185ebda6a9c4b47c",
+          "name": "MANDARINA FRESCA 261987687-HUENEME-MNBU0631925",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21789.04,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a642388a149dee8247ae",
+          "name": "MANDARINA FRESCA PER8830115A -MIAMI-SEGU9383086",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21789.04,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a7d9185ebda6a9c4bd82",
+          "name": "MANDARINA FRESCA 261715398-HUENEME-MNBU4360842",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a832c5e900f5ecdcfae0",
+          "name": "MANDARINA FRESCA-PER8823983A-MIAMI-SZLU5010513",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a855388a149dee8250a6",
+          "name": "MANDARINA FRESCA PER8823982A-MIAMI-SMLU5477740",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21812,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69c6a889388a149dee825208",
+          "name": "MANDARINA FRESCA 261433095-HUENEME-MNBU0401959",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 22500.8,
+          "score": 52.3,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 52.3,
+        "coveragePct": 32.5,
+        "rawAverage": 47.7,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerTRADECULTIVATORSLLCFreshBlueberries",
+      "companyName": "TRADE CULTIVATORS LLC",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 7,
+      "finishedDealCount": 7,
+      "avgScore": 52.3,
+      "maxScore": 52.3,
+      "minScore": 52.3,
+      "deals": [
+        {
+          "mongoId": "69d3e6fb9e76ea086ca4c1a0",
+          "name": "FRESH BLUEBERRIES TRD-CULT-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 90612,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "69d3e6fb9e76ea086ca4c1a1",
+          "name": "FRESH BLUEBERRIES TRD-CULT-002",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 88473.6,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "f8292a55b92e31af8119fe8f",
+          "name": "FRESH BLUEBERRIES TRD-CULT-003",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 88200,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "13d1c2e4dd7ce6c8c45a4b75",
+          "name": "FRESH BLUEBERRIES TRD-CULT-004",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 91080,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "f91059110d2720ef1c100c68",
+          "name": "FRESH BLUEBERRIES TRD-CULT-005",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 89126.4,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "02972b2dda4f7b4f3b133010",
+          "name": "FRESH BLUEBERRIES TRD-CULT-006",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 89011.2,
+          "score": 52.3,
+          "priorDeals": 6
+        },
+        {
+          "mongoId": "d1b96035d6c6c32f2d6bb32f",
+          "name": "FRESH BLUEBERRIES TRD-CULT-007",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 88905.6,
+          "score": 52.3,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 52.3,
+        "coveragePct": 32.5,
+        "rawAverage": 47.7,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerANTERRAFARMSGMBHFreshAsparagus",
+      "companyName": "ANTERRA FARMS GMBH",
+      "role": "buyer",
+      "product": "Fresh Asparagus",
+      "yearsInBusiness": 4,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 2,
+      "finishedDealCount": 2,
+      "avgScore": 50.8,
+      "maxScore": 50.8,
+      "minScore": 50.8,
+      "deals": [
+        {
+          "mongoId": "677c2b8ab9fa43de6d90a08a",
+          "name": "FRESH ASPARAGUS E001-10",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 17626.8,
+          "score": 50.8,
+          "priorDeals": 1
+        },
+        {
+          "mongoId": "677c3e54b9fa43de6d91291b",
+          "name": "FRESH ASPARAGUS E001-10",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 17626.8,
+          "score": 50.8,
+          "priorDeals": 1
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 50.8,
+        "coveragePct": 32.5,
+        "rawAverage": 43.1,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerAGROSMARTCONTRACTSLDAFreshAvocado",
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "role": "buyer",
+      "product": "Fresh Avocado",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 4,
+      "finishedDealCount": 4,
+      "avgScore": 49.3,
+      "maxScore": 49.3,
+      "minScore": 49.3,
+      "deals": [
+        {
+          "mongoId": "67d096556b3eee0b06f29d9a",
+          "name": "FRESH AVOCADO - BK LMM0514033",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52800,
+          "score": 49.3,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67e564fc6b3eee0b06f42666",
+          "name": "FRESH AVOCADO - BK 21619266",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52800,
+          "score": 49.3,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67ef392d6b3eee0b06f72d16",
+          "name": "FRESH AVOCADO - BK 27489042",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 50400,
+          "score": 49.3,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "683de11b42a9e57e2b48e715",
+          "name": "FRESH AVOCADO - BK 6412923740 2",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 52800,
+          "score": 49.3,
+          "priorDeals": 4
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 49.3,
+        "coveragePct": 32.5,
+        "rawAverage": 38.5,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerASMINTERNATIONALFreshBlueberries",
+      "companyName": "A.S.M International",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 5,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 5,
+      "finishedDealCount": 5,
+      "avgScore": 49,
+      "maxScore": 49,
+      "minScore": 49,
+      "deals": [
+        {
+          "mongoId": "6761acdbb9fa43de6d8a387f",
+          "name": "FRESH BLUEBERRIES E001-14",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 20284.8,
+          "score": 49,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "6786a6e9b9fa43de6d94b696",
+          "name": "FRESH BLUEBERRIES E001-29",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21600,
+          "score": 49,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "6797c0246b3eee0b06efb2a9",
+          "name": "FRESH BLUEBERRIES E001-30",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 25920,
+          "score": 49,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67a4c9a56b3eee0b06f0fb73",
+          "name": "FRESH BLUEBERRIES E001-31",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 21600,
+          "score": 49,
+          "priorDeals": 4
+        },
+        {
+          "mongoId": "67f555dd6b3eee0b06f815e6",
+          "name": "FRESH BLUEBERRIES E001-33",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 29652,
+          "score": 49,
+          "priorDeals": 4
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 49,
+        "coveragePct": 72.5,
+        "rawAverage": 44.5,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 8,
+        "customsVolumeMt": 13.32,
+        "customsFobUsd": 129551.4,
+        "customsRoutes": 1,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerAGROSMARTCONTRACTSLDAFreshMandarin",
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "role": "buyer",
+      "product": "Fresh Mandarin",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 46.3,
+      "maxScore": 46.3,
+      "minScore": 46.3,
+      "deals": [
+        {
+          "mongoId": "6853637d46f5613e126c952e",
+          "name": "MANDARINA FRESCA -OMC- 5TEU",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 156702,
+          "score": 46.3,
+          "priorDeals": 4
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 46.3,
+        "coveragePct": 32.5,
+        "rawAverage": 29.2,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerAGROSMARTCONTRACTSLDAFrozenTropicalFruits",
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "role": "buyer",
+      "product": "Frozen Tropical Fruits",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 46.3,
+      "maxScore": 46.3,
+      "minScore": 46.3,
+      "deals": [
+        {
+          "mongoId": "68910508438d2534fe4ed31f",
+          "name": "Frozen Berries from Chile",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 10368,
+          "score": 46.3,
+          "priorDeals": 6
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "product risk table row (provisional, not AC-confirmed)",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 46.3,
+        "coveragePct": 32.5,
+        "rawAverage": 29.2,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerALBORANCOMEXSLFreshGinger",
+      "companyName": "ALBORAN COMEX SL",
+      "role": "buyer",
+      "product": "Fresh Ginger",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "verified",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 46.3,
+      "maxScore": 46.3,
+      "minScore": 46.3,
+      "deals": [
+        {
+          "mongoId": "2764e7d7dc151ee27893c05b",
+          "name": "FRESH GINGER - BPOLS-ESP-001",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 11997,
+          "score": 46.3,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 46.3,
+        "coveragePct": 32.5,
+        "rawAverage": 29.2,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerARDZHIESLLCFreshBlueberries",
+      "companyName": "«Ardzhies» LLC",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 1,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 2,
+      "finishedDealCount": 2,
+      "avgScore": 45.5,
+      "maxScore": 45.5,
+      "minScore": 45.5,
+      "deals": [
+        {
+          "mongoId": "6750a959b9fa43de6d85c9de",
+          "name": "FRESH BLUEBERRIES E001-26",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 38556,
+          "score": 45.5,
+          "priorDeals": 1
+        },
+        {
+          "mongoId": "675377dfb9fa43de6d861eef",
+          "name": "FRESH BLUEBERRIES E001-22",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 70200,
+          "score": 45.5,
+          "priorDeals": 1
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 45.5,
+        "coveragePct": 32.5,
+        "rawAverage": 26.9,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerTOFFBVFreshGinger",
+      "companyName": "T.O.F.F. B.V",
+      "role": "buyer",
+      "product": "Fresh Ginger",
+      "yearsInBusiness": 1,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 44.5,
+      "maxScore": 44.5,
+      "minScore": 44.5,
+      "deals": [
+        {
+          "mongoId": "66670da1ba0490753e565ca0",
+          "name": "Fresh Ginger",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 60800,
+          "score": 44.5,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 44.5,
+        "coveragePct": 32.5,
+        "rawAverage": 23.8,
+        "trustBonus": 3,
+        "customsMatched": false,
+        "customsShipments": 0,
+        "customsVolumeMt": null,
+        "customsFobUsd": null,
+        "customsRoutes": null,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "importLicenseStatus",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerBENASSISAOPAULOIMPORTACAOEEXPORTACAOLTDAFreshBlueberries",
+      "companyName": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+      "role": "buyer",
+      "product": "Fresh Blueberries",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 39.8,
+      "maxScore": 39.8,
+      "minScore": 39.8,
+      "deals": [
+        {
+          "mongoId": "6764614cb9fa43de6d8c1bc2",
+          "name": "FRESH BLUEBERRIES E001-11",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 24101,
+          "score": 39.8,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 39.8,
+        "coveragePct": 72.5,
+        "rawAverage": 31.7,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 9,
+        "customsVolumeMt": 16.358,
+        "customsFobUsd": 119401.76,
+        "customsRoutes": 1,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    },
+    {
+      "id": "cp-buyerGOURMETBEVERAGEONEGROUPTHAILANDCOLTDFreshAvocado",
+      "companyName": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+      "role": "buyer",
+      "product": "Fresh Avocado",
+      "yearsInBusiness": 2,
+      "yearsInBusinessSource": "csv",
+      "dealCount": 1,
+      "finishedDealCount": 1,
+      "avgScore": 38.3,
+      "maxScore": 38.3,
+      "minScore": 38.3,
+      "deals": [
+        {
+          "mongoId": "67f41e496b3eee0b06f7769c",
+          "name": "FRESH AVOCADO - AWB 160-91712386",
+          "status": "finished",
+          "milestone": 7,
+          "dealValue": 4320,
+          "score": 38.3,
+          "priorDeals": 0
+        }
+      ],
+      "missingForFullCram": [
+        "customs export narrative",
+        "cargo insurance coverage (defaults to None — triggers veto)",
+        "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      ],
+      "sandbox": {
+        "score": 38.3,
+        "coveragePct": 72.5,
+        "rawAverage": 29.7,
+        "trustBonus": 3,
+        "customsMatched": true,
+        "customsShipments": 2,
+        "customsVolumeMt": 1.8,
+        "customsFobUsd": 10402.6,
+        "customsRoutes": 1,
+        "filledFieldIds": [
+          "yearsInBusiness",
+          "onlineVerifiability",
+          "importLicenseStatus",
+          "monthlyPurchaseVolume",
+          "yearlySales",
+          "annualImportVolume",
+          "routeDiversity",
+          "platformTransactionHistory"
+        ]
+      }
+    }
+  ]
+}

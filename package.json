@@ -9,7 +9,10 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "validate": "tsx scripts/validate-cram-coverage.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "aggregate-customs": "python3 scripts/aggregate-customs-companies.py",
+    "recalc-counterparties": "tsx scripts/recalculate-counterparty-scores.ts",
+    "sandbox-counterparties": "npm run aggregate-customs && npm run recalc-counterparties"
   },
   "dependencies": {
     "@vercel/node": "^5.8.22",
