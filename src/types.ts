@@ -2,6 +2,8 @@ import type { AnalyzeDocumentsResult } from "./lib/document-analysis/types";
 import type { CofaceRiskGrade } from "./lib/coface-analysis/types";
 import type { MarketIntelPayload } from "./lib/market-intel/types";
 import type { TransactionStructureInput, TransactionStructureReport } from "./lib/transaction-structure/types";
+import type { CounterpartyCustomsEnrichment } from "./types/platform";
+import type { PriceVsMarketDetail } from "./lib/price-benchmarks";
 
 export interface CounterpartyInput {
   name: string;
@@ -13,6 +15,15 @@ export interface CounterpartyInput {
   avgPaymentDelayDays?: number | null;
   qualityRejectionRatePct?: number | null;
   creditRating?: string;
+  /**
+   * Company×product platform deal count for Dimension A platform-history
+   * weight. When set (platform deals), preferred over platformDealsCompleted
+   * which historically stored prior pair deals.
+   */
+  profileDealCount?: number;
+  profileFinishedDealCount?: number;
+  /** Customs volume/routes/sales enrichment for Dimension A (build-time match). */
+  customsEnrichment?: CounterpartyCustomsEnrichment | null;
 }
 
 export interface SourceDocument {
@@ -184,6 +195,10 @@ export interface RiskAssessment {
   structure: SubScore;
   buyer: PartyScore;
   supplier: PartyScore;
+  /** Spec §4.A relationship group score (0–100) inside Dimension A composite. */
+  relationshipAdj: number;
+  /** Dimension B price-vs-usual detail for the Product Risk section. */
+  productPrice: PriceVsMarketDetail;
   overall: number;
   tier: RiskTier;
   /** Spec §6 single-veto register — true if any hard-stop condition fired, overriding the composite-based tier. */

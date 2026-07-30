@@ -25,43 +25,41 @@ export function formatUSDDetailed(amount: number): string {
 }
 
 function counterpartyWhy(deal: Deal, externalBonus: number): string {
+  const parts: string[] = [];
   if (deal.cofaceCoverageAmountUSD && deal.cofaceCoverageAmountUSD > 0) {
     const pct =
       deal.cofaceCoveragePct != null ? `${deal.cofaceCoveragePct}%` : "partial";
-    return `Coface-backed buyer, ${pct} cover, ${formatUSD(deal.cofaceCoverageAmountUSD)} protected`;
-  }
-  if (externalBonus > 0) {
-    return "External credit support on file";
-  }
-  if (
+    parts.push(
+      `Coface Gate 1: ${pct} cover, ${formatUSD(deal.cofaceCoverageAmountUSD)} protected (coverage is not a Dimension A point input)`,
+    );
+  } else if (externalBonus > 0) {
+    parts.push("External credit support on file (Gate 1 narrative)");
+  } else if (
     deal.buyer.platformDealsCompleted === 0 &&
     deal.supplier.platformDealsCompleted === 0
   ) {
-    return "Both parties new to platform, no track record";
+    parts.push("Both parties new to platform, no track record");
+  } else if (deal.buyer.licenseValid === null) {
+    parts.push("First deal on platform, license not confirmed");
+  } else {
+    parts.push("Established counterparty profile on platform");
   }
-  if (deal.buyer.licenseValid === null) {
-    return "First deal on platform, license not confirmed";
-  }
-  return "Established counterparty profile on platform";
+  return parts.join(" · ");
 }
 
 function productWhy(deal: Deal): string {
   const tableMatch = deal.productRiskProfile ?? lookupProductRisk(deal.product);
   const price = priceVsMarketDetail(deal);
+  const perish = (tableMatch?.perishabilityClass ?? deal.perishabilityClass).toLowerCase();
+  const grade = deal.qualityGrade.split("/")[0].trim();
+  const shelfDays = tableMatch?.shelfLifeDays ?? deal.shelfLifeDays;
+  const shelf = shelfDays !== null ? `, ${shelfDays}-day shelf life` : "";
+
   const priceBit =
     price.fallback === "none" || price.usualUsdPerKg == null
       ? "price-vs-usual: no month×route benchmark"
-      : `price-vs-usual ${price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0 ? "+" : ""}${price.deflatedPctOverUsual}% (${price.dealUnitPriceUSD?.toFixed(2)}/kg vs usual ${price.usualUsdPerKg.toFixed(2)}/kg, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts)`;
+      : `price-vs-usual ${price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0 ? "+" : ""}${price.deflatedPctOverUsual}% (${price.dealUnitPriceUSD?.toFixed(2)} vs usual ${price.usualUsdPerKg.toFixed(2)} ${price.priceUnit}, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts)`;
 
-  if (tableMatch) {
-    const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
-    return `Table score ${tableMatch.score} for ${tableMatch.product}${provisional} — ${tableMatch.rationale.replace(/\.\s*$/, "")}. ${priceBit}.`;
-  }
-
-  const perish = deal.perishabilityClass.toLowerCase();
-  const grade = deal.qualityGrade.split("/")[0].trim();
-  const shelf =
-    deal.shelfLifeDays !== null ? `, ${deal.shelfLifeDays}-day shelf life` : "";
   return `${perish}${shelf}, ${grade}. ${priceBit}.`;
 }
 
@@ -165,6 +163,8 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
     },
     buyer: { label: "Buyer", score: scores.buyer, why: "" },
     supplier: { label: "Supplier", score: scores.supplier, why: "" },
+    relationshipAdj: scores.relationshipAdj,
+    productPrice: priceVsMarketDetail(deal),
     overall: scores.overall,
     tier: scores.tier,
     vetoed: scores.vetoed,

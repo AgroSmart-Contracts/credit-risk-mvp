@@ -1,10 +1,9 @@
 /**
- * Counterparty risk sandbox scorer — weighted average + coverage shrink toward 50.
- * Spec: Desktop counterparty-risk-scoring-method-outline-2026-07-30.md
+ * Counterparty risk sandbox scorers — weighted average + coverage shrink toward 50.
+ * Spec: docs/counterparty-risk-scoring-method-outline-2026-07-30.md
  *
- * Separate from live CRAM Dimension A (`computeBuyerScore` / `computeSupplierScore`
- * in scoring.ts). Blank/null fields are excluded from both numerator and
- * filled-weight; unfilled weight still counts toward coverage (possible weight).
+ * Live Dimension A (`computeBuyerScore` / `computeSupplierScore` /
+ * `computeCounterpartyScore` in dimension-a.ts) calls these functions.
  */
 
 export const SANDBOX_TRUST_BONUS_DEFAULT = 3;

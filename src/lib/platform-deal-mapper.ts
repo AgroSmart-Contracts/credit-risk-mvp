@@ -62,17 +62,24 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       name: record.buyerName,
       role: "buyer",
       yearsInBusiness: record.buyerYib,
-      /** DEFAULT (decision 2026-07-24, unchanged): assumed true for all platform users — no license/KYC source in any CSV. See docs/cram-defaults-and-formula-2026-07.md. */
+      /** Assumed valid for platform users — no license/KYC source in CSV. */
       licenseValid: true,
       platformDealsCompleted: record.priorDealsBetweenParties,
+      profileDealCount: record.buyerProfileDealCount ?? 0,
+      profileFinishedDealCount: record.buyerProfileFinishedCount ?? 0,
       platformCompletionRate:
-        milestone >= 7
-          ? 100
-          : record.priorDealsBetweenParties > 0
-            ? 85
+        (record.buyerProfileDealCount ?? 0) > 0
+          ? Math.round(
+              ((record.buyerProfileFinishedCount ?? 0) /
+                (record.buyerProfileDealCount ?? 1)) *
+                100,
+            )
+          : milestone >= 7
+            ? 100
             : null,
-      /** DEFAULT (decision 2026-07-24, unchanged): 0 days = perfect score. No payment-timing source in any CSV. */
-      avgPaymentDelayDays: 0,
+      /** No payment-timing source — leave blank (Dimension A excludes blanks). */
+      avgPaymentDelayDays: null,
+      customsEnrichment: record.buyerCustomsEnrichment ?? null,
     },
     supplier: {
       name: record.supplierName,
@@ -80,14 +87,21 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       yearsInBusiness: record.supplierYib,
       licenseValid: supplierLicenseValid,
       platformDealsCompleted: record.priorDealsBetweenParties,
+      profileDealCount: record.supplierProfileDealCount ?? 0,
+      profileFinishedDealCount: record.supplierProfileFinishedCount ?? 0,
       platformCompletionRate:
-        milestone >= 7
-          ? 100
-          : record.priorDealsBetweenParties > 0
-            ? 85
+        (record.supplierProfileDealCount ?? 0) > 0
+          ? Math.round(
+              ((record.supplierProfileFinishedCount ?? 0) /
+                (record.supplierProfileDealCount ?? 1)) *
+                100,
+            )
+          : milestone >= 7
+            ? 100
             : null,
-      /** DEFAULT (decision 2026-07-24, unchanged): 0% = perfect score. No quality-rejection source in any CSV. */
-      qualityRejectionRatePct: 0,
+      /** No quality-rejection source — leave blank for Dimension A. */
+      qualityRejectionRatePct: null,
+      customsEnrichment: record.supplierCustomsEnrichment ?? null,
     },
     paymentTerms: "Documentary / against BL (platform default)",
     advancePaymentPct: 0,
