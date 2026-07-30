@@ -163,7 +163,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 1,
+    "supplierProfileFinishedCount": 1,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-66fb1eb2",
@@ -212,7 +218,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 1,
+    "supplierProfileFinishedCount": 1,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-670ed7c8",
@@ -575,7 +587,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-670edd03",
@@ -938,7 +966,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6750a959",
@@ -1149,7 +1193,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-04T19:11:21.445Z"
+    "createdAt": "2024-12-04T19:11:21.445Z",
+    "buyerProfileDealCount": 2,
+    "buyerProfileFinishedCount": 2,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-675377df",
@@ -1360,7 +1420,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-06T22:17:03.103Z"
+    "createdAt": "2024-12-06T22:17:03.103Z",
+    "buyerProfileDealCount": 2,
+    "buyerProfileFinishedCount": 2,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6759b914",
@@ -1816,7 +1892,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-11T16:08:52.011Z"
+    "createdAt": "2024-12-11T16:08:52.011Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-675a16e4",
@@ -2174,7 +2276,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-11T22:49:08.282Z"
+    "createdAt": "2024-12-11T22:49:08.282Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 315345.51,
+      "fobUsd": 435176.81,
+      "volumeMt": 86.4,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 5
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-675b6053",
@@ -2527,7 +2655,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-12T22:14:43.520Z"
+    "createdAt": "2024-12-12T22:14:43.520Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-675b708f",
@@ -2880,7 +3034,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-12T23:23:59.174Z"
+    "createdAt": "2024-12-12T23:23:59.174Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-675b7892",
@@ -3233,7 +3413,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-12T23:58:10.517Z"
+    "createdAt": "2024-12-12T23:58:10.517Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-675b799b",
@@ -3586,7 +3792,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-13T00:02:35.993Z"
+    "createdAt": "2024-12-13T00:02:35.993Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6761acdb",
@@ -3938,7 +4170,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-17T16:54:51.326Z"
+    "createdAt": "2024-12-17T16:54:51.326Z",
+    "buyerProfileDealCount": 5,
+    "buyerProfileFinishedCount": 5,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 16093.34,
+      "fobUsd": 129551.4,
+      "volumeMt": 13.32,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 8
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-676449d1",
@@ -4291,7 +4549,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-19T16:29:05.939Z"
+    "createdAt": "2024-12-19T16:29:05.939Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6764614c",
@@ -4736,7 +5020,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-19T18:09:16.362Z"
+    "createdAt": "2024-12-19T18:09:16.362Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 18833.09,
+      "fobUsd": 119401.76,
+      "volumeMt": 16.358,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 9
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-677c2b8a",
@@ -4998,7 +5308,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-06T19:14:18.308Z"
+    "createdAt": "2025-01-06T19:14:18.308Z",
+    "buyerProfileDealCount": 2,
+    "buyerProfileFinishedCount": 2,
+    "supplierProfileDealCount": 2,
+    "supplierProfileFinishedCount": 2,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-677c3e54",
@@ -5260,7 +5586,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-06T20:34:28.700Z"
+    "createdAt": "2025-01-06T20:34:28.700Z",
+    "buyerProfileDealCount": 2,
+    "buyerProfileFinishedCount": 2,
+    "supplierProfileDealCount": 2,
+    "supplierProfileFinishedCount": 2,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-677ec54e",
@@ -5712,7 +6054,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-08T18:34:54.134Z"
+    "createdAt": "2025-01-08T18:34:54.134Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 1,
+    "supplierProfileFinishedCount": 1,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6786a6e9",
@@ -6062,7 +6420,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-14T18:03:21.213Z"
+    "createdAt": "2025-01-14T18:03:21.213Z",
+    "buyerProfileDealCount": 5,
+    "buyerProfileFinishedCount": 5,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 16093.34,
+      "fobUsd": 129551.4,
+      "volumeMt": 13.32,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 8
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6797c024",
@@ -6412,7 +6796,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-27T17:19:32.692Z"
+    "createdAt": "2025-01-27T17:19:32.692Z",
+    "buyerProfileDealCount": 5,
+    "buyerProfileFinishedCount": 5,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 16093.34,
+      "fobUsd": 129551.4,
+      "volumeMt": 13.32,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 8
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-67a4c9a5",
@@ -6763,7 +7173,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-06T14:39:33.895Z"
+    "createdAt": "2025-02-06T14:39:33.895Z",
+    "buyerProfileDealCount": 5,
+    "buyerProfileFinishedCount": 5,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 16093.34,
+      "fobUsd": 129551.4,
+      "volumeMt": 13.32,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 8
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-67d09655",
@@ -7015,7 +7451,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-11T20:00:21.994Z"
+    "createdAt": "2025-03-11T20:00:21.994Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-67e5642f",
@@ -7377,7 +7819,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-27T14:43:59.093Z"
+    "createdAt": "2025-03-27T14:43:59.093Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-67e564fc",
@@ -7630,7 +8078,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-27T14:47:24.436Z"
+    "createdAt": "2025-03-27T14:47:24.436Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-67ec128e",
@@ -8085,7 +8539,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-01T16:21:34.543Z"
+    "createdAt": "2025-04-01T16:21:34.543Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-67ef392d",
@@ -8338,7 +8818,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-04T01:43:09.527Z"
+    "createdAt": "2025-04-04T01:43:09.527Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-67f41e49",
@@ -8588,7 +9074,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-07T18:49:45.830Z"
+    "createdAt": "2025-04-07T18:49:45.830Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 866.88,
+      "fobUsd": 10402.6,
+      "volumeMt": 1.8,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 2
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-67f555dd",
@@ -8940,7 +9442,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-08T16:59:09.789Z"
+    "createdAt": "2025-04-08T16:59:09.789Z",
+    "buyerProfileDealCount": 5,
+    "buyerProfileFinishedCount": 5,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 16093.34,
+      "fobUsd": 129551.4,
+      "volumeMt": 13.32,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 8
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-683780b5",
@@ -9108,7 +9636,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:31:33.349Z"
+    "createdAt": "2025-05-28T21:31:33.349Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-683781a0",
@@ -9276,7 +9810,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:35:28.626Z"
+    "createdAt": "2025-05-28T21:35:28.626Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-683781f5",
@@ -9444,7 +9984,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:36:53.697Z"
+    "createdAt": "2025-05-28T21:36:53.697Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-68378236",
@@ -9612,7 +10158,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:37:58.130Z"
+    "createdAt": "2025-05-28T21:37:58.130Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6837826d",
@@ -9780,7 +10332,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:38:53.795Z"
+    "createdAt": "2025-05-28T21:38:53.795Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-68378613",
@@ -9948,7 +10506,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:54:27.038Z"
+    "createdAt": "2025-05-28T21:54:27.038Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6837865e",
@@ -10116,7 +10680,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:55:42.228Z"
+    "createdAt": "2025-05-28T21:55:42.228Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-683786bc",
@@ -10284,7 +10854,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:57:16.666Z"
+    "createdAt": "2025-05-28T21:57:16.666Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-683786f0",
@@ -10452,7 +11028,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:58:08.724Z"
+    "createdAt": "2025-05-28T21:58:08.724Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-68378716",
@@ -10620,7 +11202,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:58:46.310Z"
+    "createdAt": "2025-05-28T21:58:46.310Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6839e3e0",
@@ -10788,7 +11376,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T16:59:12.778Z"
+    "createdAt": "2025-05-30T16:59:12.778Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6839e4d4",
@@ -10956,7 +11550,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:03:16.523Z"
+    "createdAt": "2025-05-30T17:03:16.523Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6839e7fd",
@@ -11124,7 +11724,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:16:45.506Z"
+    "createdAt": "2025-05-30T17:16:45.506Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6839e825",
@@ -11292,7 +11898,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:17:25.028Z"
+    "createdAt": "2025-05-30T17:17:25.028Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6839e8a3",
@@ -11460,7 +12072,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:19:31.353Z"
+    "createdAt": "2025-05-30T17:19:31.353Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6839e8d0",
@@ -11628,7 +12246,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:20:16.579Z"
+    "createdAt": "2025-05-30T17:20:16.579Z",
+    "buyerProfileDealCount": 16,
+    "buyerProfileFinishedCount": 16,
+    "supplierProfileDealCount": 16,
+    "supplierProfileFinishedCount": 16,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-683de11b",
@@ -11881,7 +12505,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-02T17:36:27.306Z"
+    "createdAt": "2025-06-02T17:36:27.306Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6853637d",
@@ -12049,7 +12679,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-19T01:10:21.988Z"
+    "createdAt": "2025-06-19T01:10:21.988Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-688120b2",
@@ -12505,7 +13141,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-23T17:49:38.109Z"
+    "createdAt": "2025-07-23T17:49:38.109Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68839958",
@@ -12961,7 +13623,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:48:56.800Z"
+    "createdAt": "2025-07-25T14:48:56.800Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68839a11",
@@ -13417,7 +14105,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:52:01.069Z"
+    "createdAt": "2025-07-25T14:52:01.069Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68839aad",
@@ -13873,7 +14587,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:54:37.797Z"
+    "createdAt": "2025-07-25T14:54:37.797Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68839b61",
@@ -14329,7 +15069,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:57:37.036Z"
+    "createdAt": "2025-07-25T14:57:37.036Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6890fd76",
@@ -14678,7 +15444,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T18:35:34.946Z"
+    "createdAt": "2025-08-04T18:35:34.946Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6890fdf0",
@@ -15027,7 +15809,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T18:37:36.353Z"
+    "createdAt": "2025-08-04T18:37:36.353Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68910508",
@@ -15239,7 +16037,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T19:07:52.273Z"
+    "createdAt": "2025-08-04T19:07:52.273Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 1,
+    "supplierProfileFinishedCount": 1,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68d40b98",
@@ -15589,7 +16403,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-24T15:17:44.813Z"
+    "createdAt": "2025-09-24T15:17:44.813Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-68d40e8c",
@@ -15939,7 +16769,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-24T15:30:20.287Z"
+    "createdAt": "2025-09-24T15:30:20.287Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-690cf87e",
@@ -16290,7 +17136,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-06T19:35:26.471Z"
+    "createdAt": "2025-11-06T19:35:26.471Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-690cfba2",
@@ -16637,7 +17509,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-06T19:48:50.727Z"
+    "createdAt": "2025-11-06T19:48:50.727Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-690cfcb6",
@@ -16984,7 +17882,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-06T19:53:26.521Z"
+    "createdAt": "2025-11-06T19:53:26.521Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6915d77a",
@@ -17331,7 +18255,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-13T13:04:58.601Z"
+    "createdAt": "2025-11-13T13:04:58.601Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6915ee68",
@@ -17678,7 +18628,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-13T14:42:48.825Z"
+    "createdAt": "2025-11-13T14:42:48.825Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6917a58b",
@@ -18030,7 +19006,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-14T21:56:27.780Z"
+    "createdAt": "2025-11-14T21:56:27.780Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 33,
+    "supplierProfileFinishedCount": 33,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 242531.24,
+      "fobUsd": 540844.67,
+      "volumeMt": 76.817,
+      "routeCount": 2,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 20
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 75255.98,
+      "fobUsd": 790940.36,
+      "volumeMt": 101.692,
+      "routeCount": 4,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 23
+    }
   },
   {
     "id": "plat-6922fd4e",
@@ -18360,7 +19362,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:25:50.821Z"
+    "createdAt": "2025-11-23T12:25:50.821Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6922fe91",
@@ -18690,7 +19718,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:31:13.167Z"
+    "createdAt": "2025-11-23T12:31:13.167Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-69230125",
@@ -19020,7 +20074,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:42:13.417Z"
+    "createdAt": "2025-11-23T12:42:13.417Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6923022c",
@@ -19350,7 +20430,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:46:36.395Z"
+    "createdAt": "2025-11-23T12:46:36.395Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-69230430",
@@ -19680,7 +20786,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:55:12.590Z"
+    "createdAt": "2025-11-23T12:55:12.590Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6925c62b",
@@ -20010,7 +21142,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:07:23.818Z"
+    "createdAt": "2025-11-25T15:07:23.818Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6925cc7b",
@@ -20340,7 +21498,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:34:19.854Z"
+    "createdAt": "2025-11-25T15:34:19.854Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6925cf95",
@@ -20670,7 +21854,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:47:33.161Z"
+    "createdAt": "2025-11-25T15:47:33.161Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6925d1ba",
@@ -21000,7 +22210,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:56:42.373Z"
+    "createdAt": "2025-11-25T15:56:42.373Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6925d34c",
@@ -21330,7 +22566,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T16:03:24.595Z"
+    "createdAt": "2025-11-25T16:03:24.595Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-692eea6b",
@@ -21660,7 +22922,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-02T13:32:27.112Z"
+    "createdAt": "2025-12-02T13:32:27.112Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-692eeaed",
@@ -21990,7 +23278,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-02T13:34:37.517Z"
+    "createdAt": "2025-12-02T13:34:37.517Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-692f0927",
@@ -22320,7 +23634,33 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-02T15:43:35.425Z"
+    "createdAt": "2025-12-02T15:43:35.425Z",
+    "buyerProfileDealCount": 24,
+    "buyerProfileFinishedCount": 24,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 174325.9,
+      "fobUsd": 1832165.21,
+      "volumeMt": 160.405,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 35
+    },
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-6972c745",
@@ -22654,7 +23994,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-23T00:56:37.083Z"
+    "createdAt": "2026-01-23T00:56:37.083Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 14,
+    "supplierProfileFinishedCount": 14,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 648310.49,
+      "fobUsd": 1743955.21,
+      "volumeMt": 150.847,
+      "routeCount": 2,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 35
+    }
   },
   {
     "id": "plat-69c67d82",
@@ -22822,7 +24178,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T12:52:18.327Z"
+    "createdAt": "2026-03-27T12:52:18.327Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69c6a452",
@@ -22990,7 +24352,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:37:54.951Z"
+    "createdAt": "2026-03-27T15:37:54.951Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69c6a642",
@@ -23158,7 +24526,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:46:10.207Z"
+    "createdAt": "2026-03-27T15:46:10.207Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69c6a7d9",
@@ -23326,7 +24700,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:52:57.914Z"
+    "createdAt": "2026-03-27T15:52:57.914Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69c6a832",
@@ -23494,7 +24874,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:54:26.108Z"
+    "createdAt": "2026-03-27T15:54:26.108Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69c6a855",
@@ -23662,7 +25048,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:55:01.043Z"
+    "createdAt": "2026-03-27T15:55:01.043Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69c6a889",
@@ -23830,7 +25222,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:55:53.974Z"
+    "createdAt": "2026-03-27T15:55:53.974Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-69d3e6fb",
@@ -24084,7 +25482,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-08T10:00:00.000Z"
+    "createdAt": "2025-09-08T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-69d3e6fb",
@@ -24338,7 +25752,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-22T10:00:00.000Z"
+    "createdAt": "2025-09-22T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-f8292a55",
@@ -24592,7 +26022,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-06T10:00:00.000Z"
+    "createdAt": "2025-10-06T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-13d1c2e4",
@@ -24846,7 +26292,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-20T10:00:00.000Z"
+    "createdAt": "2025-10-20T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-f9105911",
@@ -25101,7 +26563,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-13T10:00:00.000Z"
+    "createdAt": "2026-01-13T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-02972b2d",
@@ -25355,7 +26833,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-10T10:00:00.000Z"
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-d1b96035",
@@ -25609,7 +27103,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-20T10:00:00.000Z"
+    "createdAt": "2025-12-20T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 1631771.42,
+      "fobUsd": 18814324.45,
+      "volumeMt": 2472.986,
+      "routeCount": 5,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 280
+    }
   },
   {
     "id": "plat-23e57a6f",
@@ -25863,7 +27373,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-10T10:00:00.000Z"
+    "createdAt": "2025-09-10T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-45135bc7",
@@ -26117,7 +27643,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-24T10:00:00.000Z"
+    "createdAt": "2025-09-24T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-bea2c0f9",
@@ -26371,7 +27913,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-08T10:00:00.000Z"
+    "createdAt": "2025-10-08T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-0bd76140",
@@ -26625,7 +28183,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-22T10:00:00.000Z"
+    "createdAt": "2025-10-22T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-3dc9aaae",
@@ -26880,7 +28454,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-21T10:00:00.000Z"
+    "createdAt": "2026-01-21T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-72959fd4",
@@ -27134,7 +28724,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-10T10:00:00.000Z"
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-c9626056",
@@ -27388,7 +28994,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-20T10:00:00.000Z"
+    "createdAt": "2025-12-20T10:00:00.000Z",
+    "buyerProfileDealCount": 7,
+    "buyerProfileFinishedCount": 7,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 876325.7,
+      "fobUsd": 2506291.5,
+      "volumeMt": 373.947,
+      "routeCount": 7,
+      "roles": [
+        "exporter"
+      ],
+      "shipments": 71
+    }
   },
   {
     "id": "plat-64f4e1cb",
@@ -27436,7 +29058,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-10T10:00:00.000Z"
+    "createdAt": "2025-01-10T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-a006862c",
@@ -27484,7 +29112,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-20T10:00:00.000Z"
+    "createdAt": "2025-01-20T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-5713177a",
@@ -27532,7 +29166,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-09T10:00:00.000Z"
+    "createdAt": "2025-02-09T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-ccc54d97",
@@ -27580,7 +29220,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-18T10:00:00.000Z"
+    "createdAt": "2025-02-18T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-1d8db98a",
@@ -27628,7 +29274,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-10T10:00:00.000Z"
+    "createdAt": "2025-03-10T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-58e792e2",
@@ -27676,7 +29328,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-15T10:00:00.000Z"
+    "createdAt": "2025-04-15T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-652fbae3",
@@ -27724,7 +29382,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-24T10:00:00.000Z"
+    "createdAt": "2025-10-24T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-06c34a88",
@@ -27989,7 +29653,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-05T10:00:00.000Z"
+    "createdAt": "2025-09-05T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-23e523e4",
@@ -28254,7 +29924,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-18T10:00:00.000Z"
+    "createdAt": "2025-09-18T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-aa8a2204",
@@ -28508,7 +30184,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-15T10:00:00.000Z"
+    "createdAt": "2025-10-15T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-4957b340",
@@ -28774,7 +30456,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-17T10:00:00.000Z"
+    "createdAt": "2026-01-17T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-19f4e57b",
@@ -29031,7 +30719,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-06T10:00:00.000Z"
+    "createdAt": "2025-09-06T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-bf0abb2c",
@@ -29288,7 +30982,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-14T10:00:00.000Z"
+    "createdAt": "2025-09-14T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-19c67a6f",
@@ -29545,7 +31245,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-20T10:00:00.000Z"
+    "createdAt": "2025-09-20T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-9155f4c1",
@@ -29802,7 +31508,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-27T10:00:00.000Z"
+    "createdAt": "2025-09-27T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-bfe19ddd",
@@ -30059,7 +31771,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-03T10:00:00.000Z"
+    "createdAt": "2025-11-03T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-bed0586c",
@@ -30316,7 +32034,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-20T10:00:00.000Z"
+    "createdAt": "2025-10-20T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-f0e79517",
@@ -30574,7 +32298,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-09T10:00:00.000Z"
+    "createdAt": "2026-01-09T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-ef921c5a",
@@ -30832,7 +32562,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-25T10:00:00.000Z"
+    "createdAt": "2026-01-25T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-18400fc8",
@@ -31089,7 +32825,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-06T10:00:00.000Z"
+    "createdAt": "2025-12-06T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-d4a8ed1f",
@@ -31346,7 +33088,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-12T10:00:00.000Z"
+    "createdAt": "2025-12-12T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-84eb9657",
@@ -31603,7 +33351,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-18T10:00:00.000Z"
+    "createdAt": "2025-12-18T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6ebcc56a",
@@ -31860,7 +33614,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-24T10:00:00.000Z"
+    "createdAt": "2025-12-24T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 12,
+    "supplierProfileFinishedCount": 12,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-48498606",
@@ -32112,7 +33872,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-10T10:00:00.000Z"
+    "createdAt": "2025-03-10T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-8ba96f69",
@@ -32365,7 +34131,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-05T10:00:00.000Z"
+    "createdAt": "2025-04-05T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-d309a243",
@@ -32618,7 +34390,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-06T10:00:00.000Z"
+    "createdAt": "2025-04-06T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-101ad782",
@@ -32870,7 +34648,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-07T10:00:00.000Z"
+    "createdAt": "2025-07-07T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-de10bc4c",
@@ -33122,7 +34906,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-21T10:00:00.000Z"
+    "createdAt": "2025-07-21T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-e3bd45be",
@@ -33375,7 +35165,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T10:00:00.000Z"
+    "createdAt": "2025-08-04T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-e5b159d4",
@@ -33627,7 +35423,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-18T10:00:00.000Z"
+    "createdAt": "2025-08-18T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-d19f70bf",
@@ -33880,7 +35682,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-06T10:00:00.000Z"
+    "createdAt": "2025-10-06T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-8413cc04",
@@ -34133,7 +35941,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-20T10:00:00.000Z"
+    "createdAt": "2025-10-20T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-fbd21bec",
@@ -34385,7 +36199,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-15T10:00:00.000Z"
+    "createdAt": "2025-06-15T10:00:00.000Z",
+    "buyerProfileDealCount": 10,
+    "buyerProfileFinishedCount": 10,
+    "supplierProfileDealCount": 10,
+    "supplierProfileFinishedCount": 10,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-c8dcac55",
@@ -34555,7 +36375,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-10T10:00:00.000Z"
+    "createdAt": "2025-03-10T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-7394319c",
@@ -34725,7 +36561,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-10T10:00:00.000Z"
+    "createdAt": "2025-04-10T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-2d19374d",
@@ -34895,7 +36747,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-07T10:00:00.000Z"
+    "createdAt": "2025-04-07T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-4b8d7a5b",
@@ -35065,7 +36933,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-14T10:00:00.000Z"
+    "createdAt": "2025-07-14T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-743a2854",
@@ -35235,7 +37119,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-28T10:00:00.000Z"
+    "createdAt": "2025-07-28T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-32897f09",
@@ -35405,7 +37305,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-11T10:00:00.000Z"
+    "createdAt": "2025-08-11T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-30dc4ee7",
@@ -35575,7 +37491,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-25T10:00:00.000Z"
+    "createdAt": "2025-08-25T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-e2bf4fbe",
@@ -35745,7 +37677,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-13T10:00:00.000Z"
+    "createdAt": "2025-10-13T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-8d28be47",
@@ -35915,7 +37863,23 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-15T10:00:00.000Z"
+    "createdAt": "2025-06-15T10:00:00.000Z",
+    "buyerProfileDealCount": 9,
+    "buyerProfileFinishedCount": 9,
+    "supplierProfileDealCount": 9,
+    "supplierProfileFinishedCount": 9,
+    "buyerCustomsEnrichment": {
+      "matched": true,
+      "monthlyFobUsd": 28565.95,
+      "fobUsd": 223385.76,
+      "volumeMt": 41.894,
+      "routeCount": 1,
+      "roles": [
+        "importer"
+      ],
+      "shipments": 3
+    },
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-2ed7c1b1",
@@ -36081,7 +38045,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-09T10:00:00.000Z"
+    "createdAt": "2025-06-09T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-f5773097",
@@ -36247,7 +38217,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-10T10:00:00.000Z"
+    "createdAt": "2025-07-10T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-248e0cca",
@@ -36413,7 +38389,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-12T10:00:00.000Z"
+    "createdAt": "2025-08-12T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-ad35696f",
@@ -36579,7 +38561,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-06T10:00:00.000Z"
+    "createdAt": "2025-06-06T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-dbe9992e",
@@ -36745,7 +38733,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-12T10:00:00.000Z"
+    "createdAt": "2025-06-12T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-0b42b541",
@@ -36911,7 +38905,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-18T10:00:00.000Z"
+    "createdAt": "2025-06-18T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-484be526",
@@ -37077,7 +39077,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-24T10:00:00.000Z"
+    "createdAt": "2025-06-24T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-f476b4d2",
@@ -37243,7 +39249,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-07T10:00:00.000Z"
+    "createdAt": "2025-07-07T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-4de32d0a",
@@ -37409,7 +39421,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-14T10:00:00.000Z"
+    "createdAt": "2025-07-14T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-17ab808c",
@@ -37575,7 +39593,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-21T10:00:00.000Z"
+    "createdAt": "2025-07-21T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-846e9a2e",
@@ -37741,7 +39765,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-10T10:00:00.000Z"
+    "createdAt": "2025-08-10T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-84fc96e6",
@@ -37907,7 +39937,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-20T10:00:00.000Z"
+    "createdAt": "2025-08-20T10:00:00.000Z",
+    "buyerProfileDealCount": 12,
+    "buyerProfileFinishedCount": 12,
+    "supplierProfileDealCount": 20,
+    "supplierProfileFinishedCount": 20,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-8805e0ea",
@@ -38164,7 +40200,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-12T10:00:00.000Z"
+    "createdAt": "2025-09-12T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-4c357b6d",
@@ -38421,7 +40463,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-10T10:00:00.000Z"
+    "createdAt": "2025-10-10T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-3d9c4632",
@@ -38679,7 +40727,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-06T10:00:00.000Z"
+    "createdAt": "2026-01-06T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-3f0bfcf3",
@@ -38937,7 +40991,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-28T10:00:00.000Z"
+    "createdAt": "2026-01-28T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-7eecdd72",
@@ -39194,7 +41254,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-10T10:00:00.000Z"
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-2764c42c",
@@ -39451,7 +41517,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-20T10:00:00.000Z"
+    "createdAt": "2025-12-20T10:00:00.000Z",
+    "buyerProfileDealCount": 18,
+    "buyerProfileFinishedCount": 18,
+    "supplierProfileDealCount": 6,
+    "supplierProfileFinishedCount": 6,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-5fce0ffb",
@@ -39617,7 +41689,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-20T10:00:00.000Z"
+    "createdAt": "2025-04-20T10:00:00.000Z",
+    "buyerProfileDealCount": 6,
+    "buyerProfileFinishedCount": 6,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-1d3aa882",
@@ -39783,7 +41861,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-20T10:00:00.000Z"
+    "createdAt": "2025-08-20T10:00:00.000Z",
+    "buyerProfileDealCount": 6,
+    "buyerProfileFinishedCount": 6,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-67353f3c",
@@ -39949,7 +42033,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-16T10:00:00.000Z"
+    "createdAt": "2025-10-16T10:00:00.000Z",
+    "buyerProfileDealCount": 6,
+    "buyerProfileFinishedCount": 6,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-6bf2efd8",
@@ -40115,7 +42205,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-15T10:00:00.000Z"
+    "createdAt": "2025-06-15T10:00:00.000Z",
+    "buyerProfileDealCount": 6,
+    "buyerProfileFinishedCount": 6,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-dd8e0cca",
@@ -40281,7 +42377,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-15T10:00:00.000Z"
+    "createdAt": "2025-07-15T10:00:00.000Z",
+    "buyerProfileDealCount": 6,
+    "buyerProfileFinishedCount": 6,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-741b7bd8",
@@ -40447,7 +42549,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-15T10:00:00.000Z"
+    "createdAt": "2025-08-15T10:00:00.000Z",
+    "buyerProfileDealCount": 6,
+    "buyerProfileFinishedCount": 6,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-9b5a3454",
@@ -40494,7 +42602,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-15T10:00:00.000Z"
+    "createdAt": "2025-01-15T10:00:00.000Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-9f9c08f8",
@@ -40541,7 +42655,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-14T10:00:00.000Z"
+    "createdAt": "2025-02-14T10:00:00.000Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-08428bc7",
@@ -40588,7 +42708,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-15T10:00:00.000Z"
+    "createdAt": "2025-03-15T10:00:00.000Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-1f4444e7",
@@ -40635,7 +42761,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-28T10:00:00.000Z"
+    "createdAt": "2025-10-28T10:00:00.000Z",
+    "buyerProfileDealCount": 4,
+    "buyerProfileFinishedCount": 4,
+    "supplierProfileDealCount": 4,
+    "supplierProfileFinishedCount": 4,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-2764e7d7",
@@ -40802,7 +42934,13 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-12T10:00:00.000Z"
+    "createdAt": "2025-12-12T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 7,
+    "supplierProfileFinishedCount": 7,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   },
   {
     "id": "plat-b6948e52",
@@ -41026,6 +43164,12 @@
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-15T10:00:00.000Z"
+    "createdAt": "2026-01-15T10:00:00.000Z",
+    "buyerProfileDealCount": 1,
+    "buyerProfileFinishedCount": 1,
+    "supplierProfileDealCount": 1,
+    "supplierProfileFinishedCount": 1,
+    "buyerCustomsEnrichment": null,
+    "supplierCustomsEnrichment": null
   }
 ]

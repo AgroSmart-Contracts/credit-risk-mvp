@@ -1,18 +1,16 @@
 /**
- * Recalculate platform counterparty scores with the sandbox weighted/shrink
- * formula (outline 2026-07-30), enriching volume / routes / sales from
- * customs-company-aggregates.json.
+ * Apply Dimension A (weighted/shrink + customs enrichment) to platform deals
+ * and counterparty rollups. Rewrites src/data/platform-deals.ts.
  *
  * Run:
- *   python3 scripts/aggregate-customs-companies.py
+ *   python3 scripts/aggregate-customs-companies.py   # optional refresh
  *   npx tsx scripts/recalculate-counterparty-scores.ts
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, unlinkSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { companyGroupKey } from "./lib/company-name";
 import {
-  platformCounterparties,
   platformCounterpartiesBlocked,
   platformDeals,
 } from "../src/data/platform-deals";
@@ -23,12 +21,14 @@ import {
   type SandboxBuyerInputs,
   type SandboxSupplierInputs,
 } from "../src/lib/counterparty-sandbox-scoring";
-import type { PlatformCounterpartyScore } from "../src/types/platform";
+import type {
+  CounterpartyCustomsEnrichment,
+  PlatformCounterpartyScore,
+  PlatformDealRecord,
+} from "../src/types/platform";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, "..", "src", "data");
-const DESKTOP = join(process.env.HOME ?? "", "Desktop");
-const OUTLINE = join(DESKTOP, "counterparty-risk-scoring-method-outline-2026-07-30.md");
 
 interface CustomsCompany {
   key: string;
@@ -52,6 +52,26 @@ interface CustomsPayload {
   sourceFiles: string[];
   companyCount: number;
   companies: CustomsCompany[];
+}
+
+const CUSTOMS_NAME_ALIASES: Record<string, string> = {
+  "GIDDINS PERU SAC": "GIDDINGS BERRIES PERU S.A.C.",
+  "GIDDINGS PERU SAC": "GIDDINGS BERRIES PERU S.A.C.",
+  "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO LTD":
+    "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
+  "GOURMET & BEVERAGE ONE GROUP THAILAND CO LTD":
+    "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
+};
+
+function normalizeMatchKey(raw: string): string {
+  return companyGroupKey(raw)
+    .replace(/\([^)]*\)/g, " ")
+    .replace(/&/g, " ")
+    .replace(/\bY\b/g, " ")
+    .replace(/\bAND\b/g, " ")
+    .replace(/\b(SAC|SA|LTD|LLC|INC|CORP|BV|SL|GMBH|LDA|CO)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function loadCustoms(): Map<string, CustomsCompany> {
@@ -88,27 +108,6 @@ function buildRucIndex(customsMap: Map<string, CustomsCompany>): Map<string, Cus
   return byRuc;
 }
 
-/** Extra platform ↔ customs name aliases (hand-verified against Veritrade). */
-const CUSTOMS_NAME_ALIASES: Record<string, string> = {
-  "GIDDINS PERU SAC": "GIDDINGS BERRIES PERU S.A.C.",
-  "GIDDINGS PERU SAC": "GIDDINGS BERRIES PERU S.A.C.",
-  "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO LTD":
-    "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
-  "GOURMET & BEVERAGE ONE GROUP THAILAND CO LTD":
-    "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
-};
-
-function normalizeMatchKey(raw: string): string {
-  return companyGroupKey(raw)
-    .replace(/\([^)]*\)/g, " ")
-    .replace(/&/g, " ")
-    .replace(/\bY\b/g, " ")
-    .replace(/\bAND\b/g, " ")
-    .replace(/\b(SAC|SA|LTD|LLC|INC|CORP|BV|SL|GMBH|LDA|CO)\b/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
 function findCustoms(
   map: Map<string, CustomsCompany>,
   companyName: string,
@@ -116,15 +115,10 @@ function findCustoms(
   masterRucs: Map<string, string[]>,
 ): CustomsCompany | null {
   const key = companyGroupKey(companyName);
-
-  // 1) RUC join via company-master
-  const taxIds = masterRucs.get(key) ?? [];
-  for (const tax of taxIds) {
+  for (const tax of masterRucs.get(key) ?? []) {
     const hit = rucIndex.get(String(tax).trim());
     if (hit) return hit;
   }
-
-  // 2) Explicit aliases
   const alias =
     CUSTOMS_NAME_ALIASES[key] ??
     CUSTOMS_NAME_ALIASES[companyName] ??
@@ -136,35 +130,50 @@ function findCustoms(
       if (k.includes(aliasKey) || aliasKey.includes(k)) return v;
     }
   }
-
   if (map.has(key)) return map.get(key)!;
-
   const nk = normalizeMatchKey(companyName);
   if (nk.length >= 12) {
     let best: CustomsCompany | null = null;
     let bestShip = -1;
     for (const [k, v] of map) {
       const ck = normalizeMatchKey(k);
-      if (ck === nk) {
-        return v;
-      }
-      // Require the shorter key to be a substantial substring (≥12 chars)
+      if (ck === nk) return v;
       const shorter = ck.length <= nk.length ? ck : nk;
       const longer = ck.length > nk.length ? ck : nk;
-      if (shorter.length >= 12 && longer.includes(shorter)) {
-        if (v.shipments > bestShip) {
-          best = v;
-          bestShip = v.shipments;
-        }
+      if (shorter.length >= 12 && longer.includes(shorter) && v.shipments > bestShip) {
+        best = v;
+        bestShip = v.shipments;
       }
     }
     if (best) return best;
   }
-
   for (const [k, v] of map) {
     if (key.length >= 14 && (k.includes(key) || key.includes(k))) return v;
   }
   return null;
+}
+
+function toEnrichment(customs: CustomsCompany | null): CounterpartyCustomsEnrichment {
+  if (!customs) {
+    return {
+      matched: false,
+      monthlyFobUsd: null,
+      fobUsd: null,
+      volumeMt: null,
+      routeCount: null,
+      roles: [],
+      shipments: 0,
+    };
+  }
+  return {
+    matched: true,
+    monthlyFobUsd: customs.monthlyFobUsd,
+    fobUsd: customs.fobUsd,
+    volumeMt: customs.volumeMt,
+    routeCount: customs.routeCount,
+    roles: customs.roles,
+    shipments: customs.shipments,
+  };
 }
 
 function isTmEntity(name: string): boolean {
@@ -176,28 +185,23 @@ function buyerInputs(
   companyName: string,
   yearsInBusiness: number | null,
   platformDealCount: number,
-  customs: CustomsCompany | null,
+  enrichment: CounterpartyCustomsEnrichment,
 ): SandboxBuyerInputs {
   const onPlatform = platformDealCount > 0;
   return {
     yearsInBusiness,
-    // Found in customs as importer → less_authoritative online presence signal
-    onlineVerifiability: customs?.roles.includes("importer")
-      ? 55
-      : customs
-        ? 55
-        : null,
-    importLicenseStatus: 100, // platform default: valid (same as production mapper)
+    onlineVerifiability: enrichment.matched ? 55 : null,
+    importLicenseStatus: 100,
     importLicenseTm: isTmEntity(companyName) ? 100 : null,
-    monthlyPurchaseVolumeUsd: customs?.monthlyFobUsd ?? null,
-    yearlySalesUsd: customs?.fobUsd ?? null,
-    annualImportVolumeMt: customs?.roles.includes("importer")
-      ? customs.volumeMt
+    monthlyPurchaseVolumeUsd: enrichment.monthlyFobUsd,
+    yearlySalesUsd: enrichment.fobUsd,
+    annualImportVolumeMt: enrichment.roles.includes("importer")
+      ? enrichment.volumeMt
       : null,
-    routeDiversity: customs?.routeCount ?? null,
+    routeDiversity: enrichment.routeCount,
     creditRating: null,
     platformTransactionCount: platformDealCount > 0 ? platformDealCount : null,
-    paymentDelayDays: null, // no real payment-timing source — leave blank
+    paymentDelayDays: null,
     tmPlatformTrust: onPlatform || isTmEntity(companyName),
   };
 }
@@ -207,7 +211,7 @@ function supplierInputs(
   yearsInBusiness: number | null,
   platformDealCount: number,
   finishedDealCount: number,
-  customs: CustomsCompany | null,
+  enrichment: CounterpartyCustomsEnrichment,
 ): SandboxSupplierInputs {
   const onPlatform = platformDealCount > 0;
   const onTime =
@@ -216,14 +220,14 @@ function supplierInputs(
       : null;
   return {
     yearsInBusiness,
-    onlineVerifiability: customs?.roles.includes("exporter") ? 55 : customs ? 55 : null,
+    onlineVerifiability: enrichment.matched ? 55 : null,
     exportLicenseStatus: 100,
-    productionCapacityMt: customs?.volumeMt ?? null,
-    yearlySalesUsd: customs?.fobUsd ?? null,
-    annualExportVolumeMt: customs?.roles.includes("exporter")
-      ? customs.volumeMt
-      : customs?.volumeMt ?? null,
-    routeDiversity: customs?.routeCount ?? null,
+    productionCapacityMt: enrichment.volumeMt,
+    yearlySalesUsd: enrichment.fobUsd,
+    annualExportVolumeMt: enrichment.roles.includes("exporter")
+      ? enrichment.volumeMt
+      : enrichment.volumeMt,
+    routeDiversity: enrichment.routeCount,
     qualityCertifications: null,
     platformTransactionCount: platformDealCount > 0 ? platformDealCount : null,
     onTimeDeliveryRate: onTime,
@@ -232,230 +236,16 @@ function supplierInputs(
   };
 }
 
-interface ScoredRow {
-  counterparty: PlatformCounterpartyScore;
+interface ProfileMeta {
+  dealCount: number;
+  finishedCount: number;
+  yearsInBusiness: number | null;
+  yearsInBusinessSource: "csv" | "verified" | "default";
+  enrichment: CounterpartyCustomsEnrichment;
   result: GroupScoreResult;
-  customsMatch: CustomsCompany | null;
-  coveragePct: number;
-}
-
-function scoreGroup(
-  group: PlatformCounterpartyScore,
-  customsMap: Map<string, CustomsCompany>,
-  rucIndex: Map<string, CustomsCompany>,
-  masterRucs: Map<string, string[]>,
-): ScoredRow {
-  const customs = findCustoms(customsMap, group.companyName, rucIndex, masterRucs);
-  const result =
-    group.role === "buyer"
-      ? scoreBuyer(
-          buyerInputs(
-            group.companyName,
-            group.yearsInBusiness,
-            group.dealCount,
-            customs,
-          ),
-        )
-      : scoreSupplier(
-          supplierInputs(
-            group.companyName,
-            group.yearsInBusiness,
-            group.dealCount,
-            group.finishedDealCount,
-            customs,
-          ),
-        );
-  return {
-    counterparty: group,
-    result,
-    customsMatch: customs,
-    coveragePct: Math.round(result.coverageFraction * 1000) / 10,
-  };
-}
-
-function buildCsv(rows: ScoredRow[], blocked: typeof platformCounterpartiesBlocked): string {
-  const header = [
-    "companyName",
-    "role",
-    "product",
-    "status",
-    "dealCount",
-    "finishedDealCount",
-    "yearsInBusiness",
-    "yearsInBusinessSource",
-    "sandboxScore",
-    "coveragePct",
-    "rawAverage",
-    "trustBonus",
-    "customsShipments",
-    "customsVolumeMt",
-    "customsFobUsd",
-    "customsRoutes",
-    "customsMatch",
-    "filledFields",
-  ];
-  const lines = [header.join(",")];
-  const esc = (s: string | number | null | undefined) => {
-    if (s === null || s === undefined) return "";
-    const t = String(s);
-    return t.includes(",") || t.includes('"') ? `"${t.replace(/"/g, '""')}"` : t;
-  };
-  for (const row of rows) {
-    const c = row.counterparty;
-    const filled = row.result.fields
-      .filter((f) => f.score !== null && f.score !== undefined)
-      .map((f) => f.id)
-      .join("|");
-    lines.push(
-      [
-        esc(c.companyName),
-        c.role,
-        esc(c.product),
-        "scored",
-        c.dealCount,
-        c.finishedDealCount,
-        c.yearsInBusiness,
-        c.yearsInBusinessSource,
-        Math.round(row.result.score * 10) / 10,
-        row.coveragePct,
-        row.result.rawAverage === null
-          ? ""
-          : Math.round(row.result.rawAverage * 10) / 10,
-        row.result.trustBonus,
-        row.customsMatch?.shipments ?? "",
-        row.customsMatch?.volumeMt ?? "",
-        row.customsMatch?.fobUsd ?? "",
-        row.customsMatch?.routeCount ?? "",
-        row.customsMatch ? "yes" : "no",
-        esc(filled),
-      ].join(","),
-    );
-  }
-  for (const b of blocked) {
-    lines.push(
-      [
-        esc(b.companyName),
-        b.role,
-        esc(b.product),
-        "blocked_missing_yib",
-        b.dealCount,
-        b.finishedDealCount,
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-      ].join(","),
-    );
-  }
-  return lines.join("\n") + "\n";
-}
-
-function buildHtml(rows: ScoredRow[], customsMeta: CustomsPayload): string {
-  const outlineNote = OUTLINE;
-  const top = [...rows].sort((a, b) => b.result.score - a.result.score);
-  const withCustoms = rows.filter((r) => r.customsMatch).length;
-  const tr = top
-    .map((r) => {
-      const c = r.counterparty;
-      const filled = r.result.fields
-        .filter((f) => f.score != null)
-        .map((f) => `${f.label}=${Math.round(f.score!)}`)
-        .join("; ");
-      return `<tr>
-  <td>${escapeHtml(c.companyName)}</td>
-  <td>${c.role}</td>
-  <td>${escapeHtml(c.product)}</td>
-  <td class="score-range">${(Math.round(r.result.score * 10) / 10).toFixed(1)}</td>
-  <td>${r.coveragePct}%</td>
-  <td>${r.customsMatch ? r.customsMatch.shipments : "—"}</td>
-  <td>${r.customsMatch ? r.customsMatch.volumeMt.toFixed(1) : "—"}</td>
-  <td>${r.customsMatch ? r.customsMatch.routeCount : "—"}</td>
-  <td style="font-size:11px;color:#555">${escapeHtml(filled)}</td>
-</tr>`;
-    })
-    .join("\n");
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Counterparty risk formula — sandbox results (2026-07-30)</title>
-<style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    max-width: 1200px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; line-height: 1.5; }
-  h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
-  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
-  .methodology { background: #f7f7f5; border: 1px solid #e3e2dd; border-radius: 8px;
-    padding: 16px 20px; font-size: 14px; margin-bottom: 28px; }
-  .methodology h2 { font-size: 15px; margin: 0 0 8px 0; }
-  .methodology ul { margin: 0; padding-left: 20px; }
-  .methodology li { margin-bottom: 6px; }
-  code { background: #eeeee9; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
-  th, td { border: 1px solid #e3e2dd; padding: 8px 10px; text-align: left; vertical-align: top; }
-  th { background: #f7f7f5; font-weight: 600; }
-  tr:nth-child(even) { background: #fbfbfa; }
-  .score-range { font-weight: 600; white-space: nowrap; }
-  .note { font-size: 13px; color: #555; }
-</style>
-</head>
-<body>
-<h1>Counterparty risk formula — sandbox results</h1>
-<p class="subtitle">Weighted-average + coverage shrink toward 50 (outline 2026-07-30).
-Scored ${rows.length} platform (company, role, product) profiles;
-${withCustoms} matched to customs aggregates.
-Customs sources: ${customsMeta.sourceFiles.map(escapeHtml).join(", ")}.</p>
-
-<div class="methodology">
-  <h2>Methodology</h2>
-  <ul>
-    <li><strong>Group raw average</strong> = Σ(score × weight) / Σ(filled weights); blanks excluded</li>
-    <li><strong>Coverage fraction</strong> = filled weight ÷ possible weight</li>
-    <li><strong>Shrink</strong> = coverage × raw + (1 − coverage) × 50</li>
-    <li><strong>TM platform trust</strong> = +3 flat after shrink (platform counterparties + TM affiliates)</li>
-    <li><strong>Customs enrichment</strong> fills annual volume (MT), yearly FOB sales proxy, monthly FOB, route diversity, online verifiability (less-authoritative = 55 when found in Veritrade/Datasur)</li>
-    <li>Sandbox only — not wired into live CRAM Dimension A. Spec: <code>${escapeHtml(outlineNote)}</code></li>
-  </ul>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Company</th>
-      <th>Role</th>
-      <th>Product</th>
-      <th>Sandbox score</th>
-      <th>Coverage</th>
-      <th>Customs shipments</th>
-      <th>Volume MT</th>
-      <th>Routes</th>
-      <th>Filled field scores</th>
-    </tr>
-  </thead>
-  <tbody>
-${tr}
-  </tbody>
-</table>
-<p class="note">Generated ${new Date().toISOString()}. Customs aggregate generatedAt=${escapeHtml(customsMeta.generatedAt)}.</p>
-</body>
-</html>
-`;
-}
-
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  product: string;
+  role: "buyer" | "supplier";
+  companyName: string;
 }
 
 function main() {
@@ -466,79 +256,257 @@ function main() {
   const rucIndex = buildRucIndex(customsMap);
   const masterRucs = loadCompanyMasterRucs();
 
-  const scored = platformCounterparties
-    .map((g) => scoreGroup(g, customsMap, rucIndex, masterRucs))
-    .sort((a, b) => b.result.score - a.result.score || b.counterparty.dealCount - a.counterparty.dealCount);
+  // Group (company, role, product) for profile counts
+  type Group = {
+    companyName: string;
+    role: "buyer" | "supplier";
+    product: string;
+    records: PlatformDealRecord[];
+  };
+  const byGroup = new Map<string, Group>();
+  for (const record of platformDeals) {
+    for (const role of ["buyer", "supplier"] as const) {
+      const companyName = role === "buyer" ? record.buyerName : record.supplierName;
+      const yib = role === "buyer" ? record.buyerYib : record.supplierYib;
+      if (yib === null) continue;
+      const key = `${role}::${companyGroupKey(companyName)}::${record.product}`;
+      let g = byGroup.get(key);
+      if (!g) {
+        g = { companyName, role, product: record.product, records: [] };
+        byGroup.set(key, g);
+      }
+      g.records.push(record);
+    }
+  }
 
-  // Patch avg/min/max on a serializable copy for the app (sandbox scores)
-  const sandboxCounterparties = scored.map((row) => {
-    const score = Math.round(row.result.score * 10) / 10;
+  const profileByKey = new Map<string, ProfileMeta>();
+  for (const group of byGroup.values()) {
+    const key = `${group.role}::${companyGroupKey(group.companyName)}::${group.product}`;
+    const dealCount = group.records.length;
+    const finishedCount = group.records.filter((r) => r.currentMilestone >= 7).length;
+    const yib =
+      group.role === "buyer"
+        ? group.records[0].buyerYib
+        : group.records[0].supplierYib;
+    const yibSource =
+      group.role === "buyer"
+        ? group.records[0].buyerYibSource
+        : group.records[0].supplierYibSource;
+    const customs = findCustoms(
+      customsMap,
+      group.companyName,
+      rucIndex,
+      masterRucs,
+    );
+    const enrichment = toEnrichment(customs);
+    const result =
+      group.role === "buyer"
+        ? scoreBuyer(
+            buyerInputs(group.companyName, yib, dealCount, enrichment),
+          )
+        : scoreSupplier(
+            supplierInputs(
+              group.companyName,
+              yib,
+              dealCount,
+              finishedCount,
+              enrichment,
+            ),
+          );
+    profileByKey.set(key, {
+      dealCount,
+      finishedCount,
+      yearsInBusiness: yib,
+      yearsInBusinessSource: yibSource,
+      enrichment,
+      result,
+      product: group.product,
+      role: group.role,
+      companyName: group.companyName,
+    });
+  }
+
+  // Enrich every deal record with profile counts + customs
+  const records: PlatformDealRecord[] = platformDeals.map((r) => {
+    const buyerKey = `buyer::${companyGroupKey(r.buyerName)}::${r.product}`;
+    const supplierKey = `supplier::${companyGroupKey(r.supplierName)}::${r.product}`;
+    const buyer = profileByKey.get(buyerKey);
+    const supplier = profileByKey.get(supplierKey);
+    const buyerCustoms = buyer?.enrichment ?? toEnrichment(
+      findCustoms(customsMap, r.buyerName, rucIndex, masterRucs),
+    );
+    const supplierCustoms = supplier?.enrichment ?? toEnrichment(
+      findCustoms(customsMap, r.supplierName, rucIndex, masterRucs),
+    );
     return {
-      ...row.counterparty,
-      avgScore: score,
-      maxScore: score,
-      minScore: score,
-      deals: row.counterparty.deals.map((d) => ({ ...d, score })),
-      sandbox: {
-        score,
-        coveragePct: row.coveragePct,
-        rawAverage:
-          row.result.rawAverage === null
-            ? null
-            : Math.round(row.result.rawAverage * 10) / 10,
-        trustBonus: row.result.trustBonus,
-        customsMatched: Boolean(row.customsMatch),
-        customsShipments: row.customsMatch?.shipments ?? 0,
-        customsVolumeMt: row.customsMatch?.volumeMt ?? null,
-        customsFobUsd: row.customsMatch?.fobUsd ?? null,
-        customsRoutes: row.customsMatch?.routeCount ?? null,
-        filledFieldIds: row.result.fields
-          .filter((f) => f.score != null)
-          .map((f) => f.id),
-      },
+      ...r,
+      buyerProfileDealCount: buyer?.dealCount ?? 1,
+      buyerProfileFinishedCount: buyer?.finishedCount ?? (r.currentMilestone >= 7 ? 1 : 0),
+      supplierProfileDealCount: supplier?.dealCount ?? 1,
+      supplierProfileFinishedCount:
+        supplier?.finishedCount ?? (r.currentMilestone >= 7 ? 1 : 0),
+      buyerCustomsEnrichment: buyerCustoms.matched ? buyerCustoms : null,
+      supplierCustomsEnrichment: supplierCustoms.matched ? supplierCustoms : null,
     };
   });
 
-  writeFileSync(
-    join(DATA, "counterparty-sandbox-scores.json"),
-    JSON.stringify(
-      {
-        formula: "sandbox-weighted-shrink-2026-07-30",
-        generatedAt: new Date().toISOString(),
-        customsGeneratedAt: customsPayload.generatedAt,
-        customsSources: customsPayload.sourceFiles,
-        counterparties: sandboxCounterparties,
-      },
-      null,
-      2,
-    ) + "\n",
-  );
+  const counterpartyScores: PlatformCounterpartyScore[] = [...profileByKey.values()]
+    .map((p) => {
+      const score = Math.round(p.result.score * 10) / 10;
+      const coveragePct = Math.round(p.result.coverageFraction * 1000) / 10;
+      const idKey = `${p.role}-${companyGroupKey(p.companyName)}-${p.product}`;
+      const groupRecords = records.filter((r) => {
+        const name = p.role === "buyer" ? r.buyerName : r.supplierName;
+        return (
+          companyGroupKey(name) === companyGroupKey(p.companyName) &&
+          r.product === p.product
+        );
+      });
+      return {
+        id: `cp-${idKey.replace(/[^A-Z0-9]/gi, "")}`,
+        companyName: p.companyName,
+        role: p.role,
+        product: p.product,
+        yearsInBusiness: p.yearsInBusiness ?? 0,
+        yearsInBusinessSource: p.yearsInBusinessSource,
+        dealCount: p.dealCount,
+        finishedDealCount: p.finishedCount,
+        avgScore: score,
+        maxScore: score,
+        minScore: score,
+        deals: groupRecords.map((record) => ({
+          mongoId: record.mongoId,
+          name: record.dealRef,
+          status: record.status,
+          milestone: record.currentMilestone,
+          dealValue: record.dealValueUSD,
+          score,
+          priorDeals: record.priorDealsBetweenParties,
+        })),
+        missingForFullCram: [
+          ...new Set(groupRecords.flatMap((r) => r.missingFields)),
+        ],
+        coveragePct,
+        rawAverage:
+          p.result.rawAverage === null
+            ? null
+            : Math.round(p.result.rawAverage * 10) / 10,
+        trustBonus: p.result.trustBonus,
+        customsMatched: p.enrichment.matched,
+        customsShipments: p.enrichment.shipments,
+        customsVolumeMt: p.enrichment.volumeMt,
+        customsFobUsd: p.enrichment.fobUsd,
+        customsRoutes: p.enrichment.routeCount,
+        filledFieldIds: p.result.fields
+          .filter((f) => f.score != null)
+          .map((f) => f.id),
+      };
+    })
+    .sort((a, b) => b.dealCount - a.dealCount || b.avgScore - a.avgScore);
 
-  writeFileSync(join(DATA, "counterparty-scores.csv"), buildCsv(scored, platformCounterpartiesBlocked));
-
-  const html = buildHtml(scored, customsPayload);
-  writeFileSync(join(DESKTOP, "counterparty-risk-formula-test-results.html"), html);
-  writeFileSync(join(__dirname, "..", "docs", "counterparty-sandbox-results.html"), html);
-
-  // Also copy outline into repo docs for reference
-  try {
-    const outline = readFileSync(OUTLINE, "utf-8");
-    writeFileSync(
-      join(__dirname, "..", "docs", "counterparty-risk-scoring-method-outline-2026-07-30.md"),
-      outline,
-    );
-  } catch {
-    console.warn("Could not copy outline from Desktop — skipped");
+  // Sanity: live deal scores should match rollup for same company×product
+  let mismatch = 0;
+  for (const record of records.filter((r) => r.counterpartyReady).slice(0, 20)) {
+    const buyerKey = `buyer::${companyGroupKey(record.buyerName)}::${record.product}`;
+    const profile = profileByKey.get(buyerKey);
+    if (!profile) continue;
+    const live = Math.round(scoreBuyer(buyerInputs(
+      record.buyerName,
+      record.buyerYib,
+      record.buyerProfileDealCount,
+      record.buyerCustomsEnrichment ?? toEnrichment(null),
+    )).score);
+    const expected = Math.round(profile.result.score);
+    if (live !== expected) mismatch++;
   }
 
-  const matched = scored.filter((r) => r.customsMatch).length;
+  writeFileSync(join(DATA, "platform-deals.generated.json"), JSON.stringify(records, null, 2) + "\n");
+
+  const csvHeader = [
+    "companyName",
+    "role",
+    "product",
+    "status",
+    "dealCount",
+    "finishedDealCount",
+    "yearsInBusiness",
+    "yearsInBusinessSource",
+    "avgScore",
+    "coveragePct",
+    "rawAverage",
+    "trustBonus",
+    "customsMatched",
+    "customsShipments",
+    "customsVolumeMt",
+    "customsRoutes",
+    "filledFields",
+  ];
+  const csvLines = [csvHeader.join(",")];
+  const esc = (s: string | number | null | undefined) => {
+    if (s === null || s === undefined) return "";
+    const t = String(s);
+    return t.includes(",") || t.includes('"') ? `"${t.replace(/"/g, '""')}"` : t;
+  };
+  for (const c of counterpartyScores) {
+    csvLines.push(
+      [
+        esc(c.companyName),
+        c.role,
+        esc(c.product),
+        "scored",
+        c.dealCount,
+        c.finishedDealCount,
+        c.yearsInBusiness,
+        c.yearsInBusinessSource,
+        c.avgScore,
+        c.coveragePct ?? "",
+        c.rawAverage ?? "",
+        c.trustBonus ?? "",
+        c.customsMatched ? "yes" : "no",
+        c.customsShipments ?? "",
+        c.customsVolumeMt ?? "",
+        c.customsRoutes ?? "",
+        esc((c.filledFieldIds ?? []).join("|")),
+      ].join(","),
+    );
+  }
+  writeFileSync(join(DATA, "counterparty-scores.csv"), csvLines.join("\n") + "\n");
+
+  const tsFile = `/** Auto-generated by scripts/build-platform-deals.ts / recalculate-counterparty-scores.ts — do not edit by hand. */
+/** Dimension A = weighted/shrink formula (outline 2026-07-30) + customs enrichment. See docs/counterparty-risk-scoring-method-outline-2026-07-30.md. */
+import type { PlatformCounterpartyScore, PlatformCounterpartyBlocked, PlatformDealRecord } from "../types/platform";
+
+export const platformDeals: PlatformDealRecord[] = ${JSON.stringify(records, null, 2)};
+
+export const platformCounterparties: PlatformCounterpartyScore[] = ${JSON.stringify(counterpartyScores, null, 2)};
+
+/** (company, role, product) groups with no YIB at all — reported here, not just Missing fields, so a buyer/supplier's absence from the scored list above is visible in this tab too (decision 2026-07-27). */
+export const platformCounterpartiesBlocked: PlatformCounterpartyBlocked[] = ${JSON.stringify(platformCounterpartiesBlocked, null, 2)};
+
+export const platformDealsReadyForCounterparty = platformDeals.filter((d) => d.counterpartyReady);
+export const platformDealsBlocked = platformDeals.filter((d) => !d.counterpartyReady);
+`;
+  writeFileSync(join(DATA, "platform-deals.ts"), tsFile);
+
+  // Remove dual sandbox artifact stream
+  for (const f of [
+    join(DATA, "counterparty-sandbox-scores.json"),
+    join(DATA, "counterparty-sandbox-scores.ts"),
+  ]) {
+    if (existsSync(f)) unlinkSync(f);
+  }
+
+  const matched = counterpartyScores.filter((c) => c.customsMatched).length;
   const avg =
-    scored.reduce((s, r) => s + r.result.score, 0) / Math.max(1, scored.length);
+    counterpartyScores.reduce((s, c) => s + c.avgScore, 0) /
+    Math.max(1, counterpartyScores.length);
   console.log(
-    `Scored ${scored.length} counterparties (avg ${avg.toFixed(1)}); ${matched} customs-matched.`,
+    `Scored ${counterpartyScores.length} counterparties (avg ${avg.toFixed(1)}); ${matched} customs-matched.`,
   );
-  console.log(`Platform deals on file: ${platformDeals.length}`);
-  console.log("Wrote counterparty-sandbox-scores.json, counterparty-scores.csv, Desktop HTML.");
+  console.log(`Enriched ${records.length} platform deals with profile counts + customs.`);
+  console.log(`Deal↔profile buyer sanity mismatches (sample): ${mismatch}`);
+  console.log(`Customs aggregate generatedAt=${customsPayload.generatedAt}`);
+  console.log("Wrote platform-deals.ts, counterparty-scores.csv; removed sandbox dual files.");
 }
 
 main();

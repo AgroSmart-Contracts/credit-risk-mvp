@@ -35,6 +35,11 @@ export interface ProductPriceMonthRouteRow {
   nObservations: number;
   source: "customs" | "platform-sheet" | "platform-sheet-mode";
   transportMode?: "air" | "sea" | null;
+  /** Observed min/max $/kg from platform sheet (safe/observed range). */
+  minUsdPerKg?: number | null;
+  maxUsdPerKg?: number | null;
+  spreadPct?: number | null;
+  priceRangeDisplay?: string | null;
 }
 
 function foldCountry(name: string): string {
@@ -149,6 +154,9 @@ function main() {
     const productKey = productKeyFromLabel(r.product ?? "");
     const usual = Number(r.weightedAvgPrice);
     if (!productKey || !(usual > 0) || !r.month) continue;
+    const min = Number(r.minPrice);
+    const max = Number(r.maxPrice);
+    const spread = Number(String(r.spreadPct ?? "").replace(/%.*/, ""));
     rows.push({
       productKey,
       originCountry: countryKey(r.origin ?? ""),
@@ -157,6 +165,10 @@ function main() {
       usualUsdPerKg: usual,
       nObservations: Number(r.n_deals) || 1,
       source: "platform-sheet",
+      minUsdPerKg: Number.isFinite(min) && min > 0 ? min : null,
+      maxUsdPerKg: Number.isFinite(max) && max > 0 ? max : null,
+      spreadPct: Number.isFinite(spread) ? spread : null,
+      priceRangeDisplay: r.priceRangeDisplay?.trim() || null,
     });
   }
 
@@ -167,6 +179,9 @@ function main() {
     const productKey = productKeyFromLabel(r.product ?? "");
     const usual = Number(r.weightedAvgPrice);
     if (!productKey || !(usual > 0) || !r.month) continue;
+    const min = Number(r.minPrice);
+    const max = Number(r.maxPrice);
+    const spread = Number(String(r.spreadPct ?? "").replace(/%.*/, ""));
     rows.push({
       productKey,
       originCountry: countryKey(r.origin ?? ""),
@@ -176,6 +191,10 @@ function main() {
       nObservations: Number(r.n_deals) || 1,
       source: "platform-sheet-mode",
       transportMode: transportFromSheet(r.transportMode ?? ""),
+      minUsdPerKg: Number.isFinite(min) && min > 0 ? min : null,
+      maxUsdPerKg: Number.isFinite(max) && max > 0 ? max : null,
+      spreadPct: Number.isFinite(spread) ? spread : null,
+      priceRangeDisplay: r.priceRangeDisplay?.trim() || null,
     });
   }
 
@@ -196,6 +215,10 @@ export interface ProductPriceMonthRouteRow {
   nObservations: number;
   source: ProductPriceSource;
   transportMode?: "air" | "sea" | null;
+  minUsdPerKg?: number | null;
+  maxUsdPerKg?: number | null;
+  spreadPct?: number | null;
+  priceRangeDisplay?: string | null;
 }
 
 export const PRODUCT_PRICE_MONTH_ROUTE_TABLE = tableJson as ProductPriceMonthRouteRow[];

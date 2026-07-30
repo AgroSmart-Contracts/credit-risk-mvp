@@ -809,6 +809,9 @@ export const platformDealsBlocked = platformDeals.filter((d) => !d.counterpartyR
   for (const [fix, n] of locationCountryFixes) console.log(`  ${fix} (${n} deals)`);
   console.log(`Distinct unmatched routes (${routeMissCount.size}):`);
   for (const [route, n] of routeMissCount) console.log(`  ${route} (${n} deals)`);
+  console.log(
+    "NOTE: Dimension A scores above are from deal-level computeBuyerScore without customs enrichment. Run `npm run recalc-counterparties` to apply weighted/shrink + customs and rewrite platformCounterparties.",
+  );
 }
 
 main();
