@@ -4,6 +4,7 @@ import { computeOverallScore, type ScoreBreakdown } from "./scoring";
 import { analyzeRiskFactors } from "./risk-factors";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
+import { priceVsMarketDetail } from "./price-benchmarks";
 
 export function formatUSD(amount: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -46,24 +47,43 @@ function counterpartyWhy(deal: Deal, externalBonus: number): string {
 
 function productWhy(deal: Deal): string {
   const tableMatch = deal.productRiskProfile ?? lookupProductRisk(deal.product);
+  const price = priceVsMarketDetail(deal);
+  const priceBit =
+    price.fallback === "none" || price.usualUsdPerKg == null
+      ? "price-vs-usual: no month×route benchmark"
+      : `price-vs-usual ${price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0 ? "+" : ""}${price.deflatedPctOverUsual}% (${price.dealUnitPriceUSD?.toFixed(2)}/kg vs usual ${price.usualUsdPerKg.toFixed(2)}/kg, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts)`;
+
   if (tableMatch) {
     const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
-    return `Table score ${tableMatch.score} for ${tableMatch.product}${provisional} — ${tableMatch.rationale}`;
+    return `Table score ${tableMatch.score} for ${tableMatch.product}${provisional} — ${tableMatch.rationale.replace(/\.\s*$/, "")}. ${priceBit}.`;
   }
 
   const perish = deal.perishabilityClass.toLowerCase();
   const grade = deal.qualityGrade.split("/")[0].trim();
   const shelf =
     deal.shelfLifeDays !== null ? `, ${deal.shelfLifeDays}-day shelf life` : "";
-  return `${perish}${shelf}, ${grade}`;
+  return `${perish}${shelf}, ${grade}. ${priceBit}.`;
 }
 
 function routeWhy(deal: Deal): string {
   const tableMatch =
-    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination, deal.product);
+    deal.routeRiskProfile ??
+    lookupRouteRisk(
+      deal.origin,
+      deal.destination,
+      deal.product,
+      deal.transportMode,
+      deal.numberOfTransshipments,
+    );
   if (tableMatch) {
     const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
-    return `Table score ${tableMatch.score} for ${tableMatch.origin} → ${tableMatch.destination}${provisional} — ${tableMatch.rationale}`;
+    const mode =
+      tableMatch.transportMode === "air"
+        ? tableMatch.airStopsBand === "gt2"
+          ? "air ≥3 stops"
+          : "air ≤2 stops"
+        : "ocean";
+    return `Table score ${tableMatch.score} (${mode}) for ${tableMatch.origin} → ${tableMatch.destination}${provisional} — ${tableMatch.rationale}`;
   }
 
   const transship =
@@ -72,7 +92,9 @@ function routeWhy(deal: Deal): string {
       : deal.numberOfTransshipments === 1
         ? "one transshipment"
         : `${deal.numberOfTransshipments} transshipments`;
-  return `${deal.estimatedTransitDays}-day transit, ${transship}`;
+  const modeLabel =
+    deal.transportMode === "air" ? "air" : deal.transportMode === "sea" ? "sea" : "unknown mode";
+  return `${deal.estimatedTransitDays}-day transit (${modeLabel}), ${transship}`;
 }
 
 function structureWhy(
@@ -86,7 +108,13 @@ function structureWhy(
       cashFlow.worstCaseMargin >= 0
         ? "no downside on total non-payment"
         : `upside:downside ${cashFlow.upsideDownsideRatio?.toFixed(2) ?? "n/a"}`;
-    return `${tier} (${composite}/100) — ${cashFlow.exposureDuration}-day exposure, ${downside}`;
+    const sourceNote =
+      deal.transactionStructure?.structureSource === "default"
+        ? "Structure from exploration defaults — "
+        : deal.transactionStructure?.structureSource === "user"
+          ? "User-confirmed structure — "
+          : "";
+    return `${sourceNote}${tier} (${composite}/100) — ${cashFlow.exposureDuration}-day exposure, ${downside}`;
   }
   if (paymentAdj < 0) {
     return `${deal.paymentTerms} — no advance or collateral`;

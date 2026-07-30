@@ -1,0 +1,74 @@
+product,origin,destination,month,n_deals,totalKgShipped,minPrice,maxPrice,weightedAvgPrice,spreadPct,priceRangeDisplay,notes
+Blueberries (Fresh),Peru,Brazil,2024-08,2,3080,10.427,10.433,10.43,0.03%,$10.43 +/- 0.03%,
+Blueberries (Fresh),Peru,Brazil,2024-10,1,1540,10.433,10.433,10.433,0% (n=1),$10.433 (single observation),no spread computable
+Blueberries (Fresh),Ecuador,Russian Federation,2024-11,1,7800,6,6,6,0% (n=1),$6.00 (single observation),no spread computable
+Blueberries (Fresh),Ecuador,Russian Federation,2024-12,1,4284,6,6,6,0% (n=1),$6.00 (single observation),no spread computable
+Blueberries (Fresh),Peru,Israel,2024-12,1,2880,16.667,16.667,16.667,0% (n=1),$16.667 (single observation),no spread computable
+Blueberries (Fresh),Peru,Israel,2025-02,1,3600,16.667,16.667,16.667,0% (n=1),$16.667 (single observation),no spread computable
+Blueberries (Fresh),Peru,Israel,2025-08,4,14400,17.9,17.9,17.9,0%,$17.90 +/- 0%,all 4 deals identical price
+Blueberries (Fresh),Peru,Spain,2024-10,1,880,9.091,9.091,9.091,0% (n=1),$9.091 (single observation),no spread computable
+Blueberries (Fresh),Peru,Netherlands,2024-09,2,1641,12,14.897,13.484,10.74%,$13.48 +/- 10.74%,
+Blueberries (Fresh),Peru,Netherlands,2024-10,1,880,12.525,12.525,12.525,0% (n=1),$12.525 (single observation),no spread computable
+Blueberries (Fresh),Peru,Netherlands,2024-12,2,1756,8.857,10.5,9.684,8.48%,$9.68 +/- 8.48%,
+Blueberries (Fresh),Peru,Netherlands,2025-11,2,11200,5.5,8,6.75,18.52%,$6.75 +/- 18.52%,widest Netherlands spread in the data -- worth a look
+Blueberries (Fresh),Peru,India,2024-08,1,960,14.087,14.087,14.087,0% (n=1),$14.087 (single observation),no spread computable
+Blueberries (Fresh),Peru,India,2025-01,2,2640,12,12,12,0%,$12.00 +/- 0%,both deals identical price
+Blueberries (Fresh),Peru,India,2025-02,1,1200,12,12,12,0% (n=1),$12.00 (single observation),no spread computable
+Blueberries (Fresh),Peru,India,2025-04,1,1680,11.767,11.767,11.767,0% (n=1),$11.767 (single observation),no spread computable
+Blueberries (Fresh),Peru,Canada,2025-08,1,576,8.82,8.82,8.82,0% (n=1),$8.82 (single observation),no spread computable
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-09,6,46800,4.6,7.333,5.143,26.57%,$5.14 +/- 26.57%,one deal at 7.333 vs five clustered 4.6-4.78 -- the 7.333 outlier drives most of this spread
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-10,2,15600,4.56,4.72,4.64,1.72%,$4.64 +/- 1.72%,
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-11,1,7800,4.773,4.773,4.773,0% (n=1),$4.773 (single observation),no spread computable
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-12,6,46800,4.627,4.82,4.738,2.04%,$4.74 +/- 2.04%,
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2026-01,5,39000,4.607,8,5.328,31.85%,$5.33 +/- 31.85%,one deal at 8.0 vs four clustered 4.6-4.72 -- same pattern as 2025-09
+Blueberries (Fresh),Peru,United Arab Emirates,2025-08,2,8862,17.833,18.053,17.925,0.61%,$17.93 +/- 0.61%,
+Blueberries (Fresh),Peru,United Arab Emirates,2025-09,7,25668,14.44,16.86,16.056,7.54%,$16.06 +/- 7.54%,
+Blueberries (Fresh),Peru,United Arab Emirates,2025-10,7,24401,15.407,17.733,16.589,7.01%,$16.59 +/- 7.01%,
+Blueberries (Fresh),Peru,United Arab Emirates,2025-11,5,21543,14.667,15.387,14.832,2.43%,$14.83 +/- 2.43%,
+Blueberries (Fresh),Peru,United Arab Emirates,2025-12,4,16320,13.72,16.78,15.107,10.13%,$15.11 +/- 10.13%,
+Blueberries (Fresh),Peru,United Arab Emirates,2026-01,2,7680,15.473,16.673,16.073,3.73%,$16.07 +/- 3.73%,
+Blueberries (Fresh),Peru,China,2025-09,2,15600,6.747,6.847,6.797,0.74%,$6.80 +/- 0.74%,
+Blueberries (Fresh),Peru,China,2025-10,1,7800,2.949,2.949,2.949,0% (n=1),$2.949 (single observation),no spread computable; also a notable outlier vs this route's other months (~$6.7)
+Blueberries (Fresh),Peru,China,2026-01,1,7800,6.673,6.673,6.673,0% (n=1),$6.673 (single observation),no spread computable
+Mandarina,Peru,United States,2024-06,4,9184,1.379,1.379,1.379,0%,$1.379 +/- 0%,all 4 deals identical price
+Mandarina,Peru,United States,2024-07,10,22960,1.379,1.423,1.388,1.59%,$1.39 +/- 1.59%,
+Mandarina,Peru,United States,2024-08,2,4592,1.423,1.423,1.423,0%,$1.423 +/- 0%,both deals identical price
+Mandarina,Peru,United States,2025-05,1,11480,1.365,1.365,1.365,0% (n=1),$1.365 (single observation),no spread computable
+Mandarina,Peru,United States,2025-11,7,16072,0.949,0.98,0.954,1.62%,$0.95 +/- 1.62%,clear step down vs earlier 2024 months on this route
+Mandarina,Peru,Netherlands,2025-06,5,10780,1.4,1.552,1.494,5.09%,$1.49 +/- 5.09%,
+Mandarina,Peru,Netherlands,2025-07,4,8624,1.415,1.493,1.461,2.67%,$1.46 +/- 2.67%,
+Mandarina,Peru,Netherlands,2025-08,3,6468,1.506,1.576,1.55,2.26%,$1.55 +/- 2.26%,
+Ginger,Peru,Netherlands,2024-06,1,1600,2.792,2.792,2.792,0% (n=1),$2.792 (single observation),no spread computable
+Ginger,Peru,Netherlands,2025-04,1,1440,2.834,2.834,2.834,0% (n=1),$2.834 (single observation),no spread computable
+Ginger,Peru,Netherlands,2025-06,1,1440,2.78,2.78,2.78,0% (n=1),$2.78 (single observation),no spread computable
+Ginger,Peru,Netherlands,2025-07,1,1440,2.825,2.825,2.825,0% (n=1),$2.825 (single observation),no spread computable
+Ginger,Peru,Netherlands,2025-08,2,2880,2.744,2.889,2.817,2.57%,$2.82 +/- 2.57%,
+Ginger,Peru,Netherlands,2025-10,1,1440,2.885,2.885,2.885,0% (n=1),$2.885 (single observation),no spread computable
+Ginger,Peru,Spain,2025-12,1,900,0.5332,0.5332,0.5332,0% (n=1),$0.5332 (single observation),no spread computable; this single deal is far below the Netherlands lane ($2.7-2.9) -- see product-details flag on this outlier
+Mango,Peru,Poland,2024-09,1,1000,6.667,6.667,6.667,0% (n=1),$6.667 (single observation),only deal on record for this product
+Asparagus,Peru,Germany,2025-01,1,740,95.28,95.28,95.28,0% (n=1),$95.28 (single observation),flagged in product-details as likely test/anomalous data -- do not treat as representative
+Asparagus,Peru,Spain,2025-03,1,2000,2.444,2.444,2.444,0% (n=1),$2.444 (single observation),no spread computable
+Asparagus,Peru,Spain,2025-04,2,4000,2.556,2.596,2.576,0.78%,$2.58 +/- 0.78%,
+Asparagus,Peru,Spain,2025-06,1,2000,2.474,2.474,2.474,0% (n=1),$2.474 (single observation),no spread computable
+Asparagus,Peru,Spain,2025-07,2,4000,2.421,2.469,2.445,0.98%,$2.45 +/- 0.98%,
+Asparagus,Peru,Spain,2025-08,2,4000,2.419,2.478,2.4485,1.20%,$2.45 +/- 1.20%,
+Asparagus,Peru,Spain,2025-10,1,2000,2.42,2.42,2.42,0% (n=1),$2.42 (single observation),no spread computable
+Avocado,Peru,Spain,2025-03,2,4800,2.2,2.232,2.216,0.72%,$2.22 +/- 0.72%,
+Avocado,Peru,Spain,2025-04,5,12000,2.084,2.213,2.159,2.99%,$2.16 +/- 2.99%,
+Avocado,Peru,Spain,2025-06,1,2400,2.11,2.11,2.11,0% (n=1),$2.11 (single observation),no spread computable
+Avocado,Peru,Spain,2025-07,2,4800,2.111,2.221,2.166,2.54%,$2.17 +/- 2.54%,
+Avocado,Peru,Spain,2025-08,2,4800,2.155,2.202,2.1785,1.08%,$2.18 +/- 1.08%,
+Avocado,Peru,Spain,2025-10,2,11080,2.3075,2.32,2.314,0.27%,$2.31 +/- 0.27%,
+Avocado,Peru,Chile,2025-03,1,22610,1.1957,1.1957,1.1957,0% (n=1),$1.196 (single observation),single deal but ~36% of total Avocado volume by kg -- see product-details flag
+Avocado,Peru,Thailand,2025-04,1,432,2.5,2.5,2.5,0% (n=1),$2.50 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Peru,Chile,2024-10,1,1960,2.116,2.116,2.116,0% (n=1),$2.116 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Peru,Chile,2026-01,1,2400,2.333,2.333,2.333,0% (n=1),$2.333 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,China,2025-01,2,4800,4.932,5.017,4.9745,0.85%,$4.97 +/- 0.85%,
+Mixed Berries / Tropical Fruits,Chile,China,2025-02,2,4800,4.922,4.989,4.9555,0.68%,$4.96 +/- 0.68%,
+Mixed Berries / Tropical Fruits,Chile,China,2025-03,1,2400,4.922,4.922,4.922,0% (n=1),$4.922 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,China,2025-04,1,2400,4.933,4.933,4.933,0% (n=1),$4.933 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,China,2025-10,1,2400,4.954,4.954,4.954,0% (n=1),$4.954 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-01,1,2400,3.162,3.162,3.162,0% (n=1),$3.162 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-02,1,2400,3.054,3.054,3.054,0% (n=1),$3.054 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-03,1,2400,3.049,3.049,3.049,0% (n=1),$3.049 (single observation),no spread computable
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-10,1,2400,3.155,3.155,3.155,0% (n=1),$3.155 (single observation),no spread computable

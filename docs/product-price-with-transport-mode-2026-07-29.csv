@@ -1,0 +1,74 @@
+product,origin,destination,month,n_deals,weightedAvgPrice,spreadPct,transportMode,matchConfidence,matchNotes
+Blueberries (Fresh),Peru,Brazil,2024-08,2,10.43,0.03%,by_air,high,"raw file shows both deals by_air at exactly 1.5x this price (15.64/15.65 raw)"
+Blueberries (Fresh),Peru,Brazil,2024-10,1,10.433,0% (n=1),by_air,high,same 1.5x match as above -- likely same underlying deal cluster, date labeling doesn't fully reconcile between sources
+Blueberries (Fresh),Ecuador,Russian Federation,2024-11,1,6,0% (n=1),sea_freight,high,raw deal (E001-22) confirms sea_freight, exact 1.5x match (raw $9)
+Blueberries (Fresh),Ecuador,Russian Federation,2024-12,1,6,0% (n=1),sea_freight,high,raw deal (E001-26) confirms sea_freight, exact 1.5x match (raw $9)
+Blueberries (Fresh),Peru,Israel,2024-12,1,16.667,0% (n=1),by_air,high,raw deal (E001-27) confirms by_air, exact 1.5x match (raw $25)
+Blueberries (Fresh),Peru,Israel,2025-02,1,16.667,0% (n=1),by_air,medium,"matches a by_air raw deal (E001-35) at the same 1.5x ratio, but that raw row is dated 2025-04 -- same pattern as elsewhere, month labels don't reconcile between sources"
+Blueberries (Fresh),Peru,Israel,2025-08,4,17.9,0%,by_air,high,"all 4 raw deals (PI25E001-38/39/40/41) confirmed by_air, exact 1.5x match"
+Blueberries (Fresh),Peru,Spain,2024-10,1,9.091,0% (n=1),by_air,medium,"only Peru-Spain Blueberries raw row (E001-23) is by_air, but price ratio (3.3x) doesn't fit the usual 1.5x/10x pattern cleanly"
+Blueberries (Fresh),Peru,Netherlands,2024-09,2,13.484,10.74%,by_air,medium,"matches 2 by_air raw deals (E001-16, E001-12) by quantity (841kg, 800kg) and same Dec-2024 period; price ratios (~2.8-3.2x) less clean than the 1.5x/10x pattern seen elsewhere"
+Blueberries (Fresh),Peru,Netherlands,2024-10,1,12.525,0% (n=1),by_air,medium,matches by_air raw deals at qty 880kg (E001-19 or E001-17), same period; ratio not perfectly clean
+Blueberries (Fresh),Peru,Netherlands,2024-12,2,9.684,8.48%,by_air,medium-high,"one leg (876kg) matches raw deal E001-18 at a clean 3x ratio; other leg (880kg) matches an 880kg by_air deal at a looser ratio"
+Blueberries (Fresh),Peru,Netherlands,2025-11,2,6.75,18.52%,sea_freight,high,"both deals match raw rows (qty 5600kg each) at an exact 3.5x ratio -- clean match, both sea_freight"
+Blueberries (Fresh),Peru,India,2024-08,1,14.087,0% (n=1),by_air,high,raw deal (E001-14) confirms by_air, exact 1.5x match
+Blueberries (Fresh),Peru,India,2025-01,2,12,0%,by_air,high,both deals (1200kg, 1440kg) match raw rows E001-29/E001-30, both by_air, exact 1.5x match
+Blueberries (Fresh),Peru,India,2025-02,1,12,0% (n=1),by_air,high,raw deal (67a4c9a5..., 1200kg) confirms by_air, exact 1.5x match
+Blueberries (Fresh),Peru,India,2025-04,1,11.767,0% (n=1),by_air,high,raw deal (E001-33) confirms by_air, exact 1.5x match
+Blueberries (Fresh),Peru,Canada,2025-08,1,8.82,0% (n=1),by_air,medium,"matches the only Peru-Canada Blueberries raw row, by_air, but ratio (2.04x) isn't a clean fit"
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-09,6,5.143,26.57%,sea_freight,medium,"route-level inference -- both known Taiwan raw rows (Sept 2025, Jan 2026) are sea_freight, no air Taiwan deals exist in the raw file; only 1 of these 6 deals traces to a specific raw row"
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-10,2,4.64,1.72%,sea_freight,low-medium,"no direct raw-row match for this specific month; inferred from 100% consistent sea_freight pattern on this route"
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-11,1,4.773,0% (n=1),sea_freight,low-medium,same route-level inference as above -- no direct raw match this month
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2025-12,6,4.738,2.04%,sea_freight,low-medium,same route-level inference -- no direct raw match this month
+Blueberries (Fresh),Peru,"Taiwan, Province of China",2026-01,5,5.328,31.85%,sea_freight,high,"1 of 5 deals (the $8 outlier) matches a raw row (FRESH BLUEBERRIES, 2026-01-23) at exact 1.5x; rest inferred from route pattern"
+Blueberries (Fresh),Peru,United Arab Emirates,2025-08,2,17.925,0.61%,by_air,high,"both deals (3641kg, 5221kg) match raw rows at an exact 1.5x ratio -- clean match despite a month-label mismatch (raw dated Nov 2025)"
+Blueberries (Fresh),Peru,United Arab Emirates,2025-09,7,16.056,7.54%,by_air,medium-high,"route-level confidence very high (all 13 raw UAE Blueberries rows are by_air, zero exceptions); exact per-deal reconciliation to this specific month not fully nailed down by hand"
+Blueberries (Fresh),Peru,United Arab Emirates,2025-10,7,16.589,7.01%,by_air,medium-high,same basis as above -- route is 100% by_air in the raw data, exact per-deal month match not confirmed
+Blueberries (Fresh),Peru,United Arab Emirates,2025-11,5,14.832,2.43%,by_air,medium-high,same basis as above
+Blueberries (Fresh),Peru,United Arab Emirates,2025-12,4,15.107,10.13%,by_air,medium-high,same basis as above
+Blueberries (Fresh),Peru,United Arab Emirates,2026-01,2,16.073,3.73%,by_air,medium-high,same basis as above
+Blueberries (Fresh),Peru,China,2025-09,2,6.797,0.74%,UNRESOLVED,none,"no Peru-China Blueberries deals exist anywhere in the 83-row raw file -- can't determine mode from this source"
+Blueberries (Fresh),Peru,China,2025-10,1,2.949,0% (n=1),UNRESOLVED,none,same -- no raw coverage for this route at all
+Blueberries (Fresh),Peru,China,2026-01,1,6.673,0% (n=1),UNRESOLVED,none,same -- no raw coverage for this route at all
+Mandarina,Peru,United States,2024-06,4,1.379,0%,sea_freight,high,route is 100% sea_freight across all 30 Mandarina/US raw rows; this batch matches a cluster of raw deals at exact 10x
+Mandarina,Peru,United States,2024-07,10,1.388,1.59%,sea_freight,high,same basis -- 10x match to the May-2025-dated raw batch (date labels don't align between sources, price/qty do)
+Mandarina,Peru,United States,2024-08,2,1.423,0%,sea_freight,high,same basis -- clean 10x match
+Mandarina,Peru,United States,2025-05,1,1.365,0% (n=1),sea_freight,high,"exact 10x match to a specific raw deal (MANDARINA FRESCA -OMC- 5TEU, 11,480kg)"
+Mandarina,Peru,United States,2025-11,7,0.954,1.62%,sea_freight,high,"exact 10x match to the raw batch timestamped 2026-03-27 -- these are very likely the same 7 shipments re-saved later, not new deals (see transport-mode methodology doc)"
+Mandarina,Peru,Netherlands,2025-06,5,1.494,5.09%,UNRESOLVED,none,no Mandarina-Netherlands deals exist anywhere in the 83-row raw file
+Mandarina,Peru,Netherlands,2025-07,4,1.461,2.67%,UNRESOLVED,none,same -- no raw coverage for this route
+Mandarina,Peru,Netherlands,2025-08,3,1.55,2.26%,UNRESOLVED,none,same -- no raw coverage for this route
+Ginger,Peru,Netherlands,2024-06,1,2.792,0% (n=1),sea_freight,low-medium,"only Ginger raw row matches this quantity (1600kg) exactly and is sea_freight, but the price ratio (13.6x) doesn't fit any pattern seen elsewhere -- could be coincidental"
+Ginger,Peru,Netherlands,2025-04,1,2.834,0% (n=1),UNRESOLVED,none,no matching Ginger raw row for this date/quantity
+Ginger,Peru,Netherlands,2025-06,1,2.78,0% (n=1),UNRESOLVED,none,same
+Ginger,Peru,Netherlands,2025-07,1,2.825,0% (n=1),UNRESOLVED,none,same
+Ginger,Peru,Netherlands,2025-08,2,2.817,2.57%,UNRESOLVED,none,same
+Ginger,Peru,Netherlands,2025-10,1,2.885,0% (n=1),UNRESOLVED,none,same
+Ginger,Peru,Spain,2025-12,1,0.5332,0% (n=1),UNRESOLVED,none,no Peru-Spain Ginger deals in the raw file (only Peru-Netherlands Ginger appears)
+Mango,Peru,Poland,2024-09,1,6.667,0% (n=1),sea_freight,medium,"matches the only Mango raw row exactly on quantity (1000kg), sea_freight, at a 3x ratio (clean-ish but a third distinct factor from the 1.5x/10x pattern)"
+Asparagus,Peru,Germany,2025-01,1,95.28,0% (n=1),by_air,high,"matches the only Peru-Germany Asparagus raw row exactly on quantity (740kg), by_air -- but flag: raw price is $23.82, not a clean multiple of $95.28 at all (see separate flag on this deal's price integrity)"
+Asparagus,Peru,Spain,2025-03,1,2.444,0% (n=1),UNRESOLVED,none,no Peru-Spain Asparagus deals in the raw file (only Peru-Germany Asparagus appears)
+Asparagus,Peru,Spain,2025-04,2,2.576,0.78%,UNRESOLVED,none,same
+Asparagus,Peru,Spain,2025-06,1,2.474,0% (n=1),UNRESOLVED,none,same
+Asparagus,Peru,Spain,2025-07,2,2.445,0.98%,UNRESOLVED,none,same
+Asparagus,Peru,Spain,2025-08,2,2.4485,1.20%,UNRESOLVED,none,same
+Asparagus,Peru,Spain,2025-10,1,2.42,0% (n=1),UNRESOLVED,none,same
+Avocado,Peru,Spain,2025-03,2,2.216,0.72%,sea_freight,high,both deals match raw rows at an exact 10x ratio
+Avocado,Peru,Spain,2025-04,5,2.159,2.99%,sea_freight,high,"multiple deals in this cluster match raw rows at exact 10x; route is consistently sea_freight"
+Avocado,Peru,Spain,2025-06,1,2.11,0% (n=1),sea_freight,medium-high,matches a raw deal at a near-10x ratio (10.4x)
+Avocado,Peru,Spain,2025-07,2,2.166,2.54%,sea_freight,high,matches raw rows at exact 10x
+Avocado,Peru,Spain,2025-08,2,2.1785,1.08%,sea_freight,high,matches raw rows at exact 10x
+Avocado,Peru,Spain,2025-10,2,2.314,0.27%,sea_freight,medium-high,route-level confidence high (all Peru-Spain Avocado raw rows are sea_freight); exact 10x reconciliation not fully confirmed for this specific month
+Avocado,Peru,Chile,2025-03,1,1.1957,0% (n=1),UNRESOLVED,none,"the one Peru-Chile Avocado raw row is a different quantity entirely (3230kg raw vs 22610kg here) -- genuinely a different deal, not a match"
+Avocado,Peru,Thailand,2025-04,1,2.5,0% (n=1),by_air,high,"matches the only Peru-Thailand Avocado raw row exactly (432kg, AWB air-waybill reference), exact 4x ratio"
+Mixed Berries / Tropical Fruits,Peru,Chile,2024-10,1,2.116,0% (n=1),sea_freight,high,"matches the one Peru-Chile Mixed Berries raw row exactly (1960kg, ""IQF TROPICAL FRUITS 40FT""), exact 10x ratio"
+Mixed Berries / Tropical Fruits,Peru,Chile,2026-01,1,2.333,0% (n=1),UNRESOLVED,none,no second Peru-Chile Mixed Berries raw row exists to match this one
+Mixed Berries / Tropical Fruits,Chile,China,2025-01,2,4.9745,0.85%,UNRESOLVED,none,no Chile-China deals exist anywhere in the 83-row raw file
+Mixed Berries / Tropical Fruits,Chile,China,2025-02,2,4.9555,0.68%,UNRESOLVED,none,same
+Mixed Berries / Tropical Fruits,Chile,China,2025-03,1,4.922,0% (n=1),UNRESOLVED,none,same
+Mixed Berries / Tropical Fruits,Chile,China,2025-04,1,4.933,0% (n=1),UNRESOLVED,none,same
+Mixed Berries / Tropical Fruits,Chile,China,2025-10,1,4.954,0% (n=1),UNRESOLVED,none,same
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-01,1,3.162,0% (n=1),UNRESOLVED,none,no Chile-Hong Kong deals exist anywhere in the 83-row raw file
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-02,1,3.054,0% (n=1),UNRESOLVED,none,same
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-03,1,3.049,0% (n=1),UNRESOLVED,none,same
+Mixed Berries / Tropical Fruits,Chile,Hong Kong,2025-10,1,3.155,0% (n=1),UNRESOLVED,none,same

@@ -211,6 +211,8 @@ export interface MarketIntelPayload {
 export interface MarketIntelRateRequest {
   exporterRuc: string;
   importerName?: string;
+  /** Guard, not a lookup key — the engine holds Peru exports only, so any other origin suppresses the price benchmark and route intelligence rather than borrowing Peru's percentiles. */
+  originCountry?: string;
   destinationCountry?: string;
   variety?: string;
   dealWeek?: string;
