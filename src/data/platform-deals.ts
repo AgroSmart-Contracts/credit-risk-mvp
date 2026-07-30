@@ -27,6 +27,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 38,
+    "shippingStartDate": "2024-06-17T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -39,7 +40,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:08",
+        "generated_at": "2026-07-30T18:19:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -53,9 +54,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20611718579",
         "importer_name": "T.O.F.F. B.V",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
-        "deal_week": null,
+        "deal_week": "2024-06-17/2024-06-23",
         "deal_kg": 21772.415999999997,
         "deal_price_usd_per_kg": 2.7925242655661187
       },
@@ -97,8 +99,25 @@ export const platformDeals: PlatformDealRecord[] = [
         "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
       },
       "dim_b_price_benchmark": {
-        "status": "NEEDS_INPUT",
-        "reason": "variety / destination_country / deal_week required for price benchmark"
+        "variety": "GINGER",
+        "destination_country": "PAISES BAJOS",
+        "deal_week": "2024-06-17/2024-06-23",
+        "window_start": "2023-12-18/2023-12-24",
+        "window_end": "2024-06-10/2024-06-16",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for GINGER up to 2024-06-10/2024-06-16 even at variety-only grain.",
+        "deal_price_usd_per_kg": 2.7925242655661187,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
       },
       "dim_c_route_intelligence": {
         "variety": "GINGER",
@@ -124,8 +143,8 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": null,
-        "commercial_window_alignment": null,
+        "deal_week": "2024-06-17/2024-06-23",
+        "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
@@ -174,6 +193,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30,
+    "shippingStartDate": null,
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -189,8 +209,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "supplier.yearsInBusiness",
       "buyer.yearsInBusiness",
+      "supplier.yearsInBusiness",
       "customs export narrative",
       "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
@@ -217,11 +237,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 10,
-    "numberOfTransshipments": 0,
+    "estimatedTransitDays": 1,
+    "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 15.64,
+    "shippingStartDate": "2024-08-23T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -234,7 +255,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:09",
+        "generated_at": "2026-07-30T18:19:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -248,9 +269,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
-        "destination_country": "BRAZIL",
+        "origin_country": "PERU",
+        "destination_country": "BRASIL",
         "variety": "BLUEBERRY",
-        "deal_week": null,
+        "deal_week": "2024-08-19/2024-08-25",
         "deal_kg": 2310,
         "deal_price_usd_per_kg": 10.426666666666666
       },
@@ -385,43 +407,163 @@ export const platformDeals: PlatformDealRecord[] = [
         "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
       },
       "dim_b_price_benchmark": {
-        "status": "NEEDS_INPUT",
-        "reason": "variety / destination_country / deal_week required for price benchmark"
+        "variety": "BLUEBERRY",
+        "destination_country": "BRASIL",
+        "deal_week": "2024-08-19/2024-08-25",
+        "window_start": "2024-02-19/2024-02-25",
+        "window_end": "2024-08-12/2024-08-18",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-08-12/2024-08-18 even at variety-only grain.",
+        "deal_price_usd_per_kg": 10.426666666666666,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "BRAZIL",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": null,
-        "commercial_window_alignment": null,
-        "route_signal_inferred": "INSUFFICIENT",
+        "destination_country": "BRASIL",
+        "period_label": "2025-01-03 .. 2025-12-28",
+        "n_shipments": 401,
+        "n_exporters": 21,
+        "n_importers": 7,
+        "kg_net": 1346205.15,
+        "fob_usd": 8145367.970000001,
+        "lane_share_of_variety_pct": 0.35,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "AEREO": 82.5,
+          "TERRESTRE": 16.2,
+          "FLUVIAL / LACUSTRE": 1,
+          "MARÍTIMO": 0.2
+        },
+        "exporter_hhi": 2141,
+        "importer_hhi": 2320,
+        "top_exporters": [
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 33.8
+          },
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 26.5
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 12.5
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 9.5
+          },
+          {
+            "exporter_id": "20461642706",
+            "exporter_name": "AGRICOLA CERRO PRIETO S.A.",
+            "share_pct": 5.9
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "1f4f7e98",
+            "importer_name": "BERRYGOOD COMERCIO IMPORTACAO E DISTRIBUICAO DE FRUTAS LTDA",
+            "share_pct": 34.5
+          },
+          {
+            "importer_id": "0a5999ef",
+            "importer_name": "L.A. ALIMENTOS LTDA",
+            "share_pct": 27.7
+          },
+          {
+            "importer_id": "43217f63",
+            "importer_name": "LPD IMPORTACAO E EXPORTACAO LTDA",
+            "share_pct": 14
+          },
+          {
+            "importer_id": "399c30ee",
+            "importer_name": "CAXIENSE FRUTTIN BOX COM E IMP LT",
+            "share_pct": 8.8
+          },
+          {
+            "importer_id": "6c1bf4d6",
+            "importer_name": "GRUPO FARTURA DE HORTIFRUT SA",
+            "share_pct": 8.1
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 97856.72,
+          "2025-02": 51660,
+          "2025-03": 80612.45999999999,
+          "2025-04": 145171.26,
+          "2025-05": 150361.3,
+          "2025-06": 95792.16,
+          "2025-07": 99466.37,
+          "2025-08": 93798.52,
+          "2025-09": 152732.47,
+          "2025-10": 140407.21,
+          "2025-11": 148962.78,
+          "2025-12": 89383.9
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 3,
+        "in_season_weeks": [
+          "2025-01-06/2025-01-12",
+          "2025-02-24/2025-03-02",
+          "2025-03-10/2025-03-16",
+          "2025-03-24/2025-03-30",
+          "2025-04-07/2025-04-13",
+          "2025-04-21/2025-04-27",
+          "2025-04-28/2025-05-04",
+          "2025-05-05/2025-05-11",
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-09/2025-06-15",
+          "2025-06-16/2025-06-22",
+          "2025-07-07/2025-07-13",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-08-11/2025-08-17",
+          "2025-08-25/2025-08-31",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-27/2025-11-02",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2024-08-19/2024-08-25",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": null,
         "route_signal_driver": "NEEDS_INPUT",
         "route_signal_pts": null,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->BRAZIL and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "No corridor row for PE->BRASIL and no pair row for group 1. Add a table entry or supply manually."
         ]
       },
       "dim_d3_pair_history": {
@@ -458,11 +600,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 10,
-    "numberOfTransshipments": 0,
+    "estimatedTransitDays": 1,
+    "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 15.65,
+    "shippingStartDate": "2024-10-15T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -475,7 +618,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:10",
+        "generated_at": "2026-07-30T18:19:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -489,9 +632,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
-        "destination_country": "BRAZIL",
+        "origin_country": "PERU",
+        "destination_country": "BRASIL",
         "variety": "BLUEBERRY",
-        "deal_week": null,
+        "deal_week": "2024-10-14/2024-10-20",
         "deal_kg": 2310,
         "deal_price_usd_per_kg": 10.433333333333334
       },
@@ -626,43 +770,163 @@ export const platformDeals: PlatformDealRecord[] = [
         "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
       },
       "dim_b_price_benchmark": {
-        "status": "NEEDS_INPUT",
-        "reason": "variety / destination_country / deal_week required for price benchmark"
+        "variety": "BLUEBERRY",
+        "destination_country": "BRASIL",
+        "deal_week": "2024-10-14/2024-10-20",
+        "window_start": "2024-04-15/2024-04-21",
+        "window_end": "2024-10-07/2024-10-13",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-10-07/2024-10-13 even at variety-only grain.",
+        "deal_price_usd_per_kg": 10.433333333333334,
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "BRAZIL",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": null,
-        "commercial_window_alignment": null,
-        "route_signal_inferred": "INSUFFICIENT",
+        "destination_country": "BRASIL",
+        "period_label": "2025-01-03 .. 2025-12-28",
+        "n_shipments": 401,
+        "n_exporters": 21,
+        "n_importers": 7,
+        "kg_net": 1346205.15,
+        "fob_usd": 8145367.970000001,
+        "lane_share_of_variety_pct": 0.35,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "AEREO": 82.5,
+          "TERRESTRE": 16.2,
+          "FLUVIAL / LACUSTRE": 1,
+          "MARÍTIMO": 0.2
+        },
+        "exporter_hhi": 2141,
+        "importer_hhi": 2320,
+        "top_exporters": [
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 33.8
+          },
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 26.5
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 12.5
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 9.5
+          },
+          {
+            "exporter_id": "20461642706",
+            "exporter_name": "AGRICOLA CERRO PRIETO S.A.",
+            "share_pct": 5.9
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "1f4f7e98",
+            "importer_name": "BERRYGOOD COMERCIO IMPORTACAO E DISTRIBUICAO DE FRUTAS LTDA",
+            "share_pct": 34.5
+          },
+          {
+            "importer_id": "0a5999ef",
+            "importer_name": "L.A. ALIMENTOS LTDA",
+            "share_pct": 27.7
+          },
+          {
+            "importer_id": "43217f63",
+            "importer_name": "LPD IMPORTACAO E EXPORTACAO LTDA",
+            "share_pct": 14
+          },
+          {
+            "importer_id": "399c30ee",
+            "importer_name": "CAXIENSE FRUTTIN BOX COM E IMP LT",
+            "share_pct": 8.8
+          },
+          {
+            "importer_id": "6c1bf4d6",
+            "importer_name": "GRUPO FARTURA DE HORTIFRUT SA",
+            "share_pct": 8.1
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 97856.72,
+          "2025-02": 51660,
+          "2025-03": 80612.45999999999,
+          "2025-04": 145171.26,
+          "2025-05": 150361.3,
+          "2025-06": 95792.16,
+          "2025-07": 99466.37,
+          "2025-08": 93798.52,
+          "2025-09": 152732.47,
+          "2025-10": 140407.21,
+          "2025-11": 148962.78,
+          "2025-12": 89383.9
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 3,
+        "in_season_weeks": [
+          "2025-01-06/2025-01-12",
+          "2025-02-24/2025-03-02",
+          "2025-03-10/2025-03-16",
+          "2025-03-24/2025-03-30",
+          "2025-04-07/2025-04-13",
+          "2025-04-21/2025-04-27",
+          "2025-04-28/2025-05-04",
+          "2025-05-05/2025-05-11",
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-09/2025-06-15",
+          "2025-06-16/2025-06-22",
+          "2025-07-07/2025-07-13",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-08-11/2025-08-17",
+          "2025-08-25/2025-08-31",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-27/2025-11-02",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2024-10-14/2024-10-20",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": null,
         "route_signal_driver": "NEEDS_INPUT",
         "route_signal_pts": null,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->BRAZIL and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "No corridor row for PE->BRASIL and no pair row for group 1. Add a table entry or supply manually."
         ]
       },
       "dim_d3_pair_history": {
@@ -704,6 +968,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9,
+    "shippingStartDate": "2024-12-07T00:00:00.000Z",
     "priorDealsBetweenParties": 1,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -716,7 +981,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:15",
+        "generated_at": "2026-07-30T18:19:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -730,7 +995,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "«Ardzhies» LLC",
-        "destination_country": "RUSSIAN FEDERATION",
+        "origin_country": "ECUADOR",
+        "destination_country": "FEDERACION RUSA",
         "variety": "BLUEBERRY",
         "deal_week": "2024-12-02/2024-12-08",
         "deal_kg": 6426,
@@ -867,61 +1133,12 @@ export const platformDeals: PlatformDealRecord[] = [
         "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
       },
       "dim_b_price_benchmark": {
-        "variety": "BLUEBERRY",
-        "destination_country": "RUSSIAN FEDERATION",
-        "deal_week": "2024-12-02/2024-12-08",
-        "window_start": "2024-06-03/2024-06-09",
-        "window_end": "2024-11-25/2024-12-01",
-        "window_weeks": 0,
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "kg_shipped": 0,
-        "p10": null,
-        "p25": null,
-        "p50": null,
-        "p75": null,
-        "p90": null,
-        "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-11-25/2024-12-01 even at variety-only grain.",
-        "deal_price_usd_per_kg": 6,
-        "deal_vs_p50_pct": null,
-        "deal_vs_p50_band": null
+        "status": "NEEDS_INPUT",
+        "reason": "origin ECUADOR is outside this engine's data (Peru exports only) — Peru corridor percentiles would not be a valid benchmark"
       },
       "dim_c_route_intelligence": {
-        "variety": "BLUEBERRY",
-        "destination_country": "RUSSIAN FEDERATION",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2024-12-02/2024-12-08",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
-        "table_version": "0.1-DRAFT",
-        "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->RUSSIAN FEDERATION and no pair row for group 1. Add a table entry or supply manually."
-        ]
+        "status": "NEEDS_INPUT",
+        "reason": "origin ECUADOR is outside this engine's data (Peru exports only)"
       },
       "dim_d3_pair_history": {
         "status": "NEEDS_INPUT",
@@ -962,6 +1179,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9,
+    "shippingStartDate": "2024-11-20T00:00:00.000Z",
     "priorDealsBetweenParties": 1,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -974,7 +1192,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:21",
+        "generated_at": "2026-07-30T18:19:19",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -988,9 +1206,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "«Ardzhies» LLC",
-        "destination_country": "RUSSIAN FEDERATION",
+        "origin_country": "ECUADOR",
+        "destination_country": "FEDERACION RUSA",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-02/2024-12-08",
+        "deal_week": "2024-11-18/2024-11-24",
         "deal_kg": 11700,
         "deal_price_usd_per_kg": 6
       },
@@ -1125,61 +1344,12 @@ export const platformDeals: PlatformDealRecord[] = [
         "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
       },
       "dim_b_price_benchmark": {
-        "variety": "BLUEBERRY",
-        "destination_country": "RUSSIAN FEDERATION",
-        "deal_week": "2024-12-02/2024-12-08",
-        "window_start": "2024-06-03/2024-06-09",
-        "window_end": "2024-11-25/2024-12-01",
-        "window_weeks": 0,
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "kg_shipped": 0,
-        "p10": null,
-        "p25": null,
-        "p50": null,
-        "p75": null,
-        "p90": null,
-        "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-11-25/2024-12-01 even at variety-only grain.",
-        "deal_price_usd_per_kg": 6,
-        "deal_vs_p50_pct": null,
-        "deal_vs_p50_band": null
+        "status": "NEEDS_INPUT",
+        "reason": "origin ECUADOR is outside this engine's data (Peru exports only) — Peru corridor percentiles would not be a valid benchmark"
       },
       "dim_c_route_intelligence": {
-        "variety": "BLUEBERRY",
-        "destination_country": "RUSSIAN FEDERATION",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2024-12-02/2024-12-08",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
-        "table_version": "0.1-DRAFT",
-        "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->RUSSIAN FEDERATION and no pair row for group 1. Add a table entry or supply manually."
-        ]
+        "status": "NEEDS_INPUT",
+        "reason": "origin ECUADOR is outside this engine's data (Peru exports only)"
       },
       "dim_d3_pair_history": {
         "status": "NEEDS_INPUT",
@@ -1215,11 +1385,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 25,
+    "shippingStartDate": "2024-12-30T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -1232,7 +1403,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:26",
+        "generated_at": "2026-07-30T18:19:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1246,9 +1417,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-09/2024-12-15",
+        "deal_week": "2024-12-30/2025-01-05",
         "deal_kg": 4320,
         "deal_price_usd_per_kg": 16.666666666666668
       },
@@ -1462,9 +1634,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2024-12-09/2024-12-15",
-        "window_start": "2024-06-10/2024-06-16",
-        "window_end": "2024-12-02/2024-12-08",
+        "deal_week": "2024-12-30/2025-01-05",
+        "window_start": "2024-07-01/2024-07-07",
+        "window_end": "2024-12-23/2024-12-29",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -1475,7 +1647,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-02/2024-12-08 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-23/2024-12-29 even at variety-only grain.",
         "deal_price_usd_per_kg": 16.666666666666668,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -1605,8 +1777,8 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2024-12-09/2024-12-15",
-        "commercial_window_alignment": "OFF_SEASON",
+        "deal_week": "2024-12-30/2025-01-05",
+        "commercial_window_alignment": "SHOULDER",
         "route_signal_inferred": "MED",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
@@ -1614,8 +1786,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
         ]
       },
       "dim_d3_pair_history": {
@@ -1670,11 +1841,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 30,
+    "shippingStartDate": "2024-10-28T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -1687,7 +1859,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:30",
+        "generated_at": "2026-07-30T18:19:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -1701,9 +1873,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "BC NATURE QUALITY FRUITS S.L",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-09/2024-12-15",
+        "deal_week": "2024-10-28/2024-11-03",
         "deal_kg": 2904,
         "deal_price_usd_per_kg": 9.090909090909092
       },
@@ -1840,9 +2013,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ESPANA",
-        "deal_week": "2024-12-09/2024-12-15",
-        "window_start": "2024-06-10/2024-06-16",
-        "window_end": "2024-12-02/2024-12-08",
+        "deal_week": "2024-10-28/2024-11-03",
+        "window_start": "2024-04-29/2024-05-05",
+        "window_end": "2024-10-21/2024-10-27",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -1853,7 +2026,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-02/2024-12-08 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-10-21/2024-10-27 even at variety-only grain.",
         "deal_price_usd_per_kg": 9.090909090909092,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -1862,90 +2035,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "ESPANA",
         "period_label": "2025-01-01 .. 2025-12-27",
-        "n_shipments": 725,
-        "n_exporters": 45,
-        "n_importers": 19,
-        "kg_net": 5779098.850000001,
-        "fob_usd": 29478943.76,
-        "lane_share_of_variety_pct": 1.51,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 740,
+        "n_exporters": 48,
+        "n_importers": 25,
+        "kg_net": 5916027.03,
+        "fob_usd": 29757886.049999997,
+        "lane_share_of_variety_pct": 1.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 52.1,
-          "AEREO": 47.9
+          "MARITIMO": 51.1,
+          "AEREO": 46.9,
+          "MARÍTIMO": 1.9,
+          "AÉREO": 0.1
         },
-        "exporter_hhi": 1232,
-        "importer_hhi": 1820,
+        "exporter_hhi": 1183,
+        "importer_hhi": 1560,
         "top_exporters": [
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 22.3
+            "share_pct": 21.8
           },
           {
             "exporter_id": "20612065668",
             "exporter_name": "POB S.A.C.",
-            "share_pct": 18.2
+            "share_pct": 17.8
           },
           {
             "exporter_id": "20297939131",
             "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 16.3
+            "share_pct": 15.9
           },
           {
             "exporter_id": "20605814957",
             "exporter_name": "DIAMOND BRIDGE S.A.C.",
-            "share_pct": 6.7
+            "share_pct": 6.5
           },
           {
             "exporter_id": "20608170732",
             "exporter_name": "AGRICOLA BLUE GOLD S.A.C.",
-            "share_pct": 6.3
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "563d655f",
             "importer_name": "HORTIFRUT MARKETING EMEA S.A",
-            "share_pct": 32.8
+            "share_pct": 30.2
           },
           {
             "importer_id": "0496e955",
             "importer_name": "GLOBAL BERRY S.L.",
-            "share_pct": 19.6
+            "share_pct": 18
           },
           {
             "importer_id": "35f24a46",
             "importer_name": "SUREXPORT COMPANIA AGRARIA. S.L.",
-            "share_pct": 11
+            "share_pct": 10.1
           },
           {
             "importer_id": "c28866ed",
             "importer_name": "IDEAL FRUITS SL",
-            "share_pct": 10.3
+            "share_pct": 9.5
           },
           {
             "importer_id": "e79fc370",
             "importer_name": "CHAMPI?ONES Y SETAS GIMENEZ SL",
-            "share_pct": 10.2
+            "share_pct": 9.4
           }
         ],
         "monthly_kg": {
-          "2025-01": 318837.76,
-          "2025-02": 1020,
-          "2025-05": 14850,
-          "2025-06": 26591.8,
+          "2025-01": 318842.94,
+          "2025-02": 23052,
+          "2025-03": 44650,
+          "2025-04": 22976,
+          "2025-05": 14853,
+          "2025-06": 51773.8,
           "2025-07": 388097.3,
           "2025-08": 861202.12,
           "2025-09": 1442360.9,
           "2025-10": 1365241.54,
           "2025-11": 993259.73,
-          "2025-12": 367637.7
+          "2025-12": 389717.7
         },
         "peak_month": "2025-09",
-        "off_peak_month": "2025-02",
-        "peak_off_ratio": 1414.1,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 97.1,
         "in_season_weeks": [
           "2024-12-30/2025-01-05",
           "2025-01-13/2025-01-19",
@@ -1972,8 +2149,8 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-01/2025-12-07",
           "2025-12-08/2025-12-14"
         ],
-        "lane_maturity": "ESTABLISHED",
-        "deal_week": "2024-12-09/2024-12-15",
+        "lane_maturity": "DEEP",
+        "deal_week": "2024-10-28/2024-11-03",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": "LOW_MED",
@@ -2022,11 +2199,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 3,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 33.6,
+    "shippingStartDate": "2024-12-11T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -2039,7 +2217,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:34",
+        "generated_at": "2026-07-30T18:19:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2053,6 +2231,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
         "deal_week": "2024-12-09/2024-12-15",
@@ -2214,92 +2393,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -2371,11 +2552,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 3,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.57,
+    "shippingStartDate": "2024-12-11T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -2388,7 +2570,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:38",
+        "generated_at": "2026-07-30T18:19:36",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2402,6 +2584,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
         "deal_week": "2024-12-09/2024-12-15",
@@ -2563,92 +2746,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -2720,11 +2905,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 3,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 47.67,
+    "shippingStartDate": "2024-09-24T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -2737,7 +2923,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:43",
+        "generated_at": "2026-07-30T18:19:40",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -2751,9 +2937,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-09/2024-12-15",
+        "deal_week": "2024-09-23/2024-09-29",
         "deal_kg": 2691.2000000000003,
         "deal_price_usd_per_kg": 14.896875
       },
@@ -2890,9 +3077,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
-        "deal_week": "2024-12-09/2024-12-15",
-        "window_start": "2024-06-10/2024-06-16",
-        "window_end": "2024-12-02/2024-12-08",
+        "deal_week": "2024-09-23/2024-09-29",
+        "window_start": "2024-03-25/2024-03-31",
+        "window_end": "2024-09-16/2024-09-22",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -2903,7 +3090,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-02/2024-12-08 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-09-16/2024-09-22 even at variety-only grain.",
         "deal_price_usd_per_kg": 14.896875,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -2912,92 +3099,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -3022,7 +3211,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-15/2025-12-21"
         ],
         "lane_maturity": "DEEP",
-        "deal_week": "2024-12-09/2024-12-15",
+        "deal_week": "2024-09-23/2024-09-29",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": "HIGH",
@@ -3069,11 +3258,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 3,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 40.08,
+    "shippingStartDate": "2024-10-30T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -3086,7 +3276,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:47",
+        "generated_at": "2026-07-30T18:19:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3100,9 +3290,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-09/2024-12-15",
+        "deal_week": "2024-10-28/2024-11-03",
         "deal_kg": 2816,
         "deal_price_usd_per_kg": 12.525
       },
@@ -3239,9 +3430,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
-        "deal_week": "2024-12-09/2024-12-15",
-        "window_start": "2024-06-10/2024-06-16",
-        "window_end": "2024-12-02/2024-12-08",
+        "deal_week": "2024-10-28/2024-11-03",
+        "window_start": "2024-04-29/2024-05-05",
+        "window_end": "2024-10-21/2024-10-27",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -3252,7 +3443,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-02/2024-12-08 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-10-21/2024-10-27 even at variety-only grain.",
         "deal_price_usd_per_kg": 12.525,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -3261,92 +3452,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -3371,7 +3564,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-15/2025-12-21"
         ],
         "lane_maturity": "DEEP",
-        "deal_week": "2024-12-09/2024-12-15",
+        "deal_week": "2024-10-28/2024-11-03",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": "HIGH",
@@ -3418,11 +3611,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 28,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 21.13,
+    "shippingStartDate": "2024-08-29T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -3435,7 +3629,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:51",
+        "generated_at": "2026-07-30T18:19:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3449,9 +3643,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "A.S.M International",
+        "origin_country": "PERU",
         "destination_country": "INDIA",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-16/2024-12-22",
+        "deal_week": "2024-08-26/2024-09-01",
         "deal_kg": 1440,
         "deal_price_usd_per_kg": 14.086666666666666
       },
@@ -3588,9 +3783,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "INDIA",
-        "deal_week": "2024-12-16/2024-12-22",
-        "window_start": "2024-06-17/2024-06-23",
-        "window_end": "2024-12-09/2024-12-15",
+        "deal_week": "2024-08-26/2024-09-01",
+        "window_start": "2024-02-26/2024-03-03",
+        "window_end": "2024-08-19/2024-08-25",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -3601,7 +3796,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-09/2024-12-15 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-08-19/2024-08-25 even at variety-only grain.",
         "deal_price_usd_per_kg": 14.086666666666666,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -3720,7 +3915,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2024-12-16/2024-12-22",
+        "deal_week": "2024-08-26/2024-09-01",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": null,
@@ -3768,11 +3963,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 3,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 33.6,
+    "shippingStartDate": "2024-09-01T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -3785,7 +3981,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:55",
+        "generated_at": "2026-07-30T18:19:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -3799,9 +3995,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-16/2024-12-22",
+        "deal_week": "2024-08-26/2024-09-01",
         "deal_kg": 2240,
         "deal_price_usd_per_kg": 12
       },
@@ -3938,9 +4135,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
-        "deal_week": "2024-12-16/2024-12-22",
-        "window_start": "2024-06-17/2024-06-23",
-        "window_end": "2024-12-09/2024-12-15",
+        "deal_week": "2024-08-26/2024-09-01",
+        "window_start": "2024-02-26/2024-03-03",
+        "window_end": "2024-08-19/2024-08-25",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -3951,7 +4148,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-09/2024-12-15 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-08-19/2024-08-25 even at variety-only grain.",
         "deal_price_usd_per_kg": 12,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -3960,92 +4157,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -4070,7 +4269,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-15/2025-12-21"
         ],
         "lane_maturity": "DEEP",
-        "deal_week": "2024-12-16/2024-12-22",
+        "deal_week": "2024-08-26/2024-09-01",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": "HIGH",
@@ -4117,11 +4316,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 10,
-    "numberOfTransshipments": 0,
+    "estimatedTransitDays": 1,
+    "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 15.65,
+    "shippingStartDate": "2024-08-22T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -4134,7 +4334,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:09:59",
+        "generated_at": "2026-07-30T18:19:58",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4148,9 +4348,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
-        "destination_country": "BRAZIL",
+        "origin_country": "PERU",
+        "destination_country": "BRASIL",
         "variety": "BLUEBERRY",
-        "deal_week": "2024-12-16/2024-12-22",
+        "deal_week": "2024-08-19/2024-08-25",
         "deal_kg": 2310,
         "deal_price_usd_per_kg": 10.433333333333334
       },
@@ -4281,15 +4482,79 @@ export const platformDeals: PlatformDealRecord[] = [
         "d2_years_in_business_signal": "NEEDS_INPUT"
       },
       "dim_a_buyer": {
-        "status": "NEEDS_INPUT",
-        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+        "entity_id": "4fc92a0b",
+        "entity_side": "importer",
+        "entity_name": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+        "destination_country": "BRASIL",
+        "as_of": "2025-12-31",
+        "first_seen": "2025-07-18",
+        "last_seen": "2025-10-01",
+        "vintage_months": 5,
+        "months_active_12mo": 2,
+        "total_shipments": 2,
+        "total_kg_net": 3690,
+        "total_fob_usd": 25985.82,
+        "avg_monthly_kg_last_6mo": 615,
+        "avg_monthly_kg_last_12mo": 308,
+        "peak_monthly_kg": 2160,
+        "peak_monthly_kg_month": "2025-10",
+        "wavg_usd_per_kg": 7.042,
+        "peru_variety_share_pct": {
+          "BLUEBERRY": 0
+        },
+        "variety_mix": [
+          {
+            "variety": "BLUEBERRY",
+            "share_pct": 100,
+            "wavg_usd_kg": 7.042
+          }
+        ],
+        "top_partners": [
+          {
+            "partner_id": "20610068767",
+            "partner_name": "AQU ANQA II S.A.C.",
+            "kg_net": 2160,
+            "share_pct": 58.5
+          },
+          {
+            "partner_id": "20104902864",
+            "partner_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "kg_net": 1530,
+            "share_pct": 41.5
+          }
+        ],
+        "top_destinations": null,
+        "price_positioning": {
+          "BLUEBERRY": {
+            "entity_wavg_usd_kg": 7.042,
+            "peru_wavg_usd_kg": 5.119,
+            "variance_pct": 37.6,
+            "position": "PREMIUM"
+          }
+        },
+        "corridor_positioning": [],
+        "activity_consistency": 0.4,
+        "consecutive_month_streak": 1,
+        "capacity_check": {
+          "deal_kg": 2310,
+          "baseline_monthly_kg": 308,
+          "deal_vs_baseline_pct": 751.2,
+          "peak_monthly_kg": 2160,
+          "deal_vs_peak_pct": 106.9,
+          "flag": "OVER_CAPACITY_FLAG"
+        },
+        "confidence": "LOW",
+        "vintage_note": "customs-derived vintage limited to the ingested period (12 months). Treat as NEEDS_INPUT for CRAM Dim A years-in-business until multi-year files are appended (or use SUNAT lookup).",
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": "BRAZIL",
-        "deal_week": "2024-12-16/2024-12-22",
-        "window_start": "2024-06-17/2024-06-23",
-        "window_end": "2024-12-09/2024-12-15",
+        "destination_country": "BRASIL",
+        "deal_week": "2024-08-19/2024-08-25",
+        "window_start": "2024-02-19/2024-02-25",
+        "window_end": "2024-08-12/2024-08-18",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -4300,50 +4565,171 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-12-09/2024-12-15 even at variety-only grain.",
+        "fallback_note": "No usable shipments for BLUEBERRY up to 2024-08-12/2024-08-18 even at variety-only grain.",
         "deal_price_usd_per_kg": 10.433333333333334,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "BRAZIL",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2024-12-16/2024-12-22",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "destination_country": "BRASIL",
+        "period_label": "2025-01-03 .. 2025-12-28",
+        "n_shipments": 401,
+        "n_exporters": 21,
+        "n_importers": 7,
+        "kg_net": 1346205.15,
+        "fob_usd": 8145367.970000001,
+        "lane_share_of_variety_pct": 0.35,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "AEREO": 82.5,
+          "TERRESTRE": 16.2,
+          "FLUVIAL / LACUSTRE": 1,
+          "MARÍTIMO": 0.2
+        },
+        "exporter_hhi": 2141,
+        "importer_hhi": 2320,
+        "top_exporters": [
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 33.8
+          },
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 26.5
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 12.5
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 9.5
+          },
+          {
+            "exporter_id": "20461642706",
+            "exporter_name": "AGRICOLA CERRO PRIETO S.A.",
+            "share_pct": 5.9
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "1f4f7e98",
+            "importer_name": "BERRYGOOD COMERCIO IMPORTACAO E DISTRIBUICAO DE FRUTAS LTDA",
+            "share_pct": 34.5
+          },
+          {
+            "importer_id": "0a5999ef",
+            "importer_name": "L.A. ALIMENTOS LTDA",
+            "share_pct": 27.7
+          },
+          {
+            "importer_id": "43217f63",
+            "importer_name": "LPD IMPORTACAO E EXPORTACAO LTDA",
+            "share_pct": 14
+          },
+          {
+            "importer_id": "399c30ee",
+            "importer_name": "CAXIENSE FRUTTIN BOX COM E IMP LT",
+            "share_pct": 8.8
+          },
+          {
+            "importer_id": "6c1bf4d6",
+            "importer_name": "GRUPO FARTURA DE HORTIFRUT SA",
+            "share_pct": 8.1
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 97856.72,
+          "2025-02": 51660,
+          "2025-03": 80612.45999999999,
+          "2025-04": 145171.26,
+          "2025-05": 150361.3,
+          "2025-06": 95792.16,
+          "2025-07": 99466.37,
+          "2025-08": 93798.52,
+          "2025-09": 152732.47,
+          "2025-10": 140407.21,
+          "2025-11": 148962.78,
+          "2025-12": 89383.9
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 3,
+        "in_season_weeks": [
+          "2025-01-06/2025-01-12",
+          "2025-02-24/2025-03-02",
+          "2025-03-10/2025-03-16",
+          "2025-03-24/2025-03-30",
+          "2025-04-07/2025-04-13",
+          "2025-04-21/2025-04-27",
+          "2025-04-28/2025-05-04",
+          "2025-05-05/2025-05-11",
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-09/2025-06-15",
+          "2025-06-16/2025-06-22",
+          "2025-07-07/2025-07-13",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-08-11/2025-08-17",
+          "2025-08-25/2025-08-31",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-27/2025-11-02",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2024-08-19/2024-08-25",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": null,
         "route_signal_driver": "NEEDS_INPUT",
         "route_signal_pts": null,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->BRAZIL and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "No corridor row for PE->BRASIL and no pair row for group 1. Add a table entry or supply manually."
         ]
       },
       "dim_d3_pair_history": {
-        "status": "NEEDS_INPUT",
-        "reason": "exporter + importer required for pair history"
+        "exporter_id": "20608082281",
+        "exporter_name": null,
+        "importer_id": "4fc92a0b",
+        "importer_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_shipment": null,
+        "last_shipment": null,
+        "months_since_last": null,
+        "n_prior_shipments": 0,
+        "n_prior_last_12mo": 0,
+        "months_active_together": 0,
+        "cumulative_kg_net": 0,
+        "cumulative_fob_usd": 0,
+        "avg_ticket_kg": null,
+        "price_stability_cv": null,
+        "primary_variety": null,
+        "primary_destination": null,
+        "d3_indicative_pts": -12,
+        "relationship_signal": "FIRST_TIME"
       }
     },
     "htmlFormulaScore": null,
@@ -4365,7 +4751,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "740 x 250G Boxes",
     "dealValueUSD": 17626.8,
     "origin": "Callao, Peru",
-    "destination": "Frankurt AM Main, Germany",
+    "destination": "Frankurt Am Main, Germany",
     "buyerName": "ANTERRA FARMS GMBH",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 4,
@@ -4375,11 +4761,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 26,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.82,
+    "shippingStartDate": "2025-01-20T00:00:00.000Z",
     "priorDealsBetweenParties": 1,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -4392,7 +4779,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:03",
+        "generated_at": "2026-07-30T18:20:02",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4406,9 +4793,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "ANTERRA FARMS GMBH",
+        "origin_country": "PERU",
         "destination_country": "ALEMANIA",
         "variety": "ASPARAGUS",
-        "deal_week": "2025-01-06/2025-01-12",
+        "deal_week": "2025-01-20/2025-01-26",
         "deal_kg": 185,
         "deal_price_usd_per_kg": 95.28
       },
@@ -4545,9 +4933,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "ASPARAGUS",
         "destination_country": "ALEMANIA",
-        "deal_week": "2025-01-06/2025-01-12",
-        "window_start": "2024-07-08/2024-07-14",
-        "window_end": "2024-12-30/2025-01-05",
+        "deal_week": "2025-01-20/2025-01-26",
+        "window_start": "2024-07-22/2024-07-28",
+        "window_end": "2025-01-13/2025-01-19",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -4558,7 +4946,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for ASPARAGUS up to 2024-12-30/2025-01-05 even at variety-only grain.",
+        "fallback_note": "No usable shipments for ASPARAGUS up to 2025-01-13/2025-01-19 even at variety-only grain.",
         "deal_price_usd_per_kg": 95.28,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -4587,7 +4975,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-01-06/2025-01-12",
+        "deal_week": "2025-01-20/2025-01-26",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "HIGH",
@@ -4625,7 +5013,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "740 x 250G Boxes",
     "dealValueUSD": 17626.8,
     "origin": "Callao, Peru",
-    "destination": "Frankurt AM Main, Germany",
+    "destination": "Frankurt Am Main, Germany",
     "buyerName": "ANTERRA FARMS GMBH",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 4,
@@ -4635,11 +5023,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 26,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.82,
+    "shippingStartDate": "2024-08-20T00:00:00.000Z",
     "priorDealsBetweenParties": 1,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -4652,7 +5041,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:08",
+        "generated_at": "2026-07-30T18:20:06",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4666,9 +5055,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "ANTERRA FARMS GMBH",
+        "origin_country": "PERU",
         "destination_country": "ALEMANIA",
         "variety": "ASPARAGUS",
-        "deal_week": "2025-01-06/2025-01-12",
+        "deal_week": "2024-08-19/2024-08-25",
         "deal_kg": 185,
         "deal_price_usd_per_kg": 95.28
       },
@@ -4805,9 +5195,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "ASPARAGUS",
         "destination_country": "ALEMANIA",
-        "deal_week": "2025-01-06/2025-01-12",
-        "window_start": "2024-07-08/2024-07-14",
-        "window_end": "2024-12-30/2025-01-05",
+        "deal_week": "2024-08-19/2024-08-25",
+        "window_start": "2024-02-19/2024-02-25",
+        "window_end": "2024-08-12/2024-08-18",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -4818,7 +5208,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for ASPARAGUS up to 2024-12-30/2025-01-05 even at variety-only grain.",
+        "fallback_note": "No usable shipments for ASPARAGUS up to 2024-08-12/2024-08-18 even at variety-only grain.",
         "deal_price_usd_per_kg": 95.28,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -4847,7 +5237,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-01-06/2025-01-12",
+        "deal_week": "2024-08-19/2024-08-25",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "HIGH",
@@ -4900,6 +5290,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.16,
+    "shippingStartDate": "2024-10-28T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -4912,7 +5303,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:13",
+        "generated_at": "2026-07-30T18:20:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -4926,9 +5317,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+        "origin_country": "PERU",
         "destination_country": "CHILE",
         "variety": "MANGO",
-        "deal_week": "2025-01-06/2025-01-12",
+        "deal_week": "2024-10-28/2024-11-03",
         "deal_kg": 19600,
         "deal_price_usd_per_kg": 2.116
       },
@@ -5153,23 +5545,23 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANGO",
         "destination_country": "CHILE",
-        "deal_week": "2025-01-06/2025-01-12",
-        "window_start": "2024-12-02/2024-12-08",
-        "window_end": "2024-12-30/2025-01-05",
-        "window_weeks": 5,
-        "n_shipments": 5,
-        "n_exporters": 2,
-        "kg_shipped": 107983.29000000001,
-        "p10": 1.4166666666666667,
-        "p25": 1.4307095846354168,
-        "p50": 1.7556636559873773,
-        "p75": 1.8500001875435257,
-        "p90": 1.8500001875435257,
-        "confidence": "MED",
-        "fallback_note": null,
+        "deal_week": "2024-10-28/2024-11-03",
+        "window_start": "2024-04-29/2024-05-05",
+        "window_end": "2024-10-21/2024-10-27",
+        "window_weeks": 0,
+        "n_shipments": 0,
+        "n_exporters": 0,
+        "kg_shipped": 0,
+        "p10": null,
+        "p25": null,
+        "p50": null,
+        "p75": null,
+        "p90": null,
+        "confidence": "NEEDS_INPUT",
+        "fallback_note": "No usable shipments for MANGO up to 2024-10-21/2024-10-27 even at variety-only grain.",
         "deal_price_usd_per_kg": 2.116,
-        "deal_vs_p50_pct": 20.52,
-        "deal_vs_p50_band": "OUTSIDE_BAND"
+        "deal_vs_p50_pct": null,
+        "deal_vs_p50_band": null
       },
       "dim_c_route_intelligence": {
         "variety": "MANGO",
@@ -5278,9 +5670,9 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-08-11/2025-08-17"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-01-06/2025-01-12",
-        "commercial_window_alignment": "IN_SEASON",
-        "route_signal_inferred": "LOW",
+        "deal_week": "2024-10-28/2024-11-03",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": null,
         "route_signal_driver": "NEEDS_INPUT",
         "route_signal_pts": null,
@@ -5288,6 +5680,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
           "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "No corridor row for PE->CHILE and no pair row for group None. Add a table entry or supply manually."
         ]
       },
@@ -5344,11 +5737,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 28,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
+    "shippingStartDate": "2025-01-17T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -5361,7 +5755,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:16",
+        "generated_at": "2026-07-30T18:20:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5375,6 +5769,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "A.S.M International",
+        "origin_country": "PERU",
         "destination_country": "INDIA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-01-13/2025-01-19",
@@ -5692,11 +6087,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 28,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
+    "shippingStartDate": "2025-01-26T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -5709,7 +6105,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:21",
+        "generated_at": "2026-07-30T18:20:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -5723,9 +6119,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "A.S.M International",
+        "origin_country": "PERU",
         "destination_country": "INDIA",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-01-27/2025-02-02",
+        "deal_week": "2025-01-20/2025-01-26",
         "deal_kg": 2160,
         "deal_price_usd_per_kg": 12
       },
@@ -5862,22 +6259,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "INDIA",
-        "deal_week": "2025-01-27/2025-02-02",
-        "window_start": "2024-12-30/2025-01-05",
-        "window_end": "2025-01-20/2025-01-26",
+        "deal_week": "2025-01-20/2025-01-26",
+        "window_start": "2024-12-23/2024-12-29",
+        "window_end": "2025-01-13/2025-01-19",
         "window_weeks": 4,
-        "n_shipments": 37,
+        "n_shipments": 20,
         "n_exporters": 7,
-        "kg_shipped": 77760,
-        "p10": 3.7561564444444446,
-        "p25": 4.046491975308642,
-        "p50": 6.86252,
-        "p75": 7.336943985307622,
-        "p90": 9.355083222222222,
+        "kg_shipped": 37440,
+        "p10": 3.8068509259259256,
+        "p25": 5.528266203703703,
+        "p50": 6.831166666666666,
+        "p75": 7.299780092592592,
+        "p90": 9.262208888888889,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 12,
-        "deal_vs_p50_pct": 74.86,
+        "deal_vs_p50_pct": 75.67,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -5994,8 +6391,8 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-01-27/2025-02-02",
-        "commercial_window_alignment": "SHOULDER",
+        "deal_week": "2025-01-20/2025-01-26",
+        "commercial_window_alignment": "IN_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": null,
         "route_signal_driver": "NEEDS_INPUT",
@@ -6040,11 +6437,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 28,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
+    "shippingStartDate": "2025-02-07T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -6057,7 +6455,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:25",
+        "generated_at": "2026-07-30T18:20:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6071,6 +6469,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "A.S.M International",
+        "origin_country": "PERU",
         "destination_country": "INDIA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-02-03/2025-02-09",
@@ -6394,6 +6793,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-03-11T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -6406,7 +6806,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:29",
+        "generated_at": "2026-07-30T18:20:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6420,6 +6820,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-03-10/2025-03-16",
@@ -6465,58 +6866,143 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-03-10/2025-03-16",
         "window_start": "2024-09-09/2024-09-15",
         "window_end": "2025-03-03/2025-03-09",
         "window_weeks": 26,
-        "n_shipments": 147,
-        "n_exporters": 20,
-        "kg_shipped": 1479646.18,
-        "p10": 2.401937220468264,
-        "p25": 2.48,
-        "p50": 2.7523426022628374,
-        "p75": 3.1501914774990003,
-        "p90": 3.50566278602918,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "n_shipments": 8,
+        "n_exporters": 3,
+        "kg_shipped": 57327.15000000001,
+        "p10": 2.322301938830294,
+        "p25": 2.662071976612763,
+        "p50": 2.7121993581375112,
+        "p75": 2.7433825337249784,
+        "p90": 3.191272921350959,
+        "confidence": "LOW",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.2,
-        "deal_vs_p50_pct": -20.07,
+        "deal_vs_p50_pct": -18.89,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-03-10/2025-03-16",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -6544,7 +7030,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3230 x CAJAS DE 10 KG Y 4 KG",
     "dealValueUSD": 27035.1,
     "origin": "Callao, Peru",
-    "destination": "SAN Antonio, Chile",
+    "destination": "San Antonio, Chile",
     "buyerName": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
     "supplierName": "BIO FARMING PERU S.A.C.",
     "buyerYib": 8,
@@ -6559,6 +7045,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 8.37,
+    "shippingStartDate": "2025-03-22T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -6571,7 +7058,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:33",
+        "generated_at": "2026-07-30T18:20:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6585,9 +7072,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+        "origin_country": "PERU",
         "destination_country": "CHILE",
         "variety": "AVOCADO",
-        "deal_week": "2025-03-24/2025-03-30",
+        "deal_week": "2025-03-17/2025-03-23",
         "deal_kg": 32300,
         "deal_price_usd_per_kg": 0.837
       },
@@ -6719,18 +7207,18 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
         "destination_country": "CHILE",
-        "deal_week": "2025-03-24/2025-03-30",
-        "window_start": "2025-02-10/2025-02-16",
-        "window_end": "2025-03-17/2025-03-23",
-        "window_weeks": 6,
+        "deal_week": "2025-03-17/2025-03-23",
+        "window_start": "2025-01-27/2025-02-02",
+        "window_end": "2025-03-10/2025-03-16",
+        "window_weeks": 7,
         "n_shipments": 13,
-        "n_exporters": 5,
-        "kg_shipped": 100324,
-        "p10": 1.6211199697542533,
+        "n_exporters": 4,
+        "kg_shipped": 113924,
+        "p10": 1.705470820415879,
         "p25": 2.4499999999999997,
         "p50": 2.45,
-        "p75": 2.493381542736512,
-        "p90": 3.0843534,
+        "p75": 2.45,
+        "p90": 2.653109856012188,
         "confidence": "MED",
         "fallback_note": null,
         "deal_price_usd_per_kg": 0.837,
@@ -6848,8 +7336,8 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-01/2025-12-07"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-03-24/2025-03-30",
-        "commercial_window_alignment": "SHOULDER",
+        "deal_week": "2025-03-17/2025-03-23",
+        "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": null,
         "route_signal_driver": "NEEDS_INPUT",
@@ -6858,6 +7346,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
           "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "No corridor row for PE->CHILE and no pair row for group 2. Add a table entry or supply manually."
         ]
       },
@@ -6918,6 +7407,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-04-01T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -6930,7 +7420,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:37",
+        "generated_at": "2026-07-30T18:20:35",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -6944,9 +7434,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
-        "deal_week": "2025-03-24/2025-03-30",
+        "deal_week": "2025-03-31/2025-04-06",
         "deal_kg": 24000,
         "deal_price_usd_per_kg": 2.2
       },
@@ -6989,58 +7480,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
-        "deal_week": "2025-03-24/2025-03-30",
-        "window_start": "2024-09-23/2024-09-29",
-        "window_end": "2025-03-17/2025-03-23",
-        "window_weeks": 26,
-        "n_shipments": 184,
-        "n_exporters": 24,
-        "kg_shipped": 1917394.8199999998,
-        "p10": 2.4223329166666665,
-        "p25": 2.5788305452539118,
-        "p50": 2.8349468414342054,
-        "p75": 3.215660243001412,
-        "p90": 3.5189159550255558,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "ESPANA",
+        "deal_week": "2025-03-31/2025-04-06",
+        "window_start": "2025-02-24/2025-03-02",
+        "window_end": "2025-03-24/2025-03-30",
+        "window_weeks": 5,
+        "n_shipments": 7,
+        "n_exporters": 2,
+        "kg_shipped": 108698.7,
+        "p10": 2.3066384324244553,
+        "p25": 2.65,
+        "p50": 2.685936248912098,
+        "p75": 2.75,
+        "p90": 3.293469748134215,
+        "confidence": "MED",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.2,
-        "deal_vs_p50_pct": -22.4,
+        "deal_vs_p50_pct": -18.09,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-03-24/2025-03-30",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2025-03-31/2025-04-06",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -7078,11 +7655,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 25,
+    "shippingStartDate": "2025-02-15T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -7095,7 +7673,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:41",
+        "generated_at": "2026-07-30T18:20:40",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7109,9 +7687,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-03-31/2025-04-06",
+        "deal_week": "2025-02-10/2025-02-16",
         "deal_kg": 5400,
         "deal_price_usd_per_kg": 16.666666666666668
       },
@@ -7325,22 +7904,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2025-03-31/2025-04-06",
-        "window_start": "2025-03-03/2025-03-09",
-        "window_end": "2025-03-24/2025-03-30",
+        "deal_week": "2025-02-10/2025-02-16",
+        "window_start": "2025-01-13/2025-01-19",
+        "window_end": "2025-02-03/2025-02-09",
         "window_weeks": 4,
-        "n_shipments": 34,
+        "n_shipments": 28,
         "n_exporters": 3,
-        "kg_shipped": 141453,
-        "p10": 1.7056154160575048,
-        "p25": 4.176076083333333,
-        "p50": 4.273430527777777,
-        "p75": 8.452158431372549,
-        "p90": 8.793333333333333,
+        "kg_shipped": 98280,
+        "p10": 0.25996127013440035,
+        "p25": 3.0530902777777778,
+        "p50": 4.223213888888889,
+        "p75": 4.2437225000000005,
+        "p90": 5.138888888888889,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 16.666666666666668,
-        "deal_vs_p50_pct": 290.01,
+        "deal_vs_p50_pct": 294.64,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -7468,9 +8047,9 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-03-31/2025-04-06",
-        "commercial_window_alignment": "SHOULDER",
-        "route_signal_inferred": "MED",
+        "deal_week": "2025-02-10/2025-02-16",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
         "route_signal_pts": -15,
@@ -7536,6 +8115,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21,
+    "shippingStartDate": "2025-04-08T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -7548,7 +8128,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:44",
+        "generated_at": "2026-07-30T18:20:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7562,11 +8142,265 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
-        "deal_week": "2025-03-31/2025-04-06",
+        "deal_week": "2025-04-07/2025-04-13",
         "deal_kg": 24000,
         "deal_price_usd_per_kg": 2.1
+      },
+      "dim_a_supplier": {
+        "entity_id": "20612199974",
+        "entity_side": "exporter",
+        "entity_name": null,
+        "destination_country": null,
+        "as_of": "2025-12-31",
+        "first_seen": null,
+        "last_seen": null,
+        "vintage_months": null,
+        "months_active_12mo": 0,
+        "total_shipments": 0,
+        "total_kg_net": 0,
+        "total_fob_usd": 0,
+        "avg_monthly_kg_last_6mo": 0,
+        "avg_monthly_kg_last_12mo": 0,
+        "peak_monthly_kg": 0,
+        "peak_monthly_kg_month": null,
+        "wavg_usd_per_kg": null,
+        "peru_variety_share_pct": {},
+        "variety_mix": [],
+        "top_partners": [],
+        "top_destinations": null,
+        "price_positioning": {},
+        "corridor_positioning": [],
+        "activity_consistency": null,
+        "consecutive_month_streak": 0,
+        "capacity_check": null,
+        "confidence": "NO_HISTORY",
+        "vintage_note": null,
+        "sunat": null,
+        "d2_years_in_business_pts": null,
+        "d2_years_in_business_signal": null
+      },
+      "dim_a_buyer": {
+        "status": "NEEDS_INPUT",
+        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
+      },
+      "dim_b_price_benchmark": {
+        "variety": "AVOCADO",
+        "destination_country": "ESPANA",
+        "deal_week": "2025-04-07/2025-04-13",
+        "window_start": "2025-03-03/2025-03-09",
+        "window_end": "2025-03-31/2025-04-06",
+        "window_weeks": 5,
+        "n_shipments": 7,
+        "n_exporters": 2,
+        "kg_shipped": 108662.3,
+        "p10": 2.45,
+        "p25": 2.5274810216411887,
+        "p50": 2.65,
+        "p75": 2.704060059864654,
+        "p90": 3.293816463550954,
+        "confidence": "MED",
+        "fallback_note": null,
+        "deal_price_usd_per_kg": 2.1,
+        "deal_vs_p50_pct": -20.75,
+        "deal_vs_p50_band": "OUTSIDE_BAND"
+      },
+      "dim_c_route_intelligence": {
+        "variety": "AVOCADO",
+        "destination_country": "ESPANA",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2025-04-07/2025-04-13",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "LOW",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 12,
+        "table_version": "0.1-DRAFT",
+        "caveats": [
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
+        ]
+      },
+      "dim_d3_pair_history": {
+        "status": "NEEDS_INPUT",
+        "reason": "exporter + importer required for pair history"
+      }
+    },
+    "htmlFormulaScore": null,
+    "htmlFormulaBase": null,
+    "htmlFormulaBonus": null,
+    "missingFields": [
+      "customs export narrative",
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+    ],
+    "createdAt": "2025-04-04T01:43:09.527Z"
+  },
+  {
+    "id": "plat-67f41e49",
+    "mongoId": "67f41e496b3eee0b06f7769c",
+    "dealRef": "FRESH AVOCADO - AWB 160-91712386",
+    "product": "Fresh Avocado",
+    "variety": "HASS",
+    "quantityLabel": "432 x CAJAS DE 4 KG",
+    "dealValueUSD": 4320,
+    "origin": "Aereopuerto Jorge Chavez, Peru",
+    "destination": "Bangkok, Thailand",
+    "buyerName": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+    "supplierName": "BIO FARMING PERU S.A.C.",
+    "buyerYib": 2,
+    "supplierYib": 2,
+    "buyerYibSource": "csv",
+    "supplierYibSource": "csv",
+    "perishabilityClass": "Perishable",
+    "shelfLifeDays": 35,
+    "coldChainRequired": true,
+    "estimatedTransitDays": 4,
+    "numberOfTransshipments": 1,
+    "routeRiskFlag": "Medium",
+    "transportMode": "air",
+    "offerUnitPriceUSD": 10,
+    "shippingStartDate": "2025-04-05T00:00:00.000Z",
+    "priorDealsBetweenParties": 0,
+    "relationshipAgeMonths": 0,
+    "status": "finished",
+    "likelyTest": "real",
+    "currentMilestone": 7,
+    "customsNarrative": null,
+    "cofaceCoverageAmountUSD": 3888,
+    "cofaceCoveragePct": 90,
+    "cofaceIsDefaulted": true,
+    "counterpartyReady": true,
+    "marketIntel": {
+      "meta": {
+        "generated_at": "2026-07-30T18:20:49",
+        "data_as_of": "2025-12-31",
+        "table_version": "0.1-DRAFT",
+        "source_files": [
+          "10843_20260128213854_20260128213855.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
+          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
+        ],
+        "engine_data_row_count": 60466
+      },
+      "deal_inputs": {
+        "exporter_ruc": "20612199974",
+        "importer_name": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+        "origin_country": "PERU",
+        "destination_country": "TAILANDIA",
+        "variety": "AVOCADO",
+        "deal_week": "2025-03-31/2025-04-06",
+        "deal_kg": 1728,
+        "deal_price_usd_per_kg": 2.5
       },
       "dim_a_supplier": {
         "entity_id": "20612199974",
@@ -7620,171 +8454,6 @@ export const platformDeals: PlatformDealRecord[] = [
         "p50": 2.85,
         "p75": 3.2,
         "p90": 3.5224536253720258,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
-        "deal_price_usd_per_kg": 2.1,
-        "deal_vs_p50_pct": -26.32,
-        "deal_vs_p50_band": "OUTSIDE_BAND"
-      },
-      "dim_c_route_intelligence": {
-        "variety": "AVOCADO",
-        "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-03-31/2025-04-06",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": "LOW",
-        "route_signal_driver": "CORRIDOR_DEFAULT",
-        "route_signal_pts": 12,
-        "table_version": "0.1-DRAFT",
-        "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
-        ]
-      },
-      "dim_d3_pair_history": {
-        "status": "NEEDS_INPUT",
-        "reason": "exporter + importer required for pair history"
-      }
-    },
-    "htmlFormulaScore": null,
-    "htmlFormulaBase": null,
-    "htmlFormulaBonus": null,
-    "missingFields": [
-      "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
-    ],
-    "createdAt": "2025-04-04T01:43:09.527Z"
-  },
-  {
-    "id": "plat-67f41e49",
-    "mongoId": "67f41e496b3eee0b06f7769c",
-    "dealRef": "FRESH AVOCADO - AWB 160-91712386",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
-    "quantityLabel": "432 x CAJAS DE 4 KG",
-    "dealValueUSD": 4320,
-    "origin": "Aereopuerto Jorge Chavez, Peru",
-    "destination": "Bangkok, Thailand",
-    "buyerName": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
-    "supplierName": "BIO FARMING PERU S.A.C.",
-    "buyerYib": 2,
-    "supplierYib": 2,
-    "buyerYibSource": "csv",
-    "supplierYibSource": "csv",
-    "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 34,
-    "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
-    "offerUnitPriceUSD": 10,
-    "priorDealsBetweenParties": 0,
-    "relationshipAgeMonths": 0,
-    "status": "finished",
-    "likelyTest": "real",
-    "currentMilestone": 7,
-    "customsNarrative": null,
-    "cofaceCoverageAmountUSD": 3888,
-    "cofaceCoveragePct": 90,
-    "cofaceIsDefaulted": true,
-    "counterpartyReady": true,
-    "marketIntel": {
-      "meta": {
-        "generated_at": "2026-07-28T21:10:48",
-        "data_as_of": "2025-12-31",
-        "table_version": "0.1-DRAFT",
-        "source_files": [
-          "10843_20260128213854_20260128213855.xlsx",
-          "Veritrade_UL-20111724_PE_E_20260109105537.xlsx",
-          "Veritrade_UL-20111724_PE_E_20260109105821.xlsx",
-          "Veritrade_UL-20111724_PE_E_20260109110033.xlsx"
-        ],
-        "engine_data_row_count": 60466
-      },
-      "deal_inputs": {
-        "exporter_ruc": "20612199974",
-        "importer_name": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
-        "destination_country": "TAILANDIA",
-        "variety": "AVOCADO",
-        "deal_week": "2025-04-07/2025-04-13",
-        "deal_kg": 1728,
-        "deal_price_usd_per_kg": 2.5
-      },
-      "dim_a_supplier": {
-        "entity_id": "20612199974",
-        "entity_side": "exporter",
-        "entity_name": null,
-        "destination_country": null,
-        "as_of": "2025-12-31",
-        "first_seen": null,
-        "last_seen": null,
-        "vintage_months": null,
-        "months_active_12mo": 0,
-        "total_shipments": 0,
-        "total_kg_net": 0,
-        "total_fob_usd": 0,
-        "avg_monthly_kg_last_6mo": 0,
-        "avg_monthly_kg_last_12mo": 0,
-        "peak_monthly_kg": 0,
-        "peak_monthly_kg_month": null,
-        "wavg_usd_per_kg": null,
-        "peru_variety_share_pct": {},
-        "variety_mix": [],
-        "top_partners": [],
-        "top_destinations": null,
-        "price_positioning": {},
-        "corridor_positioning": [],
-        "activity_consistency": null,
-        "consecutive_month_streak": 0,
-        "capacity_check": null,
-        "confidence": "NO_HISTORY",
-        "vintage_note": null,
-        "sunat": null,
-        "d2_years_in_business_pts": null,
-        "d2_years_in_business_signal": null
-      },
-      "dim_a_buyer": {
-        "status": "NEEDS_INPUT",
-        "reason": "importer_name / destination_country not provided or no matching importer_id in marts"
-      },
-      "dim_b_price_benchmark": {
-        "variety": "AVOCADO",
-        "destination_country": null,
-        "deal_week": "2025-04-07/2025-04-13",
-        "window_start": "2024-10-07/2024-10-13",
-        "window_end": "2025-03-31/2025-04-06",
-        "window_weeks": 26,
-        "n_shipments": 224,
-        "n_exporters": 28,
-        "kg_shipped": 2467764.7199999997,
-        "p10": 2.426040996881557,
-        "p25": 2.5786894032420604,
-        "p50": 2.85,
-        "p75": 3.1509793657999996,
-        "p90": 3.5196818728543846,
         "confidence": "SPARSE",
         "fallback_note": "Corridor AVOCADO->TAILANDIA too thin; benchmark uses all destinations (variety-only fallback).",
         "deal_price_usd_per_kg": 2.5,
@@ -7896,7 +8565,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-15/2025-12-21"
         ],
         "lane_maturity": "THIN",
-        "deal_week": "2025-04-07/2025-04-13",
+        "deal_week": "2025-03-31/2025-04-06",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": "HIGH",
@@ -7944,11 +8613,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 28,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 17.65,
+    "shippingStartDate": "2025-04-15T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -7961,7 +8631,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:52",
+        "generated_at": "2026-07-30T18:20:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -7975,9 +8645,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "A.S.M International",
+        "origin_country": "PERU",
         "destination_country": "INDIA",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-04-07/2025-04-13",
+        "deal_week": "2025-04-14/2025-04-20",
         "deal_kg": 2520,
         "deal_price_usd_per_kg": 11.766666666666667
       },
@@ -8114,10 +8785,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "INDIA",
-        "deal_week": "2025-04-07/2025-04-13",
+        "deal_week": "2025-04-14/2025-04-20",
         "window_start": "2025-02-03/2025-02-09",
-        "window_end": "2025-03-31/2025-04-06",
-        "window_weeks": 9,
+        "window_end": "2025-04-07/2025-04-13",
+        "window_weeks": 10,
         "n_shipments": 59,
         "n_exporters": 7,
         "kg_shipped": 114274.5,
@@ -8246,7 +8917,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-04-07/2025-04-13",
+        "deal_week": "2025-04-14/2025-04-20",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
         "route_signal_table": null,
@@ -8299,6 +8970,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-06-24T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -8311,7 +8983,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:55",
+        "generated_at": "2026-07-30T18:20:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8325,9 +8997,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-24/2024-06-30",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -8371,9 +9044,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-06-24/2024-06-30",
+        "window_start": "2023-12-25/2023-12-31",
+        "window_end": "2024-06-17/2024-06-23",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -8384,7 +9057,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-06-17/2024-06-23 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -8413,7 +9086,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-24/2024-06-30",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -8465,6 +9138,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-06-11T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -8477,7 +9151,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:10:59",
+        "generated_at": "2026-07-30T18:21:04",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8491,9 +9165,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-10/2024-06-16",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -8537,9 +9212,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-06-10/2024-06-16",
+        "window_start": "2023-12-11/2023-12-17",
+        "window_end": "2024-06-03/2024-06-09",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -8550,7 +9225,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-06-03/2024-06-09 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -8579,7 +9254,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-10/2024-06-16",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -8631,6 +9306,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-06-22T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -8643,7 +9319,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:03",
+        "generated_at": "2026-07-30T18:21:08",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8657,9 +9333,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-17/2024-06-23",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -8703,9 +9380,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-06-17/2024-06-23",
+        "window_start": "2023-12-18/2023-12-24",
+        "window_end": "2024-06-10/2024-06-16",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -8716,7 +9393,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-06-10/2024-06-16 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -8745,7 +9422,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-17/2024-06-23",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -8797,6 +9474,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-06-26T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -8809,7 +9487,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:08",
+        "generated_at": "2026-07-30T18:21:12",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8823,9 +9501,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-24/2024-06-30",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -8869,9 +9548,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-06-24/2024-06-30",
+        "window_start": "2023-12-25/2023-12-31",
+        "window_end": "2024-06-17/2024-06-23",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -8882,7 +9561,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-06-17/2024-06-23 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -8911,7 +9590,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-06-24/2024-06-30",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -8963,6 +9642,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-03T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -8975,7 +9655,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:11",
+        "generated_at": "2026-07-30T18:21:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -8989,9 +9669,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-01/2024-07-07",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -9035,9 +9716,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-01/2024-07-07",
+        "window_start": "2024-01-01/2024-01-07",
+        "window_end": "2024-06-24/2024-06-30",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -9048,7 +9729,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-06-24/2024-06-30 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -9077,7 +9758,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-01/2024-07-07",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -9129,6 +9810,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-03T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -9141,7 +9823,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:15",
+        "generated_at": "2026-07-30T18:21:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9155,9 +9837,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-01/2024-07-07",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -9201,9 +9884,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-01/2024-07-07",
+        "window_start": "2024-01-01/2024-01-07",
+        "window_end": "2024-06-24/2024-06-30",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -9214,7 +9897,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-06-24/2024-06-30 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -9243,7 +9926,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-01/2024-07-07",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -9295,6 +9978,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-10T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -9307,7 +9991,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:19",
+        "generated_at": "2026-07-30T18:21:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9321,9 +10005,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-08/2024-07-14",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -9367,9 +10052,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-08/2024-07-14",
+        "window_start": "2024-01-08/2024-01-14",
+        "window_end": "2024-07-01/2024-07-07",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -9380,7 +10065,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-01/2024-07-07 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -9409,7 +10094,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-08/2024-07-14",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -9461,6 +10146,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-10T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -9473,7 +10159,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:23",
+        "generated_at": "2026-07-30T18:21:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9487,9 +10173,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-08/2024-07-14",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -9533,9 +10220,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-08/2024-07-14",
+        "window_start": "2024-01-08/2024-01-14",
+        "window_end": "2024-07-01/2024-07-07",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -9546,7 +10233,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-01/2024-07-07 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -9575,7 +10262,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-08/2024-07-14",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -9627,6 +10314,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-17T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -9639,7 +10327,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:28",
+        "generated_at": "2026-07-30T18:21:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9653,9 +10341,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-15/2024-07-21",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -9699,9 +10388,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-15/2024-07-21",
+        "window_start": "2024-01-15/2024-01-21",
+        "window_end": "2024-07-08/2024-07-14",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -9712,7 +10401,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-08/2024-07-14 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -9741,7 +10430,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-15/2024-07-21",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -9793,6 +10482,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-17T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -9805,7 +10495,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:33",
+        "generated_at": "2026-07-30T18:21:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9819,9 +10509,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-15/2024-07-21",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -9865,9 +10556,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-15/2024-07-21",
+        "window_start": "2024-01-15/2024-01-21",
+        "window_end": "2024-07-08/2024-07-14",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -9878,7 +10569,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-08/2024-07-14 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -9907,7 +10598,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-15/2024-07-21",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -9959,6 +10650,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-24T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -9971,7 +10663,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:38",
+        "generated_at": "2026-07-30T18:21:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -9985,9 +10677,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-22/2024-07-28",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -10031,9 +10724,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-22/2024-07-28",
+        "window_start": "2024-01-22/2024-01-28",
+        "window_end": "2024-07-15/2024-07-21",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -10044,7 +10737,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-15/2024-07-21 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -10073,7 +10766,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-22/2024-07-28",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -10125,6 +10818,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.79,
+    "shippingStartDate": "2024-07-24T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -10137,7 +10831,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:42",
+        "generated_at": "2026-07-30T18:21:46",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10151,9 +10845,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-22/2024-07-28",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.379
       },
@@ -10197,9 +10892,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-22/2024-07-28",
+        "window_start": "2024-01-22/2024-01-28",
+        "window_end": "2024-07-15/2024-07-21",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -10210,7 +10905,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-15/2024-07-21 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.379,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -10239,7 +10934,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-22/2024-07-28",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -10291,6 +10986,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.23,
+    "shippingStartDate": "2024-07-31T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -10303,7 +10999,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:46",
+        "generated_at": "2026-07-30T18:21:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10317,9 +11013,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-29/2024-08-04",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.423
       },
@@ -10363,9 +11060,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-29/2024-08-04",
+        "window_start": "2024-01-29/2024-02-04",
+        "window_end": "2024-07-22/2024-07-28",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -10376,7 +11073,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-22/2024-07-28 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.423,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -10405,7 +11102,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-29/2024-08-04",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -10457,6 +11154,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.23,
+    "shippingStartDate": "2024-07-31T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -10469,7 +11167,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:51",
+        "generated_at": "2026-07-30T18:21:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10483,9 +11181,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-29/2024-08-04",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.423
       },
@@ -10529,9 +11228,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-07-29/2024-08-04",
+        "window_start": "2024-01-29/2024-02-04",
+        "window_end": "2024-07-22/2024-07-28",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -10542,7 +11241,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-22/2024-07-28 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.423,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -10571,7 +11270,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-07-29/2024-08-04",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -10623,6 +11322,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.23,
+    "shippingStartDate": "2024-08-07T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -10635,7 +11335,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:11:54",
+        "generated_at": "2026-07-30T18:21:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10649,9 +11349,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-08-05/2024-08-11",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.423
       },
@@ -10695,9 +11396,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-08-05/2024-08-11",
+        "window_start": "2024-02-05/2024-02-11",
+        "window_end": "2024-07-29/2024-08-04",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -10708,7 +11409,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-29/2024-08-04 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.423,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -10737,7 +11438,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-08-05/2024-08-11",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -10789,6 +11490,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.23,
+    "shippingStartDate": "2024-08-07T00:00:00.000Z",
     "priorDealsBetweenParties": 15,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -10801,7 +11503,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:00",
+        "generated_at": "2026-07-30T18:22:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10815,9 +11517,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Open Markets Corporation",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-08-05/2024-08-11",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 1.423
       },
@@ -10861,9 +11564,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-05-26/2025-06-01",
-        "window_start": "2024-11-25/2024-12-01",
-        "window_end": "2025-05-19/2025-05-25",
+        "deal_week": "2024-08-05/2024-08-11",
+        "window_start": "2024-02-05/2024-02-11",
+        "window_end": "2024-07-29/2024-08-04",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -10874,7 +11577,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-19/2025-05-25 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2024-07-29/2024-08-04 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.423,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -10903,7 +11606,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-05-26/2025-06-01",
+        "deal_week": "2024-08-05/2024-08-11",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -10955,6 +11658,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-04-24T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -10967,7 +11671,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:06",
+        "generated_at": "2026-07-30T18:22:07",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -10981,9 +11685,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
-        "deal_week": "2025-06-02/2025-06-08",
+        "deal_week": "2025-04-21/2025-04-27",
         "deal_kg": 24000,
         "deal_price_usd_per_kg": 2.2
       },
@@ -11026,58 +11731,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
-        "deal_week": "2025-06-02/2025-06-08",
-        "window_start": "2024-12-02/2024-12-08",
-        "window_end": "2025-05-26/2025-06-01",
-        "window_weeks": 26,
-        "n_shipments": 655,
-        "n_exporters": 33,
-        "kg_shipped": 8529735.55,
-        "p10": 2.45,
-        "p25": 2.6359876727562037,
-        "p50": 2.844876004567437,
-        "p75": 3.1,
-        "p90": 3.4,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "ESPANA",
+        "deal_week": "2025-04-21/2025-04-27",
+        "window_start": "2025-03-10/2025-03-16",
+        "window_end": "2025-04-14/2025-04-20",
+        "window_weeks": 6,
+        "n_shipments": 10,
+        "n_exporters": 2,
+        "kg_shipped": 131775.5,
+        "p10": 2.4499999999999997,
+        "p25": 2.499956411945542,
+        "p50": 2.643034866359367,
+        "p75": 2.678993688183238,
+        "p90": 3.0736597940407373,
+        "confidence": "MED",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.2,
-        "deal_vs_p50_pct": -22.67,
+        "deal_vs_p50_pct": -16.76,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-06-02/2025-06-08",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
+        "deal_week": "2025-04-21/2025-04-27",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -11120,6 +11911,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.65,
+    "shippingStartDate": "2025-05-21T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -11132,7 +11924,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:11",
+        "generated_at": "2026-07-30T18:22:11",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11146,9 +11938,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2025-06-16/2025-06-22",
+        "deal_week": "2025-05-19/2025-05-25",
         "deal_kg": 114800,
         "deal_price_usd_per_kg": 1.365
       },
@@ -11192,9 +11985,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2025-06-16/2025-06-22",
-        "window_start": "2024-12-16/2024-12-22",
-        "window_end": "2025-06-09/2025-06-15",
+        "deal_week": "2025-05-19/2025-05-25",
+        "window_start": "2024-11-18/2024-11-24",
+        "window_end": "2025-05-12/2025-05-18",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -11205,7 +11998,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-06-09/2025-06-15 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-05-12/2025-05-18 even at variety-only grain.",
         "deal_price_usd_per_kg": 1.365,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -11234,7 +12027,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2025-06-16/2025-06-22",
+        "deal_week": "2025-05-19/2025-05-25",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -11281,11 +12074,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
+    "shippingStartDate": "2025-08-10T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -11298,7 +12092,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:16",
+        "generated_at": "2026-07-30T18:22:15",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11312,9 +12106,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-07-21/2025-07-27",
+        "deal_week": "2025-08-04/2025-08-10",
         "deal_kg": 5400,
         "deal_price_usd_per_kg": 17.9
       },
@@ -11528,22 +12323,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2025-07-21/2025-07-27",
-        "window_start": "2025-01-20/2025-01-26",
-        "window_end": "2025-07-14/2025-07-20",
+        "deal_week": "2025-08-04/2025-08-10",
+        "window_start": "2025-02-03/2025-02-09",
+        "window_end": "2025-07-28/2025-08-03",
         "window_weeks": 26,
-        "n_shipments": 99,
-        "n_exporters": 8,
-        "kg_shipped": 423882.5,
-        "p10": 0.46312348982022966,
-        "p25": 3.0416363088348763,
-        "p50": 4.231911111111111,
-        "p75": 7.733633876028807,
-        "p90": 8.722672685185184,
+        "n_shipments": 83,
+        "n_exporters": 7,
+        "kg_shipped": 370314.5,
+        "p10": 0.5374078406974228,
+        "p25": 3.0404347608024693,
+        "p50": 4.24093950617284,
+        "p75": 8.259096906318083,
+        "p90": 8.793333333333333,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 17.9,
-        "deal_vs_p50_pct": 322.98,
+        "deal_vs_p50_pct": 322.08,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -11671,17 +12466,16 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-07-21/2025-07-27",
-        "commercial_window_alignment": "OFF_SEASON",
-        "route_signal_inferred": "MED",
+        "deal_week": "2025-08-04/2025-08-10",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
         "route_signal_pts": -15,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
         ]
       },
       "dim_d3_pair_history": {
@@ -11736,11 +12530,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
+    "shippingStartDate": "2025-08-11T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -11753,7 +12548,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:21",
+        "generated_at": "2026-07-30T18:22:20",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -11767,9 +12562,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-07-21/2025-07-27",
+        "deal_week": "2025-08-11/2025-08-17",
         "deal_kg": 5400,
         "deal_price_usd_per_kg": 17.9
       },
@@ -11983,22 +12779,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2025-07-21/2025-07-27",
-        "window_start": "2025-01-20/2025-01-26",
-        "window_end": "2025-07-14/2025-07-20",
+        "deal_week": "2025-08-11/2025-08-17",
+        "window_start": "2025-02-10/2025-02-16",
+        "window_end": "2025-08-04/2025-08-10",
         "window_weeks": 26,
-        "n_shipments": 99,
-        "n_exporters": 8,
-        "kg_shipped": 423882.5,
-        "p10": 0.46312348982022966,
-        "p25": 3.0416363088348763,
-        "p50": 4.231911111111111,
-        "p75": 7.733633876028807,
-        "p90": 8.722672685185184,
+        "n_shipments": 85,
+        "n_exporters": 7,
+        "kg_shipped": 374741.5,
+        "p10": 1.6859629936380098,
+        "p25": 3.041641468942901,
+        "p50": 4.248853125,
+        "p75": 8.25369577342048,
+        "p90": 8.793333333333333,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 17.9,
-        "deal_vs_p50_pct": 322.98,
+        "deal_vs_p50_pct": 321.29,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -12126,17 +12922,16 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-07-21/2025-07-27",
-        "commercial_window_alignment": "OFF_SEASON",
-        "route_signal_inferred": "MED",
+        "deal_week": "2025-08-11/2025-08-17",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
         "route_signal_pts": -15,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
         ]
       },
       "dim_d3_pair_history": {
@@ -12191,11 +12986,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
+    "shippingStartDate": "2025-08-18T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -12208,7 +13004,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:27",
+        "generated_at": "2026-07-30T18:22:24",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12222,9 +13018,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-07-21/2025-07-27",
+        "deal_week": "2025-08-18/2025-08-24",
         "deal_kg": 5400,
         "deal_price_usd_per_kg": 17.9
       },
@@ -12438,22 +13235,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2025-07-21/2025-07-27",
-        "window_start": "2025-01-20/2025-01-26",
-        "window_end": "2025-07-14/2025-07-20",
+        "deal_week": "2025-08-18/2025-08-24",
+        "window_start": "2025-02-17/2025-02-23",
+        "window_end": "2025-08-11/2025-08-17",
         "window_weeks": 26,
-        "n_shipments": 99,
+        "n_shipments": 83,
         "n_exporters": 8,
-        "kg_shipped": 423882.5,
-        "p10": 0.46312348982022966,
-        "p25": 3.0416363088348763,
-        "p50": 4.231911111111111,
-        "p75": 7.733633876028807,
-        "p90": 8.722672685185184,
+        "kg_shipped": 367243,
+        "p10": 1.8138928397018461,
+        "p25": 3.0417476369598764,
+        "p50": 4.254096509259259,
+        "p75": 8.360493376906318,
+        "p90": 8.812769673202615,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 17.9,
-        "deal_vs_p50_pct": 322.98,
+        "deal_vs_p50_pct": 320.77,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -12581,17 +13378,16 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-07-21/2025-07-27",
-        "commercial_window_alignment": "OFF_SEASON",
-        "route_signal_inferred": "MED",
+        "deal_week": "2025-08-18/2025-08-24",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
         "route_signal_pts": -15,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
         ]
       },
       "dim_d3_pair_history": {
@@ -12646,11 +13442,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
+    "shippingStartDate": "2025-08-25T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -12663,7 +13460,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:31",
+        "generated_at": "2026-07-30T18:22:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -12677,9 +13474,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-07-21/2025-07-27",
+        "deal_week": "2025-08-25/2025-08-31",
         "deal_kg": 5400,
         "deal_price_usd_per_kg": 17.9
       },
@@ -12893,22 +13691,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2025-07-21/2025-07-27",
-        "window_start": "2025-01-20/2025-01-26",
-        "window_end": "2025-07-14/2025-07-20",
+        "deal_week": "2025-08-25/2025-08-31",
+        "window_start": "2025-02-24/2025-03-02",
+        "window_end": "2025-08-18/2025-08-24",
         "window_weeks": 26,
-        "n_shipments": 99,
+        "n_shipments": 78,
         "n_exporters": 8,
-        "kg_shipped": 423882.5,
-        "p10": 0.46312348982022966,
-        "p25": 3.0416363088348763,
-        "p50": 4.231911111111111,
-        "p75": 7.733633876028807,
-        "p90": 8.722672685185184,
+        "kg_shipped": 353020,
+        "p10": 1.9161749285140313,
+        "p25": 3.0417687885802467,
+        "p50": 4.26111975,
+        "p75": 8.400931241830065,
+        "p90": 8.862372549019609,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 17.9,
-        "deal_vs_p50_pct": 322.98,
+        "deal_vs_p50_pct": 320.08,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -13036,17 +13834,16 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-07-21/2025-07-27",
-        "commercial_window_alignment": "OFF_SEASON",
-        "route_signal_inferred": "MED",
+        "deal_week": "2025-08-25/2025-08-31",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
         "route_signal_pts": -15,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
         ]
       },
       "dim_d3_pair_history": {
@@ -13101,11 +13898,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 4,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
+    "shippingStartDate": "2025-08-18T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -13118,7 +13916,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:36",
+        "generated_at": "2026-07-30T18:22:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13132,9 +13930,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
+        "origin_country": "PERU",
         "destination_country": "ISRAEL",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-07-21/2025-07-27",
+        "deal_week": "2025-08-18/2025-08-24",
         "deal_kg": 5400,
         "deal_price_usd_per_kg": 17.9
       },
@@ -13348,22 +14147,22 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "ISRAEL",
-        "deal_week": "2025-07-21/2025-07-27",
-        "window_start": "2025-01-20/2025-01-26",
-        "window_end": "2025-07-14/2025-07-20",
+        "deal_week": "2025-08-18/2025-08-24",
+        "window_start": "2025-02-17/2025-02-23",
+        "window_end": "2025-08-11/2025-08-17",
         "window_weeks": 26,
-        "n_shipments": 99,
+        "n_shipments": 83,
         "n_exporters": 8,
-        "kg_shipped": 423882.5,
-        "p10": 0.46312348982022966,
-        "p25": 3.0416363088348763,
-        "p50": 4.231911111111111,
-        "p75": 7.733633876028807,
-        "p90": 8.722672685185184,
+        "kg_shipped": 367243,
+        "p10": 1.8138928397018461,
+        "p25": 3.0417476369598764,
+        "p50": 4.254096509259259,
+        "p75": 8.360493376906318,
+        "p90": 8.812769673202615,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 17.9,
-        "deal_vs_p50_pct": 322.98,
+        "deal_vs_p50_pct": 320.77,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
@@ -13491,17 +14290,16 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-29/2026-01-04"
         ],
         "lane_maturity": "ESTABLISHED",
-        "deal_week": "2025-07-21/2025-07-27",
-        "commercial_window_alignment": "OFF_SEASON",
-        "route_signal_inferred": "MED",
+        "deal_week": "2025-08-18/2025-08-24",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "AIR_COLD_TREATMENT_STACK",
         "route_signal_pts": -15,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
         ]
       },
       "dim_d3_pair_history": {
@@ -13556,11 +14354,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 14,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
+    "shippingStartDate": "2025-08-08T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -13573,7 +14372,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:40",
+        "generated_at": "2026-07-30T18:22:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13587,6 +14386,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "CANADA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-08-04/2025-08-10",
@@ -13730,14 +14530,14 @@ export const platformDeals: PlatformDealRecord[] = [
         "window_start": "2025-02-03/2025-02-09",
         "window_end": "2025-07-28/2025-08-03",
         "window_weeks": 26,
-        "n_shipments": 49,
-        "n_exporters": 5,
-        "kg_shipped": 246126.66000000003,
-        "p10": 4.561570992501215,
-        "p25": 7.191176470588235,
-        "p50": 7.1911764705882355,
+        "n_shipments": 54,
+        "n_exporters": 7,
+        "kg_shipped": 327059.6600000001,
+        "p10": 2.3237145358722224,
+        "p25": 3.508809044621589,
+        "p50": 7.191176470588235,
         "p75": 7.1911764705882355,
-        "p90": 8.53116545228764,
+        "p90": 8.443621206962804,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 8.818497680735108,
@@ -13747,93 +14547,95 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "CANADA",
-        "period_label": "2025-01-07 .. 2025-12-30",
-        "n_shipments": 525,
-        "n_exporters": 35,
-        "n_importers": 13,
-        "kg_net": 4681882.649999999,
-        "fob_usd": 25284685.799999997,
-        "lane_share_of_variety_pct": 1.23,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "period_label": "2025-01-03 .. 2025-12-30",
+        "n_shipments": 545,
+        "n_exporters": 41,
+        "n_importers": 20,
+        "kg_net": 5014456.75,
+        "fob_usd": 26198779.68,
+        "lane_share_of_variety_pct": 1.31,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 73.7,
-          "AEREO": 26.3
+          "MARITIMO": 71,
+          "AEREO": 25.3,
+          "MARÍTIMO": 2.8,
+          "AÉREO": 0.9
         },
-        "exporter_hhi": 725,
-        "importer_hhi": 2368,
+        "exporter_hhi": 679,
+        "importer_hhi": 1893,
         "top_exporters": [
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 15.3
+            "share_pct": 15.5
           },
           {
             "exporter_id": "20602842739",
             "exporter_name": "LARAMA BERRIES S.A.C.",
-            "share_pct": 10.6
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20600807685",
             "exporter_name": "AGROBERRIES PERU S.A.C.",
-            "share_pct": 8.1
+            "share_pct": 7.5
           },
           {
             "exporter_id": "20461642706",
             "exporter_name": "AGRICOLA CERRO PRIETO S.A.",
-            "share_pct": 6.9
+            "share_pct": 6.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 6.9
+            "share_pct": 6.4
           }
         ],
         "top_importers": [
           {
             "importer_id": "1cdbe1d3",
             "importer_name": "OFFSHORE CANADA LOGISTICS INC",
-            "share_pct": 37.2
+            "share_pct": 32.9
           },
           {
             "importer_id": "bba00920",
             "importer_name": "NORTH BAY PRODUCE INC",
-            "share_pct": 27.1
+            "share_pct": 24
           },
           {
             "importer_id": "0c177f64",
             "importer_name": "LOBLAW S INC",
-            "share_pct": 12.7
+            "share_pct": 11.3
+          },
+          {
+            "importer_id": "d425c3d1",
+            "importer_name": "NATURE'S TOUCH FROZEN FOODS INC",
+            "share_pct": 6
           },
           {
             "importer_id": "58ca1224",
             "importer_name": "METRO RICHELIEU INC",
-            "share_pct": 5.7
-          },
-          {
-            "importer_id": "d81f862f",
-            "importer_name": "PROVINCIAL FRUIT CO LTD",
-            "share_pct": 4.8
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 72776.08,
-          "2025-02": 16329.6,
-          "2025-03": 113932.8,
-          "2025-04": 84452.64,
+          "2025-01": 96776.08,
+          "2025-02": 40279.68,
+          "2025-03": 137925.7,
+          "2025-04": 117442.66,
           "2025-05": 18977.28,
           "2025-06": 8916.8,
           "2025-07": 3517.54,
-          "2025-08": 85239.71,
-          "2025-09": 822896.48,
-          "2025-10": 1457566.95,
-          "2025-11": 1326173.7,
-          "2025-12": 671103.07
+          "2025-08": 85244.61,
+          "2025-09": 822898.52,
+          "2025-10": 1529569.95,
+          "2025-11": 1372123.78,
+          "2025-12": 780784.15
         },
         "peak_month": "2025-10",
         "off_peak_month": "2025-07",
-        "peak_off_ratio": 414.4,
+        "peak_off_ratio": 434.8,
         "in_season_weeks": [
           "2025-09-01/2025-09-07",
           "2025-09-08/2025-09-14",
@@ -13852,7 +14654,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-08/2025-12-14",
           "2025-12-15/2025-12-21"
         ],
-        "lane_maturity": "ESTABLISHED",
+        "lane_maturity": "DEEP",
         "deal_week": "2025-08-04/2025-08-10",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
@@ -13901,11 +14703,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 14,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
+    "shippingStartDate": "2025-08-08T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -13918,7 +14721,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:44",
+        "generated_at": "2026-07-30T18:22:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -13932,6 +14735,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "CANADA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-08-04/2025-08-10",
@@ -14075,14 +14879,14 @@ export const platformDeals: PlatformDealRecord[] = [
         "window_start": "2025-02-03/2025-02-09",
         "window_end": "2025-07-28/2025-08-03",
         "window_weeks": 26,
-        "n_shipments": 49,
-        "n_exporters": 5,
-        "kg_shipped": 246126.66000000003,
-        "p10": 4.561570992501215,
-        "p25": 7.191176470588235,
-        "p50": 7.1911764705882355,
+        "n_shipments": 54,
+        "n_exporters": 7,
+        "kg_shipped": 327059.6600000001,
+        "p10": 2.3237145358722224,
+        "p25": 3.508809044621589,
+        "p50": 7.191176470588235,
         "p75": 7.1911764705882355,
-        "p90": 8.53116545228764,
+        "p90": 8.443621206962804,
         "confidence": "LOW",
         "fallback_note": null,
         "deal_price_usd_per_kg": 8.818497680735108,
@@ -14092,93 +14896,95 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "CANADA",
-        "period_label": "2025-01-07 .. 2025-12-30",
-        "n_shipments": 525,
-        "n_exporters": 35,
-        "n_importers": 13,
-        "kg_net": 4681882.649999999,
-        "fob_usd": 25284685.799999997,
-        "lane_share_of_variety_pct": 1.23,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "period_label": "2025-01-03 .. 2025-12-30",
+        "n_shipments": 545,
+        "n_exporters": 41,
+        "n_importers": 20,
+        "kg_net": 5014456.75,
+        "fob_usd": 26198779.68,
+        "lane_share_of_variety_pct": 1.31,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 73.7,
-          "AEREO": 26.3
+          "MARITIMO": 71,
+          "AEREO": 25.3,
+          "MARÍTIMO": 2.8,
+          "AÉREO": 0.9
         },
-        "exporter_hhi": 725,
-        "importer_hhi": 2368,
+        "exporter_hhi": 679,
+        "importer_hhi": 1893,
         "top_exporters": [
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 15.3
+            "share_pct": 15.5
           },
           {
             "exporter_id": "20602842739",
             "exporter_name": "LARAMA BERRIES S.A.C.",
-            "share_pct": 10.6
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20600807685",
             "exporter_name": "AGROBERRIES PERU S.A.C.",
-            "share_pct": 8.1
+            "share_pct": 7.5
           },
           {
             "exporter_id": "20461642706",
             "exporter_name": "AGRICOLA CERRO PRIETO S.A.",
-            "share_pct": 6.9
+            "share_pct": 6.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 6.9
+            "share_pct": 6.4
           }
         ],
         "top_importers": [
           {
             "importer_id": "1cdbe1d3",
             "importer_name": "OFFSHORE CANADA LOGISTICS INC",
-            "share_pct": 37.2
+            "share_pct": 32.9
           },
           {
             "importer_id": "bba00920",
             "importer_name": "NORTH BAY PRODUCE INC",
-            "share_pct": 27.1
+            "share_pct": 24
           },
           {
             "importer_id": "0c177f64",
             "importer_name": "LOBLAW S INC",
-            "share_pct": 12.7
+            "share_pct": 11.3
+          },
+          {
+            "importer_id": "d425c3d1",
+            "importer_name": "NATURE'S TOUCH FROZEN FOODS INC",
+            "share_pct": 6
           },
           {
             "importer_id": "58ca1224",
             "importer_name": "METRO RICHELIEU INC",
-            "share_pct": 5.7
-          },
-          {
-            "importer_id": "d81f862f",
-            "importer_name": "PROVINCIAL FRUIT CO LTD",
-            "share_pct": 4.8
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 72776.08,
-          "2025-02": 16329.6,
-          "2025-03": 113932.8,
-          "2025-04": 84452.64,
+          "2025-01": 96776.08,
+          "2025-02": 40279.68,
+          "2025-03": 137925.7,
+          "2025-04": 117442.66,
           "2025-05": 18977.28,
           "2025-06": 8916.8,
           "2025-07": 3517.54,
-          "2025-08": 85239.71,
-          "2025-09": 822896.48,
-          "2025-10": 1457566.95,
-          "2025-11": 1326173.7,
-          "2025-12": 671103.07
+          "2025-08": 85244.61,
+          "2025-09": 822898.52,
+          "2025-10": 1529569.95,
+          "2025-11": 1372123.78,
+          "2025-12": 780784.15
         },
         "peak_month": "2025-10",
         "off_peak_month": "2025-07",
-        "peak_off_ratio": 414.4,
+        "peak_off_ratio": 434.8,
         "in_season_weeks": [
           "2025-09-01/2025-09-07",
           "2025-09-08/2025-09-14",
@@ -14197,7 +15003,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-08/2025-12-14",
           "2025-12-15/2025-12-21"
         ],
-        "lane_maturity": "ESTABLISHED",
+        "lane_maturity": "DEEP",
         "deal_week": "2025-08-04/2025-08-10",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
@@ -14235,8 +15041,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "Ventura",
     "quantityLabel": "576 x 12 x 6oz",
     "dealValueUSD": 10368,
-    "origin": "Callao, Chile",
-    "destination": "Vancouver, Netherlands",
+    "origin": "Callao, Peru",
+    "destination": "Vancouver, Canada",
     "buyerName": "AGRO SMART CONTRACTS LDA",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 2,
@@ -14246,11 +15052,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 10,
-    "numberOfTransshipments": 0,
+    "estimatedTransitDays": 2,
+    "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
+    "shippingStartDate": "2026-01-06T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -14263,7 +15070,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:44",
+        "generated_at": "2026-07-30T18:22:43",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14277,9 +15084,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
-        "destination_country": "PAISES BAJOS",
+        "origin_country": "PERU",
+        "destination_country": "CANADA",
         "variety": null,
-        "deal_week": "2025-08-04/2025-08-10",
+        "deal_week": "2026-01-05/2026-01-11",
         "deal_kg": 1175.7104640000002,
         "deal_price_usd_per_kg": 8.818497680735108
       },
@@ -14432,7 +15240,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -14462,6 +15269,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 11,
+    "shippingStartDate": "2025-09-29T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -14474,7 +15282,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:48",
+        "generated_at": "2026-07-30T18:22:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14488,9 +15296,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-09-22/2025-09-28",
+        "deal_week": "2025-09-29/2025-10-05",
         "deal_kg": 15921.079200000002,
         "deal_price_usd_per_kg": 5.3890819160047885
       },
@@ -14626,58 +15435,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-09-22/2025-09-28",
-        "window_start": "2025-03-24/2025-03-30",
-        "window_end": "2025-09-15/2025-09-21",
-        "window_weeks": 26,
-        "n_shipments": 11947,
-        "n_exporters": 147,
-        "kg_shipped": 115820597.71,
-        "p10": 1.5,
-        "p25": 2.705276371034065,
-        "p50": 5.945225151718446,
-        "p75": 8.42,
-        "p90": 10.153333333333334,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "TAIWAN",
+        "deal_week": "2025-09-29/2025-10-05",
+        "window_start": "2025-09-01/2025-09-07",
+        "window_end": "2025-09-22/2025-09-28",
+        "window_weeks": 4,
+        "n_shipments": 83,
+        "n_exporters": 16,
+        "kg_shipped": 947967.78,
+        "p10": 1.7380588599279507,
+        "p25": 4.444444444444445,
+        "p50": 6.330909085470085,
+        "p75": 8.043824695682664,
+        "p90": 8.57346426484769,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 5.3890819160047885,
-        "deal_vs_p50_pct": -9.35,
+        "deal_vs_p50_pct": -14.88,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-09-22/2025-09-28",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
+        "deal_week": "2025-09-29/2025-10-05",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -14720,6 +15619,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 11,
+    "shippingStartDate": "2025-09-29T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 2,
     "status": "finished",
@@ -14732,7 +15632,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:53",
+        "generated_at": "2026-07-30T18:22:52",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -14746,9 +15646,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-09-22/2025-09-28",
+        "deal_week": "2025-09-29/2025-10-05",
         "deal_kg": 11700,
         "deal_price_usd_per_kg": 7.333333333333333
       },
@@ -14884,58 +15785,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-09-22/2025-09-28",
-        "window_start": "2025-03-24/2025-03-30",
-        "window_end": "2025-09-15/2025-09-21",
-        "window_weeks": 26,
-        "n_shipments": 11947,
-        "n_exporters": 147,
-        "kg_shipped": 115820597.71,
-        "p10": 1.5,
-        "p25": 2.705276371034065,
-        "p50": 5.945225151718446,
-        "p75": 8.42,
-        "p90": 10.153333333333334,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "TAIWAN",
+        "deal_week": "2025-09-29/2025-10-05",
+        "window_start": "2025-09-01/2025-09-07",
+        "window_end": "2025-09-22/2025-09-28",
+        "window_weeks": 4,
+        "n_shipments": 83,
+        "n_exporters": 16,
+        "kg_shipped": 947967.78,
+        "p10": 1.7380588599279507,
+        "p25": 4.444444444444445,
+        "p50": 6.330909085470085,
+        "p75": 8.043824695682664,
+        "p90": 8.57346426484769,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 7.333333333333333,
-        "deal_vs_p50_pct": 23.35,
+        "deal_vs_p50_pct": 15.83,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-09-22/2025-09-28",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
+        "deal_week": "2025-09-29/2025-10-05",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -14978,6 +15969,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 28,
+    "shippingStartDate": "2025-11-11T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -14990,7 +15982,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:12:57",
+        "generated_at": "2026-07-30T18:22:56",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15004,9 +15996,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-03/2025-11-09",
+        "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 19600,
         "deal_price_usd_per_kg": 8
       },
@@ -15143,18 +16136,18 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
-        "deal_week": "2025-11-03/2025-11-09",
-        "window_start": "2025-10-06/2025-10-12",
-        "window_end": "2025-10-27/2025-11-02",
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-10-13/2025-10-19",
+        "window_end": "2025-11-03/2025-11-09",
         "window_weeks": 4,
-        "n_shipments": 1559,
-        "n_exporters": 59,
-        "kg_shipped": 20683936.32,
-        "p10": 1.0204081632653061,
-        "p25": 2.4846938775510203,
+        "n_shipments": 1555,
+        "n_exporters": 67,
+        "kg_shipped": 20710571.35,
+        "p10": 1.176373228591794,
+        "p25": 2.795371844230346,
         "p50": 5,
-        "p75": 5.635105475736762,
-        "p90": 7.878496693632246,
+        "p75": 5.60671398495115,
+        "p90": 6.888835956052834,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 8,
@@ -15165,92 +16158,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -15275,9 +16270,9 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-12-15/2025-12-21"
         ],
         "lane_maturity": "DEEP",
-        "deal_week": "2025-11-03/2025-11-09",
+        "deal_week": "2025-11-10/2025-11-16",
         "commercial_window_alignment": "IN_SEASON",
-        "route_signal_inferred": "MED",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -15,
@@ -15320,11 +16315,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-11-10T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -15337,7 +16333,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:02",
+        "generated_at": "2026-07-30T18:23:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15351,9 +16347,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-03/2025-11-09",
+        "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 6480,
         "deal_price_usd_per_kg": 14.666666666666666
       },
@@ -15489,59 +16486,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-03/2025-11-09",
-        "window_start": "2025-05-05/2025-05-11",
-        "window_end": "2025-10-27/2025-11-02",
-        "window_weeks": 26,
-        "n_shipments": 20832,
-        "n_exporters": 163,
-        "kg_shipped": 221210021.64000002,
-        "p10": 1.2755102040816326,
-        "p25": 2.65,
-        "p50": 5.095108695652174,
-        "p75": 7.6049999999999995,
-        "p90": 9.134615384615385,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-10-13/2025-10-19",
+        "window_end": "2025-11-03/2025-11-09",
+        "window_weeks": 4,
+        "n_shipments": 28,
+        "n_exporters": 9,
+        "kg_shipped": 82046.72,
+        "p10": 1.3207008,
+        "p25": 2.619989328213894,
+        "p50": 4.064432990946503,
+        "p75": 5.3029119658119654,
+        "p90": 7.491666179358025,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.666666666666666,
-        "deal_vs_p50_pct": 187.86,
+        "deal_vs_p50_pct": 260.85,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-03/2025-11-09",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-11-10/2025-11-16",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -15578,11 +16662,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-11-03T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -15595,7 +16680,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:10",
+        "generated_at": "2026-07-30T18:23:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15609,7 +16694,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-11-03/2025-11-09",
         "deal_kg": 6480,
@@ -15747,59 +16833,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-11-03/2025-11-09",
-        "window_start": "2025-05-05/2025-05-11",
+        "window_start": "2025-10-06/2025-10-12",
         "window_end": "2025-10-27/2025-11-02",
-        "window_weeks": 26,
-        "n_shipments": 20832,
-        "n_exporters": 163,
-        "kg_shipped": 221210021.64000002,
-        "p10": 1.2755102040816326,
-        "p25": 2.65,
-        "p50": 5.095108695652174,
-        "p75": 7.6049999999999995,
-        "p90": 9.134615384615385,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 23,
+        "n_exporters": 8,
+        "kg_shipped": 78608.36,
+        "p10": 1.2691254,
+        "p25": 4.064382141769548,
+        "p50": 5.3029119658119654,
+        "p75": 8.91096654941358,
+        "p90": 8.916340641011429,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.666666666666666,
-        "deal_vs_p50_pct": 187.86,
+        "deal_vs_p50_pct": 176.58,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-11-03/2025-11-09",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -15836,11 +17009,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-11-11T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -15853,7 +17027,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:14",
+        "generated_at": "2026-07-30T18:23:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -15867,7 +17041,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 6480,
@@ -16005,59 +17180,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-11-10/2025-11-16",
-        "window_start": "2025-05-12/2025-05-18",
+        "window_start": "2025-10-13/2025-10-19",
         "window_end": "2025-11-03/2025-11-09",
-        "window_weeks": 26,
-        "n_shipments": 22170,
-        "n_exporters": 165,
-        "kg_shipped": 238417541.68,
-        "p10": 1.3526381855170324,
-        "p25": 2.705276371034065,
-        "p50": 5.095108695652174,
-        "p75": 7.5,
-        "p90": 9.003784957093082,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 28,
+        "n_exporters": 9,
+        "kg_shipped": 82046.72,
+        "p10": 1.3207008,
+        "p25": 2.619989328213894,
+        "p50": 4.064432990946503,
+        "p75": 5.3029119658119654,
+        "p90": 7.491666179358025,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.666666666666666,
-        "deal_vs_p50_pct": 187.86,
+        "deal_vs_p50_pct": 260.85,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-11-10/2025-11-16",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -16094,11 +17356,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22,
+    "shippingStartDate": "2025-11-11T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -16111,7 +17374,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:18",
+        "generated_at": "2026-07-30T18:23:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16125,7 +17388,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 6480,
@@ -16263,59 +17527,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-11-10/2025-11-16",
-        "window_start": "2025-05-12/2025-05-18",
+        "window_start": "2025-10-13/2025-10-19",
         "window_end": "2025-11-03/2025-11-09",
-        "window_weeks": 26,
-        "n_shipments": 22170,
-        "n_exporters": 165,
-        "kg_shipped": 238417541.68,
-        "p10": 1.3526381855170324,
-        "p25": 2.705276371034065,
-        "p50": 5.095108695652174,
-        "p75": 7.5,
-        "p90": 9.003784957093082,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 28,
+        "n_exporters": 9,
+        "kg_shipped": 82046.72,
+        "p10": 1.3207008,
+        "p25": 2.619989328213894,
+        "p50": 4.064432990946503,
+        "p75": 5.3029119658119654,
+        "p90": 7.491666179358025,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.666666666666666,
-        "deal_vs_p50_pct": 187.86,
+        "deal_vs_p50_pct": 260.85,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-11-10/2025-11-16",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -16357,6 +17708,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 19.25,
+    "shippingStartDate": "2025-11-11T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -16369,7 +17721,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:23",
+        "generated_at": "2026-07-30T18:23:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16383,6 +17735,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20608082281",
         "importer_name": "LIMAX SP. Z O.O.",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-11-10/2025-11-16",
@@ -16526,14 +17879,14 @@ export const platformDeals: PlatformDealRecord[] = [
         "window_start": "2025-10-13/2025-10-19",
         "window_end": "2025-11-03/2025-11-09",
         "window_weeks": 4,
-        "n_shipments": 1536,
-        "n_exporters": 60,
-        "kg_shipped": 20254580.02,
-        "p10": 1.1305803090416797,
-        "p25": 2.9577208053691275,
+        "n_shipments": 1555,
+        "n_exporters": 67,
+        "kg_shipped": 20710571.35,
+        "p10": 1.176373228591794,
+        "p25": 2.795371844230346,
         "p50": 5,
-        "p75": 5.637906705469858,
-        "p90": 6.895097926948487,
+        "p75": 5.60671398495115,
+        "p90": 6.888835956052834,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 5.5,
@@ -16544,92 +17897,94 @@ export const platformDeals: PlatformDealRecord[] = [
         "variety": "BLUEBERRY",
         "destination_country": "PAISES BAJOS",
         "period_label": "2025-01-01 .. 2025-12-30",
-        "n_shipments": 7436,
-        "n_exporters": 83,
-        "n_importers": 81,
-        "kg_net": 91723076.61000001,
-        "fob_usd": 460800502.76,
-        "lane_share_of_variety_pct": 24.03,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
+        "n_shipments": 7529,
+        "n_exporters": 95,
+        "n_importers": 96,
+        "kg_net": 93726162.41,
+        "fob_usd": 465691158.46000004,
+        "lane_share_of_variety_pct": 24.55,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 92.5,
-          "AEREO": 7.5
+          "MARITIMO": 91.4,
+          "AEREO": 7.4,
+          "MARÍTIMO": 1.2,
+          "AÉREO": 0
         },
-        "exporter_hhi": 707,
-        "importer_hhi": 471,
+        "exporter_hhi": 699,
+        "importer_hhi": 429,
         "top_exporters": [
-          {
-            "exporter_id": "20297939131",
-            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
-            "share_pct": 14.8
-          },
           {
             "exporter_id": "20340584237",
             "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 14.4
+            "share_pct": 14.8
+          },
+          {
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 14.5
           },
           {
             "exporter_id": "20170040938",
             "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 10.1
+            "share_pct": 9.9
           },
           {
             "exporter_id": "20554556192",
             "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 7.5
+            "share_pct": 7.4
           },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 6.2
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
             "importer_id": "0a78c5b7",
             "importer_name": "OGL FOODTRADE LEBENSMITTELVERTRIEB GMBH",
-            "share_pct": 11.9
+            "share_pct": 11.3
           },
           {
             "importer_id": "6a25b644",
             "importer_name": "AGROVISION EUROPE B.V.",
-            "share_pct": 7.9
+            "share_pct": 7.5
           },
           {
             "importer_id": "f134d3f9",
             "importer_name": "NORTH BAY EUROPE BV",
-            "share_pct": 6.9
+            "share_pct": 6.6
           },
           {
             "importer_id": "e4db5188",
             "importer_name": "FRUTANIA GMBH",
-            "share_pct": 6.2
+            "share_pct": 5.9
           },
           {
             "importer_id": "6d9703d4",
             "importer_name": "AGROBERRIES EUROPE B.V.",
-            "share_pct": 5.4
+            "share_pct": 5.1
           }
         ],
         "monthly_kg": {
-          "2025-01": 5837894.98,
-          "2025-02": 1447713.8,
-          "2025-03": 248877.3,
-          "2025-04": 146041.5,
-          "2025-05": 241126.2,
-          "2025-06": 329772.6,
-          "2025-07": 2210717.08,
-          "2025-08": 9713864.29,
-          "2025-09": 19905401.76,
-          "2025-10": 22785374.94,
-          "2025-11": 19704031.12,
-          "2025-12": 9152261.04
+          "2025-01": 6037894.98,
+          "2025-02": 1618223.8,
+          "2025-03": 318903.3,
+          "2025-04": 302547.5,
+          "2025-05": 285176.2,
+          "2025-06": 529772.6,
+          "2025-07": 2254717.08,
+          "2025-08": 9757864.29,
+          "2025-09": 20069401.76,
+          "2025-10": 23121358.23,
+          "2025-11": 20158041.63,
+          "2025-12": 9272261.04
         },
         "peak_month": "2025-10",
-        "off_peak_month": "2025-04",
-        "peak_off_ratio": 156,
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 81.1,
         "in_season_weeks": [
           "2025-01-06/2025-01-12",
           "2025-01-13/2025-01-19",
@@ -16656,7 +18011,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "lane_maturity": "DEEP",
         "deal_week": "2025-11-10/2025-11-16",
         "commercial_window_alignment": "IN_SEASON",
-        "route_signal_inferred": "MED",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -15,
@@ -16700,11 +18055,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 27.08,
+    "shippingStartDate": "2025-08-13T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -16717,7 +18073,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:27",
+        "generated_at": "2026-07-30T18:23:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16731,9 +18087,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-17/2025-11-23",
+        "deal_week": "2025-08-11/2025-08-17",
         "deal_kg": 5461.5,
         "deal_price_usd_per_kg": 18.053333333333335
       },
@@ -16852,59 +18209,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-17/2025-11-23",
-        "window_start": "2025-05-19/2025-05-25",
-        "window_end": "2025-11-10/2025-11-16",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-08-11/2025-08-17",
+        "window_start": "2025-02-10/2025-02-16",
+        "window_end": "2025-08-04/2025-08-10",
         "window_weeks": 26,
-        "n_shipments": 23618,
-        "n_exporters": 168,
-        "kg_shipped": 256428773.57,
-        "p10": 1.3616557734204793,
-        "p25": 2.89989522106804,
-        "p50": 5.091666666666667,
-        "p75": 7.356699541091365,
-        "p90": 8.951408768438283,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "n_shipments": 42,
+        "n_exporters": 8,
+        "kg_shipped": 70646.83,
+        "p10": 0.5441331544557823,
+        "p25": 3.8061751688194447,
+        "p50": 5.545775878075703,
+        "p75": 7.465207212610534,
+        "p90": 8.598709918826398,
+        "confidence": "LOW",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 18.053333333333335,
-        "deal_vs_p50_pct": 254.57,
+        "deal_vs_p50_pct": 225.53,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-17/2025-11-23",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-08-11/2025-08-17",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -16941,11 +18385,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.75,
+    "shippingStartDate": "2025-08-18T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -16958,7 +18403,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:31",
+        "generated_at": "2026-07-30T18:23:26",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -16972,9 +18417,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-17/2025-11-23",
+        "deal_week": "2025-08-18/2025-08-24",
         "deal_kg": 7831.5,
         "deal_price_usd_per_kg": 17.833333333333332
       },
@@ -17093,59 +18539,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-17/2025-11-23",
-        "window_start": "2025-05-19/2025-05-25",
-        "window_end": "2025-11-10/2025-11-16",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-08-18/2025-08-24",
+        "window_start": "2025-02-17/2025-02-23",
+        "window_end": "2025-08-11/2025-08-17",
         "window_weeks": 26,
-        "n_shipments": 23618,
-        "n_exporters": 168,
-        "kg_shipped": 256428773.57,
-        "p10": 1.3616557734204793,
-        "p25": 2.89989522106804,
-        "p50": 5.091666666666667,
-        "p75": 7.356699541091365,
-        "p90": 8.951408768438283,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "n_shipments": 43,
+        "n_exporters": 9,
+        "kg_shipped": 69621.83,
+        "p10": 0.5436903823469388,
+        "p25": 3.822675842708333,
+        "p50": 5.747360795465337,
+        "p75": 7.466783529411765,
+        "p90": 8.639053206244693,
+        "confidence": "LOW",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 17.833333333333332,
-        "deal_vs_p50_pct": 250.25,
+        "deal_vs_p50_pct": 210.29,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-17/2025-11-23",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-08-18/2025-08-24",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -17182,11 +18715,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 24.84,
+    "shippingStartDate": "2025-09-01T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -17199,7 +18733,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:36",
+        "generated_at": "2026-07-30T18:23:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17213,9 +18747,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-17/2025-11-23",
+        "deal_week": "2025-09-01/2025-09-07",
         "deal_kg": 5983.5,
         "deal_price_usd_per_kg": 16.56
       },
@@ -17334,59 +18869,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-17/2025-11-23",
-        "window_start": "2025-05-19/2025-05-25",
-        "window_end": "2025-11-10/2025-11-16",
-        "window_weeks": 26,
-        "n_shipments": 23618,
-        "n_exporters": 168,
-        "kg_shipped": 256428773.57,
-        "p10": 1.3616557734204793,
-        "p25": 2.89989522106804,
-        "p50": 5.091666666666667,
-        "p75": 7.356699541091365,
-        "p90": 8.951408768438283,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-09-01/2025-09-07",
+        "window_start": "2025-08-04/2025-08-10",
+        "window_end": "2025-08-25/2025-08-31",
+        "window_weeks": 4,
+        "n_shipments": 20,
+        "n_exporters": 6,
+        "kg_shipped": 47326.1,
+        "p10": 3.538769973752611,
+        "p25": 5.2761229007523145,
+        "p50": 5.775853830721747,
+        "p75": 6.9826536,
+        "p90": 9.809376035958689,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.56,
-        "deal_vs_p50_pct": 225.24,
+        "deal_vs_p50_pct": 186.71,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-17/2025-11-23",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-09-01/2025-09-07",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -17423,11 +19045,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.29,
+    "shippingStartDate": "2025-09-13T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -17440,7 +19063,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:40",
+        "generated_at": "2026-07-30T18:23:35",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17454,9 +19077,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-17/2025-11-23",
+        "deal_week": "2025-09-08/2025-09-14",
         "deal_kg": 2880,
         "deal_price_usd_per_kg": 16.86
       },
@@ -17575,59 +19199,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-17/2025-11-23",
-        "window_start": "2025-05-19/2025-05-25",
-        "window_end": "2025-11-10/2025-11-16",
-        "window_weeks": 26,
-        "n_shipments": 23618,
-        "n_exporters": 168,
-        "kg_shipped": 256428773.57,
-        "p10": 1.3616557734204793,
-        "p25": 2.89989522106804,
-        "p50": 5.091666666666667,
-        "p75": 7.356699541091365,
-        "p90": 8.951408768438283,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-09-08/2025-09-14",
+        "window_start": "2025-08-11/2025-08-17",
+        "window_end": "2025-09-01/2025-09-07",
+        "window_weeks": 4,
+        "n_shipments": 23,
+        "n_exporters": 5,
+        "kg_shipped": 54694.1,
+        "p10": 3.551365942333895,
+        "p25": 5.26609146225563,
+        "p50": 5.95811820771688,
+        "p75": 9.257893527199073,
+        "p90": 9.95546608061822,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.86,
-        "deal_vs_p50_pct": 231.13,
+        "deal_vs_p50_pct": 182.98,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-17/2025-11-23",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-09-08/2025-09-14",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -17664,11 +19375,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 24.52,
+    "shippingStartDate": "2025-09-28T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -17681,7 +19393,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:44",
+        "generated_at": "2026-07-30T18:23:40",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17695,9 +19407,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-17/2025-11-23",
+        "deal_week": "2025-09-22/2025-09-28",
         "deal_kg": 6238.5,
         "deal_price_usd_per_kg": 16.346666666666664
       },
@@ -17816,59 +19529,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-17/2025-11-23",
-        "window_start": "2025-05-19/2025-05-25",
-        "window_end": "2025-11-10/2025-11-16",
-        "window_weeks": 26,
-        "n_shipments": 23618,
-        "n_exporters": 168,
-        "kg_shipped": 256428773.57,
-        "p10": 1.3616557734204793,
-        "p25": 2.89989522106804,
-        "p50": 5.091666666666667,
-        "p75": 7.356699541091365,
-        "p90": 8.951408768438283,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-09-22/2025-09-28",
+        "window_start": "2025-08-25/2025-08-31",
+        "window_end": "2025-09-15/2025-09-21",
+        "window_weeks": 4,
+        "n_shipments": 31,
+        "n_exporters": 6,
+        "kg_shipped": 84404.5,
+        "p10": 1.507860422405877,
+        "p25": 5.146321037290459,
+        "p50": 6.075059481663037,
+        "p75": 8.524618526562971,
+        "p90": 9.71663274537037,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.346666666666664,
-        "deal_vs_p50_pct": 221.05,
+        "deal_vs_p50_pct": 169.08,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-17/2025-11-23",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-09-22/2025-09-28",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -17905,11 +19705,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 24.24,
+    "shippingStartDate": "2025-10-13T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -17922,7 +19723,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:49",
+        "generated_at": "2026-07-30T18:23:44",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -17936,9 +19737,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-24/2025-11-30",
+        "deal_week": "2025-10-13/2025-10-19",
         "deal_kg": 7903.5,
         "deal_price_usd_per_kg": 16.16
       },
@@ -18057,59 +19859,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-24/2025-11-30",
-        "window_start": "2025-05-26/2025-06-01",
-        "window_end": "2025-11-17/2025-11-23",
-        "window_weeks": 26,
-        "n_shipments": 24986,
-        "n_exporters": 169,
-        "kg_shipped": 272842943.09000003,
-        "p10": 1.3793103448275863,
-        "p25": 2.9,
-        "p50": 5.066331054324389,
-        "p75": 7.197671380789959,
-        "p90": 8.931137724550897,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-10-13/2025-10-19",
+        "window_start": "2025-09-15/2025-09-21",
+        "window_end": "2025-10-06/2025-10-12",
+        "window_weeks": 4,
+        "n_shipments": 24,
+        "n_exporters": 9,
+        "kg_shipped": 72530.09,
+        "p10": 1.134886232093664,
+        "p25": 4.937698638490807,
+        "p50": 8.375467282777779,
+        "p75": 8.92305235152399,
+        "p90": 9.997348794506447,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.16,
-        "deal_vs_p50_pct": 218.97,
+        "deal_vs_p50_pct": 92.94,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-24/2025-11-30",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-10-13/2025-10-19",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -18146,11 +20035,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.11,
+    "shippingStartDate": "2025-10-20T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -18163,7 +20053,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:54",
+        "generated_at": "2026-07-30T18:23:48",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18177,9 +20067,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-24/2025-11-30",
+        "deal_week": "2025-10-20/2025-10-26",
         "deal_kg": 3600,
         "deal_price_usd_per_kg": 15.406666666666666
       },
@@ -18298,59 +20189,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-24/2025-11-30",
-        "window_start": "2025-05-26/2025-06-01",
-        "window_end": "2025-11-17/2025-11-23",
-        "window_weeks": 26,
-        "n_shipments": 24986,
-        "n_exporters": 169,
-        "kg_shipped": 272842943.09000003,
-        "p10": 1.3793103448275863,
-        "p25": 2.9,
-        "p50": 5.066331054324389,
-        "p75": 7.197671380789959,
-        "p90": 8.931137724550897,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-10-20/2025-10-26",
+        "window_start": "2025-09-22/2025-09-28",
+        "window_end": "2025-10-13/2025-10-19",
+        "window_weeks": 4,
+        "n_shipments": 22,
+        "n_exporters": 10,
+        "kg_shipped": 67193.77,
+        "p10": 1.2197035109472516,
+        "p25": 4.951579701557044,
+        "p50": 8.844681383472222,
+        "p75": 8.918910020354865,
+        "p90": 10.10143801835109,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.406666666666666,
-        "deal_vs_p50_pct": 204.1,
+        "deal_vs_p50_pct": 74.19,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-24/2025-11-30",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-10-20/2025-10-26",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -18387,11 +20365,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.19,
+    "shippingStartDate": "2025-10-21T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -18404,7 +20383,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:13:58",
+        "generated_at": "2026-07-30T18:23:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18418,9 +20397,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-24/2025-11-30",
+        "deal_week": "2025-10-20/2025-10-26",
         "deal_kg": 7920,
         "deal_price_usd_per_kg": 15.459999999999999
       },
@@ -18539,59 +20519,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-24/2025-11-30",
-        "window_start": "2025-05-26/2025-06-01",
-        "window_end": "2025-11-17/2025-11-23",
-        "window_weeks": 26,
-        "n_shipments": 24986,
-        "n_exporters": 169,
-        "kg_shipped": 272842943.09000003,
-        "p10": 1.3793103448275863,
-        "p25": 2.9,
-        "p50": 5.066331054324389,
-        "p75": 7.197671380789959,
-        "p90": 8.931137724550897,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-10-20/2025-10-26",
+        "window_start": "2025-09-22/2025-09-28",
+        "window_end": "2025-10-13/2025-10-19",
+        "window_weeks": 4,
+        "n_shipments": 22,
+        "n_exporters": 10,
+        "kg_shipped": 67193.77,
+        "p10": 1.2197035109472516,
+        "p25": 4.951579701557044,
+        "p50": 8.844681383472222,
+        "p75": 8.918910020354865,
+        "p90": 10.10143801835109,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.459999999999999,
-        "deal_vs_p50_pct": 205.15,
+        "deal_vs_p50_pct": 74.79,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-24/2025-11-30",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-10-20/2025-10-26",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -18628,11 +20695,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.8,
+    "shippingStartDate": "2025-10-27T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -18645,7 +20713,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:03",
+        "generated_at": "2026-07-30T18:23:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18659,9 +20727,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-24/2025-11-30",
+        "deal_week": "2025-10-27/2025-11-02",
         "deal_kg": 3498,
         "deal_price_usd_per_kg": 15.866666666666665
       },
@@ -18780,59 +20849,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-24/2025-11-30",
-        "window_start": "2025-05-26/2025-06-01",
-        "window_end": "2025-11-17/2025-11-23",
-        "window_weeks": 26,
-        "n_shipments": 24986,
-        "n_exporters": 169,
-        "kg_shipped": 272842943.09000003,
-        "p10": 1.3793103448275863,
-        "p25": 2.9,
-        "p50": 5.066331054324389,
-        "p75": 7.197671380789959,
-        "p90": 8.931137724550897,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-10-27/2025-11-02",
+        "window_start": "2025-09-15/2025-09-21",
+        "window_end": "2025-10-20/2025-10-26",
+        "window_weeks": 6,
+        "n_shipments": 35,
+        "n_exporters": 11,
+        "kg_shipped": 102653.45000000001,
+        "p10": 1.3017409366391184,
+        "p25": 4.36268158925252,
+        "p50": 5.363338943672187,
+        "p75": 8.915379983828194,
+        "p90": 9.74326775562325,
+        "confidence": "MED",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.866666666666665,
-        "deal_vs_p50_pct": 213.18,
+        "deal_vs_p50_pct": 195.84,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-24/2025-11-30",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-10-27/2025-11-02",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -18869,11 +21025,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22.18,
+    "shippingStartDate": "2025-11-03T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -18886,7 +21043,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:08",
+        "generated_at": "2026-07-30T18:24:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -18900,9 +21057,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-11-24/2025-11-30",
+        "deal_week": "2025-11-03/2025-11-09",
         "deal_kg": 6480,
         "deal_price_usd_per_kg": 14.786666666666667
       },
@@ -19021,59 +21179,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-11-24/2025-11-30",
-        "window_start": "2025-05-26/2025-06-01",
-        "window_end": "2025-11-17/2025-11-23",
-        "window_weeks": 26,
-        "n_shipments": 24986,
-        "n_exporters": 169,
-        "kg_shipped": 272842943.09000003,
-        "p10": 1.3793103448275863,
-        "p25": 2.9,
-        "p50": 5.066331054324389,
-        "p75": 7.197671380789959,
-        "p90": 8.931137724550897,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-11-03/2025-11-09",
+        "window_start": "2025-10-06/2025-10-12",
+        "window_end": "2025-10-27/2025-11-02",
+        "window_weeks": 4,
+        "n_shipments": 23,
+        "n_exporters": 8,
+        "kg_shipped": 78608.36,
+        "p10": 1.2691254,
+        "p25": 4.064382141769548,
+        "p50": 5.3029119658119654,
+        "p75": 8.91096654941358,
+        "p90": 8.916340641011429,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.786666666666667,
-        "deal_vs_p50_pct": 191.86,
+        "deal_vs_p50_pct": 178.84,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-11-24/2025-11-30",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-11-03/2025-11-09",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -19110,11 +21355,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23,
+    "shippingStartDate": "2025-11-10T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -19127,7 +21373,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:12",
+        "generated_at": "2026-07-30T18:24:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19141,9 +21387,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-12-01/2025-12-07",
+        "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 6394.5,
         "deal_price_usd_per_kg": 15.333333333333334
       },
@@ -19262,59 +21509,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-12-01/2025-12-07",
-        "window_start": "2025-06-02/2025-06-08",
-        "window_end": "2025-11-24/2025-11-30",
-        "window_weeks": 26,
-        "n_shipments": 26163,
-        "n_exporters": 171,
-        "kg_shipped": 287920004.93,
-        "p10": 1.3739584584843516,
-        "p25": 2.840909090909091,
-        "p50": 5.013333333333334,
-        "p75": 7.019578592115906,
-        "p90": 8.93,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-10-13/2025-10-19",
+        "window_end": "2025-11-03/2025-11-09",
+        "window_weeks": 4,
+        "n_shipments": 28,
+        "n_exporters": 9,
+        "kg_shipped": 82046.72,
+        "p10": 1.3207008,
+        "p25": 2.619989328213894,
+        "p50": 4.064432990946503,
+        "p75": 5.3029119658119654,
+        "p90": 7.491666179358025,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.333333333333334,
-        "deal_vs_p50_pct": 205.85,
+        "deal_vs_p50_pct": 277.26,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-12-01/2025-12-07",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-11-10/2025-11-16",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -19351,11 +21685,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.08,
+    "shippingStartDate": "2025-11-10T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -19368,7 +21703,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:16",
+        "generated_at": "2026-07-30T18:24:10",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19382,9 +21717,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-12-01/2025-12-07",
+        "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 6394.5,
         "deal_price_usd_per_kg": 15.386666666666665
       },
@@ -19503,59 +21839,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-12-01/2025-12-07",
-        "window_start": "2025-06-02/2025-06-08",
-        "window_end": "2025-11-24/2025-11-30",
-        "window_weeks": 26,
-        "n_shipments": 26163,
-        "n_exporters": 171,
-        "kg_shipped": 287920004.93,
-        "p10": 1.3739584584843516,
-        "p25": 2.840909090909091,
-        "p50": 5.013333333333334,
-        "p75": 7.019578592115906,
-        "p90": 8.93,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-10-13/2025-10-19",
+        "window_end": "2025-11-03/2025-11-09",
+        "window_weeks": 4,
+        "n_shipments": 28,
+        "n_exporters": 9,
+        "kg_shipped": 82046.72,
+        "p10": 1.3207008,
+        "p25": 2.619989328213894,
+        "p50": 4.064432990946503,
+        "p75": 5.3029119658119654,
+        "p90": 7.491666179358025,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.386666666666665,
-        "deal_vs_p50_pct": 206.91,
+        "deal_vs_p50_pct": 278.57,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-12-01/2025-12-07",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-11-10/2025-11-16",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -19592,11 +22015,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.08,
+    "shippingStartDate": "2025-11-17T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -19609,7 +22033,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:21",
+        "generated_at": "2026-07-30T18:24:14",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19623,9 +22047,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "Eagle Trading Agriculture Marketing Ltd",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
-        "deal_week": "2025-12-01/2025-12-07",
+        "deal_week": "2025-11-17/2025-11-23",
         "deal_kg": 6394.5,
         "deal_price_usd_per_kg": 15.386666666666665
       },
@@ -19744,59 +22169,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2025-12-01/2025-12-07",
-        "window_start": "2025-06-02/2025-06-08",
-        "window_end": "2025-11-24/2025-11-30",
-        "window_weeks": 26,
-        "n_shipments": 26163,
-        "n_exporters": 171,
-        "kg_shipped": 287920004.93,
-        "p10": 1.3739584584843516,
-        "p25": 2.840909090909091,
-        "p50": 5.013333333333334,
-        "p75": 7.019578592115906,
-        "p90": 8.93,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-10-20/2025-10-26",
+        "window_end": "2025-11-10/2025-11-16",
+        "window_weeks": 4,
+        "n_shipments": 30,
+        "n_exporters": 7,
+        "kg_shipped": 78452.54000000001,
+        "p10": 1.8053708114883407,
+        "p25": 2.6437440626462854,
+        "p50": 4.064424460288066,
+        "p75": 5.3029119658119654,
+        "p90": 7.90163294045988,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.386666666666665,
-        "deal_vs_p50_pct": 206.91,
+        "deal_vs_p50_pct": 278.57,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2025-12-01/2025-12-07",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
+        "deal_week": "2025-11-17/2025-11-23",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -19838,6 +22350,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 12,
+    "shippingStartDate": "2026-01-27T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -19850,7 +22363,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:25",
+        "generated_at": "2026-07-30T18:24:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -19864,9 +22377,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602722628",
         "importer_name": "AGRO SMART CONTRACTS LDA",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
-        "deal_week": "2026-01-19/2026-01-25",
+        "deal_week": "2026-01-26/2026-02-01",
         "deal_kg": 11700,
         "deal_price_usd_per_kg": 8
       },
@@ -19985,58 +22499,149 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
-        "deal_week": "2026-01-19/2026-01-25",
-        "window_start": "2025-07-07/2025-07-13",
+        "destination_country": "TAIWAN",
+        "deal_week": "2026-01-26/2026-02-01",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 11,
+        "kg_shipped": 337069.4,
+        "p10": 1.6454863110879432,
+        "p25": 3.2807869734823583,
+        "p50": 4.768746368518919,
+        "p75": 5.380957264957265,
+        "p90": 6.481476600996077,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 8,
-        "deal_vs_p50_pct": 60,
+        "deal_vs_p50_pct": 67.76,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
-        "deal_week": "2026-01-19/2026-01-25",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
+        "deal_week": "2026-01-26/2026-02-01",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -20079,6 +22684,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.5,
+    "shippingStartDate": "2025-11-22T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -20091,7 +22697,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:29",
+        "generated_at": "2026-07-30T18:24:22",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20105,9 +22711,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.95
       },
@@ -20151,9 +22758,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -20164,7 +22771,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-11-10/2025-11-16 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.95,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -20193,7 +22800,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -20245,6 +22852,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.49,
+    "shippingStartDate": "2025-11-22T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -20257,7 +22865,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:33",
+        "generated_at": "2026-07-30T18:24:26",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20271,9 +22879,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.9490000000000001
       },
@@ -20317,9 +22926,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -20330,7 +22939,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-11-10/2025-11-16 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.9490000000000001,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -20359,7 +22968,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -20411,6 +23020,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.49,
+    "shippingStartDate": "2025-11-24T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -20423,7 +23033,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:37",
+        "generated_at": "2026-07-30T18:24:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20437,9 +23047,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-24/2025-11-30",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.9490000000000001
       },
@@ -20483,9 +23094,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-24/2025-11-30",
+        "window_start": "2025-05-26/2025-06-01",
+        "window_end": "2025-11-17/2025-11-23",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -20496,7 +23107,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-11-17/2025-11-23 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.9490000000000001,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -20525,7 +23136,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-24/2025-11-30",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -20577,6 +23188,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.5,
+    "shippingStartDate": "2025-11-15T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -20589,7 +23201,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:41",
+        "generated_at": "2026-07-30T18:24:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20603,9 +23215,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-10/2025-11-16",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.95
       },
@@ -20649,9 +23262,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-10/2025-11-16",
+        "window_start": "2025-05-12/2025-05-18",
+        "window_end": "2025-11-03/2025-11-09",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -20662,7 +23275,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-11-03/2025-11-09 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.95,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -20691,7 +23304,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-10/2025-11-16",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -20743,6 +23356,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.5,
+    "shippingStartDate": "2025-11-17T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -20755,7 +23369,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:45",
+        "generated_at": "2026-07-30T18:24:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20769,9 +23383,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.95
       },
@@ -20815,9 +23430,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -20828,7 +23443,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-11-10/2025-11-16 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.95,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -20857,7 +23472,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -20909,6 +23524,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.5,
+    "shippingStartDate": "2025-11-17T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -20921,7 +23537,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:49",
+        "generated_at": "2026-07-30T18:24:43",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -20935,9 +23551,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.95
       },
@@ -20981,9 +23598,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-17/2025-11-23",
+        "window_start": "2025-05-19/2025-05-25",
+        "window_end": "2025-11-10/2025-11-16",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -20994,7 +23611,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-11-10/2025-11-16 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.95,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -21023,7 +23640,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-17/2025-11-23",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -21075,6 +23692,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.8,
+    "shippingStartDate": "2025-11-08T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -21087,7 +23705,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:14:53",
+        "generated_at": "2026-07-30T18:24:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -21101,9 +23719,10 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "BIO FARMING PERU S.A.C.",
+        "origin_country": "PERU",
         "destination_country": "ESTADOS UNIDOS",
         "variety": "MANDARIN",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-03/2025-11-09",
         "deal_kg": 22960,
         "deal_price_usd_per_kg": 0.98
       },
@@ -21147,9 +23766,9 @@ export const platformDeals: PlatformDealRecord[] = [
       "dim_b_price_benchmark": {
         "variety": "MANDARIN",
         "destination_country": "ESTADOS UNIDOS",
-        "deal_week": "2026-03-23/2026-03-29",
-        "window_start": "2025-07-07/2025-07-13",
-        "window_end": "2025-12-29/2026-01-04",
+        "deal_week": "2025-11-03/2025-11-09",
+        "window_start": "2025-05-05/2025-05-11",
+        "window_end": "2025-10-27/2025-11-02",
         "window_weeks": 0,
         "n_shipments": 0,
         "n_exporters": 0,
@@ -21160,7 +23779,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "p75": null,
         "p90": null,
         "confidence": "NEEDS_INPUT",
-        "fallback_note": "No usable shipments for MANDARIN up to 2025-12-29/2026-01-04 even at variety-only grain.",
+        "fallback_note": "No usable shipments for MANDARIN up to 2025-10-27/2025-11-02 even at variety-only grain.",
         "deal_price_usd_per_kg": 0.98,
         "deal_vs_p50_pct": null,
         "deal_vs_p50_band": null
@@ -21189,7 +23808,7 @@ export const platformDeals: PlatformDealRecord[] = [
         "peak_off_ratio": null,
         "in_season_weeks": [],
         "lane_maturity": "SPARSE",
-        "deal_week": "2026-03-23/2026-03-29",
+        "deal_week": "2025-11-03/2025-11-09",
         "commercial_window_alignment": "NEEDS_INPUT",
         "route_signal_inferred": "INSUFFICIENT",
         "route_signal_table": "MED",
@@ -21236,11 +23855,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.17,
+    "shippingStartDate": "2025-09-08T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -21253,7 +23873,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:09",
+        "generated_at": "2026-07-30T18:24:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -21267,7 +23887,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-08/2025-09-14",
         "deal_kg": 5400,
@@ -21312,59 +23933,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-09-08/2025-09-14",
-        "window_start": "2025-03-10/2025-03-16",
+        "window_start": "2025-08-11/2025-08-17",
         "window_end": "2025-09-01/2025-09-07",
-        "window_weeks": 26,
-        "n_shipments": 8840,
-        "n_exporters": 142,
-        "kg_shipped": 82375404.76,
-        "p10": 1.6907977318962906,
-        "p25": 2.705276371034065,
-        "p50": 6,
-        "p75": 8.545185609116741,
-        "p90": 10.435416666666667,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 23,
+        "n_exporters": 5,
+        "kg_shipped": 54694.1,
+        "p10": 3.551365942333895,
+        "p25": 5.26609146225563,
+        "p50": 5.95811820771688,
+        "p75": 9.257893527199073,
+        "p90": 9.95546608061822,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.78,
-        "deal_vs_p50_pct": 179.67,
+        "deal_vs_p50_pct": 181.63,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-09-08/2025-09-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -21401,11 +24109,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.04,
+    "shippingStartDate": "2025-09-22T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -21418,7 +24127,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:14",
+        "generated_at": "2026-07-30T18:24:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -21432,7 +24141,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-22/2025-09-28",
         "deal_kg": 5760,
@@ -21477,59 +24187,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-09-22/2025-09-28",
-        "window_start": "2025-03-24/2025-03-30",
+        "window_start": "2025-08-25/2025-08-31",
         "window_end": "2025-09-15/2025-09-21",
-        "window_weeks": 26,
-        "n_shipments": 11947,
-        "n_exporters": 147,
-        "kg_shipped": 115820597.71,
-        "p10": 1.5,
-        "p25": 2.705276371034065,
-        "p50": 5.945225151718446,
-        "p75": 8.42,
-        "p90": 10.153333333333334,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 31,
+        "n_exporters": 6,
+        "kg_shipped": 84404.5,
+        "p10": 1.507860422405877,
+        "p25": 5.146321037290459,
+        "p50": 6.075059481663037,
+        "p75": 8.524618526562971,
+        "p90": 9.71663274537037,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.360000000000001,
-        "deal_vs_p50_pct": 158.36,
+        "deal_vs_p50_pct": 152.84,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-09-22/2025-09-28",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -21566,11 +24363,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 24.5,
+    "shippingStartDate": "2025-10-06T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -21583,7 +24381,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:18",
+        "generated_at": "2026-07-30T18:24:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -21597,7 +24395,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-06/2025-10-12",
         "deal_kg": 5400,
@@ -21642,59 +24441,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-10-06/2025-10-12",
-        "window_start": "2025-04-07/2025-04-13",
+        "window_start": "2025-09-08/2025-09-14",
         "window_end": "2025-09-29/2025-10-05",
-        "window_weeks": 26,
-        "n_shipments": 14784,
-        "n_exporters": 150,
-        "kg_shipped": 147077517.57,
-        "p10": 1.3888888888888888,
-        "p25": 2.6709401709401708,
-        "p50": 5.71,
-        "p75": 8.052884615384615,
-        "p90": 9.733645827349019,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 8,
+        "kg_shipped": 81259.48999999999,
+        "p10": 1.086206822016461,
+        "p25": 4.82378933271154,
+        "p50": 5.714746939496205,
+        "p75": 8.35374032421076,
+        "p90": 9.827074809694926,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.333333333333332,
-        "deal_vs_p50_pct": 186.05,
+        "deal_vs_p50_pct": 185.81,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-10-06/2025-10-12",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -21731,11 +24617,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.3,
+    "shippingStartDate": "2025-10-20T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -21748,7 +24635,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:22",
+        "generated_at": "2026-07-30T18:25:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -21762,7 +24649,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-20/2025-10-26",
         "deal_kg": 5400,
@@ -21807,59 +24695,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-10-20/2025-10-26",
-        "window_start": "2025-04-21/2025-04-27",
+        "window_start": "2025-09-22/2025-09-28",
         "window_end": "2025-10-13/2025-10-19",
-        "window_weeks": 26,
-        "n_shipments": 18038,
-        "n_exporters": 156,
-        "kg_shipped": 186232365.52,
-        "p10": 1.3543217665763088,
-        "p25": 2.705276371034065,
-        "p50": 5.388682414649539,
-        "p75": 7.9484871118258935,
-        "p90": 9.412199565005206,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 22,
+        "n_exporters": 10,
+        "kg_shipped": 67193.77,
+        "p10": 1.2197035109472516,
+        "p25": 4.951579701557044,
+        "p50": 8.844681383472222,
+        "p75": 8.918910020354865,
+        "p90": 10.10143801835109,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.866666666666667,
-        "deal_vs_p50_pct": 213,
+        "deal_vs_p50_pct": 90.7,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-10-20/2025-10-26",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -21896,11 +24871,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.21,
+    "shippingStartDate": "2026-01-13T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -21913,7 +24889,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:25",
+        "generated_at": "2026-07-30T18:25:07",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -21927,7 +24903,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-12/2026-01-18",
         "deal_kg": 5760,
@@ -21972,59 +24949,147 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2026-01-12/2026-01-18",
-        "window_start": "2025-07-07/2025-07-13",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 20,
+        "n_exporters": 5,
+        "kg_shipped": 64287.08,
+        "p10": 1.10003824,
+        "p25": 3.2437719674549585,
+        "p50": 4.018347218794653,
+        "p75": 6.689879631280192,
+        "p90": 8.552976795833333,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.473333333333333,
-        "deal_vs_p50_pct": 209.47,
+        "deal_vs_p50_pct": 285.07,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2026-01-12/2026-01-18",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -22061,11 +25126,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.18,
+    "shippingStartDate": "2025-12-10T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -22078,7 +25144,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:29",
+        "generated_at": "2026-07-30T18:25:11",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -22092,7 +25158,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-08/2025-12-14",
         "deal_kg": 5760,
@@ -22137,59 +25204,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-12-08/2025-12-14",
-        "window_start": "2025-06-09/2025-06-15",
+        "window_start": "2025-11-10/2025-11-16",
         "window_end": "2025-12-01/2025-12-07",
-        "window_weeks": 26,
-        "n_shipments": 27201,
-        "n_exporters": 173,
-        "kg_shipped": 300514386.73,
-        "p10": 1.3976363401191998,
-        "p25": 2.9,
-        "p50": 5.010078587214551,
-        "p75": 7,
-        "p90": 8.929729729729731,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 25,
+        "n_exporters": 6,
+        "kg_shipped": 76745.92,
+        "p10": 2.113262846320214,
+        "p25": 3.16011352333806,
+        "p50": 5.225402661045191,
+        "p75": 6.180746651282051,
+        "p90": 9.569057781070017,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 15.453333333333333,
-        "deal_vs_p50_pct": 208.44,
+        "deal_vs_p50_pct": 195.73,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-12-08/2025-12-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -22226,11 +25380,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 20.58,
+    "shippingStartDate": "2025-12-20T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -22243,7 +25398,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:33",
+        "generated_at": "2026-07-30T18:25:15",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -22257,7 +25412,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601552557",
         "importer_name": "TRADE CULTIVATORS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-15/2025-12-21",
         "deal_kg": 6480,
@@ -22302,59 +25458,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-12-15/2025-12-21",
-        "window_start": "2025-06-16/2025-06-22",
+        "window_start": "2025-11-17/2025-11-23",
         "window_end": "2025-12-08/2025-12-14",
-        "window_weeks": 26,
-        "n_shipments": 28030,
-        "n_exporters": 173,
-        "kg_shipped": 310791037.55,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 7,
-        "p90": 8.9,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 25,
+        "n_exporters": 6,
+        "kg_shipped": 102683.1,
+        "p10": 2.880207675777365,
+        "p25": 3.4577514384472345,
+        "p50": 4.446449020922852,
+        "p75": 5.380957264957265,
+        "p90": 7.2374232071604965,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 13.72,
-        "deal_vs_p50_pct": 174.4,
+        "deal_vs_p50_pct": 208.56,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-12-15/2025-12-21",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -22391,11 +25634,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 21.66,
+    "shippingStartDate": "2025-09-10T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -22408,7 +25652,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:37",
+        "generated_at": "2026-07-30T18:25:18",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -22422,7 +25666,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-08/2025-09-14",
         "deal_kg": 6480,
@@ -22467,59 +25712,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-09-08/2025-09-14",
-        "window_start": "2025-03-10/2025-03-16",
+        "window_start": "2025-08-11/2025-08-17",
         "window_end": "2025-09-01/2025-09-07",
-        "window_weeks": 26,
-        "n_shipments": 8840,
-        "n_exporters": 142,
-        "kg_shipped": 82375404.76,
-        "p10": 1.6907977318962906,
-        "p25": 2.705276371034065,
-        "p50": 6,
-        "p75": 8.545185609116741,
-        "p90": 10.435416666666667,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 23,
+        "n_exporters": 5,
+        "kg_shipped": 54694.1,
+        "p10": 3.551365942333895,
+        "p25": 5.26609146225563,
+        "p50": 5.95811820771688,
+        "p75": 9.257893527199073,
+        "p90": 9.95546608061822,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.44,
-        "deal_vs_p50_pct": 140.67,
+        "deal_vs_p50_pct": 142.36,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-09-08/2025-09-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -22556,11 +25888,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25,
+    "shippingStartDate": "2025-09-24T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -22573,7 +25906,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:40",
+        "generated_at": "2026-07-30T18:25:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -22587,7 +25920,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-22/2025-09-28",
         "deal_kg": 5760,
@@ -22632,59 +25966,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-09-22/2025-09-28",
-        "window_start": "2025-03-24/2025-03-30",
+        "window_start": "2025-08-25/2025-08-31",
         "window_end": "2025-09-15/2025-09-21",
-        "window_weeks": 26,
-        "n_shipments": 11947,
-        "n_exporters": 147,
-        "kg_shipped": 115820597.71,
-        "p10": 1.5,
-        "p25": 2.705276371034065,
-        "p50": 5.945225151718446,
-        "p75": 8.42,
-        "p90": 10.153333333333334,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 31,
+        "n_exporters": 6,
+        "kg_shipped": 84404.5,
+        "p10": 1.507860422405877,
+        "p25": 5.146321037290459,
+        "p50": 6.075059481663037,
+        "p75": 8.524618526562971,
+        "p90": 9.71663274537037,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.666666666666668,
-        "deal_vs_p50_pct": 180.34,
+        "deal_vs_p50_pct": 174.35,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-09-22/2025-09-28",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -22721,11 +26142,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.95,
+    "shippingStartDate": "2025-10-08T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -22738,7 +26160,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:44",
+        "generated_at": "2026-07-30T18:25:26",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -22752,7 +26174,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-06/2025-10-12",
         "deal_kg": 5400,
@@ -22797,59 +26220,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-10-06/2025-10-12",
-        "window_start": "2025-04-07/2025-04-13",
+        "window_start": "2025-09-08/2025-09-14",
         "window_end": "2025-09-29/2025-10-05",
-        "window_weeks": 26,
-        "n_shipments": 14784,
-        "n_exporters": 150,
-        "kg_shipped": 147077517.57,
-        "p10": 1.3888888888888888,
-        "p25": 2.6709401709401708,
-        "p50": 5.71,
-        "p75": 8.052884615384615,
-        "p90": 9.733645827349019,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 8,
+        "kg_shipped": 81259.48999999999,
+        "p10": 1.086206822016461,
+        "p25": 4.82378933271154,
+        "p50": 5.714746939496205,
+        "p75": 8.35374032421076,
+        "p90": 9.827074809694926,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 17.3,
-        "deal_vs_p50_pct": 202.98,
+        "deal_vs_p50_pct": 202.73,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-10-06/2025-10-12",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -22886,11 +26396,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.6,
+    "shippingStartDate": "2025-10-22T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -22903,7 +26414,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:48",
+        "generated_at": "2026-07-30T18:25:30",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -22917,7 +26428,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-20/2025-10-26",
         "deal_kg": 5400,
@@ -22962,59 +26474,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-10-20/2025-10-26",
-        "window_start": "2025-04-21/2025-04-27",
+        "window_start": "2025-09-22/2025-09-28",
         "window_end": "2025-10-13/2025-10-19",
-        "window_weeks": 26,
-        "n_shipments": 18038,
-        "n_exporters": 156,
-        "kg_shipped": 186232365.52,
-        "p10": 1.3543217665763088,
-        "p25": 2.705276371034065,
-        "p50": 5.388682414649539,
-        "p75": 7.9484871118258935,
-        "p90": 9.412199565005206,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 22,
+        "n_exporters": 10,
+        "kg_shipped": 67193.77,
+        "p10": 1.2197035109472516,
+        "p25": 4.951579701557044,
+        "p50": 8.844681383472222,
+        "p75": 8.918910020354865,
+        "p90": 10.10143801835109,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 17.733333333333334,
-        "deal_vs_p50_pct": 229.08,
+        "deal_vs_p50_pct": 100.5,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-10-20/2025-10-26",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -23051,11 +26650,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.01,
+    "shippingStartDate": "2026-01-21T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -23068,7 +26668,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:52",
+        "generated_at": "2026-07-30T18:25:34",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -23082,7 +26682,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-19/2026-01-25",
         "deal_kg": 5760,
@@ -23127,59 +26728,147 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2026-01-19/2026-01-25",
-        "window_start": "2025-07-07/2025-07-13",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 20,
+        "n_exporters": 5,
+        "kg_shipped": 64287.08,
+        "p10": 1.10003824,
+        "p25": 3.2437719674549585,
+        "p50": 4.018347218794653,
+        "p75": 6.689879631280192,
+        "p90": 8.552976795833333,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.673333333333332,
-        "deal_vs_p50_pct": 233.47,
+        "deal_vs_p50_pct": 314.93,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2026-01-19/2026-01-25",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -23216,11 +26905,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.17,
+    "shippingStartDate": "2025-12-10T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -23233,7 +26923,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:55",
+        "generated_at": "2026-07-30T18:25:38",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -23247,7 +26937,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-08/2025-12-14",
         "deal_kg": 5760,
@@ -23292,59 +26983,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-12-08/2025-12-14",
-        "window_start": "2025-06-09/2025-06-15",
+        "window_start": "2025-11-10/2025-11-16",
         "window_end": "2025-12-01/2025-12-07",
-        "window_weeks": 26,
-        "n_shipments": 27201,
-        "n_exporters": 173,
-        "kg_shipped": 300514386.73,
-        "p10": 1.3976363401191998,
-        "p25": 2.9,
-        "p50": 5.010078587214551,
-        "p75": 7,
-        "p90": 8.929729729729731,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 25,
+        "n_exporters": 6,
+        "kg_shipped": 76745.92,
+        "p10": 2.113262846320214,
+        "p25": 3.16011352333806,
+        "p50": 5.225402661045191,
+        "p75": 6.180746651282051,
+        "p90": 9.569057781070017,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 16.78,
-        "deal_vs_p50_pct": 234.92,
+        "deal_vs_p50_pct": 221.12,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-12-08/2025-12-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -23381,11 +27159,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 2,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22.04,
+    "shippingStartDate": "2025-12-20T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -23398,7 +27177,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:15:59",
+        "generated_at": "2026-07-30T18:25:43",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -23412,7 +27191,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20535311210",
         "importer_name": "FRESH EXPRESS LLC",
-        "destination_country": "UNITED ARAB EMIRATES",
+        "origin_country": "PERU",
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-15/2025-12-21",
         "deal_kg": 6480,
@@ -23457,59 +27237,146 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
         "deal_week": "2025-12-15/2025-12-21",
-        "window_start": "2025-06-16/2025-06-22",
+        "window_start": "2025-11-17/2025-11-23",
         "window_end": "2025-12-08/2025-12-14",
-        "window_weeks": 26,
-        "n_shipments": 28030,
-        "n_exporters": 173,
-        "kg_shipped": 310791037.55,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 7,
-        "p90": 8.9,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->UNITED ARAB EMIRATES too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 25,
+        "n_exporters": 6,
+        "kg_shipped": 102683.1,
+        "p10": 2.880207675777365,
+        "p25": 3.4577514384472345,
+        "p50": 4.446449020922852,
+        "p75": 5.380957264957265,
+        "p90": 7.2374232071604965,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 14.693333333333333,
-        "deal_vs_p50_pct": 193.87,
+        "deal_vs_p50_pct": 230.45,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "UNITED ARAB EMIRATES",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
+        "destination_country": "EMIRATOS ARABES UNIDOS",
+        "period_label": "2025-01-01 .. 2025-12-30",
+        "n_shipments": 188,
+        "n_exporters": 19,
+        "n_importers": 9,
+        "kg_net": 482094.82,
+        "fob_usd": 2788034.8200000003,
+        "lane_share_of_variety_pct": 0.13,
         "green_channel_pct": null,
         "orange_channel_pct": null,
         "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "transport_mode_mix": {
+          "AEREO": 92.6,
+          "MARITIMO": 7.4
+        },
+        "exporter_hhi": 3099,
+        "importer_hhi": 4132,
+        "top_exporters": [
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 52.6
+          },
+          {
+            "exporter_id": "20610068767",
+            "exporter_name": "AQU ANQA II S.A.C.",
+            "share_pct": 12.2
+          },
+          {
+            "exporter_id": "20104902864",
+            "exporter_name": "EXPORTADORA FRUTICOLA DEL SUR SA",
+            "share_pct": 9.4
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 8.1
+          },
+          {
+            "exporter_id": "20492681220",
+            "exporter_name": "GRUPO TREBOL S.A.C.",
+            "share_pct": 2.7
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "b36d3175",
+            "importer_name": "FRESH FRUITS COMPANY VEGETABLES AND FRUIT TRADING LLC",
+            "share_pct": 59
+          },
+          {
+            "importer_id": "79b9ee88",
+            "importer_name": "KIBSONS INTERNATIONAL LLC",
+            "share_pct": 24.2
+          },
+          {
+            "importer_id": "f1e73bed",
+            "importer_name": "SPINNEYS DUBAI LLC",
+            "share_pct": 6.7
+          },
+          {
+            "importer_id": "7a23ffc7",
+            "importer_name": "ELITE GLOBAL FRESH TRADING LLC DUBAI BRANCH",
+            "share_pct": 3.2
+          },
+          {
+            "importer_id": "4f8fa788",
+            "importer_name": "VIVA PREMIERE GENERAL TRADING",
+            "share_pct": 2.6
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 24618,
+          "2025-02": 17555.04,
+          "2025-03": 12189.84,
+          "2025-04": 783.36,
+          "2025-05": 783.36,
+          "2025-06": 13350.41,
+          "2025-07": 14451.5,
+          "2025-08": 47326.1,
+          "2025-09": 100979.99,
+          "2025-10": 72600.86,
+          "2025-11": 100234.78,
+          "2025-12": 77221.58
+        },
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 8.3,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-08/2025-09-14",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-22/2025-12-28"
+        ],
+        "lane_maturity": "THIN",
         "deal_week": "2025-12-15/2025-12-21",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
-        "route_signal_table": null,
-        "route_signal_driver": "NEEDS_INPUT",
-        "route_signal_pts": null,
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
+        "route_signal_table": "MED",
+        "route_signal_driver": "CORRIDOR_DEFAULT",
+        "route_signal_pts": 3,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
-          "No corridor row for PE->UNITED ARAB EMIRATES and no pair row for group 1. Add a table entry or supply manually."
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
       "dim_d3_pair_history": {
@@ -23535,7 +27402,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 118368,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23546,11 +27413,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.32,
+    "shippingStartDate": "2025-01-10T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23569,7 +27437,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23583,7 +27450,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 120408,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23594,11 +27461,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 50.17,
+    "shippingStartDate": "2025-01-20T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23617,7 +27485,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23631,7 +27498,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 119736,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23642,11 +27509,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.89,
+    "shippingStartDate": "2025-02-09T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23665,7 +27533,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23679,7 +27546,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 118128,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23690,11 +27557,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.22,
+    "shippingStartDate": "2025-02-18T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23713,7 +27581,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23727,7 +27594,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 118128,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23738,11 +27605,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.22,
+    "shippingStartDate": "2025-03-10T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23761,7 +27629,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23775,7 +27642,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 118392,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23786,11 +27653,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.33,
+    "shippingStartDate": "2025-04-15T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23809,7 +27677,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23823,7 +27690,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG",
     "dealValueUSD": 118896,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Shanghai, China",
     "buyerName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
     "supplierName": "JUHINEJ LTD",
@@ -23834,11 +27701,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 25,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.54,
+    "shippingStartDate": "2025-10-24T10:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -23857,7 +27725,6 @@ export const platformDeals: PlatformDealRecord[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -23872,7 +27739,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "7800 x CARTON X 1.5KG",
     "dealValueUSD": 78936,
     "origin": "Callao, Peru",
-    "destination": "Malaga, China",
+    "destination": "Malaga, Spain",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
     "supplierName": "ICA BLUEBERRIES SAC",
     "buyerYib": null,
@@ -23882,11 +27749,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 18,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.12,
+    "shippingStartDate": "2025-09-05T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -23899,7 +27767,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:03",
+        "generated_at": "2026-07-30T18:25:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -23913,7 +27781,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601449837",
         "importer_name": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-        "destination_country": "CHINA",
+        "origin_country": "PERU",
+        "destination_country": "ESPANA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-01/2025-09-07",
         "deal_kg": 11700,
@@ -23958,116 +27827,120 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": "CHINA",
+        "destination_country": "ESPANA",
         "deal_week": "2025-09-01/2025-09-07",
         "window_start": "2025-08-04/2025-08-10",
         "window_end": "2025-08-25/2025-08-31",
         "window_weeks": 4,
-        "n_shipments": 753,
-        "n_exporters": 36,
-        "kg_shipped": 8265506,
-        "p10": 2.5641025641025643,
-        "p25": 4.444444444444445,
-        "p50": 8,
-        "p75": 8.653846153846153,
-        "p90": 10.153333333333334,
+        "n_shipments": 102,
+        "n_exporters": 19,
+        "kg_shipped": 818217.98,
+        "p10": 1.0569370180611952,
+        "p25": 1.4467592592592593,
+        "p50": 5.703022765376985,
+        "p75": 8,
+        "p90": 10.31983691303207,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 6.746666666666667,
-        "deal_vs_p50_pct": -15.67,
+        "deal_vs_p50_pct": 18.3,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "CHINA",
-        "period_label": "2025-01-04 .. 2025-12-29",
-        "n_shipments": 3064,
-        "n_exporters": 57,
-        "n_importers": 22,
-        "kg_net": 35382222.65,
-        "fob_usd": 202248817.56,
-        "lane_share_of_variety_pct": 9.27,
+        "destination_country": "ESPANA",
+        "period_label": "2025-01-01 .. 2025-12-27",
+        "n_shipments": 740,
+        "n_exporters": 48,
+        "n_importers": 25,
+        "kg_net": 5916027.03,
+        "fob_usd": 29757886.049999997,
+        "lane_share_of_variety_pct": 1.55,
         "green_channel_pct": 100,
         "orange_channel_pct": 0,
         "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 99.8,
-          "AÉREO": 0.2,
-          "AEREO": 0,
-          "MARÍTIMO": 0
+          "MARITIMO": 51.1,
+          "AEREO": 46.9,
+          "MARÍTIMO": 1.9,
+          "AÉREO": 0.1
         },
-        "exporter_hhi": 744,
-        "importer_hhi": 1102,
+        "exporter_hhi": 1183,
+        "importer_hhi": 1560,
         "top_exporters": [
-          {
-            "exporter_id": "20340584237",
-            "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 18.1
-          },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 9.8
+            "share_pct": 21.8
           },
           {
-            "exporter_id": "20554556192",
-            "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 8.6
+            "exporter_id": "20612065668",
+            "exporter_name": "POB S.A.C.",
+            "share_pct": 17.8
           },
           {
-            "exporter_id": "20602842739",
-            "exporter_name": "LARAMA BERRIES S.A.C.",
-            "share_pct": 7.3
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 15.9
           },
           {
-            "exporter_id": "20170040938",
-            "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 6.3
+            "exporter_id": "20605814957",
+            "exporter_name": "DIAMOND BRIDGE S.A.C.",
+            "share_pct": 6.5
+          },
+          {
+            "exporter_id": "20608170732",
+            "exporter_name": "AGRICOLA BLUE GOLD S.A.C.",
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
-            "importer_id": "41cea63a",
-            "importer_name": "SHENZHEN OHENG IMPORT & EXPORT CO..LTD.",
-            "share_pct": 17.8
+            "importer_id": "563d655f",
+            "importer_name": "HORTIFRUT MARKETING EMEA S.A",
+            "share_pct": 30.2
           },
           {
-            "importer_id": "177d835b",
-            "importer_name": "GIDDINGSSHANGHAIFRUIT TRADING",
-            "share_pct": 15.2
+            "importer_id": "0496e955",
+            "importer_name": "GLOBAL BERRY S.L.",
+            "share_pct": 18
           },
           {
-            "importer_id": "57d6386f",
-            "importer_name": "SHENZHEN JOY WING MAU FRUIT CO. LTD",
-            "share_pct": 12.3
+            "importer_id": "35f24a46",
+            "importer_name": "SUREXPORT COMPANIA AGRARIA. S.L.",
+            "share_pct": 10.1
           },
           {
-            "importer_id": "8e9e0878",
-            "importer_name": "SHENZHEN YUESHI SUPPLY CHAIN MANAGEMENT CO. LTD.",
-            "share_pct": 11.4
+            "importer_id": "c28866ed",
+            "importer_name": "IDEAL FRUITS SL",
+            "share_pct": 9.5
           },
           {
-            "importer_id": "2897d9eb",
-            "importer_name": "SHANGHAI HUI ZHAN INTERNATIONAL TRADE CO. LTD",
-            "share_pct": 11.2
+            "importer_id": "e79fc370",
+            "importer_name": "CHAMPI?ONES Y SETAS GIMENEZ SL",
+            "share_pct": 9.4
           }
         ],
         "monthly_kg": {
-          "2025-01": 168480,
-          "2025-02": 21757.5,
-          "2025-05": 1.25,
-          "2025-06": 1362097,
-          "2025-07": 4123206.93,
-          "2025-08": 8374286,
-          "2025-09": 6361719.94,
-          "2025-10": 7471976.27,
-          "2025-11": 6008733.38,
-          "2025-12": 1489964.38
+          "2025-01": 318842.94,
+          "2025-02": 23052,
+          "2025-03": 44650,
+          "2025-04": 22976,
+          "2025-05": 14853,
+          "2025-06": 51773.8,
+          "2025-07": 388097.3,
+          "2025-08": 861202.12,
+          "2025-09": 1442360.9,
+          "2025-10": 1365241.54,
+          "2025-11": 993259.73,
+          "2025-12": 389717.7
         },
-        "peak_month": "2025-08",
-        "off_peak_month": "2025-02",
-        "peak_off_ratio": 384.9,
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 97.1,
         "in_season_weeks": [
+          "2024-12-30/2025-01-05",
+          "2025-01-13/2025-01-19",
           "2025-07-07/2025-07-13",
           "2025-07-14/2025-07-20",
           "2025-07-21/2025-07-27",
@@ -24080,23 +27953,30 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-09-15/2025-09-21",
           "2025-09-22/2025-09-28",
           "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
           "2025-10-13/2025-10-19",
           "2025-10-20/2025-10-26",
           "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
           "2025-11-10/2025-11-16",
-          "2025-11-24/2025-11-30"
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14"
         ],
         "lane_maturity": "DEEP",
         "deal_week": "2025-09-01/2025-09-07",
         "commercial_window_alignment": "IN_SEASON",
         "route_signal_inferred": "LOW",
-        "route_signal_table": "MED",
-        "route_signal_driver": "CORRIDOR_DEFAULT",
-        "route_signal_pts": 3,
+        "route_signal_table": "LOW_MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 7,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
       "dim_d3_pair_history": {
@@ -24110,7 +27990,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -24125,7 +28004,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "7800 x CARTON X 1.5KG",
     "dealValueUSD": 80106,
     "origin": "Callao, Peru",
-    "destination": "Malaga, China",
+    "destination": "Malaga, Spain",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
     "supplierName": "ICA BLUEBERRIES SAC",
     "buyerYib": null,
@@ -24135,11 +28014,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 18,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.27,
+    "shippingStartDate": "2025-09-18T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -24152,7 +28032,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:08",
+        "generated_at": "2026-07-30T18:25:51",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -24166,7 +28046,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601449837",
         "importer_name": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-        "destination_country": "CHINA",
+        "origin_country": "PERU",
+        "destination_country": "ESPANA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-15/2025-09-21",
         "deal_kg": 11700,
@@ -24211,116 +28092,120 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": "CHINA",
+        "destination_country": "ESPANA",
         "deal_week": "2025-09-15/2025-09-21",
         "window_start": "2025-08-18/2025-08-24",
         "window_end": "2025-09-08/2025-09-14",
         "window_weeks": 4,
-        "n_shipments": 591,
-        "n_exporters": 33,
-        "kg_shipped": 6595201.699999999,
-        "p10": 1.7094017094017093,
-        "p25": 3.90458790340963,
-        "p50": 5.789016027543406,
-        "p75": 8.42,
-        "p90": 9.030884020313517,
+        "n_shipments": 179,
+        "n_exporters": 25,
+        "kg_shipped": 1151974.56,
+        "p10": 1.0523693588977605,
+        "p25": 1.71306623998919,
+        "p50": 5.868660011998335,
+        "p75": 8,
+        "p90": 9.0017650018284,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 6.846666666666667,
-        "deal_vs_p50_pct": 18.27,
+        "deal_vs_p50_pct": 16.66,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "CHINA",
-        "period_label": "2025-01-04 .. 2025-12-29",
-        "n_shipments": 3064,
-        "n_exporters": 57,
-        "n_importers": 22,
-        "kg_net": 35382222.65,
-        "fob_usd": 202248817.56,
-        "lane_share_of_variety_pct": 9.27,
+        "destination_country": "ESPANA",
+        "period_label": "2025-01-01 .. 2025-12-27",
+        "n_shipments": 740,
+        "n_exporters": 48,
+        "n_importers": 25,
+        "kg_net": 5916027.03,
+        "fob_usd": 29757886.049999997,
+        "lane_share_of_variety_pct": 1.55,
         "green_channel_pct": 100,
         "orange_channel_pct": 0,
         "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 99.8,
-          "AÉREO": 0.2,
-          "AEREO": 0,
-          "MARÍTIMO": 0
+          "MARITIMO": 51.1,
+          "AEREO": 46.9,
+          "MARÍTIMO": 1.9,
+          "AÉREO": 0.1
         },
-        "exporter_hhi": 744,
-        "importer_hhi": 1102,
+        "exporter_hhi": 1183,
+        "importer_hhi": 1560,
         "top_exporters": [
-          {
-            "exporter_id": "20340584237",
-            "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 18.1
-          },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 9.8
+            "share_pct": 21.8
           },
           {
-            "exporter_id": "20554556192",
-            "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 8.6
+            "exporter_id": "20612065668",
+            "exporter_name": "POB S.A.C.",
+            "share_pct": 17.8
           },
           {
-            "exporter_id": "20602842739",
-            "exporter_name": "LARAMA BERRIES S.A.C.",
-            "share_pct": 7.3
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 15.9
           },
           {
-            "exporter_id": "20170040938",
-            "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 6.3
+            "exporter_id": "20605814957",
+            "exporter_name": "DIAMOND BRIDGE S.A.C.",
+            "share_pct": 6.5
+          },
+          {
+            "exporter_id": "20608170732",
+            "exporter_name": "AGRICOLA BLUE GOLD S.A.C.",
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
-            "importer_id": "41cea63a",
-            "importer_name": "SHENZHEN OHENG IMPORT & EXPORT CO..LTD.",
-            "share_pct": 17.8
+            "importer_id": "563d655f",
+            "importer_name": "HORTIFRUT MARKETING EMEA S.A",
+            "share_pct": 30.2
           },
           {
-            "importer_id": "177d835b",
-            "importer_name": "GIDDINGSSHANGHAIFRUIT TRADING",
-            "share_pct": 15.2
+            "importer_id": "0496e955",
+            "importer_name": "GLOBAL BERRY S.L.",
+            "share_pct": 18
           },
           {
-            "importer_id": "57d6386f",
-            "importer_name": "SHENZHEN JOY WING MAU FRUIT CO. LTD",
-            "share_pct": 12.3
+            "importer_id": "35f24a46",
+            "importer_name": "SUREXPORT COMPANIA AGRARIA. S.L.",
+            "share_pct": 10.1
           },
           {
-            "importer_id": "8e9e0878",
-            "importer_name": "SHENZHEN YUESHI SUPPLY CHAIN MANAGEMENT CO. LTD.",
-            "share_pct": 11.4
+            "importer_id": "c28866ed",
+            "importer_name": "IDEAL FRUITS SL",
+            "share_pct": 9.5
           },
           {
-            "importer_id": "2897d9eb",
-            "importer_name": "SHANGHAI HUI ZHAN INTERNATIONAL TRADE CO. LTD",
-            "share_pct": 11.2
+            "importer_id": "e79fc370",
+            "importer_name": "CHAMPI?ONES Y SETAS GIMENEZ SL",
+            "share_pct": 9.4
           }
         ],
         "monthly_kg": {
-          "2025-01": 168480,
-          "2025-02": 21757.5,
-          "2025-05": 1.25,
-          "2025-06": 1362097,
-          "2025-07": 4123206.93,
-          "2025-08": 8374286,
-          "2025-09": 6361719.94,
-          "2025-10": 7471976.27,
-          "2025-11": 6008733.38,
-          "2025-12": 1489964.38
+          "2025-01": 318842.94,
+          "2025-02": 23052,
+          "2025-03": 44650,
+          "2025-04": 22976,
+          "2025-05": 14853,
+          "2025-06": 51773.8,
+          "2025-07": 388097.3,
+          "2025-08": 861202.12,
+          "2025-09": 1442360.9,
+          "2025-10": 1365241.54,
+          "2025-11": 993259.73,
+          "2025-12": 389717.7
         },
-        "peak_month": "2025-08",
-        "off_peak_month": "2025-02",
-        "peak_off_ratio": 384.9,
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 97.1,
         "in_season_weeks": [
+          "2024-12-30/2025-01-05",
+          "2025-01-13/2025-01-19",
           "2025-07-07/2025-07-13",
           "2025-07-14/2025-07-20",
           "2025-07-21/2025-07-27",
@@ -24333,23 +28218,30 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-09-15/2025-09-21",
           "2025-09-22/2025-09-28",
           "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
           "2025-10-13/2025-10-19",
           "2025-10-20/2025-10-26",
           "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
           "2025-11-10/2025-11-16",
-          "2025-11-24/2025-11-30"
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14"
         ],
         "lane_maturity": "DEEP",
         "deal_week": "2025-09-15/2025-09-21",
         "commercial_window_alignment": "IN_SEASON",
         "route_signal_inferred": "LOW",
-        "route_signal_table": "MED",
-        "route_signal_driver": "CORRIDOR_DEFAULT",
-        "route_signal_pts": 3,
+        "route_signal_table": "LOW_MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 7,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
-          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4."
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
       "dim_d3_pair_history": {
@@ -24363,7 +28255,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -24388,11 +28279,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 32,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.32,
+    "shippingStartDate": "2025-10-15T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -24405,7 +28297,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:12",
+        "generated_at": "2026-07-30T18:25:55",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -24419,6 +28311,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601449837",
         "importer_name": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+        "origin_country": "PERU",
         "destination_country": "CHINA",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-13/2025-10-19",
@@ -24616,7 +28509,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -24631,7 +28523,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "7800 x CARTON X 1.5KG",
     "dealValueUSD": 78078,
     "origin": "Callao, Peru",
-    "destination": "Malaga, China",
+    "destination": "Malaga, Spain",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
     "supplierName": "ICA BLUEBERRIES SAC",
     "buyerYib": null,
@@ -24641,11 +28533,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 18,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.01,
+    "shippingStartDate": "2026-01-17T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -24658,7 +28551,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": false,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:15",
+        "generated_at": "2026-07-30T18:25:59",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -24672,7 +28565,8 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20601449837",
         "importer_name": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-        "destination_country": "CHINA",
+        "origin_country": "PERU",
+        "destination_country": "ESPANA",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-12/2026-01-18",
         "deal_kg": 11700,
@@ -24717,116 +28611,120 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": "CHINA",
+        "destination_country": "ESPANA",
         "deal_week": "2026-01-12/2026-01-18",
         "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
         "window_weeks": 4,
-        "n_shipments": 85,
-        "n_exporters": 12,
-        "kg_shipped": 902157.88,
-        "p10": 1.202671937647608,
-        "p25": 1.3419783668870462,
-        "p50": 1.646090534979424,
-        "p75": 5.1167906694593945,
-        "p90": 7.191053285470085,
+        "n_shipments": 20,
+        "n_exporters": 6,
+        "kg_shipped": 255148.74,
+        "p10": 0.9985638904963992,
+        "p25": 1.1574074074074074,
+        "p50": 4.948037821687751,
+        "p75": 5.086763086961738,
+        "p90": 6.32824334716263,
         "confidence": "HIGH",
         "fallback_note": null,
         "deal_price_usd_per_kg": 6.673333333333333,
-        "deal_vs_p50_pct": 305.4,
+        "deal_vs_p50_pct": 34.87,
         "deal_vs_p50_band": "OVER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
-        "destination_country": "CHINA",
-        "period_label": "2025-01-04 .. 2025-12-29",
-        "n_shipments": 3064,
-        "n_exporters": 57,
-        "n_importers": 22,
-        "kg_net": 35382222.65,
-        "fob_usd": 202248817.56,
-        "lane_share_of_variety_pct": 9.27,
+        "destination_country": "ESPANA",
+        "period_label": "2025-01-01 .. 2025-12-27",
+        "n_shipments": 740,
+        "n_exporters": 48,
+        "n_importers": 25,
+        "kg_net": 5916027.03,
+        "fob_usd": 29757886.049999997,
+        "lane_share_of_variety_pct": 1.55,
         "green_channel_pct": 100,
         "orange_channel_pct": 0,
         "red_channel_pct": 0,
         "transport_mode_mix": {
-          "MARITIMO": 99.8,
-          "AÉREO": 0.2,
-          "AEREO": 0,
-          "MARÍTIMO": 0
+          "MARITIMO": 51.1,
+          "AEREO": 46.9,
+          "MARÍTIMO": 1.9,
+          "AÉREO": 0.1
         },
-        "exporter_hhi": 744,
-        "importer_hhi": 1102,
+        "exporter_hhi": 1183,
+        "importer_hhi": 1560,
         "top_exporters": [
-          {
-            "exporter_id": "20340584237",
-            "exporter_name": "CAMPOSOL S.A.",
-            "share_pct": 18.1
-          },
           {
             "exporter_id": "20602822533",
             "exporter_name": "HORTIFRUT - PER? S.A.C.",
-            "share_pct": 9.8
+            "share_pct": 21.8
           },
           {
-            "exporter_id": "20554556192",
-            "exporter_name": "AGROVISION PERU S.A.C.",
-            "share_pct": 8.6
+            "exporter_id": "20612065668",
+            "exporter_name": "POB S.A.C.",
+            "share_pct": 17.8
           },
           {
-            "exporter_id": "20602842739",
-            "exporter_name": "LARAMA BERRIES S.A.C.",
-            "share_pct": 7.3
+            "exporter_id": "20297939131",
+            "exporter_name": "COMPLEJO AGROINDUSTRIAL BETA S.A.",
+            "share_pct": 15.9
           },
           {
-            "exporter_id": "20170040938",
-            "exporter_name": "DANPER TRUJILLO S.A.C.",
-            "share_pct": 6.3
+            "exporter_id": "20605814957",
+            "exporter_name": "DIAMOND BRIDGE S.A.C.",
+            "share_pct": 6.5
+          },
+          {
+            "exporter_id": "20608170732",
+            "exporter_name": "AGRICOLA BLUE GOLD S.A.C.",
+            "share_pct": 6.1
           }
         ],
         "top_importers": [
           {
-            "importer_id": "41cea63a",
-            "importer_name": "SHENZHEN OHENG IMPORT & EXPORT CO..LTD.",
-            "share_pct": 17.8
+            "importer_id": "563d655f",
+            "importer_name": "HORTIFRUT MARKETING EMEA S.A",
+            "share_pct": 30.2
           },
           {
-            "importer_id": "177d835b",
-            "importer_name": "GIDDINGSSHANGHAIFRUIT TRADING",
-            "share_pct": 15.2
+            "importer_id": "0496e955",
+            "importer_name": "GLOBAL BERRY S.L.",
+            "share_pct": 18
           },
           {
-            "importer_id": "57d6386f",
-            "importer_name": "SHENZHEN JOY WING MAU FRUIT CO. LTD",
-            "share_pct": 12.3
+            "importer_id": "35f24a46",
+            "importer_name": "SUREXPORT COMPANIA AGRARIA. S.L.",
+            "share_pct": 10.1
           },
           {
-            "importer_id": "8e9e0878",
-            "importer_name": "SHENZHEN YUESHI SUPPLY CHAIN MANAGEMENT CO. LTD.",
-            "share_pct": 11.4
+            "importer_id": "c28866ed",
+            "importer_name": "IDEAL FRUITS SL",
+            "share_pct": 9.5
           },
           {
-            "importer_id": "2897d9eb",
-            "importer_name": "SHANGHAI HUI ZHAN INTERNATIONAL TRADE CO. LTD",
-            "share_pct": 11.2
+            "importer_id": "e79fc370",
+            "importer_name": "CHAMPI?ONES Y SETAS GIMENEZ SL",
+            "share_pct": 9.4
           }
         ],
         "monthly_kg": {
-          "2025-01": 168480,
-          "2025-02": 21757.5,
-          "2025-05": 1.25,
-          "2025-06": 1362097,
-          "2025-07": 4123206.93,
-          "2025-08": 8374286,
-          "2025-09": 6361719.94,
-          "2025-10": 7471976.27,
-          "2025-11": 6008733.38,
-          "2025-12": 1489964.38
+          "2025-01": 318842.94,
+          "2025-02": 23052,
+          "2025-03": 44650,
+          "2025-04": 22976,
+          "2025-05": 14853,
+          "2025-06": 51773.8,
+          "2025-07": 388097.3,
+          "2025-08": 861202.12,
+          "2025-09": 1442360.9,
+          "2025-10": 1365241.54,
+          "2025-11": 993259.73,
+          "2025-12": 389717.7
         },
-        "peak_month": "2025-08",
-        "off_peak_month": "2025-02",
-        "peak_off_ratio": 384.9,
+        "peak_month": "2025-09",
+        "off_peak_month": "2025-05",
+        "peak_off_ratio": 97.1,
         "in_season_weeks": [
+          "2024-12-30/2025-01-05",
+          "2025-01-13/2025-01-19",
           "2025-07-07/2025-07-13",
           "2025-07-14/2025-07-20",
           "2025-07-21/2025-07-27",
@@ -24839,24 +28737,31 @@ export const platformDeals: PlatformDealRecord[] = [
           "2025-09-15/2025-09-21",
           "2025-09-22/2025-09-28",
           "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
           "2025-10-13/2025-10-19",
           "2025-10-20/2025-10-26",
           "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
           "2025-11-10/2025-11-16",
-          "2025-11-24/2025-11-30"
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14"
         ],
         "lane_maturity": "DEEP",
         "deal_week": "2026-01-12/2026-01-18",
         "commercial_window_alignment": "OFF_SEASON",
         "route_signal_inferred": "MED",
-        "route_signal_table": "MED",
-        "route_signal_driver": "CORRIDOR_DEFAULT",
-        "route_signal_pts": 3,
+        "route_signal_table": "LOW_MED",
+        "route_signal_driver": "PAIR_OVERRIDE",
+        "route_signal_pts": 7,
         "table_version": "0.1-DRAFT",
         "caveats": [
           "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
           "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
-          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play."
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
+          "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring.",
+          "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
       "dim_d3_pair_history": {
@@ -24870,7 +28775,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -24887,7 +28791,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -24900,6 +28804,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.09,
+    "shippingStartDate": "2025-09-06T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -24912,7 +28817,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:19",
+        "generated_at": "2026-07-30T18:26:03",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -24926,6 +28831,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-01/2025-09-07",
@@ -24971,58 +28877,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-09-01/2025-09-07",
-        "window_start": "2025-03-03/2025-03-09",
+        "window_start": "2025-08-04/2025-08-10",
         "window_end": "2025-08-25/2025-08-31",
-        "window_weeks": 26,
-        "n_shipments": 7625,
-        "n_exporters": 137,
-        "kg_shipped": 69811067.78999999,
-        "p10": 1.6583547369193514,
-        "p25": 2.5217686706209435,
-        "p50": 5.790419161676646,
-        "p75": 8.547008547008547,
-        "p90": 10.435416666666667,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 67,
+        "n_exporters": 16,
+        "kg_shipped": 778268.48,
+        "p10": 1.7094017094017093,
+        "p25": 4.576698734347406,
+        "p50": 5.849747658571854,
+        "p75": 8.466666666666667,
+        "p90": 9.71420481895396,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.726666666666667,
-        "deal_vs_p50_pct": -18.37,
+        "deal_vs_p50_pct": -19.2,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-09-01/2025-09-07",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -25052,7 +29048,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -25065,6 +29061,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.9,
+    "shippingStartDate": "2025-09-14T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -25077,7 +29074,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:24",
+        "generated_at": "2026-07-30T18:26:07",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -25091,6 +29088,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-08/2025-09-14",
@@ -25136,58 +29134,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-09-08/2025-09-14",
-        "window_start": "2025-03-10/2025-03-16",
+        "window_start": "2025-08-11/2025-08-17",
         "window_end": "2025-09-01/2025-09-07",
-        "window_weeks": 26,
-        "n_shipments": 8840,
-        "n_exporters": 142,
-        "kg_shipped": 82375404.76,
-        "p10": 1.6907977318962906,
-        "p25": 2.705276371034065,
-        "p50": 6,
-        "p75": 8.545185609116741,
-        "p90": 10.435416666666667,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 76,
+        "n_exporters": 15,
+        "kg_shipped": 897481.52,
+        "p10": 1.7094017094017093,
+        "p25": 4.632779233620892,
+        "p50": 6.085798816568047,
+        "p75": 8.399465335612536,
+        "p90": 9.5,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.6,
-        "deal_vs_p50_pct": -23.33,
+        "deal_vs_p50_pct": -24.41,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-09-08/2025-09-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -25217,7 +29305,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -25230,6 +29318,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.17,
+    "shippingStartDate": "2025-09-20T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -25242,7 +29331,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:27",
+        "generated_at": "2026-07-30T18:26:11",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -25256,6 +29345,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-15/2025-09-21",
@@ -25301,58 +29391,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-09-15/2025-09-21",
-        "window_start": "2025-03-17/2025-03-23",
+        "window_start": "2025-08-18/2025-08-24",
         "window_end": "2025-09-08/2025-09-14",
-        "window_weeks": 26,
-        "n_shipments": 10238,
-        "n_exporters": 143,
-        "kg_shipped": 97267445.94,
-        "p10": 1.6883132901753173,
-        "p25": 2.8910121409619824,
-        "p50": 6.085798816568047,
-        "p75": 8.5,
-        "p90": 10.403311965811966,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 71,
+        "n_exporters": 14,
+        "kg_shipped": 817320.72,
+        "p10": 1.7094017094017093,
+        "p25": 4.9212949115906035,
+        "p50": 6.159042313527772,
+        "p75": 8.4,
+        "p90": 9.077783477226378,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.78,
-        "deal_vs_p50_pct": -21.46,
+        "deal_vs_p50_pct": -22.39,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-09-15/2025-09-21",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -25382,7 +29562,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -25395,6 +29575,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.14,
+    "shippingStartDate": "2025-09-27T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -25407,7 +29588,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:31",
+        "generated_at": "2026-07-30T18:26:15",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -25421,6 +29602,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-22/2025-09-28",
@@ -25466,58 +29648,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-09-22/2025-09-28",
-        "window_start": "2025-03-24/2025-03-30",
+        "window_start": "2025-08-25/2025-08-31",
         "window_end": "2025-09-15/2025-09-21",
-        "window_weeks": 26,
-        "n_shipments": 11947,
-        "n_exporters": 147,
-        "kg_shipped": 115820597.71,
-        "p10": 1.5,
-        "p25": 2.705276371034065,
-        "p50": 5.945225151718446,
-        "p75": 8.42,
-        "p90": 10.153333333333334,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 80,
+        "n_exporters": 14,
+        "kg_shipped": 898947.78,
+        "p10": 1.7094017094017093,
+        "p25": 4.444444444444445,
+        "p50": 5.915105616492098,
+        "p75": 8.189170887448082,
+        "p90": 8.653522721783913,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.76,
-        "deal_vs_p50_pct": -19.94,
+        "deal_vs_p50_pct": -19.53,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-09-22/2025-09-28",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -25547,7 +29819,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -25560,6 +29832,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.16,
+    "shippingStartDate": "2025-11-03T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -25572,7 +29845,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:35",
+        "generated_at": "2026-07-30T18:26:19",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -25586,6 +29859,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-11-03/2025-11-09",
@@ -25631,58 +29905,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-11-03/2025-11-09",
-        "window_start": "2025-05-05/2025-05-11",
+        "window_start": "2025-10-06/2025-10-12",
         "window_end": "2025-10-27/2025-11-02",
-        "window_weeks": 26,
-        "n_shipments": 20832,
-        "n_exporters": 163,
-        "kg_shipped": 221210021.64000002,
-        "p10": 1.2755102040816326,
-        "p25": 2.65,
-        "p50": 5.095108695652174,
-        "p75": 7.6049999999999995,
-        "p90": 9.134615384615385,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 104,
+        "n_exporters": 19,
+        "kg_shipped": 1284982.04,
+        "p10": 1.3881785706683696,
+        "p25": 4.5,
+        "p50": 6,
+        "p75": 7,
+        "p90": 8.442253953122945,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.773333333333333,
-        "deal_vs_p50_pct": -6.32,
-        "deal_vs_p50_band": "WITHIN_BAND"
+        "deal_vs_p50_pct": -20.44,
+        "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-11-03/2025-11-09",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -25712,7 +30076,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -25725,6 +30089,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.08,
+    "shippingStartDate": "2025-10-20T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -25737,7 +30102,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:39",
+        "generated_at": "2026-07-30T18:26:23",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -25751,6 +30116,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-20/2025-10-26",
@@ -25796,58 +30162,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-10-20/2025-10-26",
-        "window_start": "2025-04-21/2025-04-27",
+        "window_start": "2025-09-22/2025-09-28",
         "window_end": "2025-10-13/2025-10-19",
-        "window_weeks": 26,
-        "n_shipments": 18038,
-        "n_exporters": 156,
-        "kg_shipped": 186232365.52,
-        "p10": 1.3543217665763088,
-        "p25": 2.705276371034065,
-        "p50": 5.388682414649539,
-        "p75": 7.9484871118258935,
-        "p90": 9.412199565005206,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 93,
+        "n_exporters": 15,
+        "kg_shipped": 1113606.48,
+        "p10": 2.486622710622711,
+        "p25": 5.128239732985054,
+        "p50": 6.333333333333333,
+        "p75": 7.700499647764646,
+        "p90": 8.810226495726495,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.72,
-        "deal_vs_p50_pct": -12.41,
-        "deal_vs_p50_band": "WITHIN_BAND"
+        "deal_vs_p50_pct": -25.47,
+        "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-10-20/2025-10-26",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -25877,7 +30333,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -25890,6 +30346,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.02,
+    "shippingStartDate": "2026-01-09T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -25902,7 +30359,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:43",
+        "generated_at": "2026-07-30T18:26:27",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -25916,6 +30373,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-05/2026-01-11",
@@ -25961,58 +30419,149 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2026-01-05/2026-01-11",
-        "window_start": "2025-07-07/2025-07-13",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 11,
+        "kg_shipped": 337069.4,
+        "p10": 1.6454863110879432,
+        "p25": 3.2807869734823583,
+        "p50": 4.768746368518919,
+        "p75": 5.380957264957265,
+        "p90": 6.481476600996077,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.68,
-        "deal_vs_p50_pct": -6.4,
+        "deal_vs_p50_pct": -1.86,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2026-01-05/2026-01-11",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -26042,7 +30591,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -26055,6 +30604,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.91,
+    "shippingStartDate": "2026-01-25T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -26067,7 +30617,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:48",
+        "generated_at": "2026-07-30T18:26:31",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -26081,6 +30631,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-19/2026-01-25",
@@ -26126,58 +30677,149 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2026-01-19/2026-01-25",
-        "window_start": "2025-07-07/2025-07-13",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 11,
+        "kg_shipped": 337069.4,
+        "p10": 1.6454863110879432,
+        "p25": 3.2807869734823583,
+        "p50": 4.768746368518919,
+        "p75": 5.380957264957265,
+        "p90": 6.481476600996077,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.6066666666666665,
-        "deal_vs_p50_pct": -7.87,
+        "deal_vs_p50_pct": -3.4,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2026-01-19/2026-01-25",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -26207,7 +30849,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -26220,6 +30862,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.03,
+    "shippingStartDate": "2025-12-06T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -26232,7 +30875,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:53",
+        "generated_at": "2026-07-30T18:26:35",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -26246,6 +30889,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-01/2025-12-07",
@@ -26291,58 +30935,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-12-01/2025-12-07",
-        "window_start": "2025-06-02/2025-06-08",
+        "window_start": "2025-11-03/2025-11-09",
         "window_end": "2025-11-24/2025-11-30",
-        "window_weeks": 26,
-        "n_shipments": 26163,
-        "n_exporters": 171,
-        "kg_shipped": 287920004.93,
-        "p10": 1.3739584584843516,
-        "p25": 2.840909090909091,
-        "p50": 5.013333333333334,
-        "p75": 7.019578592115906,
-        "p90": 8.93,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 67,
+        "n_exporters": 13,
+        "kg_shipped": 821810.1,
+        "p10": 1.3888888888888888,
+        "p25": 5.052955462124676,
+        "p50": 5.78962442472058,
+        "p75": 6.3770408171567885,
+        "p90": 7.2549685470085485,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.6866666666666665,
-        "deal_vs_p50_pct": -6.52,
-        "deal_vs_p50_band": "WITHIN_BAND"
+        "deal_vs_p50_pct": -19.05,
+        "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-12-01/2025-12-07",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -26372,7 +31106,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -26385,6 +31119,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.1,
+    "shippingStartDate": "2025-12-12T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -26397,7 +31132,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:16:57",
+        "generated_at": "2026-07-30T18:26:39",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -26411,6 +31146,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-08/2025-12-14",
@@ -26456,58 +31192,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-12-08/2025-12-14",
-        "window_start": "2025-06-09/2025-06-15",
+        "window_start": "2025-11-10/2025-11-16",
         "window_end": "2025-12-01/2025-12-07",
-        "window_weeks": 26,
-        "n_shipments": 27201,
-        "n_exporters": 173,
-        "kg_shipped": 300514386.73,
-        "p10": 1.3976363401191998,
-        "p25": 2.9,
-        "p50": 5.010078587214551,
-        "p75": 7,
-        "p90": 8.929729729729731,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 70,
+        "n_exporters": 14,
+        "kg_shipped": 847021.14,
+        "p10": 1.3888888888888888,
+        "p25": 5.123837735559864,
+        "p50": 5.666666666666667,
+        "p75": 6.388546152562176,
+        "p90": 7.333333333333333,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.733333333333333,
-        "deal_vs_p50_pct": -5.52,
-        "deal_vs_p50_band": "WITHIN_BAND"
+        "deal_vs_p50_pct": -16.47,
+        "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-12-08/2025-12-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -26537,7 +31363,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -26550,6 +31376,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.94,
+    "shippingStartDate": "2025-12-18T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -26562,7 +31389,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:01",
+        "generated_at": "2026-07-30T18:26:43",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -26576,6 +31403,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-15/2025-12-21",
@@ -26621,58 +31449,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-12-15/2025-12-21",
-        "window_start": "2025-06-16/2025-06-22",
+        "window_start": "2025-11-17/2025-11-23",
         "window_end": "2025-12-08/2025-12-14",
-        "window_weeks": 26,
-        "n_shipments": 28030,
-        "n_exporters": 173,
-        "kg_shipped": 310791037.55,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 7,
-        "p90": 8.9,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 66,
+        "n_exporters": 15,
+        "kg_shipped": 801150.24,
+        "p10": 1.3888888888888888,
+        "p25": 4.273504273504273,
+        "p50": 5.249453081837333,
+        "p75": 6.373558803160145,
+        "p90": 6.9156017846153865,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.626666666666667,
-        "deal_vs_p50_pct": -7.47,
+        "deal_vs_p50_pct": -11.86,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-12-15/2025-12-21",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -26702,7 +31620,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIASOL SAC",
+    "supplierName": "AGRICOLA VIÑASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "verified",
@@ -26715,6 +31633,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.22,
+    "shippingStartDate": "2025-12-24T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -26727,7 +31646,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:04",
+        "generated_at": "2026-07-30T18:26:47",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -26741,6 +31660,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20534208008",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-22/2025-12-28",
@@ -26786,58 +31706,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-12-22/2025-12-28",
-        "window_start": "2025-06-23/2025-06-29",
+        "window_start": "2025-11-24/2025-11-30",
         "window_end": "2025-12-15/2025-12-21",
-        "window_weeks": 26,
-        "n_shipments": 28650,
-        "n_exporters": 173,
-        "kg_shipped": 318740206.02000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.999999999999999,
-        "p90": 8.817254846432208,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 57,
+        "n_exporters": 13,
+        "kg_shipped": 684175.14,
+        "p10": 1.454023519721656,
+        "p25": 3.8553423401271103,
+        "p50": 5.1397413174468625,
+        "p75": 6.373333333333334,
+        "p90": 6.945032707692309,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.8133333333333335,
-        "deal_vs_p50_pct": -3.73,
+        "deal_vs_p50_pct": -6.35,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-12-22/2025-12-28",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -26880,6 +31890,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.32,
+    "shippingStartDate": "2025-03-10T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -26892,7 +31903,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:11",
+        "generated_at": "2026-07-30T18:26:52",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -26906,6 +31917,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-03-10/2025-03-16",
@@ -26951,58 +31963,143 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-03-10/2025-03-16",
         "window_start": "2024-09-09/2024-09-15",
         "window_end": "2025-03-03/2025-03-09",
         "window_weeks": 26,
-        "n_shipments": 147,
-        "n_exporters": 20,
-        "kg_shipped": 1479646.18,
-        "p10": 2.401937220468264,
-        "p25": 2.48,
-        "p50": 2.7523426022628374,
-        "p75": 3.1501914774990003,
-        "p90": 3.50566278602918,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "n_shipments": 8,
+        "n_exporters": 3,
+        "kg_shipped": 57327.15000000001,
+        "p10": 2.322301938830294,
+        "p25": 2.662071976612763,
+        "p50": 2.7121993581375112,
+        "p75": 2.7433825337249784,
+        "p90": 3.191272921350959,
+        "confidence": "LOW",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.232,
-        "deal_vs_p50_pct": -18.91,
+        "deal_vs_p50_pct": -17.71,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-03-10/2025-03-16",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -27045,6 +32142,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 20.84,
+    "shippingStartDate": "2025-04-05T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -27057,7 +32155,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:15",
+        "generated_at": "2026-07-30T18:26:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -27071,6 +32169,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-03-31/2025-04-06",
@@ -27116,58 +32215,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-03-31/2025-04-06",
-        "window_start": "2024-09-30/2024-10-06",
+        "window_start": "2025-02-24/2025-03-02",
         "window_end": "2025-03-24/2025-03-30",
-        "window_weeks": 26,
-        "n_shipments": 205,
-        "n_exporters": 28,
-        "kg_shipped": 2167684.1199999996,
-        "p10": 2.425419261534005,
-        "p25": 2.6018668132944223,
-        "p50": 2.85,
-        "p75": 3.2,
-        "p90": 3.5224536253720258,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 5,
+        "n_shipments": 7,
+        "n_exporters": 2,
+        "kg_shipped": 108698.7,
+        "p10": 2.3066384324244553,
+        "p25": 2.65,
+        "p50": 2.685936248912098,
+        "p75": 2.75,
+        "p90": 3.293469748134215,
+        "confidence": "MED",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.084,
-        "deal_vs_p50_pct": -26.88,
+        "deal_vs_p50_pct": -22.41,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-03-31/2025-04-06",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -27210,6 +32395,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.13,
+    "shippingStartDate": "2025-04-06T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -27222,7 +32408,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:19",
+        "generated_at": "2026-07-30T18:27:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -27236,6 +32422,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-03-31/2025-04-06",
@@ -27281,58 +32468,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-03-31/2025-04-06",
-        "window_start": "2024-09-30/2024-10-06",
+        "window_start": "2025-02-24/2025-03-02",
         "window_end": "2025-03-24/2025-03-30",
-        "window_weeks": 26,
-        "n_shipments": 205,
-        "n_exporters": 28,
-        "kg_shipped": 2167684.1199999996,
-        "p10": 2.425419261534005,
-        "p25": 2.6018668132944223,
-        "p50": 2.85,
-        "p75": 3.2,
-        "p90": 3.5224536253720258,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 5,
+        "n_shipments": 7,
+        "n_exporters": 2,
+        "kg_shipped": 108698.7,
+        "p10": 2.3066384324244553,
+        "p25": 2.65,
+        "p50": 2.685936248912098,
+        "p75": 2.75,
+        "p90": 3.293469748134215,
+        "confidence": "MED",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.213,
-        "deal_vs_p50_pct": -22.35,
+        "deal_vs_p50_pct": -17.61,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-03-31/2025-04-06",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -27375,6 +32648,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.21,
+    "shippingStartDate": "2025-07-07T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -27387,7 +32661,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:24",
+        "generated_at": "2026-07-30T18:27:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -27401,6 +32675,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-07-07/2025-07-13",
@@ -27446,58 +32721,143 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-07-07/2025-07-13",
-        "window_start": "2025-01-06/2025-01-12",
+        "window_start": "2025-06-09/2025-06-15",
         "window_end": "2025-06-30/2025-07-06",
-        "window_weeks": 26,
-        "n_shipments": 1046,
-        "n_exporters": 34,
-        "kg_shipped": 14819194.69,
-        "p10": 2.45,
-        "p25": 2.646186378250481,
-        "p50": 2.85,
-        "p75": 3.10421381712963,
-        "p90": 3.4612896332399914,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 32,
+        "n_exporters": 7,
+        "kg_shipped": 500026.80000000005,
+        "p10": 2.6449932494370128,
+        "p25": 2.6810133846735518,
+        "p50": 2.9517846745563845,
+        "p75": 3.500254347826087,
+        "p90": 3.514633695652174,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.221,
-        "deal_vs_p50_pct": -22.07,
+        "deal_vs_p50_pct": -24.76,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-07-07/2025-07-13",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -27540,6 +32900,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.11,
+    "shippingStartDate": "2025-07-21T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -27552,7 +32913,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:28",
+        "generated_at": "2026-07-30T18:27:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -27566,6 +32927,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-07-21/2025-07-27",
@@ -27611,58 +32973,143 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-07-21/2025-07-27",
-        "window_start": "2025-01-20/2025-01-26",
+        "window_start": "2025-06-23/2025-06-29",
         "window_end": "2025-07-14/2025-07-20",
-        "window_weeks": 26,
-        "n_shipments": 1184,
-        "n_exporters": 35,
-        "kg_shipped": 17164336.42,
-        "p10": 2.45,
-        "p25": 2.65,
-        "p50": 2.86,
-        "p75": 3.107619061732859,
-        "p90": 3.468621237545697,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 41,
+        "n_exporters": 6,
+        "kg_shipped": 613508.6,
+        "p10": 2.6073917701378675,
+        "p25": 2.6501824553834776,
+        "p50": 2.947925038498368,
+        "p75": 3.5137137690601374,
+        "p90": 3.5615793005369807,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.111,
-        "deal_vs_p50_pct": -26.19,
+        "deal_vs_p50_pct": -28.39,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-07-21/2025-07-27",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -27705,6 +33152,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.02,
+    "shippingStartDate": "2025-08-04T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -27717,7 +33165,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:32",
+        "generated_at": "2026-07-30T18:27:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -27731,6 +33179,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-08-04/2025-08-10",
@@ -27776,58 +33225,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-08-04/2025-08-10",
-        "window_start": "2025-02-03/2025-02-09",
+        "window_start": "2025-07-07/2025-07-13",
         "window_end": "2025-07-28/2025-08-03",
-        "window_weeks": 26,
-        "n_shipments": 1335,
-        "n_exporters": 34,
-        "kg_shipped": 19799158.95,
-        "p10": 2.45,
-        "p25": 2.6693129530508894,
-        "p50": 2.873217220747248,
-        "p75": 3.1353540404040405,
-        "p90": 3.5000000000000004,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 45,
+        "n_exporters": 4,
+        "kg_shipped": 703175.6,
+        "p10": 2.374722037952936,
+        "p25": 2.6497631014988783,
+        "p50": 3.0962340224157563,
+        "p75": 3.6416277173913043,
+        "p90": 3.6486479723227787,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.202,
-        "deal_vs_p50_pct": -23.36,
+        "deal_vs_p50_pct": -28.88,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-08-04/2025-08-10",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -27870,6 +33405,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.55,
+    "shippingStartDate": "2025-08-18T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -27882,7 +33418,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:36",
+        "generated_at": "2026-07-30T18:27:16",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -27896,6 +33432,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-08-18/2025-08-24",
@@ -27941,58 +33478,143 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-08-18/2025-08-24",
-        "window_start": "2025-02-17/2025-02-23",
+        "window_start": "2025-07-21/2025-07-27",
         "window_end": "2025-08-11/2025-08-17",
-        "window_weeks": 26,
-        "n_shipments": 1472,
-        "n_exporters": 34,
-        "kg_shipped": 22069333.47,
-        "p10": 2.45,
-        "p25": 2.67,
-        "p50": 2.88,
-        "p75": 3.14,
-        "p90": 3.514633695652174,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 45,
+        "n_exporters": 6,
+        "kg_shipped": 747656.3,
+        "p10": 2.274747238715278,
+        "p25": 2.8185929608898115,
+        "p50": 3.535056779368502,
+        "p75": 3.6430243334180057,
+        "p90": 3.653999456521739,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.155,
-        "deal_vs_p50_pct": -25.17,
-        "deal_vs_p50_band": "OUTSIDE_BAND"
+        "deal_vs_p50_pct": -39.04,
+        "deal_vs_p50_band": "UNDER_MARKET_FLAG"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-08-18/2025-08-24",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -28035,6 +33657,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.28,
+    "shippingStartDate": "2025-10-06T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -28047,7 +33670,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:40",
+        "generated_at": "2026-07-30T18:27:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -28061,6 +33684,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-10-06/2025-10-12",
@@ -28106,58 +33730,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-10-06/2025-10-12",
-        "window_start": "2025-04-07/2025-04-13",
+        "window_start": "2025-09-08/2025-09-14",
         "window_end": "2025-09-29/2025-10-05",
-        "window_weeks": 26,
-        "n_shipments": 1858,
-        "n_exporters": 36,
-        "kg_shipped": 28551721.36,
-        "p10": 2.45,
-        "p25": 2.7,
-        "p50": 2.909090909090909,
-        "p75": 3.1853691919191918,
-        "p90": 3.535114063313209,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 21,
+        "n_exporters": 4,
+        "kg_shipped": 332206.4,
+        "p10": 2.3461071811277776,
+        "p25": 2.646682941312504,
+        "p50": 3.0943625944801516,
+        "p75": 3.1255091836031856,
+        "p90": 3.6493038043478263,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.32,
-        "deal_vs_p50_pct": -20.25,
+        "deal_vs_p50_pct": -25.02,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-10-06/2025-10-12",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -28200,6 +33910,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.23,
+    "shippingStartDate": "2025-10-20T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -28212,7 +33923,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:44",
+        "generated_at": "2026-07-30T18:27:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -28226,6 +33937,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-10-20/2025-10-26",
@@ -28271,58 +33983,144 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-10-20/2025-10-26",
-        "window_start": "2025-04-21/2025-04-27",
+        "window_start": "2025-09-22/2025-09-28",
         "window_end": "2025-10-13/2025-10-19",
-        "window_weeks": 26,
-        "n_shipments": 1910,
-        "n_exporters": 36,
-        "kg_shipped": 29340187.55,
-        "p10": 2.45,
-        "p25": 2.7,
-        "p50": 2.918042083333333,
-        "p75": 3.2,
-        "p90": 3.580842133196317,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 20,
+        "n_exporters": 3,
+        "kg_shipped": 309968.1,
+        "p10": 2.507105559428372,
+        "p25": 2.7743853823956055,
+        "p50": 3.0956411594202895,
+        "p75": 3.648096628233548,
+        "p90": 3.665617919606865,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.3074999999999997,
-        "deal_vs_p50_pct": -20.92,
+        "deal_vs_p50_pct": -25.46,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-10-20/2025-10-26",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -28365,6 +34163,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.1,
+    "shippingStartDate": "2025-06-15T10:00:00.000Z",
     "priorDealsBetweenParties": 9,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -28377,7 +34176,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:49",
+        "generated_at": "2026-07-30T18:27:28",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -28391,6 +34190,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602492191",
         "importer_name": "XARKI SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "AVOCADO",
         "deal_week": "2025-06-09/2025-06-15",
@@ -28436,58 +34236,143 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "AVOCADO",
-        "destination_country": null,
+        "destination_country": "ESPANA",
         "deal_week": "2025-06-09/2025-06-15",
-        "window_start": "2024-12-09/2024-12-15",
+        "window_start": "2025-05-12/2025-05-18",
         "window_end": "2025-06-02/2025-06-08",
-        "window_weeks": 26,
-        "n_shipments": 711,
-        "n_exporters": 33,
-        "kg_shipped": 9431118.870000001,
-        "p10": 2.45,
-        "p25": 2.635932952984447,
-        "p50": 2.85,
-        "p75": 3.1030360810185194,
-        "p90": 3.421644219094655,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor AVOCADO->ESPANA too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 47,
+        "n_exporters": 8,
+        "kg_shipped": 572134.4,
+        "p10": 2.55,
+        "p25": 2.664275834418207,
+        "p50": 2.944376857231674,
+        "p75": 2.9471553623188407,
+        "p90": 2.986598054843305,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 2.11,
-        "deal_vs_p50_pct": -25.96,
+        "deal_vs_p50_pct": -28.34,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "AVOCADO",
         "destination_country": "ESPANA",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-09 .. 2025-12-17",
+        "n_shipments": 239,
+        "n_exporters": 15,
+        "n_importers": 17,
+        "kg_net": 3479718.71,
+        "fob_usd": 10536361.740000002,
+        "lane_share_of_variety_pct": 9.04,
+        "green_channel_pct": 97.1,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 2.9,
+        "transport_mode_mix": {
+          "MARÍTIMO": 97.9,
+          "AÉREO": 2.1
+        },
+        "exporter_hhi": 3163,
+        "importer_hhi": 2496,
+        "top_exporters": [
+          {
+            "exporter_id": "20610799869",
+            "exporter_name": "VIRU S.A.",
+            "share_pct": 51.3
+          },
+          {
+            "exporter_id": "20604580294",
+            "exporter_name": "AMARA FOODS S.A.C.",
+            "share_pct": 16.9
+          },
+          {
+            "exporter_id": "20402805294",
+            "exporter_name": "AGRICOLA Y GANADERA CHAVIN DE HUANTAR SA",
+            "share_pct": 14.2
+          },
+          {
+            "exporter_id": "20611474106",
+            "exporter_name": "GRUPO TAVARI S.A.C.",
+            "share_pct": 4.2
+          },
+          {
+            "exporter_id": "20604125821",
+            "exporter_name": "AGRO FROST S.A.C.",
+            "share_pct": 2.8
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "809bd689",
+            "importer_name": "VIRU IBERICA. S.L.",
+            "share_pct": 45.5
+          },
+          {
+            "importer_id": "b43fa281",
+            "importer_name": "GLOBAL FOOD LINK SL",
+            "share_pct": 16.3
+          },
+          {
+            "importer_id": "aeedf1ae",
+            "importer_name": "TO ORDER",
+            "share_pct": 7.5
+          },
+          {
+            "importer_id": "487ba40e",
+            "importer_name": "GENERAL MILLS INTERNATIONAL. SLU",
+            "share_pct": 7.2
+          },
+          {
+            "importer_id": "71ce7208",
+            "importer_name": "ECOFROST ULTRACONGELADOS. S.L.",
+            "share_pct": 3.8
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 34346.15,
+          "2025-02": 22981,
+          "2025-03": 85717.7,
+          "2025-04": 69101.8,
+          "2025-05": 517458.4,
+          "2025-06": 369492.8,
+          "2025-07": 804039.6,
+          "2025-08": 788393.3,
+          "2025-09": 275536.4,
+          "2025-10": 321797.5,
+          "2025-11": 111941,
+          "2025-12": 78913.06
+        },
+        "peak_month": "2025-07",
+        "off_peak_month": "2025-02",
+        "peak_off_ratio": 35,
+        "in_season_weeks": [
+          "2025-05-12/2025-05-18",
+          "2025-05-19/2025-05-25",
+          "2025-05-26/2025-06-01",
+          "2025-06-02/2025-06-08",
+          "2025-06-09/2025-06-15",
+          "2025-06-23/2025-06-29",
+          "2025-06-30/2025-07-06",
+          "2025-07-14/2025-07-20",
+          "2025-07-21/2025-07-27",
+          "2025-07-28/2025-08-03",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-29/2025-10-05"
+        ],
+        "lane_maturity": "ESTABLISHED",
         "deal_week": "2025-06-09/2025-06-15",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "LOW",
         "route_signal_driver": "CORRIDOR_DEFAULT",
         "route_signal_pts": 12,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Corridor transit/customs figures are PROPOSED (public logistics norms). Verify against TM's own BL data before final scoring."
         ]
       },
@@ -28530,6 +34415,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.44,
+    "shippingStartDate": "2025-03-10T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -28542,7 +34428,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:53",
+        "generated_at": "2026-07-30T18:27:32",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -28556,6 +34442,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-03-10/2025-03-16",
@@ -28698,6 +34585,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 25.96,
+    "shippingStartDate": "2025-04-10T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -28710,7 +34598,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:17:57",
+        "generated_at": "2026-07-30T18:27:36",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -28724,6 +34612,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-04-07/2025-04-13",
@@ -28866,6 +34755,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 25.56,
+    "shippingStartDate": "2025-04-07T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -28878,7 +34768,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:03",
+        "generated_at": "2026-07-30T18:27:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -28892,6 +34782,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-04-07/2025-04-13",
@@ -29034,6 +34925,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.69,
+    "shippingStartDate": "2025-07-14T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -29046,7 +34938,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:11",
+        "generated_at": "2026-07-30T18:27:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -29060,6 +34952,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-07-14/2025-07-20",
@@ -29202,6 +35095,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.21,
+    "shippingStartDate": "2025-07-28T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -29214,7 +35108,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:15",
+        "generated_at": "2026-07-30T18:27:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -29228,6 +35122,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-07-28/2025-08-03",
@@ -29370,6 +35265,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.19,
+    "shippingStartDate": "2025-08-11T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -29382,7 +35278,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:18",
+        "generated_at": "2026-07-30T18:27:53",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -29396,6 +35292,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-08-11/2025-08-17",
@@ -29538,6 +35435,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.78,
+    "shippingStartDate": "2025-08-25T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -29550,7 +35448,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:24",
+        "generated_at": "2026-07-30T18:27:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -29564,6 +35462,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-08-25/2025-08-31",
@@ -29706,6 +35605,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.2,
+    "shippingStartDate": "2025-10-13T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -29718,7 +35618,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:28",
+        "generated_at": "2026-07-30T18:28:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -29732,6 +35632,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-10-13/2025-10-19",
@@ -29874,6 +35775,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.74,
+    "shippingStartDate": "2025-06-15T10:00:00.000Z",
     "priorDealsBetweenParties": 8,
     "relationshipAgeMonths": 7,
     "status": "finished",
@@ -29886,7 +35788,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:32",
+        "generated_at": "2026-07-30T18:28:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -29900,6 +35802,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20602283088",
         "importer_name": "HACIENDA SOTOMAYOR SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "ASPARAGUS",
         "deal_week": "2025-06-09/2025-06-15",
@@ -30042,6 +35945,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.52,
+    "shippingStartDate": "2025-06-09T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -30054,7 +35958,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:36",
+        "generated_at": "2026-07-30T18:28:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -30068,6 +35972,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-06-09/2025-06-15",
@@ -30206,6 +36111,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.57,
+    "shippingStartDate": "2025-07-10T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -30218,7 +36124,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:40",
+        "generated_at": "2026-07-30T18:28:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -30232,6 +36138,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-07-07/2025-07-13",
@@ -30370,6 +36277,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.06,
+    "shippingStartDate": "2025-08-12T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -30382,7 +36290,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:44",
+        "generated_at": "2026-07-30T18:28:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -30396,6 +36304,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-08-11/2025-08-17",
@@ -30534,6 +36443,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.42,
+    "shippingStartDate": "2025-06-06T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -30546,7 +36456,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:49",
+        "generated_at": "2026-07-30T18:28:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -30560,6 +36470,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-06-02/2025-06-08",
@@ -30698,6 +36609,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.45,
+    "shippingStartDate": "2025-06-12T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -30710,7 +36622,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:53",
+        "generated_at": "2026-07-30T18:28:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -30724,6 +36636,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-06-09/2025-06-15",
@@ -30862,6 +36775,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14,
+    "shippingStartDate": "2025-06-18T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -30874,7 +36788,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:18:57",
+        "generated_at": "2026-07-30T18:28:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -30888,6 +36802,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-06-16/2025-06-22",
@@ -31026,6 +36941,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.3,
+    "shippingStartDate": "2025-06-24T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -31038,7 +36954,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:01",
+        "generated_at": "2026-07-30T18:28:33",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -31052,6 +36968,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-06-23/2025-06-29",
@@ -31190,6 +37107,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.79,
+    "shippingStartDate": "2025-07-07T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -31202,7 +37120,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:08",
+        "generated_at": "2026-07-30T18:28:37",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -31216,6 +37134,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-07-07/2025-07-13",
@@ -31354,6 +37273,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.93,
+    "shippingStartDate": "2025-07-14T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -31366,7 +37286,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:12",
+        "generated_at": "2026-07-30T18:28:42",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -31380,6 +37300,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-07-14/2025-07-20",
@@ -31518,6 +37439,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.15,
+    "shippingStartDate": "2025-07-21T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -31530,7 +37452,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:17",
+        "generated_at": "2026-07-30T18:28:46",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -31544,6 +37466,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-07-21/2025-07-27",
@@ -31682,6 +37605,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.76,
+    "shippingStartDate": "2025-08-10T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -31694,7 +37618,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:22",
+        "generated_at": "2026-07-30T18:28:49",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -31708,6 +37632,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-08-04/2025-08-10",
@@ -31846,6 +37771,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.67,
+    "shippingStartDate": "2025-08-20T10:00:00.000Z",
     "priorDealsBetweenParties": 11,
     "relationshipAgeMonths": 3,
     "status": "finished",
@@ -31858,7 +37784,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:25",
+        "generated_at": "2026-07-30T18:28:54",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -31872,6 +37798,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20612199974",
         "importer_name": "DAVIS GLOBAL BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "MANDARIN",
         "deal_week": "2025-08-18/2025-08-24",
@@ -32010,6 +37937,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.99,
+    "shippingStartDate": "2025-09-12T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -32022,7 +37950,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:30",
+        "generated_at": "2026-07-30T18:28:57",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -32036,6 +37964,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-09-08/2025-09-14",
@@ -32081,58 +38010,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-09-08/2025-09-14",
-        "window_start": "2025-03-10/2025-03-16",
+        "window_start": "2025-08-11/2025-08-17",
         "window_end": "2025-09-01/2025-09-07",
-        "window_weeks": 26,
-        "n_shipments": 8840,
-        "n_exporters": 142,
-        "kg_shipped": 82375404.76,
-        "p10": 1.6907977318962906,
-        "p25": 2.705276371034065,
-        "p50": 6,
-        "p75": 8.545185609116741,
-        "p90": 10.435416666666667,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 76,
+        "n_exporters": 15,
+        "kg_shipped": 897481.52,
+        "p10": 1.7094017094017093,
+        "p25": 4.632779233620892,
+        "p50": 6.085798816568047,
+        "p75": 8.399465335612536,
+        "p90": 9.5,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.66,
-        "deal_vs_p50_pct": -22.33,
+        "deal_vs_p50_pct": -23.43,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-09-08/2025-09-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "SHOULDER",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -32175,6 +38194,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.84,
+    "shippingStartDate": "2025-10-10T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -32187,7 +38207,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:33",
+        "generated_at": "2026-07-30T18:29:01",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -32201,6 +38221,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-10-06/2025-10-12",
@@ -32246,58 +38267,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-10-06/2025-10-12",
-        "window_start": "2025-04-07/2025-04-13",
+        "window_start": "2025-09-08/2025-09-14",
         "window_end": "2025-09-29/2025-10-05",
-        "window_weeks": 26,
-        "n_shipments": 14784,
-        "n_exporters": 150,
-        "kg_shipped": 147077517.57,
-        "p10": 1.3888888888888888,
-        "p25": 2.6709401709401708,
-        "p50": 5.71,
-        "p75": 8.052884615384615,
-        "p90": 9.733645827349019,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 83,
+        "n_exporters": 15,
+        "kg_shipped": 938407.5,
+        "p10": 1.470193187014175,
+        "p25": 4.444444444444445,
+        "p50": 6.274709874654022,
+        "p75": 7.983060056564913,
+        "p90": 8.585629407736139,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.56,
-        "deal_vs_p50_pct": -20.14,
+        "deal_vs_p50_pct": -27.33,
         "deal_vs_p50_band": "OUTSIDE_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-10-06/2025-10-12",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -32340,6 +38451,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.08,
+    "shippingStartDate": "2026-01-06T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -32352,7 +38464,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:38",
+        "generated_at": "2026-07-30T18:29:05",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -32366,6 +38478,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-05/2026-01-11",
@@ -32411,58 +38524,149 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2026-01-05/2026-01-11",
-        "window_start": "2025-07-07/2025-07-13",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 11,
+        "kg_shipped": 337069.4,
+        "p10": 1.6454863110879432,
+        "p25": 3.2807869734823583,
+        "p50": 4.768746368518919,
+        "p75": 5.380957264957265,
+        "p90": 6.481476600996077,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.72,
-        "deal_vs_p50_pct": -5.6,
+        "deal_vs_p50_pct": -1.02,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2026-01-05/2026-01-11",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -32505,6 +38709,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.95,
+    "shippingStartDate": "2026-01-28T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -32517,7 +38722,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:41",
+        "generated_at": "2026-07-30T18:29:09",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -32531,6 +38736,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2026-01-26/2026-02-01",
@@ -32576,58 +38782,149 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2026-01-26/2026-02-01",
-        "window_start": "2025-07-07/2025-07-13",
+        "window_start": "2025-12-08/2025-12-14",
         "window_end": "2025-12-29/2026-01-04",
-        "window_weeks": 26,
-        "n_shipments": 28899,
-        "n_exporters": 171,
-        "kg_shipped": 322791022.90000004,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 6.972891857243378,
-        "p90": 8.693524291409238,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 29,
+        "n_exporters": 11,
+        "kg_shipped": 337069.4,
+        "p10": 1.6454863110879432,
+        "p25": 3.2807869734823583,
+        "p50": 4.768746368518919,
+        "p75": 5.380957264957265,
+        "p90": 6.481476600996077,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.633333333333334,
-        "deal_vs_p50_pct": -7.33,
+        "deal_vs_p50_pct": -2.84,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2026-01-26/2026-02-01",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "OFF_SEASON",
+        "route_signal_inferred": "MED",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
+          "Deal week is off the observed commercial window; verify the deal is not a stock-clearance or opportunistic play.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -32670,6 +38967,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.23,
+    "shippingStartDate": "2025-12-10T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -32682,7 +38980,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:45",
+        "generated_at": "2026-07-30T18:29:13",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -32696,6 +38994,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-08/2025-12-14",
@@ -32741,58 +39040,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-12-08/2025-12-14",
-        "window_start": "2025-06-09/2025-06-15",
+        "window_start": "2025-11-10/2025-11-16",
         "window_end": "2025-12-01/2025-12-07",
-        "window_weeks": 26,
-        "n_shipments": 27201,
-        "n_exporters": 173,
-        "kg_shipped": 300514386.73,
-        "p10": 1.3976363401191998,
-        "p25": 2.9,
-        "p50": 5.010078587214551,
-        "p75": 7,
-        "p90": 8.929729729729731,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 70,
+        "n_exporters": 14,
+        "kg_shipped": 847021.14,
+        "p10": 1.3888888888888888,
+        "p25": 5.123837735559864,
+        "p50": 5.666666666666667,
+        "p75": 6.388546152562176,
+        "p90": 7.333333333333333,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.82,
-        "deal_vs_p50_pct": -3.79,
+        "deal_vs_p50_pct": -14.94,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-12-08/2025-12-14",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -32835,6 +39224,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.12,
+    "shippingStartDate": "2025-12-20T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 5,
     "status": "finished",
@@ -32847,7 +39237,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:49",
+        "generated_at": "2026-07-30T18:29:17",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -32861,6 +39251,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20610491104",
         "importer_name": "Allied Trade Global",
+        "origin_country": "PERU",
         "destination_country": "TAIWAN",
         "variety": "BLUEBERRY",
         "deal_week": "2025-12-15/2025-12-21",
@@ -32906,58 +39297,148 @@ export const platformDeals: PlatformDealRecord[] = [
       },
       "dim_b_price_benchmark": {
         "variety": "BLUEBERRY",
-        "destination_country": null,
+        "destination_country": "TAIWAN",
         "deal_week": "2025-12-15/2025-12-21",
-        "window_start": "2025-06-16/2025-06-22",
+        "window_start": "2025-11-17/2025-11-23",
         "window_end": "2025-12-08/2025-12-14",
-        "window_weeks": 26,
-        "n_shipments": 28030,
-        "n_exporters": 173,
-        "kg_shipped": 310791037.55,
-        "p10": 1.4285714285714286,
-        "p25": 2.9,
-        "p50": 5,
-        "p75": 7,
-        "p90": 8.9,
-        "confidence": "SPARSE",
-        "fallback_note": "Corridor BLUEBERRY->TAIWAN too thin; benchmark uses all destinations (variety-only fallback).",
+        "window_weeks": 4,
+        "n_shipments": 66,
+        "n_exporters": 15,
+        "kg_shipped": 801150.24,
+        "p10": 1.3888888888888888,
+        "p25": 4.273504273504273,
+        "p50": 5.249453081837333,
+        "p75": 6.373558803160145,
+        "p90": 6.9156017846153865,
+        "confidence": "HIGH",
+        "fallback_note": null,
         "deal_price_usd_per_kg": 4.746666666666667,
-        "deal_vs_p50_pct": -5.07,
+        "deal_vs_p50_pct": -9.58,
         "deal_vs_p50_band": "WITHIN_BAND"
       },
       "dim_c_route_intelligence": {
         "variety": "BLUEBERRY",
         "destination_country": "TAIWAN",
-        "period_label": "2025-01-01 .. 2025-12-31",
-        "n_shipments": 0,
-        "n_exporters": 0,
-        "n_importers": 0,
-        "kg_net": 0,
-        "fob_usd": 0,
-        "lane_share_of_variety_pct": 0,
-        "green_channel_pct": null,
-        "orange_channel_pct": null,
-        "red_channel_pct": null,
-        "transport_mode_mix": {},
-        "exporter_hhi": 0,
-        "importer_hhi": 0,
-        "top_exporters": [],
-        "top_importers": [],
-        "monthly_kg": {},
-        "peak_month": null,
-        "off_peak_month": null,
-        "peak_off_ratio": null,
-        "in_season_weeks": [],
-        "lane_maturity": "SPARSE",
+        "period_label": "2025-01-04 .. 2025-12-30",
+        "n_shipments": 461,
+        "n_exporters": 31,
+        "n_importers": 24,
+        "kg_net": 5459849.44,
+        "fob_usd": 31285669.09,
+        "lane_share_of_variety_pct": 1.43,
+        "green_channel_pct": 100,
+        "orange_channel_pct": 0,
+        "red_channel_pct": 0,
+        "transport_mode_mix": {
+          "MARITIMO": 99.6,
+          "AEREO": 0.2,
+          "AÉREO": 0.2
+        },
+        "exporter_hhi": 958,
+        "importer_hhi": 1483,
+        "top_exporters": [
+          {
+            "exporter_id": "20602822533",
+            "exporter_name": "HORTIFRUT - PER? S.A.C.",
+            "share_pct": 16.1
+          },
+          {
+            "exporter_id": "20293718220",
+            "exporter_name": "AGRICOLA DON RICARDO S.A.C.",
+            "share_pct": 15.7
+          },
+          {
+            "exporter_id": "20554556192",
+            "exporter_name": "AGROVISION PERU S.A.C.",
+            "share_pct": 11.3
+          },
+          {
+            "exporter_id": "20340584237",
+            "exporter_name": "CAMPOSOL S.A.",
+            "share_pct": 10.4
+          },
+          {
+            "exporter_id": "20606009284",
+            "exporter_name": "BOMAREA S.R.L.",
+            "share_pct": 8.3
+          }
+        ],
+        "top_importers": [
+          {
+            "importer_id": "8617caeb",
+            "importer_name": "LICA FRESH CO. LTD",
+            "share_pct": 27
+          },
+          {
+            "importer_id": "2b07fbef",
+            "importer_name": "VERY FRESH INC",
+            "share_pct": 24.1
+          },
+          {
+            "importer_id": "d801835f",
+            "importer_name": "HOWARD FRUITS CO. LTD",
+            "share_pct": 7
+          },
+          {
+            "importer_id": "25e3ce0b",
+            "importer_name": "JOY LEE CO.. LTD",
+            "share_pct": 5.6
+          },
+          {
+            "importer_id": "19cb5a13",
+            "importer_name": "UNITED PRODUCE COMPANY LTD.",
+            "share_pct": 3.4
+          }
+        ],
+        "monthly_kg": {
+          "2025-01": 184834.8,
+          "2025-02": 190423.8,
+          "2025-03": 11700,
+          "2025-04": 6.97,
+          "2025-05": 42430.5,
+          "2025-06": 142045,
+          "2025-07": 269418.83,
+          "2025-08": 778268.48,
+          "2025-09": 947967.78,
+          "2025-10": 1478311.76,
+          "2025-11": 869149.38,
+          "2025-12": 545292.14
+        },
+        "peak_month": "2025-10",
+        "off_peak_month": "2025-03",
+        "peak_off_ratio": 126.4,
+        "in_season_weeks": [
+          "2025-08-04/2025-08-10",
+          "2025-08-11/2025-08-17",
+          "2025-08-18/2025-08-24",
+          "2025-08-25/2025-08-31",
+          "2025-09-01/2025-09-07",
+          "2025-09-15/2025-09-21",
+          "2025-09-22/2025-09-28",
+          "2025-09-29/2025-10-05",
+          "2025-10-06/2025-10-12",
+          "2025-10-13/2025-10-19",
+          "2025-10-20/2025-10-26",
+          "2025-10-27/2025-11-02",
+          "2025-11-03/2025-11-09",
+          "2025-11-10/2025-11-16",
+          "2025-11-17/2025-11-23",
+          "2025-11-24/2025-11-30",
+          "2025-12-01/2025-12-07",
+          "2025-12-08/2025-12-14",
+          "2025-12-15/2025-12-21"
+        ],
+        "lane_maturity": "DEEP",
         "deal_week": "2025-12-15/2025-12-21",
-        "commercial_window_alignment": "NEEDS_INPUT",
-        "route_signal_inferred": "INSUFFICIENT",
+        "commercial_window_alignment": "IN_SEASON",
+        "route_signal_inferred": "LOW",
         "route_signal_table": "MED_HIGH",
         "route_signal_driver": "PAIR_OVERRIDE",
         "route_signal_pts": -8,
         "table_version": "0.1-DRAFT",
         "caveats": [
-          "No shipments in this corridor for the period observed.",
+          "Customs channel is Peru-side (SUNAT green/orange/red) -- does not capture destination-country customs friction.",
+          "route_signal_inferred is derived from lane maturity + Peru-side ops + seasonality. It does NOT include transit ceiling, transshipment norms, resale liquidity, or destination market fragility -- use route_signal_table for authoritative C4.",
           "Pair flag is PROPOSED (not yet AC-confirmed)."
         ]
       },
@@ -33000,6 +39481,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 38.56,
+    "shippingStartDate": "2025-04-20T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 6,
     "status": "finished",
@@ -33012,7 +39494,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:53",
+        "generated_at": "2026-07-30T18:29:21",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -33026,6 +39508,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "BIOFRESHI BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
         "deal_week": "2025-04-14/2025-04-20",
@@ -33164,6 +39647,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 39.32,
+    "shippingStartDate": "2025-08-20T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 6,
     "status": "finished",
@@ -33176,7 +39660,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:19:57",
+        "generated_at": "2026-07-30T18:29:25",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -33190,6 +39674,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "BIOFRESHI BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
         "deal_week": "2025-08-18/2025-08-24",
@@ -33328,6 +39813,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 39.26,
+    "shippingStartDate": "2025-10-16T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 6,
     "status": "finished",
@@ -33340,7 +39826,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:20:01",
+        "generated_at": "2026-07-30T18:29:29",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -33354,6 +39840,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "BIOFRESHI BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
         "deal_week": "2025-10-13/2025-10-19",
@@ -33492,6 +39979,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 37.83,
+    "shippingStartDate": "2025-06-15T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 6,
     "status": "finished",
@@ -33504,7 +39992,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:20:05",
+        "generated_at": "2026-07-30T18:29:32",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -33518,6 +40006,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "BIOFRESHI BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
         "deal_week": "2025-06-09/2025-06-15",
@@ -33656,6 +40145,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 38.45,
+    "shippingStartDate": "2025-07-15T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 6,
     "status": "finished",
@@ -33668,7 +40158,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:20:09",
+        "generated_at": "2026-07-30T18:29:36",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -33682,6 +40172,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "BIOFRESHI BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
         "deal_week": "2025-07-14/2025-07-20",
@@ -33820,6 +40311,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 37.35,
+    "shippingStartDate": "2025-08-15T10:00:00.000Z",
     "priorDealsBetweenParties": 5,
     "relationshipAgeMonths": 6,
     "status": "finished",
@@ -33832,7 +40324,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:20:13",
+        "generated_at": "2026-07-30T18:29:41",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -33846,6 +40338,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "BIOFRESHI BV",
+        "origin_country": "PERU",
         "destination_country": "PAISES BAJOS",
         "variety": "GINGER",
         "deal_week": "2025-08-11/2025-08-17",
@@ -33968,7 +40461,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 75888,
-    "origin": "Callao, Chile",
+    "origin": "Callao, Peru",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -33979,11 +40472,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 34,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 31.62,
+    "shippingStartDate": "2025-01-15T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -34001,7 +40495,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -34015,7 +40508,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 73296,
-    "origin": "Callao, Chile",
+    "origin": "Callao, Peru",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -34026,11 +40519,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 34,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30.54,
+    "shippingStartDate": "2025-02-14T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -34048,7 +40542,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -34062,7 +40555,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 73176,
-    "origin": "Callao, Chile",
+    "origin": "Callao, Peru",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -34073,11 +40566,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 34,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30.49,
+    "shippingStartDate": "2025-03-15T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -34095,7 +40589,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -34109,7 +40602,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 75720,
-    "origin": "SAN Antonio, Chile",
+    "origin": "San Antonio, Chile",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -34120,11 +40613,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 26,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 31.55,
+    "shippingStartDate": "2025-10-28T10:00:00.000Z",
     "priorDealsBetweenParties": 3,
     "relationshipAgeMonths": 10,
     "status": "finished",
@@ -34142,7 +40636,6 @@ export const platformDeals: PlatformDealRecord[] = [
     "missingFields": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
@@ -34172,6 +40665,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.33,
+    "shippingStartDate": "2025-12-12T10:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -34184,7 +40678,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:20:17",
+        "generated_at": "2026-07-30T18:29:45",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -34198,6 +40692,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20600326464",
         "importer_name": "ALBORAN COMEX SL",
+        "origin_country": "PERU",
         "destination_country": "ESPANA",
         "variety": "GINGER",
         "deal_week": "2025-12-08/2025-12-14",
@@ -34322,7 +40817,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "2400 x CARTON X 10KG (10X1KG)",
     "dealValueUSD": 55992,
     "origin": "Callao, Peru",
-    "destination": "SAN Antonio, Chile",
+    "destination": "San Antonio, Chile",
     "buyerName": "JUHINEJ LTD",
     "supplierName": "INDUSTRIAS SOLIMAR SAC",
     "buyerYib": 19,
@@ -34337,6 +40832,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 23.33,
+    "shippingStartDate": "2026-01-15T10:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -34349,7 +40845,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "counterpartyReady": true,
     "marketIntel": {
       "meta": {
-        "generated_at": "2026-07-28T21:20:18",
+        "generated_at": "2026-07-30T18:29:46",
         "data_as_of": "2025-12-31",
         "table_version": "0.1-DRAFT",
         "source_files": [
@@ -34363,6 +40859,7 @@ export const platformDeals: PlatformDealRecord[] = [
       "deal_inputs": {
         "exporter_ruc": "20526450851",
         "importer_name": "JUHINEJ LTD",
+        "origin_country": "PERU",
         "destination_country": "CHILE",
         "variety": null,
         "deal_week": "2026-01-12/2026-01-18",
@@ -34498,7 +40995,7 @@ export const platformDeals: PlatformDealRecord[] = [
           "direccion": "AV. RIVERA NAVARRETE NRO 2801 DEP. 1606 OTR. SAN ISIDRO",
           "tipo": null,
           "actividad_economica": null,
-          "fetched_at": "2026-07-28T19:37:55",
+          "fetched_at": "2026-07-30T00:34:57",
           "source": "apis.net.pe v1 (https://api.apis.net.pe/v1/ruc?numero=20526450851)",
           "error": "no-fecha_inscripcion-in-free-tier (v1 basic; set APIS_NET_PE_TOKEN for full data)",
           "d2_pts": null,
@@ -35949,7 +42446,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
   },
   {
     "id": "cp-supplierAGRICOLAVIASOLSACFreshBlueberries",
-    "companyName": "AGRICOLA VIASOL SAC",
+    "companyName": "AGRICOLA VIÑASOL SAC",
     "role": "supplier",
     "product": "Fresh Blueberries",
     "yearsInBusiness": 15,
@@ -37289,7 +43786,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       "buyer.yearsInBusiness",
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -37773,7 +44269,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "buyer.yearsInBusiness",
       "customs export narrative",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -37831,7 +44326,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -37889,7 +44383,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -38106,9 +44599,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 80,
-    "maxScore": 80,
-    "minScore": 80,
+    "avgScore": 70,
+    "maxScore": 70,
+    "minScore": 70,
     "deals": [
       {
         "mongoId": "6764614cb9fa43de6d8c1bc2",
@@ -38116,7 +44609,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 24101,
-        "score": 80,
+        "score": 70,
         "priorDeals": 0
       }
     ],
@@ -38299,7 +44792,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -38330,7 +44822,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "missingForFullCram": [
       "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
-      "route risk table row (transport-mode fallback used)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
