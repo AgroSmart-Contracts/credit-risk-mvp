@@ -49,10 +49,28 @@ export interface ProductRiskProfile {
 export interface RouteRiskProfile {
   origin: string;
   destination: string;
-  /** Added 2026-07-28: route risk is now scored per (origin, destination, product) — a route's adjustedScore depends on this product's shelf life / cold-chain need on this corridor. */
+  /** Route risk is scored per (origin, destination, product) — adjustedScore depends on this product's shelf life / cold-chain need on this corridor. */
   product: string;
+  /**
+   * Freight mode this table row applies to (decision 2026-07-29).
+   * Ocean and air ≤2 stops share the same base/freshness math; air ≥3 stops
+   * adds an airStopPenalty (typically −15 when cold-chain is required).
+   */
+  transportMode: "sea" | "air";
+  /**
+   * Air-only stop band: `le2` = direct or ≤2 stops; `gt2` = ≥3 stops.
+   * null for sea rows.
+   */
+  airStopsBand: "le2" | "gt2" | null;
+  /** CSV airStopPenalty already baked into `score` (0 for ocean / air ≤2). */
+  airStopPenalty: number;
   score: number;
   estimatedTransitDays: number;
+  /**
+   * Corridor-level ocean transshipment count for sea rows.
+   * For air rows this is a band marker (2 for le2, 3 for gt2) — deal-level
+   * stop counts live on Deal.numberOfTransshipments.
+   */
   numberOfTransshipments: number;
   routeRiskFlag: "Low" | "Medium" | "High";
   /** true when this (route, product) combination's freshness ratio (transit days ÷ shelf-life days) meaningfully exceeds 1.0 — fed into checkVetoRegister() as an additional veto reason, alongside the existing cargo-insurance veto. */
@@ -103,6 +121,13 @@ export interface Deal {
   transportMode: "air" | "sea" | null;
   /** Deal Register `offerUnitPrice`, USD. Feeds spec §4.B "Price vs market" (30% of Product weight) — see lib/price-benchmarks.ts. null = not captured. */
   offerUnitPriceUSD: number | null;
+  /**
+   * Planned / actual shipment start (ISO). Drives product price-vs-usual by
+   * calendar month × route. Prefer this over `createdAt` when both exist.
+   */
+  shippingStartDate?: string | null;
+  /** Platform deal creation timestamp (ISO). Fallback month anchor when shippingStartDate is missing. */
+  createdAt?: string | null;
   priorDealsBetweenParties: number;
   relationshipAgeMonths: number;
   externalCreditSignal?: string;
