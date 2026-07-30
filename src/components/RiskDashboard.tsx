@@ -116,6 +116,54 @@ export function RiskDashboard({
                       label="Supplier"
                       score={assessment.supplier.score}
                     />
+                    <SubScoreBar.Party
+                      label="Rel. score"
+                      score={assessment.relationshipAdj}
+                    />
+                  </div>
+                )}
+                {dim.key === "product" && (
+                  <div className="mt-2 space-y-1 rounded-lg bg-tm-neutral-light px-3 py-2 text-xs text-tm-text">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-tm-text-muted">Price unit</span>
+                      <span className="font-medium text-tm-text">
+                        {assessment.productPrice.priceUnit}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-tm-text-muted">Deal price</span>
+                      <span className="font-medium text-tm-text">
+                        {assessment.productPrice.dealUnitPriceUSD != null
+                          ? `$${assessment.productPrice.dealUnitPriceUSD.toFixed(2)}`
+                          : "—"}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-tm-text-muted">Usual (month×route)</span>
+                      <span className="font-medium text-tm-text">
+                        {assessment.productPrice.usualUsdPerKg != null
+                          ? `$${assessment.productPrice.usualUsdPerKg.toFixed(2)}`
+                          : "—"}
+                      </span>
+                    </div>
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="shrink-0 text-tm-text-muted">
+                        Safe price range
+                      </span>
+                      <span className="text-right font-medium text-tm-text">
+                        {assessment.productPrice.safeRangeDisplay ?? "—"}
+                        {assessment.productPrice.safeRangeSource === "score-band" && (
+                          <span className="mt-0.5 block text-[10px] font-normal text-tm-text-muted">
+                            scoring band (±15% of usual)
+                          </span>
+                        )}
+                        {assessment.productPrice.safeRangeSource === "observed" && (
+                          <span className="mt-0.5 block text-[10px] font-normal text-tm-text-muted">
+                            observed corridor min–max
+                          </span>
+                        )}
+                      </span>
+                    </div>
                   </div>
                 )}
               </SubScoreBar>
@@ -136,8 +184,8 @@ export function RiskDashboard({
           </p>
           <p className="mt-1 text-sm text-tm-text-light">
             Still missing from platform enrichment — scoring used assumed
-            defaults where noted (license valid, 0 payment delay, 0% quality
-            rejection).
+            defaults where noted (license valid). Payment delay and quality
+            rejection are left blank for Dimension A when unknown.
           </p>
           <ul className="mt-3 flex flex-wrap gap-1.5">
             {deal.fieldsNeedingConfirmation.map((field) => (

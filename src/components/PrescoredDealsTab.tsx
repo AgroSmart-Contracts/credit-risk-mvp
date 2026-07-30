@@ -68,14 +68,18 @@ function CramFormulaPanel() {
             A · Counterparty (40%)
           </p>
           <p className="mt-1 text-tm-text-light">
-            buyer×0.5 + supplier×0.5 + relationship signal
+            Weighted/shrink composite over buyer + supplier + relationship
+            fields (same formula as Counterparties tab)
           </p>
           <ul className="mt-1.5 list-disc space-y-1 pl-4 text-tm-text-light">
-            <li>YIB bands + license (assumed valid) + platform track record</li>
-            <li>Credit rating from Coface CRA/DRA grade, when on file</li>
             <li>
-              Payment delay = 0 days · quality rejection = 0% (perfect defaults)
+              Per party: coverage × rawAvg + (1 − coverage) × 50 + trust (+3)
             </li>
+            <li>
+              YIB, license, platform history; blanks excluded (no invented
+              perfect payment delay / rejection)
+            </li>
+            <li>Customs enrichment fills volume, sales, routes when matched</li>
           </ul>
         </div>
         <div>
@@ -83,8 +87,9 @@ function CramFormulaPanel() {
             B · Product (25%)
           </p>
           <p className="mt-1 text-tm-text-light">
-            Product risk table score (perishability / cold chain) + quality
-            grade + price-vs-market benchmark (Fresh Blueberries only so far)
+            Perishability class (base 70 ± band) + quality grade + price-vs-usual
+            by shipment month × origin→destination (USD/kg). AC table scores are
+            not used — only attributes (shelf life / cold chain).
           </p>
         </div>
         <div>

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { deals as sampleDeals } from "./data/deals";
 import {
+  platformCounterparties,
   platformDealsBlocked,
 } from "./data/platform-deals";
-import { sandboxCounterparties } from "./data/counterparty-sandbox-scores";
 import {
   prescoredByDealId,
   prescoredByMongoId,
@@ -153,7 +153,7 @@ function App() {
       <AppNav
         view={view}
         onChange={handleViewChange}
-        scoredCount={sandboxCounterparties.length}
+        scoredCount={platformCounterparties.length}
         platformCount={prescoredPlatformDeals.length}
         missingCount={missingDealCount}
       />

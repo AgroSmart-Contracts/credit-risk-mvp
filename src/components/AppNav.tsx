@@ -19,7 +19,7 @@ const TABS: { id: AppView; label: string; short: string }[] = [
   },
   {
     id: "product-table",
-    label: "Product risk table",
+    label: "Product attributes",
     short: "Products",
   },
   {
