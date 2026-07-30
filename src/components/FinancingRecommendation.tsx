@@ -9,12 +9,14 @@ import {
   XCircle,
 } from "lucide-react";
 import type { Deal, FinancingRecommendation, RiskAssessment } from "../types";
+import type { TransactionStructureInput } from "../lib/transaction-structure/types";
 import { formatUSD } from "../lib/assessment";
 import {
   formatDecisionLabel,
   getDecisionStyle,
   getTierColors,
 } from "../lib/risk-colors";
+import { TransactionStructureAnalysis } from "./TransactionStructureAnalysis";
 
 interface FinancingRecommendationPanelProps {
   deal: Deal;
@@ -22,6 +24,7 @@ interface FinancingRecommendationPanelProps {
   financing: FinancingRecommendation;
   onBack: () => void;
   onAssessAnother: () => void;
+  onApplyStructure?: (structure: TransactionStructureInput) => void;
 }
 
 const decisionIcons = {
@@ -37,6 +40,7 @@ export function FinancingRecommendationPanel({
   financing,
   onBack,
   onAssessAnother,
+  onApplyStructure,
 }: FinancingRecommendationPanelProps) {
   const decisionStyle = getDecisionStyle(financing.decision);
   const DecisionIcon = decisionIcons[decisionStyle.icon];
@@ -113,6 +117,12 @@ export function FinancingRecommendationPanel({
           />
         </dl>
       </motion.div>
+
+      <TransactionStructureAnalysis
+        deal={deal}
+        assessment={assessment}
+        onApplyStructure={onApplyStructure}
+      />
 
       <div className="flex flex-wrap gap-3 pt-2">
         <button

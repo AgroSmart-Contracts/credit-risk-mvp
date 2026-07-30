@@ -57,6 +57,9 @@ export interface InsuranceOverlay {
   policyholder: string | null;
 }
 
+/** Provenance of structure inputs — exploration defaults vs user-confirmed edits. */
+export type StructureSource = "default" | "user";
+
 /** Cash-flow + structure inputs per Kanato CRAM Transaction Structure model, extended 2026-07-28 with the deal-sensitivity-playbook's legs/cost-stack/insurance-overlay model. */
 export interface TransactionStructureInput {
   /** Manual entry, or left null to derive from `legs` (sum of leg + fixed costs) when legs are provided. */
@@ -79,6 +82,11 @@ export interface TransactionStructureInput {
   legs: DealLeg[];
   fixedCosts: DealFixedCost[];
   insurance: InsuranceOverlay | null;
+  /**
+   * "default" = seeded for exploration from deal value (not verified economics).
+   * "user" = confirmed/edited for scoring. Omitted on legacy blank inputs.
+   */
+  structureSource?: StructureSource;
 }
 
 export interface ResolvedTransactionStructure {

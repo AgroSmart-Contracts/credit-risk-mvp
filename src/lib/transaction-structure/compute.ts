@@ -60,6 +60,132 @@ export function blankTransactionStructureInput(): TransactionStructureInput {
   };
 }
 
+/** Minimal deal fields needed to seed an exploration-ready structure. */
+export interface DealStructureSeed {
+  dealValueUSD: number;
+  offerUnitPriceUSD?: number | null;
+  advancePaymentPct?: number;
+  estimatedTransitDays?: number;
+}
+
+let defaultIdSeq = 0;
+function defaultId(prefix: string): string {
+  defaultIdSeq += 1;
+  return `${prefix}-default-${defaultIdSeq}`;
+}
+
+/**
+ * Seed a usable FOB-ready structure from deal value so KPIs / sensitivity
+ * work immediately (deal-sensitivity-playbook exploration defaults).
+ * Not verified deal economics — UI must label as exploration defaults.
+ */
+export function defaultStructureFromDeal(deal: DealStructureSeed): TransactionStructureInput {
+  const saleTotal = Math.max(0, deal.dealValueUSD);
+  const unitPrice =
+    deal.offerUnitPriceUSD != null && deal.offerUnitPriceUSD > 0
+      ? deal.offerUnitPriceUSD
+      : saleTotal > 0
+        ? 5
+        : 5;
+  const netKg = saleTotal > 0 ? saleTotal / unitPrice : 1000;
+  const salePricePerKg = unitPrice;
+  // Illustrative 15% gross margin before fixed logistics — labeled assumption.
+  const purchasePricePerKg = Math.round(salePricePerKg * 0.85 * 100) / 100;
+  const fixedLogistics = Math.max(500, Math.round(saleTotal * 0.02));
+  const transit = Math.max(1, deal.estimatedTransitDays ?? 30);
+  const buyerFirstDay = Math.max(0, transit);
+  const buyerFinalDay = buyerFirstDay + 10;
+  const advancePct = Math.max(0, Math.min(100, deal.advancePaymentPct ?? 0)) / 100;
+  // Documentary-style split: first collection on BL/arrival, balance later.
+  // If the deal already has an advance %, treat that as buyer first %.
+  const buyFirstPct = advancePct > 0 ? advancePct : 0.7;
+  const buyFinalPct = Math.max(0, 1 - buyFirstPct);
+
+  return {
+    purchaseTotalUSD: null,
+    saleTotalUSD: null,
+    salePricePerKg,
+    // Supplier paid earlier than buyer collections (capital need).
+    supAdvDay: 0,
+    supAdvPct: 0.5,
+    supFinDay: Math.max(0, buyerFirstDay - 5),
+    supFinPct: 0.5,
+    buyFirstDay: buyerFirstDay,
+    buyFirstPct,
+    buyFinalDay: buyerFinalDay,
+    buyFinalPct,
+    dealPurpose: "Export",
+    tmProductOwnership: true,
+    collectionRights: true,
+    legs: [
+      {
+        id: defaultId("leg"),
+        label: "FOB-ready supply (default)",
+        legType: "fob_ready",
+        grossKg: Math.round(netKg * 100) / 100,
+        discardPct: 0,
+        kgPerCarton: 1.5,
+        priceBasis: "packed_kg",
+        purchasePricePerKg,
+        variableCosts: [
+          {
+            id: defaultId("cost"),
+            label: "Onward logistics / handling",
+            amountPerUnit: 0,
+            unit: "per_kg",
+            taxRatePct: 0,
+          },
+        ],
+      },
+    ],
+    fixedCosts: [
+      {
+        id: defaultId("fixed"),
+        label: "Logistics to port (default)",
+        amountUSD: fixedLogistics,
+      },
+    ],
+    insurance: null,
+    structureSource: "default",
+  };
+}
+
+/** Apply playbook Module 3 what-if overrides onto a structure copy (sandbox). */
+export function applyStructureWhatIf(
+  input: TransactionStructureInput,
+  overrides: {
+    salePricePerKg?: number;
+    costShiftPerKg?: number;
+    discardPct?: number; // 0–100, sourcing legs only
+  },
+): TransactionStructureInput {
+  const costShift = overrides.costShiftPerKg ?? 0;
+  const discardFrac =
+    overrides.discardPct !== undefined ? Math.max(0, Math.min(100, overrides.discardPct)) / 100 : null;
+  return {
+    ...input,
+    salePricePerKg: overrides.salePricePerKg ?? input.salePricePerKg,
+    legs: input.legs.map((leg) => ({
+      ...leg,
+      discardPct:
+        leg.legType === "sourcing" && discardFrac !== null ? discardFrac : leg.discardPct,
+      purchasePricePerKg: Math.max(0, leg.purchasePricePerKg + costShift),
+    })),
+    purchaseTotalUSD: null,
+    saleTotalUSD: null,
+  };
+}
+
+/** Resolve structure for UI: keep user/deal structure if present, else seed defaults. */
+export function structureForDeal(
+  deal: DealStructureSeed & { transactionStructure?: TransactionStructureInput | null },
+): TransactionStructureInput {
+  if (hasTransactionStructureInput(deal.transactionStructure)) {
+    return deal.transactionStructure;
+  }
+  return defaultStructureFromDeal(deal);
+}
+
 // ---------------------------------------------------------------------------
 // Resolution — fill defaults, track completeness (same convention as
 // product-risk-tables.ts / route-risk-tables.ts: real value where one exists,

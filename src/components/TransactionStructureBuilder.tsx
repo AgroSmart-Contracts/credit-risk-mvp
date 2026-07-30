@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import type {
   CostLine,
@@ -19,6 +19,10 @@ interface TransactionStructureBuilderProps {
   dealValueUSD: number;
   advancePaymentPct: number;
   contractType: string;
+  /** Expand panel on mount (e.g. when seeded with exploration defaults). */
+  defaultExpanded?: boolean;
+  /** Restore deal-derived exploration defaults. */
+  onResetToDefaults?: () => void;
 }
 
 let idCounter = 0;
@@ -70,9 +74,17 @@ export function TransactionStructureBuilder({
   dealValueUSD,
   advancePaymentPct,
   contractType,
+  defaultExpanded = false,
+  onResetToDefaults,
 }: TransactionStructureBuilderProps) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(defaultExpanded);
   const [previewCollectionPct, setPreviewCollectionPct] = useState(100);
+
+  useEffect(() => {
+    if (defaultExpanded || value.structureSource === "default") {
+      setExpanded(true);
+    }
+  }, [defaultExpanded, value.structureSource]);
 
   const report = useMemo(
     () => buildTransactionStructureReport(value, dealValueUSD, advancePaymentPct, contractType),
@@ -83,7 +95,8 @@ export function TransactionStructureBuilder({
     report.score.cashFlow.buyerFirstAmount + report.score.cashFlow.buyerFinalAmount * (previewCollectionPct / 100);
   const previewMargin = previewCashCollected - report.resolved.purchaseTotal;
 
-  const update = (patch: Partial<TransactionStructureInput>) => onChange({ ...value, ...patch });
+  const update = (patch: Partial<TransactionStructureInput>) =>
+    onChange({ ...value, ...patch, structureSource: "user" });
 
   const updateLeg = (id: string, patch: Partial<DealLeg>) =>
     update({ legs: value.legs.map((l) => (l.id === id ? { ...l, ...patch } : l)) });
@@ -122,8 +135,9 @@ export function TransactionStructureBuilder({
         <div>
           <h3 className="font-semibold text-tm-black">Transaction structure — cash flow &amp; sensitivity</h3>
           <p className="mt-0.5 text-xs text-tm-text-light">
-            Optional. Model supply legs, cost stack, payment tranches, and insurance to drive Dimension
-            D from a real cash-flow engine instead of the default category-based estimate.
+            Model supply legs, cost stack, payment tranches, and insurance to drive Dimension D from a
+            cash-flow engine. Seeded with deal-value defaults so KPIs work immediately — edit before
+            treating as verified economics.
           </p>
         </div>
         <span
@@ -136,6 +150,35 @@ export function TransactionStructureBuilder({
 
       {expanded && (
         <div className="mt-5 space-y-6">
+          {value.structureSource === "default" && (
+            <div className="rounded-lg border border-tm-accent/40 bg-tm-accent/10 px-3 py-2 text-xs text-tm-accent-dark">
+              Defaults for exploration — not verified deal economics. Purchase ≈ 85% of sale, ~70/30
+              buyer split (or deal advance %), FOB-ready leg sized from deal value / unit price.
+              {onResetToDefaults && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onResetToDefaults();
+                  }}
+                  className="ml-2 font-semibold underline underline-offset-2 hover:text-tm-black"
+                >
+                  Reset to defaults
+                </button>
+              )}
+            </div>
+          )}
+          {value.structureSource === "user" && onResetToDefaults && (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={onResetToDefaults}
+                className="text-xs font-medium text-tm-text-light underline underline-offset-2 hover:text-tm-black"
+              >
+                Reset to defaults
+              </button>
+            </div>
+          )}
           <KpiStrip report={report} />
 
           <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
