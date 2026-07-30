@@ -2,9 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { deals as sampleDeals } from "./data/deals";
 import {
-  platformCounterparties,
   platformDealsBlocked,
 } from "./data/platform-deals";
+import { sandboxCounterparties } from "./data/counterparty-sandbox-scores";
 import {
   prescoredByDealId,
   prescoredByMongoId,
@@ -14,6 +14,7 @@ import { buildRiskAssessment } from "./lib/assessment";
 import { createBlankDeal } from "./lib/deal-builder";
 import { recommendFinancingTerms } from "./lib/financing";
 import type { Deal, FinancingRecommendation, RiskAssessment, Step } from "./types";
+import type { TransactionStructureInput } from "./lib/transaction-structure/types";
 import type { AppView } from "./types/platform";
 import { AppNav } from "./components/AppNav";
 import { StepIndicator } from "./components/StepIndicator";
@@ -67,7 +68,7 @@ function App() {
     setStep(2);
   };
 
-  const handleRunAssessment = (dealToAssess: Deal) => {
+  const handleRunAssessment = (dealToAssess: Deal, stayOnFinancing = false) => {
     setSelectedDeal(dealToAssess);
     const result = buildRiskAssessment(dealToAssess);
     const terms = recommendFinancingTerms(
@@ -77,7 +78,13 @@ function App() {
     setAssessment(result);
     setFinancing(terms);
     setView("assess");
-    setStep(3);
+    setStep(stayOnFinancing ? 4 : 3);
+  };
+
+  const handleApplyStructure = (structure: TransactionStructureInput) => {
+    if (!selectedDeal) return;
+    // Re-score but keep the financing page open so what-if Apply updates live.
+    handleRunAssessment({ ...selectedDeal, transactionStructure: structure }, true);
   };
 
   const handleReset = () => {
@@ -146,7 +153,7 @@ function App() {
       <AppNav
         view={view}
         onChange={handleViewChange}
-        scoredCount={platformCounterparties.length}
+        scoredCount={sandboxCounterparties.length}
         platformCount={prescoredPlatformDeals.length}
         missingCount={missingDealCount}
       />
@@ -281,7 +288,7 @@ function App() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 12 }}
                 transition={{ duration: 0.25 }}
-                className="mx-auto max-w-3xl"
+                className="mx-auto max-w-5xl"
               >
                 <FinancingRecommendationPanel
                   deal={selectedDeal}
@@ -289,6 +296,7 @@ function App() {
                   financing={financing}
                   onBack={() => setStep(3)}
                   onAssessAnother={handleReset}
+                  onApplyStructure={handleApplyStructure}
                 />
               </motion.div>
             )}

@@ -55,8 +55,12 @@ coverage
 # Vite / local overrides
 *.local
 
-# Local reference spreadsheets (not part of the app)
+# Local reference spreadsheets / raw customs dumps (not part of the app)
 docs/*.xlsx
+docs/Veritrade_*.csv
 
 # Market-intel SUNAT lookup cache (regenerable)
 docs/market-intel-peru-2025-2026-07-10/marts/sunat_cache/
+
+# Regenerable customs company aggregates (run: npm run aggregate-customs)
+src/data/customs-company-aggregates.json

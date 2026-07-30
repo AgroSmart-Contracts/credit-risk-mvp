@@ -12,7 +12,10 @@ import { analyzeCofaceDocument } from "../lib/coface-analysis/analyze-coface-cli
 import { analyzeDealDocuments } from "../lib/document-analysis/analyze-documents-client";
 import { PRODUCT_RISK_TABLE } from "../lib/product-risk-tables";
 import { ROUTE_OPTIONS, lookupRouteRisk } from "../lib/route-risk-tables";
-import { blankTransactionStructureInput } from "../lib/transaction-structure/compute";
+import {
+  defaultStructureFromDeal,
+  structureForDeal,
+} from "../lib/transaction-structure/compute";
 import type { TransactionStructureInput } from "../lib/transaction-structure/types";
 import { TransactionStructureBuilder } from "./TransactionStructureBuilder";
 
@@ -34,6 +37,8 @@ interface DealFormState {
   qualityGrade: Deal["qualityGrade"];
   origin: string;
   destination: string;
+  transportMode: "air" | "sea" | "";
+  numberOfTransshipments: string;
 }
 
 function initialForm(deal: Deal): DealFormState {
@@ -49,6 +54,8 @@ function initialForm(deal: Deal): DealFormState {
     qualityGrade: deal.qualityGrade,
     origin: deal.origin,
     destination: deal.destination,
+    transportMode: deal.transportMode ?? "",
+    numberOfTransshipments: String(deal.numberOfTransshipments),
   };
 }
 
@@ -71,7 +78,7 @@ export function DocumentIngestion({
     deal.cofaceCoveragePct != null ? String(deal.cofaceCoveragePct) : "",
   );
   const [transactionStructure, setTransactionStructure] = useState<TransactionStructureInput>(
-    () => deal.transactionStructure ?? blankTransactionStructureInput(),
+    () => structureForDeal(deal),
   );
   const [docStatus, setDocStatus] = useState<string>("");
   const [cofaceStatus, setCofaceStatus] = useState<string>("");
@@ -105,17 +112,32 @@ export function DocumentIngestion({
       cofaceCountryRiskGrade: deal.cofaceCountryRiskGrade ?? null,
       cofaceCompanyRiskGrade: deal.cofaceCompanyRiskGrade ?? null,
     });
-    setTransactionStructure(deal.transactionStructure ?? blankTransactionStructureInput());
+    setTransactionStructure(structureForDeal(deal));
   }, [deal]);
+
+  const handleStructureChange = (next: TransactionStructureInput) => {
+    setTransactionStructure({ ...next, structureSource: "user" });
+  };
+
+  const handleResetStructure = () => {
+    setTransactionStructure(
+      defaultStructureFromDeal({
+        dealValueUSD: Number(form.dealValueUSD || 0) || deal.dealValueUSD,
+        offerUnitPriceUSD: deal.offerUnitPriceUSD,
+        advancePaymentPct: Number(form.advancePaymentPct || 0),
+        estimatedTransitDays: deal.estimatedTransitDays,
+      }),
+    );
+  };
 
   const selectedProduct = useMemo(
     () => PRODUCT_RISK_TABLE.find((entry) => entry.product === form.product) ?? null,
     [form.product],
   );
 
-  // route-risk-tables.ts is keyed per (origin, destination, product) since
-  // the 2026-07-28 per-commodity rework — dedupe to distinct corridors for
-  // the dropdown, then resolve the exact per-product row separately.
+  // route-risk-tables.ts is keyed per (origin, destination, product, mode)
+  // since the 2026-07-29 transport/air-stops split — dedupe to distinct
+  // corridors for the dropdown, then resolve the exact row separately.
   const corridors = useMemo(() => {
     const seen = new Map<string, { origin: string; destination: string }>();
     for (const entry of ROUTE_OPTIONS) {
@@ -126,8 +148,21 @@ export function DocumentIngestion({
   }, []);
 
   const selectedRoute = useMemo(
-    () => lookupRouteRisk(form.origin, form.destination, form.product),
-    [form.origin, form.destination, form.product],
+    () =>
+      lookupRouteRisk(
+        form.origin,
+        form.destination,
+        form.product,
+        form.transportMode === "" ? null : form.transportMode,
+        Number(form.numberOfTransshipments || 0),
+      ),
+    [
+      form.origin,
+      form.destination,
+      form.product,
+      form.transportMode,
+      form.numberOfTransshipments,
+    ],
   );
 
   const handleAnalyzeDocs = async () => {
@@ -260,6 +295,8 @@ export function DocumentIngestion({
       qualityGrade: form.qualityGrade,
       origin: form.origin,
       destination: form.destination,
+      transportMode: form.transportMode === "" ? null : form.transportMode,
+      numberOfTransshipments: Number(form.numberOfTransshipments || 0),
       cofaceCoverageAmountUSD:
         cofaceCoverageAmountUSD.trim() === ""
           ? null
@@ -391,6 +428,29 @@ export function DocumentIngestion({
               label: routeLabel(entry.origin, entry.destination),
             }))}
           />
+          <Select
+            label="Transport mode"
+            value={form.transportMode}
+            onChange={(value) =>
+              setForm((current) => ({
+                ...current,
+                transportMode: value as DealFormState["transportMode"],
+              }))
+            }
+            options={[
+              { value: "", label: "Unknown (use ocean table)" },
+              { value: "sea", label: "Ocean / sea freight" },
+              { value: "air", label: "Air freight" },
+            ]}
+          />
+          <Input
+            label="Stops / transits (air)"
+            value={form.numberOfTransshipments}
+            onChange={(value) =>
+              setForm((current) => ({ ...current, numberOfTransshipments: value }))
+            }
+            placeholder="0"
+          />
           <Input
             label="Variety"
             value={form.variety}
@@ -469,11 +529,32 @@ export function DocumentIngestion({
             label="Route table"
             value={
               selectedRoute
-                ? `${routeLabel(selectedRoute.origin, selectedRoute.destination)} · score ${selectedRoute.score}`
+                ? `${routeLabel(selectedRoute.origin, selectedRoute.destination)} · ${
+                    selectedRoute.transportMode === "air"
+                      ? selectedRoute.airStopsBand === "gt2"
+                        ? "air ≥3 stops"
+                        : "air ≤2 stops"
+                      : "ocean"
+                  } · score ${selectedRoute.score}${
+                    selectedRoute.airStopPenalty
+                      ? ` (air stop ${selectedRoute.airStopPenalty})`
+                      : ""
+                  }`
                 : "Select a route"
             }
             source="document"
           />
+          {form.transportMode === "air" && (
+            <Field
+              label="Air stops band"
+              value={
+                Number(form.numberOfTransshipments || 0) > 2
+                  ? "≥3 stops — higher route risk table"
+                  : "≤2 stops (direct / few connections)"
+              }
+              source="document"
+            />
+          )}
           <Field
             label="Deal value"
             value={
@@ -497,7 +578,9 @@ export function DocumentIngestion({
 
       <TransactionStructureBuilder
         value={transactionStructure}
-        onChange={setTransactionStructure}
+        onChange={handleStructureChange}
+        onResetToDefaults={handleResetStructure}
+        defaultExpanded={transactionStructure.structureSource === "default"}
         dealValueUSD={Number(form.dealValueUSD || 0)}
         advancePaymentPct={Number(form.advancePaymentPct || 0)}
         contractType={deal.contractType}

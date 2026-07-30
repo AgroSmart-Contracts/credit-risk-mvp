@@ -41,6 +41,11 @@ export interface PlatformDealRecord {
   transportMode: "air" | "sea" | null;
   /** Raw CSV `offerUnitPrice`, USD. Feeds Product dimension price-vs-market (spec §4.B). */
   offerUnitPriceUSD: number | null;
+  /**
+   * Raw CSV `shippingStartDate` (ISO). Product price-vs-usual keys off this
+   * month together with origin→destination (see product-price-month-route.ts).
+   */
+  shippingStartDate: string | null;
   /** Count from company-trade-profiles-2026-07-21.csv / this same CSV, grouped by buyer+supplier pair (all rows, likely_test included per decision 2026-07-28). */
   priorDealsBetweenParties: number;
   /** Derived from (latest − earliest) createdAt for that buyer+supplier pair, in months. 0 when createdAt is missing on all of the pair's rows. */
@@ -142,6 +147,23 @@ export interface PlatformCounterpartyScore {
   minScore: number;
   deals: PlatformCounterpartyDealRef[];
   missingForFullCram: string[];
+  /**
+   * Sandbox weighted/shrink formula (outline 2026-07-30) — populated by
+   * scripts/recalculate-counterparty-scores.ts. Live CRAM Dimension A still
+   * uses computeBuyerScore/computeSupplierScore.
+   */
+  sandbox?: {
+    score: number;
+    coveragePct: number;
+    rawAverage: number | null;
+    trustBonus: number;
+    customsMatched: boolean;
+    customsShipments: number;
+    customsVolumeMt: number | null;
+    customsFobUsd: number | null;
+    customsRoutes: number | null;
+    filledFieldIds: string[];
+  };
 }
 
 export type AppView =

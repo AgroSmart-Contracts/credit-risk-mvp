@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Counterparty risk formula — sandbox results (2026-07-30)</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    max-width: 1200px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; line-height: 1.5; }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .methodology { background: #f7f7f5; border: 1px solid #e3e2dd; border-radius: 8px;
+    padding: 16px 20px; font-size: 14px; margin-bottom: 28px; }
+  .methodology h2 { font-size: 15px; margin: 0 0 8px 0; }
+  .methodology ul { margin: 0; padding-left: 20px; }
+  .methodology li { margin-bottom: 6px; }
+  code { background: #eeeee9; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
+  th, td { border: 1px solid #e3e2dd; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f7f7f5; font-weight: 600; }
+  tr:nth-child(even) { background: #fbfbfa; }
+  .score-range { font-weight: 600; white-space: nowrap; }
+  .note { font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+<h1>Counterparty risk formula — sandbox results</h1>
+<p class="subtitle">Weighted-average + coverage shrink toward 50 (outline 2026-07-30).
+Scored 47 platform (company, role, product) profiles;
+14 matched to customs aggregates.
+Customs sources: Veritrade_UL-20111724_PE_E_20260109105908(new).csv, 10843_20260128213854_20260128213855.xlsx, Veritrade_UL-20111724_PE_E_20260109110033.xlsx.</p>
+
+<div class="methodology">
+  <h2>Methodology</h2>
+  <ul>
+    <li><strong>Group raw average</strong> = Σ(score × weight) / Σ(filled weights); blanks excluded</li>
+    <li><strong>Coverage fraction</strong> = filled weight ÷ possible weight</li>
+    <li><strong>Shrink</strong> = coverage × raw + (1 − coverage) × 50</li>
+    <li><strong>TM platform trust</strong> = +3 flat after shrink (platform counterparties + TM affiliates)</li>
+    <li><strong>Customs enrichment</strong> fills annual volume (MT), yearly FOB sales proxy, monthly FOB, route diversity, online verifiability (less-authoritative = 55 when found in Veritrade/Datasur)</li>
+    <li>Sandbox only — not wired into live CRAM Dimension A. Spec: <code>/Users/tasneem-admin/Desktop/counterparty-risk-scoring-method-outline-2026-07-30.md</code></li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Role</th>
+      <th>Product</th>
+      <th>Sandbox score</th>
+      <th>Coverage</th>
+      <th>Customs shipments</th>
+      <th>Volume MT</th>
+      <th>Routes</th>
+      <th>Filled field scores</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+  <td>GIDDINS PERU SAC</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">84.2</td>
+  <td>85.7%</td>
+  <td>280</td>
+  <td>2473.0</td>
+  <td>5</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Online verifiability=55; Export license status=100; Production capacity=80; Yearly sales=80; Annual export volume=80; Route diversity=80; Platform transaction history=70; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>AGRICOLA VIÑASOL SAC</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">76.8</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Export license status=100; Platform transaction history=100; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>FUNDO LAS LOMAS SAC</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">75.1</td>
+  <td>85.7%</td>
+  <td>71</td>
+  <td>373.9</td>
+  <td>7</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Online verifiability=55; Export license status=100; Production capacity=40; Yearly sales=60; Annual export volume=40; Route diversity=90; Platform transaction history=70; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>JUHINEJ LTD</td>
+  <td>supplier</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">74.0</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Export license status=100; Platform transaction history=70; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>BLUE PACIFIC FOODS SAC</td>
+  <td>supplier</td>
+  <td>Fresh Ginger</td>
+  <td class="score-range">74.0</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Export license status=100; Platform transaction history=70; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>Holy Fruit Peru</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">70.4</td>
+  <td>85.7%</td>
+  <td>35</td>
+  <td>150.8</td>
+  <td>2</td>
+  <td style="font-size:11px;color:#555">Years in business=80; Online verifiability=55; Export license status=100; Production capacity=40; Yearly sales=40; Annual export volume=40; Route diversity=40; Platform transaction history=100; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>ICA BLUEBERRIES SAC</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">69.4</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=90; Export license status=100; Platform transaction history=40; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>Allied Trade Global</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">69.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Import license status=100; Platform transaction history=100</td>
+</tr>
+<tr>
+  <td>XARKI SL</td>
+  <td>buyer</td>
+  <td>Fresh Avocado</td>
+  <td class="score-range">69.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Import license status=100; Platform transaction history=100</td>
+</tr>
+<tr>
+  <td>AGRICOLA MEDANO AZUL SAC</td>
+  <td>supplier</td>
+  <td>Fresh Avocado</td>
+  <td class="score-range">68.5</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Export license status=100; Platform transaction history=100; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>NATURAL SOUTH FRUIT LTD</td>
+  <td>supplier</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">67.8</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=80; Export license status=100; Platform transaction history=40; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>TRU MARKET BLOCKCHAIN S.A.C.</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">66.8</td>
+  <td>85.7%</td>
+  <td>23</td>
+  <td>101.7</td>
+  <td>4</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Online verifiability=55; Export license status=100; Production capacity=40; Yearly sales=40; Annual export volume=40; Route diversity=70; Platform transaction history=100; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>FRESH EXPRESS LLC</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">66.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Import license status=100; Platform transaction history=70</td>
+</tr>
+<tr>
+  <td>LIMAX SP. Z O.O.</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">65.5</td>
+  <td>72.5%</td>
+  <td>20</td>
+  <td>76.8</td>
+  <td>2</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Online verifiability=55; Import license status=100; Monthly purchase volume=80; Yearly sales=40; Annual import volume=25; Route diversity=40; Platform transaction history=70</td>
+</tr>
+<tr>
+  <td>BIOFRESHI BV</td>
+  <td>buyer</td>
+  <td>Fresh Ginger</td>
+  <td class="score-range">65.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Import license status=100; Platform transaction history=60</td>
+</tr>
+<tr>
+  <td>Villaventura Peru SAC</td>
+  <td>supplier</td>
+  <td>Fresh Mandarin</td>
+  <td class="score-range">65.1</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=30; Export license status=100; Platform transaction history=100; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>INDUSTRIAS SOLIMAR SAC</td>
+  <td>supplier</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">64.9</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=80; Export license status=100; Platform transaction history=10; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>BIO FARMING PERU S.A.C.</td>
+  <td>supplier</td>
+  <td>Fresh Mandarin</td>
+  <td class="score-range">63.5</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Export license status=100; Platform transaction history=100; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>KHI INTERNATIONAL CORP</td>
+  <td>buyer</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">63.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Import license status=100; Platform transaction history=40</td>
+</tr>
+<tr>
+  <td>MIKHUNA FOODS SAC</td>
+  <td>supplier</td>
+  <td>Fresh Asparagus</td>
+  <td class="score-range">62.5</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Export license status=100; Platform transaction history=90; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>DAVIS GLOBAL BV</td>
+  <td>buyer</td>
+  <td>Fresh Mandarin</td>
+  <td class="score-range">62.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=60; Import license status=100; Platform transaction history=100</td>
+</tr>
+<tr>
+  <td>Villaventura Peru SAC</td>
+  <td>supplier</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">61.3</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=30; Export license status=100; Platform transaction history=60; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>JUHINEJ LTD</td>
+  <td>buyer</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">60.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>BIO FARMING PERU S.A.C.</td>
+  <td>supplier</td>
+  <td>Fresh Avocado</td>
+  <td class="score-range">59.7</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Export license status=100; Platform transaction history=60; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>TRU MARKET BLOCKCHAIN S.A.C.</td>
+  <td>supplier</td>
+  <td>Fresh Asparagus</td>
+  <td class="score-range">59.2</td>
+  <td>85.7%</td>
+  <td>23</td>
+  <td>101.7</td>
+  <td>4</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Online verifiability=55; Export license status=100; Production capacity=40; Yearly sales=40; Annual export volume=40; Route diversity=70; Platform transaction history=20; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>TRU MARKET BLOCKCHAIN S.A.C.</td>
+  <td>supplier</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">58.2</td>
+  <td>85.7%</td>
+  <td>23</td>
+  <td>101.7</td>
+  <td>4</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Online verifiability=55; Export license status=100; Production capacity=40; Yearly sales=40; Annual export volume=40; Route diversity=70; Platform transaction history=10; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>TRU MARKET BLOCKCHAIN S.A.C.</td>
+  <td>supplier</td>
+  <td>Frozen Tropical Fruits</td>
+  <td class="score-range">58.2</td>
+  <td>85.7%</td>
+  <td>23</td>
+  <td>101.7</td>
+  <td>4</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Online verifiability=55; Export license status=100; Production capacity=40; Yearly sales=40; Annual export volume=40; Route diversity=70; Platform transaction history=10; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>BC NATURE QUALITY FRUITS S.L</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">57.8</td>
+  <td>72.5%</td>
+  <td>5</td>
+  <td>86.4</td>
+  <td>1</td>
+  <td style="font-size:11px;color:#555">Years in business=100; Online verifiability=55; Import license status=100; Monthly purchase volume=80; Yearly sales=25; Annual import volume=25; Route diversity=35; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>AGRICOLA Y COMERCIAL VALLES DEL NUBLE</td>
+  <td>buyer</td>
+  <td>Mixed Berries / Tropical Fruits (IQF)</td>
+  <td class="score-range">56.8</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=80; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>AGRICOLA Y COMERCIAL VALLES DEL NUBLE</td>
+  <td>buyer</td>
+  <td>Fresh Avocado</td>
+  <td class="score-range">56.8</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=80; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>Open Markets Corporation</td>
+  <td>buyer</td>
+  <td>Fresh Mandarin</td>
+  <td class="score-range">55.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=100</td>
+</tr>
+<tr>
+  <td>MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C</td>
+  <td>supplier</td>
+  <td>Fresh Ginger</td>
+  <td class="score-range">54.9</td>
+  <td>47.6%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Export license status=100; Platform transaction history=10; On-time delivery rate=100</td>
+</tr>
+<tr>
+  <td>Eagle Trading Agriculture Marketing Ltd</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">53.8</td>
+  <td>72.5%</td>
+  <td>35</td>
+  <td>160.4</td>
+  <td>1</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Online verifiability=55; Import license status=100; Monthly purchase volume=60; Yearly sales=40; Annual import volume=40; Route diversity=35; Platform transaction history=100</td>
+</tr>
+<tr>
+  <td>HACIENDA SOTOMAYOR SL</td>
+  <td>buyer</td>
+  <td>Fresh Asparagus</td>
+  <td class="score-range">53.0</td>
+  <td>72.5%</td>
+  <td>3</td>
+  <td>41.9</td>
+  <td>1</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Online verifiability=55; Import license status=100; Monthly purchase volume=40; Yearly sales=25; Annual import volume=25; Route diversity=35; Platform transaction history=90</td>
+</tr>
+<tr>
+  <td>AGRO SMART CONTRACTS LDA</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">52.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=70</td>
+</tr>
+<tr>
+  <td>BIO FARMING PERU S.A.C.</td>
+  <td>buyer</td>
+  <td>Fresh Mandarin</td>
+  <td class="score-range">52.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=70</td>
+</tr>
+<tr>
+  <td>TRADE CULTIVATORS LLC</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">52.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=70</td>
+</tr>
+<tr>
+  <td>ANTERRA FARMS GMBH</td>
+  <td>buyer</td>
+  <td>Fresh Asparagus</td>
+  <td class="score-range">50.8</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=40; Import license status=100; Platform transaction history=20</td>
+</tr>
+<tr>
+  <td>AGRO SMART CONTRACTS LDA</td>
+  <td>buyer</td>
+  <td>Fresh Avocado</td>
+  <td class="score-range">49.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=40</td>
+</tr>
+<tr>
+  <td>A.S.M International</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">49.0</td>
+  <td>72.5%</td>
+  <td>8</td>
+  <td>13.3</td>
+  <td>1</td>
+  <td style="font-size:11px;color:#555">Years in business=50; Online verifiability=55; Import license status=100; Monthly purchase volume=40; Yearly sales=25; Annual import volume=25; Route diversity=35; Platform transaction history=50</td>
+</tr>
+<tr>
+  <td>AGRO SMART CONTRACTS LDA</td>
+  <td>buyer</td>
+  <td>Fresh Mandarin</td>
+  <td class="score-range">46.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>AGRO SMART CONTRACTS LDA</td>
+  <td>buyer</td>
+  <td>Frozen Tropical Fruits</td>
+  <td class="score-range">46.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>ALBORAN COMEX SL</td>
+  <td>buyer</td>
+  <td>Fresh Ginger</td>
+  <td class="score-range">46.3</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>«Ardzhies» LLC</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">45.5</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=10; Import license status=100; Platform transaction history=20</td>
+</tr>
+<tr>
+  <td>T.O.F.F. B.V</td>
+  <td>buyer</td>
+  <td>Fresh Ginger</td>
+  <td class="score-range">44.5</td>
+  <td>32.5%</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="font-size:11px;color:#555">Years in business=10; Import license status=100; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA</td>
+  <td>buyer</td>
+  <td>Fresh Blueberries</td>
+  <td class="score-range">39.8</td>
+  <td>72.5%</td>
+  <td>9</td>
+  <td>16.4</td>
+  <td>1</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Online verifiability=55; Import license status=100; Monthly purchase volume=40; Yearly sales=25; Annual import volume=25; Route diversity=35; Platform transaction history=10</td>
+</tr>
+<tr>
+  <td>GOURMET &amp; BEVERAGE ONE GROUP (THAILAND) CO. LTD</td>
+  <td>buyer</td>
+  <td>Fresh Avocado</td>
+  <td class="score-range">38.3</td>
+  <td>72.5%</td>
+  <td>2</td>
+  <td>1.8</td>
+  <td>1</td>
+  <td style="font-size:11px;color:#555">Years in business=20; Online verifiability=55; Import license status=100; Monthly purchase volume=25; Yearly sales=25; Annual import volume=25; Route diversity=35; Platform transaction history=10</td>
+</tr>
+  </tbody>
+</table>
+<p class="note">Generated 2026-07-30T15:23:07.384Z. Customs aggregate generatedAt=2026-07-30T15:18:39.973569Z.</p>
+</body>
+</html>

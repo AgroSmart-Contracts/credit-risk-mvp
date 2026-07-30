@@ -32,12 +32,13 @@ import { parseCsvRecords } from "./lib/csv";
 import { normalizeCompanyName, companyGroupKey } from "./lib/company-name";
 import { extractValidRuc, fetchMarketIntelSync } from "./lib/market-intel-cli";
 import { lookupProductRisk } from "../src/lib/product-risk-tables";
-import { lookupRouteRisk } from "../src/lib/route-risk-tables";
+import { ROUTE_OPTIONS, lookupRouteRisk } from "../src/lib/route-risk-tables";
 import { normalizeDealMilestone } from "../src/lib/deal-milestone";
 import { platformDealToDeal } from "../src/lib/platform-deal-mapper";
 import { computeBuyerScore, computeSupplierScore } from "../src/lib/scoring";
 import {
   customsDestinationCountry,
+  customsOriginCountry,
   customsVariety,
   parseDealKg,
   dealPricePerKg,
@@ -123,15 +124,46 @@ function titleCasePort(raw: string): string {
     .join(" ");
 }
 
+/**
+ * Canonical `Port, Country` for every port in the route-risk table. Port names
+ * are unique across the table, so a port alone identifies its country.
+ */
+const CANONICAL_LOCATION_BY_PORT = new Map<string, string>(
+  ROUTE_OPTIONS.flatMap((entry) => [entry.origin, entry.destination])
+    .filter((location) => location.includes(","))
+    .map((location) => [
+      location.slice(0, location.lastIndexOf(",")).trim().toLowerCase(),
+      location,
+    ]),
+);
+
+/** `"Malaga, China" -> "Malaga, Spain"` → deal count, reported at the end of the run. */
+const locationCountryFixes = new Map<string, number>();
+
 function buildLocationString(port: string, country: string): string {
   const p = titleCasePort(port || "");
   const c = country.trim();
   if (!p) return c;
-  return `${p}, ${c}`;
+  const asGiven = `${p}, ${c}`;
+  const canonical = CANONICAL_LOCATION_BY_PORT.get(p.toLowerCase());
+  if (!canonical) return asGiven;
+  // Source rows sometimes pair a real port with the wrong country
+  // ("Malaga, China", "Callao, Chile"), which silently misses the route lookup
+  // and drops the deal onto the generic transport fallback.
+  if (canonical.toLowerCase() !== asGiven.toLowerCase()) {
+    const key = `${asGiven} -> ${canonical}`;
+    locationCountryFixes.set(key, (locationCountryFixes.get(key) ?? 0) + 1);
+  }
+  return canonical;
 }
 
 const TRANSPORT_FALLBACK: Record<string, { transitDays: number; transshipments: number; flag: "Low" | "Medium" | "High" }> = {
-  by_air: { transitDays: 10, transshipments: 0, flag: "Medium" },
+  // Air defaults to one hub, not a direct flight: in Peru 2025 customs
+  // (Datasur), 53.5% of air export lines clear through a third-country port —
+  // Los Angeles, Miami, Madrid, Panama City, Paris, Atlanta. One hub still
+  // resolves to the ≤2-stop table; the ≥3-stop table only applies once a real
+  // stop count above 2 is supplied on the deal.
+  by_air: { transitDays: 10, transshipments: 1, flag: "Medium" },
   sea_freight: { transitDays: 20, transshipments: 1, flag: "Medium" },
 };
 
@@ -198,6 +230,7 @@ const DEFAULTS_CSV_HEADER = [
   "relationshipAgeMonths",
   // --- ERD v4: Product (reference table) + deal-specific product fields ---
   "offerUnitPriceUSD",
+  "shippingStartDate",
   "qualityGrade",
   "qualityGradeSource",
   "perishabilityClass",
@@ -367,6 +400,7 @@ function buildDefaultsCsv(records: PlatformDealRecord[]): string {
         r.relationshipAgeMonths,
         // Dimension B
         r.offerUnitPriceUSD,
+        r.shippingStartDate,
         "Grade A / Class I", // DEFAULT (platform-deal-mapper.ts): no per-deal quality-grade source
         "default",
         r.perishabilityClass,
@@ -446,6 +480,7 @@ function main() {
   const records: PlatformDealRecord[] = [];
   const productMissCount = new Map<string, number>();
   const routeMissCount = new Map<string, number>();
+  let airStopsDefaulted = 0;
 
   for (const row of allRows) {
     const buyerCompany = safeJsonParse(row.buyerCompany);
@@ -464,9 +499,23 @@ function main() {
 
     const originStr = buildLocationString(row.portOfOrigin, row.origin);
     const destStr = buildLocationString(row.portOfDestination, row.destination);
-    const routeProfile = lookupRouteRisk(originStr, destStr, product);
-    if (!routeProfile) routeMissCount.set(`${originStr} -> ${destStr}`, (routeMissCount.get(`${originStr} -> ${destStr}`) ?? 0) + 1);
+    const transportMode: "air" | "sea" | null =
+      row.transport === "by_air" ? "air" : row.transport === "sea_freight" ? "sea" : null;
     const transportFallback = TRANSPORT_FALLBACK[row.transport] ?? TRANSPORT_FALLBACK.sea_freight;
+    // Air stop counts aren't in the source CSV — assume one hub (see
+    // TRANSPORT_FALLBACK). Sea adopts corridor facts from the matched ocean
+    // table row after lookup.
+    const provisionalStops =
+      transportMode === "air" ? transportFallback.transshipments : 0;
+    if (transportMode === "air") airStopsDefaulted += 1;
+    const routeProfile = lookupRouteRisk(
+      originStr,
+      destStr,
+      product,
+      transportMode,
+      provisionalStops,
+    );
+    if (!routeProfile) routeMissCount.set(`${originStr} -> ${destStr}`, (routeMissCount.get(`${originStr} -> ${destStr}`) ?? 0) + 1);
 
     const pairKey = pairKeyFor(row);
     const agg = pairAgg.get(pairKey) ?? { dealCount: 0, createdAtDates: [] };
@@ -482,8 +531,6 @@ function main() {
       relationshipAgeMonths = monthsBetween(sorted[0], sorted[sorted.length - 1]);
     }
 
-    const transportMode: "air" | "sea" | null =
-      row.transport === "by_air" ? "air" : row.transport === "sea_freight" ? "sea" : null;
     const offerUnitPriceUSD = row.offerUnitPrice ? parseNumber(row.offerUnitPrice) : null;
 
     const dealValueUSD = parseNumber(row.investmentAmount) || parseNumber(row.dealValue);
@@ -520,9 +567,14 @@ function main() {
       marketIntel = fetchMarketIntelSync({
         exporterRuc: supplierRuc,
         importerName: buyerName,
+        originCountry: customsOriginCountry(originStr) ?? undefined,
         destinationCountry: customsDestinationCountry(destStr) ?? undefined,
         variety: customsVariety(product, row.variety) ?? undefined,
-        dealWeek: row.createdAt ? dealWeekFor(new Date(row.createdAt)) : undefined,
+        dealWeek: row.shippingStartDate
+          ? dealWeekFor(new Date(row.shippingStartDate))
+          : row.createdAt
+            ? dealWeekFor(new Date(row.createdAt))
+            : undefined,
         dealKg,
         dealPriceUsdPerKg: dealPricePerKg({ quantityLabel, dealValueUSD }) ?? undefined,
       });
@@ -575,10 +627,14 @@ function main() {
       shelfLifeDays: productProfile?.shelfLifeDays ?? null,
       coldChainRequired: productProfile?.coldChainRequired ?? true,
       estimatedTransitDays: routeProfile?.estimatedTransitDays ?? transportFallback.transitDays,
-      numberOfTransshipments: routeProfile?.numberOfTransshipments ?? transportFallback.transshipments,
+      numberOfTransshipments:
+        transportMode === "air"
+          ? provisionalStops
+          : (routeProfile?.numberOfTransshipments ?? transportFallback.transshipments),
       routeRiskFlag: routeProfile?.routeRiskFlag ?? transportFallback.flag,
       transportMode,
       offerUnitPriceUSD,
+      shippingStartDate: row.shippingStartDate?.trim() || null,
       priorDealsBetweenParties,
       relationshipAgeMonths,
       status,
@@ -748,6 +804,9 @@ export const platformDealsBlocked = platformDeals.filter((d) => !d.counterpartyR
   console.log(`${counterpartyScores.length} scored (company, role, product) counterparty profiles; ${counterpartyBlocked.length} blocked (missing YIB).`);
   console.log(`Market-intel: ${marketIntelCount}/${records.length} deals got a response (valid Peru supplier RUC resolved); ${supplierCapacityKnown} of those have a usable supplier capacity_check (shipment history in this data bundle).`);
   console.log(`Products with no confirmed table row (deal count): ${[...productMissCount.entries()].map(([p, n]) => `${p}=${n}`).join(", ") || "none"}`);
+  console.log(`Air deals with an assumed stop count (${airStopsDefaulted}) — none reach the ≥3-stop table until a real count is supplied.`);
+  console.log(`Port/country conflicts reconciled against the route table (${locationCountryFixes.size}):`);
+  for (const [fix, n] of locationCountryFixes) console.log(`  ${fix} (${n} deals)`);
   console.log(`Distinct unmatched routes (${routeMissCount.size}):`);
   for (const [route, n] of routeMissCount) console.log(`  ${route} (${n} deals)`);
 }

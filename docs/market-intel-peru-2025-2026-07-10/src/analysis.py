@@ -12,6 +12,8 @@ Dimension B, variable 2 ("price vs market") lookup.
 
 from __future__ import annotations
 
+import re
+import unicodedata
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
@@ -40,6 +42,52 @@ MIN_SHIPMENTS_ANY = 3
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+
+# Veritrade writes the same destination several ways: with and without accents
+# ("ESPANA"/"ESPAÑA", "CANADA"/"CANADÁ"), with a bracketed alternate name
+# ("TAIWAN {FORMOSA}", "HONG KONG {CHINA}"), and with a trailing political
+# qualifier ("TAIWÁN, PROVINCIA DE CHINA"). Matching the raw column with `==`
+# therefore reaches only part of a corridor — measured 2026-07-30, exact-match
+# lookups saw 25% of Spain's volume, 68% of the Netherlands' and 10% of
+# Canada's, and missed Taiwan, Hong Kong, Brazil, Russia and the UAE outright.
+_COUNTRY_QUALIFIERS = re.compile(r",\s*(PROVINCIA DE CHINA|FEDERACION)\b")
+_COUNTRY_BRACKETS = re.compile(r"\{[^}]*\}")
+
+# Distinct spellings that survive folding but mean the same country.
+_COUNTRY_ALIASES = {
+    "RUSIA": "FEDERACION RUSA",
+}
+
+
+def canonical_country(name: str | None) -> str | None:
+    """
+    Fold a destination-country label to a single comparable token: strip
+    accents, bracketed alternates and political qualifiers, uppercase, then
+    resolve known aliases. Both sides of every destination comparison must go
+    through this — see `_COUNTRY_QUALIFIERS` above for why.
+    """
+    if name is None:
+        return None
+    folded = unicodedata.normalize("NFKD", str(name)).encode("ascii", "ignore").decode()
+    folded = folded.upper().strip()
+    folded = _COUNTRY_BRACKETS.sub("", folded)
+    folded = _COUNTRY_QUALIFIERS.sub("", folded)
+    folded = re.sub(r"\s+", " ", folded).strip(" ,")
+    if not folded:
+        return None
+    return _COUNTRY_ALIASES.get(folded, folded)
+
+
+def _with_canonical_destination(fact: pd.DataFrame) -> pd.DataFrame:
+    """Attach the folded destination column used by every corridor filter."""
+    if "_destination_canonical" in fact.columns:
+        return fact
+    fact = fact.copy()
+    fact["_destination_canonical"] = [
+        canonical_country(x) for x in fact["destination_country"]
+    ]
+    return fact
 
 
 def _weighted_quantile(values: np.ndarray, weights: np.ndarray, qs: tuple[float, ...]) -> dict[float, float]:
@@ -184,12 +232,21 @@ def price_benchmark(
 
     Window is anchored to the freshest week available in `fact` if the deal
     week is beyond it (typical: Veritrade lags 2-4 weeks behind live deals).
+
+    `destination_country` is compared through `canonical_country()`, so the
+    corridor sees every spelling Veritrade uses for it. Before that folding was
+    added (2026-07-30) most lookups silently reached tier 4 and priced the deal
+    off a variety-only, all-destinations sample: across the 169-deal platform
+    book, 67 of 87 resolved benchmarks were SPARSE. With folding, 69 reach the
+    tier-1 HIGH window and 1 stays SPARSE.
     """
     deal_week_p = _parse_week(deal_week)
 
-    fact = fact.copy()
+    fact = _with_canonical_destination(fact)
     fact["_week_p"] = pd.PeriodIndex(fact["week"], freq="W")
     fact = fact[fact["kg_net"] > 0]
+
+    destination_canonical = canonical_country(destination_country)
 
     max_available = max_week_available or fact["_week_p"].max()
     anchor_week = min(deal_week_p - 1, max_available)
@@ -197,7 +254,7 @@ def price_benchmark(
     def _window_rows(start: pd.Period, end: pd.Period, dest: str | None) -> pd.DataFrame:
         m = (fact["_week_p"] >= start) & (fact["_week_p"] <= end) & (fact["variety"] == variety)
         if dest is not None:
-            m &= fact["destination_country"] == dest
+            m &= fact["_destination_canonical"] == dest
         return fact[m]
 
     def _package(rows: pd.DataFrame, start: pd.Period, end: pd.Period, dest: str | None, confidence: str, note: str | None = None) -> Benchmark:
@@ -227,20 +284,20 @@ def price_benchmark(
 
     # Tier 1: 4-week fixed window
     start1 = anchor_week - (TIER1_WINDOW_WEEKS - 1)
-    rows = _window_rows(start1, anchor_week, destination_country)
+    rows = _window_rows(start1, anchor_week, destination_canonical)
     if len(rows) >= TIER1_MIN_SHIPMENTS and rows["exporter_id"].nunique() >= TIER1_MIN_EXPORTERS:
         return _package(rows, start1, anchor_week, destination_country, "HIGH")
 
     # Tier 2: expand week-by-week until cumulative kg ≥ 100k, up to 12 weeks
     for w in range(TIER1_WINDOW_WEEKS + 1, TIER2_MAX_WEEKS + 1):
         start = anchor_week - (w - 1)
-        rows = _window_rows(start, anchor_week, destination_country)
+        rows = _window_rows(start, anchor_week, destination_canonical)
         if rows["kg_net"].sum() >= TIER2_MIN_KG and len(rows) >= MIN_SHIPMENTS_ANY:
             return _package(rows, start, anchor_week, destination_country, "MED")
 
     # Tier 3: 26-week window whatever the sample
     start3 = anchor_week - (TIER3_MAX_WEEKS - 1)
-    rows = _window_rows(start3, anchor_week, destination_country)
+    rows = _window_rows(start3, anchor_week, destination_canonical)
     if len(rows) >= MIN_SHIPMENTS_ANY:
         return _package(rows, start3, anchor_week, destination_country, "LOW")
 
@@ -763,8 +820,11 @@ def route_intelligence(
     seasonality, and an inferred CRAM Dim C route signal.
     Origin is Peru (implicit).
     """
-    f = fact[fact["kg_net"] > 0].copy()
-    lane = f[(f["variety"] == variety) & (f["destination_country"] == destination_country)]
+    f = _with_canonical_destination(fact[fact["kg_net"] > 0])
+    lane = f[
+        (f["variety"] == variety)
+        & (f["_destination_canonical"] == canonical_country(destination_country))
+    ]
 
     # Authoritative table lookup (works even when the lane is empty)
     from src.cram_tables import route_lookup, table_version

@@ -7,7 +7,13 @@ import { lookupRouteRisk } from "./route-risk-tables";
 /** Map a CSV-backed platform deal into the MVP Deal shape for scoring / wizard. */
 export function platformDealToDeal(record: PlatformDealRecord): Deal {
   const productProfile = lookupProductRisk(record.product);
-  const routeProfile = lookupRouteRisk(record.origin, record.destination, record.product);
+  const routeProfile = lookupRouteRisk(
+    record.origin,
+    record.destination,
+    record.product,
+    record.transportMode,
+    record.numberOfTransshipments,
+  );
   const milestone = normalizeDealMilestone(
     record.status,
     record.currentMilestone,
@@ -100,11 +106,14 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
     qualityGrade: "Grade A / Class I",
     estimatedTransitDays:
       routeProfile?.estimatedTransitDays ?? record.estimatedTransitDays,
-    numberOfTransshipments:
-      routeProfile?.numberOfTransshipments ?? record.numberOfTransshipments,
+    // Keep the platform deal's stop count (air stop band is selected from it).
+    // Do not overwrite with the table row's band marker (2/3).
+    numberOfTransshipments: record.numberOfTransshipments,
     routeRiskFlag: routeProfile?.routeRiskFlag ?? record.routeRiskFlag,
     transportMode: record.transportMode,
     offerUnitPriceUSD: record.offerUnitPriceUSD,
+    shippingStartDate: record.shippingStartDate,
+    createdAt: record.createdAt || null,
     priorDealsBetweenParties: record.priorDealsBetweenParties,
     relationshipAgeMonths: record.relationshipAgeMonths,
     /**

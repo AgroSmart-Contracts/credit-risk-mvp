@@ -542,7 +542,14 @@ function routeFallbackStructuralScore(deal: Deal): number {
 
 export function computeRouteScore(deal: Deal): number {
   const tableMatch =
-    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination, deal.product);
+    deal.routeRiskProfile ??
+    lookupRouteRisk(
+      deal.origin,
+      deal.destination,
+      deal.product,
+      deal.transportMode,
+      deal.numberOfTransshipments,
+    );
   const structuralScore = tableMatch ? tableMatch.score : routeFallbackStructuralScore(deal);
 
   // Incoterms (20%wt) is genuinely per-deal, not baked into either the
@@ -553,6 +560,7 @@ export function computeRouteScore(deal: Deal): number {
   // matches, its adjustedScore already bakes in a route+product-specific
   // cold-chain penalty (decision 2026-07-28 — see route-risk-tables.ts) —
   // applying the flat −5 on top would double-count the same risk factor.
+  // Air ≥3-stop penalty is likewise baked into the matched row's score.
   const coldChainAdj = tableMatch ? 0 : deal.coldChainRequired ? -5 : 0;
 
   return clamp(structuralScore + incotermAdj + coldChainAdj);
@@ -710,7 +718,14 @@ export function checkVetoRegister(deal: Deal): VetoResult {
   // product's shelf life — a shipment that's structurally likely to arrive
   // spoiled, independent of the composite score.
   const routeMatch =
-    deal.routeRiskProfile ?? lookupRouteRisk(deal.origin, deal.destination, deal.product);
+    deal.routeRiskProfile ??
+    lookupRouteRisk(
+      deal.origin,
+      deal.destination,
+      deal.product,
+      deal.transportMode,
+      deal.numberOfTransshipments,
+    );
   if (routeMatch?.vetoCandidate) {
     reasons.push(
       `Estimated transit time exceeds ${deal.product}'s shelf life on this corridor (${deal.origin} → ${deal.destination})`,

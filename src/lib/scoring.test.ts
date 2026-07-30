@@ -59,6 +59,8 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
     routeRiskFlag: "Medium",
     transportMode: null,
     offerUnitPriceUSD: null,
+    shippingStartDate: null,
+    createdAt: null,
     priorDealsBetweenParties: 0,
     relationshipAgeMonths: 0,
     sourceDocuments: [],
@@ -349,5 +351,53 @@ describe("computeProductScore / computeRouteScore — structural fallback + per-
     // structural fallback: 70 + transit(<=30d non-perishable +12) + transshipment(0 +15) + routeFlag(Low +12) = 109 -> clamp 100
     // + incoterm CIF +12, + coldChain -5 -> still clamps at 100
     expect(computeRouteScore(deal)).toBe(100);
+  });
+
+  it("air ≥3 stops uses the higher-risk table (airStopPenalty baked into adjustedScore)", () => {
+    const ocean = baseDeal({
+      origin: "Callao, Peru",
+      destination: "Buenaventura, Colombia",
+      product: "Fresh Avocado",
+      transportMode: "sea",
+      numberOfTransshipments: 0,
+      routeRiskProfile: undefined,
+      incoterm: "FCA", // 0 pts so table score shows through unchanged
+      coldChainRequired: true,
+    });
+    const airFewStops = baseDeal({
+      ...ocean,
+      transportMode: "air",
+      numberOfTransshipments: 1,
+    });
+    const airManyStops = baseDeal({
+      ...ocean,
+      transportMode: "air",
+      numberOfTransshipments: 3,
+    });
+    // Short corridor: avocado already max freshness on ocean (91). Air ≤2 stays 91;
+    // air ≥3 applies −15 stop penalty → 76.
+    expect(computeRouteScore(ocean)).toBe(91);
+    expect(computeRouteScore(airFewStops)).toBe(91);
+    expect(computeRouteScore(airManyStops)).toBe(76);
+  });
+
+  it("air ≤2 stops scores safer than ocean when freshness was ocean-bound", () => {
+    const ocean = baseDeal({
+      origin: "Callao, Peru",
+      destination: "Rotterdam, Netherlands",
+      product: "Fresh Asparagus",
+      transportMode: "sea",
+      numberOfTransshipments: 1,
+      routeRiskProfile: undefined,
+      incoterm: "FCA",
+      coldChainRequired: true,
+    });
+    const air = baseDeal({
+      ...ocean,
+      transportMode: "air",
+      numberOfTransshipments: 1,
+    });
+    expect(computeRouteScore(ocean)).toBe(41);
+    expect(computeRouteScore(air)).toBe(71);
   });
 });

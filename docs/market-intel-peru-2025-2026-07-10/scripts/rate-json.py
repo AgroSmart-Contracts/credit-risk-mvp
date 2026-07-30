@@ -46,6 +46,7 @@ def main() -> int:
         fact=fact,
         exporter_ruc=params["exporterRuc"],
         importer_name=params.get("importerName"),
+        origin_country=params.get("originCountry"),
         destination_country=params.get("destinationCountry"),
         variety=params.get("variety"),
         deal_week=params.get("dealWeek"),

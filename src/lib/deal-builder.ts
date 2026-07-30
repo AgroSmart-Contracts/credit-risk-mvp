@@ -16,6 +16,10 @@ export interface DealDraftInput {
   qualityGrade: Deal["qualityGrade"];
   origin: string;
   destination: string;
+  /** Freight mode — drives which route-risk table variant is used. */
+  transportMode?: Deal["transportMode"];
+  /** Air stops / transits — >2 selects the higher-risk air table band. */
+  numberOfTransshipments?: number;
   cofaceCoverageAmountUSD: number | null;
   cofaceCoveragePct: number | null;
   cofaceRequestCountry?: string | null;
@@ -104,6 +108,7 @@ export function createBlankDeal(): Deal {
     routeRiskFlag: "Medium",
     transportMode: null,
     offerUnitPriceUSD: null,
+    shippingStartDate: null,
     priorDealsBetweenParties: 0,
     relationshipAgeMonths: 0,
     cofaceCoverageAmountUSD: null,
@@ -156,8 +161,17 @@ function buildTeaser(
 }
 
 export function buildDealFromDraft(baseDeal: Deal, draft: DealDraftInput): Deal {
+  const transportMode = draft.transportMode ?? baseDeal.transportMode;
+  const numberOfTransshipments =
+    draft.numberOfTransshipments ?? baseDeal.numberOfTransshipments;
   const productProfile = lookupProductRisk(draft.product);
-  const routeProfile = lookupRouteRisk(draft.origin, draft.destination, draft.product);
+  const routeProfile = lookupRouteRisk(
+    draft.origin,
+    draft.destination,
+    draft.product,
+    transportMode,
+    numberOfTransshipments,
+  );
 
   return {
     ...baseDeal,
@@ -191,9 +205,16 @@ export function buildDealFromDraft(baseDeal: Deal, draft: DealDraftInput): Deal 
     coldChainRequired: productProfile?.coldChainRequired ?? baseDeal.coldChainRequired,
     estimatedTransitDays:
       routeProfile?.estimatedTransitDays ?? baseDeal.estimatedTransitDays,
+    // Prefer the deal/draft stop count (especially for air). Sea can still
+    // adopt corridor facts when the draft didn't set a count.
     numberOfTransshipments:
-      routeProfile?.numberOfTransshipments ?? baseDeal.numberOfTransshipments,
+      draft.numberOfTransshipments != null
+        ? draft.numberOfTransshipments
+        : transportMode === "air"
+          ? numberOfTransshipments
+          : (routeProfile?.numberOfTransshipments ?? numberOfTransshipments),
     routeRiskFlag: routeProfile?.routeRiskFlag ?? baseDeal.routeRiskFlag,
+    transportMode,
     externalCreditSignal:
       draft.cofaceCoverageAmountUSD && draft.cofaceCoverageAmountUSD > 0
         ? `Coface cover on file — ${draft.cofaceCoveragePct ?? "?"}% / USD ${Math.round(draft.cofaceCoverageAmountUSD).toLocaleString()}`
