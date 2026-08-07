@@ -10,17 +10,6 @@ import type { MarketIntelPayload } from "../lib/market-intel/types";
  */
 export type DataQualityFlag = "real" | "unverified" | "likely real" | "likely_test";
 
-/** Slim customs fields attached to platform deals for Dimension A scoring. */
-export interface CounterpartyCustomsEnrichment {
-  matched: boolean;
-  monthlyFobUsd: number | null;
-  fobUsd: number | null;
-  volumeMt: number | null;
-  routeCount: number | null;
-  roles: string[];
-  shipments: number;
-}
-
 export interface PlatformDealRecord {
   id: string;
   mongoId: string;
@@ -85,17 +74,10 @@ export interface PlatformDealRecord {
    * RUC via company-master.json's taxIds — decision 2026-07-27. null means
    * either no valid RUC resolved, or the supplier has no shipment history in
    * this data bundle (HS 0810/0811, 2025 only) — not necessarily "no data
-   * exists at all". Used for license/SUNAT signals; Dimension A volume/routes
-   * come from `buyerCustomsEnrichment` / `supplierCustomsEnrichment`.
+   * exists at all". Feeds computeBuyerScore()/computeSupplierScore()'s
+   * capacity variables in src/lib/scoring.ts.
    */
   marketIntel: MarketIntelPayload | null;
-  /** Company×product deal counts for Dimension A platform-history weight. */
-  buyerProfileDealCount?: number;
-  buyerProfileFinishedCount?: number;
-  supplierProfileDealCount?: number;
-  supplierProfileFinishedCount?: number;
-  buyerCustomsEnrichment?: CounterpartyCustomsEnrichment | null;
-  supplierCustomsEnrichment?: CounterpartyCustomsEnrichment | null;
   htmlFormulaScore: number | null;
   htmlFormulaBase: number | null;
   htmlFormulaBonus: number | null;
@@ -166,18 +148,27 @@ export interface PlatformCounterpartyScore {
   deals: PlatformCounterpartyDealRef[];
   missingForFullCram: string[];
   /**
-   * Dimension A coverage / customs detail from the weighted-shrink formula
-   * (outline 2026-07-30).
+   * Sandbox weighted/shrink formula (outline 2026-07-30) — populated by
+   * scripts/recalculate-counterparty-scores.ts. Live CRAM Dimension A still
+   * uses computeBuyerScore/computeSupplierScore.
    */
-  coveragePct?: number;
-  rawAverage?: number | null;
-  trustBonus?: number;
-  customsMatched?: boolean;
-  customsShipments?: number;
-  customsVolumeMt?: number | null;
-  customsFobUsd?: number | null;
-  customsRoutes?: number | null;
-  filledFieldIds?: string[];
+  sandbox?: {
+    score: number;
+    coveragePct: number;
+    rawAverage: number | null;
+    trustBonus: number;
+    /** Worst/best case published score if every missing field turned out 0 / 100 */
+    scoreLow: number;
+    scoreHigh: number;
+    customsMatched: boolean;
+    customsShipments: number;
+    customsVolumeMt: number | null;
+    customsFobUsd: number | null;
+    /** Avg monthly FOB USD from customs (active months, else ÷12) */
+    customsMonthlyFobUsd: number | null;
+    customsRoutes: number | null;
+    filledFieldIds: string[];
+  };
 }
 
 export type AppView =
@@ -185,5 +176,5 @@ export type AppView =
   | "counterparties"
   | "platform"
   | "missing"
-  | "product-table"
-  | "route-table";
+  | "route-table"
+  | "blueberry-cram";

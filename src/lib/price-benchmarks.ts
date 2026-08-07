@@ -203,7 +203,7 @@ export function priceVsMarketDetail(deal: Deal): PriceVsMarketDetail {
             safeMinUsdPerKg: null,
             safeMaxUsdPerKg: null,
             safeRangeDisplay: null,
-            safeRangeSource: null as const,
+            safeRangeSource: null,
           };
     return emptyDetail(unit, {
       usualUsdPerKg: usual,
@@ -220,7 +220,7 @@ export function priceVsMarketDetail(deal: Deal): PriceVsMarketDetail {
           safeMinUsdPerKg: null,
           safeMaxUsdPerKg: null,
           safeRangeDisplay: null,
-          safeRangeSource: null as const,
+          safeRangeSource: null,
         };
   return {
     pts: bandPoints(deflatedPct),

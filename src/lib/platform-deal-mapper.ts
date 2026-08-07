@@ -3,6 +3,28 @@ import type { PlatformDealRecord } from "../types/platform";
 import { normalizeDealMilestone } from "./deal-milestone";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
+import { scoreDealBuyer, scoreDealSupplier } from "./dimension-a";
+
+/**
+ * Dimension A blank fields for this deal's buyer/supplier, labeled to match
+ * the "Buyer years in business" / "Supplier years in business" convention
+ * already used below. Computed from the same WeightedField[] the scoring
+ * engine itself uses (scoreDealBuyer/scoreDealSupplier), so this list can't
+ * drift out of sync with what actually gets excluded from the raw average —
+ * previously this tab only knew about a small hand-picked set of gaps
+ * (customs narrative, risk-table fallback, YIB) with no visibility into
+ * credit rating, online verifiability, volumes, route diversity, quality
+ * certifications, or quality rejection rate.
+ */
+function dimensionAMissingFields(deal: Deal): string[] {
+  const buyerBlanks = scoreDealBuyer(deal)
+    .fields.filter((f) => f.score == null)
+    .map((f) => `Buyer ${f.label.charAt(0).toLowerCase()}${f.label.slice(1)}`);
+  const supplierBlanks = scoreDealSupplier(deal)
+    .fields.filter((f) => f.score == null)
+    .map((f) => `Supplier ${f.label.charAt(0).toLowerCase()}${f.label.slice(1)}`);
+  return [...buyerBlanks, ...supplierBlanks];
+}
 
 /** Map a CSV-backed platform deal into the MVP Deal shape for scoring / wizard. */
 export function platformDealToDeal(record: PlatformDealRecord): Deal {
@@ -48,7 +70,7 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       (!supplierSunat.condicion || supplierSunat.condicion === "HABIDO")
     : true;
 
-  return {
+  const deal: Deal = {
     id: record.id,
     dealRef: record.dealRef,
     product: record.product,
@@ -62,24 +84,17 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       name: record.buyerName,
       role: "buyer",
       yearsInBusiness: record.buyerYib,
-      /** Assumed valid for platform users — no license/KYC source in CSV. */
+      /** DEFAULT (decision 2026-07-24, unchanged): assumed true for all platform users — no license/KYC source in any CSV. See docs/cram-defaults-and-formula-2026-07.md. */
       licenseValid: true,
       platformDealsCompleted: record.priorDealsBetweenParties,
-      profileDealCount: record.buyerProfileDealCount ?? 0,
-      profileFinishedDealCount: record.buyerProfileFinishedCount ?? 0,
       platformCompletionRate:
-        (record.buyerProfileDealCount ?? 0) > 0
-          ? Math.round(
-              ((record.buyerProfileFinishedCount ?? 0) /
-                (record.buyerProfileDealCount ?? 1)) *
-                100,
-            )
-          : milestone >= 7
-            ? 100
+        milestone >= 7
+          ? 100
+          : record.priorDealsBetweenParties > 0
+            ? 85
             : null,
-      /** No payment-timing source — leave blank (Dimension A excludes blanks). */
+      /** No payment-timing source — leave blank for Dimension A (excludes blanks). */
       avgPaymentDelayDays: null,
-      customsEnrichment: record.buyerCustomsEnrichment ?? null,
     },
     supplier: {
       name: record.supplierName,
@@ -87,21 +102,14 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       yearsInBusiness: record.supplierYib,
       licenseValid: supplierLicenseValid,
       platformDealsCompleted: record.priorDealsBetweenParties,
-      profileDealCount: record.supplierProfileDealCount ?? 0,
-      profileFinishedDealCount: record.supplierProfileFinishedCount ?? 0,
       platformCompletionRate:
-        (record.supplierProfileDealCount ?? 0) > 0
-          ? Math.round(
-              ((record.supplierProfileFinishedCount ?? 0) /
-                (record.supplierProfileDealCount ?? 1)) *
-                100,
-            )
-          : milestone >= 7
-            ? 100
+        milestone >= 7
+          ? 100
+          : record.priorDealsBetweenParties > 0
+            ? 85
             : null,
       /** No quality-rejection source — leave blank for Dimension A. */
       qualityRejectionRatePct: null,
-      customsEnrichment: record.supplierCustomsEnrichment ?? null,
     },
     paymentTerms: "Documentary / against BL (platform default)",
     advancePaymentPct: 0,
@@ -152,9 +160,17 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
           },
         ]
       : [],
-    fieldsNeedingConfirmation: [...new Set(fieldsNeedingConfirmation)],
+    fieldsNeedingConfirmation: [],
     teaser: record.counterpartyReady
       ? `Counterparty-ready · YIB ${record.buyerYib}/${record.supplierYib} · ${record.status}`
       : `Incomplete CRAM inputs · ${record.status}`,
   };
+
+  deal.fieldsNeedingConfirmation = [
+    ...new Set([
+      ...fieldsNeedingConfirmation,
+      ...dimensionAMissingFields(deal),
+    ]),
+  ];
+  return deal;
 }

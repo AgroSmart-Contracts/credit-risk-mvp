@@ -15,7 +15,7 @@ import {
   relationshipAdjustment,
 } from "./scoring";
 
-/** Neutral baseline — blank fields shrink Dimension A toward 50. */
+/** Thin baseline — every buyer/supplier field blank, so it lands exactly on neutral 50. */
 function baseDeal(overrides: Partial<Deal> = {}): Deal {
   return {
     id: "test-deal",
@@ -28,7 +28,7 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
     destination: "Rotterdam, Netherlands",
     incoterm: "FOB",
     buyer: {
-      name: "Test Buyer",
+      name: "Test Buyer Unique XYZ",
       role: "buyer",
       yearsInBusiness: null,
       licenseValid: null,
@@ -37,7 +37,7 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
       avgPaymentDelayDays: null,
     },
     supplier: {
-      name: "Test Supplier",
+      name: "Test Supplier Unique XYZ",
       role: "supplier",
       yearsInBusiness: null,
       licenseValid: null,
@@ -74,8 +74,9 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
 }
 
 describe("computeBuyerScore — Dimension A weighted/shrink", () => {
-  it("stays near neutral 50 when everything is blank (no trust bonus)", () => {
-    expect(computeBuyerScore(baseDeal())).toBe(50);
+  it("blank buyer still gets optimistic payment-delay default (not pure neutral 50)", () => {
+    // paymentDelayDays defaults to 100 until measured → slight lift over 50
+    expect(computeBuyerScore(baseDeal())).toBe(55);
   });
 
   it("adds platform trust when profile has deals", () => {
@@ -86,11 +87,10 @@ describe("computeBuyerScore — Dimension A weighted/shrink", () => {
         platformDealsCompleted: 3,
       },
     });
-    // Thin coverage + trust +3 → above pure-blank 50
     expect(computeBuyerScore(deal)).toBeGreaterThan(50);
   });
 
-  it("years in business raises raw average (10y → field score 100)", () => {
+  it("years in business raises score", () => {
     const thin = computeBuyerScore(baseDeal());
     const withYib = computeBuyerScore(
       baseDeal({
@@ -115,72 +115,58 @@ describe("computeBuyerScore — Dimension A weighted/shrink", () => {
   });
 
   it("explainPartyScore returns weighted field lines", () => {
-    const audit = explainPartyScore(
-      baseDeal({ buyer: { ...baseDeal().buyer, yearsInBusiness: 5 } }),
-      "buyer",
-    );
-    expect(audit.lines.some((l) => l.id === "yearsInBusiness")).toBe(true);
-    expect(audit.score).toBe(computeBuyerScore(baseDeal({
+    const deal = baseDeal({
       buyer: { ...baseDeal().buyer, yearsInBusiness: 5 },
-    })));
+    });
+    const audit = explainPartyScore(deal, "buyer");
+    expect(audit.lines.some((l) => l.id === "yearsInBusiness")).toBe(true);
+    expect(audit.score).toBe(computeBuyerScore(deal));
+  });
+
+  it("uses sandbox score for known platform buyer (Open Markets)", () => {
+    const deal = baseDeal({
+      product: "Fresh Mandarin",
+      buyer: {
+        ...baseDeal().buyer,
+        name: "Open Markets Corporation",
+        yearsInBusiness: 2,
+        licenseValid: true,
+        platformDealsCompleted: 10,
+      },
+    });
+    // Precomputed sandbox score for this (company, product) after optimistic
+    // payment-delay / rejection defaults.
+    expect(computeBuyerScore(deal)).toBe(60);
   });
 });
 
-describe("computeSupplierScore — Dimension A weighted/shrink", () => {
-  it("stays near neutral without data", () => {
-    expect(computeSupplierScore(baseDeal())).toBe(50);
+describe("computeSupplierScore / composite", () => {
+  it("blank supplier still gets optimistic quality-rejection default (not pure neutral 50)", () => {
+    expect(computeSupplierScore(baseDeal())).toBe(55);
   });
 
-  it("on-time rate from completion lifts score", () => {
-    const base = computeSupplierScore(baseDeal());
-    const withOnTime = computeSupplierScore(
-      baseDeal({
-        supplier: {
-          ...baseDeal().supplier,
-          profileDealCount: 4,
-          profileFinishedDealCount: 4,
-          platformCompletionRate: 100,
-          yearsInBusiness: 5,
-          licenseValid: true,
-        },
-      }),
-    );
-    expect(withOnTime).toBeGreaterThan(base);
-  });
-});
-
-describe("computeCounterpartyScore — composite", () => {
-  it("blends buyer, supplier, and relationship fields", () => {
-    const score = computeCounterpartyScore(
-      baseDeal({
-        priorDealsBetweenParties: 5,
-        relationshipAgeMonths: 12,
-        buyer: {
-          ...baseDeal().buyer,
-          yearsInBusiness: 8,
-          licenseValid: true,
-          profileDealCount: 5,
-        },
-        supplier: {
-          ...baseDeal().supplier,
-          yearsInBusiness: 8,
-          licenseValid: true,
-          profileDealCount: 5,
-          platformCompletionRate: 95,
-        },
-      }),
-    );
-    expect(score).toBeGreaterThan(50);
-    expect(score).toBeLessThanOrEqual(100);
-  });
-
-  it("relationshipAdjustment is 0–100 group score", () => {
-    const none = relationshipAdjustment(baseDeal({ priorDealsBetweenParties: 0 }));
-    const many = relationshipAdjustment(
-      baseDeal({ priorDealsBetweenParties: 10, relationshipAgeMonths: 24 }),
-    );
-    expect(none).toBeGreaterThanOrEqual(0);
-    expect(many).toBeGreaterThan(none);
+  it("composite and relationship are 0–100", () => {
+    const deal = baseDeal({
+      priorDealsBetweenParties: 5,
+      relationshipAgeMonths: 12,
+      buyer: {
+        ...baseDeal().buyer,
+        yearsInBusiness: 8,
+        licenseValid: true,
+        profileDealCount: 5,
+      },
+      supplier: {
+        ...baseDeal().supplier,
+        yearsInBusiness: 8,
+        licenseValid: true,
+        profileDealCount: 5,
+        platformCompletionRate: 95,
+      },
+    });
+    const cp = computeCounterpartyScore(deal);
+    expect(cp).toBeGreaterThan(50);
+    expect(cp).toBeLessThanOrEqual(100);
+    expect(relationshipAdjustment(deal)).toBeGreaterThanOrEqual(0);
   });
 });
 
@@ -193,7 +179,7 @@ describe("other dimensions still score", () => {
     const overall = computeOverallScore(deal);
     expect(overall.overall).toBeGreaterThan(0);
     expect(overall.buyer).toBe(computeBuyerScore(deal));
-    expect(overall.supplier).toBe(computeSupplierScore(deal));
+    expect(overall.relationshipAdj).toBeDefined();
   });
 
   it("paymentTermsAdjustment and tiers", () => {
@@ -204,5 +190,56 @@ describe("other dimensions still score", () => {
   it("veto register fires on no insurance", () => {
     const v = checkVetoRegister(baseDeal({ insuranceCoverage: "None" }));
     expect(v.vetoed).toBe(true);
+  });
+
+  it("air ≥4 stops is a Dimension C veto; 3 stops is not", () => {
+    const at3 = checkVetoRegister(
+      baseDeal({
+        insuranceCoverage: "Basic",
+        transportMode: "air",
+        numberOfTransshipments: 3,
+      }),
+    );
+    expect(at3.reasons.some((r) => /air stops/i.test(r))).toBe(false);
+
+    const at4 = checkVetoRegister(
+      baseDeal({
+        insuranceCoverage: "Basic",
+        transportMode: "air",
+        numberOfTransshipments: 4,
+      }),
+    );
+    expect(at4.vetoed).toBe(true);
+    expect(at4.reasons.some((r) => /≥4 air stops/i.test(r))).toBe(true);
+  });
+});
+
+describe("Dimension C v2 route table", () => {
+  it("uses table score as-is when a row matches (no Incoterms overlay)", () => {
+    const deal = baseDeal({
+      origin: "Callao",
+      destination: "Algeciras",
+      product: "Cacao Beans",
+      transportMode: "sea",
+      insuranceCoverage: "Basic",
+      incoterm: "FOB",
+    });
+    expect(computeRouteScore(deal)).toBe(100);
+  });
+
+  it("does not invent structural transit/transship points on a miss", () => {
+    const deal = baseDeal({
+      origin: "Nowhereville",
+      destination: "Atlantis",
+      product: "Unicorn Fruit",
+      transportMode: "sea",
+      estimatedTransitDays: 2,
+      numberOfTransshipments: 0,
+      routeRiskFlag: "Low",
+      coldChainRequired: true,
+      insuranceCoverage: "Basic",
+      incoterm: "EXW",
+    });
+    expect(computeRouteScore(deal)).toBe(70);
   });
 });

@@ -1,8 +1,28 @@
 import type { FinancingRecommendation } from "../types";
 
+/**
+ * Extra APY for thin counterparty data, additive on top of the score-based
+ * riskPremium below. Without this, a deal whose score got shrunk toward
+ * neutral because most fields are blank prices identically to a deal that
+ * genuinely earned the same score with a full profile — the uncertainty is
+ * real risk to an investor and should show up as premium, not get absorbed
+ * into a mid-pack score bucket. Buckets are a starting point, not calibrated
+ * against realized outcomes (same caveat as every other constant in this
+ * engine — see docs/counterparty-risk-scoring-method-outline-2026-07-30.md).
+ */
+function uncertaintyPremiumFor(counterpartyCoveragePct: number | null): number {
+  if (counterpartyCoveragePct == null) return 0;
+  if (counterpartyCoveragePct >= 80) return 0;
+  if (counterpartyCoveragePct >= 60) return 0.5;
+  if (counterpartyCoveragePct >= 40) return 1.0;
+  if (counterpartyCoveragePct >= 20) return 1.75;
+  return 2.5;
+}
+
 export function recommendFinancingTerms(
   overall: number,
   dealValueUSD: number,
+  counterpartyCoveragePct: number | null = null,
 ): FinancingRecommendation {
   let maxFinancingPct: number;
   if (overall >= 80) maxFinancingPct = 100;
@@ -24,6 +44,7 @@ export function recommendFinancingTerms(
   else if (overall >= 60) riskPremium = 2.5;
   else if (overall >= 50) riskPremium = 4.0;
   else riskPremium = 6.0;
+  const uncertaintyPremium = uncertaintyPremiumFor(counterpartyCoveragePct);
 
   let collateralRequired: string;
   if (overall >= 80) collateralRequired = "None";
@@ -56,9 +77,11 @@ export function recommendFinancingTerms(
     maxFinancingPct,
     requiredAdvanceAmount: dealValueUSD * (requiredAdvancePct / 100),
     requiredAdvancePct,
-    interestRate: baseRate + riskPremium,
+    interestRate: baseRate + riskPremium + uncertaintyPremium,
     baseRate,
     riskPremium,
+    uncertaintyPremium,
+    counterpartyCoveragePct,
     collateralRequired,
     decision,
     approvalLevel,

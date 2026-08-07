@@ -1,6 +1,6 @@
 import type { Deal, RiskTier } from "../types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
-import { lookupRouteRisk } from "./route-risk-tables";
+import { lookupRouteRisk, MAX_AIR_STOPS } from "./route-risk-tables";
 import { priceVsMarketPoints } from "./price-benchmarks";
 import {
   buildTransactionStructureReport,
@@ -8,6 +8,7 @@ import {
 } from "./transaction-structure/compute";
 import {
   computeBuyerScore,
+  computeCounterpartyCoveragePct,
   computeCounterpartyScore,
   computeSupplierScore,
   explainPartyScore,
@@ -18,6 +19,7 @@ import {
 
 export {
   computeBuyerScore,
+  computeCounterpartyCoveragePct,
   computeCounterpartyScore,
   computeSupplierScore,
   explainPartyScore,
@@ -30,8 +32,8 @@ function clamp(value: number, min = 0, max = 100): number {
 }
 
 /**
- * Coface coverage note — **not a Counterparty (Dimension A) score input.**
- * Per spec §1, Coface is Gate 1 narrative only (`assessment.ts`).
+ * Coface coverage note — Gate 1 narrative only (`assessment.ts`).
+ * Not a Dimension A score input.
  */
 function externalCreditBonus(deal: Deal): number {
   const coveragePct = deal.cofaceCoveragePct ?? 0;
@@ -42,120 +44,26 @@ function externalCreditBonus(deal: Deal): number {
 }
 
 /**
- * Dimension B (Product) — perishability structural baseline + quality grade +
- * price-vs-usual (month × route).
+ * Dimension B (Product) — driven by unit price vs usual for the same
+ * product × origin→destination × shipment month (price-benchmarks.ts).
  *
- * The AC product-risk table still supplies perishability / shelf life / cold
- * chain metadata for the deal and Route vetoes, but its hardcoded 0–100
- * `score` is **not** used as the Dimension B baseline anymore (decision
- * 2026-07-30): live product risk is driven by perishability class + this
- * shipment's grade and unit price vs the usual month×route band.
+ * Spec §4.B called price-vs-market the highest-signal fraud variable. The old
+ * PRODUCT_RISK_TABLE `.score` was a baked AC structural shortcut; it is no
+ * longer added into the deal score. That table is kept only for product
+ * attributes (perishability, shelf life, cold chain) used when hydrating deals.
+ *
+ * Score = base 70 + price-vs-usual band points (−35 … +20). No grade / table overlay.
  */
-function productStructuralScore(deal: Deal): number {
-  const perishabilityPts: Record<Deal["perishabilityClass"], number> = {
-    "Non-Perishable": 18,
-    "Semi-Perishable": 9,
-    Perishable: -4,
-    "Ultra-Perishable": -12,
-  };
-  return 70 + perishabilityPts[deal.perishabilityClass];
-}
-
-function qualityGradePoints(qualityGrade: Deal["qualityGrade"]): number {
-  if (qualityGrade === "Grade A / Class I") return 18;
-  if (qualityGrade === "Grade B / Class II") return 5;
-  return 8; // Industrial
-}
-
 export function computeProductScore(deal: Deal): number {
-  const structuralScore = productStructuralScore(deal);
-  const priceAdj = priceVsMarketPoints(deal);
-  const gradeAdj = qualityGradePoints(deal.qualityGrade);
-  return clamp(structuralScore + priceAdj + gradeAdj);
-}
-
-/** Incoterms — spec §4.C, 20% weight. */
-function incotermAdjustment(incoterm: string): number {
-  const map: Record<string, number> = {
-    EXW: -8,
-    FCA: 0,
-    FAS: 0,
-    FOB: 8,
-    CFR: 5,
-    CPT: 5,
-    CIF: 12,
-    CIP: 12,
-    DAP: 15,
-    DPU: 15,
-    DDP: 15,
-  };
-  return map[incoterm.toUpperCase()] ?? 0;
+  return clamp(70 + priceVsMarketPoints(deal));
 }
 
 /**
- * Transit time × freight — spec §4.C, 25% weight. Differentiated by freight
- * mode: air, ocean-reefer (perishable/cold-chain cargo), ocean-non-perishable.
- * `deal.transportMode` is null for any deal with no source data — neutral 0
- * in that case (can't tell which curve applies).
+ * Dimension C v2 owns the route score (transit / stops / corridor flag / perish /
+ * cold-treatment). TS never recomputes the formula and does not layer Incoterms
+ * on top — Incoterms are deal commercial terms, not corridor risk.
+ * On a table miss return base 70 only (HANDOFF: engine never guesses).
  */
-function transitTimePoints(deal: Deal): number {
-  if (deal.transportMode === "air") {
-    if (deal.estimatedTransitDays <= 2) return 18;
-    if (deal.estimatedTransitDays <= 5) return 12;
-    return -10; // spec only tables ≤2d/2–5d for air; beyond that treated as the risk case
-  }
-  if (deal.transportMode === "sea") {
-    const isReefer = deal.perishabilityClass !== "Non-Perishable";
-    if (isReefer) {
-      if (deal.estimatedTransitDays <= 14) return 14;
-      if (deal.estimatedTransitDays <= 21) return 6;
-      return -10;
-    }
-    if (deal.estimatedTransitDays <= 30) return 12;
-    if (deal.estimatedTransitDays > 60) return -8;
-    return 0; // 31–60d non-perishable: no explicit spec bucket
-  }
-  return 0; // transportMode unknown
-}
-
-/**
- * Transshipments × freight — spec §4.C, 20% weight. ≥2 air transshipments is
- * also a spec §6 veto (see checkVetoRegister) — that's evaluated separately
- * and independently sinks the deal regardless of this point value.
- */
-function transshipmentPoints(deal: Deal): number {
-  if (deal.transportMode === "air") {
-    if (deal.numberOfTransshipments === 0) return 15;
-    if (deal.numberOfTransshipments === 1) return -10;
-    return -20;
-  }
-  // sea, or unknown mode — spec's ocean table is the more conservative default
-  if (deal.numberOfTransshipments === 0) return 15;
-  if (deal.numberOfTransshipments === 1) return 3;
-  return -10;
-}
-
-function routeFlagPoints(routeRiskFlag: Deal["routeRiskFlag"]): number {
-  if (routeRiskFlag === "Low") return 12;
-  if (routeRiskFlag === "Medium") return 3;
-  return -15;
-}
-
-/**
- * Structural route score (transit time + transshipments + route-risk flag) —
- * spec base 70. Matches the ERD's `Route(T2)` design: a per-corridor
- * pre-computed value (`bestRouteRiskFlag`/`riskOverrideValue`), so when a
- * route-risk-tables.ts row matches, its static `score` is used directly
- * instead of recomputing this — same reasoning as the Product dimension.
- */
-function routeFallbackStructuralScore(deal: Deal): number {
-  return 70 + transitTimePoints(deal) + transshipmentPoints(deal) + routeFlagPoints(deal.routeRiskFlag);
-}
-
-// spec §4.C "Customs clearance time" (5%wt, ≤3d +5 / >7d −8) has no data source —
-// `customsNarrative` is unparsed free text, not a structured clearance-time number.
-// Not implemented; stays out of computeRouteScore entirely rather than guessed at.
-
 export function computeRouteScore(deal: Deal): number {
   const tableMatch =
     deal.routeRiskProfile ??
@@ -166,20 +74,9 @@ export function computeRouteScore(deal: Deal): number {
       deal.transportMode,
       deal.numberOfTransshipments,
     );
-  const structuralScore = tableMatch ? tableMatch.score : routeFallbackStructuralScore(deal);
-
-  // Incoterms (20%wt) is genuinely per-deal, not baked into either the
-  // static table score or the fallback.
-  const incotermAdj = incotermAdjustment(deal.incoterm);
-  // Cold-chain requirement (15%wt): spec's flat rule (required+documented −5)
-  // only applies in the fallback path. When a route-risk-tables.ts row
-  // matches, its adjustedScore already bakes in a route+product-specific
-  // cold-chain penalty (decision 2026-07-28 — see route-risk-tables.ts) —
-  // applying the flat −5 on top would double-count the same risk factor.
-  // Air ≥3-stop penalty is likewise baked into the matched row's score.
-  const coldChainAdj = tableMatch ? 0 : deal.coldChainRequired ? -5 : 0;
-
-  return clamp(structuralScore + incotermAdj + coldChainAdj);
+  // Veto rows carry score 0 in the rendered table; composite still runs but
+  // checkVetoRegister hard-stops the deal.
+  return clamp(tableMatch ? tableMatch.score : 70);
 }
 
 /**
@@ -203,8 +100,9 @@ export function paymentTermsAdjustment(paymentTerms: string): number {
 
 /**
  * Relationship history — spec §4.D, 25% weight: ≥10 +15 / ≥5 +12 / ≥1 +8 / 0 −12.
- * Distinct from Dimension A's relationship fields inside the weighted/shrink
- * composite (see computeCounterpartyScore / scoreRelationship).
+ * Distinct from Dimension A's cross-applied relationship signal (different
+ * point values, spec explicitly calls for both — see computeCounterpartyScore).
+ * Previously missing the ≥10 tier entirely and used unrelated point values.
  */
 function structureRelationshipAdjustment(deal: Deal): number {
   if (deal.priorDealsBetweenParties >= 10) return 15;
@@ -325,13 +223,13 @@ export function checkVetoRegister(deal: Deal): VetoResult {
   if (deal.insuranceCoverage === "None") {
     reasons.push("No cargo insurance on file (mandatory baseline)");
   }
-  if (deal.transportMode === "air" && deal.numberOfTransshipments >= 2) {
-    reasons.push(`≥2 transshipments by air (${deal.numberOfTransshipments})`);
+  // AC ruling 2026-07-30: air ≥4 stops is a hard veto (supersedes legacy ≥2).
+  if (deal.transportMode === "air" && deal.numberOfTransshipments > MAX_AIR_STOPS) {
+    reasons.push(
+      `≥${MAX_AIR_STOPS + 1} air stops (${deal.numberOfTransshipments}) — Dimension C veto`,
+    );
   }
-  // Decision 2026-07-28: route-risk-tables.ts rows carry a per-(route,product)
-  // vetoCandidate flag when estimated transit time meaningfully exceeds this
-  // product's shelf life — a shipment that's structurally likely to arrive
-  // spoiled, independent of the composite score.
+  // Dimension C v2 rows set vetoCandidate for engine vetoes (air ≥4, etc.).
   const routeMatch =
     deal.routeRiskProfile ??
     lookupRouteRisk(
@@ -361,7 +259,14 @@ export interface ScoreBreakdown {
   vetoed: boolean;
   vetoReasons: string[];
   externalCreditBonus: number;
-  /** Spec §4.A relationship add-on inside Dimension A (not a separate dimension). */
+  /**
+   * Composite counterparty data completeness, 0–100. Separate from
+   * `counterparty` (the score itself) so a thin-data deal and a
+   * well-documented deal that happen to land on the same score can still be
+   * told apart downstream (see financing.ts's uncertaintyPremium).
+   */
+  counterpartyCoveragePct: number;
+  /** Dimension A relationship group score (0–100). */
   relationshipAdj: number;
   paymentTermsAdj: number;
   /** Populated only when deal.transactionStructure has real input — see computeStructureScore. */
@@ -373,6 +278,7 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
   const supplier = Math.round(computeSupplierScore(deal));
   const relationshipAdj = relationshipAdjustment(deal);
   const counterparty = Math.round(computeCounterpartyScore(deal));
+  const counterpartyCoveragePct = computeCounterpartyCoveragePct(deal);
   const product = Math.round(computeProductScore(deal));
   const route = Math.round(computeRouteScore(deal));
   const structureReport = hasTransactionStructureInput(deal.transactionStructure)
@@ -401,6 +307,7 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
     vetoed: veto.vetoed,
     vetoReasons: veto.reasons,
     externalCreditBonus: externalCreditBonus(deal),
+    counterpartyCoveragePct,
     relationshipAdj,
     paymentTermsAdj: paymentTermsAdjustment(deal.paymentTerms),
     structureReport,

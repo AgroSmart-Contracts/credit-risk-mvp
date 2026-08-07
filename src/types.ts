@@ -2,8 +2,6 @@ import type { AnalyzeDocumentsResult } from "./lib/document-analysis/types";
 import type { CofaceRiskGrade } from "./lib/coface-analysis/types";
 import type { MarketIntelPayload } from "./lib/market-intel/types";
 import type { TransactionStructureInput, TransactionStructureReport } from "./lib/transaction-structure/types";
-import type { CounterpartyCustomsEnrichment } from "./types/platform";
-import type { PriceVsMarketDetail } from "./lib/price-benchmarks";
 
 export interface CounterpartyInput {
   name: string;
@@ -15,15 +13,19 @@ export interface CounterpartyInput {
   avgPaymentDelayDays?: number | null;
   qualityRejectionRatePct?: number | null;
   creditRating?: string;
-  /**
-   * Company×product platform deal count for Dimension A platform-history
-   * weight. When set (platform deals), preferred over platformDealsCompleted
-   * which historically stored prior pair deals.
-   */
+  /** Company×product deal count for Dimension A platform-history weight. */
   profileDealCount?: number;
   profileFinishedDealCount?: number;
-  /** Customs volume/routes/sales enrichment for Dimension A (build-time match). */
-  customsEnrichment?: CounterpartyCustomsEnrichment | null;
+  /** Customs volume/routes/sales enrichment for Dimension A. */
+  customsEnrichment?: {
+    matched: boolean;
+    monthlyFobUsd: number | null;
+    fobUsd: number | null;
+    volumeMt: number | null;
+    routeCount: number | null;
+    roles: string[];
+    shipments: number;
+  } | null;
 }
 
 export interface SourceDocument {
@@ -63,32 +65,40 @@ export interface RouteRiskProfile {
   /** Route risk is scored per (origin, destination, product) — adjustedScore depends on this product's shelf life / cold-chain need on this corridor. */
   product: string;
   /**
-   * Freight mode this table row applies to (decision 2026-07-29).
-   * Ocean and air ≤2 stops share the same base/freshness math; air ≥3 stops
-   * adds an airStopPenalty (typically −15 when cold-chain is required).
+   * Freight mode this table row applies to (Dimension C v2).
+   * Air rows are keyed by exact stop count (0–4); stop curve is baked into `score`.
    */
   transportMode: "sea" | "air";
+  /** Exact air stop count for this row; null for ocean. */
+  airStops: number | null;
   /**
-   * Air-only stop band: `le2` = direct or ≤2 stops; `gt2` = ≥3 stops.
+   * @deprecated Prefer `airStops`. UI grouping only: `le2` = 0–2, `gt2` = ≥3.
    * null for sea rows.
    */
   airStopsBand: "le2" | "gt2" | null;
-  /** CSV airStopPenalty already baked into `score` (0 for ocean / air ≤2). */
+  /** Points from stop_modifiers.csv already baked into `score` (display only). */
   airStopPenalty: number;
   score: number;
   estimatedTransitDays: number;
   /**
-   * Corridor-level ocean transshipment count for sea rows.
-   * For air rows this is a band marker (2 for le2, 3 for gt2) — deal-level
-   * stop counts live on Deal.numberOfTransshipments.
+   * For air rows equals `airStops`. For ocean, corridor transshipment count
+   * from the lane (deal-level stops still live on Deal.numberOfTransshipments).
    */
   numberOfTransshipments: number;
   routeRiskFlag: "Low" | "Medium" | "High";
-  /** true when this (route, product) combination's freshness ratio (transit days ÷ shelf-life days) meaningfully exceeds 1.0 — fed into checkVetoRegister() as an additional veto reason, alongside the existing cargo-insurance veto. */
+  /**
+   * true when Dimension C v2 marks this row VETO (e.g. air ≥4 stops) or
+   * transit exceeds shelf life — fed into checkVetoRegister().
+   */
   vetoCandidate: boolean;
   rationale: string;
   /** false = provisional/estimated corridor or product (not sourced from confirmed BL history or an AC-reviewed table for both the route and the product). */
   scoreConfirmed: boolean;
+  /** Lane id from Dimension C (e.g. PECLL-ESALG-O). */
+  laneId?: string;
+  /** Alias strings (UN/LOCODE, IATA, dirty platform names) for lookup. */
+  originAliases?: string[];
+  destinationAliases?: string[];
 }
 
 export interface Deal {
@@ -195,10 +205,10 @@ export interface RiskAssessment {
   structure: SubScore;
   buyer: PartyScore;
   supplier: PartyScore;
-  /** Spec §4.A relationship group score (0–100) inside Dimension A composite. */
+  /** Dimension A relationship group score (0–100). */
   relationshipAdj: number;
-  /** Dimension B price-vs-usual detail for the Product Risk section. */
-  productPrice: PriceVsMarketDetail;
+  /** Composite counterparty data completeness, 0–100 — see financing.ts's uncertaintyPremium. */
+  counterpartyCoveragePct: number;
   overall: number;
   tier: RiskTier;
   /** Spec §6 single-veto register — true if any hard-stop condition fired, overriding the composite-based tier. */
@@ -218,6 +228,15 @@ export interface FinancingRecommendation {
   interestRate: number;
   baseRate: number;
   riskPremium: number;
+  /**
+   * Extra APY added when counterparty data coverage is thin, on top of
+   * riskPremium (which is keyed off the score alone). Two deals landing on
+   * the same score bucket with very different data completeness no longer
+   * get priced identically — see dimension-a.ts's computeCounterpartyCoveragePct.
+   */
+  uncertaintyPremium: number;
+  /** Coverage % this uncertaintyPremium was computed from, for auditability. */
+  counterpartyCoveragePct: number | null;
   collateralRequired: string;
   decision: string;
   approvalLevel: string;
