@@ -1,0 +1,35 @@
+lane_id,pol_node,pod_node,mode,transit_days_p50,transit_days_p90,transship_norm,customs_days,corridor_flag,exists_evidence,transit_evidence,v1_corridor,change,note
+PECLL-ESALG-O,CLL,ALG,OCEAN,19,24,1,3,LOW,REF,AC,"Callao -> Algeciras, Spain",KEPT,"Table 2: 18-22d via Med hub"
+PELIM-ESMAD-A,LIM,MAD,AIR,2,3,0,2,LOW,VERITRADE,REF,"Callao -> Madrid, Spain",POL_FIXED,"MAD air-confirmed 1.84M kg 2025. Ocean lane DELETED - Madrid landlocked"
+PECLL-NLRTM-O,CLL,RTM,OCEAN,21,26,0,3,LOW,REF,AC,"Callao -> Rotterdam, Netherlands",KEPT,"Table 2 AC-confirmed 19-22d"
+PELIM-NLAMS-A,LIM,AMS,AIR,2,3,0,2,LOW,VERITRADE,REF,"Callao -> Amsterdam, Netherlands",MERGED_OCEAN_TO_RTM,"AMS air-only (832K kg). v1 ocean 22d was Rotterdam mislabelled"
+PECLL-THLCH-O,CLL,LCH,OCEAN,34,40,1,4,MED,REF,REF,"Callao -> Bangkok, Thailand",POD_FIXED,"Ocean POD is Laem Chabang, not Bangkok"
+PELIM-THBKK-A,LIM,BKK,AIR,3,4,1,4,MED,VERITRADE,REF,"Aereopuerto Jorge Chavez -> Bangkok",POL_FIXED,"TH is 63% air - ocean marginal"
+PECLL-COBUN-O,CLL,BUN,OCEAN,7,10,0,5,MED,VERITRADE,REF,"Callao -> Buenaventura, Colombia",KEPT,
+PELIM-COBOG-A,LIM,BOG,AIR,1,2,0,5,MED,VERITRADE,REF,,ADDED,"CO is 78% air (1.5M kg) - v1 had no air lane to Colombia"
+PECLL-AEJEA-O,CLL,JEA,OCEAN,30,36,1,3,MED,REF,REF,"Callao -> Jebel Ali, UAE + Callao -> Dubai, UAE",MERGED,"v1 scored Dubai and Jebel Ali as separate identical corridors"
+PELIM-AEDXB-A,LIM,DXB,AIR,2,3,1,3,MED,VERITRADE,REF,"Callao -> Dubai, United Arab Emirates",POL_FIXED,"AE is 63% air"
+PELIM-DEFRA-A,LIM,FRA,AIR,2,3,1,3,LOW,VERITRADE,REF,"Callao -> Frankurt Am Main, Germany",OCEAN_DELETED,"Frankfurt landlocked. DE is 46% air"
+PECLL-PLGDN-O,CLL,GDN,OCEAN,24,30,1,3,LOW,REF,REF,"Callao -> Gdansk, Poland",KEPT,
+PELIM-BRGRU-A,LIM,GRU,AIR,1,2,0,4,MED,VERITRADE,REF,"Callao -> Guarulhos, Brazil",OCEAN_DELETED,"GRU is an airport. BR is 100% air (442 t)"
+PECLL-USHUE-O,CLL,HUE,OCEAN,13,17,0,3,LOW,VERITRADE,REF,"Callao -> Port Hueneme + Callao -> Hueneme",MERGED,"v1 had these as two corridors (20 and 1 deals)"
+PECLL-TWKHH-O,CLL,KHH,OCEAN,30,36,1,4,MED,VERITRADE,AC,"Callao -> Kaohsiung, Taiwan",KEPT,"Table 2 AC-confirmed 30d. TW is 0% air. Transships Valparaiso/Shanghai"
+PECHY-TWKHH-O,CHN,KHH,OCEAN,25,30,0,4,MED,REF,NEEDS_CONFIRM,"Chancay -> Kaohsiung, Taiwan",TRANSIT_FIXED,"v1 gave Chancay the SAME 35d as Callao. Direct Asia service is Chancay's entire rationale ❓"
+PECLL-PTLIS-O,CLL,LIS,OCEAN,20,25,1,4,LOW,REF,REF,"Callao -> Lisbon, Portugal",KEPT,
+PECLL-ESAGP-O,CLL,AGP,OCEAN,20,26,1,3,MED,REF,NEEDS_CONFIRM,"Callao -> Malaga, Spain + Callao -> Malaga, China",MERGED,"'Malaga, China' was a country-field error. Malaga port has limited reefer vs Algeciras ❓"
+PECLL-USMIA-O,CLL,MIA,OCEAN,9,12,1,3,LOW,VERITRADE,NEEDS_CONFIRM,"Callao -> Miami, United States",TRANSIT_FIXED,"v1 gave Miami the SAME 12d as Port Hueneme - opposite coasts, Miami transits Panama ❓"
+PELIM-USMIA-A,LIM,MIA,AIR,1,2,0,3,LOW,VERITRADE,REF,,ADDED,"MIA air 1.4M kg - v1 had no air lane"
+PECLL-INNSA-O,CLL,NSA,OCEAN,28,34,1,7,MED,REF,REF,"Callao -> Mumbai, India",POD_FIXED,"Ocean POD is Nhava Sheva"
+PELIM-INBOM-A,LIM,BOM,AIR,3,4,1,7,MED,VERITRADE,REF,,ADDED,"IN is 82% air (1.45M kg) - the dominant India mode, absent from v1"
+PECLL-CLSAI-O,CLL,SAI,OCEAN,7,10,0,3,LOW,VERITRADE,REF,"Callao -> San Antonio, Chile",KEPT,
+PECLL-CLSVE-O,CLL,SVI,OCEAN,8,11,0,3,LOW,REF,REF,"Callao -> San Vicente, Chile",KEPT,
+PECLL-RULED-O,CLL,LED,OCEAN,30,38,1,7,HIGH,REF,REF,"Callao -> St Petersburg, Russian Federation",KEPT,
+PEPBO-RULED-O,PBO,LED,OCEAN,30,38,1,7,HIGH,REF,REF,"Puerto Bolivar, Ecuador -> St Petersburg",KEPT,
+PELIM-ILTLV-A,LIM,TLV,AIR,2,3,1,5,HIGH,VERITRADE,REF,"Callao -> Tel Aviv, Israel",OCEAN_DELETED,"IL is 100% AIR - zero ocean declarations in 35,671 rows. Canonical routing LIM-MAD-TLV (79% via MAD, Air Europa)"
+PECLL-ILASH-O,CLL,ASH,OCEAN,35,42,2,6,HIGH,NO_EVIDENCE,AC,,FLAGGED_NONEXISTENT,"Table 2 AC-confirmed 35d+ BUT zero 2025 declarations. Retained as scoreable-but-unused; 35-day rule floors it at High"
+PECLL-ESVLC-O,CLL,VLC,OCEAN,19,24,1,3,LOW,REF,REF,"Callao -> Valencia, Spain",KEPT,
+PECLL-CAVAN-O,CLL,YVR,OCEAN,16,20,1,3,LOW,VERITRADE,REF,"Callao -> Vancouver, Canada + Callao Chile -> Vancouver Netherlands",MERGED,"'Vancouver, Netherlands' was a country-field error"
+PELIM-ATVIE-A,LIM,VIE,AIR,2,3,1,3,LOW,REF,REF,"Callao -> Vienna, Austria",OCEAN_DELETED,"Vienna landlocked"
+PECLL-CNSHA-O,CLL,SHA,OCEAN,28,34,0,4,MED,VERITRADE,REF,"Callao Peru -> Shanghai, China (unmatched)",ADDED,"31.2M kg 2025 - was in the unmatched list with no table row"
+PECLL-HKHKG-O,CLL,HKG,OCEAN,30,36,1,4,MED,VERITRADE,REF,"Callao Chile -> Hong Kong (unmatched)",ADDED,"8.0M kg 2025 - was unmatched. 'Callao, Chile' was a country error"
+PECLL-CLVAP-O,CLL,VAP,OCEAN,7,10,0,3,LOW,VERITRADE,REF,"SAN Antonio, Chile -> Shanghai (unmatched)",ADDED,"Valparaiso is the dominant Asia transship hub (21.7M kg)"

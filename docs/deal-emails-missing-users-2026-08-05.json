@@ -1,0 +1,405 @@
+{
+  "description": "Deal buyer/supplier participant emails that have a company name on the deal but no matching document in prod.users",
+  "countExternal": 20,
+  "emails": [
+    {
+      "email": "rita@alliedtrade.com",
+      "domain": "alliedtrade.com",
+      "primaryCompany": "ALLIED TRADE GLOBAL CORP",
+      "allCompanies": [
+        "ALLIED TRADE GLOBAL CORP"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 17,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES ATG-TWN-001",
+        "FRESH BLUEBERRIES ATG-TWN-002",
+        "FRESH BLUEBERRIES ATG-TWN-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "andresti@biofarming.com",
+      "domain": "biofarming.com",
+      "primaryCompany": "BIO FARMING PERU S.A.C.",
+      "allCompanies": [
+        "BIO FARMING PERU S.A.C.",
+        "VILLAVENTURA PERU SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 13,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "MANDARINA FRESCA DAVIS-NL-001",
+        "MANDARINA FRESCA DAVIS-NL-002",
+        "MANDARINA FRESCA DAVIS-NL-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "dganga@davisworldwide.nl",
+      "domain": "davisworldwide.nl",
+      "primaryCompany": "DAVIS GLOBAL BV",
+      "allCompanies": [
+        "DAVIS GLOBAL BV",
+        "ALLIED TRADE GLOBAL CORP"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 13,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "MANDARINA FRESCA DAVIS-NL-001",
+        "MANDARINA FRESCA DAVIS-NL-002",
+        "MANDARINA FRESCA DAVIS-NL-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "lgarcia@avsa.com.pe",
+      "domain": "avsa.com.pe",
+      "primaryCompany": "AGRICOLA VI\u00d1ASOL SAC",
+      "allCompanies": [
+        "AGRICOLA VI\u00d1ASOL SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 12,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES ATG-TWN-001",
+        "FRESH BLUEBERRIES ATG-TWN-002",
+        "FRESH BLUEBERRIES ATG-TWN-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "ivette.aedo@juhinej.com",
+      "domain": "juhinej.com",
+      "primaryCompany": "JUHINEJ LTD",
+      "allCompanies": [
+        "JUHINEJ LTD",
+        "NATURAL SOUTH FRUIT LTD"
+      ],
+      "roles": [
+        "buyer",
+        "supplier"
+      ],
+      "dealCount": 12,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH MIXED BERRIES SGC-CHN-001",
+        "FRESH MIXED BERRIES SGC-CHN-002",
+        "FRESH MIXED BERRIES SGC-CHN-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "lvergara@medano.com.pe",
+      "domain": "medano.com.pe",
+      "primaryCompany": "AGRICOLA MEDANO AZUL SAC",
+      "allCompanies": [
+        "AGRICOLA MEDANO AZUL SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 10,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH AVOCADO XRK-ESP-001",
+        "FRESH AVOCADO XRK-ESP-002",
+        "FRESH AVOCADO XRK-ESP-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "miguel@xarki.com",
+      "domain": "xarki.com",
+      "primaryCompany": "XARKI SL",
+      "allCompanies": [
+        "XARKI SL"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 10,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH AVOCADO XRK-ESP-001",
+        "FRESH AVOCADO XRK-ESP-002",
+        "FRESH AVOCADO XRK-ESP-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "info@haciendasotomayor.es",
+      "domain": "haciendasotomayor.es",
+      "primaryCompany": "HACIENDA SOTOMAYOR SL",
+      "allCompanies": [
+        "HACIENDA SOTOMAYOR SL"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 9,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH ASPARAGUS HSM-ESP-001",
+        "FRESH ASPARAGUS HSM-ESP-002",
+        "FRESH ASPARAGUS HSM-ESP-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "sales@freshexpress.ae",
+      "domain": "freshexpress.ae",
+      "primaryCompany": "FRESH EXPRESS LLC",
+      "allCompanies": [
+        "FRESH EXPRESS LLC"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES FXP-UAE-001",
+        "FRESH BLUEBERRIES FXP-UAE-002",
+        "FRESH BLUEBERRIES FXP-UAE-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "tesor1@fundolaslomas.com",
+      "domain": "fundolaslomas.com",
+      "primaryCompany": "FUNDO LAS LOMAS SAC",
+      "allCompanies": [
+        "FUNDO LAS LOMAS SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 7,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES FXP-UAE-001",
+        "FRESH BLUEBERRIES FXP-UAE-002",
+        "FRESH BLUEBERRIES FXP-UAE-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "cesar.berrospi@giddingsfruit.com",
+      "domain": "giddingsfruit.com",
+      "primaryCompany": "GIDDINS PERU SAC",
+      "allCompanies": [
+        "GIDDINS PERU SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 7,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES TRD-CULT-001",
+        "FRESH BLUEBERRIES TRD-CULT-002",
+        "FRESH BLUEBERRIES TRD-CULT-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "jenny@internationalgreenco.com",
+      "domain": "internationalgreenco.com",
+      "primaryCompany": "SHANGHAI GREEN CHAIN TRADING CO LTD",
+      "allCompanies": [
+        "SHANGHAI GREEN CHAIN TRADING CO LTD"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH MIXED BERRIES SGC-CHN-001",
+        "FRESH MIXED BERRIES SGC-CHN-002",
+        "FRESH MIXED BERRIES SGC-CHN-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "mohamed.nazer@tradecultivators.com",
+      "domain": "tradecultivators.com",
+      "primaryCompany": "TRADE CULTIVATORS LLC",
+      "allCompanies": [
+        "TRADE CULTIVATORS LLC"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES TRD-CULT-001",
+        "FRESH BLUEBERRIES TRD-CULT-002",
+        "FRESH BLUEBERRIES TRD-CULT-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "gerritjan@biofreshi.com",
+      "domain": "biofreshi.com",
+      "primaryCompany": "BIOFRESHI BV",
+      "allCompanies": [
+        "BIOFRESHI BV"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 5,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH GINGER BFRSH-NL-001",
+        "FRESH GINGER BFRSH-NL-002",
+        "FRESH GINGER BFRSH-NL-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "ian@khi-international.com",
+      "domain": "khi-international.com",
+      "primaryCompany": "KHI INTERNATIONAL CORP",
+      "allCompanies": [
+        "KHI INTERNATIONAL CORP",
+        "BIOFRESHI BV"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 5,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH GINGER BFRSH-NL-006",
+        "FRESH MIXED BERRIES KHI-HKG-001",
+        "FRESH MIXED BERRIES KHI-HKG-002"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "rony@villaventuraperu.com",
+      "domain": "villaventuraperu.com",
+      "primaryCompany": "VILLAVENTURA PERU SAC",
+      "allCompanies": [
+        "VILLAVENTURA PERU SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 5,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES VLV-TWN-002",
+        "FRESH BLUEBERRIES VLV-TWN-003",
+        "FRESH BLUEBERRIES VLV-TWN-004"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "sales@buyrite-intl.com",
+      "domain": "buyrite-intl.com",
+      "primaryCompany": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+      "allCompanies": [
+        "GUANGZHOU FRESH LINK IMPORT CO LTD"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 4,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FRESH BLUEBERRIES GFL-CHN-001",
+        "FRESH BLUEBERRIES GFL-CHN-002",
+        "FRESH BLUEBERRIES GFL-CHN-003"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "amory.sepulveda@juhinej.com",
+      "domain": "juhinej.com",
+      "primaryCompany": "AGR\u00cdCOLA Y COMERCIAL VALLES DEL \u00d1UBLE SPA",
+      "allCompanies": [
+        "AGR\u00cdCOLA Y COMERCIAL VALLES DEL \u00d1UBLE SPA"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "TM-2026-016 FROZEN TROPICAL"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "andresmarin@drelifresh.com",
+      "domain": "drelifresh.com",
+      "primaryCompany": "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA",
+      "allCompanies": [
+        "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA"
+      ],
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "TM-2026-018 FRESH BLUEBERRIES"
+      ],
+      "isTrumarketStaff": false
+    },
+    {
+      "email": "mvillarreal.almacen@solimar.com.pe",
+      "domain": "solimar.com.pe",
+      "primaryCompany": "INDUSTRIAS SOLIMAR SAC",
+      "allCompanies": [
+        "INDUSTRIAS SOLIMAR SAC"
+      ],
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 1,
+      "hasUserIdOnSomeDeal": false,
+      "missingUserIdOnSomeDeal": true,
+      "sampleDeals": [
+        "FROZEN TROPICAL FRUITS - SOLIMAR-JHN-001"
+      ],
+      "isTrumarketStaff": false
+    }
+  ]
+}

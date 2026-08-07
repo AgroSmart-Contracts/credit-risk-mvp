@@ -1,0 +1,937 @@
+lane_id,pol,pod,pol_code,pod_code,country,mode,stops,commodity,perish_class,score,veto_reason,eff_days,headroom_days,corridor_flag,exists,transit_evidence
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,27.0,243.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Green Coffee,NON_PERISHABLE,100,,27.0,338.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Ginger,SEMI,97,,27.0,63.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Grapes,PERISHABLE,76,,27.0,18.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Mandarin,PERISHABLE,76,,27.0,18.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Blueberries,PERISHABLE,76,,27.0,23.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Avocado,PERISHABLE,58,,27.0,3.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 27.0d >= shelf life 16d,,,,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 27.0d >= shelf life 25d,,,,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 27.0d >= shelf life 10d,,,,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,27.0,513.0,LOW,REF,AC
+PECLL-ESALG-O,Callao,Algeciras,PECLL,ESALG,ES,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,27.0,513.0,LOW,REF,AC
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,5.0,265.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Cacao Beans,NON_PERISHABLE,100,,5.5,264.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Cacao Beans,NON_PERISHABLE,87,,6.5,263.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,5.0,360.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Green Coffee,NON_PERISHABLE,100,,5.5,359.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Green Coffee,NON_PERISHABLE,87,,6.5,358.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Ginger,SEMI,100,,5.0,85.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Ginger,SEMI,100,,5.5,84.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Ginger,SEMI,93,,6.0,84.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Ginger,SEMI,80,,6.5,83.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Grapes,PERISHABLE,92,,5.0,40.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Grapes,PERISHABLE,87,,5.5,39.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Grapes,PERISHABLE,80,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Grapes,PERISHABLE,67,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Mandarin,PERISHABLE,92,,5.0,40.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Mandarin,PERISHABLE,87,,5.5,39.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Mandarin,PERISHABLE,80,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Mandarin,PERISHABLE,67,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Blueberries,PERISHABLE,92,,5.0,45.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Blueberries,PERISHABLE,87,,5.5,44.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Blueberries,PERISHABLE,80,,6.0,44.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Blueberries,PERISHABLE,67,,6.5,43.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Avocado,PERISHABLE,92,,5.0,25.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Avocado,PERISHABLE,87,,5.5,24.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Avocado,PERISHABLE,80,,6.0,24.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Avocado,PERISHABLE,67,,6.5,23.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Asparagus,ULTRA,76,,5.0,11.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Asparagus,ULTRA,71,,5.5,10.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Asparagus,ULTRA,64,,6.0,10.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Asparagus,ULTRA,51,,6.5,9.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Mango,PERISHABLE,92,,5.0,20.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Mango,PERISHABLE,87,,5.5,19.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Mango,PERISHABLE,80,,6.0,19.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Mango,PERISHABLE,59,,6.5,18.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Fresh Strawberries,ULTRA,68,,5.0,5.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Fresh Strawberries,ULTRA,63,,5.5,4.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Fresh Strawberries,ULTRA,56,,6.0,4.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Fresh Strawberries,ULTRA,43,,6.5,3.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,5.0,535.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,5.5,534.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,87,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,5.0,535.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,5.5,534.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,87,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-ESMAD-A,Lima Jorge Chavez,Madrid Barajas,LIM,MAD,ES,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,29.0,241.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Green Coffee,NON_PERISHABLE,100,,29.0,336.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Ginger,SEMI,97,,29.0,61.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Grapes,PERISHABLE,76,,29.0,16.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Mandarin,PERISHABLE,76,,29.0,16.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Blueberries,PERISHABLE,76,,29.0,21.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Avocado,PERISHABLE,58,,29.0,1.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 29.0d >= shelf life 16d,,,,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 29.0d >= shelf life 25d,,,,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 29.0d >= shelf life 10d,,,,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,29.0,511.0,LOW,REF,AC
+PECLL-NLRTM-O,Callao,Rotterdam,PECLL,NLRTM,NL,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,29.0,511.0,LOW,REF,AC
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,5.0,265.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Cacao Beans,NON_PERISHABLE,100,,5.5,264.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Cacao Beans,NON_PERISHABLE,87,,6.5,263.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,5.0,360.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Green Coffee,NON_PERISHABLE,100,,5.5,359.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Green Coffee,NON_PERISHABLE,87,,6.5,358.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Ginger,SEMI,100,,5.0,85.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Ginger,SEMI,100,,5.5,84.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Ginger,SEMI,93,,6.0,84.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Ginger,SEMI,80,,6.5,83.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Grapes,PERISHABLE,92,,5.0,40.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Grapes,PERISHABLE,87,,5.5,39.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Grapes,PERISHABLE,80,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Grapes,PERISHABLE,67,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Mandarin,PERISHABLE,92,,5.0,40.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Mandarin,PERISHABLE,87,,5.5,39.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Mandarin,PERISHABLE,80,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Mandarin,PERISHABLE,67,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Blueberries,PERISHABLE,92,,5.0,45.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Blueberries,PERISHABLE,87,,5.5,44.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Blueberries,PERISHABLE,80,,6.0,44.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Blueberries,PERISHABLE,67,,6.5,43.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Avocado,PERISHABLE,92,,5.0,25.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Avocado,PERISHABLE,87,,5.5,24.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Avocado,PERISHABLE,80,,6.0,24.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Avocado,PERISHABLE,67,,6.5,23.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Asparagus,ULTRA,76,,5.0,11.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Asparagus,ULTRA,71,,5.5,10.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Asparagus,ULTRA,64,,6.0,10.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Asparagus,ULTRA,51,,6.5,9.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Mango,PERISHABLE,92,,5.0,20.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Mango,PERISHABLE,87,,5.5,19.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Mango,PERISHABLE,80,,6.0,19.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Mango,PERISHABLE,59,,6.5,18.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Fresh Strawberries,ULTRA,68,,5.0,5.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Fresh Strawberries,ULTRA,63,,5.5,4.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Fresh Strawberries,ULTRA,56,,6.0,4.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Fresh Strawberries,ULTRA,43,,6.5,3.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,5.0,535.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,5.5,534.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,87,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,5.0,535.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,5.5,534.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,87,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-NLAMS-A,Lima Jorge Chavez,Amsterdam Schiphol,LIM,AMS,NL,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,44.0,226.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Green Coffee,NON_PERISHABLE,95,,44.0,321.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Ginger,SEMI,80,,44.0,46.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Grapes,PERISHABLE,49,,44.0,1.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Mandarin,PERISHABLE,49,,44.0,1.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Blueberries,PERISHABLE,49,,44.0,6.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 44.0d >= shelf life 30d,,,,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 44.0d >= shelf life 16d,,,,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 44.0d >= shelf life 25d,,,,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 44.0d >= shelf life 10d,,,,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,44.0,496.0,MED,REF,REF
+PECLL-THLCH-O,Callao,Laem Chabang,PECLL,THLCH,TH,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,44.0,496.0,MED,REF,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,8.0,262.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Cacao Beans,NON_PERISHABLE,98,,8.5,261.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Cacao Beans,NON_PERISHABLE,91,,9.0,261.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Cacao Beans,NON_PERISHABLE,78,,9.5,260.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,8.0,357.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Green Coffee,NON_PERISHABLE,98,,8.5,356.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Green Coffee,NON_PERISHABLE,91,,9.0,356.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Green Coffee,NON_PERISHABLE,78,,9.5,355.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Ginger,SEMI,96,,8.0,82.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Ginger,SEMI,91,,8.5,81.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Ginger,SEMI,84,,9.0,81.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Ginger,SEMI,71,,9.5,80.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Grapes,PERISHABLE,83,,8.0,37.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Grapes,PERISHABLE,78,,8.5,36.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Grapes,PERISHABLE,71,,9.0,36.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Grapes,PERISHABLE,58,,9.5,35.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Mandarin,PERISHABLE,83,,8.0,37.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Mandarin,PERISHABLE,78,,8.5,36.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Mandarin,PERISHABLE,71,,9.0,36.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Mandarin,PERISHABLE,58,,9.5,35.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Blueberries,PERISHABLE,83,,8.0,42.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Blueberries,PERISHABLE,78,,8.5,41.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Blueberries,PERISHABLE,71,,9.0,41.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Blueberries,PERISHABLE,58,,9.5,40.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Avocado,PERISHABLE,75,,8.0,22.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Avocado,PERISHABLE,70,,8.5,21.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Avocado,PERISHABLE,63,,9.0,21.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Avocado,PERISHABLE,50,,9.5,20.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Asparagus,ULTRA,59,,8.0,8.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Asparagus,ULTRA,54,,8.5,7.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Asparagus,ULTRA,47,,9.0,7.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Asparagus,ULTRA,34,,9.5,6.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Mango,PERISHABLE,75,,8.0,17.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Mango,PERISHABLE,70,,8.5,16.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Mango,PERISHABLE,63,,9.0,16.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Mango,PERISHABLE,50,,9.5,15.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Fresh Strawberries,ULTRA,51,,8.0,2.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Fresh Strawberries,ULTRA,46,,8.5,1.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Fresh Strawberries,ULTRA,29,,9.0,1.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Fresh Strawberries,ULTRA,16,,9.5,0.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,8.0,532.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,98,,8.5,531.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,91,,9.0,531.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,78,,9.5,530.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,8.0,532.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,98,,8.5,531.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,91,,9.0,531.0,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,78,,9.5,530.5,MED,VERITRADE,REF
+PELIM-THBKK-A,Lima Jorge Chavez,Bangkok Suvarnabhumi,LIM,BKK,TH,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,15.0,255.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Green Coffee,NON_PERISHABLE,100,,15.0,350.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Ginger,SEMI,96,,15.0,75.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Grapes,PERISHABLE,75,,15.0,30.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Mandarin,PERISHABLE,75,,15.0,30.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Blueberries,PERISHABLE,75,,15.0,35.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Avocado,PERISHABLE,67,,15.0,15.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Asparagus,ULTRA,41,,15.0,1.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Mango,PERISHABLE,67,,15.0,10.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 15.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,15.0,525.0,MED,VERITRADE,REF
+PECLL-COBUN-O,Callao,Buenaventura,PECLL,COBUN,CO,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,15.0,525.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,7.0,263.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Cacao Beans,NON_PERISHABLE,98,,7.5,262.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Cacao Beans,NON_PERISHABLE,91,,8.0,262.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Cacao Beans,NON_PERISHABLE,78,,8.5,261.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,7.0,358.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Green Coffee,NON_PERISHABLE,98,,7.5,357.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Green Coffee,NON_PERISHABLE,91,,8.0,357.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Green Coffee,NON_PERISHABLE,78,,8.5,356.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Ginger,SEMI,96,,7.0,83.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Ginger,SEMI,91,,7.5,82.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Ginger,SEMI,84,,8.0,82.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Ginger,SEMI,71,,8.5,81.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Grapes,PERISHABLE,83,,7.0,38.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Grapes,PERISHABLE,78,,7.5,37.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Grapes,PERISHABLE,71,,8.0,37.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Grapes,PERISHABLE,58,,8.5,36.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Mandarin,PERISHABLE,83,,7.0,38.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Mandarin,PERISHABLE,78,,7.5,37.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Mandarin,PERISHABLE,71,,8.0,37.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Mandarin,PERISHABLE,58,,8.5,36.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Blueberries,PERISHABLE,83,,7.0,43.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Blueberries,PERISHABLE,78,,7.5,42.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Blueberries,PERISHABLE,71,,8.0,42.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Blueberries,PERISHABLE,58,,8.5,41.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Avocado,PERISHABLE,83,,7.0,23.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Avocado,PERISHABLE,78,,7.5,22.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Avocado,PERISHABLE,63,,8.0,22.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Avocado,PERISHABLE,50,,8.5,21.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Asparagus,ULTRA,67,,7.0,9.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Asparagus,ULTRA,54,,7.5,8.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Asparagus,ULTRA,47,,8.0,8.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Asparagus,ULTRA,34,,8.5,7.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Mango,PERISHABLE,75,,7.0,18.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Mango,PERISHABLE,70,,7.5,17.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Mango,PERISHABLE,63,,8.0,17.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Mango,PERISHABLE,50,,8.5,16.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Fresh Strawberries,ULTRA,51,,7.0,3.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Fresh Strawberries,ULTRA,46,,7.5,2.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Fresh Strawberries,ULTRA,39,,8.0,2.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Fresh Strawberries,ULTRA,26,,8.5,1.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,7.0,533.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,98,,7.5,532.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,91,,8.0,532.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,78,,8.5,531.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,7.0,533.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,98,,7.5,532.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,91,,8.0,532.0,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,78,,8.5,531.5,MED,VERITRADE,REF
+PELIM-COBOG-A,Lima Jorge Chavez,El Dorado / Bogota,LIM,BOG,CO,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,39.0,231.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Green Coffee,NON_PERISHABLE,95,,39.0,326.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Ginger,SEMI,88,,39.0,51.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Grapes,PERISHABLE,49,,39.0,6.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Mandarin,PERISHABLE,49,,39.0,6.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Blueberries,PERISHABLE,59,,39.0,11.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 39.0d >= shelf life 30d,,,,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 39.0d >= shelf life 16d,,,,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 39.0d >= shelf life 25d,,,,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 39.0d >= shelf life 10d,,,,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,39.0,501.0,MED,REF,REF
+PECLL-AEJEA-O,Callao,Jebel Ali,PECLL,AEJEA,AE,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,39.0,501.0,MED,REF,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Cacao Beans,NON_PERISHABLE,98,,6.5,263.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Cacao Beans,NON_PERISHABLE,91,,7.0,263.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Cacao Beans,NON_PERISHABLE,78,,7.5,262.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Green Coffee,NON_PERISHABLE,98,,6.5,358.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Green Coffee,NON_PERISHABLE,91,,7.0,358.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Green Coffee,NON_PERISHABLE,78,,7.5,357.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Ginger,SEMI,96,,6.0,84.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Ginger,SEMI,91,,6.5,83.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Ginger,SEMI,84,,7.0,83.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Ginger,SEMI,71,,7.5,82.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Grapes,PERISHABLE,83,,6.0,39.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Grapes,PERISHABLE,78,,6.5,38.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Grapes,PERISHABLE,71,,7.0,38.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Grapes,PERISHABLE,58,,7.5,37.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Mandarin,PERISHABLE,83,,6.0,39.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Mandarin,PERISHABLE,78,,6.5,38.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Mandarin,PERISHABLE,71,,7.0,38.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Mandarin,PERISHABLE,58,,7.5,37.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Blueberries,PERISHABLE,83,,6.0,44.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Blueberries,PERISHABLE,78,,6.5,43.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Blueberries,PERISHABLE,71,,7.0,43.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Blueberries,PERISHABLE,58,,7.5,42.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Avocado,PERISHABLE,83,,6.0,24.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Avocado,PERISHABLE,78,,6.5,23.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Avocado,PERISHABLE,71,,7.0,23.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Avocado,PERISHABLE,58,,7.5,22.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Asparagus,ULTRA,67,,6.0,10.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Asparagus,ULTRA,62,,6.5,9.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Asparagus,ULTRA,55,,7.0,9.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Asparagus,ULTRA,34,,7.5,8.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Mango,PERISHABLE,83,,6.0,19.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Mango,PERISHABLE,70,,6.5,18.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Mango,PERISHABLE,63,,7.0,18.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Mango,PERISHABLE,50,,7.5,17.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Fresh Strawberries,ULTRA,59,,6.0,4.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Fresh Strawberries,ULTRA,54,,6.5,3.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Fresh Strawberries,ULTRA,39,,7.0,3.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Fresh Strawberries,ULTRA,26,,7.5,2.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,98,,6.5,533.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,91,,7.0,533.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,78,,7.5,532.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,98,,6.5,533.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,91,,7.0,533.0,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,78,,7.5,532.5,MED,VERITRADE,REF
+PELIM-AEDXB-A,Lima Jorge Chavez,Dubai Intl,LIM,DXB,AE,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Cacao Beans,NON_PERISHABLE,100,,6.5,263.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Cacao Beans,NON_PERISHABLE,100,,7.0,263.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Cacao Beans,NON_PERISHABLE,87,,7.5,262.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Green Coffee,NON_PERISHABLE,100,,6.5,358.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Green Coffee,NON_PERISHABLE,100,,7.0,358.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Green Coffee,NON_PERISHABLE,87,,7.5,357.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Ginger,SEMI,100,,6.0,84.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Ginger,SEMI,100,,6.5,83.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Ginger,SEMI,93,,7.0,83.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Ginger,SEMI,80,,7.5,82.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Grapes,PERISHABLE,92,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Grapes,PERISHABLE,87,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Grapes,PERISHABLE,80,,7.0,38.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Grapes,PERISHABLE,67,,7.5,37.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Mandarin,PERISHABLE,92,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Mandarin,PERISHABLE,87,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Mandarin,PERISHABLE,80,,7.0,38.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Mandarin,PERISHABLE,67,,7.5,37.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Blueberries,PERISHABLE,92,,6.0,44.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Blueberries,PERISHABLE,87,,6.5,43.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Blueberries,PERISHABLE,80,,7.0,43.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Blueberries,PERISHABLE,67,,7.5,42.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Avocado,PERISHABLE,92,,6.0,24.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Avocado,PERISHABLE,87,,6.5,23.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Avocado,PERISHABLE,80,,7.0,23.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Avocado,PERISHABLE,67,,7.5,22.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Asparagus,ULTRA,76,,6.0,10.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Asparagus,ULTRA,71,,6.5,9.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Asparagus,ULTRA,64,,7.0,9.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Asparagus,ULTRA,43,,7.5,8.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Mango,PERISHABLE,92,,6.0,19.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Mango,PERISHABLE,79,,6.5,18.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Mango,PERISHABLE,72,,7.0,18.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Mango,PERISHABLE,59,,7.5,17.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Fresh Strawberries,ULTRA,68,,6.0,4.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Fresh Strawberries,ULTRA,63,,6.5,3.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Fresh Strawberries,ULTRA,48,,7.0,3.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Fresh Strawberries,ULTRA,35,,7.5,2.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,7.0,533.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,87,,7.5,532.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,7.0,533.0,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,87,,7.5,532.5,LOW,VERITRADE,REF
+PELIM-DEFRA-A,Lima Jorge Chavez,Frankfurt am Main,LIM,FRA,DE,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,33.0,237.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Green Coffee,NON_PERISHABLE,100,,33.0,332.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Ginger,SEMI,97,,33.0,57.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Grapes,PERISHABLE,68,,33.0,12.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Mandarin,PERISHABLE,68,,33.0,12.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Blueberries,PERISHABLE,68,,33.0,17.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 33.0d >= shelf life 30d,,,,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 33.0d >= shelf life 16d,,,,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 33.0d >= shelf life 25d,,,,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 33.0d >= shelf life 10d,,,,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,33.0,507.0,LOW,REF,REF
+PECLL-PLGDN-O,Callao,Gdansk,PECLL,PLGDN,PL,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,33.0,507.0,LOW,REF,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Cacao Beans,NON_PERISHABLE,98,,6.5,263.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Cacao Beans,NON_PERISHABLE,91,,7.0,263.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Cacao Beans,NON_PERISHABLE,78,,7.5,262.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Green Coffee,NON_PERISHABLE,98,,6.5,358.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Green Coffee,NON_PERISHABLE,91,,7.0,358.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Green Coffee,NON_PERISHABLE,78,,7.5,357.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Ginger,SEMI,96,,6.0,84.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Ginger,SEMI,91,,6.5,83.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Ginger,SEMI,84,,7.0,83.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Ginger,SEMI,71,,7.5,82.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Grapes,PERISHABLE,83,,6.0,39.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Grapes,PERISHABLE,78,,6.5,38.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Grapes,PERISHABLE,71,,7.0,38.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Grapes,PERISHABLE,58,,7.5,37.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Mandarin,PERISHABLE,83,,6.0,39.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Mandarin,PERISHABLE,78,,6.5,38.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Mandarin,PERISHABLE,71,,7.0,38.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Mandarin,PERISHABLE,58,,7.5,37.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Blueberries,PERISHABLE,83,,6.0,44.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Blueberries,PERISHABLE,78,,6.5,43.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Blueberries,PERISHABLE,71,,7.0,43.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Blueberries,PERISHABLE,58,,7.5,42.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Avocado,PERISHABLE,83,,6.0,24.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Avocado,PERISHABLE,78,,6.5,23.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Avocado,PERISHABLE,71,,7.0,23.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Avocado,PERISHABLE,58,,7.5,22.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Asparagus,ULTRA,67,,6.0,10.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Asparagus,ULTRA,62,,6.5,9.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Asparagus,ULTRA,55,,7.0,9.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Asparagus,ULTRA,34,,7.5,8.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Mango,PERISHABLE,83,,6.0,19.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Mango,PERISHABLE,70,,6.5,18.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Mango,PERISHABLE,63,,7.0,18.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Mango,PERISHABLE,50,,7.5,17.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Fresh Strawberries,ULTRA,59,,6.0,4.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Fresh Strawberries,ULTRA,54,,6.5,3.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Fresh Strawberries,ULTRA,39,,7.0,3.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Fresh Strawberries,ULTRA,26,,7.5,2.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,98,,6.5,533.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,91,,7.0,533.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,78,,7.5,532.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,98,,6.5,533.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,91,,7.0,533.0,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,78,,7.5,532.5,MED,VERITRADE,REF
+PELIM-BRGRU-A,Lima Jorge Chavez,Sao Paulo Guarulhos,LIM,GRU,BR,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,20.0,250.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Green Coffee,NON_PERISHABLE,100,,20.0,345.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Ginger,SEMI,100,,20.0,70.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Grapes,PERISHABLE,84,,20.0,25.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Mandarin,PERISHABLE,84,,20.0,25.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Blueberries,PERISHABLE,84,,20.0,30.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Avocado,PERISHABLE,68,,20.0,10.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 20.0d >= shelf life 16d,,,,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Mango,PERISHABLE,68,,20.0,5.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 20.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,20.0,520.0,LOW,VERITRADE,REF
+PECLL-USHUE-O,Callao,Port Hueneme,PECLL,USHUE,US,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,20.0,520.0,LOW,VERITRADE,REF
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,40.0,230.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Green Coffee,NON_PERISHABLE,95,,40.0,325.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Ginger,SEMI,88,,40.0,50.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Grapes,PERISHABLE,49,,40.0,5.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Mandarin,PERISHABLE,49,,40.0,5.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Blueberries,PERISHABLE,59,,40.0,10.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 40.0d >= shelf life 30d,,,,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 40.0d >= shelf life 16d,,,,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 40.0d >= shelf life 25d,,,,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 40.0d >= shelf life 10d,,,,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,40.0,500.0,MED,VERITRADE,AC
+PECLL-TWKHH-O,Callao,Kaohsiung,PECLL,TWKHH,TW,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,40.0,500.0,MED,VERITRADE,AC
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,34.0,236.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Green Coffee,NON_PERISHABLE,95,,34.0,331.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Ginger,SEMI,88,,34.0,56.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Grapes,PERISHABLE,59,,34.0,11.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Mandarin,PERISHABLE,59,,34.0,11.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Blueberries,PERISHABLE,59,,34.0,16.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 34.0d >= shelf life 30d,,,,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 34.0d >= shelf life 16d,,,,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 34.0d >= shelf life 25d,,,,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 34.0d >= shelf life 10d,,,,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,34.0,506.0,MED,REF,NEEDS_CONFIRM
+PECHY-TWKHH-O,Chancay,Kaohsiung,PECHY,TWKHH,TW,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,34.0,506.0,MED,REF,NEEDS_CONFIRM
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,29.0,241.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Green Coffee,NON_PERISHABLE,100,,29.0,336.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Ginger,SEMI,97,,29.0,61.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Grapes,PERISHABLE,76,,29.0,16.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Mandarin,PERISHABLE,76,,29.0,16.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Blueberries,PERISHABLE,76,,29.0,21.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Avocado,PERISHABLE,58,,29.0,1.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 29.0d >= shelf life 16d,,,,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 29.0d >= shelf life 25d,,,,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 29.0d >= shelf life 10d,,,,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,29.0,511.0,LOW,REF,REF
+PECLL-PTLIS-O,Callao,Lisbon,PECLL,PTLIS/LIS,PT,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,29.0,511.0,LOW,REF,REF
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,29.0,241.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Green Coffee,NON_PERISHABLE,100,,29.0,336.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Ginger,SEMI,88,,29.0,61.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Grapes,PERISHABLE,67,,29.0,16.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Mandarin,PERISHABLE,67,,29.0,16.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Blueberries,PERISHABLE,67,,29.0,21.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Avocado,PERISHABLE,49,,29.0,1.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 29.0d >= shelf life 16d,,,,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 29.0d >= shelf life 25d,,,,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 29.0d >= shelf life 10d,,,,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,29.0,511.0,MED,REF,NEEDS_CONFIRM
+PECLL-ESAGP-O,Callao,Malaga,PECLL,ESAGP/AGP,ES,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,29.0,511.0,MED,REF,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,15.0,255.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Green Coffee,NON_PERISHABLE,100,,15.0,350.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Ginger,SEMI,100,,15.0,75.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Grapes,PERISHABLE,84,,15.0,30.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Mandarin,PERISHABLE,84,,15.0,30.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Blueberries,PERISHABLE,84,,15.0,35.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Avocado,PERISHABLE,76,,15.0,15.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Asparagus,ULTRA,50,,15.0,1.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Mango,PERISHABLE,76,,15.0,10.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 15.0d >= shelf life 10d,,,,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,15.0,525.0,LOW,VERITRADE,NEEDS_CONFIRM
+PECLL-USMIA-O,Callao,Miami,PECLL,USMIA/MIA,US,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,15.0,525.0,LOW,VERITRADE,NEEDS_CONFIRM
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,5.0,265.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Cacao Beans,NON_PERISHABLE,100,,5.5,264.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Cacao Beans,NON_PERISHABLE,87,,6.5,263.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,5.0,360.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Green Coffee,NON_PERISHABLE,100,,5.5,359.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Green Coffee,NON_PERISHABLE,87,,6.5,358.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Ginger,SEMI,100,,5.0,85.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Ginger,SEMI,100,,5.5,84.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Ginger,SEMI,93,,6.0,84.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Ginger,SEMI,80,,6.5,83.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Grapes,PERISHABLE,92,,5.0,40.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Grapes,PERISHABLE,87,,5.5,39.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Grapes,PERISHABLE,80,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Grapes,PERISHABLE,67,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Mandarin,PERISHABLE,92,,5.0,40.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Mandarin,PERISHABLE,87,,5.5,39.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Mandarin,PERISHABLE,80,,6.0,39.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Mandarin,PERISHABLE,67,,6.5,38.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Blueberries,PERISHABLE,92,,5.0,45.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Blueberries,PERISHABLE,87,,5.5,44.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Blueberries,PERISHABLE,80,,6.0,44.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Blueberries,PERISHABLE,67,,6.5,43.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Avocado,PERISHABLE,92,,5.0,25.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Avocado,PERISHABLE,87,,5.5,24.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Avocado,PERISHABLE,80,,6.0,24.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Avocado,PERISHABLE,67,,6.5,23.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Asparagus,ULTRA,76,,5.0,11.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Asparagus,ULTRA,71,,5.5,10.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Asparagus,ULTRA,64,,6.0,10.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Asparagus,ULTRA,51,,6.5,9.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Mango,PERISHABLE,92,,5.0,20.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Mango,PERISHABLE,87,,5.5,19.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Mango,PERISHABLE,80,,6.0,19.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Mango,PERISHABLE,59,,6.5,18.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Fresh Strawberries,ULTRA,68,,5.0,5.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Fresh Strawberries,ULTRA,63,,5.5,4.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Fresh Strawberries,ULTRA,56,,6.0,4.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Fresh Strawberries,ULTRA,43,,6.5,3.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,5.0,535.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,5.5,534.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,87,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,5.0,535.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,5.5,534.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,87,,6.5,533.5,LOW,VERITRADE,REF
+PELIM-USMIA-A,Lima Jorge Chavez,Miami,LIM,USMIA/MIA,US,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,41.0,229.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Green Coffee,NON_PERISHABLE,95,,41.0,324.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Ginger,SEMI,80,,41.0,49.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Grapes,PERISHABLE,49,,41.0,4.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Mandarin,PERISHABLE,49,,41.0,4.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Blueberries,PERISHABLE,59,,41.0,9.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 41.0d >= shelf life 30d,,,,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 41.0d >= shelf life 16d,,,,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 41.0d >= shelf life 25d,,,,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 41.0d >= shelf life 10d,,,,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,41.0,499.0,MED,REF,REF
+PECLL-INNSA-O,Callao,Nhava Sheva (Mumbai),PECLL,INNSA,IN,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,41.0,499.0,MED,REF,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,11.0,259.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Cacao Beans,NON_PERISHABLE,98,,11.5,258.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Cacao Beans,NON_PERISHABLE,91,,12.0,258.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Cacao Beans,NON_PERISHABLE,78,,12.5,257.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,11.0,354.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Green Coffee,NON_PERISHABLE,98,,11.5,353.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Green Coffee,NON_PERISHABLE,91,,12.0,353.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Green Coffee,NON_PERISHABLE,78,,12.5,352.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Ginger,SEMI,96,,11.0,79.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Ginger,SEMI,91,,11.5,78.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Ginger,SEMI,84,,12.0,78.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Ginger,SEMI,71,,12.5,77.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Grapes,PERISHABLE,83,,11.0,34.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Grapes,PERISHABLE,70,,11.5,33.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Grapes,PERISHABLE,63,,12.0,33.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Grapes,PERISHABLE,50,,12.5,32.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Mandarin,PERISHABLE,83,,11.0,34.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Mandarin,PERISHABLE,70,,11.5,33.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Mandarin,PERISHABLE,63,,12.0,33.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Mandarin,PERISHABLE,50,,12.5,32.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Blueberries,PERISHABLE,83,,11.0,39.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Blueberries,PERISHABLE,78,,11.5,38.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Blueberries,PERISHABLE,71,,12.0,38.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Blueberries,PERISHABLE,58,,12.5,37.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Avocado,PERISHABLE,75,,11.0,19.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Avocado,PERISHABLE,70,,11.5,18.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Avocado,PERISHABLE,63,,12.0,18.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Avocado,PERISHABLE,50,,12.5,17.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Asparagus,ULTRA,51,,11.0,5.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Asparagus,ULTRA,46,,11.5,4.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Asparagus,ULTRA,39,,12.0,4.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Asparagus,ULTRA,26,,12.5,3.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Mango,PERISHABLE,75,,11.0,14.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Mango,PERISHABLE,62,,11.5,13.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Mango,PERISHABLE,55,,12.0,13.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Mango,PERISHABLE,42,,12.5,12.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Fresh Strawberries,ULTRA,VETO,effective transit 11.0d >= shelf life 10d,,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Fresh Strawberries,ULTRA,VETO,effective transit 11.5d >= shelf life 10d,,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Fresh Strawberries,ULTRA,VETO,effective transit 12.0d >= shelf life 10d,,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Fresh Strawberries,ULTRA,VETO,effective transit 12.5d >= shelf life 10d,,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,11.0,529.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,98,,11.5,528.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,91,,12.0,528.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,78,,12.5,527.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,11.0,529.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,98,,11.5,528.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,91,,12.0,528.0,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,78,,12.5,527.5,MED,VERITRADE,REF
+PELIM-INBOM-A,Lima Jorge Chavez,Mumbai Chhatrapati Shivaji,LIM,BOM,IN,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,13.0,257.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Green Coffee,NON_PERISHABLE,100,,13.0,352.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Ginger,SEMI,100,,13.0,77.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Grapes,PERISHABLE,84,,13.0,32.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Mandarin,PERISHABLE,84,,13.0,32.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Blueberries,PERISHABLE,84,,13.0,37.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Avocado,PERISHABLE,84,,13.0,17.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Asparagus,ULTRA,60,,13.0,3.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Mango,PERISHABLE,76,,13.0,12.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 13.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,13.0,527.0,LOW,VERITRADE,REF
+PECLL-CLSAI-O,Callao,San Antonio,PECLL,CLSAI,CL,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,13.0,527.0,LOW,VERITRADE,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,14.0,256.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Green Coffee,NON_PERISHABLE,100,,14.0,351.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Ginger,SEMI,100,,14.0,76.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Grapes,PERISHABLE,84,,14.0,31.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Mandarin,PERISHABLE,84,,14.0,31.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Blueberries,PERISHABLE,84,,14.0,36.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Avocado,PERISHABLE,76,,14.0,16.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Asparagus,ULTRA,50,,14.0,2.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Mango,PERISHABLE,76,,14.0,11.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 14.0d >= shelf life 10d,,,,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,14.0,526.0,LOW,REF,REF
+PECLL-CLSVE-O,Callao,San Vicente,PECLL,CLSVE,CL,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,14.0,526.0,LOW,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Cacao Beans,NON_PERISHABLE,77,,45.0,225.0,HIGH,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Green Coffee,NON_PERISHABLE,77,,45.0,320.0,HIGH,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Ginger,SEMI,62,,45.0,45.0,HIGH,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Grapes,PERISHABLE,VETO,effective transit 45.0d >= shelf life 45d,,,,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Mandarin,PERISHABLE,VETO,effective transit 45.0d >= shelf life 45d,,,,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Blueberries,PERISHABLE,31,,45.0,5.0,HIGH,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 45.0d >= shelf life 30d,,,,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 45.0d >= shelf life 16d,,,,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 45.0d >= shelf life 25d,,,,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 45.0d >= shelf life 10d,,,,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,77,,45.0,495.0,HIGH,REF,REF
+PECLL-RULED-O,Callao,St Petersburg,PECLL,RULED,RU,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,77,,45.0,495.0,HIGH,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Cacao Beans,NON_PERISHABLE,77,,45.0,225.0,HIGH,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Green Coffee,NON_PERISHABLE,77,,45.0,320.0,HIGH,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Ginger,SEMI,62,,45.0,45.0,HIGH,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Grapes,PERISHABLE,VETO,effective transit 45.0d >= shelf life 45d,,,,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Mandarin,PERISHABLE,VETO,effective transit 45.0d >= shelf life 45d,,,,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Blueberries,PERISHABLE,31,,45.0,5.0,HIGH,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 45.0d >= shelf life 30d,,,,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 45.0d >= shelf life 16d,,,,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 45.0d >= shelf life 25d,,,,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 45.0d >= shelf life 10d,,,,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,77,,45.0,495.0,HIGH,REF,REF
+PEPBO-RULED-O,Puerto Bolivar,St Petersburg,ECPBO,RULED,RU,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,77,,45.0,495.0,HIGH,REF,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Cacao Beans,NON_PERISHABLE,85,,8.0,262.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Cacao Beans,NON_PERISHABLE,80,,8.5,261.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Cacao Beans,NON_PERISHABLE,73,,9.0,261.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Cacao Beans,NON_PERISHABLE,60,,9.5,260.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Green Coffee,NON_PERISHABLE,85,,8.0,357.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Green Coffee,NON_PERISHABLE,80,,8.5,356.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Green Coffee,NON_PERISHABLE,73,,9.0,356.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Green Coffee,NON_PERISHABLE,60,,9.5,355.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Ginger,SEMI,78,,8.0,82.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Ginger,SEMI,73,,8.5,81.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Ginger,SEMI,66,,9.0,81.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Ginger,SEMI,53,,9.5,80.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Grapes,PERISHABLE,65,,8.0,37.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Grapes,PERISHABLE,60,,8.5,36.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Grapes,PERISHABLE,53,,9.0,36.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Grapes,PERISHABLE,40,,9.5,35.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Mandarin,PERISHABLE,65,,8.0,37.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Mandarin,PERISHABLE,60,,8.5,36.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Mandarin,PERISHABLE,53,,9.0,36.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Mandarin,PERISHABLE,40,,9.5,35.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Blueberries,PERISHABLE,65,,8.0,42.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Blueberries,PERISHABLE,60,,8.5,41.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Blueberries,PERISHABLE,53,,9.0,41.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Blueberries,PERISHABLE,40,,9.5,40.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Avocado,PERISHABLE,57,,8.0,22.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Avocado,PERISHABLE,52,,8.5,21.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Avocado,PERISHABLE,45,,9.0,21.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Avocado,PERISHABLE,32,,9.5,20.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Asparagus,ULTRA,41,,8.0,8.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Asparagus,ULTRA,36,,8.5,7.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Asparagus,ULTRA,29,,9.0,7.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Asparagus,ULTRA,16,,9.5,6.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Mango,PERISHABLE,57,,8.0,17.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Mango,PERISHABLE,52,,8.5,16.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Mango,PERISHABLE,45,,9.0,16.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Mango,PERISHABLE,32,,9.5,15.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Fresh Strawberries,ULTRA,33,,8.0,2.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Fresh Strawberries,ULTRA,28,,8.5,1.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Fresh Strawberries,ULTRA,11,,9.0,1.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Fresh Strawberries,ULTRA,0,,9.5,0.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,85,,8.0,532.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,80,,8.5,531.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,73,,9.0,531.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,60,,9.5,530.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,85,,8.0,532.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,80,,8.5,531.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,73,,9.0,531.0,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,60,,9.5,530.5,HIGH,VERITRADE,REF
+PELIM-ILTLV-A,Lima Jorge Chavez,Tel Aviv Ben Gurion,LIM,TLV,IL,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,VERITRADE,REF
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Cacao Beans,NON_PERISHABLE,77,,48.0,222.0,HIGH,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Green Coffee,NON_PERISHABLE,77,,48.0,317.0,HIGH,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Ginger,SEMI,62,,48.0,42.0,HIGH,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Grapes,PERISHABLE,VETO,effective transit 48.0d >= shelf life 45d,,,,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Mandarin,PERISHABLE,VETO,effective transit 48.0d >= shelf life 45d,,,,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Blueberries,PERISHABLE,31,,48.0,2.0,HIGH,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 48.0d >= shelf life 30d,,,,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 48.0d >= shelf life 16d,,,,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 48.0d >= shelf life 25d,,,,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 48.0d >= shelf life 10d,,,,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,77,,48.0,492.0,HIGH,NO_EVIDENCE,AC
+PECLL-ILASH-O,Callao,Ashdod,PECLL,ILASH,IL,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,77,,48.0,492.0,HIGH,NO_EVIDENCE,AC
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,27.0,243.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Green Coffee,NON_PERISHABLE,100,,27.0,338.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Ginger,SEMI,97,,27.0,63.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Grapes,PERISHABLE,76,,27.0,18.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Mandarin,PERISHABLE,76,,27.0,18.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Blueberries,PERISHABLE,76,,27.0,23.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Avocado,PERISHABLE,58,,27.0,3.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 27.0d >= shelf life 16d,,,,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 27.0d >= shelf life 25d,,,,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 27.0d >= shelf life 10d,,,,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,27.0,513.0,LOW,REF,REF
+PECLL-ESVLC-O,Callao,Valencia,PECLL,ESVLC,ES,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,27.0,513.0,LOW,REF,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,23.0,247.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Green Coffee,NON_PERISHABLE,100,,23.0,342.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Ginger,SEMI,97,,23.0,67.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Grapes,PERISHABLE,76,,23.0,22.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Mandarin,PERISHABLE,76,,23.0,22.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Blueberries,PERISHABLE,76,,23.0,27.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Avocado,PERISHABLE,68,,23.0,7.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 23.0d >= shelf life 16d,,,,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Mango,PERISHABLE,58,,23.0,2.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 23.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,23.0,517.0,LOW,VERITRADE,REF
+PECLL-CAVAN-O,Callao,Vancouver BC,PECLL,CAVAN/YVR,CA,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,23.0,517.0,LOW,VERITRADE,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Cacao Beans,NON_PERISHABLE,100,,6.0,264.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Cacao Beans,NON_PERISHABLE,100,,6.5,263.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Cacao Beans,NON_PERISHABLE,100,,7.0,263.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Cacao Beans,NON_PERISHABLE,87,,7.5,262.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Cacao Beans,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Green Coffee,NON_PERISHABLE,100,,6.0,359.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Green Coffee,NON_PERISHABLE,100,,6.5,358.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Green Coffee,NON_PERISHABLE,100,,7.0,358.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Green Coffee,NON_PERISHABLE,87,,7.5,357.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Green Coffee,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Ginger,SEMI,100,,6.0,84.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Ginger,SEMI,100,,6.5,83.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Ginger,SEMI,93,,7.0,83.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Ginger,SEMI,80,,7.5,82.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Ginger,SEMI,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Grapes,PERISHABLE,92,,6.0,39.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Grapes,PERISHABLE,87,,6.5,38.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Grapes,PERISHABLE,80,,7.0,38.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Grapes,PERISHABLE,67,,7.5,37.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Grapes,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Mandarin,PERISHABLE,92,,6.0,39.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Mandarin,PERISHABLE,87,,6.5,38.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Mandarin,PERISHABLE,80,,7.0,38.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Mandarin,PERISHABLE,67,,7.5,37.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Mandarin,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Blueberries,PERISHABLE,92,,6.0,44.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Blueberries,PERISHABLE,87,,6.5,43.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Blueberries,PERISHABLE,80,,7.0,43.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Blueberries,PERISHABLE,67,,7.5,42.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Blueberries,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Avocado,PERISHABLE,92,,6.0,24.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Avocado,PERISHABLE,87,,6.5,23.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Avocado,PERISHABLE,80,,7.0,23.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Avocado,PERISHABLE,67,,7.5,22.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Avocado,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Asparagus,ULTRA,76,,6.0,10.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Asparagus,ULTRA,71,,6.5,9.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Asparagus,ULTRA,64,,7.0,9.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Asparagus,ULTRA,43,,7.5,8.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Asparagus,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Mango,PERISHABLE,92,,6.0,19.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Mango,PERISHABLE,79,,6.5,18.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Mango,PERISHABLE,72,,7.0,18.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Mango,PERISHABLE,59,,7.5,17.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Mango,PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Fresh Strawberries,ULTRA,68,,6.0,4.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Fresh Strawberries,ULTRA,63,,6.5,3.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Fresh Strawberries,ULTRA,48,,7.0,3.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Fresh Strawberries,ULTRA,35,,7.5,2.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Fresh Strawberries,ULTRA,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.0,534.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,6.5,533.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Frozen Tropical Fruits,NON_PERISHABLE,100,,7.0,533.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Frozen Tropical Fruits,NON_PERISHABLE,87,,7.5,532.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Frozen Tropical Fruits,NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,0.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.0,534.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,1.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,6.5,533.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,2.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,7.0,533.0,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,3.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,87,,7.5,532.5,LOW,REF,REF
+PELIM-ATVIE-A,Lima Jorge Chavez,Vienna Schwechat,LIM,VIE,AT,AIR,4.0,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,VETO,AIR 4 stops > 3 (AC ruling),,,,REF,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,38.0,232.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Green Coffee,NON_PERISHABLE,95,,38.0,327.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Ginger,SEMI,88,,38.0,52.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Grapes,PERISHABLE,59,,38.0,7.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Mandarin,PERISHABLE,59,,38.0,7.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Blueberries,PERISHABLE,59,,38.0,12.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 38.0d >= shelf life 30d,,,,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 38.0d >= shelf life 16d,,,,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 38.0d >= shelf life 25d,,,,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 38.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,38.0,502.0,MED,VERITRADE,REF
+PECLL-CNSHA-O,Callao,Shanghai,PECLL,CNSHA,CN,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,38.0,502.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Cacao Beans,NON_PERISHABLE,95,,40.0,230.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Green Coffee,NON_PERISHABLE,95,,40.0,325.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Ginger,SEMI,88,,40.0,50.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Grapes,PERISHABLE,49,,40.0,5.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Mandarin,PERISHABLE,49,,40.0,5.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Blueberries,PERISHABLE,59,,40.0,10.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Avocado,PERISHABLE,VETO,effective transit 40.0d >= shelf life 30d,,,,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Asparagus,ULTRA,VETO,effective transit 40.0d >= shelf life 16d,,,,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Mango,PERISHABLE,VETO,effective transit 40.0d >= shelf life 25d,,,,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 40.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,95,,40.0,500.0,MED,VERITRADE,REF
+PECLL-HKHKG-O,Callao,Hong Kong,PECLL,HKHKG/HKG,HK,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,95,,40.0,500.0,MED,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Cacao Beans,NON_PERISHABLE,100,,13.0,257.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Green Coffee,NON_PERISHABLE,100,,13.0,352.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Ginger,SEMI,100,,13.0,77.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Grapes,PERISHABLE,84,,13.0,32.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Mandarin,PERISHABLE,84,,13.0,32.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Blueberries,PERISHABLE,84,,13.0,37.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Avocado,PERISHABLE,84,,13.0,17.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Asparagus,ULTRA,60,,13.0,3.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Mango,PERISHABLE,76,,13.0,12.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Fresh Strawberries,ULTRA,VETO,effective transit 13.0d >= shelf life 10d,,,,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Frozen Tropical Fruits,NON_PERISHABLE,100,,13.0,527.0,LOW,VERITRADE,REF
+PECLL-CLVAP-O,Callao,Valparaiso,PECLL,CLVAP,CL,OCEAN,,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,100,,13.0,527.0,LOW,VERITRADE,REF

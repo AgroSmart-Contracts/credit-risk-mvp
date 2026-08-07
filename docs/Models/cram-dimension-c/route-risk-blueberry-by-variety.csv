@@ -1,0 +1,781 @@
+lane_id,pod,country,mode,stops,variety,variety_class,shelf_life_days,score,eff_days,headroom_days,veto_reason
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Sekoya Pop,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Magica,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Ventura,EUROPE_30d,30,58,27.0,3.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Sekoya,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Biloxi,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Abril Blue,EUROPE_30d,30,58,27.0,3.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Matias,EUROPE_30d,30,58,27.0,3.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Sekoya Beauty,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 27.0d >= shelf life 25.0d
+PECLL-ESALG-O,Algeciras,ES,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 27.0d >= shelf life 25.0d
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Sekoya Pop,TRAVELLER,50,92,5.0,45.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Sekoya Pop,TRAVELLER,50,87,5.5,44.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Sekoya Pop,TRAVELLER,50,80,6.0,44.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Sekoya Pop,TRAVELLER,50,67,6.5,43.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Magica,TRAVELLER,50,92,5.0,45.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Magica,TRAVELLER,50,87,5.5,44.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Magica,TRAVELLER,50,80,6.0,44.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Magica,TRAVELLER,50,67,6.5,43.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Ventura,EUROPE_30d,30,92,5.0,25.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Ventura,EUROPE_30d,30,87,5.5,24.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Ventura,EUROPE_30d,30,80,6.0,24.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Ventura,EUROPE_30d,30,67,6.5,23.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Sekoya,TRAVELLER,50,92,5.0,45.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Sekoya,TRAVELLER,50,87,5.5,44.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Sekoya,TRAVELLER,50,80,6.0,44.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Sekoya,TRAVELLER,50,67,6.5,43.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Biloxi,TRAVELLER,50,92,5.0,45.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Biloxi,TRAVELLER,50,87,5.5,44.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Biloxi,TRAVELLER,50,80,6.0,44.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Biloxi,TRAVELLER,50,67,6.5,43.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Abril Blue,EUROPE_30d,30,92,5.0,25.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Abril Blue,EUROPE_30d,30,87,5.5,24.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Abril Blue,EUROPE_30d,30,80,6.0,24.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Abril Blue,EUROPE_30d,30,67,6.5,23.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Matias,EUROPE_30d,30,92,5.0,25.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Matias,EUROPE_30d,30,87,5.5,24.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Matias,EUROPE_30d,30,80,6.0,24.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Matias,EUROPE_30d,30,67,6.5,23.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Sekoya Beauty,TRAVELLER,50,92,5.0,45.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Sekoya Beauty,TRAVELLER,50,87,5.5,44.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Sekoya Beauty,TRAVELLER,50,80,6.0,44.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Sekoya Beauty,TRAVELLER,50,67,6.5,43.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Alessia,LOW_TRAVEL,25,92,5.0,20.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Alessia,LOW_TRAVEL,25,87,5.5,19.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Alessia,LOW_TRAVEL,25,80,6.0,19.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Alessia,LOW_TRAVEL,25,59,6.5,18.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,0.0,Rocio,LOW_TRAVEL,25,92,5.0,20.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,1.0,Rocio,LOW_TRAVEL,25,87,5.5,19.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,2.0,Rocio,LOW_TRAVEL,25,80,6.0,19.0,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,3.0,Rocio,LOW_TRAVEL,25,59,6.5,18.5,
+PELIM-ESMAD-A,Madrid Barajas,ES,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Sekoya Pop,TRAVELLER,50,76,29.0,21.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Magica,TRAVELLER,50,76,29.0,21.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Ventura,EUROPE_30d,30,58,29.0,1.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Sekoya,TRAVELLER,50,76,29.0,21.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Biloxi,TRAVELLER,50,76,29.0,21.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Abril Blue,EUROPE_30d,30,58,29.0,1.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Matias,EUROPE_30d,30,58,29.0,1.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Sekoya Beauty,TRAVELLER,50,76,29.0,21.0,
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 29.0d >= shelf life 25.0d
+PECLL-NLRTM-O,Rotterdam,NL,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 29.0d >= shelf life 25.0d
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Sekoya Pop,TRAVELLER,50,92,5.0,45.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Sekoya Pop,TRAVELLER,50,87,5.5,44.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Sekoya Pop,TRAVELLER,50,80,6.0,44.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Sekoya Pop,TRAVELLER,50,67,6.5,43.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Magica,TRAVELLER,50,92,5.0,45.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Magica,TRAVELLER,50,87,5.5,44.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Magica,TRAVELLER,50,80,6.0,44.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Magica,TRAVELLER,50,67,6.5,43.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Ventura,EUROPE_30d,30,92,5.0,25.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Ventura,EUROPE_30d,30,87,5.5,24.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Ventura,EUROPE_30d,30,80,6.0,24.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Ventura,EUROPE_30d,30,67,6.5,23.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Sekoya,TRAVELLER,50,92,5.0,45.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Sekoya,TRAVELLER,50,87,5.5,44.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Sekoya,TRAVELLER,50,80,6.0,44.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Sekoya,TRAVELLER,50,67,6.5,43.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Biloxi,TRAVELLER,50,92,5.0,45.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Biloxi,TRAVELLER,50,87,5.5,44.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Biloxi,TRAVELLER,50,80,6.0,44.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Biloxi,TRAVELLER,50,67,6.5,43.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Abril Blue,EUROPE_30d,30,92,5.0,25.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Abril Blue,EUROPE_30d,30,87,5.5,24.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Abril Blue,EUROPE_30d,30,80,6.0,24.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Abril Blue,EUROPE_30d,30,67,6.5,23.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Matias,EUROPE_30d,30,92,5.0,25.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Matias,EUROPE_30d,30,87,5.5,24.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Matias,EUROPE_30d,30,80,6.0,24.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Matias,EUROPE_30d,30,67,6.5,23.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Sekoya Beauty,TRAVELLER,50,92,5.0,45.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Sekoya Beauty,TRAVELLER,50,87,5.5,44.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Sekoya Beauty,TRAVELLER,50,80,6.0,44.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Sekoya Beauty,TRAVELLER,50,67,6.5,43.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Alessia,LOW_TRAVEL,25,92,5.0,20.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Alessia,LOW_TRAVEL,25,87,5.5,19.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Alessia,LOW_TRAVEL,25,80,6.0,19.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Alessia,LOW_TRAVEL,25,59,6.5,18.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,0.0,Rocio,LOW_TRAVEL,25,92,5.0,20.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,1.0,Rocio,LOW_TRAVEL,25,87,5.5,19.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,2.0,Rocio,LOW_TRAVEL,25,80,6.0,19.0,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,3.0,Rocio,LOW_TRAVEL,25,59,6.5,18.5,
+PELIM-NLAMS-A,Amsterdam Schiphol,NL,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Sekoya Pop,TRAVELLER,50,49,44.0,6.0,
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Magica,TRAVELLER,50,49,44.0,6.0,
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 44.0d >= shelf life 30.0d
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Sekoya,TRAVELLER,50,49,44.0,6.0,
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Biloxi,TRAVELLER,50,49,44.0,6.0,
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 44.0d >= shelf life 30.0d
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 44.0d >= shelf life 30.0d
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Sekoya Beauty,TRAVELLER,50,49,44.0,6.0,
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 44.0d >= shelf life 25.0d
+PECLL-THLCH-O,Laem Chabang,TH,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 44.0d >= shelf life 25.0d
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Sekoya Pop,TRAVELLER,50,83,8.0,42.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Sekoya Pop,TRAVELLER,50,78,8.5,41.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Sekoya Pop,TRAVELLER,50,71,9.0,41.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Sekoya Pop,TRAVELLER,50,58,9.5,40.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Magica,TRAVELLER,50,83,8.0,42.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Magica,TRAVELLER,50,78,8.5,41.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Magica,TRAVELLER,50,71,9.0,41.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Magica,TRAVELLER,50,58,9.5,40.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Ventura,EUROPE_30d,30,75,8.0,22.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Ventura,EUROPE_30d,30,70,8.5,21.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Ventura,EUROPE_30d,30,63,9.0,21.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Ventura,EUROPE_30d,30,50,9.5,20.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Sekoya,TRAVELLER,50,83,8.0,42.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Sekoya,TRAVELLER,50,78,8.5,41.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Sekoya,TRAVELLER,50,71,9.0,41.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Sekoya,TRAVELLER,50,58,9.5,40.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Biloxi,TRAVELLER,50,83,8.0,42.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Biloxi,TRAVELLER,50,78,8.5,41.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Biloxi,TRAVELLER,50,71,9.0,41.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Biloxi,TRAVELLER,50,58,9.5,40.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Abril Blue,EUROPE_30d,30,75,8.0,22.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Abril Blue,EUROPE_30d,30,70,8.5,21.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Abril Blue,EUROPE_30d,30,63,9.0,21.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Abril Blue,EUROPE_30d,30,50,9.5,20.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Matias,EUROPE_30d,30,75,8.0,22.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Matias,EUROPE_30d,30,70,8.5,21.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Matias,EUROPE_30d,30,63,9.0,21.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Matias,EUROPE_30d,30,50,9.5,20.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Sekoya Beauty,TRAVELLER,50,83,8.0,42.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Sekoya Beauty,TRAVELLER,50,78,8.5,41.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Sekoya Beauty,TRAVELLER,50,71,9.0,41.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Sekoya Beauty,TRAVELLER,50,58,9.5,40.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Alessia,LOW_TRAVEL,25,75,8.0,17.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Alessia,LOW_TRAVEL,25,70,8.5,16.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Alessia,LOW_TRAVEL,25,63,9.0,16.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Alessia,LOW_TRAVEL,25,50,9.5,15.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,0.0,Rocio,LOW_TRAVEL,25,75,8.0,17.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,1.0,Rocio,LOW_TRAVEL,25,70,8.5,16.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,2.0,Rocio,LOW_TRAVEL,25,63,9.0,16.0,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,3.0,Rocio,LOW_TRAVEL,25,50,9.5,15.5,
+PELIM-THBKK-A,Bangkok Suvarnabhumi,TH,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Sekoya Pop,TRAVELLER,50,75,15.0,35.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Magica,TRAVELLER,50,75,15.0,35.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Ventura,EUROPE_30d,30,67,15.0,15.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Sekoya,TRAVELLER,50,75,15.0,35.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Biloxi,TRAVELLER,50,75,15.0,35.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Abril Blue,EUROPE_30d,30,67,15.0,15.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Matias,EUROPE_30d,30,67,15.0,15.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Sekoya Beauty,TRAVELLER,50,75,15.0,35.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Alessia,LOW_TRAVEL,25,67,15.0,10.0,
+PECLL-COBUN-O,Buenaventura,CO,OCEAN,,Rocio,LOW_TRAVEL,25,67,15.0,10.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Sekoya Pop,TRAVELLER,50,83,7.0,43.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Sekoya Pop,TRAVELLER,50,78,7.5,42.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Sekoya Pop,TRAVELLER,50,71,8.0,42.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Sekoya Pop,TRAVELLER,50,58,8.5,41.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Magica,TRAVELLER,50,83,7.0,43.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Magica,TRAVELLER,50,78,7.5,42.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Magica,TRAVELLER,50,71,8.0,42.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Magica,TRAVELLER,50,58,8.5,41.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Ventura,EUROPE_30d,30,83,7.0,23.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Ventura,EUROPE_30d,30,78,7.5,22.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Ventura,EUROPE_30d,30,63,8.0,22.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Ventura,EUROPE_30d,30,50,8.5,21.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Sekoya,TRAVELLER,50,83,7.0,43.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Sekoya,TRAVELLER,50,78,7.5,42.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Sekoya,TRAVELLER,50,71,8.0,42.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Sekoya,TRAVELLER,50,58,8.5,41.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Biloxi,TRAVELLER,50,83,7.0,43.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Biloxi,TRAVELLER,50,78,7.5,42.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Biloxi,TRAVELLER,50,71,8.0,42.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Biloxi,TRAVELLER,50,58,8.5,41.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Abril Blue,EUROPE_30d,30,83,7.0,23.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Abril Blue,EUROPE_30d,30,78,7.5,22.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Abril Blue,EUROPE_30d,30,63,8.0,22.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Abril Blue,EUROPE_30d,30,50,8.5,21.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Matias,EUROPE_30d,30,83,7.0,23.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Matias,EUROPE_30d,30,78,7.5,22.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Matias,EUROPE_30d,30,63,8.0,22.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Matias,EUROPE_30d,30,50,8.5,21.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Sekoya Beauty,TRAVELLER,50,83,7.0,43.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Sekoya Beauty,TRAVELLER,50,78,7.5,42.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Sekoya Beauty,TRAVELLER,50,71,8.0,42.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Sekoya Beauty,TRAVELLER,50,58,8.5,41.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Alessia,LOW_TRAVEL,25,75,7.0,18.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Alessia,LOW_TRAVEL,25,70,7.5,17.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Alessia,LOW_TRAVEL,25,63,8.0,17.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Alessia,LOW_TRAVEL,25,50,8.5,16.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,0.0,Rocio,LOW_TRAVEL,25,75,7.0,18.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,1.0,Rocio,LOW_TRAVEL,25,70,7.5,17.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,2.0,Rocio,LOW_TRAVEL,25,63,8.0,17.0,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,3.0,Rocio,LOW_TRAVEL,25,50,8.5,16.5,
+PELIM-COBOG-A,El Dorado / Bogota,CO,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Sekoya Pop,TRAVELLER,50,59,39.0,11.0,
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Magica,TRAVELLER,50,59,39.0,11.0,
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 39.0d >= shelf life 30.0d
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Sekoya,TRAVELLER,50,59,39.0,11.0,
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Biloxi,TRAVELLER,50,59,39.0,11.0,
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 39.0d >= shelf life 30.0d
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 39.0d >= shelf life 30.0d
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Sekoya Beauty,TRAVELLER,50,59,39.0,11.0,
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 39.0d >= shelf life 25.0d
+PECLL-AEJEA-O,Jebel Ali,AE,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 39.0d >= shelf life 25.0d
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Sekoya Pop,TRAVELLER,50,83,6.0,44.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Sekoya Pop,TRAVELLER,50,78,6.5,43.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Sekoya Pop,TRAVELLER,50,71,7.0,43.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Sekoya Pop,TRAVELLER,50,58,7.5,42.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Magica,TRAVELLER,50,83,6.0,44.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Magica,TRAVELLER,50,78,6.5,43.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Magica,TRAVELLER,50,71,7.0,43.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Magica,TRAVELLER,50,58,7.5,42.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Ventura,EUROPE_30d,30,83,6.0,24.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Ventura,EUROPE_30d,30,78,6.5,23.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Ventura,EUROPE_30d,30,71,7.0,23.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Ventura,EUROPE_30d,30,58,7.5,22.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Sekoya,TRAVELLER,50,83,6.0,44.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Sekoya,TRAVELLER,50,78,6.5,43.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Sekoya,TRAVELLER,50,71,7.0,43.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Sekoya,TRAVELLER,50,58,7.5,42.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Biloxi,TRAVELLER,50,83,6.0,44.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Biloxi,TRAVELLER,50,78,6.5,43.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Biloxi,TRAVELLER,50,71,7.0,43.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Biloxi,TRAVELLER,50,58,7.5,42.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Abril Blue,EUROPE_30d,30,83,6.0,24.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Abril Blue,EUROPE_30d,30,78,6.5,23.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Abril Blue,EUROPE_30d,30,71,7.0,23.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Abril Blue,EUROPE_30d,30,58,7.5,22.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Matias,EUROPE_30d,30,83,6.0,24.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Matias,EUROPE_30d,30,78,6.5,23.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Matias,EUROPE_30d,30,71,7.0,23.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Matias,EUROPE_30d,30,58,7.5,22.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Sekoya Beauty,TRAVELLER,50,83,6.0,44.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Sekoya Beauty,TRAVELLER,50,78,6.5,43.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Sekoya Beauty,TRAVELLER,50,71,7.0,43.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Sekoya Beauty,TRAVELLER,50,58,7.5,42.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Alessia,LOW_TRAVEL,25,83,6.0,19.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Alessia,LOW_TRAVEL,25,70,6.5,18.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Alessia,LOW_TRAVEL,25,63,7.0,18.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Alessia,LOW_TRAVEL,25,50,7.5,17.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,0.0,Rocio,LOW_TRAVEL,25,83,6.0,19.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,1.0,Rocio,LOW_TRAVEL,25,70,6.5,18.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,2.0,Rocio,LOW_TRAVEL,25,63,7.0,18.0,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,3.0,Rocio,LOW_TRAVEL,25,50,7.5,17.5,
+PELIM-AEDXB-A,Dubai Intl,AE,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Sekoya Pop,TRAVELLER,50,92,6.0,44.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Sekoya Pop,TRAVELLER,50,87,6.5,43.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Sekoya Pop,TRAVELLER,50,80,7.0,43.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Sekoya Pop,TRAVELLER,50,67,7.5,42.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Magica,TRAVELLER,50,92,6.0,44.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Magica,TRAVELLER,50,87,6.5,43.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Magica,TRAVELLER,50,80,7.0,43.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Magica,TRAVELLER,50,67,7.5,42.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Ventura,EUROPE_30d,30,92,6.0,24.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Ventura,EUROPE_30d,30,87,6.5,23.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Ventura,EUROPE_30d,30,80,7.0,23.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Ventura,EUROPE_30d,30,67,7.5,22.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Sekoya,TRAVELLER,50,92,6.0,44.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Sekoya,TRAVELLER,50,87,6.5,43.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Sekoya,TRAVELLER,50,80,7.0,43.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Sekoya,TRAVELLER,50,67,7.5,42.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Biloxi,TRAVELLER,50,92,6.0,44.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Biloxi,TRAVELLER,50,87,6.5,43.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Biloxi,TRAVELLER,50,80,7.0,43.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Biloxi,TRAVELLER,50,67,7.5,42.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Abril Blue,EUROPE_30d,30,92,6.0,24.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Abril Blue,EUROPE_30d,30,87,6.5,23.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Abril Blue,EUROPE_30d,30,80,7.0,23.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Abril Blue,EUROPE_30d,30,67,7.5,22.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Matias,EUROPE_30d,30,92,6.0,24.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Matias,EUROPE_30d,30,87,6.5,23.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Matias,EUROPE_30d,30,80,7.0,23.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Matias,EUROPE_30d,30,67,7.5,22.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Sekoya Beauty,TRAVELLER,50,92,6.0,44.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Sekoya Beauty,TRAVELLER,50,87,6.5,43.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Sekoya Beauty,TRAVELLER,50,80,7.0,43.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Sekoya Beauty,TRAVELLER,50,67,7.5,42.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Alessia,LOW_TRAVEL,25,92,6.0,19.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Alessia,LOW_TRAVEL,25,79,6.5,18.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Alessia,LOW_TRAVEL,25,72,7.0,18.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Alessia,LOW_TRAVEL,25,59,7.5,17.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,0.0,Rocio,LOW_TRAVEL,25,92,6.0,19.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,1.0,Rocio,LOW_TRAVEL,25,79,6.5,18.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,2.0,Rocio,LOW_TRAVEL,25,72,7.0,18.0,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,3.0,Rocio,LOW_TRAVEL,25,59,7.5,17.5,
+PELIM-DEFRA-A,Frankfurt am Main,DE,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Sekoya Pop,TRAVELLER,50,68,33.0,17.0,
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Magica,TRAVELLER,50,68,33.0,17.0,
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 33.0d >= shelf life 30.0d
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Sekoya,TRAVELLER,50,68,33.0,17.0,
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Biloxi,TRAVELLER,50,68,33.0,17.0,
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 33.0d >= shelf life 30.0d
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 33.0d >= shelf life 30.0d
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Sekoya Beauty,TRAVELLER,50,68,33.0,17.0,
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 33.0d >= shelf life 25.0d
+PECLL-PLGDN-O,Gdansk,PL,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 33.0d >= shelf life 25.0d
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Sekoya Pop,TRAVELLER,50,83,6.0,44.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Sekoya Pop,TRAVELLER,50,78,6.5,43.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Sekoya Pop,TRAVELLER,50,71,7.0,43.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Sekoya Pop,TRAVELLER,50,58,7.5,42.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Magica,TRAVELLER,50,83,6.0,44.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Magica,TRAVELLER,50,78,6.5,43.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Magica,TRAVELLER,50,71,7.0,43.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Magica,TRAVELLER,50,58,7.5,42.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Ventura,EUROPE_30d,30,83,6.0,24.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Ventura,EUROPE_30d,30,78,6.5,23.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Ventura,EUROPE_30d,30,71,7.0,23.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Ventura,EUROPE_30d,30,58,7.5,22.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Sekoya,TRAVELLER,50,83,6.0,44.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Sekoya,TRAVELLER,50,78,6.5,43.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Sekoya,TRAVELLER,50,71,7.0,43.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Sekoya,TRAVELLER,50,58,7.5,42.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Biloxi,TRAVELLER,50,83,6.0,44.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Biloxi,TRAVELLER,50,78,6.5,43.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Biloxi,TRAVELLER,50,71,7.0,43.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Biloxi,TRAVELLER,50,58,7.5,42.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Abril Blue,EUROPE_30d,30,83,6.0,24.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Abril Blue,EUROPE_30d,30,78,6.5,23.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Abril Blue,EUROPE_30d,30,71,7.0,23.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Abril Blue,EUROPE_30d,30,58,7.5,22.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Matias,EUROPE_30d,30,83,6.0,24.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Matias,EUROPE_30d,30,78,6.5,23.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Matias,EUROPE_30d,30,71,7.0,23.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Matias,EUROPE_30d,30,58,7.5,22.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Sekoya Beauty,TRAVELLER,50,83,6.0,44.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Sekoya Beauty,TRAVELLER,50,78,6.5,43.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Sekoya Beauty,TRAVELLER,50,71,7.0,43.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Sekoya Beauty,TRAVELLER,50,58,7.5,42.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Alessia,LOW_TRAVEL,25,83,6.0,19.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Alessia,LOW_TRAVEL,25,70,6.5,18.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Alessia,LOW_TRAVEL,25,63,7.0,18.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Alessia,LOW_TRAVEL,25,50,7.5,17.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,0.0,Rocio,LOW_TRAVEL,25,83,6.0,19.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,1.0,Rocio,LOW_TRAVEL,25,70,6.5,18.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,2.0,Rocio,LOW_TRAVEL,25,63,7.0,18.0,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,3.0,Rocio,LOW_TRAVEL,25,50,7.5,17.5,
+PELIM-BRGRU-A,Sao Paulo Guarulhos,BR,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Sekoya Pop,TRAVELLER,50,84,20.0,30.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Magica,TRAVELLER,50,84,20.0,30.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Ventura,EUROPE_30d,30,68,20.0,10.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Sekoya,TRAVELLER,50,84,20.0,30.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Biloxi,TRAVELLER,50,84,20.0,30.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Abril Blue,EUROPE_30d,30,68,20.0,10.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Matias,EUROPE_30d,30,68,20.0,10.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Sekoya Beauty,TRAVELLER,50,84,20.0,30.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Alessia,LOW_TRAVEL,25,68,20.0,5.0,
+PECLL-USHUE-O,Port Hueneme,US,OCEAN,,Rocio,LOW_TRAVEL,25,68,20.0,5.0,
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Sekoya Pop,TRAVELLER,50,59,40.0,10.0,
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Magica,TRAVELLER,50,59,40.0,10.0,
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 40.0d >= shelf life 30.0d
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Sekoya,TRAVELLER,50,59,40.0,10.0,
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Biloxi,TRAVELLER,50,59,40.0,10.0,
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 40.0d >= shelf life 30.0d
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 40.0d >= shelf life 30.0d
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Sekoya Beauty,TRAVELLER,50,59,40.0,10.0,
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 40.0d >= shelf life 25.0d
+PECLL-TWKHH-O,Kaohsiung,TW,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 40.0d >= shelf life 25.0d
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Sekoya Pop,TRAVELLER,50,59,34.0,16.0,
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Magica,TRAVELLER,50,59,34.0,16.0,
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 34.0d >= shelf life 30.0d
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Sekoya,TRAVELLER,50,59,34.0,16.0,
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Biloxi,TRAVELLER,50,59,34.0,16.0,
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 34.0d >= shelf life 30.0d
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 34.0d >= shelf life 30.0d
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Sekoya Beauty,TRAVELLER,50,59,34.0,16.0,
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 34.0d >= shelf life 25.0d
+PECHY-TWKHH-O,Kaohsiung,TW,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 34.0d >= shelf life 25.0d
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Sekoya Pop,TRAVELLER,50,76,29.0,21.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Magica,TRAVELLER,50,76,29.0,21.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Ventura,EUROPE_30d,30,58,29.0,1.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Sekoya,TRAVELLER,50,76,29.0,21.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Biloxi,TRAVELLER,50,76,29.0,21.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Abril Blue,EUROPE_30d,30,58,29.0,1.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Matias,EUROPE_30d,30,58,29.0,1.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Sekoya Beauty,TRAVELLER,50,76,29.0,21.0,
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 29.0d >= shelf life 25.0d
+PECLL-PTLIS-O,Lisbon,PT,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 29.0d >= shelf life 25.0d
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Sekoya Pop,TRAVELLER,50,67,29.0,21.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Magica,TRAVELLER,50,67,29.0,21.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Ventura,EUROPE_30d,30,49,29.0,1.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Sekoya,TRAVELLER,50,67,29.0,21.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Biloxi,TRAVELLER,50,67,29.0,21.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Abril Blue,EUROPE_30d,30,49,29.0,1.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Matias,EUROPE_30d,30,49,29.0,1.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Sekoya Beauty,TRAVELLER,50,67,29.0,21.0,
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 29.0d >= shelf life 25.0d
+PECLL-ESAGP-O,Malaga,ES,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 29.0d >= shelf life 25.0d
+PECLL-USMIA-O,Miami,US,OCEAN,,Sekoya Pop,TRAVELLER,50,84,15.0,35.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Magica,TRAVELLER,50,84,15.0,35.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Ventura,EUROPE_30d,30,76,15.0,15.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Sekoya,TRAVELLER,50,84,15.0,35.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Biloxi,TRAVELLER,50,84,15.0,35.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Abril Blue,EUROPE_30d,30,76,15.0,15.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Matias,EUROPE_30d,30,76,15.0,15.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Sekoya Beauty,TRAVELLER,50,84,15.0,35.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Alessia,LOW_TRAVEL,25,76,15.0,10.0,
+PECLL-USMIA-O,Miami,US,OCEAN,,Rocio,LOW_TRAVEL,25,76,15.0,10.0,
+PELIM-USMIA-A,Miami,US,AIR,0.0,Sekoya Pop,TRAVELLER,50,92,5.0,45.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Sekoya Pop,TRAVELLER,50,87,5.5,44.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Sekoya Pop,TRAVELLER,50,80,6.0,44.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Sekoya Pop,TRAVELLER,50,67,6.5,43.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Magica,TRAVELLER,50,92,5.0,45.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Magica,TRAVELLER,50,87,5.5,44.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Magica,TRAVELLER,50,80,6.0,44.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Magica,TRAVELLER,50,67,6.5,43.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Ventura,EUROPE_30d,30,92,5.0,25.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Ventura,EUROPE_30d,30,87,5.5,24.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Ventura,EUROPE_30d,30,80,6.0,24.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Ventura,EUROPE_30d,30,67,6.5,23.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Sekoya,TRAVELLER,50,92,5.0,45.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Sekoya,TRAVELLER,50,87,5.5,44.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Sekoya,TRAVELLER,50,80,6.0,44.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Sekoya,TRAVELLER,50,67,6.5,43.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Biloxi,TRAVELLER,50,92,5.0,45.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Biloxi,TRAVELLER,50,87,5.5,44.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Biloxi,TRAVELLER,50,80,6.0,44.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Biloxi,TRAVELLER,50,67,6.5,43.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Abril Blue,EUROPE_30d,30,92,5.0,25.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Abril Blue,EUROPE_30d,30,87,5.5,24.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Abril Blue,EUROPE_30d,30,80,6.0,24.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Abril Blue,EUROPE_30d,30,67,6.5,23.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Matias,EUROPE_30d,30,92,5.0,25.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Matias,EUROPE_30d,30,87,5.5,24.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Matias,EUROPE_30d,30,80,6.0,24.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Matias,EUROPE_30d,30,67,6.5,23.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Sekoya Beauty,TRAVELLER,50,92,5.0,45.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Sekoya Beauty,TRAVELLER,50,87,5.5,44.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Sekoya Beauty,TRAVELLER,50,80,6.0,44.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Sekoya Beauty,TRAVELLER,50,67,6.5,43.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Alessia,LOW_TRAVEL,25,92,5.0,20.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Alessia,LOW_TRAVEL,25,87,5.5,19.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Alessia,LOW_TRAVEL,25,80,6.0,19.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Alessia,LOW_TRAVEL,25,59,6.5,18.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-USMIA-A,Miami,US,AIR,0.0,Rocio,LOW_TRAVEL,25,92,5.0,20.0,
+PELIM-USMIA-A,Miami,US,AIR,1.0,Rocio,LOW_TRAVEL,25,87,5.5,19.5,
+PELIM-USMIA-A,Miami,US,AIR,2.0,Rocio,LOW_TRAVEL,25,80,6.0,19.0,
+PELIM-USMIA-A,Miami,US,AIR,3.0,Rocio,LOW_TRAVEL,25,59,6.5,18.5,
+PELIM-USMIA-A,Miami,US,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Sekoya Pop,TRAVELLER,50,59,41.0,9.0,
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Magica,TRAVELLER,50,59,41.0,9.0,
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 41.0d >= shelf life 30.0d
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Sekoya,TRAVELLER,50,59,41.0,9.0,
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Biloxi,TRAVELLER,50,59,41.0,9.0,
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 41.0d >= shelf life 30.0d
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 41.0d >= shelf life 30.0d
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Sekoya Beauty,TRAVELLER,50,59,41.0,9.0,
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 41.0d >= shelf life 25.0d
+PECLL-INNSA-O,Nhava Sheva (Mumbai),IN,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 41.0d >= shelf life 25.0d
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Sekoya Pop,TRAVELLER,50,83,11.0,39.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Sekoya Pop,TRAVELLER,50,78,11.5,38.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Sekoya Pop,TRAVELLER,50,71,12.0,38.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Sekoya Pop,TRAVELLER,50,58,12.5,37.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Magica,TRAVELLER,50,83,11.0,39.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Magica,TRAVELLER,50,78,11.5,38.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Magica,TRAVELLER,50,71,12.0,38.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Magica,TRAVELLER,50,58,12.5,37.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Ventura,EUROPE_30d,30,75,11.0,19.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Ventura,EUROPE_30d,30,70,11.5,18.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Ventura,EUROPE_30d,30,63,12.0,18.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Ventura,EUROPE_30d,30,50,12.5,17.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Sekoya,TRAVELLER,50,83,11.0,39.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Sekoya,TRAVELLER,50,78,11.5,38.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Sekoya,TRAVELLER,50,71,12.0,38.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Sekoya,TRAVELLER,50,58,12.5,37.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Biloxi,TRAVELLER,50,83,11.0,39.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Biloxi,TRAVELLER,50,78,11.5,38.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Biloxi,TRAVELLER,50,71,12.0,38.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Biloxi,TRAVELLER,50,58,12.5,37.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Abril Blue,EUROPE_30d,30,75,11.0,19.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Abril Blue,EUROPE_30d,30,70,11.5,18.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Abril Blue,EUROPE_30d,30,63,12.0,18.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Abril Blue,EUROPE_30d,30,50,12.5,17.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Matias,EUROPE_30d,30,75,11.0,19.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Matias,EUROPE_30d,30,70,11.5,18.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Matias,EUROPE_30d,30,63,12.0,18.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Matias,EUROPE_30d,30,50,12.5,17.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Sekoya Beauty,TRAVELLER,50,83,11.0,39.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Sekoya Beauty,TRAVELLER,50,78,11.5,38.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Sekoya Beauty,TRAVELLER,50,71,12.0,38.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Sekoya Beauty,TRAVELLER,50,58,12.5,37.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Alessia,LOW_TRAVEL,25,75,11.0,14.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Alessia,LOW_TRAVEL,25,62,11.5,13.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Alessia,LOW_TRAVEL,25,55,12.0,13.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Alessia,LOW_TRAVEL,25,42,12.5,12.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,0.0,Rocio,LOW_TRAVEL,25,75,11.0,14.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,1.0,Rocio,LOW_TRAVEL,25,62,11.5,13.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,2.0,Rocio,LOW_TRAVEL,25,55,12.0,13.0,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,3.0,Rocio,LOW_TRAVEL,25,42,12.5,12.5,
+PELIM-INBOM-A,Mumbai Chhatrapati Shivaji,IN,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Sekoya Pop,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Magica,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Ventura,EUROPE_30d,30,84,13.0,17.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Sekoya,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Biloxi,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Abril Blue,EUROPE_30d,30,84,13.0,17.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Matias,EUROPE_30d,30,84,13.0,17.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Sekoya Beauty,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Alessia,LOW_TRAVEL,25,76,13.0,12.0,
+PECLL-CLSAI-O,San Antonio,CL,OCEAN,,Rocio,LOW_TRAVEL,25,76,13.0,12.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Sekoya Pop,TRAVELLER,50,84,14.0,36.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Magica,TRAVELLER,50,84,14.0,36.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Ventura,EUROPE_30d,30,76,14.0,16.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Sekoya,TRAVELLER,50,84,14.0,36.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Biloxi,TRAVELLER,50,84,14.0,36.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Abril Blue,EUROPE_30d,30,76,14.0,16.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Matias,EUROPE_30d,30,76,14.0,16.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Sekoya Beauty,TRAVELLER,50,84,14.0,36.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Alessia,LOW_TRAVEL,25,76,14.0,11.0,
+PECLL-CLSVE-O,San Vicente,CL,OCEAN,,Rocio,LOW_TRAVEL,25,76,14.0,11.0,
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Sekoya Pop,TRAVELLER,50,31,45.0,5.0,
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Magica,TRAVELLER,50,31,45.0,5.0,
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 45.0d >= shelf life 30.0d
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Sekoya,TRAVELLER,50,31,45.0,5.0,
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Biloxi,TRAVELLER,50,31,45.0,5.0,
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 45.0d >= shelf life 30.0d
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 45.0d >= shelf life 30.0d
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Sekoya Beauty,TRAVELLER,50,31,45.0,5.0,
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 45.0d >= shelf life 25.0d
+PECLL-RULED-O,St Petersburg,RU,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 45.0d >= shelf life 25.0d
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Sekoya Pop,TRAVELLER,50,31,45.0,5.0,
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Magica,TRAVELLER,50,31,45.0,5.0,
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 45.0d >= shelf life 30.0d
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Sekoya,TRAVELLER,50,31,45.0,5.0,
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Biloxi,TRAVELLER,50,31,45.0,5.0,
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 45.0d >= shelf life 30.0d
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 45.0d >= shelf life 30.0d
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Sekoya Beauty,TRAVELLER,50,31,45.0,5.0,
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 45.0d >= shelf life 25.0d
+PEPBO-RULED-O,St Petersburg,RU,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 45.0d >= shelf life 25.0d
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Sekoya Pop,TRAVELLER,50,65,8.0,42.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Sekoya Pop,TRAVELLER,50,60,8.5,41.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Sekoya Pop,TRAVELLER,50,53,9.0,41.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Sekoya Pop,TRAVELLER,50,40,9.5,40.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Magica,TRAVELLER,50,65,8.0,42.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Magica,TRAVELLER,50,60,8.5,41.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Magica,TRAVELLER,50,53,9.0,41.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Magica,TRAVELLER,50,40,9.5,40.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Ventura,EUROPE_30d,30,57,8.0,22.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Ventura,EUROPE_30d,30,52,8.5,21.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Ventura,EUROPE_30d,30,45,9.0,21.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Ventura,EUROPE_30d,30,32,9.5,20.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Sekoya,TRAVELLER,50,65,8.0,42.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Sekoya,TRAVELLER,50,60,8.5,41.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Sekoya,TRAVELLER,50,53,9.0,41.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Sekoya,TRAVELLER,50,40,9.5,40.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Biloxi,TRAVELLER,50,65,8.0,42.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Biloxi,TRAVELLER,50,60,8.5,41.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Biloxi,TRAVELLER,50,53,9.0,41.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Biloxi,TRAVELLER,50,40,9.5,40.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Abril Blue,EUROPE_30d,30,57,8.0,22.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Abril Blue,EUROPE_30d,30,52,8.5,21.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Abril Blue,EUROPE_30d,30,45,9.0,21.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Abril Blue,EUROPE_30d,30,32,9.5,20.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Matias,EUROPE_30d,30,57,8.0,22.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Matias,EUROPE_30d,30,52,8.5,21.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Matias,EUROPE_30d,30,45,9.0,21.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Matias,EUROPE_30d,30,32,9.5,20.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Sekoya Beauty,TRAVELLER,50,65,8.0,42.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Sekoya Beauty,TRAVELLER,50,60,8.5,41.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Sekoya Beauty,TRAVELLER,50,53,9.0,41.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Sekoya Beauty,TRAVELLER,50,40,9.5,40.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Alessia,LOW_TRAVEL,25,57,8.0,17.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Alessia,LOW_TRAVEL,25,52,8.5,16.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Alessia,LOW_TRAVEL,25,45,9.0,16.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Alessia,LOW_TRAVEL,25,32,9.5,15.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,0.0,Rocio,LOW_TRAVEL,25,57,8.0,17.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,1.0,Rocio,LOW_TRAVEL,25,52,8.5,16.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,2.0,Rocio,LOW_TRAVEL,25,45,9.0,16.0,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,3.0,Rocio,LOW_TRAVEL,25,32,9.5,15.5,
+PELIM-ILTLV-A,Tel Aviv Ben Gurion,IL,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Sekoya Pop,TRAVELLER,50,31,48.0,2.0,
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Magica,TRAVELLER,50,31,48.0,2.0,
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 48.0d >= shelf life 30.0d
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Sekoya,TRAVELLER,50,31,48.0,2.0,
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Biloxi,TRAVELLER,50,31,48.0,2.0,
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 48.0d >= shelf life 30.0d
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 48.0d >= shelf life 30.0d
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Sekoya Beauty,TRAVELLER,50,31,48.0,2.0,
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 48.0d >= shelf life 25.0d
+PECLL-ILASH-O,Ashdod,IL,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 48.0d >= shelf life 25.0d
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Sekoya Pop,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Magica,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Ventura,EUROPE_30d,30,58,27.0,3.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Sekoya,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Biloxi,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Abril Blue,EUROPE_30d,30,58,27.0,3.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Matias,EUROPE_30d,30,58,27.0,3.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Sekoya Beauty,TRAVELLER,50,76,27.0,23.0,
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 27.0d >= shelf life 25.0d
+PECLL-ESVLC-O,Valencia,ES,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 27.0d >= shelf life 25.0d
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Sekoya Pop,TRAVELLER,50,76,23.0,27.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Magica,TRAVELLER,50,76,23.0,27.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Ventura,EUROPE_30d,30,68,23.0,7.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Sekoya,TRAVELLER,50,76,23.0,27.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Biloxi,TRAVELLER,50,76,23.0,27.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Abril Blue,EUROPE_30d,30,68,23.0,7.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Matias,EUROPE_30d,30,68,23.0,7.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Sekoya Beauty,TRAVELLER,50,76,23.0,27.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Alessia,LOW_TRAVEL,25,58,23.0,2.0,
+PECLL-CAVAN-O,Vancouver BC,CA,OCEAN,,Rocio,LOW_TRAVEL,25,58,23.0,2.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Sekoya Pop,TRAVELLER,50,92,6.0,44.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Sekoya Pop,TRAVELLER,50,87,6.5,43.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Sekoya Pop,TRAVELLER,50,80,7.0,43.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Sekoya Pop,TRAVELLER,50,67,7.5,42.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Sekoya Pop,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Magica,TRAVELLER,50,92,6.0,44.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Magica,TRAVELLER,50,87,6.5,43.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Magica,TRAVELLER,50,80,7.0,43.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Magica,TRAVELLER,50,67,7.5,42.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Magica,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Ventura,EUROPE_30d,30,92,6.0,24.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Ventura,EUROPE_30d,30,87,6.5,23.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Ventura,EUROPE_30d,30,80,7.0,23.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Ventura,EUROPE_30d,30,67,7.5,22.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Ventura,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Sekoya,TRAVELLER,50,92,6.0,44.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Sekoya,TRAVELLER,50,87,6.5,43.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Sekoya,TRAVELLER,50,80,7.0,43.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Sekoya,TRAVELLER,50,67,7.5,42.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Sekoya,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Biloxi,TRAVELLER,50,92,6.0,44.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Biloxi,TRAVELLER,50,87,6.5,43.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Biloxi,TRAVELLER,50,80,7.0,43.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Biloxi,TRAVELLER,50,67,7.5,42.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Biloxi,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Abril Blue,EUROPE_30d,30,92,6.0,24.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Abril Blue,EUROPE_30d,30,87,6.5,23.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Abril Blue,EUROPE_30d,30,80,7.0,23.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Abril Blue,EUROPE_30d,30,67,7.5,22.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Abril Blue,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Matias,EUROPE_30d,30,92,6.0,24.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Matias,EUROPE_30d,30,87,6.5,23.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Matias,EUROPE_30d,30,80,7.0,23.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Matias,EUROPE_30d,30,67,7.5,22.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Matias,EUROPE_30d,30,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Sekoya Beauty,TRAVELLER,50,92,6.0,44.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Sekoya Beauty,TRAVELLER,50,87,6.5,43.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Sekoya Beauty,TRAVELLER,50,80,7.0,43.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Sekoya Beauty,TRAVELLER,50,67,7.5,42.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Sekoya Beauty,TRAVELLER,50,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Alessia,LOW_TRAVEL,25,92,6.0,19.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Alessia,LOW_TRAVEL,25,79,6.5,18.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Alessia,LOW_TRAVEL,25,72,7.0,18.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Alessia,LOW_TRAVEL,25,59,7.5,17.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Alessia,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,0.0,Rocio,LOW_TRAVEL,25,92,6.0,19.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,1.0,Rocio,LOW_TRAVEL,25,79,6.5,18.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,2.0,Rocio,LOW_TRAVEL,25,72,7.0,18.0,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,3.0,Rocio,LOW_TRAVEL,25,59,7.5,17.5,
+PELIM-ATVIE-A,Vienna Schwechat,AT,AIR,4.0,Rocio,LOW_TRAVEL,25,VETO,,,AIR 4 stops > 3 (AC ruling)
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Sekoya Pop,TRAVELLER,50,59,38.0,12.0,
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Magica,TRAVELLER,50,59,38.0,12.0,
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 38.0d >= shelf life 30.0d
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Sekoya,TRAVELLER,50,59,38.0,12.0,
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Biloxi,TRAVELLER,50,59,38.0,12.0,
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 38.0d >= shelf life 30.0d
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 38.0d >= shelf life 30.0d
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Sekoya Beauty,TRAVELLER,50,59,38.0,12.0,
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 38.0d >= shelf life 25.0d
+PECLL-CNSHA-O,Shanghai,CN,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 38.0d >= shelf life 25.0d
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Sekoya Pop,TRAVELLER,50,59,40.0,10.0,
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Magica,TRAVELLER,50,59,40.0,10.0,
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Ventura,EUROPE_30d,30,VETO,,,effective transit 40.0d >= shelf life 30.0d
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Sekoya,TRAVELLER,50,59,40.0,10.0,
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Biloxi,TRAVELLER,50,59,40.0,10.0,
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Abril Blue,EUROPE_30d,30,VETO,,,effective transit 40.0d >= shelf life 30.0d
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Matias,EUROPE_30d,30,VETO,,,effective transit 40.0d >= shelf life 30.0d
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Sekoya Beauty,TRAVELLER,50,59,40.0,10.0,
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Alessia,LOW_TRAVEL,25,VETO,,,effective transit 40.0d >= shelf life 25.0d
+PECLL-HKHKG-O,Hong Kong,HK,OCEAN,,Rocio,LOW_TRAVEL,25,VETO,,,effective transit 40.0d >= shelf life 25.0d
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Sekoya Pop,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Magica,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Ventura,EUROPE_30d,30,84,13.0,17.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Sekoya,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Biloxi,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Abril Blue,EUROPE_30d,30,84,13.0,17.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Matias,EUROPE_30d,30,84,13.0,17.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Sekoya Beauty,TRAVELLER,50,84,13.0,37.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Alessia,LOW_TRAVEL,25,76,13.0,12.0,
+PECLL-CLVAP-O,Valparaiso,CL,OCEAN,,Rocio,LOW_TRAVEL,25,76,13.0,12.0,
