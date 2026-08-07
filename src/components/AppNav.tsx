@@ -18,14 +18,14 @@ const TABS: { id: AppView; label: string; short: string }[] = [
     short: "Missing",
   },
   {
-    id: "product-table",
-    label: "Product risk table",
-    short: "Products",
-  },
-  {
     id: "route-table",
     label: "Route risk table",
     short: "Routes",
+  },
+  {
+    id: "blueberry-cram",
+    label: "Blueberry CRAM",
+    short: "Blueberries",
   },
 ];
 

@@ -68,13 +68,16 @@ function CramFormulaPanel() {
             A · Counterparty (40%)
           </p>
           <p className="mt-1 text-tm-text-light">
-            buyer×0.5 + supplier×0.5 + relationship signal
+            Weighted/shrink composite over buyer + supplier + relationship
+            fields (customs-enriched when matched)
           </p>
           <ul className="mt-1.5 list-disc space-y-1 pl-4 text-tm-text-light">
-            <li>YIB bands + license (assumed valid) + platform track record</li>
-            <li>Credit rating from Coface CRA/DRA grade, when on file</li>
             <li>
-              Payment delay = 0 days · quality rejection = 0% (perfect defaults)
+              Per party: coverage × rawAvg + (1 − coverage) × 50 + trust (+3)
+            </li>
+            <li>Same scores as the Counterparties tab</li>
+            <li>
+              Blanks excluded (no invented perfect payment delay / rejection)
             </li>
           </ul>
         </div>

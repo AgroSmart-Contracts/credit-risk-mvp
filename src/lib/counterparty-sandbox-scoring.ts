@@ -1,13 +1,22 @@
 /**
- * Counterparty risk sandbox scorer — weighted average + coverage shrink toward 50.
- * Spec: Desktop counterparty-risk-scoring-method-outline-2026-07-30.md
+ * Counterparty risk scorers — weighted average + coverage shrink toward 50.
+ * Spec: docs/counterparty-risk-scoring-method-outline-2026-07-30.md
  *
- * Separate from live CRAM Dimension A (`computeBuyerScore` / `computeSupplierScore`
- * in scoring.ts). Blank/null fields are excluded from both numerator and
- * filled-weight; unfilled weight still counts toward coverage (possible weight).
+ * Live Dimension A (`dimension-a.ts` → computeBuyerScore / computeSupplierScore /
+ * computeCounterpartyScore) calls these functions.
  */
 
+/**
+ * Hand-set judgment call, not calibrated against realized outcomes (payment
+ * defaults, delays, etc.) — there's no historical outcome data in this repo
+ * to fit it against yet. Revisit once that data exists.
+ */
 export const SANDBOX_TRUST_BONUS_DEFAULT = 3;
+/**
+ * Hand-set judgment call (midpoint of the 0–100 scale), not calibrated
+ * against realized outcomes. Revisit once outcome data exists to check
+ * whether a non-midpoint anchor predicts better.
+ */
 export const SANDBOX_NEUTRAL = 50;
 
 export type FilledNumber = number | null | undefined;
@@ -24,10 +33,19 @@ export interface GroupScoreResult {
   rawAverage: number | null;
   filledWeight: number;
   possibleWeight: number;
+  /** filledWeight ÷ possibleWeight — ignores which/how many fields are filled */
+  weightCoverageFraction: number;
+  /** filled field count ÷ total field count — ignores field weight */
+  fieldCoverageFraction: number;
+  /** min(weightCoverageFraction, fieldCoverageFraction); drives shrinkage below */
   coverageFraction: number;
   shrunkScore: number;
   trustBonus: number;
   score: number;
+  /** Worst case if every missing field turned out to score 0 */
+  pessimisticScore: number;
+  /** Best case if every missing field turned out to score 100 */
+  optimisticScore: number;
   fields: WeightedField[];
 }
 
@@ -164,7 +182,8 @@ export function scorePlatformTransactionCount(count: FilledNumber): FilledNumber
 }
 
 export function scorePaymentDelayDays(days: FilledNumber): FilledNumber {
-  if (!isFilled(days)) return null;
+  // Temporary optimistic default: no measured delay → full score until we have data.
+  if (!isFilled(days)) return 100;
   return Math.max(15, 100 - days * 2);
 }
 
@@ -183,7 +202,8 @@ export function scoreOnTimeDeliveryRate(rate: FilledNumber): FilledNumber {
 }
 
 export function scoreQualityRejectionRate(rate: FilledNumber): FilledNumber {
-  if (!isFilled(rate)) return null;
+  // Temporary optimistic default: no measured rejection rate → full score until we have data.
+  if (!isFilled(rate)) return 100;
   return Math.max(15, 100 - rate);
 }
 
@@ -199,6 +219,13 @@ export function scoreRelationshipAgeMonths(months: FilledNumber): FilledNumber {
 
 /**
  * Group raw average → coverage → shrink toward 50 → optional flat trust bonus.
+ *
+ * Coverage is the more conservative of two measures: weight-based (filled
+ * weight ÷ possible weight) and field-count-based (filled fields ÷ total
+ * fields). Taking the min means a profile propped up by a couple of heavy
+ * fields (e.g. credit rating + years-in-business = 14/40 weight but only
+ * 2/10 fields) shrinks as hard as its field count implies, not as little as
+ * its weight fraction alone would suggest.
  */
 export function scoreWeightedGroup(
   fields: WeightedField[],
@@ -206,28 +233,43 @@ export function scoreWeightedGroup(
 ): GroupScoreResult {
   const possibleWeight = fields.reduce((s, f) => s + f.weight, 0);
   let filledWeight = 0;
+  let filledFieldCount = 0;
   let weightedSum = 0;
   for (const f of fields) {
     if (!isFilled(f.score)) continue;
     filledWeight += f.weight;
+    filledFieldCount += 1;
     weightedSum += f.score * f.weight;
   }
   const rawAverage = filledWeight > 0 ? weightedSum / filledWeight : null;
-  const coverageFraction = possibleWeight > 0 ? filledWeight / possibleWeight : 0;
+  const weightCoverageFraction =
+    possibleWeight > 0 ? filledWeight / possibleWeight : 0;
+  const fieldCoverageFraction =
+    fields.length > 0 ? filledFieldCount / fields.length : 0;
+  const coverageFraction = Math.min(weightCoverageFraction, fieldCoverageFraction);
+  const rawAverageOrZero = rawAverage ?? 0;
   const shrunkScore =
     rawAverage === null
       ? SANDBOX_NEUTRAL
       : coverageFraction * rawAverage + (1 - coverageFraction) * SANDBOX_NEUTRAL;
   const bonus = Math.max(0, trustBonus);
   const score = clamp(shrunkScore + bonus);
+  const pessimisticScore = clamp(coverageFraction * rawAverageOrZero + bonus);
+  const optimisticScore = clamp(
+    coverageFraction * rawAverageOrZero + (1 - coverageFraction) * 100 + bonus,
+  );
   return {
     rawAverage,
     filledWeight,
     possibleWeight,
+    weightCoverageFraction,
+    fieldCoverageFraction,
     coverageFraction,
     shrunkScore,
     trustBonus: bonus,
     score,
+    pessimisticScore,
+    optimisticScore,
     fields,
   };
 }

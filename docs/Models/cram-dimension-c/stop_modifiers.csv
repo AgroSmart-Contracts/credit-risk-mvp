@@ -1,0 +1,9 @@
+stops,mode,points,hub_dwell_days,status,rationale
+0,AIR,0,0,OK,"Direct - no handoff"
+1,AIR,-5,0.5,OK,"Single transfer; canonical LIM-MAD-TLV routing"
+2,AIR,-12,1.0,OK,"Two independent failure points; still executable"
+3,AIR,-25,1.5,OK,"Worst executable routing (AC ruling 2026-07-30)"
+4,AIR,,,VETO,"AC ruling 2026-07-30: >3 stops = veto, air only"
+0,OCEAN,0,0,OK,"Direct service"
+1,OCEAN,0,0,OK,"Transshipment modelled as transit VARIANCE (p90 widening), not a stop penalty - AC ruling: stops are air-only"
+2,OCEAN,0,0,OK,"As above"

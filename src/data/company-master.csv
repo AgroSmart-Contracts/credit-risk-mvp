@@ -1,39 +1,40 @@
 name,roles,countries,taxId,taxIdStatus,allTaxIdsOnFile,dealCount,yearsInBusiness,yearsInBusinessSource,licenseValid,licenseValidSource,nameVariantsSeen
-"«Ardzhies» LLC","buyer","Russian Federation",PT517935392,not-peru-na,"PT517935392",2,1,csv,true,default,"Â«ARDZHIESÂ» LLC"
-"A.S.M International","buyer","India",100170220006904,not-peru-na,"100170220006904 | 10017022006904",5,5,verified,true,default,"ASM INTERNATIONAL FSSAI | A.S.M INTERNATIONAL"
-"AGRICOLA MEDANO AZUL SAC","supplier","Peru",20602492191,valid-ruc,"20602492191",10,5,verified,true,default,""
-"AGRICOLA VIÑASOL SAC","supplier","Peru",20534208008,valid-ruc,"20534208008",12,15,verified,true,default,"AGRICOLA VIÃASOL SAC"
-"AGRICOLA Y COMERCIAL VALLES DEL NUBLE","buyer","Chile",77.394.695-7,not-peru-na,"77.394.695-7 | 77394695-7",2,8,verified,true,default,""
-"AGRO SMART CONTRACTS LDA","buyer","Portugal",517935392,not-peru-na,"517935392",13,2,verified,true,default,"AGRO SMART CONTRACTS, LDA. | AGRO SMART CONTRACTS | AGROSMART CONTRACTS LDA"
-"ALBORAN COMEX SL","buyer","Spain",B75320598,not-peru-na,"B75320598",1,2,verified,true,default,""
-"Allied Trade Global","buyer","Taiwan, Province of China",54354228,not-peru-na,"54354228",18,14,verified,true,default,"ALLIED TRADE GLOBAL CORP"
-"ANTERRA FARMS GMBH","buyer","Austria",ATEOS1000126910,not-peru-na,"ATEOS1000126910",2,4,verified,true,default,""
-"BC NATURE QUALITY FRUITS S.L","buyer","Spain",B11882909,not-peru-na,"B11882909",1,16,verified,true,default,""
-"BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA","buyer","Brazil",CNPJ : 04.052.176 / 0001-48,not-peru-na,"CNPJ : 04.052.176 / 0001-48",1,2,csv,true,default,""
-"BIO FARMING PERU S.A.C.","supplier|buyer","Peru",20612199974,valid-ruc,"20612199974",33,2,csv,true,default,"BIO FARMIN PERU S.A.C | BIO FARMING PERU S.A.C"
-"BIOFRESHI BV","buyer","Netherlands",NL853825828B01,not-peru-na,"NL853825828B01",6,17,verified,true,default,""
-"BLUE PACIFIC FOODS SAC","supplier","Peru",20600326464,valid-ruc,"20600326464",7,22,verified,true,default,""
-"DAVIS GLOBAL BV","buyer","Netherlands",NL861363103B01,not-peru-na,"NL861363103B01",12,6,verified,true,default,""
-"Eagle Trading Agriculture Marketing Ltd","buyer","Israel|United Arab Emirates",515059509,not-peru-na,"515059509",24,2,csv,true,default,"Eagle Trading Agriculture Marketing LTD | EAGLE TRADING AGRICULTURE MARKETING LTD"
-"FRESH EXPRESS LLC","buyer","United Arab Emirates",100295133600003,not-peru-na,"100295133600003",7,33,verified,true,default,""
-"FUNDO LAS LOMAS SAC","supplier","Peru",20535311210,valid-ruc,"20535311210",7,16,csv,true,default,""
-"GIDDINS PERU SAC","supplier","Peru",20601552557,valid-ruc,"20601552557",7,12,csv,true,default,""
-"GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD","buyer","Thailand",0105548144820,not-peru-na,"0105548144820",1,2,csv,true,default,""
-"GUANGZHOU FRESH LINK IMPORT CO LTD","buyer","China",91440101MA59L8UW3L,not-peru-na,"91440101MA59L8UW3L",4,,default,true,default,""
-"HACIENDA SOTOMAYOR SL","buyer","Spain",B19277867,not-peru-na,"B19277867",9,5,verified,true,default,""
-"Holy Fruit Peru","supplier","Peru",20602722628,valid-ruc,"20602722628",14,8,csv,true,default,"HOLY FRUIT PERU"
-"ICA BLUEBERRIES SAC","supplier","Peru",20601449837,valid-ruc,"20601449837",4,9,csv,true,default,""
-"INDUSTRIAS SOLIMAR SAC","supplier","Peru",20526450851,valid-ruc,"20526450851",1,8,csv,true,default,""
-"JUHINEJ LTD","supplier|buyer","Chile",76.476.953-2,not-peru-na,"76.476.953-2",8,19,verified,true,default,""
-"KHI INTERNATIONAL CORP","buyer","Hong Kong",1794711,not-peru-na,"1794711",4,12,verified,true,default,""
-"LIMAX SP. Z O.O.","buyer","Poland",9231585471,not-peru-na,"9231585471",7,24,verified,true,default,"LIMAX SP ZOO"
-"MIKHUNA FOODS SAC","supplier","Peru",20602283088,valid-ruc,"20602283088",9,2,csv,true,default,""
-"MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C","supplier","Peru",20611718579,valid-ruc,"20611718579",1,2,csv,true,default,""
-"NATURAL SOUTH FRUIT LTD","supplier","Chile",76.537.404-3,not-peru-na,"76.537.404-3",4,8,verified,true,default,""
-"Open Markets Corporation","buyer","United States",65-1078039,not-peru-na,"65-1078039",16,2,csv,true,default,""
-"SHANGHAI GREEN CHAIN TRADING CO LTD","buyer","China",91310115MA1H83UR0Q,not-peru-na,"91310115MA1H83UR0Q",7,,default,true,default,""
-"T.O.F.F. B.V","buyer","Netherlands",NL854346533B01,not-peru-na,"NL854346533B01",1,1,csv,true,default,"T.O.F.F. B.V."
-"TRADE CULTIVATORS LLC","buyer","United Arab Emirates",100412431700003,not-peru-na,"100412431700003",7,2,verified,true,default,""
-"TRU MARKET BLOCKCHAIN S.A.C.","supplier","Peru",20608082281,valid-ruc,"20608082281",37,5,csv,true,default,"TRU MARKET BLOCKCHAIN S.A.C | TRU MARKET BLOCKCHAIN"
-"Villaventura Peru SAC","supplier","Peru",20610491104,valid-ruc,"20610491104 | 20601777273",22,3,csv,true,default,"VILLAVENTURA PERU SAC | Villaventura Produce Sac"
-"XARKI SL","buyer","Spain",B65792942,not-peru-na,"B65792942",10,66,verified,true,default,""
+«Ardzhies» LLC,buyer,Russian Federation,PT517935392,not-peru-na,PT517935392,2,1,csv,true,default,Â«ARDZHIESÂ» LLC
+A.S.M International,buyer,India,100170220006904,not-peru-na,100170220006904 | 10017022006904,5,5,verified,true,default,ASM INTERNATIONAL FSSAI | A.S.M INTERNATIONAL
+AGRICOLA MEDANO AZUL SAC,supplier,Peru,20602492191,valid-ruc,20602492191,10,5,verified,true,default,
+AGRICOLA VIÑASOL SAC,supplier,Peru,20534208008,valid-ruc,20534208008,12,15,verified,true,default,AGRICOLA VIÃASOL SAC
+AGRICOLA Y COMERCIAL VALLES DEL NUBLE,buyer,Chile,77.394.695-7,not-peru-na,77.394.695-7 | 77394695-7,2,8,verified,true,default,
+AGRO SMART CONTRACTS LDA,buyer,Portugal,517935392,not-peru-na,517935392,13,2,verified,true,default,"AGRO SMART CONTRACTS, LDA. | AGRO SMART CONTRACTS | AGROSMART CONTRACTS LDA"
+ALBORAN COMEX SL,buyer,Spain,B75320598,not-peru-na,B75320598,1,2,verified,true,default,
+Allied Trade Global,buyer,"Taiwan, Province of China",54354228,not-peru-na,54354228,18,14,verified,true,default,ALLIED TRADE GLOBAL CORP
+ANTERRA FARMS GMBH,buyer,Austria,ATEOS1000126910,not-peru-na,ATEOS1000126910,2,4,verified,true,default,
+BC NATURE QUALITY FRUITS S.L,buyer,Spain,B11882909,not-peru-na,B11882909,1,16,verified,true,default,
+BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA,buyer,Brazil,CNPJ : 04.052.176 / 0001-48,not-peru-na,CNPJ : 04.052.176 / 0001-48,1,2,csv,true,default,
+BIO FARMING PERU S.A.C.,supplier|buyer,Peru,20612199974,valid-ruc,20612199974,33,2,csv,true,default,BIO FARMIN PERU S.A.C | BIO FARMING PERU S.A.C
+BIOFRESHI BV,buyer,Netherlands,NL853825828B01,not-peru-na,NL853825828B01,6,17,verified,true,default,
+BLUE PACIFIC FOODS SAC,supplier,Peru,20600326464,valid-ruc,20600326464,7,22,verified,true,default,
+DAVIS GLOBAL BV,buyer,Netherlands,NL861363103B01,not-peru-na,NL861363103B01,12,6,verified,true,default,
+Eagle Trading Agriculture Marketing Ltd,buyer,Israel|United Arab Emirates,515059509,not-peru-na,515059509,24,2,csv,true,default,Eagle Trading Agriculture Marketing LTD | EAGLE TRADING AGRICULTURE MARKETING LTD
+FRESH EXPRESS LLC,buyer,United Arab Emirates,100295133600003,not-peru-na,100295133600003,7,33,verified,true,default,
+FUNDO LAS LOMAS SAC,supplier,Peru,20535311210,valid-ruc,20535311210,7,16,csv,true,default,
+GIDDINS PERU SAC,supplier,Peru,20601552557,valid-ruc,20601552557,7,12,csv,true,default,
+GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD,buyer,Thailand,0105548144820,not-peru-na,0105548144820,1,2,csv,true,default,
+GUANGZHOU FRESH LINK IMPORT CO LTD,buyer,China,91440101MA59L8UW3L,not-peru-na,91440101MA59L8UW3L,4,5,verified,true,default,
+HACIENDA SOTOMAYOR SL,buyer,Spain,B19277867,not-peru-na,B19277867,9,5,verified,true,default,
+Holy Fruit Peru,supplier,Peru,20602722628,valid-ruc,20602722628,14,8,csv,true,default,HOLY FRUIT PERU
+ICA BLUEBERRIES SAC,supplier,Peru,20601449837,valid-ruc,20601449837,4,9,csv,true,default,
+INDUSTRIAS SOLIMAR SAC,supplier,Peru,20526450851,valid-ruc,20526450851,1,8,csv,true,default,
+JUHINEJ LTD,supplier|buyer,Chile,76.476.953-2,not-peru-na,76.476.953-2,8,19,verified,true,default,
+KHI INTERNATIONAL CORP,buyer,Hong Kong,1794711,not-peru-na,1794711,4,12,verified,true,default,
+LIMAX SP. Z O.O.,buyer,Poland,9231585471,not-peru-na,9231585471,7,24,verified,true,default,LIMAX SP ZOO
+MIKHUNA FOODS SAC,supplier,Peru,20602283088,valid-ruc,20602283088,9,2,csv,true,default,
+MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C,supplier,Peru,20611718579,valid-ruc,20611718579,1,2,csv,true,default,
+NATURAL SOUTH FRUIT LTD,supplier,Chile,76.537.404-3,not-peru-na,76.537.404-3,4,8,verified,true,default,
+Open Markets Corporation,buyer,United States,65-1078039,not-peru-na,65-1078039,16,2,csv,true,default,
+SHANGHAI GREEN CHAIN TRADING CO LTD,buyer,China,91310115MA1H83UR0Q,not-peru-na,91310115MA1H83UR0Q,7,5,verified,true,default,
+T.O.F.F. B.V,buyer,Netherlands,NL854346533B01,not-peru-na,NL854346533B01,1,1,csv,true,default,T.O.F.F. B.V.
+TRADE CULTIVATORS LLC,buyer,United Arab Emirates,100412431700003,not-peru-na,100412431700003,7,2,verified,true,default,
+TRU MARKET BLOCKCHAIN S.A.C.,supplier,Peru,20608082281,valid-ruc,20608082281,37,5,csv,true,default,TRU MARKET BLOCKCHAIN S.A.C | TRU MARKET BLOCKCHAIN
+Villaventura Peru SAC,supplier,Peru,20610491104,valid-ruc,20610491104 | 20601777273,22,3,csv,true,default,VILLAVENTURA PERU SAC | Villaventura Produce Sac
+XARKI SL,buyer,Spain,B65792942,not-peru-na,B65792942,10,66,verified,true,default,
+DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Colombia,901893567,not-peru-na,901893567,1,4,verified,true,default,

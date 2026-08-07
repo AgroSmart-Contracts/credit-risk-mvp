@@ -64,3 +64,7 @@ docs/market-intel-peru-2025-2026-07-10/marts/sunat_cache/
 
 # Regenerable customs company aggregates (run: npm run aggregate-customs)
 src/data/customs-company-aggregates.json
+
+# Python
+__pycache__/
+*.py[cod]

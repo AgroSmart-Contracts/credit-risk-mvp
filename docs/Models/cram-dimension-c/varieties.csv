@@ -1,0 +1,24 @@
+variety,ac_class,proposed_class,shelf_life_days,max_observed_ocean_d,kg_2025_ocean,mean_transit_d,pct_far_asia_mena,usd_kg,n_exporters,signal,ceiling_vs_class
+Sekoya Pop,TRAVELLER,,50.0,34,30624478.0,19.4,23.6,7.53,30.0,STRONG,consistent
+Magica,TRAVELLER,,50.0,34,6968336.0,22.1,52.4,6.02,6.0,MODERATE,consistent
+Ventura,EUROPE_30d,,30.0,31,26032205.0,18.1,3.4,5.9,32.0,STRONG,consistent
+Sekoya,TRAVELLER,,50.0,30,4798713.0,17.3,10.4,7.08,15.0,STRONG,consistent
+Biloxi,TRAVELLER,,50.0,30,4721497.0,14.8,2.5,6.16,19.0,STRONG,consistent
+Eureka,,EUROPE_30d?,,30,3478286.0,15.9,8.1,8.46,2.0,WEAK — few exporters,
+Abril Blue,EUROPE_30d,,30.0,30,2747878.0,18.6,16.1,4.87,2.0,WEAK — few exporters,consistent
+Rosita,,EUROPE_30d?,,30,2689107.0,15.9,14.0,9.3,7.0,MODERATE,
+Matias,EUROPE_30d,,30.0,30,2609092.0,15.0,0.7,5.52,3.0,WEAK — few exporters,consistent
+Sekoya Beauty,TRAVELLER,,50.0,30,2111431.0,14.3,5.5,7.15,3.0,WEAK — few exporters,consistent
+Abril,,EUROPE_30d?,,30,1843662.0,16.3,3.9,4.62,1.0,WEAK — few exporters,
+Atlas,,EUROPE_30d?,,30,1671029.0,18.1,0.9,6.16,15.0,STRONG,
+Alessia Blue,,EUROPE_30d?,,30,1035061.0,18.9,11.6,6.39,1.0,WEAK — few exporters,
+Alessia,LOW_TRAVEL,,25.0,30,928823.0,17.8,4.7,4.77,1.0,WEAK — few exporters,TENSION — ships beyond low-travel range
+Raymi,,EUROPE_30d?,,30,812658.0,16.3,17.0,9.1,5.0,MODERATE,
+Arana,,EUROPE_30d?,,30,598600.0,20.1,43.5,7.83,4.0,MODERATE,
+Eureka Sunrise,,EUROPE_30d?,,28,4653239.0,15.7,3.0,8.5,3.0,WEAK — few exporters,
+Madeira,,EUROPE_30d?,,28,2845361.0,15.0,2.0,6.15,13.0,STRONG,
+Raymi Blu,,EUROPE_30d?,,28,1167021.0,14.0,4.2,8.58,2.0,WEAK — few exporters,
+Emerald,,EUROPE_30d?,,28,509743.0,17.2,6.0,7.81,11.0,STRONG,
+Rocio,LOW_TRAVEL,,25.0,21,3309581.0,13.3,0.0,7.17,3.0,WEAK — few exporters,consistent
+Atlas Blue,,LOW_TRAVEL?,,21,1550222.0,15.3,0.0,5.81,9.0,MODERATE,
+Divino,,LOW_TRAVEL?,,13,521634.0,13.0,0.0,6.05,1.0,WEAK — few exporters,

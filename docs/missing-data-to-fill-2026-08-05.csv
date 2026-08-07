@@ -1,0 +1,46 @@
+section,priority,company,role,product,email,dealRef_or_mongoId,field_to_fill,current_value,value_to_fill,source_hint,notes
+blocked_yib,done,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,andresmarin@drelifresh.com,TM-2026-018 / 6a71bb190e42678faa034630,yearsInBusiness,empty,4,verified 2026-08-06,Now scored (sandbox ~48.5)
+blocked_yib,done,SHANGHAI GREEN CHAIN TRADING CO LTD,buyer,Mixed Berries / Tropical Fruits (IQF),jenny@internationalgreenco.com,SGC-CHN-* (7 deals),yearsInBusiness,empty,5,verified 2026-08-06,Now scored (sandbox ~57.5)
+blocked_yib,done,GUANGZHOU FRESH LINK IMPORT CO LTD,buyer,Fresh Blueberries,sales@buyrite-intl.com,GFL-CHN-* (4 deals),yearsInBusiness,empty,5,verified 2026-08-06,Now scored (sandbox ~54.5)
+unknown_parties_deal,high,Unknown buyer + Unknown supplier,buyer+supplier,Fresh Blueberries,,Arándano fresco / 66fb1eb20b1b5991fc6479ff,real buyer name + YIB + real supplier name + YIB,"buyer=Unknown buyer; supplier=Unknown supplier; $30000; 1000 units; Peru→Netherlands; sea; finished milestone 7",,,"Deal ref mojibake ArÃ¯Â¿Â½ndano fresco; also missing insurance/customs/credit rating/shipping date"
+deal_field,high,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,,TM-2026-018 / 6a71bb190e42678faa034630,cargo insurance coverage,None (default),,,"Mandatory veto until filled; overall currently 64 Veto"
+deal_field,high,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,,TM-2026-018 / 6a71bb190e42678faa034630,buyer credit rating (Coface),none,,,
+deal_field,medium,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,,TM-2026-018 / 6a71bb190e42678faa034630,customs export narrative / DUA,none,,,
+deal_field,medium,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,,TM-2026-018 / 6a71bb190e42678faa034630,confirm origin/destination ports,"stored Lima Jorge Chavez → El Dorado/Bogota (prod Callao/Colombia)",,,Dimension C route score 83 on LIM→BOG air
+no_company_email,high,Eagle Trading Agriculture Marketing Ltd,buyer,nir@eagle-import.com,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,nir@eagle-import.com,,24 deals — email collected; wire onto deals
+no_company_email,high,Holy Fruit Peru,supplier,,,,"company invite email on deals",supply@trumarket.tech only,,"Users @holyfruitperu.com exist — attach to deals",14 deals
+no_company_email,high,AGRO SMART CONTRACTS LDA,buyer,,,,"company invite email (non-TM)",TM staff only,,,13 deals
+no_company_email,high,LIMAX SP. Z O.O.,buyer,Leo.Klaassen@limax.pl,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,Leo.Klaassen@limax.pl,,7 deals — email collected; wire onto deals
+no_company_email,high,A.S.M International,buyer,asminternational2@gmail.com,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,asminternational2@gmail.com,,5 deals — email collected; wire onto deals
+no_company_email,high,ICA BLUEBERRIES SAC,supplier,,,,"company invite email (non-TM)",supply@trumarket.tech only,,,4 deals
+no_company_email,medium,ANTERRA FARMS GMBH,buyer,anders.persson@anterrafarms.com,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,anders.persson@anterrafarms.com,,2 deals — email collected; wire onto deals
+no_company_email,medium,«Ardzhies» LLC,buyer,,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,,,2 deals
+no_company_email,medium,BC NATURE QUALITY FRUITS S.L,buyer,jcortes@bcnature.es,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,jcortes@bcnature.es,,1 deal — email collected; wire onto deals
+no_company_email,medium,BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA,buyer,benassi.importacao@benassisp.com.br,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,benassi.importacao@benassisp.com.br,,1 deal — email collected; wire onto deals
+no_company_email,medium,GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD,buyer,,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,,,1 deal
+create_user,high,ALLIED TRADE GLOBAL CORP,buyer,,rita@alliedtrade.com,,create prod User + company.name,,,17 deal invites; email not in users
+create_user,high,BIO FARMING PERU S.A.C.,supplier,,andresti@biofarming.com,,create prod User + company.name,,,13 deals; note andreti@biofarmingperu.com already a user
+create_user,high,DAVIS GLOBAL BV,buyer,,dganga@davisworldwide.nl,,create prod User + company.name,,,13 deals
+create_user,high,AGRICOLA VIÑASOL SAC,supplier,,lgarcia@avsa.com.pe,,create prod User + company.name,,,12 deals
+create_user,high,JUHINEJ LTD,buyer/supplier,,ivette.aedo@juhinej.com,,create prod User + company.name,,,12 deals
+create_user,high,AGRICOLA MEDANO AZUL SAC,supplier,,lvergara@medano.com.pe,,create prod User + company.name,,,10 deals
+create_user,high,XARKI SL,buyer,,miguel@xarki.com,,create prod User + company.name,,,10 deals
+create_user,high,HACIENDA SOTOMAYOR SL,buyer,,info@haciendasotomayor.es,,create prod User + company.name,,,9 deals
+create_user,medium,FRESH EXPRESS LLC,buyer,,sales@freshexpress.ae,,create prod User + company.name,,,7 deals
+create_user,medium,FUNDO LAS LOMAS SAC,supplier,,tesor1@fundolaslomas.com,,create prod User + company.name,,,7 deals
+create_user,medium,GIDDINS PERU SAC,supplier,,cesar.berrospi@giddingsfruit.com,,create prod User + company.name,,,7 deals
+create_user,medium,SHANGHAI GREEN CHAIN TRADING CO LTD,buyer,,jenny@internationalgreenco.com,,create prod User + company.name,,,7 deals; also needs YIB
+create_user,medium,TRADE CULTIVATORS LLC,buyer,,mohamed.nazer@tradecultivators.com,,create prod User + company.name,,,7 deals
+create_user,medium,BIOFRESHI BV,buyer,,gerritjan@biofreshi.com,,create prod User + company.name,,,5 deals
+create_user,medium,KHI INTERNATIONAL CORP,buyer,,ian@khi-international.com,,create prod User + company.name,,,5 deals
+create_user,medium,VILLAVENTURA PERU SAC,supplier,,rony@villaventuraperu.com,,create prod User + company.name,,,5 deals; note rony@villaventurapro.com already a user
+create_user,medium,GUANGZHOU FRESH LINK IMPORT CO LTD,buyer,,sales@buyrite-intl.com,,create prod User + company.name,,,4 deals; also needs YIB
+create_user,low,AGRÍCOLA Y COMERCIAL VALLES DEL ÑUBLE,buyer,,amory.sepulveda@juhinej.com,,create prod User + company.name,,,1 deal
+create_user,high,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,,andresmarin@drelifresh.com,TM-2026-018,create prod User + company.name/country/taxId,,Colombia / 901893567,1 deal; also needs YIB
+create_user,low,INDUSTRIAS SOLIMAR SAC,supplier,,mvillarreal.almacen@solimar.com.pe,,create prod User + company.name,,,1 deal
+fill_user_company,medium,BLUE PACIFIC FOODS SAC,supplier,,wli@bluepacificoils.com,,User.company.name/country/taxId,empty,,,User exists; company fields empty
+fill_user_company,medium,MIKHUNA FOODS SAC,supplier,,rsuarez@mikhunafoods.com.pe,,User.company.name/country/taxId,empty,,,
+fill_user_company,medium,MIKHUNA FOODS SAC,supplier,,lsalas@mikhunafoods.com.pe,,User.company.name/country/taxId,empty,,,
+fill_user_company,medium,T.O.F.F. B.V,buyer,,jarno.moret@toffbv.nl,,User.company.name/country/taxId,empty,,,
+fill_user_company,medium,Holy Fruit Peru,supplier,,alessandro@holyfruitperu.com,,User.company.name/country/taxId,empty,,,
+fill_user_company,medium,Holy Fruit Peru,supplier,,ventas@holyfruitperu.com,,User.company.name/country/taxId,empty,,,

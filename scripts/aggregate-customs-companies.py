@@ -29,7 +29,12 @@ DOCS = ROOT / "docs"
 DESKTOP = Path.home() / "Desktop"
 OUT = ROOT / "src" / "data" / "customs-company-aggregates.json"
 
+# Matching Company CSV is the curated platform↔customs join (Match Type column).
+# It is loaded first; later Veritrade/Datasur rows are deduped so shipments are
+# not double-counted when they also appear in the matched extract.
 SOURCES = [
+    DOCS / "Matching Company customs data.csv",
+    DESKTOP / "Matching Company customs data.csv",
     DOCS / "Veritrade_UL-20111724_PE_E_20260109105908(new).csv",
     DESKTOP / "Veritrade_UL-20111724_PE_E_20260109105908(new).csv",
     DOCS / "Veritrade_UL-20111724_PE_E_20260109110033.xlsx",
@@ -40,7 +45,7 @@ SOURCES = [
 def company_group_key(raw: str) -> str:
     s = (raw or "").strip().upper()
     s = re.sub(r"[ÃÂ]", "", s)
-    # Align with scripts/lib/company-name.ts companyGroupKey
+    # Align with scripts/lib/company-name.ts normalizeCompanyName / companyGroupKey
     aliases = {
         "AGRO SMART CONTRACTS, LDA.": "AGRO SMART CONTRACTS LDA",
         "AGRO SMART CONTRACTS": "AGRO SMART CONTRACTS LDA",
@@ -49,13 +54,33 @@ def company_group_key(raw: str) -> str:
         "TRU MARKET BLOCKCHAIN": "TRU MARKET BLOCKCHAIN S.A.C.",
         "BIO FARMING PERU S.A.C": "BIO FARMING PERU S.A.C.",
         "BIO FARMIN PERU S.A.C": "BIO FARMING PERU S.A.C.",
+        "LIMAX SP. Z O.O.": "LIMAX SP. Z O.O.",
         "LIMAX SP ZOO": "LIMAX SP. Z O.O.",
+        "LIMAX SP. Z.O.O.": "LIMAX SP. Z O.O.",
+        "LIMAX SP. Z.O.O": "LIMAX SP. Z O.O.",
+        "LIMAX SP Z.O.O.": "LIMAX SP. Z O.O.",
+        "LIMAX SP Z.O.O": "LIMAX SP. Z O.O.",
+        "LIMAX SP Z O O": "LIMAX SP. Z O.O.",
+        "LIMAX SP Z OO": "LIMAX SP. Z O.O.",
+        "LIMAX SP. ZO.O.": "LIMAX SP. Z O.O.",
+        "LIMAX SP. ZO.O": "LIMAX SP. Z O.O.",
+        "LIMAX SP ZO.O": "LIMAX SP. Z O.O.",
+        "LIMAX SP ZO.O.": "LIMAX SP. Z O.O.",
         "LIMAX SP. Z O.O": "LIMAX SP. Z O.O.",
+        "LIMAX SP. Z O O": "LIMAX SP. Z O.O.",
         "EAGLE TRADING AGRICULTURE MARKETING LTD.": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+        "EAGLE TRADING AGRICULTURE MARKETING LTD": "EAGLE TRADING AGRICULTURE MARKETING LTD",
+        "EAGLE TRADING AGRICULTURE LTD": "EAGLE TRADING AGRICULTURE MARKETING LTD",
         "A.S.M INTERNATIONAL": "A.S.M INTERNATIONAL",
+        "ASM INTERNATIONAL": "A.S.M INTERNATIONAL",
         "ASM INTERNATIONAL FSSAI": "A.S.M INTERNATIONAL",
         "ALLIED TRADE GLOBAL CORP": "ALLIED TRADE GLOBAL",
         "HOLY FRUIT PERU": "HOLY FRUIT PERU",
+        "HOLY FRUIT PERU S.A.C": "HOLY FRUIT PERU",
+        "HOLY FRUIT PERU S.A.C.": "HOLY FRUIT PERU",
+        "HOLY FRUIT PERU SAC": "HOLY FRUIT PERU",
+        "FUNDO LAS LOMAS S.A.C.": "FUNDO LAS LOMAS SAC",
+        "FUNDO LAS LOMAS S.A.C": "FUNDO LAS LOMAS SAC",
         "AGRICOLA VINASOL SAC": "AGRICOLA VIÑASOL SAC",
     }
     if s in aliases:
@@ -87,9 +112,15 @@ def parse_date(val):
     if hasattr(val, "year"):
         return val
     s = str(val).strip()
-    for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%m/%d/%Y", "%d-%m-%Y"):
+    for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%m/%d/%Y", "%d-%m-%Y", "%d/%m/%y", "%m/%d/%y"):
         try:
-            return datetime.strptime(s[:10], fmt).date()
+            return datetime.strptime(s[:10] if len(s) >= 8 else s, fmt).date()
+        except ValueError:
+            continue
+    # bare d/m/yy without zero-padding (e.g. 1/1/25)
+    for fmt in ("%d/%m/%y", "%m/%d/%y", "%d/%m/%Y", "%m/%d/%Y"):
+        try:
+            return datetime.strptime(s, fmt).date()
         except ValueError:
             continue
     return None
@@ -145,7 +176,25 @@ def add_shipment(
     origin_office: str,
     date,
     source: str,
+    seen_shipments: set | None = None,
+    dua: str = "",
 ):
+    # Deduplicate across Matching Company extract + full Veritrade book.
+    fp = "|".join(
+        [
+            str(dua or "").strip(),
+            str(date or ""),
+            company_group_key(exporter),
+            company_group_key(importer),
+            f"{kg_net:.2f}",
+            f"{fob:.2f}",
+        ]
+    )
+    if seen_shipments is not None:
+        if fp in seen_shipments:
+            return False
+        seen_shipments.add(fp)
+
     exp_key = company_group_key(exporter)
     imp_key = company_group_key(importer)
     if exp_key:
@@ -184,17 +233,22 @@ def add_shipment(
         if date:
             a.dates.append(date)
         a.sources.add(source)
+    return True
 
 
-def load_veritrade_csv(path: Path, store: dict):
+def load_veritrade_csv(path: Path, store: dict, seen_shipments: set | None = None):
     raw = path.read_bytes().replace(b"\x00", b"")
     text = raw.decode("utf-8-sig", errors="replace")
     lines = text.splitlines()
-    header_idx = next(i for i, ln in enumerate(lines) if ln.startswith("Partida Aduanera"))
+    header_idx = next(i for i, ln in enumerate(lines) if ln.startswith("Partida Aduanera") or ln.startswith("\ufeffPartida Aduanera"))
+    # strip BOM from first header cell if present
+    if lines[header_idx].startswith("\ufeff"):
+        lines[header_idx] = lines[header_idx].lstrip("\ufeff")
     reader = csv.DictReader(lines[header_idx:])
     n = 0
+    kept = 0
     for row in reader:
-        add_shipment(
+        ok = add_shipment(
             store,
             exporter=row.get("Exportador") or "",
             importer=row.get("Importador") or "",
@@ -206,12 +260,16 @@ def load_veritrade_csv(path: Path, store: dict):
             origin_office=row.get("Aduana") or "",
             date=parse_date(row.get("Fecha")),
             source=path.name,
+            seen_shipments=seen_shipments,
+            dua=str(row.get("DUA / DAM") or ""),
         )
         n += 1
-    print(f"  {path.name}: {n} rows")
+        if ok:
+            kept += 1
+    print(f"  {path.name}: {kept}/{n} rows kept")
 
 
-def load_veritrade_xlsx(path: Path, store: dict):
+def load_veritrade_xlsx(path: Path, store: dict, seen_shipments: set | None = None):
     wb = load_workbook(path, read_only=True, data_only=True)
     ws = wb[wb.sheetnames[0]]
     rows = ws.iter_rows(values_only=True)
@@ -233,10 +291,11 @@ def load_veritrade_xlsx(path: Path, store: dict):
         return row[i] if i is not None and i < len(row) else None
 
     n = 0
+    kept = 0
     for row in rows:
         if not row or row[0] is None:
             continue
-        add_shipment(
+        ok = add_shipment(
             store,
             exporter=str(cell(row, "Exportador") or ""),
             importer=str(cell(row, "Importador") or ""),
@@ -248,13 +307,17 @@ def load_veritrade_xlsx(path: Path, store: dict):
             origin_office=str(cell(row, "Aduana") or ""),
             date=parse_date(cell(row, "Fecha")),
             source=path.name,
+            seen_shipments=seen_shipments,
+            dua=str(cell(row, "DUA / DAM") or ""),
         )
         n += 1
+        if ok:
+            kept += 1
     wb.close()
-    print(f"  {path.name}: {n} rows (header at {header_idx})")
+    print(f"  {path.name}: {kept}/{n} rows kept (header at {header_idx})")
 
 
-def load_datasur_xlsx(path: Path, store: dict):
+def load_datasur_xlsx(path: Path, store: dict, seen_shipments: set | None = None):
     wb = load_workbook(path, read_only=True, data_only=True)
     ws = wb["Datasur"] if "Datasur" in wb.sheetnames else wb[wb.sheetnames[0]]
     rows = ws.iter_rows(values_only=True)
@@ -266,6 +329,7 @@ def load_datasur_xlsx(path: Path, store: dict):
         return row[i] if i is not None and i < len(row) else None
 
     n = 0
+    kept = 0
     for row in rows:
         if not row:
             continue
@@ -278,7 +342,7 @@ def load_datasur_xlsx(path: Path, store: dict):
                 date = datetime(int(year), int(month), int(day)).date()
         except (TypeError, ValueError):
             date = None
-        add_shipment(
+        ok = add_shipment(
             store,
             exporter=str(cell(row, "EXPORTADOR") or ""),
             importer=str(cell(row, "CONSIGNATARIO") or ""),
@@ -290,10 +354,14 @@ def load_datasur_xlsx(path: Path, store: dict):
             origin_office=str(cell(row, "ADUANA") or ""),
             date=date,
             source=path.name,
+            seen_shipments=seen_shipments,
+            dua=str(cell(row, "DUA") or cell(row, "DAM") or ""),
         )
         n += 1
+        if ok:
+            kept += 1
     wb.close()
-    print(f"  {path.name}: {n} rows")
+    print(f"  {path.name}: {kept}/{n} rows kept")
 
 
 def months_span(dates) -> float | None:
@@ -307,6 +375,7 @@ def months_span(dates) -> float | None:
 def main():
     store: dict[str, Agg] = {}
     seen_paths = set()
+    seen_shipments: set[str] = set()
     print("Ingesting customs…")
     for path in SOURCES:
         if not path.exists():
@@ -323,13 +392,18 @@ def main():
         ):
             print(f"  skip duplicate {path.name}")
             continue
+        if path.name == "Matching Company customs data.csv" and any(
+            p.name == "Matching Company customs data.csv" for p in seen_paths
+        ):
+            print(f"  skip duplicate {path.name}")
+            continue
         seen_paths.add(resolved)
         if path.suffix.lower() == ".csv":
-            load_veritrade_csv(path, store)
+            load_veritrade_csv(path, store, seen_shipments)
         elif "10843" in path.name:
-            load_datasur_xlsx(path, store)
+            load_datasur_xlsx(path, store, seen_shipments)
         else:
-            load_veritrade_xlsx(path, store)
+            load_veritrade_xlsx(path, store, seen_shipments)
 
     companies = []
     for key, a in sorted(store.items(), key=lambda kv: -kv[1].shipments):

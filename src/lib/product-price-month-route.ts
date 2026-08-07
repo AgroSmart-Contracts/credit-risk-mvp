@@ -119,6 +119,12 @@ export interface UsualPriceMatch {
     | "sheet-origin-dest-month"
     | "sheet-mode-origin-dest-month";
   transportMode?: "air" | "sea" | null;
+  /** Observed corridor min $/kg when the platform sheet has a spread. */
+  minUsdPerKg?: number | null;
+  /** Observed corridor max $/kg when the platform sheet has a spread. */
+  maxUsdPerKg?: number | null;
+  spreadPct?: number | null;
+  priceRangeDisplay?: string | null;
 }
 
 function calendarMonth(ym: string): string {
@@ -131,6 +137,32 @@ function pickBest(candidates: ProductPriceMonthRouteRow[]): ProductPriceMonthRou
     if (b.nObservations !== a.nObservations) return b.nObservations - a.nObservations;
     return b.usualUsdPerKg - a.usualUsdPerKg;
   })[0];
+}
+
+function matchFromRow(
+  hit: ProductPriceMonthRouteRow,
+  meta: {
+    productKey: string;
+    originCountry: string | null;
+    destinationCountry: string | null;
+    matchLevel: UsualPriceMatch["matchLevel"];
+  },
+): UsualPriceMatch {
+  return {
+    usualUsdPerKg: hit.usualUsdPerKg,
+    nObservations: hit.nObservations,
+    source: hit.source,
+    month: hit.month,
+    productKey: meta.productKey,
+    originCountry: meta.originCountry,
+    destinationCountry: meta.destinationCountry,
+    matchLevel: meta.matchLevel,
+    transportMode: hit.transportMode ?? null,
+    minUsdPerKg: hit.minUsdPerKg ?? null,
+    maxUsdPerKg: hit.maxUsdPerKg ?? null,
+    spreadPct: hit.spreadPct ?? null,
+    priceRangeDisplay: hit.priceRangeDisplay ?? null,
+  };
 }
 
 export function lookupUsualUnitPrice(args: {
@@ -168,16 +200,12 @@ export function lookupUsualUnitPrice(args: {
       ),
     );
     if (hit) {
-      return {
-        usualUsdPerKg: hit.usualUsdPerKg,
-        nObservations: hit.nObservations,
-        source: hit.source,
-        month: hit.month,
+      return matchFromRow(hit, {
         productKey,
         originCountry,
         destinationCountry,
         matchLevel: "customs-origin-dest-month",
-      };
+      });
     }
   }
 
@@ -192,16 +220,12 @@ export function lookupUsualUnitPrice(args: {
       ),
     );
     if (hit) {
-      return {
-        usualUsdPerKg: hit.usualUsdPerKg,
-        nObservations: hit.nObservations,
-        source: hit.source,
-        month: hit.month,
+      return matchFromRow(hit, {
         productKey,
         originCountry,
         destinationCountry,
         matchLevel: "customs-dest-month",
-      };
+      });
     }
   }
 
@@ -218,16 +242,12 @@ export function lookupUsualUnitPrice(args: {
       ),
     );
     if (hit) {
-      return {
-        usualUsdPerKg: hit.usualUsdPerKg,
-        nObservations: hit.nObservations,
-        source: hit.source,
-        month: hit.month,
+      return matchFromRow(hit, {
         productKey,
         originCountry,
         destinationCountry,
         matchLevel: "sheet-origin-dest-month",
-      };
+      });
     }
   }
 
@@ -245,17 +265,12 @@ export function lookupUsualUnitPrice(args: {
         : null;
     const hit = preferred ?? pickBest(modePool);
     if (hit) {
-      return {
-        usualUsdPerKg: hit.usualUsdPerKg,
-        nObservations: hit.nObservations,
-        source: hit.source,
-        month: hit.month,
+      return matchFromRow(hit, {
         productKey,
         originCountry,
         destinationCountry,
         matchLevel: "sheet-mode-origin-dest-month",
-        transportMode: hit.transportMode ?? null,
-      };
+      });
     }
   }
 
@@ -271,16 +286,12 @@ export function lookupUsualUnitPrice(args: {
       ),
     );
     if (hit) {
-      return {
-        usualUsdPerKg: hit.usualUsdPerKg,
-        nObservations: hit.nObservations,
-        source: hit.source,
-        month: hit.month,
+      return matchFromRow(hit, {
         productKey,
         originCountry,
         destinationCountry,
         matchLevel: "customs-dest-calendar-month",
-      };
+      });
     }
   }
 

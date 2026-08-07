@@ -157,10 +157,15 @@ export interface PlatformCounterpartyScore {
     coveragePct: number;
     rawAverage: number | null;
     trustBonus: number;
+    /** Worst/best case published score if every missing field turned out 0 / 100 */
+    scoreLow: number;
+    scoreHigh: number;
     customsMatched: boolean;
     customsShipments: number;
     customsVolumeMt: number | null;
     customsFobUsd: number | null;
+    /** Avg monthly FOB USD from customs (active months, else ÷12) */
+    customsMonthlyFobUsd: number | null;
     customsRoutes: number | null;
     filledFieldIds: string[];
   };
@@ -171,5 +176,5 @@ export type AppView =
   | "counterparties"
   | "platform"
   | "missing"
-  | "product-table"
-  | "route-table";
+  | "route-table"
+  | "blueberry-cram";

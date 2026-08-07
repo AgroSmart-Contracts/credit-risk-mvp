@@ -12,6 +12,10 @@ export interface ProductPriceMonthRouteRow {
   nObservations: number;
   source: ProductPriceSource;
   transportMode?: "air" | "sea" | null;
+  minUsdPerKg?: number | null;
+  maxUsdPerKg?: number | null;
+  spreadPct?: number | null;
+  priceRangeDisplay?: string | null;
 }
 
 export const PRODUCT_PRICE_MONTH_ROUTE_TABLE = tableJson as ProductPriceMonthRouteRow[];

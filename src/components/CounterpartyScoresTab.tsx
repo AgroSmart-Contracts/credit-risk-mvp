@@ -28,10 +28,12 @@ const platformDealByMongoId = new Map(platformDeals.map((d) => [d.mongoId, d]));
 function ScorePill({
   label,
   value,
+  sub,
   tone = "default",
 }: {
   label: string;
   value: string | number;
+  sub?: string;
   tone?: "default" | "good" | "warn";
 }) {
   const toneClass =
@@ -46,6 +48,7 @@ function ScorePill({
         {label}
       </p>
       <p className="font-display text-xl">{value}</p>
+      {sub && <p className="text-[10px] opacity-70">{sub}</p>}
     </div>
   );
 }
@@ -59,10 +62,10 @@ function FormulaPanel() {
         </div>
         <div>
           <h2 className="text-sm font-semibold text-tm-black">
-            Sandbox formula
+            Dimension A formula
           </h2>
           <p className="text-[11px] text-tm-text-muted">
-            Outline 2026-07-30 — not live CRAM
+            Same formula as Platform deals / Assess
           </p>
         </div>
       </div>
@@ -77,8 +80,11 @@ function FormulaPanel() {
             weight) ÷ Σ(filled weights). Blank fields are excluded.
           </li>
           <li>
-            <span className="font-medium">Coverage</span> — filled weight ÷ all
-            possible weight for that role.
+            <span className="font-medium">Coverage</span> — the more
+            conservative of filled weight ÷ possible weight and filled fields
+            ÷ total fields. A couple of heavy fields (e.g. credit rating +
+            years-in-business) no longer look as complete as their weight
+            alone would suggest.
           </li>
           <li>
             <span className="font-medium">Shrink toward 50</span> — coverage ×
@@ -87,7 +93,12 @@ function FormulaPanel() {
           <li>
             <span className="font-medium">TM trust bonus</span> — +3 flat after
             shrink when the company is on the platform (or a known TM
-            affiliate).
+            affiliate). Hand-set, not calibrated against outcomes yet.
+          </li>
+          <li>
+            <span className="font-medium">Range</span> — best/worst case if
+            every missing field turned out to score 100 / 0. The published
+            score is the midpoint (missing fields assumed neutral).
           </li>
         </ol>
       </section>
@@ -116,10 +127,10 @@ function FormulaPanel() {
 
       <section className="space-y-2">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-primary">
-          Deal-level CRAM (elsewhere)
+          Live Dimension A
         </p>
         <p className="text-xs leading-relaxed text-tm-text-light">
-          Platform deals / Assess still use live Dimension A (
+          Platform deals / Assess use these same scores via{" "}
           <code className="rounded bg-tm-neutral px-1 text-[10px]">
             computeBuyerScore
           </code>{" "}
@@ -127,7 +138,7 @@ function FormulaPanel() {
           <code className="rounded bg-tm-neutral px-1 text-[10px]">
             computeSupplierScore
           </code>
-          ). This tab is the sandbox tester only.
+          .
         </p>
       </section>
 
@@ -186,7 +197,12 @@ function CounterpartyCard({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <ScorePill label="Sandbox score" value={score} tone={tone} />
+        <ScorePill
+          label="Sandbox score"
+          value={score}
+          sub={sb ? `range ${sb.scoreLow}–${sb.scoreHigh}` : undefined}
+          tone={tone}
+        />
         <ScorePill
           label="Coverage"
           value={sb ? `${sb.coveragePct}%` : "—"}

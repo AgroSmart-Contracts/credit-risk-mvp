@@ -116,6 +116,10 @@ export function RiskDashboard({
                       label="Supplier"
                       score={assessment.supplier.score}
                     />
+                    <SubScoreBar.Party
+                      label="Rel. score"
+                      score={assessment.relationshipAdj}
+                    />
                   </div>
                 )}
               </SubScoreBar>
@@ -136,8 +140,8 @@ export function RiskDashboard({
           </p>
           <p className="mt-1 text-sm text-tm-text-light">
             Still missing from platform enrichment — scoring used assumed
-            defaults where noted (license valid, 0 payment delay, 0% quality
-            rejection).
+            defaults where noted (license valid). Payment delay and quality
+            rejection are left blank for Dimension A when unknown.
           </p>
           <ul className="mt-3 flex flex-wrap gap-1.5">
             {deal.fieldsNeedingConfirmation.map((field) => (

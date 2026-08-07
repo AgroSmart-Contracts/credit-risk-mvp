@@ -1,0 +1,681 @@
+{
+  "basis": "36 unique scored companyName values from counterparty-scores.csv (status=scored)",
+  "matchMethods": [
+    "User.company.name (normalized)",
+    "User.email domain (explicit map + token-in-domain; generic/trumarket.tech excluded)"
+  ],
+  "summary": {
+    "scoredCompanies": 36,
+    "matchedCompanyName": 4,
+    "matchedEmailDomainOnly": 6,
+    "noMatchingUser": 26
+  },
+  "matchedCompanyName": [
+    {
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "key": "TRU MARKET BLOCKCHAIN",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Asparagus",
+        "Fresh Blueberries",
+        "Frozen Tropical Fruits",
+        "Mixed Berries / Tropical Fruits (IQF)"
+      ],
+      "dealCount": 37,
+      "status": "matched_company_name",
+      "users": [
+        {
+          "email": "julissa.ruiz@trumarket.tech",
+          "accountType": "supplier",
+          "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "matchVia": [
+            "company.name"
+          ],
+          "taxId": "20608082281"
+        },
+        {
+          "email": "soltarparaencontrar@gmail.com",
+          "accountType": "supplier",
+          "companyName": "TRU MARKET BLOCKCHAIN SAC",
+          "matchVia": [
+            "company.name"
+          ],
+          "taxId": "20608082281"
+        },
+        {
+          "email": "tasneemsherif23@gmail.com",
+          "accountType": "supplier",
+          "companyName": "TRU MARKET BLOCKCHAIN S.A.C",
+          "matchVia": [
+            "company.name"
+          ],
+          "taxId": "20608082281"
+        }
+      ]
+    },
+    {
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "key": "BIO FARMING PERU",
+      "roles": [
+        "buyer",
+        "supplier"
+      ],
+      "products": [
+        "Fresh Avocado",
+        "Fresh Mandarin"
+      ],
+      "dealCount": 33,
+      "status": "matched_company_name",
+      "users": [
+        {
+          "email": "rony@villaventurapro.com",
+          "accountType": "supplier",
+          "companyName": "BIO FARMING PERU S.A.C.",
+          "matchVia": [
+            "company.name"
+          ],
+          "taxId": "20610491104"
+        },
+        {
+          "email": "andreti@biofarmingperu.com",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        },
+        {
+          "email": "rony@biofarmingperu.com",
+          "accountType": "buyer",
+          "companyName": "GRUPO QSP SRL",
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": "1-31-79197-2"
+        }
+      ]
+    },
+    {
+      "companyName": "Open Markets Corporation",
+      "key": "OPEN MARKETS CORPORATION",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Mandarin"
+      ],
+      "dealCount": 16,
+      "status": "matched_company_name",
+      "users": [
+        {
+          "email": "andresticona@openmarketscorp.com",
+          "accountType": "supplier",
+          "companyName": "Open Markets Corporation",
+          "matchVia": [
+            "company.name",
+            "email.domain"
+          ],
+          "taxId": "65-1078039"
+        }
+      ]
+    },
+    {
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "key": "AGRO SMART CONTRACTS",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Avocado",
+        "Fresh Blueberries",
+        "Fresh Mandarin",
+        "Frozen Tropical Fruits"
+      ],
+      "dealCount": 13,
+      "status": "matched_company_name",
+      "users": [
+        {
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "companyName": "AGRO SMART CONTRACTS LDA",
+          "matchVia": [
+            "company.name"
+          ],
+          "taxId": "517935392"
+        }
+      ]
+    }
+  ],
+  "matchedEmailDomainOnly": [
+    {
+      "companyName": "Villaventura Peru SAC",
+      "key": "VILLAVENTURA PERU",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Blueberries",
+        "Fresh Mandarin"
+      ],
+      "dealCount": 22,
+      "status": "matched_email_domain",
+      "users": [
+        {
+          "email": "boris@villaventurapro.com",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        },
+        {
+          "email": "stephany@villaventurapro.com",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        },
+        {
+          "email": "rony@villaventurapro.com",
+          "accountType": "supplier",
+          "companyName": "BIO FARMING PERU S.A.C.",
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": "20610491104"
+        }
+      ]
+    },
+    {
+      "companyName": "Holy Fruit Peru",
+      "key": "HOLY FRUIT PERU",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 14,
+      "status": "matched_email_domain",
+      "users": [
+        {
+          "email": "alessandro@holyfruitperu.com",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        },
+        {
+          "email": "ventas@holyfruitperu.com",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        }
+      ]
+    },
+    {
+      "companyName": "MIKHUNA FOODS SAC",
+      "key": "MIKHUNA FOODS",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Asparagus",
+        "Fresh Ginger"
+      ],
+      "dealCount": 9,
+      "status": "matched_email_domain",
+      "users": [
+        {
+          "email": "rsuarez@mikhunafoods.com.pe",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        },
+        {
+          "email": "lsalas@mikhunafoods.com.pe",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        }
+      ]
+    },
+    {
+      "companyName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+      "key": "MIKHUNA FOODS",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Ginger"
+      ],
+      "dealCount": 1,
+      "status": "matched_email_domain",
+      "users": [
+        {
+          "email": "rsuarez@mikhunafoods.com.pe",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        },
+        {
+          "email": "lsalas@mikhunafoods.com.pe",
+          "accountType": "supplier",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        }
+      ]
+    },
+    {
+      "companyName": "ALBORAN COMEX SL",
+      "key": "ALBORAN COMEX",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Ginger"
+      ],
+      "dealCount": 1,
+      "status": "matched_email_domain",
+      "users": [
+        {
+          "email": "antonio@alboranps.com",
+          "accountType": "buyer",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        }
+      ]
+    },
+    {
+      "companyName": "T.O.F.F. B.V",
+      "key": "TOFF",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Ginger"
+      ],
+      "dealCount": 1,
+      "status": "matched_email_domain",
+      "users": [
+        {
+          "email": "jarno.moret@toffbv.nl",
+          "accountType": "buyer",
+          "companyName": null,
+          "matchVia": [
+            "email.domain"
+          ],
+          "taxId": null
+        }
+      ]
+    }
+  ],
+  "noMatchingUser": [
+    {
+      "companyName": "Eagle Trading Agriculture Marketing Ltd",
+      "key": "EAGLE TRADING AGRICULTURE MARKETING",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 24,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "Allied Trade Global",
+      "key": "ALLIED TRADE GLOBAL",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 18,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "AGRICOLA VI\u00c2\u0091ASOL SAC",
+      "key": "AGRICOLA VINASOL",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 12,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "DAVIS GLOBAL BV",
+      "key": "DAVIS GLOBAL",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Mandarin"
+      ],
+      "dealCount": 12,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "XARKI SL",
+      "key": "XARKI",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Avocado"
+      ],
+      "dealCount": 10,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "AGRICOLA MEDANO AZUL SAC",
+      "key": "AGRICOLA MEDANO AZUL",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Avocado"
+      ],
+      "dealCount": 10,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "HACIENDA SOTOMAYOR SL",
+      "key": "HACIENDA SOTOMAYOR",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Asparagus"
+      ],
+      "dealCount": 9,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "JUHINEJ LTD",
+      "key": "JUHINEJ",
+      "roles": [
+        "buyer",
+        "supplier"
+      ],
+      "products": [
+        "Mixed Berries / Tropical Fruits (IQF)"
+      ],
+      "dealCount": 8,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "GIDDINS PERU SAC",
+      "key": "GIDDINS PERU",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 7,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "BLUE PACIFIC FOODS SAC",
+      "key": "BLUE PACIFIC FOODS",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Ginger"
+      ],
+      "dealCount": 7,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "FUNDO LAS LOMAS SAC",
+      "key": "FUNDO LAS LOMAS",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 7,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "FRESH EXPRESS LLC",
+      "key": "FRESH EXPRESS",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 7,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "LIMAX SP. Z O.O.",
+      "key": "LIMAX",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 7,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "TRADE CULTIVATORS LLC",
+      "key": "TRADE CULTIVATORS",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 7,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "BIOFRESHI BV",
+      "key": "BIOFRESHI",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Ginger"
+      ],
+      "dealCount": 6,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "A.S.M International",
+      "key": "ASM INTERNATIONAL",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 5,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "ICA BLUEBERRIES SAC",
+      "key": "ICA BLUEBERRIES",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 4,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "NATURAL SOUTH FRUIT LTD",
+      "key": "NATURAL SOUTH FRUIT",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Mixed Berries / Tropical Fruits (IQF)"
+      ],
+      "dealCount": 4,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "KHI INTERNATIONAL CORP",
+      "key": "KHI INTERNATIONAL",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Mixed Berries / Tropical Fruits (IQF)"
+      ],
+      "dealCount": 4,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "key": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Avocado",
+        "Mixed Berries / Tropical Fruits (IQF)"
+      ],
+      "dealCount": 2,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "ANTERRA FARMS GMBH",
+      "key": "ANTERRA FARMS",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Asparagus"
+      ],
+      "dealCount": 2,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "\u00c2\u00abArdzhies\u00c2\u00bb LLC",
+      "key": "ARDZHIES",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 2,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "INDUSTRIAS SOLIMAR SAC",
+      "key": "INDUSTRIAS SOLIMAR",
+      "roles": [
+        "supplier"
+      ],
+      "products": [
+        "Mixed Berries / Tropical Fruits (IQF)"
+      ],
+      "dealCount": 1,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "BC NATURE QUALITY FRUITS S.L",
+      "key": "BC NATURE QUALITY FRUITS S L",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 1,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+      "key": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Blueberries"
+      ],
+      "dealCount": 1,
+      "status": "no_user",
+      "users": []
+    },
+    {
+      "companyName": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+      "key": "GOURMET BEVERAGE ONE GROUP THAILAND",
+      "roles": [
+        "buyer"
+      ],
+      "products": [
+        "Fresh Avocado"
+      ],
+      "dealCount": 1,
+      "status": "no_user",
+      "users": []
+    }
+  ]
+}

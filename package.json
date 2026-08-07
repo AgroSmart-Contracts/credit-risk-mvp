@@ -9,6 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "validate": "tsx scripts/validate-cram-coverage.ts",
+    "build:route-risk": "tsx scripts/build-route-risk-table.ts",
+    "apply-platform-defaults": "tsx scripts/apply-platform-defaults-csv.ts",
     "test": "vitest run",
     "aggregate-customs": "python3 scripts/aggregate-customs-companies.py",
     "recalc-counterparties": "tsx scripts/recalculate-counterparty-scores.ts",

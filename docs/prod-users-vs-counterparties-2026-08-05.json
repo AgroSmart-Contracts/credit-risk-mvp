@@ -1,0 +1,951 @@
+{
+  "generatedAt": "2026-08-05",
+  "sources": {
+    "prodUsers": "mongodb prod.users",
+    "prodDeals": "mongodb prod.deals (buyerCompany/supplierCompany + buyers/suppliers)",
+    "counterparties": "credit-risk-mvp/src/data/counterparty-scores.csv"
+  },
+  "summary": {
+    "prodUsersTotal": 98,
+    "prodUsersWithCompanyName": 10,
+    "counterpartyCompanies": 39,
+    "identityMatch": 4,
+    "dealParticipantProxyOnly": 13,
+    "noUser": 22
+  },
+  "rows": [
+    {
+      "key": "TRU MARKET BLOCKCHAIN",
+      "company": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 37,
+      "customsMatch": "yes",
+      "yearsInBusiness": "5",
+      "sandboxScore": "61.8",
+      "match": "identity",
+      "identityUsers": [
+        {
+          "id": "674634b57017d126c68f26c7",
+          "email": "julissa.ruiz@trumarket.tech",
+          "accountType": "supplier",
+          "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "taxId": "20608082281",
+          "country": "Peru"
+        },
+        {
+          "id": "6851bb189b44067e89752878",
+          "email": "soltarparaencontrar@gmail.com",
+          "accountType": "supplier",
+          "companyName": "TRU MARKET BLOCKCHAIN SAC",
+          "taxId": "20608082281",
+          "country": "Peru"
+        },
+        {
+          "id": "68d164c77da7cd1764853a88",
+          "email": "tasneemsherif23@gmail.com",
+          "accountType": "supplier",
+          "companyName": "TRU MARKET BLOCKCHAIN S.A.C",
+          "taxId": "20608082281",
+          "country": "Peru"
+        }
+      ],
+      "genuineParticipants": [
+        {
+          "id": "674634b57017d126c68f26c7",
+          "email": "julissa.ruiz@trumarket.tech",
+          "accountType": "supplier",
+          "userCompanyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+          "dealRole": "supplier"
+        }
+      ],
+      "proxyParticipants": [
+        {
+          "id": "664f43f8ea33ba8ed6b9d976",
+          "email": "alessandro@holyfruitperu.com",
+          "accountType": "supplier",
+          "userCompanyName": null,
+          "dealRole": "supplier"
+        },
+        {
+          "id": "686fd2d3b2ad7b0ec2a4f8bb",
+          "email": "supply@trumarket.tech",
+          "accountType": "supplier",
+          "userCompanyName": "Geneva MEDITERRANEAN SHIPPING COMPANY DEL PERU S.A.C.",
+          "dealRole": "supplier"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro@holyfruitperu.com",
+        "supply@trumarket.tech"
+      ]
+    },
+    {
+      "key": "BIO FARMING PERU",
+      "company": "BIO FARMING PERU S.A.C.",
+      "roles": [
+        "buyer",
+        "supplier"
+      ],
+      "dealCount": 33,
+      "customsMatch": "no",
+      "yearsInBusiness": "2",
+      "sandboxScore": "63.5",
+      "match": "identity",
+      "identityUsers": [
+        {
+          "id": "6654cb5aea33ba8ed6ba6015",
+          "email": "rony@villaventurapro.com",
+          "accountType": "supplier",
+          "companyName": "BIO FARMING PERU S.A.C.",
+          "taxId": "20610491104",
+          "country": "Peru"
+        }
+      ],
+      "genuineParticipants": [
+        {
+          "id": "6654cb5aea33ba8ed6ba6015",
+          "email": "rony@villaventurapro.com",
+          "accountType": "supplier",
+          "userCompanyName": "BIO FARMING PERU S.A.C.",
+          "dealRole": "supplier"
+        }
+      ],
+      "proxyParticipants": [
+        {
+          "id": "69c67e070bdf50f1f471b136",
+          "email": "rony@biofarmingperu.com",
+          "accountType": "buyer",
+          "userCompanyName": "GRUPO QSP SRL",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "rony@biofarmingperu.com"
+      ]
+    },
+    {
+      "key": "OPEN MARKETS CORPORATION",
+      "company": "Open Markets Corporation",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 16,
+      "customsMatch": "no",
+      "yearsInBusiness": "2",
+      "sandboxScore": "55.3",
+      "match": "identity",
+      "identityUsers": [
+        {
+          "id": "6654d0eaea33ba8ed6ba60a7",
+          "email": "andresticona@openmarketscorp.com",
+          "accountType": "supplier",
+          "companyName": "Open Markets Corporation",
+          "taxId": "65-1078039",
+          "country": "United States"
+        }
+      ],
+      "genuineParticipants": [
+        {
+          "id": "6654d0eaea33ba8ed6ba60a7",
+          "email": "andresticona@openmarketscorp.com",
+          "accountType": "supplier",
+          "userCompanyName": "Open Markets Corporation",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "AGRO SMART CONTRACTS",
+      "company": "AGRO SMART CONTRACTS LDA",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 13,
+      "customsMatch": "no",
+      "yearsInBusiness": "2",
+      "sandboxScore": "52.3",
+      "match": "identity",
+      "identityUsers": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "companyName": "AGRO SMART CONTRACTS LDA",
+          "taxId": "517935392",
+          "country": "Portugal"
+        }
+      ],
+      "genuineParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyParticipants": [
+        {
+          "id": "66fc0a700b1b5991fc6480f8",
+          "email": "chiara.rivas@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": null,
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "chiara.rivas@trumarket.tech"
+      ]
+    },
+    {
+      "key": "EAGLE TRADING AGRICULTURE MARKETING",
+      "company": "Eagle Trading Agriculture Marketing Ltd",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 24,
+      "customsMatch": "yes",
+      "yearsInBusiness": "2",
+      "sandboxScore": "52.3",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "VILLAVENTURA PERU",
+      "company": "Villaventura Peru SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 22,
+      "customsMatch": "no",
+      "yearsInBusiness": "3",
+      "sandboxScore": "65.1",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6654cb5aea33ba8ed6ba6015",
+          "email": "rony@villaventurapro.com",
+          "accountType": "supplier",
+          "userCompanyName": "BIO FARMING PERU S.A.C.",
+          "dealRole": "supplier"
+        }
+      ],
+      "proxyEmails": [
+        "rony@villaventurapro.com"
+      ]
+    },
+    {
+      "key": "HOLY FRUIT PERU",
+      "company": "Holy Fruit Peru",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 14,
+      "customsMatch": "yes",
+      "yearsInBusiness": "8",
+      "sandboxScore": "67.5",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "686fd2d3b2ad7b0ec2a4f8bb",
+          "email": "supply@trumarket.tech",
+          "accountType": "supplier",
+          "userCompanyName": "Geneva MEDITERRANEAN SHIPPING COMPANY DEL PERU S.A.C.",
+          "dealRole": "supplier"
+        }
+      ],
+      "proxyEmails": [
+        "supply@trumarket.tech"
+      ]
+    },
+    {
+      "key": "MIKHUNA FOODS",
+      "company": "MIKHUNA FOODS SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 10,
+      "customsMatch": "no",
+      "yearsInBusiness": "6",
+      "sandboxScore": "69.2",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "666217b5408ef4b7232d4f48",
+          "email": "rsuarez@mikhunafoods.com.pe",
+          "accountType": "supplier",
+          "userCompanyName": null,
+          "dealRole": "supplier"
+        },
+        {
+          "id": "666abe030b1b5991fc623e88",
+          "email": "lsalas@mikhunafoods.com.pe",
+          "accountType": "supplier",
+          "userCompanyName": null,
+          "dealRole": "supplier"
+        }
+      ],
+      "proxyEmails": [
+        "lsalas@mikhunafoods.com.pe",
+        "rsuarez@mikhunafoods.com.pe"
+      ]
+    },
+    {
+      "key": "LIMAX",
+      "company": "LIMAX SP. Z O.O.",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "customsMatch": "yes",
+      "yearsInBusiness": "24",
+      "sandboxScore": "62",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "ASM INTERNATIONAL",
+      "company": "A.S.M International",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 5,
+      "customsMatch": "yes",
+      "yearsInBusiness": "5",
+      "sandboxScore": "49",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "company": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 2,
+      "customsMatch": "no",
+      "yearsInBusiness": "8",
+      "sandboxScore": "56.8",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "ANTERRA FARMS",
+      "company": "ANTERRA FARMS GMBH",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 2,
+      "customsMatch": "no",
+      "yearsInBusiness": "4",
+      "sandboxScore": "50.8",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "ARDZHIES",
+      "company": "\u00c2\u00abArdzhies\u00c2\u00bb LLC",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 2,
+      "customsMatch": "no",
+      "yearsInBusiness": "1",
+      "sandboxScore": "45.5",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "BC NATURE QUALITY FRUITS S L",
+      "company": "BC NATURE QUALITY FRUITS S.L",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "customsMatch": "yes",
+      "yearsInBusiness": "16",
+      "sandboxScore": "57.8",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "TOFF",
+      "company": "T.O.F.F. B.V",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "customsMatch": "no",
+      "yearsInBusiness": "1",
+      "sandboxScore": "44.5",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6669756a0b1b5991fc623482",
+          "email": "jarno.moret@toffbv.nl",
+          "accountType": "buyer",
+          "userCompanyName": null,
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "jarno.moret@toffbv.nl"
+      ]
+    },
+    {
+      "key": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+      "company": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "customsMatch": "yes",
+      "yearsInBusiness": "2",
+      "sandboxScore": "39.8",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "GOURMET BEVERAGE ONE GROUP THAILAND",
+      "company": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "customsMatch": "yes",
+      "yearsInBusiness": "2",
+      "sandboxScore": "38.3",
+      "match": "deal_participant_only",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [
+        {
+          "id": "6657ad0f0731399c58d79674",
+          "email": "alessandro.cordano@trumarket.tech",
+          "accountType": "buyer",
+          "userCompanyName": "AGRO SMART CONTRACTS LDA",
+          "dealRole": "buyer"
+        }
+      ],
+      "proxyEmails": [
+        "alessandro.cordano@trumarket.tech"
+      ]
+    },
+    {
+      "key": "ALLIED TRADE GLOBAL",
+      "company": "Allied Trade Global",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 18,
+      "customsMatch": "no",
+      "yearsInBusiness": "14",
+      "sandboxScore": "69.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "AGRICOLA VI\u00c2NASOL",
+      "company": "AGRICOLA VI\u00c2\u0091ASOL SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 12,
+      "customsMatch": "no",
+      "yearsInBusiness": "15",
+      "sandboxScore": "76.8",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "DAVIS GLOBAL",
+      "company": "DAVIS GLOBAL BV",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 12,
+      "customsMatch": "no",
+      "yearsInBusiness": "6",
+      "sandboxScore": "62.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "XARKI",
+      "company": "XARKI SL",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 10,
+      "customsMatch": "no",
+      "yearsInBusiness": "66",
+      "sandboxScore": "69.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "AGRICOLA MEDANO AZUL",
+      "company": "AGRICOLA MEDANO AZUL SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 10,
+      "customsMatch": "no",
+      "yearsInBusiness": "5",
+      "sandboxScore": "68.5",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "HACIENDA SOTOMAYOR",
+      "company": "HACIENDA SOTOMAYOR SL",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 9,
+      "customsMatch": "yes",
+      "yearsInBusiness": "5",
+      "sandboxScore": "53",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "JUHINEJ",
+      "company": "JUHINEJ LTD",
+      "roles": [
+        "buyer",
+        "supplier"
+      ],
+      "dealCount": 8,
+      "customsMatch": "no",
+      "yearsInBusiness": "19",
+      "sandboxScore": "74",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "GIDDINS PERU",
+      "company": "GIDDINS PERU SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 7,
+      "customsMatch": "yes",
+      "yearsInBusiness": "12",
+      "sandboxScore": "84.2",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "BLUE PACIFIC FOODS",
+      "company": "BLUE PACIFIC FOODS SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 7,
+      "customsMatch": "no",
+      "yearsInBusiness": "22",
+      "sandboxScore": "74",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "FUNDO LAS LOMAS",
+      "company": "FUNDO LAS LOMAS SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 7,
+      "customsMatch": "yes",
+      "yearsInBusiness": "15",
+      "sandboxScore": "72.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "FRESH EXPRESS",
+      "company": "FRESH EXPRESS LLC",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "customsMatch": "no",
+      "yearsInBusiness": "33",
+      "sandboxScore": "66.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "TRADE CULTIVATORS",
+      "company": "TRADE CULTIVATORS LLC",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "customsMatch": "no",
+      "yearsInBusiness": "2",
+      "sandboxScore": "52.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "SHANGHAI GREEN CHAIN TRADING",
+      "company": "SHANGHAI GREEN CHAIN TRADING CO LTD",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 7,
+      "customsMatch": "",
+      "yearsInBusiness": "",
+      "sandboxScore": "",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "BIOFRESHI",
+      "company": "BIOFRESHI BV",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 6,
+      "customsMatch": "no",
+      "yearsInBusiness": "17",
+      "sandboxScore": "65.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "ICA BLUEBERRIES",
+      "company": "ICA BLUEBERRIES SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 4,
+      "customsMatch": "no",
+      "yearsInBusiness": "10",
+      "sandboxScore": "71.1",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "NATURAL SOUTH FRUIT",
+      "company": "NATURAL SOUTH FRUIT LTD",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 4,
+      "customsMatch": "no",
+      "yearsInBusiness": "8",
+      "sandboxScore": "67.8",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "KHI INTERNATIONAL",
+      "company": "KHI INTERNATIONAL CORP",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 4,
+      "customsMatch": "no",
+      "yearsInBusiness": "12",
+      "sandboxScore": "63.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "GUANGZHOU FRESH LINK IMPORT",
+      "company": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 4,
+      "customsMatch": "",
+      "yearsInBusiness": "",
+      "sandboxScore": "",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "INDUSTRIAS SOLIMAR",
+      "company": "INDUSTRIAS SOLIMAR SAC",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 1,
+      "customsMatch": "no",
+      "yearsInBusiness": "9",
+      "sandboxScore": "66.6",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "ALBORAN COMEX",
+      "company": "ALBORAN COMEX SL",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "customsMatch": "no",
+      "yearsInBusiness": "2",
+      "sandboxScore": "46.3",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "UNKNOWN BUYER",
+      "company": "Unknown buyer",
+      "roles": [
+        "buyer"
+      ],
+      "dealCount": 1,
+      "customsMatch": "",
+      "yearsInBusiness": "",
+      "sandboxScore": "",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    },
+    {
+      "key": "UNKNOWN SUPPLIER",
+      "company": "Unknown supplier",
+      "roles": [
+        "supplier"
+      ],
+      "dealCount": 1,
+      "customsMatch": "",
+      "yearsInBusiness": "",
+      "sandboxScore": "",
+      "match": "no_user",
+      "identityUsers": [],
+      "genuineParticipants": [],
+      "proxyParticipants": [],
+      "proxyEmails": []
+    }
+  ],
+  "fieldGaps": {
+    "userSchema": [
+      "email",
+      "accountType",
+      "walletAddress",
+      "walletType",
+      "role",
+      "createdAt",
+      "company.name",
+      "company.country",
+      "company.taxId"
+    ],
+    "counterpartyCsvColumnsNotOnUser": [
+      "role",
+      "product",
+      "status",
+      "dealCount",
+      "finishedDealCount",
+      "yearsInBusiness",
+      "yearsInBusinessSource",
+      "sandboxScore",
+      "coveragePct",
+      "rawAverage",
+      "trustBonus",
+      "customsShipments",
+      "customsVolumeMt",
+      "customsFobUsd",
+      "customsRoutes",
+      "customsMatch",
+      "filledFields"
+    ],
+    "note": "role maps loosely to accountType; product/deal stats/scores/customs/YIB have no User fields",
+    "rubricFieldsNotOnUser": [
+      "annualExportVolume",
+      "annualImportVolume",
+      "exportLicenseStatus",
+      "importLicenseStatus",
+      "monthlyPurchaseVolume",
+      "onTimeDeliveryRate",
+      "onlineVerifiability",
+      "platformTransactionHistory",
+      "productionCapacity",
+      "routeDiversity",
+      "yearlySales",
+      "yearsInBusiness"
+    ]
+  }
+}

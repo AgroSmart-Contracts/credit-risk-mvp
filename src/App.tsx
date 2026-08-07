@@ -2,9 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { deals as sampleDeals } from "./data/deals";
 import {
+  platformCounterparties,
   platformDealsBlocked,
 } from "./data/platform-deals";
-import { sandboxCounterparties } from "./data/counterparty-sandbox-scores";
 import {
   prescoredByDealId,
   prescoredByMongoId,
@@ -25,8 +25,8 @@ import { FinancingRecommendationPanel } from "./components/FinancingRecommendati
 import { CounterpartyScoresTab } from "./components/CounterpartyScoresTab";
 import { PrescoredDealsTab } from "./components/PrescoredDealsTab";
 import { DealMissingFieldsTab } from "./components/DealMissingFieldsTab";
-import { ProductRiskTableTab } from "./components/ProductRiskTableTab";
 import { RouteRiskTableTab } from "./components/RouteRiskTableTab";
+import { BlueberryCramAnalysisTab } from "./components/BlueberryCramAnalysisTab";
 
 function App() {
   const [view, setView] = useState<AppView>("assess");
@@ -74,6 +74,7 @@ function App() {
     const terms = recommendFinancingTerms(
       result.overall,
       dealToAssess.dealValueUSD,
+      result.counterpartyCoveragePct,
     );
     setAssessment(result);
     setFinancing(terms);
@@ -153,7 +154,7 @@ function App() {
       <AppNav
         view={view}
         onChange={handleViewChange}
-        scoredCount={sandboxCounterparties.length}
+        scoredCount={platformCounterparties.length}
         platformCount={prescoredPlatformDeals.length}
         missingCount={missingDealCount}
       />
@@ -201,18 +202,6 @@ function App() {
             </motion.div>
           )}
 
-          {view === "product-table" && (
-            <motion.div
-              key="product-table"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ProductRiskTableTab />
-            </motion.div>
-          )}
-
           {view === "route-table" && (
             <motion.div
               key="route-table"
@@ -222,6 +211,18 @@ function App() {
               transition={{ duration: 0.2 }}
             >
               <RouteRiskTableTab />
+            </motion.div>
+          )}
+
+          {view === "blueberry-cram" && (
+            <motion.div
+              key="blueberry-cram"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <BlueberryCramAnalysisTab />
             </motion.div>
           )}
 

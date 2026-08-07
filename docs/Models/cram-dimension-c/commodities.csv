@@ -1,0 +1,13 @@
+commodity_id,commodity,perish_class,perish_points,shelf_life_days,shelf_life_days_no_ca,ac_group,cold_treatment_markets,evidence,source
+CACAO,Cacao Beans,NON_PERISHABLE,18,270,270,4,,AC,Table 1 (6-12 months dry)
+COFFEE,Green Coffee,NON_PERISHABLE,18,365,365,4,,AC,Table 1 (12+ months dry)
+GINGER,Fresh Ginger,SEMI,9,90,58,3,,REF,Table 1 (60-120d+) 🔶
+GRAPES,Fresh Grapes,PERISHABLE,-4,45,29,1,CN,REF,Table 1 (30-60d SO2/CA) 🔶
+MANDARIN,Fresh Mandarin,PERISHABLE,-4,45,29,3,US,REF,Table 1 (30-60d) 🔶
+BLUEBERRY,Fresh Blueberries,PERISHABLE,-4,50,32,1,US;CN;HK;TW;SA,AC,AC 2026-07-30: ~50d with controlled atmosphere + cold chain. Variety-dependent - see varieties.csv
+AVOCADO,Fresh Avocado,PERISHABLE,-4,30,20,2,,REF,Table 1 (25-35d reefer) 🔶
+ASPARAGUS,Fresh Asparagus,ULTRA,-12,16,10,1,,NEEDS_CONFIRM,Table 1 (10-21d) - class Ultra vs Perishable UNRESOLVED ❓
+MANGO,Fresh Mango,PERISHABLE,-4,25,16,2,US,NEEDS_CONFIRM,NOT IN TABLE 1 - seeded from agro norms 🔶
+STRAWBERRY,Fresh Strawberries,ULTRA,-12,10,6,1,,NEEDS_CONFIRM,NOT IN TABLE 1 - seeded from agro norms 🔶
+FROZEN_TROP,Frozen Tropical Fruits,NON_PERISHABLE,18,540,540,4,,NEEDS_CONFIRM,NOT IN TABLE 1 - frozen chain; risk is chain-break not decay 🔶
+IQF_BERRIES,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,18,540,540,4,,NEEDS_CONFIRM,NOT IN TABLE 1 - frozen chain 🔶

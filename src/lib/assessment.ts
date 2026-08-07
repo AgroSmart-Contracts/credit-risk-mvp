@@ -2,7 +2,6 @@ import type { Deal, RiskAssessment } from "../types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
 import { computeOverallScore, type ScoreBreakdown } from "./scoring";
 import { analyzeRiskFactors } from "./risk-factors";
-import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
 import { priceVsMarketDetail } from "./price-benchmarks";
 
@@ -28,10 +27,10 @@ function counterpartyWhy(deal: Deal, externalBonus: number): string {
   if (deal.cofaceCoverageAmountUSD && deal.cofaceCoverageAmountUSD > 0) {
     const pct =
       deal.cofaceCoveragePct != null ? `${deal.cofaceCoveragePct}%` : "partial";
-    return `Coface-backed buyer, ${pct} cover, ${formatUSD(deal.cofaceCoverageAmountUSD)} protected`;
+    return `Coface Gate 1: ${pct} cover, ${formatUSD(deal.cofaceCoverageAmountUSD)} protected (coverage is not a Dimension A point input)`;
   }
   if (externalBonus > 0) {
-    return "External credit support on file";
+    return "External credit support on file (Gate 1 narrative)";
   }
   if (
     deal.buyer.platformDealsCompleted === 0 &&
@@ -42,27 +41,21 @@ function counterpartyWhy(deal: Deal, externalBonus: number): string {
   if (deal.buyer.licenseValid === null) {
     return "First deal on platform, license not confirmed";
   }
-  return "Established counterparty profile on platform";
+  return "Weighted/shrink counterparty profile (Dimension A)";
 }
 
 function productWhy(deal: Deal): string {
-  const tableMatch = deal.productRiskProfile ?? lookupProductRisk(deal.product);
   const price = priceVsMarketDetail(deal);
-  const priceBit =
-    price.fallback === "none" || price.usualUsdPerKg == null
-      ? "price-vs-usual: no month×route benchmark"
-      : `price-vs-usual ${price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0 ? "+" : ""}${price.deflatedPctOverUsual}% (${price.dealUnitPriceUSD?.toFixed(2)}/kg vs usual ${price.usualUsdPerKg.toFixed(2)}/kg, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts)`;
-
-  if (tableMatch) {
-    const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
-    return `Table score ${tableMatch.score} for ${tableMatch.product}${provisional} — ${tableMatch.rationale.replace(/\.\s*$/, "")}. ${priceBit}.`;
+  if (price.fallback === "none" || price.usualUsdPerKg == null) {
+    return `Unit price vs usual: no month×route benchmark — base 70 (neutral). Deal unit ${
+      price.dealUnitPriceUSD != null ? `$${price.dealUnitPriceUSD.toFixed(2)}/kg` : "unknown"
+    }.`;
   }
-
-  const perish = deal.perishabilityClass.toLowerCase();
-  const grade = deal.qualityGrade.split("/")[0].trim();
-  const shelf =
-    deal.shelfLifeDays !== null ? `, ${deal.shelfLifeDays}-day shelf life` : "";
-  return `${perish}${shelf}, ${grade}. ${priceBit}.`;
+  const pct =
+    price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0
+      ? `+${price.deflatedPctOverUsual}`
+      : `${price.deflatedPctOverUsual}`;
+  return `Unit price vs usual ${pct}% ($${price.dealUnitPriceUSD?.toFixed(2)}/kg vs usual $${price.usualUsdPerKg.toFixed(2)}/kg, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts) → base 70 ${price.pts >= 0 ? "+" : ""}${price.pts}.`;
 }
 
 function routeWhy(deal: Deal): string {
@@ -79,22 +72,15 @@ function routeWhy(deal: Deal): string {
     const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
     const mode =
       tableMatch.transportMode === "air"
-        ? tableMatch.airStopsBand === "gt2"
-          ? "air ≥3 stops"
-          : "air ≤2 stops"
+        ? `air ${tableMatch.airStops ?? 0} stops`
         : "ocean";
+    if (tableMatch.vetoCandidate) {
+      return `Dimension C veto (${mode}) for ${tableMatch.origin} → ${tableMatch.destination} — ${tableMatch.rationale}`;
+    }
     return `Table score ${tableMatch.score} (${mode}) for ${tableMatch.origin} → ${tableMatch.destination}${provisional} — ${tableMatch.rationale}`;
   }
 
-  const transship =
-    deal.numberOfTransshipments === 0
-      ? "no transshipment"
-      : deal.numberOfTransshipments === 1
-        ? "one transshipment"
-        : `${deal.numberOfTransshipments} transshipments`;
-  const modeLabel =
-    deal.transportMode === "air" ? "air" : deal.transportMode === "sea" ? "sea" : "unknown mode";
-  return `${deal.estimatedTransitDays}-day transit (${modeLabel}), ${transship}`;
+  return `No Dimension C table row for ${deal.origin} → ${deal.destination} / ${deal.product} (${deal.transportMode ?? "unknown mode"}, ${deal.numberOfTransshipments} stops) — using base 70`;
 }
 
 function structureWhy(
@@ -165,6 +151,8 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
     },
     buyer: { label: "Buyer", score: scores.buyer, why: "" },
     supplier: { label: "Supplier", score: scores.supplier, why: "" },
+    relationshipAdj: scores.relationshipAdj,
+    counterpartyCoveragePct: scores.counterpartyCoveragePct,
     overall: scores.overall,
     tier: scores.tier,
     vetoed: scores.vetoed,

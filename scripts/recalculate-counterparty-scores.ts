@@ -7,10 +7,11 @@
  *   python3 scripts/aggregate-customs-companies.py
  *   npx tsx scripts/recalculate-counterparty-scores.ts
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { companyGroupKey } from "./lib/company-name";
+import { parseCsvRecords } from "./lib/csv";
 import {
   platformCounterparties,
   platformCounterpartiesBlocked,
@@ -24,11 +25,17 @@ import {
   type SandboxSupplierInputs,
 } from "../src/lib/counterparty-sandbox-scoring";
 import type { PlatformCounterpartyScore } from "../src/types/platform";
+import { lookupOnlineVerifiability } from "../src/lib/counterparty-research-overrides";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, "..", "src", "data");
+const DOCS = join(__dirname, "..", "docs");
 const DESKTOP = join(process.env.HOME ?? "", "Desktop");
 const OUTLINE = join(DESKTOP, "counterparty-risk-scoring-method-outline-2026-07-30.md");
+const MATCHING_CSV_CANDIDATES = [
+  join(DOCS, "Matching Company customs data.csv"),
+  join(DESKTOP, "Matching Company customs data.csv"),
+];
 
 interface CustomsCompany {
   key: string;
@@ -52,6 +59,146 @@ interface CustomsPayload {
   sourceFiles: string[];
   companyCount: number;
   companies: CustomsCompany[];
+}
+
+function parseNum(raw: string | undefined): number {
+  if (!raw) return 0;
+  const n = Number(String(raw).replace(/,/g, "").trim());
+  return Number.isFinite(n) ? n : 0;
+}
+
+function monthsSpan(dates: Date[]): number | null {
+  if (dates.length === 0) return null;
+  const ms = dates.map((d) => d.getTime());
+  const days = (Math.max(...ms) - Math.min(...ms)) / (1000 * 60 * 60 * 24);
+  return Math.round((days / 30.44) * 100) / 100;
+}
+
+function parseCustomsDate(raw: string | undefined): Date | null {
+  if (!raw) return null;
+  const s = raw.trim();
+  for (const fmt of [
+    /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/,
+    /^(\d{1,2})\/(\d{1,2})\/(\d{2})$/,
+  ]) {
+    const m = s.match(fmt);
+    if (!m) continue;
+    const d = Number(m[1]);
+    const mo = Number(m[2]);
+    let y = Number(m[3]);
+    if (y < 100) y += 2000;
+    const dt = new Date(Date.UTC(y, mo - 1, d));
+    if (!Number.isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+interface MutableAgg {
+  name: string;
+  roles: Set<string>;
+  rucs: Set<string>;
+  shipments: number;
+  kgNet: number;
+  fobUsd: number;
+  destCountries: Set<string>;
+  originOffices: Set<string>;
+  destPorts: Set<string>;
+  dates: Date[];
+  sources: Set<string>;
+}
+
+/**
+ * Curated platform↔customs extract. Prefer these company profiles when scoring
+ * platform counterparties so volumes reflect matched rows, not the full book.
+ */
+function loadMatchingCompanyMap(): {
+  map: Map<string, CustomsCompany>;
+  path: string | null;
+  rowCount: number;
+} {
+  const path = MATCHING_CSV_CANDIDATES.find((p) => existsSync(p)) ?? null;
+  if (!path) return { map: new Map(), path: null, rowCount: 0 };
+
+  const text = readFileSync(path, "utf8").replace(/^\uFEFF/, "");
+  const records = parseCsvRecords(text);
+  const store = new Map<string, MutableAgg>();
+
+  const touch = (rawName: string, role: "exporter" | "importer", row: Record<string, string>) => {
+    const name = (rawName || "").trim();
+    if (!name) return;
+    const key = companyGroupKey(name);
+    let a = store.get(key);
+    if (!a) {
+      a = {
+        name,
+        roles: new Set(),
+        rucs: new Set(),
+        shipments: 0,
+        kgNet: 0,
+        fobUsd: 0,
+        destCountries: new Set(),
+        originOffices: new Set(),
+        destPorts: new Set(),
+        dates: [],
+        sources: new Set(),
+      };
+      store.set(key, a);
+    }
+    a.roles.add(role);
+    a.shipments += 1;
+    a.kgNet += parseNum(row["Kg Neto"]);
+    a.fobUsd += parseNum(row["U$ FOB Tot"]);
+    const dest = (row["Pais de Destino"] || "").trim().toUpperCase();
+    const port = (row["Puerto de destino"] || "").trim().toUpperCase();
+    const office = (row["Aduana"] || "").trim().toUpperCase();
+    if (dest) a.destCountries.add(dest);
+    if (port) a.destPorts.add(port);
+    if (office) a.originOffices.add(office);
+    if (role === "exporter") {
+      const ruc = String(row["Cod. Tributario"] || "").trim();
+      if (ruc) a.rucs.add(ruc);
+    }
+    const dt = parseCustomsDate(row["Fecha"]);
+    if (dt) a.dates.push(dt);
+    a.sources.add("Matching Company customs data.csv");
+  };
+
+  for (const row of records) {
+    touch(row["Exportador"] || "", "exporter", row);
+    touch(row["Importador"] || "", "importer", row);
+  }
+
+  const map = new Map<string, CustomsCompany>();
+  for (const [key, a] of store) {
+    const activeMonths = monthsSpan(a.dates);
+    const volumeMt = a.kgNet / 1000;
+    const routeCount =
+      a.roles.has("exporter")
+        ? a.destCountries.size
+        : a.originOffices.size || a.destPorts.size || a.destCountries.size;
+    let monthlyFobUsd: number | null = null;
+    if (activeMonths != null && activeMonths >= 1) monthlyFobUsd = a.fobUsd / activeMonths;
+    else if (a.fobUsd > 0) monthlyFobUsd = a.fobUsd / 12;
+    map.set(key, {
+      key,
+      name: a.name,
+      roles: [...a.roles].sort(),
+      rucs: [...a.rucs].sort(),
+      shipments: a.shipments,
+      kgNet: Math.round(a.kgNet * 100) / 100,
+      fobUsd: Math.round(a.fobUsd * 100) / 100,
+      volumeMt: Math.round(volumeMt * 1000) / 1000,
+      routeCount,
+      partnerCount: 0,
+      destCountries: [...a.destCountries].sort(),
+      activityMonths: activeMonths,
+      monthlyFobUsd:
+        monthlyFobUsd != null ? Math.round(monthlyFobUsd * 100) / 100 : null,
+      sources: [...a.sources],
+    });
+  }
+
+  return { map, path, rowCount: records.length };
 }
 
 function loadCustoms(): Map<string, CustomsCompany> {
@@ -96,6 +243,11 @@ const CUSTOMS_NAME_ALIASES: Record<string, string> = {
     "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
   "GOURMET & BEVERAGE ONE GROUP THAILAND CO LTD":
     "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
+  "HOLY FRUIT PERU S.A.C.": "Holy Fruit Peru",
+  "HOLY FRUIT PERU S.A.C": "Holy Fruit Peru",
+  "HOLY FRUIT PERU SAC": "Holy Fruit Peru",
+  "FUNDO LAS LOMAS S.A.C.": "FUNDO LAS LOMAS SAC",
+  "FUNDO LAS LOMAS S.A.C": "FUNDO LAS LOMAS SAC",
 };
 
 function normalizeMatchKey(raw: string): string {
@@ -114,7 +266,14 @@ function findCustoms(
   companyName: string,
   rucIndex: Map<string, CustomsCompany>,
   masterRucs: Map<string, string[]>,
+  preferredMap?: Map<string, CustomsCompany>,
 ): CustomsCompany | null {
+  // Prefer curated Matching Company profiles when available.
+  if (preferredMap && preferredMap.size > 0) {
+    const preferred = findCustoms(preferredMap, companyName, buildRucIndex(preferredMap), masterRucs);
+    if (preferred) return preferred;
+  }
+
   const key = companyGroupKey(companyName);
 
   // 1) RUC join via company-master
@@ -186,7 +345,7 @@ function buyerInputs(
       ? 55
       : customs
         ? 55
-        : null,
+        : lookupOnlineVerifiability(companyName),
     importLicenseStatus: 100, // platform default: valid (same as production mapper)
     importLicenseTm: isTmEntity(companyName) ? 100 : null,
     monthlyPurchaseVolumeUsd: customs?.monthlyFobUsd ?? null,
@@ -197,7 +356,7 @@ function buyerInputs(
     routeDiversity: customs?.routeCount ?? null,
     creditRating: null,
     platformTransactionCount: platformDealCount > 0 ? platformDealCount : null,
-    paymentDelayDays: null, // no real payment-timing source — leave blank
+    paymentDelayDays: null, // no measured source yet → excluded from raw average & coverage
     tmPlatformTrust: onPlatform || isTmEntity(companyName),
   };
 }
@@ -216,7 +375,11 @@ function supplierInputs(
       : null;
   return {
     yearsInBusiness,
-    onlineVerifiability: customs?.roles.includes("exporter") ? 55 : customs ? 55 : null,
+    onlineVerifiability: customs?.roles.includes("exporter")
+      ? 55
+      : customs
+        ? 55
+        : lookupOnlineVerifiability(companyName),
     exportLicenseStatus: 100,
     productionCapacityMt: customs?.volumeMt ?? null,
     yearlySalesUsd: customs?.fobUsd ?? null,
@@ -227,7 +390,7 @@ function supplierInputs(
     qualityCertifications: null,
     platformTransactionCount: platformDealCount > 0 ? platformDealCount : null,
     onTimeDeliveryRate: onTime,
-    qualityRejectionRate: null,
+    qualityRejectionRate: null, // no measured source yet → excluded from raw average & coverage
     tmPlatformTrust: onPlatform || isTmEntity(companyName),
   };
 }
@@ -244,8 +407,15 @@ function scoreGroup(
   customsMap: Map<string, CustomsCompany>,
   rucIndex: Map<string, CustomsCompany>,
   masterRucs: Map<string, string[]>,
+  matchingMap: Map<string, CustomsCompany>,
 ): ScoredRow {
-  const customs = findCustoms(customsMap, group.companyName, rucIndex, masterRucs);
+  const customs = findCustoms(
+    customsMap,
+    group.companyName,
+    rucIndex,
+    masterRucs,
+    matchingMap,
+  );
   const result =
     group.role === "buyer"
       ? scoreBuyer(
@@ -465,9 +635,17 @@ function main() {
   const customsMap = loadCustoms();
   const rucIndex = buildRucIndex(customsMap);
   const masterRucs = loadCompanyMasterRucs();
+  const matching = loadMatchingCompanyMap();
+  if (matching.path) {
+    console.log(
+      `Matching Company overlay: ${matching.rowCount} rows → ${matching.map.size} companies (${matching.path})`,
+    );
+  } else {
+    console.warn("Matching Company customs data.csv not found — using full aggregates only");
+  }
 
   const scored = platformCounterparties
-    .map((g) => scoreGroup(g, customsMap, rucIndex, masterRucs))
+    .map((g) => scoreGroup(g, customsMap, rucIndex, masterRucs, matching.map))
     .sort((a, b) => b.result.score - a.result.score || b.counterparty.dealCount - a.counterparty.dealCount);
 
   // Patch avg/min/max on a serializable copy for the app (sandbox scores)
@@ -487,10 +665,13 @@ function main() {
             ? null
             : Math.round(row.result.rawAverage * 10) / 10,
         trustBonus: row.result.trustBonus,
+        scoreLow: Math.round(row.result.pessimisticScore),
+        scoreHigh: Math.round(row.result.optimisticScore),
         customsMatched: Boolean(row.customsMatch),
         customsShipments: row.customsMatch?.shipments ?? 0,
         customsVolumeMt: row.customsMatch?.volumeMt ?? null,
         customsFobUsd: row.customsMatch?.fobUsd ?? null,
+        customsMonthlyFobUsd: row.customsMatch?.monthlyFobUsd ?? null,
         customsRoutes: row.customsMatch?.routeCount ?? null,
         filledFieldIds: row.result.fields
           .filter((f) => f.score != null)
@@ -499,6 +680,11 @@ function main() {
     };
   });
 
+  const customsSources = [
+    ...(matching.path ? ["Matching Company customs data.csv"] : []),
+    ...customsPayload.sourceFiles.filter((s) => s !== "Matching Company customs data.csv"),
+  ];
+
   writeFileSync(
     join(DATA, "counterparty-sandbox-scores.json"),
     JSON.stringify(
@@ -506,7 +692,7 @@ function main() {
         formula: "sandbox-weighted-shrink-2026-07-30",
         generatedAt: new Date().toISOString(),
         customsGeneratedAt: customsPayload.generatedAt,
-        customsSources: customsPayload.sourceFiles,
+        customsSources,
         counterparties: sandboxCounterparties,
       },
       null,
@@ -516,7 +702,11 @@ function main() {
 
   writeFileSync(join(DATA, "counterparty-scores.csv"), buildCsv(scored, platformCounterpartiesBlocked));
 
-  const html = buildHtml(scored, customsPayload);
+  const htmlPayload: CustomsPayload = {
+    ...customsPayload,
+    sourceFiles: customsSources,
+  };
+  const html = buildHtml(scored, htmlPayload);
   writeFileSync(join(DESKTOP, "counterparty-risk-formula-test-results.html"), html);
   writeFileSync(join(__dirname, "..", "docs", "counterparty-sandbox-results.html"), html);
 
@@ -532,10 +722,14 @@ function main() {
   }
 
   const matched = scored.filter((r) => r.customsMatch).length;
+  const matchedViaOverlay = scored.filter(
+    (r) =>
+      r.customsMatch?.sources.includes("Matching Company customs data.csv") ?? false,
+  ).length;
   const avg =
     scored.reduce((s, r) => s + r.result.score, 0) / Math.max(1, scored.length);
   console.log(
-    `Scored ${scored.length} counterparties (avg ${avg.toFixed(1)}); ${matched} customs-matched.`,
+    `Scored ${scored.length} counterparties (avg ${avg.toFixed(1)}); ${matched} customs-matched (${matchedViaOverlay} via Matching Company overlay).`,
   );
   console.log(`Platform deals on file: ${platformDeals.length}`);
   console.log("Wrote counterparty-sandbox-scores.json, counterparty-scores.csv, Desktop HTML.");
