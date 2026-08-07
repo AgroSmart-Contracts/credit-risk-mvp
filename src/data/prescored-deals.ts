@@ -15,7 +15,11 @@ export interface PrescoredDeal {
 
 function buildPrescored(deal: Deal, mongoId: string): PrescoredDeal {
   const assessment = buildRiskAssessment(deal);
-  const financing = recommendFinancingTerms(assessment.overall, deal.dealValueUSD);
+  const financing = recommendFinancingTerms(
+    assessment.overall,
+    deal.dealValueUSD,
+    assessment.counterpartyCoveragePct,
+  );
   return { deal, assessment, financing, mongoId, source: "platform" };
 }
 

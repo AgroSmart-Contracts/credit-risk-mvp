@@ -1,7 +1,7 @@
 [
   {
-    "key": "«ARDZHIES» LLC",
-    "name": "«Ardzhies» LLC",
+    "key": "\u00abARDZHIES\u00bb LLC",
+    "name": "\u00abArdzhies\u00bb LLC",
     "countries": [
       "Russian Federation"
     ],
@@ -17,7 +17,7 @@
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": [
-      "Â«ARDZHIESÂ» LLC"
+      "\u00c2\u00abARDZHIES\u00c2\u00bb LLC"
     ]
   },
   {
@@ -63,8 +63,8 @@
     "nameVariantsSeen": []
   },
   {
-    "key": "AGRICOLA VIÑASOL SAC",
-    "name": "AGRICOLA VIÑASOL SAC",
+    "key": "AGRICOLA VI\u00d1ASOL SAC",
+    "name": "AGRICOLA VI\u00d1ASOL SAC",
     "countries": [
       "Peru"
     ],
@@ -80,7 +80,7 @@
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": [
-      "AGRICOLA VIÃASOL SAC"
+      "AGRICOLA VI\u00c3\u0091ASOL SAC"
     ]
   },
   {
@@ -415,8 +415,8 @@
       "91440101MA59L8UW3L"
     ],
     "dealCount": 4,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -648,8 +648,8 @@
       "91310115MA1H83UR0Q"
     ],
     "dealCount": 7,
-    "yearsInBusiness": null,
-    "yearsInBusinessSource": "default",
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
     "nameVariantsSeen": []
@@ -753,6 +753,25 @@
     ],
     "dealCount": 10,
     "yearsInBusiness": 66,
+    "yearsInBusinessSource": "verified",
+    "licenseValid": true,
+    "licenseValidSource": "default",
+    "nameVariantsSeen": []
+  },
+  {
+    "key": "drelifresh sas vereda el portento via retiro la ceja",
+    "name": "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA",
+    "countries": [
+      "Colombia"
+    ],
+    "roles": [
+      "buyer"
+    ],
+    "taxIds": [
+      "901893567"
+    ],
+    "dealCount": 1,
+    "yearsInBusiness": 4,
     "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
