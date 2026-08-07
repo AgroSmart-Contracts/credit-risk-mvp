@@ -1,3 +1,8 @@
+/**
+ * Product attribute catalog (CRAM Table 1 inputs): perishability, shelf life,
+ * cold chain, AC group. The `.score` field is a legacy baked value and is **not**
+ * used by `computeProductScore` — Dimension B is unit price vs usual only.
+ */
 import type { ProductRiskProfile } from "../types";
 
 export type PerishabilityClass = ProductRiskProfile["perishabilityClass"];

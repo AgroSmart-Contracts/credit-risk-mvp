@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { CheckCircle2, AlertTriangle, ShieldAlert } from "lucide-react";
-import { ROUTE_OPTIONS } from "../lib/route-risk-tables";
+import { ROUTE_ENGINE_VERSION, ROUTE_OPTIONS } from "../lib/route-risk-tables";
 import { platformDeals } from "../data/platform-deals";
 import type { RouteRiskProfile } from "../types";
 
@@ -9,8 +9,8 @@ interface UnifiedRow {
   destination: string;
   product: string;
   ocean: RouteRiskProfile;
-  airLe2: RouteRiskProfile | null;
-  airGt2: RouteRiskProfile | null;
+  airDirect: RouteRiskProfile | null;
+  airMulti: RouteRiskProfile | null;
 }
 
 interface CorridorGroup {
@@ -31,19 +31,19 @@ const COLUMN_TITLES = {
   ocean: {
     short: "Ocean",
     title: "Route risk by ocean freight",
-    description: "Sea / reefer corridor score for this commodity (transit days ÷ shelf life).",
+    description: "Sea / reefer corridor score (Dimension C v2: transit ÷ shelf life + flag).",
   },
-  airLe2: {
-    short: "Air ≤2 stops",
-    title: "Route risk by air, ≤2 stops/transits",
+  airDirect: {
+    short: "Air 0 stops",
+    title: "Route risk by air, direct (0 stops)",
     description:
-      "Air freight with direct or ≤2 stops — shorter transit, freshness recomputed (should be ≥ ocean for perishables).",
+      "Direct air freight — stop curve 0 pts; freshness from effective transit days.",
   },
-  airGt2: {
-    short: "Air ≥3 stops",
-    title: "Route risk by air, ≥3 stops/transits",
+  airMulti: {
+    short: "Air 3 stops",
+    title: "Route risk by air, 3 stops (worst executable)",
     description:
-      "Air freight with ≥3 stops — more handoffs; cold-chain lanes take an additional air-stop penalty (typically −15).",
+      "Air with 3 stops (−25 pts). ≥4 stops is a hard veto (AC ruling 2026-07-30).",
   },
 } as const;
 
@@ -56,11 +56,15 @@ function ScoreCell({
 }) {
   if (!profile) return <span className="text-tm-text-muted">—</span>;
   const delta =
-    highlightVs != null && Number.isFinite(highlightVs) ? profile.score - highlightVs : null;
+    highlightVs != null && Number.isFinite(highlightVs) && !profile.vetoCandidate
+      ? profile.score - highlightVs
+      : null;
   return (
     <div className="space-y-0.5">
       <div className="flex flex-wrap items-center gap-1">
-        <span className="font-semibold text-tm-black">{profile.score}</span>
+        <span className="font-semibold text-tm-black">
+          {profile.vetoCandidate ? "VETO" : profile.score}
+        </span>
         {delta != null && delta > 0 && (
           <span className="text-[10px] font-medium text-tm-primary">+{delta} vs ocean</span>
         )}
@@ -110,14 +114,14 @@ export function RouteRiskTableTab() {
           destination: r.destination,
           product: r.product,
           ocean: r,
-          airLe2: null,
-          airGt2: null,
+          airDirect: null,
+          airMulti: null,
         };
         byKey.set(key, row);
       }
       if (r.transportMode === "sea") row.ocean = r;
-      else if (r.airStopsBand === "le2") row.airLe2 = r;
-      else if (r.airStopsBand === "gt2") row.airGt2 = r;
+      else if (r.airStops === 0) row.airDirect = r;
+      else if (r.airStops === 3) row.airMulti = r;
     }
     return [...byKey.values()].sort((a, b) => {
       const c = corridorKey(a.origin, a.destination).localeCompare(
@@ -165,13 +169,13 @@ export function RouteRiskTableTab() {
   }, [corridors]);
 
   const airSaferCount = unified.filter(
-    (r) => r.airLe2 != null && r.airLe2.score > r.ocean.score,
+    (r) => r.airDirect != null && !r.airDirect.vetoCandidate && r.airDirect.score > r.ocean.score,
   ).length;
   const airEqualCount = unified.filter(
-    (r) => r.airLe2 != null && r.airLe2.score === r.ocean.score,
+    (r) => r.airDirect != null && !r.airDirect.vetoCandidate && r.airDirect.score === r.ocean.score,
   ).length;
   const airWorseCount = unified.filter(
-    (r) => r.airLe2 != null && r.airLe2.score < r.ocean.score,
+    (r) => r.airDirect != null && !r.airDirect.vetoCandidate && r.airDirect.score < r.ocean.score,
   ).length;
 
   return (
@@ -181,8 +185,8 @@ export function RouteRiskTableTab() {
           Route Risk Table (CRAM Dimension C)
         </h1>
         <p className="mt-2 text-tm-text-light">
-          One row per (corridor × commodity) with three mode scores side by side —{" "}
-          {unified.length} products across {corridors.length} corridors.
+          Generated Dimension C v2 scores — {unified.length} products across {corridors.length}{" "}
+          corridors · engine {ROUTE_ENGINE_VERSION}.
         </p>
       </div>
 
@@ -205,21 +209,13 @@ export function RouteRiskTableTab() {
       </div>
 
       <div className="rounded-xl border border-tm-accent/40 bg-tm-accent/10 px-4 py-3 text-xs text-tm-accent-dark">
-        <p className="font-semibold">Validation (2026-07-29)</p>
+        <p className="font-semibold">Dimension C v2 (AC rulings 2026-07-30)</p>
         <p className="mt-1">
-          Prior air ≤2 CSVs copied ocean freshness ratios (same transit days), so scores were
-          identical — that contradicted industry practice (air is days, ocean is weeks for
-          perishables). Air scores were recomputed with mode-specific transit. Result: air ≤2 is
-          safer than ocean on <strong>{airSaferCount}</strong> rows, equal on{" "}
-          <strong>{airEqualCount}</strong> (mostly non-perishables / already-good freshness), worse
-          on <strong>{airWorseCount}</strong>.
-        </p>
-        <p className="mt-2">
-          Blueberry sea rows were then rescored on a 42-day controlled-atmosphere shelf life
-          instead of the 21-day ambient figure. Peru 2025 customs shows 94.7 M kg reaching
-          Rotterdam on 22-day transits and 51.6 M kg reaching China, Taiwan and Hong Kong on
-          35-day transits, at the highest unit prices in that data — lanes the ambient figure was
-          flagging as veto candidates.
+          Scores come from <code className="rounded bg-tm-neutral px-1">score_route.py</code> — TS
+          only renders the table. Air stop curve: 0 / −5 / −12 / −25; ≥4 stops = veto. Blueberry
+          shelf life baseline is 50 days (controlled atmosphere). Direct air is safer than ocean on{" "}
+          <strong>{airSaferCount}</strong> rows, equal on <strong>{airEqualCount}</strong>, worse on{" "}
+          <strong>{airWorseCount}</strong>.
         </p>
       </div>
 
@@ -268,11 +264,14 @@ export function RouteRiskTableTab() {
                       <th className="pb-1.5 pr-2 font-semibold" title={COLUMN_TITLES.ocean.description}>
                         {COLUMN_TITLES.ocean.title}
                       </th>
-                      <th className="pb-1.5 pr-2 font-semibold" title={COLUMN_TITLES.airLe2.description}>
-                        {COLUMN_TITLES.airLe2.title}
+                      <th
+                        className="pb-1.5 pr-2 font-semibold"
+                        title={COLUMN_TITLES.airDirect.description}
+                      >
+                        {COLUMN_TITLES.airDirect.title}
                       </th>
-                      <th className="pb-1.5 font-semibold" title={COLUMN_TITLES.airGt2.description}>
-                        {COLUMN_TITLES.airGt2.title}
+                      <th className="pb-1.5 font-semibold" title={COLUMN_TITLES.airMulti.description}>
+                        {COLUMN_TITLES.airMulti.title}
                       </th>
                     </tr>
                   </thead>
@@ -287,10 +286,10 @@ export function RouteRiskTableTab() {
                           <ScoreCell profile={r.ocean} />
                         </td>
                         <td className="py-2 pr-2">
-                          <ScoreCell profile={r.airLe2} highlightVs={r.ocean.score} />
+                          <ScoreCell profile={r.airDirect} highlightVs={r.ocean.score} />
                         </td>
                         <td className="py-2">
-                          <ScoreCell profile={r.airGt2} highlightVs={r.ocean.score} />
+                          <ScoreCell profile={r.airMulti} highlightVs={r.ocean.score} />
                         </td>
                       </tr>
                     ))}
@@ -303,9 +302,9 @@ export function RouteRiskTableTab() {
       </div>
 
       <p className="text-center text-xs text-tm-text-muted">
-        Unified source:{" "}
+        Source:{" "}
         <code className="rounded bg-tm-neutral px-1">
-          src/data/route-risk-given-commodity-by-mode-2026-07-29.csv
+          docs/Models/cram-dimension-c/route-risk-table-v2.csv
         </code>{" "}
         · rebuild with{" "}
         <code className="rounded bg-tm-neutral px-1">npx tsx scripts/build-route-risk-table.ts</code>
