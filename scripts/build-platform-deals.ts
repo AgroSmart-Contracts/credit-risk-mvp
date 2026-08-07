@@ -1,7 +1,10 @@
 /**
  * Regenerates src/data/platform-deals.generated.json + platform-deals.ts from
- * full-deals-dataset-2026-07 (1).csv (the CSV of record as of 2026-07-24 —
- * all future regenerations should point at whichever file supersedes this one).
+ * full-deals-dataset-2026-07 (1).csv (mongoId / quantity / market-intel base).
+ *
+ * After a full rebuild, overlay the curated export with:
+ *   npm run apply-platform-defaults
+ * (docs/platform-deals-with-defaults-2.csv — transit, mode, YIB, OD, priors).
  *
  * What this does that the old (undated) generator didn't:
  *  - `likely_test` rows are merged into the same scoring/aggregate pipeline as
