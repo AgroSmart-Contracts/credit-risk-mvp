@@ -69,17 +69,16 @@ function CramFormulaPanel() {
           </p>
           <p className="mt-1 text-tm-text-light">
             Weighted/shrink composite over buyer + supplier + relationship
-            fields (same formula as Counterparties tab)
+            fields (customs-enriched when matched)
           </p>
           <ul className="mt-1.5 list-disc space-y-1 pl-4 text-tm-text-light">
             <li>
               Per party: coverage × rawAvg + (1 − coverage) × 50 + trust (+3)
             </li>
+            <li>Same scores as the Counterparties tab</li>
             <li>
-              YIB, license, platform history; blanks excluded (no invented
-              perfect payment delay / rejection)
+              Blanks excluded (no invented perfect payment delay / rejection)
             </li>
-            <li>Customs enrichment fills volume, sales, routes when matched</li>
           </ul>
         </div>
         <div>
@@ -87,9 +86,8 @@ function CramFormulaPanel() {
             B · Product (25%)
           </p>
           <p className="mt-1 text-tm-text-light">
-            Perishability class (base 70 ± band) + quality grade + price-vs-usual
-            by shipment month × origin→destination (USD/kg). AC table scores are
-            not used — only attributes (shelf life / cold chain).
+            Product risk table score (perishability / cold chain) + quality
+            grade + price-vs-market benchmark (Fresh Blueberries only so far)
           </p>
         </div>
         <div>

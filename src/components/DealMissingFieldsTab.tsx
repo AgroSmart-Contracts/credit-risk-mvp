@@ -14,10 +14,48 @@ import { buildRiskAssessment, formatUSD } from "../lib/assessment";
 import { getTierColors } from "../lib/risk-colors";
 import { useDataCorrections, downloadYibCorrectionsCsv } from "../lib/data-corrections";
 import { CargoInsuranceSection } from "./CargoInsuranceSection";
-import { CompanyTaxIdSection } from "./CompanyTaxIdSection";
 
 interface DealMissingFieldsTabProps {
   onViewDeal?: (dealId: string) => void;
+}
+
+type ProductBucket = "Blueberries" | "Mandarins" | "Other";
+
+const PRODUCT_BUCKETS: ProductBucket[] = [
+  "Blueberries",
+  "Mandarins",
+  "Other",
+];
+
+const PRODUCT_COL_LABEL: Record<ProductBucket, string> = {
+  Blueberries: "BB",
+  Mandarins: "Mand",
+  Other: "Other",
+};
+
+function productBucket(product: string): ProductBucket {
+  if (/blueberr/i.test(product)) return "Blueberries";
+  if (/mandarin/i.test(product)) return "Mandarins";
+  return "Other";
+}
+
+type FieldFreqRow = {
+  field: string;
+  unit: "buyers" | "suppliers";
+  /** Unique companies missing this field across all products. */
+  total: number;
+  /** Unique companies of this role in the scored set (bar denom). */
+  universe: number;
+  /** Unique companies missing the field on deals in each product bucket. */
+  byProduct: Record<ProductBucket, number>;
+};
+
+function emptyProductSets(): Record<ProductBucket, Set<string>> {
+  return {
+    Blueberries: new Set(),
+    Mandarins: new Set(),
+    Other: new Set(),
+  };
 }
 
 export function DealMissingFieldsTab({
@@ -56,16 +94,70 @@ export function DealMissingFieldsTab({
       );
   }, [query]);
 
+  /** Unique buyers / suppliers missing each Dimension A field, split by product. */
   const fieldFreq = useMemo(() => {
-    const map = new Map<string, number>();
+    const allBuyers = new Set<string>();
+    const allSuppliers = new Set<string>();
+    const buyersByField = new Map<
+      string,
+      { all: Set<string>; by: Record<ProductBucket, Set<string>> }
+    >();
+    const suppliersByField = new Map<
+      string,
+      { all: Set<string>; by: Record<ProductBucket, Set<string>> }
+    >();
+
     for (const entry of prescoredPlatformDeals) {
-      for (const field of entry.deal.fieldsNeedingConfirmation) {
-        map.set(field, (map.get(field) ?? 0) + 1);
+      const { deal } = entry;
+      const bucket = productBucket(deal.product);
+      allBuyers.add(deal.buyer.name);
+      allSuppliers.add(deal.supplier.name);
+      for (const field of deal.fieldsNeedingConfirmation) {
+        if (field.startsWith("Buyer ")) {
+          let row = buyersByField.get(field);
+          if (!row) {
+            row = { all: new Set(), by: emptyProductSets() };
+            buyersByField.set(field, row);
+          }
+          row.all.add(deal.buyer.name);
+          row.by[bucket].add(deal.buyer.name);
+        } else if (field.startsWith("Supplier ")) {
+          let row = suppliersByField.get(field);
+          if (!row) {
+            row = { all: new Set(), by: emptyProductSets() };
+            suppliersByField.set(field, row);
+          }
+          row.all.add(deal.supplier.name);
+          row.by[bucket].add(deal.supplier.name);
+        }
       }
     }
-    return [...map.entries()]
-      .map(([field, count]) => ({ field, count }))
-      .sort((a, b) => b.count - a.count);
+
+    const toRows = (
+      map: Map<string, { all: Set<string>; by: Record<ProductBucket, Set<string>> }>,
+      unit: "buyers" | "suppliers",
+      universe: number,
+    ): FieldFreqRow[] =>
+      [...map.entries()]
+        .map(([field, row]) => ({
+          field,
+          unit,
+          total: row.all.size,
+          universe,
+          byProduct: {
+            Blueberries: row.by.Blueberries.size,
+            Mandarins: row.by.Mandarins.size,
+            Other: row.by.Other.size,
+          },
+        }))
+        .sort(
+          (a, b) => b.total - a.total || a.field.localeCompare(b.field),
+        );
+
+    return {
+      buyers: toRows(buyersByField, "buyers", allBuyers.size),
+      suppliers: toRows(suppliersByField, "suppliers", allSuppliers.size),
+    };
   }, []);
 
   const dealsWithGaps = prescoredPlatformDeals.filter(
@@ -98,8 +190,12 @@ export function DealMissingFieldsTab({
         </h1>
         <p className="mt-2 text-tm-text-light">
           {dealsWithGaps} of {prescoredPlatformDeals.length} pre-scored platform
-          deals still have enrichment gaps. Scores already assume license valid,
-          0 payment delay days, and 0% quality rejection.{" "}
+          deals still have enrichment gaps, including the full Dimension A
+          counterparty field list (credit rating, payment delay, quality
+          rejection, volumes, route diversity, certifications) — these are
+          excluded from each party's raw average, not assumed, so a gap here
+          lowers coverage rather than faking a score. License is still
+          assumed valid (no KYC source on file).{" "}
           {platformDealsBlocked.length > 0 && (
             <>
               {platformDealsBlocked.length} more deals are blocked from
@@ -115,34 +211,84 @@ export function DealMissingFieldsTab({
         </p>
       </div>
 
-      {fieldFreq.length > 0 && (
+      {(fieldFreq.buyers.length > 0 || fieldFreq.suppliers.length > 0) && (
         <section className="rounded-xl border border-tm-border bg-tm-surface p-5 shadow-tm-sm">
           <h2 className="text-sm font-semibold text-tm-black">
-            Field frequency across pre-scored deals
+            Field frequency across buyers &amp; suppliers
           </h2>
-          <ul className="mt-3 space-y-2">
-            {fieldFreq.map((row) => (
-              <li key={row.field} className="flex items-center gap-3 text-sm">
-                <div className="h-2 flex-1 overflow-hidden rounded-full bg-tm-neutral">
-                  <div
-                    className="h-full rounded-full bg-tm-danger/70"
-                    style={{
-                      width: `${Math.min(
-                        100,
-                        (row.count / prescoredPlatformDeals.length) * 100,
-                      )}%`,
-                    }}
-                  />
+          <p className="mt-1 text-xs text-tm-text-muted">
+            Unique companies missing each field, by product. A company can
+            appear in more than one product (counts may not sum to total).
+            Other = avocado, asparagus, ginger, IQF, etc.
+          </p>
+
+          {(
+            [
+              ["Buyers", fieldFreq.buyers],
+              ["Suppliers", fieldFreq.suppliers],
+            ] as const
+          ).map(([title, group]) =>
+            group.length === 0 ? null : (
+              <div key={title} className="mt-5">
+                <h3 className="mb-2 text-xs font-semibold text-tm-black">
+                  {title}
+                  <span className="ml-1.5 font-normal text-tm-text-muted">
+                    ({group[0]?.universe ?? 0} unique)
+                  </span>
+                </h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[28rem] border-collapse text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-tm-border text-xs text-tm-text-muted">
+                        <th className="py-2 pr-3 font-medium">Field</th>
+                        <th
+                          className="px-2 py-2 text-right font-medium"
+                          title="Unique companies missing this field (all products)"
+                        >
+                          Total
+                        </th>
+                        {PRODUCT_BUCKETS.map((bucket) => (
+                          <th
+                            key={bucket}
+                            className="px-2 py-2 text-right font-medium"
+                            title={bucket}
+                          >
+                            {PRODUCT_COL_LABEL[bucket]}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.map((row) => (
+                        <tr
+                          key={row.field}
+                          className="border-b border-tm-border/60 last:border-0"
+                        >
+                          <td className="py-2.5 pr-3 text-tm-text">
+                            {row.field.replace(/^(Buyer|Supplier)\s+/, "")}
+                          </td>
+                          <td
+                            className="px-2 py-2.5 text-right font-medium tabular-nums text-tm-black"
+                            title={`${row.total} of ${row.universe} ${row.unit}`}
+                          >
+                            {row.total}
+                          </td>
+                          {PRODUCT_BUCKETS.map((bucket) => (
+                            <td
+                              key={bucket}
+                              className="px-2 py-2.5 text-right tabular-nums text-tm-text-light"
+                            >
+                              {row.byProduct[bucket] || "—"}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-                <span className="w-8 shrink-0 text-right text-xs font-semibold text-tm-text">
-                  {row.count}
-                </span>
-                <span className="w-[55%] shrink-0 truncate text-xs text-tm-text-light">
-                  {row.field}
-                </span>
-              </li>
-            ))}
-          </ul>
+              </div>
+            ),
+          )}
         </section>
       )}
 
@@ -157,8 +303,6 @@ export function DealMissingFieldsTab({
       </div>
 
       <CargoInsuranceSection query={query} />
-
-      <CompanyTaxIdSection />
 
       <div className="space-y-3">
         {rows.map(({ deal, assessment }) => (

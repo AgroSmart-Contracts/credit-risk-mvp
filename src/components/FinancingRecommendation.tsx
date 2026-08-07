@@ -94,7 +94,11 @@ export function FinancingRecommendationPanel({
         <dl className="space-y-3 border-t border-tm-border pt-5">
           <DetailRow
             label="Interest rate"
-            value={`${financing.baseRate.toFixed(1)}% + ${financing.riskPremium.toFixed(1)}% = ${financing.interestRate.toFixed(1)}%`}
+            value={
+              financing.uncertaintyPremium > 0
+                ? `${financing.baseRate.toFixed(1)}% + ${financing.riskPremium.toFixed(1)}% risk + ${financing.uncertaintyPremium.toFixed(1)}% data-uncertainty = ${financing.interestRate.toFixed(1)}%`
+                : `${financing.baseRate.toFixed(1)}% + ${financing.riskPremium.toFixed(1)}% = ${financing.interestRate.toFixed(1)}%`
+            }
           />
           <DetailRow
             label="Collateral requirement"

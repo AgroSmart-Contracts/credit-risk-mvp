@@ -416,7 +416,7 @@ export function DocumentIngestion({
             onChange={(value) => setForm((current) => ({ ...current, product: value }))}
             options={PRODUCT_RISK_TABLE.map((entry) => ({
               value: entry.product,
-              label: `${entry.product} · score ${entry.score}`,
+              label: `${entry.product} · ${entry.perishabilityClass}`,
             }))}
           />
           <Select
@@ -520,7 +520,7 @@ export function DocumentIngestion({
             label="Product table"
             value={
               selectedProduct
-                ? `${selectedProduct.product} · score ${selectedProduct.score}`
+                ? `${selectedProduct.product} · ${selectedProduct.perishabilityClass}`
                 : "Select a product"
             }
             source="document"
@@ -531,9 +531,9 @@ export function DocumentIngestion({
               selectedRoute
                 ? `${routeLabel(selectedRoute.origin, selectedRoute.destination)} · ${
                     selectedRoute.transportMode === "air"
-                      ? selectedRoute.airStopsBand === "gt2"
-                        ? "air ≥3 stops"
-                        : "air ≤2 stops"
+                      ? selectedRoute.airStops != null
+                        ? `air ${selectedRoute.airStops} stops`
+                        : "air"
                       : "ocean"
                   } · score ${selectedRoute.score}${
                     selectedRoute.airStopPenalty
@@ -546,12 +546,14 @@ export function DocumentIngestion({
           />
           {form.transportMode === "air" && (
             <Field
-              label="Air stops band"
-              value={
-                Number(form.numberOfTransshipments || 0) > 2
-                  ? "≥3 stops — higher route risk table"
-                  : "≤2 stops (direct / few connections)"
-              }
+              label="Air stops"
+              value={`${Number(form.numberOfTransshipments || 0)} stops${
+                Number(form.numberOfTransshipments || 0) > 3
+                  ? " — Dimension C veto (≥4)"
+                  : Number(form.numberOfTransshipments || 0) === 3
+                    ? " — worst executable"
+                    : ""
+              }`}
               source="document"
             />
           )}

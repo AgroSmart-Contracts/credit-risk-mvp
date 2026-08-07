@@ -8,10 +8,10 @@ import {
   Truck,
 } from "lucide-react";
 import {
-  platformCounterparties,
-  platformCounterpartiesBlocked,
-  platformDeals,
-} from "../data/platform-deals";
+  counterpartySandboxMeta,
+  sandboxCounterparties,
+} from "../data/counterparty-sandbox-scores";
+import { platformCounterpartiesBlocked, platformDeals } from "../data/platform-deals";
 import { formatUSD } from "../lib/assessment";
 import type {
   PlatformCounterpartyBlocked,
@@ -28,10 +28,12 @@ const platformDealByMongoId = new Map(platformDeals.map((d) => [d.mongoId, d]));
 function ScorePill({
   label,
   value,
+  sub,
   tone = "default",
 }: {
   label: string;
   value: string | number;
+  sub?: string;
   tone?: "default" | "good" | "warn";
 }) {
   const toneClass =
@@ -46,6 +48,7 @@ function ScorePill({
         {label}
       </p>
       <p className="font-display text-xl">{value}</p>
+      {sub && <p className="text-[10px] opacity-70">{sub}</p>}
     </div>
   );
 }
@@ -62,43 +65,90 @@ function FormulaPanel() {
             Dimension A formula
           </h2>
           <p className="text-[11px] text-tm-text-muted">
-            Same as Platform deals / Assess
+            Same formula as Platform deals / Assess
           </p>
         </div>
       </div>
 
       <section className="mt-5 space-y-2">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-primary">
-          Per party (buyer or supplier)
+          How each score is built
         </p>
-        <p className="rounded-lg bg-tm-neutral-light px-3 py-2 font-mono text-[11px] leading-relaxed text-tm-text">
-          score = coverage × rawAvg + (1 − coverage) × 50 + trustBonus
-        </p>
-        <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-tm-text-light">
-          <li>Raw avg = weighted mean of filled fields only</li>
-          <li>Coverage = filled weight ÷ all field weights</li>
-          <li>Thin profiles shrink toward neutral 50</li>
-          <li>TM platform trust +3 flat when on platform</li>
-          <li>Customs fills volume, sales, routes when matched</li>
-        </ul>
+        <ol className="list-decimal space-y-2 pl-4 text-xs leading-relaxed text-tm-text">
+          <li>
+            <span className="font-medium">Raw average</span> — Σ(field score ×
+            weight) ÷ Σ(filled weights). Blank fields are excluded.
+          </li>
+          <li>
+            <span className="font-medium">Coverage</span> — the more
+            conservative of filled weight ÷ possible weight and filled fields
+            ÷ total fields. A couple of heavy fields (e.g. credit rating +
+            years-in-business) no longer look as complete as their weight
+            alone would suggest.
+          </li>
+          <li>
+            <span className="font-medium">Shrink toward 50</span> — coverage ×
+            raw + (1 − coverage) × 50. Thin profiles stay near neutral.
+          </li>
+          <li>
+            <span className="font-medium">TM trust bonus</span> — +3 flat after
+            shrink when the company is on the platform (or a known TM
+            affiliate). Hand-set, not calibrated against outcomes yet.
+          </li>
+          <li>
+            <span className="font-medium">Range</span> — best/worst case if
+            every missing field turned out to score 100 / 0. The published
+            score is the midpoint (missing fields assumed neutral).
+          </li>
+        </ol>
       </section>
 
-      <div className="my-4 border-t border-tm-border" />
+      <div className="my-5 border-t border-tm-border" />
 
       <section className="space-y-2">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-primary">
-          Deal counterparty dimension
+          Customs enrichment
         </p>
-        <p className="rounded-lg bg-tm-neutral-light px-3 py-2 font-mono text-[11px] leading-relaxed text-tm-text">
-          composite over buyer + supplier + relationship fields
+        <ul className="space-y-2 text-xs leading-relaxed text-tm-text">
+          <li>
+            Annual volume (MT), yearly FOB, monthly FOB, and route diversity
+            from Veritrade + Datasur when the company matches.
+          </li>
+          <li>
+            Found in customs → online verifiability = 55 (less-authoritative).
+          </li>
+          <li>
+            Sources: {counterpartySandboxMeta.customsSources.join("; ")}
+          </li>
+        </ul>
+      </section>
+
+      <div className="my-5 border-t border-tm-border" />
+
+      <section className="space-y-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-primary">
+          Live Dimension A
         </p>
-        <p className="text-xs text-tm-text-light">
-          Spec:{" "}
-          <code className="text-[10px]">
-            docs/counterparty-risk-scoring-method-outline-2026-07-30.md
+        <p className="text-xs leading-relaxed text-tm-text-light">
+          Platform deals / Assess use these same scores via{" "}
+          <code className="rounded bg-tm-neutral px-1 text-[10px]">
+            computeBuyerScore
+          </code>{" "}
+          /{" "}
+          <code className="rounded bg-tm-neutral px-1 text-[10px]">
+            computeSupplierScore
           </code>
+          .
         </p>
       </section>
+
+      <div className="mt-5 rounded-lg bg-tm-neutral-light px-3 py-2 text-[11px] leading-relaxed text-tm-text-muted">
+        Regenerated {new Date(counterpartySandboxMeta.generatedAt).toLocaleString()}.
+        Spec:{" "}
+        <code className="text-[10px]">
+          docs/counterparty-risk-scoring-method-outline-2026-07-30.md
+        </code>
+      </div>
     </aside>
   );
 }
@@ -110,8 +160,10 @@ function CounterpartyCard({
   cp: PlatformCounterpartyScore;
   onAssess?: (mongoId: string) => void;
 }) {
-  const tone = cp.avgScore >= 70 ? "good" : cp.avgScore >= 40 ? "warn" : "default";
+  const score = cp.sandbox?.score ?? cp.avgScore;
+  const tone = score >= 70 ? "good" : score >= 40 ? "warn" : "default";
   const RoleIcon = cp.role === "buyer" ? ShoppingCart : Truck;
+  const sb = cp.sandbox;
 
   return (
     <article className="rounded-xl border border-tm-border bg-tm-surface p-5 shadow-tm-sm">
@@ -134,7 +186,7 @@ function CounterpartyCard({
             <span className="rounded-full bg-tm-neutral px-2 py-0.5 text-[10px] font-medium text-tm-text-muted">
               {cp.product}
             </span>
-            {cp.customsMatched && (
+            {sb?.customsMatched && (
               <span className="rounded-full bg-tm-primary/10 px-2 py-0.5 text-[10px] font-medium text-tm-primary">
                 customs matched
               </span>
@@ -145,10 +197,15 @@ function CounterpartyCard({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <ScorePill label="Score" value={cp.avgScore} tone={tone} />
+        <ScorePill
+          label="Sandbox score"
+          value={score}
+          sub={sb ? `range ${sb.scoreLow}–${sb.scoreHigh}` : undefined}
+          tone={tone}
+        />
         <ScorePill
           label="Coverage"
-          value={cp.coveragePct != null ? `${cp.coveragePct}%` : "—"}
+          value={sb ? `${sb.coveragePct}%` : "—"}
         />
         <ScorePill
           label="Years in business"
@@ -160,29 +217,27 @@ function CounterpartyCard({
         />
       </div>
 
-      {(cp.rawAverage != null || cp.customsMatched) && (
+      {sb && (
         <div className="mt-4 rounded-lg border border-tm-border bg-tm-neutral-light/60 px-3 py-3 text-xs text-tm-text">
           <p>
             Raw avg{" "}
             <span className="font-medium text-tm-black">
-              {cp.rawAverage ?? "n/a"}
+              {sb.rawAverage ?? "n/a"}
             </span>
             {" · "}
-            trust +{cp.trustBonus ?? 0}
-            {cp.customsMatched && (
+            trust +{sb.trustBonus}
+            {sb.customsMatched && (
               <>
                 {" · "}
-                customs {cp.customsShipments} shipments
-                {cp.customsVolumeMt != null && <> · {cp.customsVolumeMt} MT</>}
-                {cp.customsRoutes != null && <> · {cp.customsRoutes} routes</>}
+                customs {sb.customsShipments} shipments
+                {sb.customsVolumeMt != null && <> · {sb.customsVolumeMt} MT</>}
+                {sb.customsRoutes != null && <> · {sb.customsRoutes} routes</>}
               </>
             )}
           </p>
-          {cp.filledFieldIds && cp.filledFieldIds.length > 0 && (
-            <p className="mt-1.5 text-[11px] text-tm-text-muted">
-              Filled: {cp.filledFieldIds.join(", ")}
-            </p>
-          )}
+          <p className="mt-1.5 text-[11px] text-tm-text-muted">
+            Filled: {sb.filledFieldIds.join(", ") || "none"}
+          </p>
         </div>
       )}
 
@@ -203,7 +258,6 @@ function CounterpartyCard({
                   <p className="text-[11px] text-tm-text-muted">
                     {formatUSD(deal.dealValue)}
                     {record ? ` · ${record.origin} → ${record.destination}` : ""}
-                    {typeof deal.score === "number" ? ` · score ${deal.score}` : ""}
                   </p>
                 </div>
                 {onAssess && (
@@ -225,35 +279,49 @@ function CounterpartyCard({
   );
 }
 
-function BlockedCard({
+function BlockedCounterpartyCard({
   cp,
   onGoToMissingFields,
 }: {
   cp: PlatformCounterpartyBlocked;
   onGoToMissingFields?: () => void;
 }) {
+  const RoleIcon = cp.role === "buyer" ? ShoppingCart : Truck;
   return (
     <article className="rounded-xl border border-dashed border-tm-border bg-tm-surface/60 p-5">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-tm-neutral text-tm-text-muted">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-tm-accent/15 text-tm-accent-dark">
           <Ban className="h-5 w-5" />
         </div>
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-tm-text-muted">
-            Missing years in business · {cp.role} · {cp.product}
-          </p>
-          <h3 className="mt-1 font-semibold text-tm-black">{cp.companyName}</h3>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span
+              className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                cp.role === "buyer"
+                  ? "bg-tm-blue/10 text-tm-blue"
+                  : "bg-tm-accent/15 text-tm-accent-dark"
+              }`}
+            >
+              <RoleIcon className="h-3 w-3" />
+              {cp.role === "buyer" ? "Buyer" : "Supplier"}
+            </span>
+            <span className="rounded-full bg-tm-neutral px-2 py-0.5 text-[10px] font-medium text-tm-text-muted">
+              {cp.product}
+            </span>
+          </div>
+          <h3 className="mt-1.5 font-semibold text-tm-black">{cp.companyName}</h3>
           <p className="mt-1 text-xs text-tm-text-light">
-            Cannot score without YIB ({cp.dealCount} deal
-            {cp.dealCount === 1 ? "" : "s"}).
+            No score — {cp.dealCount} deal{cp.dealCount === 1 ? "" : "s"} need{" "}
+            {cp.role} years-in-business.
           </p>
         </div>
       </div>
+
       {onGoToMissingFields && (
         <button
           type="button"
           onClick={onGoToMissingFields}
-          className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-tm-primary hover:underline"
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-tm-border bg-tm-surface px-3 py-2 text-sm font-medium text-tm-text hover:border-tm-primary hover:text-tm-primary"
         >
           Fill in years in business
           <ArrowRight className="h-4 w-4" />
@@ -269,14 +337,13 @@ export function CounterpartyScoresTab({
 }: CounterpartyScoresTabProps) {
   const [roleFilter, setRoleFilter] = useState<"all" | "buyer" | "supplier">("all");
 
-  const scored = platformCounterparties;
   const buyers = useMemo(
-    () => scored.filter((cp) => cp.role === "buyer"),
-    [scored],
+    () => sandboxCounterparties.filter((cp) => cp.role === "buyer"),
+    [],
   );
   const suppliers = useMemo(
-    () => scored.filter((cp) => cp.role === "supplier"),
-    [scored],
+    () => sandboxCounterparties.filter((cp) => cp.role === "supplier"),
+    [],
   );
   const blockedBuyers = useMemo(
     () => platformCounterpartiesBlocked.filter((cp) => cp.role === "buyer"),
@@ -292,7 +359,7 @@ export function CounterpartyScoresTab({
       ? buyers
       : roleFilter === "supplier"
         ? suppliers
-        : scored;
+        : sandboxCounterparties;
 
   const blockedVisible =
     roleFilter === "buyer"
@@ -301,7 +368,9 @@ export function CounterpartyScoresTab({
         ? blockedSuppliers
         : platformCounterpartiesBlocked;
 
-  const customsMatched = scored.filter((c) => c.customsMatched).length;
+  const customsMatched = sandboxCounterparties.filter(
+    (c) => c.sandbox?.customsMatched,
+  ).length;
 
   return (
     <div className="space-y-6">
@@ -310,32 +379,39 @@ export function CounterpartyScoresTab({
           Counterparty risk scores
         </h1>
         <p className="mt-2 max-w-2xl text-tm-text-light">
-          Dimension A scores for {scored.length} (company, role, product)
-          profiles — same weighted/shrink formula used in Platform deals.
-          {customsMatched > 0 && (
-            <> {customsMatched} matched to customs aggregates.</>
-          )}
+          Sandbox weighted/shrink scores for {sandboxCounterparties.length}{" "}
+          (company, role, product) profiles — {customsMatched} enriched from
+          customs. Live CRAM Dimension A is unchanged.
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        {(["all", "buyer", "supplier"] as const).map((role) => (
+      <div className="flex gap-2">
+        {(
+          [
+            [
+              "all",
+              `All (${sandboxCounterparties.length + platformCounterpartiesBlocked.length})`,
+            ],
+            ["buyer", `Buyers (${buyers.length + blockedBuyers.length})`],
+            ["supplier", `Suppliers (${suppliers.length + blockedSuppliers.length})`],
+          ] as const
+        ).map(([value, label]) => (
           <button
-            key={role}
+            key={value}
             type="button"
-            onClick={() => setRoleFilter(role)}
-            className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${
-              roleFilter === role
+            onClick={() => setRoleFilter(value)}
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+              roleFilter === value
                 ? "bg-tm-primary text-white"
-                : "bg-tm-neutral text-tm-text-muted hover:bg-tm-neutral/80"
+                : "bg-tm-neutral text-tm-text-light hover:text-tm-black"
             }`}
           >
-            {role}
+            {label}
           </button>
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="space-y-4">
           {visible.map((cp) => (
             <CounterpartyCard
@@ -344,13 +420,26 @@ export function CounterpartyScoresTab({
               onAssess={onAssessDealId}
             />
           ))}
-          {blockedVisible.map((cp) => (
-            <BlockedCard
-              key={cp.id}
-              cp={cp}
-              onGoToMissingFields={onGoToMissingFields}
-            />
-          ))}
+          {visible.length === 0 && blockedVisible.length === 0 && (
+            <p className="py-8 text-center text-sm text-tm-text-muted">
+              No counterparties in this view
+            </p>
+          )}
+
+          {blockedVisible.length > 0 && (
+            <>
+              <h2 className="pt-2 text-sm font-semibold text-tm-black">
+                Blocked — no years-in-business on file ({blockedVisible.length})
+              </h2>
+              {blockedVisible.map((cp) => (
+                <BlockedCounterpartyCard
+                  key={cp.id}
+                  cp={cp}
+                  onGoToMissingFields={onGoToMissingFields}
+                />
+              ))}
+            </>
+          )}
         </div>
         <FormulaPanel />
       </div>
