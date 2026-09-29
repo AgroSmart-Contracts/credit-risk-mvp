@@ -12,12 +12,8 @@ import { analyzeCofaceDocument } from "../lib/coface-analysis/analyze-coface-cli
 import { analyzeDealDocuments } from "../lib/document-analysis/analyze-documents-client";
 import { PRODUCT_RISK_TABLE } from "../lib/product-risk-tables";
 import { ROUTE_OPTIONS, lookupRouteRisk } from "../lib/route-risk-tables";
-import {
-  defaultStructureFromDeal,
-  structureForDeal,
-} from "../lib/transaction-structure/compute";
+import { structureForDeal } from "../lib/transaction-structure/compute";
 import type { TransactionStructureInput } from "../lib/transaction-structure/types";
-import { TransactionStructureBuilder } from "./TransactionStructureBuilder";
 
 interface DocumentIngestionProps {
   deal: Deal;
@@ -114,21 +110,6 @@ export function DocumentIngestion({
     });
     setTransactionStructure(structureForDeal(deal));
   }, [deal]);
-
-  const handleStructureChange = (next: TransactionStructureInput) => {
-    setTransactionStructure({ ...next, structureSource: "user" });
-  };
-
-  const handleResetStructure = () => {
-    setTransactionStructure(
-      defaultStructureFromDeal({
-        dealValueUSD: Number(form.dealValueUSD || 0) || deal.dealValueUSD,
-        offerUnitPriceUSD: deal.offerUnitPriceUSD,
-        advancePaymentPct: Number(form.advancePaymentPct || 0),
-        estimatedTransitDays: deal.estimatedTransitDays,
-      }),
-    );
-  };
 
   const selectedProduct = useMemo(
     () => PRODUCT_RISK_TABLE.find((entry) => entry.product === form.product) ?? null,
@@ -577,16 +558,6 @@ export function DocumentIngestion({
           />
         </dl>
       </section>
-
-      <TransactionStructureBuilder
-        value={transactionStructure}
-        onChange={handleStructureChange}
-        onResetToDefaults={handleResetStructure}
-        defaultExpanded={transactionStructure.structureSource === "default"}
-        dealValueUSD={Number(form.dealValueUSD || 0)}
-        advancePaymentPct={Number(form.advancePaymentPct || 0)}
-        contractType={deal.contractType}
-      />
 
       <div className="flex justify-end pt-2">
         <button
