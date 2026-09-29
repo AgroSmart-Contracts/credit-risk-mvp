@@ -39,6 +39,7 @@ import { ROUTE_OPTIONS, lookupRouteRisk } from "../src/lib/route-risk-tables";
 import { normalizeDealMilestone } from "../src/lib/deal-milestone";
 import { platformDealToDeal } from "../src/lib/platform-deal-mapper";
 import { computeBuyerScore, computeSupplierScore } from "../src/lib/scoring";
+import { hsHeading4, resolveHsProduct } from "../src/lib/hs-product-map";
 import {
   customsDestinationCountry,
   customsOriginCountry,
@@ -497,7 +498,10 @@ function main() {
     const supplierMaster = companyByKey.get(companyGroupKey(supplierRawName));
 
     const product = classifyProduct(row._id, row.name, row.description);
-    const productProfile = lookupProductRisk(product);
+    const hsResolved = resolveHsProduct({ product });
+    const hsCode = hsResolved?.hsCode ?? null;
+    const hsHeading4Val = hsHeading4(hsCode) ?? hsResolved?.hsHeading4 ?? null;
+    const productProfile = lookupProductRisk(product, hsCode);
     if (!productProfile) productMissCount.set(product, (productMissCount.get(product) ?? 0) + 1);
 
     const originStr = buildLocationString(row.portOfOrigin, row.origin);
@@ -615,11 +619,18 @@ function main() {
       mongoId: row._id,
       dealRef: row.name || row._id,
       product,
+      hsCode,
+      hsHeading4: hsHeading4Val,
       variety: row.variety || "",
       quantityLabel,
+      presentation: row.presentation?.trim() || null,
+      quantityKg: parseDealKg({ quantityLabel, dealValueUSD }),
       dealValueUSD,
       origin: originStr,
       destination: destStr,
+      portOfOrigin: row.portOfOrigin?.trim() || null,
+      portOfDestination: row.portOfDestination?.trim() || null,
+      shipmentCompany: null,
       buyerName,
       supplierName,
       buyerYib,

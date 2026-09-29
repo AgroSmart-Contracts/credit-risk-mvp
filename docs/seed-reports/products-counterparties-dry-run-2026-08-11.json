@@ -1,0 +1,69 @@
+{
+  "mode": "dry-run",
+  "products": [
+    {
+      "name": "Fresh Blueberries",
+      "hsCode": "0810400000",
+      "productKey": "BLUEBERRY"
+    },
+    {
+      "name": "Fresh Avocado",
+      "hsCode": "0804400000",
+      "productKey": "AVOCADO"
+    },
+    {
+      "name": "Fresh Mandarin",
+      "hsCode": "0805200000",
+      "productKey": "MANDARIN"
+    },
+    {
+      "name": "Fresh Ginger",
+      "hsCode": "0910110000",
+      "productKey": "GINGER"
+    },
+    {
+      "name": "Fresh Asparagus",
+      "hsCode": "0709200000",
+      "productKey": "ASPARAGUS"
+    },
+    {
+      "name": "Fresh Strawberries",
+      "hsCode": "0810100000",
+      "productKey": "STRAWBERRY"
+    },
+    {
+      "name": "Fresh Grapes",
+      "hsCode": "0806100000",
+      "productKey": "GRAPE"
+    },
+    {
+      "name": "Mixed Berries / Tropical Fruits (IQF)",
+      "hsCode": "0811900000",
+      "productKey": "MIXED_BERRIES"
+    },
+    {
+      "name": "Frozen Tropical Fruits",
+      "hsCode": "0811900000",
+      "productKey": "MIXED_BERRIES"
+    },
+    {
+      "name": "Green Coffee",
+      "hsCode": "0901110000",
+      "productKey": "COFFEE"
+    },
+    {
+      "name": "Fresh Mango",
+      "hsCode": "0804502000",
+      "productKey": "MANGO"
+    },
+    {
+      "name": "Cacao Beans",
+      "hsCode": "1801000000",
+      "productKey": "CACAO"
+    }
+  ],
+  "dealProductLinks": 174,
+  "counterpartiesWritten": 100,
+  "counterpartiesSkipped": 0,
+  "skippedSample": []
+}

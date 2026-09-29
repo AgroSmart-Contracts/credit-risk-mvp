@@ -1,0 +1,1850 @@
+{
+  "mode": "apply",
+  "matched": 169,
+  "unmatchedCsv": [
+    {
+      "csvRow": 3,
+      "dealRef": "Arï¿½ndano fresco",
+      "mongoId": "66fb1eb20b1b5991fc6479ff",
+      "reason": "mongoId_not_found_in_prod"
+    }
+  ],
+  "dealPatches": [
+    {
+      "dealId": "66670da1ba0490753e565ca0",
+      "dealName": "Fresh Ginger",
+      "dealRef": "Fresh Ginger",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 21772.42
+      }
+    },
+    {
+      "dealId": "670ed7c83fdd80df80736642",
+      "dealName": "Fresh Blueberries",
+      "dealRef": "Fresh Blueberries",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2310
+      }
+    },
+    {
+      "dealId": "670edd033fdd80df80736ef5",
+      "dealName": "Fresh Blueberries",
+      "dealRef": "Fresh Blueberries",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2310
+      }
+    },
+    {
+      "dealId": "6750a959b9fa43de6d85c9de",
+      "dealName": "FRESH BLUEBERRIES E001-26",
+      "dealRef": "FRESH BLUEBERRIES E001-26",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6426
+      }
+    },
+    {
+      "dealId": "675377dfb9fa43de6d861eef",
+      "dealName": "FRESH BLUEBERRIES E001-22",
+      "dealRef": "FRESH BLUEBERRIES E001-22",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "6759b914b9fa43de6d86f192",
+      "dealName": "FRESH BLUEBERRIES E001-27",
+      "dealRef": "FRESH BLUEBERRIES E001-27",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 4320
+      }
+    },
+    {
+      "dealId": "675a16e4b9fa43de6d873513",
+      "dealName": "FRESH BLUEBERRIES E001-23",
+      "dealRef": "FRESH BLUEBERRIES E001-23",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2904
+      }
+    },
+    {
+      "dealId": "675b6053b9fa43de6d879470",
+      "dealName": "FRESH BLUEBERRIES E001-19",
+      "dealRef": "FRESH BLUEBERRIES E001-19",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2816
+      }
+    },
+    {
+      "dealId": "675b708fb9fa43de6d882fb9",
+      "dealName": "FRESH BLUEBERRIES E001-18",
+      "dealRef": "FRESH BLUEBERRIES E001-18",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2628
+      }
+    },
+    {
+      "dealId": "675b7892b9fa43de6d887afe",
+      "dealName": "FRESH BLUEBERRIES E001-16",
+      "dealRef": "FRESH BLUEBERRIES E001-16",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2691.2
+      }
+    },
+    {
+      "dealId": "675b799bb9fa43de6d88826b",
+      "dealName": "FRESH BLUEBERRIES E001-17",
+      "dealRef": "FRESH BLUEBERRIES E001-17",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2816
+      }
+    },
+    {
+      "dealId": "6761acdbb9fa43de6d8a387f",
+      "dealName": "FRESH BLUEBERRIES E001-14",
+      "dealRef": "FRESH BLUEBERRIES E001-14",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 1440
+      }
+    },
+    {
+      "dealId": "676449d1b9fa43de6d8bcd7e",
+      "dealName": "FRESH BLUEBERRIES E001-12",
+      "dealRef": "FRESH BLUEBERRIES E001-12",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2240
+      }
+    },
+    {
+      "dealId": "6764614cb9fa43de6d8c1bc2",
+      "dealName": "FRESH BLUEBERRIES E001-11",
+      "dealRef": "FRESH BLUEBERRIES E001-11",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2310
+      }
+    },
+    {
+      "dealId": "677c2b8ab9fa43de6d90a08a",
+      "dealName": "FRESH ASPARAGUS E001-10",
+      "dealRef": "FRESH ASPARAGUS E001-10",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 185
+      }
+    },
+    {
+      "dealId": "677ec54eb9fa43de6d931ebd",
+      "dealName": "IQF TROPICAL FRUITS 40FT",
+      "dealRef": "IQF TROPICAL FRUITS 40FT",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 19600
+      }
+    },
+    {
+      "dealId": "6786a6e9b9fa43de6d94b696",
+      "dealName": "FRESH BLUEBERRIES E001-29",
+      "dealRef": "FRESH BLUEBERRIES E001-29",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 1800
+      }
+    },
+    {
+      "dealId": "6797c0246b3eee0b06efb2a9",
+      "dealName": "FRESH BLUEBERRIES E001-30",
+      "dealRef": "FRESH BLUEBERRIES E001-30",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2160
+      }
+    },
+    {
+      "dealId": "67a4c9a56b3eee0b06f0fb73",
+      "dealName": "FRESH BLUEBERRIES E001-31",
+      "dealRef": "FRESH BLUEBERRIES E001-31",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 1800
+      }
+    },
+    {
+      "dealId": "67d096556b3eee0b06f29d9a",
+      "dealName": "FRESH AVOCADO - BK LMM0514033",
+      "dealRef": "FRESH AVOCADO - BK LMM0514033",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "67e5642f6b3eee0b06f42147",
+      "dealName": "FRESH AVOCADO BK 6412923740",
+      "dealRef": "FRESH AVOCADO BK 6412923740",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 32300
+      }
+    },
+    {
+      "dealId": "67e564fc6b3eee0b06f42666",
+      "dealName": "FRESH AVOCADO - BK 21619266",
+      "dealRef": "FRESH AVOCADO - BK 21619266",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "67ec128e6b3eee0b06f6547b",
+      "dealName": "FRESH BLUEBERRIES E001-35",
+      "dealRef": "FRESH BLUEBERRIES E001-35",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "67ef392d6b3eee0b06f72d16",
+      "dealName": "FRESH AVOCADO - BK 27489042",
+      "dealRef": "FRESH AVOCADO - BK 27489042",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "67f41e496b3eee0b06f7769c",
+      "dealName": "FRESH AVOCADO - AWB 160-91712386",
+      "dealRef": "FRESH AVOCADO - AWB 160-91712386",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 1728
+      }
+    },
+    {
+      "dealId": "67f555dd6b3eee0b06f815e6",
+      "dealName": "FRESH BLUEBERRIES E001-33",
+      "dealRef": "FRESH BLUEBERRIES E001-33",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2520
+      }
+    },
+    {
+      "dealId": "683780b542a9e57e2b4729d8",
+      "dealName": "MANDARINA FRESCA",
+      "dealRef": "MANDARINA FRESCA",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "683781a042a9e57e2b472bad",
+      "dealName": "MANDARINA FRESCA 241064978",
+      "dealRef": "MANDARINA FRESCA 241064978",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "683781f542a9e57e2b472c5e",
+      "dealName": "MANDARINA FRESCA 241313022",
+      "dealRef": "MANDARINA FRESCA 241313022",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6837823642a9e57e2b472d18",
+      "dealName": "MANDARINA FRESCA 241607904",
+      "dealRef": "MANDARINA FRESCA 241607904",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6837826d42a9e57e2b472ddb",
+      "dealName": "MANDARINA FRESCA 241870809",
+      "dealRef": "MANDARINA FRESCA 241870809",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6837861342a9e57e2b472f8d",
+      "dealName": "MANDARINA FRESCA 241870858",
+      "dealRef": "MANDARINA FRESCA 241870858",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6837865e42a9e57e2b4731c8",
+      "dealName": "MANDARINA FRESCA 242024839",
+      "dealRef": "MANDARINA FRESCA 242024839",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "683786bc42a9e57e2b47343c",
+      "dealName": "MANDARINA FRESCA 242024835",
+      "dealRef": "MANDARINA FRESCA 242024835",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "683786f042a9e57e2b473523",
+      "dealName": "MANDARINA FRESCA 242381517",
+      "dealRef": "MANDARINA FRESCA 242381517",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6837871642a9e57e2b47360f",
+      "dealName": "MANDARINA FRESCA 242381425",
+      "dealRef": "MANDARINA FRESCA 242381425",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6839e3e042a9e57e2b47a6a5",
+      "dealName": "MANDARINA FRESCA 242528179",
+      "dealRef": "MANDARINA FRESCA 242528179",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6839e7fd42a9e57e2b47c7c4",
+      "dealName": "MANDARINA FRESCA 242780372",
+      "dealRef": "MANDARINA FRESCA 242780372",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6839e82542a9e57e2b47c915",
+      "dealName": "MANDARINA FRESCA 242780347",
+      "dealRef": "MANDARINA FRESCA 242780347",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6839e8a342a9e57e2b47ca7f",
+      "dealName": "MANDARINA FRESCA 243039126",
+      "dealRef": "MANDARINA FRESCA 243039126",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "6839e8d042a9e57e2b47cbe2",
+      "dealName": "MANDARINA FRESCA 243039123",
+      "dealRef": "MANDARINA FRESCA 243039123",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "683de11b42a9e57e2b48e715",
+      "dealName": "FRESH AVOCADO - BK 6412923740 2",
+      "dealRef": "FRESH AVOCADO - BK 6412923740 2",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "6853637d46f5613e126c952e",
+      "dealName": "MANDARINA FRESCA -OMC- 5TEU",
+      "dealRef": "MANDARINA FRESCA -OMC- 5TEU",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 114800
+      }
+    },
+    {
+      "dealId": "688120b2953ab2c775d3e679",
+      "dealName": "Fresh Blueberries PI25E001-38",
+      "dealRef": "Fresh Blueberries PI25E001-38",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "68839958953ab2c775d51830",
+      "dealName": "Fresh Blueberries PI25E001-39",
+      "dealRef": "Fresh Blueberries PI25E001-39",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "68839a11953ab2c775d51f2e",
+      "dealName": "Fresh Blueberries PI25E001-40",
+      "dealRef": "Fresh Blueberries PI25E001-40",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "68839aad953ab2c775d523ef",
+      "dealName": "Fresh Blueberries PI25E001-41",
+      "dealRef": "Fresh Blueberries PI25E001-41",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "6890fd76438d2534fe4eb33c",
+      "dealName": "Blueberries Export Canada",
+      "dealRef": "Blueberries Export Canada",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 1175.71
+      }
+    },
+    {
+      "dealId": "6890fdf0438d2534fe4ebc56",
+      "dealName": "Blueberries EXW Canada E001-42",
+      "dealRef": "Blueberries EXW Canada E001-42",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 1175.71
+      }
+    },
+    {
+      "dealId": "68910508438d2534fe4ed31f",
+      "dealName": "Frozen Berries from Chile",
+      "dealRef": "Frozen Berries from Chile",
+      "set": {
+        "productSpeciesName": "Frozen Tropical Fruits",
+        "hsCode": "0811900000",
+        "volumeKg": 1175.71
+      }
+    },
+    {
+      "dealId": "68d40b987da7cd176486aabb",
+      "dealName": "Blueberries E001-50",
+      "dealRef": "Blueberries E001-50",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 15921.08
+      }
+    },
+    {
+      "dealId": "690cf87e3d2ca4b63b280e92",
+      "dealName": "FRESH BLUEBERRIES E001-52",
+      "dealRef": "FRESH BLUEBERRIES E001-52",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 19600
+      }
+    },
+    {
+      "dealId": "690cfba23d2ca4b63b282e8b",
+      "dealName": "FRESH BLUEBERRIES E001-50",
+      "dealRef": "FRESH BLUEBERRIES E001-50",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6480
+      }
+    },
+    {
+      "dealId": "690cfcb63d2ca4b63b283ea7",
+      "dealName": "FRESH BLUEBERRIES E001-49",
+      "dealRef": "FRESH BLUEBERRIES E001-49",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6480
+      }
+    },
+    {
+      "dealId": "6917a58b62ce4b73260f06f4",
+      "dealName": "EUROPE BULK",
+      "dealRef": "EUROPE BULK",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 19600
+      }
+    },
+    {
+      "dealId": "6922fd4e11cf91e11fbd2f5a",
+      "dealName": "FRESH BLUEBERRIES E001-38",
+      "dealRef": "FRESH BLUEBERRIES E001-38",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5461.5
+      }
+    },
+    {
+      "dealId": "6922fe9111cf91e11fbd3178",
+      "dealName": "FRESH BLUEBERRIES E001-39",
+      "dealRef": "FRESH BLUEBERRIES E001-39",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 7831.5
+      }
+    },
+    {
+      "dealId": "6923012511cf91e11fbd4971",
+      "dealName": "FRESH BLUEBERRIES E001-40",
+      "dealRef": "FRESH BLUEBERRIES E001-40",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5983.5
+      }
+    },
+    {
+      "dealId": "6923022c11cf91e11fbd5796",
+      "dealName": "FRESH BLUEBERRIES E001-41",
+      "dealRef": "FRESH BLUEBERRIES E001-41",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2880
+      }
+    },
+    {
+      "dealId": "6923043011cf91e11fbd6a29",
+      "dealName": "FRESH BLUEBERRIES E001-42",
+      "dealRef": "FRESH BLUEBERRIES E001-42",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6238.5
+      }
+    },
+    {
+      "dealId": "6925c62b11cf91e11fc0fc68",
+      "dealName": "FRESH BLUEBERRIES AWB 996-13806111",
+      "dealRef": "FRESH BLUEBERRIES AWB 996-13806111",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 7903.5
+      }
+    },
+    {
+      "dealId": "6925cc7b11cf91e11fc1329f",
+      "dealName": "FRESH BLUEBERRIES AWB 996-13806144",
+      "dealRef": "FRESH BLUEBERRIES AWB 996-13806144",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 3600
+      }
+    },
+    {
+      "dealId": "6925cf9511cf91e11fc16b90",
+      "dealName": "FRESH BLUEBERRIES AWB 996-13806122",
+      "dealRef": "FRESH BLUEBERRIES AWB 996-13806122",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 7920
+      }
+    },
+    {
+      "dealId": "6925d1ba11cf91e11fc193a6",
+      "dealName": "FRESH BLUEBERRIES AWB996-13810333",
+      "dealRef": "FRESH BLUEBERRIES AWB996-13810333",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 3498
+      }
+    },
+    {
+      "dealId": "6925d34c11cf91e11fc1c847",
+      "dealName": "FRESH BLUEBERRIES AWB 996-13810355",
+      "dealRef": "FRESH BLUEBERRIES AWB 996-13810355",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6480
+      }
+    },
+    {
+      "dealId": "692eea6b89cca3bcb7a1b6ef",
+      "dealName": "FRESH BLUEBERRIES AWB 996-13810366",
+      "dealRef": "FRESH BLUEBERRIES AWB 996-13810366",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6394.5
+      }
+    },
+    {
+      "dealId": "692eeaed89cca3bcb7a1c661",
+      "dealName": "FRESH BLUEBERRIES AWB 996-13810366",
+      "dealRef": "FRESH BLUEBERRIES AWB 996-13810366",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6394.5
+      }
+    },
+    {
+      "dealId": "6972c74509dd14423e2461eb",
+      "dealName": "FRESH BLUEBERRIES",
+      "dealRef": "FRESH BLUEBERRIES",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "69c67d820bdf50f1f471aeac",
+      "dealName": "MANDARINA FRESCA",
+      "dealRef": "MANDARINA FRESCA",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69c6a452185ebda6a9c4b47c",
+      "dealName": "MANDARINA FRESCA 261987687-HUENEME-MNBU0631925",
+      "dealRef": "MANDARINA FRESCA 261987687-HUENEME-MNBU0631925",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69c6a642388a149dee8247ae",
+      "dealName": "MANDARINA FRESCA PER8830115A -MIAMI-SEGU9383086",
+      "dealRef": "MANDARINA FRESCA PER8830115A -MIAMI-SEGU9383086",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69c6a7d9185ebda6a9c4bd82",
+      "dealName": "MANDARINA FRESCA 261715398-HUENEME-MNBU4360842",
+      "dealRef": "MANDARINA FRESCA 261715398-HUENEME-MNBU4360842",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69c6a832c5e900f5ecdcfae0",
+      "dealName": "MANDARINA FRESCA-PER8823983A-MIAMI-SZLU5010513",
+      "dealRef": "MANDARINA FRESCA-PER8823983A-MIAMI-SZLU5010513",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69c6a855388a149dee8250a6",
+      "dealName": "MANDARINA FRESCA PER8823982A-MIAMI-SMLU5477740",
+      "dealRef": "MANDARINA FRESCA PER8823982A-MIAMI-SMLU5477740",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69c6a889388a149dee825208",
+      "dealName": "MANDARINA FRESCA 261433095-HUENEME-MNBU0401959",
+      "dealRef": "MANDARINA FRESCA 261433095-HUENEME-MNBU0401959",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 22960
+      }
+    },
+    {
+      "dealId": "69d3e6fb9e76ea086ca4c1a0",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-001",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-001",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "69d3e6fb9e76ea086ca4c1a1",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-002",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-002",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5760
+      }
+    },
+    {
+      "dealId": "f8292a55b92e31af8119fe8f",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-003",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-003",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "13d1c2e4dd7ce6c8c45a4b75",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-004",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-004",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "f91059110d2720ef1c100c68",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-005",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-005",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5760
+      }
+    },
+    {
+      "dealId": "02972b2dda4f7b4f3b133010",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-006",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-006",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5760
+      }
+    },
+    {
+      "dealId": "d1b96035d6c6c32f2d6bb32f",
+      "dealName": "FRESH BLUEBERRIES TRD-CULT-007",
+      "dealRef": "FRESH BLUEBERRIES TRD-CULT-007",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6480
+      }
+    },
+    {
+      "dealId": "23e57a6f048a99b2289e172e",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-001",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-001",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6480
+      }
+    },
+    {
+      "dealId": "45135bc76d452a32a725edec",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-002",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-002",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5760
+      }
+    },
+    {
+      "dealId": "bea2c0f99ebc8f06cbf904f2",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-003",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-003",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "0bd76140ce4658e133b374a2",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-004",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-004",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5400
+      }
+    },
+    {
+      "dealId": "3dc9aaaea9df02e3e76ae23f",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-005",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-005",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5760
+      }
+    },
+    {
+      "dealId": "72959fd4f095035fafece109",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-006",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-006",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 5760
+      }
+    },
+    {
+      "dealId": "c9626056eb561b65860def70",
+      "dealName": "FRESH BLUEBERRIES FXP-UAE-007",
+      "dealRef": "FRESH BLUEBERRIES FXP-UAE-007",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6480
+      }
+    },
+    {
+      "dealId": "64f4e1cb9e4b71a61ed3885a",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-001",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-001",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "a006862cd472eb14e7502a92",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-002",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-002",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "5713177ae51507ab6fa5ad45",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-003",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-003",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "ccc54d974ae01e48ae2b0823",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-004",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-004",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "1d8db98a6819bdc6e2ab0e53",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-005",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-005",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "58e792e207113dc806c2f1b0",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-006",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-006",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "652fbae35dc0853a8731b75c",
+      "dealName": "FRESH MIXED BERRIES SGC-CHN-007",
+      "dealRef": "FRESH MIXED BERRIES SGC-CHN-007",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "06c34a88f0952a2320f620a8",
+      "dealName": "FRESH BLUEBERRIES GFL-CHN-001",
+      "dealRef": "FRESH BLUEBERRIES GFL-CHN-001",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "23e523e46e222d9075058dd8",
+      "dealName": "FRESH BLUEBERRIES GFL-CHN-002",
+      "dealRef": "FRESH BLUEBERRIES GFL-CHN-002",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "aa8a2204db5a02446f0b2d08",
+      "dealName": "FRESH BLUEBERRIES GFL-CHN-003",
+      "dealRef": "FRESH BLUEBERRIES GFL-CHN-003",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 27300
+      }
+    },
+    {
+      "dealId": "4957b3404f55a8589b9e420e",
+      "dealName": "FRESH BLUEBERRIES GFL-CHN-004",
+      "dealRef": "FRESH BLUEBERRIES GFL-CHN-004",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "19f4e57b930b0cc3a8609ea7",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-001",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-001",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "bf0abb2c4ecfae5bb9ec18a7",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-002",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-002",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "19c67a6fc82122d15b6bd830",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-003",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-003",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "9155f4c191c670a4be1b1ba2",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-004",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-004",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "bfe19ddd3d7c50770df3aac4",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-005",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-005",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "bed0586cf9d24578cd316d76",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-006",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-006",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "f0e79517f24013fc8440d14b",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-007",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-007",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "ef921c5aaee25f373e611b7a",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-008",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-008",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "18400fc8dab9ef9339b20ba5",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-009",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-009",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "d4a8ed1fb760180e4e00b3bf",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-010",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-010",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "84eb96572784d5e39a4a647c",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-011",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-011",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "6ebcc56a39b148ec79c103ec",
+      "dealName": "FRESH BLUEBERRIES ATG-TWN-012",
+      "dealRef": "FRESH BLUEBERRIES ATG-TWN-012",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "484986066a7417fcfe592946",
+      "dealName": "FRESH AVOCADO XRK-ESP-001",
+      "dealRef": "FRESH AVOCADO XRK-ESP-001",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "8ba96f6965749c434694263e",
+      "dealName": "FRESH AVOCADO XRK-ESP-002",
+      "dealRef": "FRESH AVOCADO XRK-ESP-002",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "d309a2434ae0d85043332a28",
+      "dealName": "FRESH AVOCADO XRK-ESP-003",
+      "dealRef": "FRESH AVOCADO XRK-ESP-003",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "101ad782e9b05452df4e6de1",
+      "dealName": "FRESH AVOCADO XRK-ESP-004",
+      "dealRef": "FRESH AVOCADO XRK-ESP-004",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "de10bc4c6dc304f27f22c71b",
+      "dealName": "FRESH AVOCADO XRK-ESP-005",
+      "dealRef": "FRESH AVOCADO XRK-ESP-005",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "e3bd45be46c02a03587be9ff",
+      "dealName": "FRESH AVOCADO XRK-ESP-006",
+      "dealRef": "FRESH AVOCADO XRK-ESP-006",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "e5b159d4320d161759a80f86",
+      "dealName": "FRESH AVOCADO XRK-ESP-007",
+      "dealRef": "FRESH AVOCADO XRK-ESP-007",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "d19f70bf1eca33acc81de653",
+      "dealName": "FRESH AVOCADO XRK-ESP-008",
+      "dealRef": "FRESH AVOCADO XRK-ESP-008",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 22160
+      }
+    },
+    {
+      "dealId": "8413cc04d544fe53c0254173",
+      "dealName": "FRESH AVOCADO XRK-ESP-009",
+      "dealRef": "FRESH AVOCADO XRK-ESP-009",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 22160
+      }
+    },
+    {
+      "dealId": "fbd21becdccde94e83865585",
+      "dealName": "FRESH AVOCADO XRK-ESP-010",
+      "dealRef": "FRESH AVOCADO XRK-ESP-010",
+      "set": {
+        "productSpeciesName": "Fresh Avocado",
+        "hsCode": "0804400000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "c8dcac5597b0e930ae253eff",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-001",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-001",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "7394319c4838862cd229de92",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-002",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-002",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "2d19374d4f8331ce5f4051d0",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-003",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-003",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "4b8d7a5b4742bbf14f494eaf",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-004",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-004",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "743a2854fbc7fef6e4dea5d3",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-005",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-005",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "32897f091183db2f46a577ff",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-006",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-006",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "30dc4ee7d54082ca34ad0d59",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-007",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-007",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "e2bf4fbe59c0c5bea91c0b26",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-008",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-008",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "8d28be47d037080eb35ce5a4",
+      "dealName": "FRESH ASPARAGUS HSM-ESP-009",
+      "dealRef": "FRESH ASPARAGUS HSM-ESP-009",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 20000
+      }
+    },
+    {
+      "dealId": "2ed7c1b150ad8f4526fa7f4d",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-001",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-001",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "f5773097d8a8a638caefd256",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-002",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-002",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "248e0cca105c2c60131599bf",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-003",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-003",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "ad35696fe45079e585ff4ef1",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-004",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-004",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "dbe9992e55a45817e0d6b2cd",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-005",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-005",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "0b42b541b06d1772e862b368",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-006",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-006",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "484be52664c4d034ac0c8bed",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-007",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-007",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "f476b4d2a714e7a83621aba0",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-008",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-008",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "4de32d0a8f3a7b07c43e34b3",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-009",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-009",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "17ab808caeaea4d2a6f9774e",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-010",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-010",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "846e9a2ebd8357ff396e0dff",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-011",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-011",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "84fc96e64a6345f411f92998",
+      "dealName": "MANDARINA FRESCA DAVIS-NL-012",
+      "dealRef": "MANDARINA FRESCA DAVIS-NL-012",
+      "set": {
+        "productSpeciesName": "Fresh Mandarin",
+        "hsCode": "0805200000",
+        "volumeKg": 21560
+      }
+    },
+    {
+      "dealId": "8805e0ea118aa336eb288425",
+      "dealName": "FRESH BLUEBERRIES VLV-TWN-001",
+      "dealRef": "FRESH BLUEBERRIES VLV-TWN-001",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "4c357b6d67d09e395e6a8d9a",
+      "dealName": "FRESH BLUEBERRIES VLV-TWN-002",
+      "dealRef": "FRESH BLUEBERRIES VLV-TWN-002",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "3d9c463212172ea8c28f407a",
+      "dealName": "FRESH BLUEBERRIES VLV-TWN-003",
+      "dealRef": "FRESH BLUEBERRIES VLV-TWN-003",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "3f0bfcf33f54f78137e95ed0",
+      "dealName": "FRESH BLUEBERRIES VLV-TWN-004",
+      "dealRef": "FRESH BLUEBERRIES VLV-TWN-004",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "7eecdd7261421e77ff484443",
+      "dealName": "FRESH BLUEBERRIES VLV-TWN-005",
+      "dealRef": "FRESH BLUEBERRIES VLV-TWN-005",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "2764c42c0a3b1e3a6d89bbce",
+      "dealName": "FRESH BLUEBERRIES VLV-TWN-006",
+      "dealRef": "FRESH BLUEBERRIES VLV-TWN-006",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "5fce0ffb54b19c4c8e53dc2a",
+      "dealName": "FRESH GINGER BFRSH-NL-001",
+      "dealRef": "FRESH GINGER BFRSH-NL-001",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 19595.17
+      }
+    },
+    {
+      "dealId": "1d3aa882b64dfc03a7ec2891",
+      "dealName": "FRESH GINGER BFRSH-NL-002",
+      "dealRef": "FRESH GINGER BFRSH-NL-002",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 19595.17
+      }
+    },
+    {
+      "dealId": "67353f3c2a7b55259a3d3d21",
+      "dealName": "FRESH GINGER BFRSH-NL-003",
+      "dealRef": "FRESH GINGER BFRSH-NL-003",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 19595.17
+      }
+    },
+    {
+      "dealId": "6bf2efd8ce3537b5aa6c50fe",
+      "dealName": "FRESH GINGER BFRSH-NL-004",
+      "dealRef": "FRESH GINGER BFRSH-NL-004",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 19595.17
+      }
+    },
+    {
+      "dealId": "dd8e0ccaa0833ca55c023c34",
+      "dealName": "FRESH GINGER BFRSH-NL-005",
+      "dealRef": "FRESH GINGER BFRSH-NL-005",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 19595.17
+      }
+    },
+    {
+      "dealId": "741b7bd8b6cbb503e64046cc",
+      "dealName": "FRESH GINGER BFRSH-NL-006",
+      "dealRef": "FRESH GINGER BFRSH-NL-006",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 19595.17
+      }
+    },
+    {
+      "dealId": "9b5a34548f5eba3c26485d7b",
+      "dealName": "FRESH MIXED BERRIES KHI-HKG-001",
+      "dealRef": "FRESH MIXED BERRIES KHI-HKG-001",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "9f9c08f87f9881cd37132b9f",
+      "dealName": "FRESH MIXED BERRIES KHI-HKG-002",
+      "dealRef": "FRESH MIXED BERRIES KHI-HKG-002",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "08428bc73fc3ccdfc36e7c4a",
+      "dealName": "FRESH MIXED BERRIES KHI-HKG-003",
+      "dealRef": "FRESH MIXED BERRIES KHI-HKG-003",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "1f4444e7365df2ff9ca128c1",
+      "dealName": "FRESH MIXED BERRIES KHI-HKG-004",
+      "dealRef": "FRESH MIXED BERRIES KHI-HKG-004",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "2764e7d7dc151ee27893c05b",
+      "dealName": "FRESH GINGER - BPOLS-ESP-001",
+      "dealRef": "FRESH GINGER - BPOLS-ESP-001",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 22500
+      }
+    },
+    {
+      "dealId": "b6948e52fcced0daf3a48d45",
+      "dealName": "FROZEN TROPICAL FRUITS - SOLIMAR-JHN-001",
+      "dealRef": "FROZEN TROPICAL FRUITS - SOLIMAR-JHN-001",
+      "set": {
+        "productSpeciesName": "Mixed Berries / Tropical Fruits (IQF)",
+        "hsCode": "0811900000",
+        "volumeKg": 24000
+      }
+    },
+    {
+      "dealId": "6a71bb190e42678faa034630",
+      "dealName": "TM-2026-018 FRESH BLUEBERRIES",
+      "dealRef": "TM-2026-018 FRESH BLUEBERRIES",
+      "set": {
+        "portOfDestination": "El Dorado / Bogota",
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 150
+      }
+    }
+  ],
+  "txUpserts": 169,
+  "companyPatches": [
+    {
+      "companyId": "6a79a8221e40fb4d27c74899",
+      "legalName": "ICA BLUEBERRIES SAC",
+      "set": {
+        "yearsInBusiness": 10,
+        "yearsInBusinessSource": "default"
+      }
+    },
+    {
+      "companyId": "6a79a8231e40fb4d27c7489e",
+      "legalName": "MIKHUNA FOODS SAC",
+      "set": {
+        "yearsInBusiness": 6,
+        "yearsInBusinessSource": "default"
+      }
+    },
+    {
+      "companyId": "6a79a8221e40fb4d27c7489a",
+      "legalName": "INDUSTRIAS SOLIMAR SAC",
+      "set": {
+        "yearsInBusiness": 9,
+        "yearsInBusinessSource": "default"
+      }
+    }
+  ],
+  "cofaceUpserts": 169,
+  "sampleDealPatches": [
+    {
+      "dealId": "66670da1ba0490753e565ca0",
+      "dealName": "Fresh Ginger",
+      "dealRef": "Fresh Ginger",
+      "set": {
+        "productSpeciesName": "Fresh Ginger",
+        "hsCode": "0910110000",
+        "volumeKg": 21772.42
+      }
+    },
+    {
+      "dealId": "670ed7c83fdd80df80736642",
+      "dealName": "Fresh Blueberries",
+      "dealRef": "Fresh Blueberries",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2310
+      }
+    },
+    {
+      "dealId": "670edd033fdd80df80736ef5",
+      "dealName": "Fresh Blueberries",
+      "dealRef": "Fresh Blueberries",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2310
+      }
+    },
+    {
+      "dealId": "6750a959b9fa43de6d85c9de",
+      "dealName": "FRESH BLUEBERRIES E001-26",
+      "dealRef": "FRESH BLUEBERRIES E001-26",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 6426
+      }
+    },
+    {
+      "dealId": "675377dfb9fa43de6d861eef",
+      "dealName": "FRESH BLUEBERRIES E001-22",
+      "dealRef": "FRESH BLUEBERRIES E001-22",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 11700
+      }
+    },
+    {
+      "dealId": "6759b914b9fa43de6d86f192",
+      "dealName": "FRESH BLUEBERRIES E001-27",
+      "dealRef": "FRESH BLUEBERRIES E001-27",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 4320
+      }
+    },
+    {
+      "dealId": "675a16e4b9fa43de6d873513",
+      "dealName": "FRESH BLUEBERRIES E001-23",
+      "dealRef": "FRESH BLUEBERRIES E001-23",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2904
+      }
+    },
+    {
+      "dealId": "675b6053b9fa43de6d879470",
+      "dealName": "FRESH BLUEBERRIES E001-19",
+      "dealRef": "FRESH BLUEBERRIES E001-19",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2816
+      }
+    },
+    {
+      "dealId": "675b708fb9fa43de6d882fb9",
+      "dealName": "FRESH BLUEBERRIES E001-18",
+      "dealRef": "FRESH BLUEBERRIES E001-18",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2628
+      }
+    },
+    {
+      "dealId": "675b7892b9fa43de6d887afe",
+      "dealName": "FRESH BLUEBERRIES E001-16",
+      "dealRef": "FRESH BLUEBERRIES E001-16",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2691.2
+      }
+    },
+    {
+      "dealId": "675b799bb9fa43de6d88826b",
+      "dealName": "FRESH BLUEBERRIES E001-17",
+      "dealRef": "FRESH BLUEBERRIES E001-17",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2816
+      }
+    },
+    {
+      "dealId": "6761acdbb9fa43de6d8a387f",
+      "dealName": "FRESH BLUEBERRIES E001-14",
+      "dealRef": "FRESH BLUEBERRIES E001-14",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 1440
+      }
+    },
+    {
+      "dealId": "676449d1b9fa43de6d8bcd7e",
+      "dealName": "FRESH BLUEBERRIES E001-12",
+      "dealRef": "FRESH BLUEBERRIES E001-12",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2240
+      }
+    },
+    {
+      "dealId": "6764614cb9fa43de6d8c1bc2",
+      "dealName": "FRESH BLUEBERRIES E001-11",
+      "dealRef": "FRESH BLUEBERRIES E001-11",
+      "set": {
+        "productSpeciesName": "Fresh Blueberries",
+        "hsCode": "0810400000",
+        "volumeKg": 2310
+      }
+    },
+    {
+      "dealId": "677c2b8ab9fa43de6d90a08a",
+      "dealName": "FRESH ASPARAGUS E001-10",
+      "dealRef": "FRESH ASPARAGUS E001-10",
+      "set": {
+        "productSpeciesName": "Fresh Asparagus",
+        "hsCode": "0709200000",
+        "volumeKg": 185
+      }
+    }
+  ],
+  "sampleCompanyPatches": [
+    {
+      "companyId": "6a79a8221e40fb4d27c74899",
+      "legalName": "ICA BLUEBERRIES SAC",
+      "set": {
+        "yearsInBusiness": 10,
+        "yearsInBusinessSource": "default"
+      }
+    },
+    {
+      "companyId": "6a79a8231e40fb4d27c7489e",
+      "legalName": "MIKHUNA FOODS SAC",
+      "set": {
+        "yearsInBusiness": 6,
+        "yearsInBusinessSource": "default"
+      }
+    },
+    {
+      "companyId": "6a79a8221e40fb4d27c7489a",
+      "legalName": "INDUSTRIAS SOLIMAR SAC",
+      "set": {
+        "yearsInBusiness": 9,
+        "yearsInBusinessSource": "default"
+      }
+    }
+  ],
+  "unmatchedSample": [
+    {
+      "csvRow": 3,
+      "dealRef": "Arï¿½ndano fresco",
+      "mongoId": "66fb1eb20b1b5991fc6479ff",
+      "reason": "mongoId_not_found_in_prod"
+    }
+  ],
+  "report": "/Users/tasneem-admin/Desktop/projects/blockchain/work/TruMarket/credit-risk-mvp/docs/seed-reports/platform-defaults-mongo-applied-2026-08-10.json"
+}

@@ -23,6 +23,7 @@ import { sandboxCounterparties } from "../data/counterparty-sandbox-scores";
 import { priceVsMarketDetail } from "./price-benchmarks";
 import { lookupRouteRisk } from "./route-risk-tables";
 import { paymentTermsAdjustment } from "./scoring";
+import { computeRiskReward, type RiskRewardSummary } from "./risk-reward";
 
 function partyKey(role: string, companyName: string, product: string): string {
   return `${role}::${companyName.trim().toUpperCase().replace(/[.,]/g, "").replace(/\s+/g, " ")}::${product}`;
@@ -85,21 +86,14 @@ function buildCounterpartyMethodAudit(
       toShrinkAudit("Composite (feeds Dimension A)", compositeA, null),
     ],
     why: [
-      `Blank fields are excluded from the raw average so missing data does not fake a zero — we only average what we know.`,
-      `Coverage = the more conservative of filled weight ÷ possible weight and filled field count ÷ total field count. A couple of heavy fields (e.g. credit rating + years-in-business) no longer look as complete as their weight alone would suggest.`,
-      `Shrink: coverage × rawAvg + (1 − coverage) × ${SANDBOX_NEUTRAL}. Pulls sparse profiles toward neutral ${SANDBOX_NEUTRAL} so one or two strong fields cannot overstate creditworthiness.`,
-      `TM trust bonus (+3 when on-platform / TM affiliate) is added flat after shrink — a known platform relationship keeps its full weight even on a thin customs profile.`,
-      `Range: best/worst case if every missing field turned out to score 100 / 0. The published score is always the range's midpoint (missing fields assumed neutral).`,
-      `Dimension A overall uses the composite (buyer + supplier + relationship fields together), then × 40% of CRAM.`,
+      `Blanks are skipped in the raw average (not scored as 0).`,
+      `Coverage = min(weight filled, fields filled); shrink pulls sparse profiles toward ${SANDBOX_NEUTRAL}.`,
+      `+3 TM trust after shrink when on-platform. Published score = midpoint of missing-field range.`,
     ],
     improvements: [
-      `Fill customs for importers (Veritrade / Matching Company as Importador) — unlocks monthly volume, yearly FOB, MT, routes, and online verifiability (55).`,
-      `Wire monthlyFobUsd through sandbox enrichment (today live rebuild often drops it even when Counterparties scored it).`,
-      `Add Coface / CRA credit ratings — weight 7, currently almost always blank.`,
-      `Payment delay / quality rejection now correctly exclude from the raw average when unmeasured (fixed 2026-08-06 — previously defaulted to a free 100).`,
-      `Online verifiability for the 6 non-customs-matched blueberries counterparties is now hand-researched (see docs/blueberry-deals-research-2026-08-06.md) — 3 came back with real identity-verification red flags (Allied Trade Global's taxId matches no registered Taiwan company; Guangzhou Fresh Link is fully unverifiable; two Peru RUCs on file fail SUNAT's checksum) that need human follow-up.`,
-      `Improve name matching (spelling variants) so buyers like Agro Smart are found when they appear under a different consignee string.`,
-      `Consider a lower floor than ${SANDBOX_NEUTRAL} for veto-adjacent signals, or requiring minimum coverage before AUTO-APPROVE.`,
+      `Fill Veritrade importer customs → volume, FOB, routes, shipment count.`,
+      `Add Coface/CRA credit rating (often blank, weight 7).`,
+      `Tighten buyer name matching so customs rows link reliably.`,
     ],
   };
 }
@@ -118,6 +112,8 @@ export const BLUEBERRY_CRAM_SAMPLE_MONGO_IDS = [
   "6922fd4e11cf91e11fbd2f5a", // Eagle Trading ← Holy Fruit · ~64
 ] as const;
 
+export type FieldHighlight = "primary" | "danger" | "accent" | "call";
+
 export interface FieldRow {
   id: string;
   label: string;
@@ -127,6 +123,8 @@ export interface FieldRow {
   score: number | null;
   weight: number;
   note: string;
+  /** Visual emphasis — same tones as pre-scored Structure KpiStrip */
+  highlight?: FieldHighlight;
 }
 
 /** Raw avg → coverage → shrink → trust bonus audit for one party group. */
@@ -183,6 +181,8 @@ export interface BlueberryCramCase {
   financing: FinancingRecommendation;
   /** Estimated financing APY% = baseRate + riskPremium from financing engine */
   estimatedApyPct: number;
+  /** Investor/ops risk–reward overlay for Structure (Dimension D). */
+  riskReward: RiskRewardSummary;
 }
 
 function fmtNum(n: number | null | undefined, digits = 2): string {
@@ -190,7 +190,10 @@ function fmtNum(n: number | null | undefined, digits = 2): string {
   return n.toFixed(digits);
 }
 
-function structureFallbackFields(deal: Deal): FieldRow[] {
+function structureFallbackFields(
+  deal: Deal,
+  riskReward: RiskRewardSummary,
+): FieldRow[] {
   const payAdj = paymentTermsAdjustment(deal.paymentTerms);
   const rel =
     deal.priorDealsBetweenParties >= 10
@@ -226,6 +229,7 @@ function structureFallbackFields(deal: Deal): FieldRow[] {
           ? 1
           : 0;
 
+  // Scoring inputs only — cash KPIs / investment call live in StructureInvestmentPanel.
   return [
     {
       id: "base",
@@ -233,15 +237,15 @@ function structureFallbackFields(deal: Deal): FieldRow[] {
       input: "60",
       score: 60,
       weight: 0,
-      note: "Flat fallback (no transaction-structure cash-flow input on platform CSV deals)",
+      note: "Fallback base (no attached cash-flow structure)",
     },
     {
       id: "collateral",
       label: "Collateral",
-      input: `${deal.collateralType} (value ${formatUSD(deal.collateralValueUSD)})`,
+      input: `${deal.collateralType} (${formatUSD(deal.collateralValueUSD)})`,
       score: coll,
       weight: 35,
-      note: "Points added to base (spec §4.D)",
+      note: "Pts vs base",
     },
     {
       id: "paymentTerms",
@@ -249,15 +253,15 @@ function structureFallbackFields(deal: Deal): FieldRow[] {
       input: deal.paymentTerms,
       score: payAdj,
       weight: 25,
-      note: "Points added to base",
+      note: "Pts vs base",
     },
     {
       id: "relationship",
       label: "Prior deals (structure)",
-      input: `${deal.priorDealsBetweenParties} prior · ${deal.relationshipAgeMonths} mo relationship`,
+      input: `${deal.priorDealsBetweenParties} prior · ${deal.relationshipAgeMonths} mo`,
       score: rel,
       weight: 25,
-      note: "≥10 → +15 / ≥5 → +12 / ≥1 → +8 / 0 → −12",
+      note: "≥10 +15 · ≥5 +12 · ≥1 +8 · 0 −12",
     },
     {
       id: "advance",
@@ -265,7 +269,11 @@ function structureFallbackFields(deal: Deal): FieldRow[] {
       input: `${deal.advancePaymentPct}%`,
       score: adv,
       weight: 10,
-      note: "≥50% → +10 / ≥25% → +7 / ≥10% → +5",
+      note:
+        deal.advancePaymentPct > 0
+          ? "≥50 +10 · ≥25 +7 · ≥10 +5"
+          : `0% on deal · policy asks ${riskReward.recommendedAdvancePct}%`,
+      highlight: deal.advancePaymentPct <= 0 ? "accent" : "primary",
     },
     {
       id: "insurance",
@@ -273,10 +281,22 @@ function structureFallbackFields(deal: Deal): FieldRow[] {
       input: deal.insuranceCoverage,
       score: ins,
       weight: 0,
-      note:
-        deal.insuranceCoverage === "None"
-          ? "0 pts here — also triggers veto register (mandatory baseline)"
-          : "Points added to base",
+      note: deal.insuranceCoverage === "None" ? "Veto — mandatory" : "Pts vs base",
+      highlight: deal.insuranceCoverage === "None" ? "danger" : undefined,
+    },
+    {
+      id: "structureCashScore",
+      label: "Cash-structure score",
+      input: `${Math.round(riskReward.structureComposite)}/100 · ${riskReward.structureTier}`,
+      score: riskReward.structureComposite,
+      weight: 0,
+      note: riskReward.structureProtocol,
+      highlight:
+        riskReward.structureComposite < 60
+          ? "accent"
+          : riskReward.structureComposite >= 75
+            ? "primary"
+            : undefined,
     },
   ];
 }
@@ -292,6 +312,13 @@ export function buildBlueberryCramCase(
     deal.dealValueUSD,
     breakdown.counterpartyCoveragePct,
   );
+  const riskReward = computeRiskReward({
+    deal,
+    overall: breakdown.overall,
+    tier: breakdown.tier,
+    vetoed: breakdown.vetoed,
+    financing,
+  });
 
   const buyerResult = scoreDealBuyer(deal);
   const supplierResult = scoreDealSupplier(deal);
@@ -310,54 +337,55 @@ export function buildBlueberryCramCase(
           ? `${deal.buyer.yearsInBusiness ?? "—"} yrs (source ${record.buyerYibSource})`
           : f.id === "platformTransactionCount"
             ? `${deal.buyer.platformDealsCompleted} platform deals`
-            : f.id === "importLicenseStatus"
-              ? `licenseValid=${String(deal.buyer.licenseValid)}`
-              : f.id === "paymentDelay"
+            : f.id === "paymentDelay"
                 ? deal.buyer.avgPaymentDelayDays == null
-                  ? "default full score (no measured delay yet)"
+                  ? "unmeasured"
                   : `${deal.buyer.avgPaymentDelayDays} days`
-                : f.id === "monthlyPurchaseVolume"
-                  ? customs?.monthlyFobUsd != null
-                    ? `$${Math.round(customs.monthlyFobUsd).toLocaleString()} /mo (customs)`
-                    : "blank — not in Veritrade/Matching as Importador"
+                  : f.id === "monthlyPurchaseVolume"
+                  ? customs?.fobUsd != null
+                    ? `$${Math.round(customs.fobUsd / 12).toLocaleString()}/mo`
+                    : "blank — no customs"
                   : f.id === "yearlySales"
                     ? customs?.fobUsd != null
-                      ? `$${Math.round(customs.fobUsd).toLocaleString()} FOB (customs)`
-                      : "blank — not in Veritrade/Matching as Importador"
+                      ? `$${Math.round(customs.fobUsd).toLocaleString()} FOB`
+                      : "blank — no customs"
                     : f.id === "annualImportVolume"
                       ? customs?.volumeMt != null
-                        ? `${customs.volumeMt} MT (customs)`
-                        : "blank — not in Veritrade/Matching as Importador"
+                        ? `${customs.volumeMt} MT`
+                        : "blank — no customs"
                       : f.id === "routeDiversity"
                         ? customs?.routeCount != null
-                          ? `${customs.routeCount} routes (customs)`
-                          : "blank — not in Veritrade/Matching as Importador"
-                        : f.id === "onlineVerifiability"
-                          ? customs?.matched
-                            ? "customs match → 55"
-                            : score == null
-                              ? "blank — no online/customs signal"
-                              : `score ${Math.round(score)} (web/registry lookup)`
+                          ? `${customs.routeCount} routes`
+                          : "blank — no customs"
+                        : f.id === "frequencyOfDeals"
+                          ? customs?.shipments != null && customs.shipments > 0
+                            ? `${customs.shipments} shipments`
+                            : deal.buyer.platformDealsCompleted > 0
+                              ? `${deal.buyer.platformDealsCompleted} platform deals`
+                              : "blank"
                           : f.id === "creditRating"
-                            ? "blank — needs Coface CRA/DRA (not in Veritrade)"
+                            ? "blank — needs Coface"
                             : score == null
                               ? "blank"
                               : `score ${Math.round(score)}`,
       score,
       weight: f.weight,
       note:
-        f.id === "paymentDelay" && deal.buyer.avgPaymentDelayDays == null
-          ? "Temporary default 100 until payment-timing data exists"
-          : f.id === "creditRating" && score == null
-            ? "Coface only — Veritrade cannot fill this"
-            : score == null
-              ? "Blank — excluded from raw avg; still reduces coverage"
-              : `Weight ${f.weight}`,
+        f.id === "monthlyPurchaseVolume" && customs?.fobUsd != null
+          ? "Yearly FOB ÷ 12"
+          : f.id === "paymentDelay" && deal.buyer.avgPaymentDelayDays == null
+            ? "Unmeasured — excluded"
+            : f.id === "creditRating" && score == null
+              ? "Needs Coface"
+              : score == null
+                ? "Blank"
+                : `w${f.weight}`,
     };
   });
 
   const supplierFields: FieldRow[] = supplierResult.fields.map((f) => {
     const score = f.score ?? null;
+    const customs = enrichedDeal.supplier.customsEnrichment;
     return {
       id: `supplier.${f.id}`,
       label: `Supplier · ${f.label}`,
@@ -366,11 +394,17 @@ export function buildBlueberryCramCase(
           ? `${deal.supplier.yearsInBusiness ?? "—"} yrs (source ${record.supplierYibSource})`
           : f.id === "platformTransactionCount"
             ? `${deal.supplier.platformDealsCompleted} platform deals`
-            : f.id === "onTimeDeliveryRate"
+            : f.id === "frequencyOfDeals"
+              ? customs?.shipments != null && customs.shipments > 0
+                ? `${customs.shipments} customs shipments`
+                : deal.supplier.platformDealsCompleted > 0
+                  ? `${deal.supplier.platformDealsCompleted} platform deals`
+                  : "blank — no shipment / platform deal count"
+              : f.id === "onTimeDeliveryRate"
               ? `completion ${deal.supplier.platformCompletionRate ?? "—"}%`
               : f.id === "qualityRejectionRate"
                 ? deal.supplier.qualityRejectionRatePct == null
-                  ? "default full score (no measured rejection rate yet)"
+                  ? "unmeasured"
                   : `${deal.supplier.qualityRejectionRatePct}%`
                 : score == null
                   ? "blank"
@@ -380,10 +414,10 @@ export function buildBlueberryCramCase(
       note:
         f.id === "qualityRejectionRate" &&
         deal.supplier.qualityRejectionRatePct == null
-          ? "Temporary default 100 until rejection-rate data exists"
+          ? "Unmeasured — excluded"
           : score == null
-            ? "Blank — excluded from raw avg; still reduces coverage"
-            : `Weight ${f.weight}`,
+            ? "Blank"
+            : `w${f.weight}`,
     };
   });
 
@@ -402,7 +436,7 @@ export function buildBlueberryCramCase(
               : `score ${Math.round(score)}`,
       score,
       weight: f.weight,
-      note: score == null ? "Blank" : `Weight ${f.weight}`,
+      note: score == null ? "Blank" : `w${f.weight}`,
     };
   });
 
@@ -414,29 +448,29 @@ export function buildBlueberryCramCase(
       input: "70",
       score: 70,
       weight: 0,
-      note: "Convention — no baked product-table score",
+      note: "Base",
     },
     {
       id: "priceVsMarket",
-      label: "Price vs usual (month×route)",
+      label: "Price vs usual",
       input:
         price.usualUsdPerKg != null
-          ? `$${fmtNum(price.dealUnitPriceUSD)}/kg vs usual $${fmtNum(price.usualUsdPerKg)}/kg (${price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0 ? "+" : ""}${fmtNum(price.deflatedPctOverUsual, 1)}%, ${price.fallback}${price.match ? ` · ${price.match.matchLevel}` : ""})`
-          : `Deal unit $${fmtNum(price.dealUnitPriceUSD)}/kg · no usual benchmark (${price.fallback})`,
+          ? `$${fmtNum(price.dealUnitPriceUSD)}/kg vs $${fmtNum(price.usualUsdPerKg)}/kg (${price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0 ? "+" : ""}${fmtNum(price.deflatedPctOverUsual, 1)}%)`
+          : `$${fmtNum(price.dealUnitPriceUSD)}/kg · no benchmark`,
       score: price.pts,
       weight: 0,
-      note: "Band points −35…+20 added to base 70",
+      note: "−35…+20 on base 70",
     },
     {
       id: "offerUnit",
-      label: "Offer unit price (raw CSV)",
+      label: "Offer unit (CSV)",
       input:
         deal.offerUnitPriceUSD != null
-          ? `$${fmtNum(deal.offerUnitPriceUSD)} (may be per carton)`
+          ? `$${fmtNum(deal.offerUnitPriceUSD)}`
           : "—",
       score: null,
       weight: 0,
-      note: "Context only — scoring uses $/kg when quantity allows",
+      note: "May be per carton",
     },
     {
       id: "shippingMonth",
@@ -444,7 +478,7 @@ export function buildBlueberryCramCase(
       input: deal.shippingStartDate ?? "—",
       score: null,
       weight: 0,
-      note: "Keys month×route usual price table",
+      note: "Price-table month",
     },
   ];
 
@@ -465,25 +499,25 @@ export function buildBlueberryCramCase(
       input: `${deal.origin} → ${deal.destination}`,
       score: null,
       weight: 0,
-      note: "Lookup key for Dimension C v2 table",
+      note: "Route key",
     },
     {
       id: "modeStops",
       label: "Mode / stops",
-      input: `${deal.transportMode ?? "—"} · ${deal.numberOfTransshipments} transshipments · transit ${deal.estimatedTransitDays}d`,
+      input: `${deal.transportMode ?? "—"} · ${deal.numberOfTransshipments} stops · ${deal.estimatedTransitDays}d`,
       score: null,
       weight: 0,
-      note: "Air stop band selects table row",
+      note: "Table row selector",
     },
     {
       id: "table",
       label: "Route table score",
       input: routeProfile
-        ? `${routeProfile.score} · ${routeProfile.routeRiskFlag} · ${routeProfile.transportMode}${routeProfile.airStops != null ? ` · ${routeProfile.airStops} air stops` : ""} · ${routeProfile.scoreConfirmed ? "AC-confirmed" : "provisional"}`
-        : "No table row — fallback base 70",
+        ? `${routeProfile.score} · ${routeProfile.routeRiskFlag}${routeProfile.airStops != null ? ` · ${routeProfile.airStops} air stops` : ""}`
+        : "No row → 70",
       score: routeProfile?.score ?? 70,
       weight: 0,
-      note: routeProfile?.rationale ?? "HANDOFF: engine never guesses on miss",
+      note: routeProfile?.rationale ?? "No guess on miss",
     },
   ];
 
@@ -498,7 +532,7 @@ export function buildBlueberryCramCase(
           breakdown.counterparty * DIMENSION_WEIGHTS.counterparty * 10,
         ) / 10,
       why: assessment.counterparty.why,
-      formula: `Composite ${Math.round(compositeA.score)} (buyer cov ${Math.round(buyerResult.coverageFraction * 100)}% · supplier cov ${Math.round(supplierResult.coverageFraction * 100)}%). Live field rebuild below; Counterparties tab may show published sandbox party scores.`,
+      formula: `Composite ${Math.round(compositeA.score)} · buyer cov ${Math.round(buyerResult.coverageFraction * 100)}% · supplier cov ${Math.round(supplierResult.coverageFraction * 100)}%`,
       fields: [...buyerFields, ...supplierFields, ...relFields],
       methodAudit: buildCounterpartyMethodAudit(
         deal,
@@ -543,8 +577,8 @@ export function buildBlueberryCramCase(
       why: assessment.structure.why,
       formula: deal.transactionStructure
         ? "Cash-flow structure engine composite"
-        : `clamp(60 + collateral + payment + relationship + advance + insurance) = ${breakdown.structure}`,
-      fields: structureFallbackFields(deal),
+        : `clamp(60 + collateral + payment + advance + insurance) = ${breakdown.structure}`,
+      fields: structureFallbackFields(deal, riskReward),
     },
   ];
 
@@ -558,7 +592,8 @@ export function buildBlueberryCramCase(
     vetoReasons: breakdown.vetoReasons,
     dimensions: dims,
     financing,
-    estimatedApyPct: financing.interestRate,
+    estimatedApyPct: breakdown.investorApyPct,
+    riskReward,
   };
 }
 

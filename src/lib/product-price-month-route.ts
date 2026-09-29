@@ -20,6 +20,7 @@ import {
   type ProductPriceMonthRouteRow,
   type ProductPriceSource,
 } from "./product-price-month-route-tables";
+import { productKeyFromHsOrLabel } from "./hs-product-map";
 
 export type { ProductPriceMonthRouteRow, ProductPriceSource };
 
@@ -171,8 +172,14 @@ export function lookupUsualUnitPrice(args: {
   destination: string;
   shipmentMonth: string | null;
   transportMode?: "air" | "sea" | null;
+  /** When set, commodity identity prefers HS → productKey over name regex. */
+  hsCode?: string | null;
 }): UsualPriceMatch | null {
-  const productKey = productKeyFromLabel(args.product);
+  const productKey = productKeyFromHsOrLabel(
+    args.hsCode,
+    args.product,
+    productKeyFromLabel,
+  );
   const originCountry = countryKeyFromLocation(args.origin);
   const destinationCountry = countryKeyFromLocation(args.destination);
   const month = args.shipmentMonth;

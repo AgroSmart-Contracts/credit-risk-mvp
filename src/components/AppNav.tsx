@@ -29,6 +29,15 @@ const TABS: { id: AppView; label: string; short: string }[] = [
   },
 ];
 
+/** Hidden from nav for now — views/code kept so they can be re-enabled. */
+export const HIDDEN_APP_TABS = new Set<AppView>([
+  "counterparties",
+  "missing",
+  "route-table",
+]);
+
+export const VISIBLE_APP_TABS = TABS.filter((t) => !HIDDEN_APP_TABS.has(t.id));
+
 interface AppNavProps {
   view: AppView;
   onChange: (view: AppView) => void;
@@ -53,7 +62,7 @@ export function AppNav({
   return (
     <nav className="border-b border-tm-border bg-tm-surface">
       <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-4 sm:px-6">
-        {TABS.map((tab) => {
+        {VISIBLE_APP_TABS.map((tab) => {
           const active = view === tab.id;
           const count = badge[tab.id];
           return (
@@ -69,7 +78,7 @@ export function AppNav({
             >
               <span className="sm:hidden">{tab.short}</span>
               <span className="hidden sm:inline">{tab.label}</span>
-              {typeof count === "number" && (
+              {typeof count === "number" && tab.id === "platform" && (
                 <span
                   className={`ml-1.5 inline-flex min-w-[1.25rem] items-center justify-center rounded-full px-1.5 text-[10px] font-semibold ${
                     active

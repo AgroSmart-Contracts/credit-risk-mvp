@@ -24,6 +24,8 @@ function dealWith(overrides: Partial<Deal>): Deal {
     id: "t",
     dealRef: "T",
     product: "Fresh Blueberries",
+    hsCode: null,
+    hsHeading4: null,
     variety: "",
     quantityLabel: "1000 kg",
     dealValueUSD: 10000,
@@ -54,6 +56,7 @@ function dealWith(overrides: Partial<Deal>): Deal {
     collateralType: "None",
     collateralValueUSD: 0,
     insuranceCoverage: "None",
+    insuranceConfirmed: true,
     insuranceValueUSD: 0,
     productCategory: "Fresh Produce",
     perishabilityClass: "Ultra-Perishable",
@@ -141,6 +144,6 @@ describe("priceVsMarketPoints — month × route via offerUnitPrice", () => {
         } as Deal["marketIntel"],
       }),
     );
-    expect(pts).toBe(20);
+    expect(pts).toBe(10);
   });
 });

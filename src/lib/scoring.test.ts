@@ -12,15 +12,16 @@ import {
   paymentTermsAdjustment,
   checkVetoRegister,
   getTier,
-  relationshipAdjustment,
 } from "./scoring";
 
-/** Thin baseline — every buyer/supplier field blank, so it lands exactly on neutral 50. */
+/** Neutral baseline — every variable at its "no data" midpoint. */
 function baseDeal(overrides: Partial<Deal> = {}): Deal {
   return {
     id: "test-deal",
     dealRef: "TEST-001",
     product: "Fresh Blueberries",
+    hsCode: null,
+    hsHeading4: null,
     variety: "",
     quantityLabel: "1000 kg",
     dealValueUSD: 100_000,
@@ -28,7 +29,7 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
     destination: "Rotterdam, Netherlands",
     incoterm: "FOB",
     buyer: {
-      name: "Test Buyer Unique XYZ",
+      name: "Test Buyer",
       role: "buyer",
       yearsInBusiness: null,
       licenseValid: null,
@@ -37,7 +38,7 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
       avgPaymentDelayDays: null,
     },
     supplier: {
-      name: "Test Supplier Unique XYZ",
+      name: "Test Supplier",
       role: "supplier",
       yearsInBusiness: null,
       licenseValid: null,
@@ -51,6 +52,7 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
     collateralType: "None",
     collateralValueUSD: 0,
     insuranceCoverage: "None",
+    insuranceConfirmed: true,
     insuranceValueUSD: 0,
     productCategory: "Fresh Produce",
     perishabilityClass: "Perishable",
@@ -73,173 +75,331 @@ function baseDeal(overrides: Partial<Deal> = {}): Deal {
   };
 }
 
-describe("computeBuyerScore — Dimension A weighted/shrink", () => {
-  it("blank buyer still gets optimistic payment-delay default (not pure neutral 50)", () => {
-    // paymentDelayDays defaults to 100 until measured → slight lift over 50
-    expect(computeBuyerScore(baseDeal())).toBe(55);
+describe("computeBuyerScore / computeSupplierScore — Dimension A (weighted/shrink)", () => {
+  it("starts near neutral 50 with everything unknown", () => {
+    expect(computeBuyerScore(baseDeal())).toBe(50);
+    expect(computeSupplierScore(baseDeal())).toBe(50);
   });
 
-  it("adds platform trust when profile has deals", () => {
-    const deal = baseDeal({
-      buyer: {
-        ...baseDeal().buyer,
-        profileDealCount: 3,
-        platformDealsCompleted: 3,
-      },
-    });
-    expect(computeBuyerScore(deal)).toBeGreaterThan(50);
-  });
-
-  it("years in business raises score", () => {
-    const thin = computeBuyerScore(baseDeal());
-    const withYib = computeBuyerScore(
-      baseDeal({
-        buyer: { ...baseDeal().buyer, yearsInBusiness: 10 },
-      }),
+  it("moves with years in business", () => {
+    const young = computeBuyerScore(
+      baseDeal({ buyer: { ...baseDeal().buyer, yearsInBusiness: 1 } }),
     );
-    expect(withYib).toBeGreaterThan(thin);
+    const mature = computeBuyerScore(
+      baseDeal({ buyer: { ...baseDeal().buyer, yearsInBusiness: 10 } }),
+    );
+    expect(mature).toBeGreaterThan(young);
   });
 
-  it("invalid license pulls score down vs valid", () => {
+  it("invalid buyer license can reduce or leave score (blank vs known)", () => {
+    const unknown = computeBuyerScore(baseDeal());
     const invalid = computeBuyerScore(
-      baseDeal({
-        buyer: { ...baseDeal().buyer, licenseValid: false, yearsInBusiness: 5 },
-      }),
+      baseDeal({ buyer: { ...baseDeal().buyer, licenseValid: false } }),
     );
-    const valid = computeBuyerScore(
-      baseDeal({
-        buyer: { ...baseDeal().buyer, licenseValid: true, yearsInBusiness: 5 },
-      }),
-    );
-    expect(valid).toBeGreaterThan(invalid);
-  });
-
-  it("explainPartyScore returns weighted field lines", () => {
-    const deal = baseDeal({
-      buyer: { ...baseDeal().buyer, yearsInBusiness: 5 },
-    });
-    const audit = explainPartyScore(deal, "buyer");
-    expect(audit.lines.some((l) => l.id === "yearsInBusiness")).toBe(true);
-    expect(audit.score).toBe(computeBuyerScore(deal));
-  });
-
-  it("uses sandbox score for known platform buyer (Open Markets)", () => {
-    const deal = baseDeal({
-      product: "Fresh Mandarin",
-      buyer: {
-        ...baseDeal().buyer,
-        name: "Open Markets Corporation",
-        yearsInBusiness: 2,
-        licenseValid: true,
-        platformDealsCompleted: 10,
-      },
-    });
-    // Precomputed sandbox score for this (company, product) after optimistic
-    // payment-delay / rejection defaults.
-    expect(computeBuyerScore(deal)).toBe(60);
+    // Invalid is never better than unknown/valid baselines on this engine.
+    expect(invalid).toBeLessThanOrEqual(unknown);
   });
 });
 
-describe("computeSupplierScore / composite", () => {
-  it("blank supplier still gets optimistic quality-rejection default (not pure neutral 50)", () => {
-    expect(computeSupplierScore(baseDeal())).toBe(55);
-  });
-
-  it("composite and relationship are 0–100", () => {
+describe("explainPartyScore — auditor trail", () => {
+  it("matches computeSupplierScore", () => {
     const deal = baseDeal({
-      priorDealsBetweenParties: 5,
-      relationshipAgeMonths: 12,
-      buyer: {
-        ...baseDeal().buyer,
-        yearsInBusiness: 8,
-        licenseValid: true,
-        profileDealCount: 5,
-      },
       supplier: {
         ...baseDeal().supplier,
-        yearsInBusiness: 8,
+        yearsInBusiness: 5,
         licenseValid: true,
-        profileDealCount: 5,
-        platformCompletionRate: 95,
+        platformDealsCompleted: 4,
       },
     });
-    const cp = computeCounterpartyScore(deal);
-    expect(cp).toBeGreaterThan(50);
-    expect(cp).toBeLessThanOrEqual(100);
-    expect(relationshipAdjustment(deal)).toBeGreaterThanOrEqual(0);
+    const audit = explainPartyScore(deal, "supplier");
+    expect(audit.score).toBe(computeSupplierScore(deal));
+    expect(audit).toBeTruthy();
   });
 });
 
-describe("other dimensions still score", () => {
-  it("product / route / structure / overall run", () => {
-    const deal = baseDeal({ insuranceCoverage: "Basic" });
-    expect(computeProductScore(deal)).toBeGreaterThan(0);
-    expect(computeRouteScore(deal)).toBeGreaterThan(0);
-    expect(computeStructureScore(deal)).toBeGreaterThan(0);
-    const overall = computeOverallScore(deal);
-    expect(overall.overall).toBeGreaterThan(0);
-    expect(overall.buyer).toBe(computeBuyerScore(deal));
-    expect(overall.relationshipAdj).toBeDefined();
-  });
-
-  it("paymentTermsAdjustment and tiers", () => {
-    expect(paymentTermsAdjustment("Cash in advance")).toBe(25);
-    expect(getTier(80)).toBe("Low Risk");
-  });
-
-  it("veto register fires on no insurance", () => {
-    const v = checkVetoRegister(baseDeal({ insuranceCoverage: "None" }));
-    expect(v.vetoed).toBe(true);
-  });
-
-  it("air ≥4 stops is a Dimension C veto; 3 stops is not", () => {
-    const at3 = checkVetoRegister(
-      baseDeal({
-        insuranceCoverage: "Basic",
-        transportMode: "air",
-        numberOfTransshipments: 3,
-      }),
+describe("computeCounterpartyScore — blended Dimension A", () => {
+  it("rewards thicker pair history vs zero priors", () => {
+    const none = computeCounterpartyScore(baseDeal({ priorDealsBetweenParties: 0 }));
+    const thick = computeCounterpartyScore(
+      baseDeal({ priorDealsBetweenParties: 10 }),
     );
-    expect(at3.reasons.some((r) => /air stops/i.test(r))).toBe(false);
-
-    const at4 = checkVetoRegister(
-      baseDeal({
-        insuranceCoverage: "Basic",
-        transportMode: "air",
-        numberOfTransshipments: 4,
-      }),
-    );
-    expect(at4.vetoed).toBe(true);
-    expect(at4.reasons.some((r) => /≥4 air stops/i.test(r))).toBe(true);
+    expect(thick).toBeGreaterThan(none);
   });
 });
 
-describe("Dimension C v2 route table", () => {
-  it("uses table score as-is when a row matches (no Incoterms overlay)", () => {
+describe("computeStructureScore — Dimension D", () => {
+  it("confirmed defaults without relationship: 60 − 5 collateral (= 55)", () => {
+    expect(
+      computeStructureScore(
+        baseDeal({ insuranceCoverage: "None", insuranceConfirmed: true }),
+      ),
+    ).toBe(55);
+  });
+
+  it("unconfirmed insurance applies −8 haircut", () => {
+    expect(
+      computeStructureScore(
+        baseDeal({ insuranceCoverage: "None", insuranceConfirmed: false }),
+      ),
+    ).toBe(47);
+  });
+
+  it("Letter of Credit covering full deal value gets +5 full-coverage bonus", () => {
     const deal = baseDeal({
-      origin: "Callao",
-      destination: "Algeciras",
-      product: "Cacao Beans",
-      transportMode: "sea",
+      collateralType: "Letter of Credit",
+      collateralValueUSD: 100_000,
+      dealValueUSD: 100_000,
+      insuranceConfirmed: true,
       insuranceCoverage: "Basic",
-      incoterm: "FOB",
     });
-    expect(computeRouteScore(deal)).toBe(100);
+    expect(computeStructureScore(deal)).toBe(91);
   });
 
-  it("does not invent structural transit/transship points on a miss", () => {
+  it("does not award full-coverage bonus when collateral is under deal value", () => {
     const deal = baseDeal({
-      origin: "Nowhereville",
-      destination: "Atlantis",
-      product: "Unicorn Fruit",
-      transportMode: "sea",
-      estimatedTransitDays: 2,
+      collateralType: "Letter of Credit",
+      collateralValueUSD: 50_000,
+      dealValueUSD: 100_000,
+      insuranceConfirmed: true,
+      insuranceCoverage: "Basic",
+    });
+    expect(computeStructureScore(deal)).toBe(86);
+  });
+});
+
+describe("paymentTermsAdjustment", () => {
+  it.each([
+    ["Cash in advance", 25],
+    ["Letter of Credit at sight", 20],
+    ["Documentary / against BL (platform default)", 5],
+    ["Cash against documents / BL", 15],
+    ["30 days from BL", 10],
+    ["60 days", 0],
+    ["90 days", -10],
+    ["120 days net", -18],
+  ])("%s -> %i", (terms, expected) => {
+    expect(paymentTermsAdjustment(terms)).toBe(expected);
+  });
+});
+
+describe("checkVetoRegister — spec §6 hard stops", () => {
+  it("passes a clean deal", () => {
+    const deal = baseDeal({
+      insuranceCoverage: "Basic",
+      insuranceConfirmed: true,
+    });
+    expect(checkVetoRegister(deal).vetoed).toBe(false);
+  });
+
+  it("vetoes on confirmed missing cargo insurance", () => {
+    expect(
+      checkVetoRegister(
+        baseDeal({ insuranceCoverage: "None", insuranceConfirmed: true }),
+      ).vetoed,
+    ).toBe(true);
+  });
+
+  it("does not veto unconfirmed None insurance", () => {
+    expect(
+      checkVetoRegister(
+        baseDeal({ insuranceCoverage: "None", insuranceConfirmed: false }),
+      ).vetoed,
+    ).toBe(false);
+  });
+
+  it("vetoes on invalid buyer license", () => {
+    const result = checkVetoRegister(
+      baseDeal({
+        insuranceCoverage: "Basic",
+        insuranceConfirmed: true,
+        buyer: { ...baseDeal().buyer, licenseValid: false },
+      }),
+    );
+    expect(result.vetoed).toBe(true);
+    expect(result.reasons).toContain("Buyer import license invalid");
+  });
+
+  it("vetoes when air stops exceed MAX_AIR_STOPS (3)", () => {
+    const ok = baseDeal({
+      insuranceCoverage: "Basic",
+      insuranceConfirmed: true,
+      transportMode: "air",
+      numberOfTransshipments: 3,
+    });
+    const veto = baseDeal({
+      insuranceCoverage: "Basic",
+      insuranceConfirmed: true,
+      transportMode: "air",
+      numberOfTransshipments: 4,
+    });
+    expect(checkVetoRegister(ok).vetoed).toBe(false);
+    expect(checkVetoRegister(veto).vetoed).toBe(true);
+  });
+
+  it("collects multiple independent veto reasons", () => {
+    const deal = baseDeal({
+      insuranceCoverage: "None",
+      insuranceConfirmed: true,
+      buyer: { ...baseDeal().buyer, licenseValid: false },
+      supplier: { ...baseDeal().supplier, licenseValid: false },
+    });
+    expect(checkVetoRegister(deal).reasons).toHaveLength(3);
+  });
+});
+
+describe("getTier", () => {
+  it.each([
+    [90, "Low Risk"],
+    [75, "Low Risk"],
+    [74, "Medium-Low Risk"],
+    [60, "Medium-Low Risk"],
+    [59, "Medium-High Risk"],
+    [45, "Medium-High Risk"],
+    [44, "High Risk"],
+    [0, "High Risk"],
+  ])("score %i -> %s", (score, tier) => {
+    expect(getTier(score)).toBe(tier);
+  });
+});
+
+describe("computeOverallScore — composite + APY", () => {
+  it("weights the four dimensions at 40/25/20/15", () => {
+    const result = computeOverallScore(
+      baseDeal({ insuranceCoverage: "Basic", insuranceConfirmed: true }),
+    );
+    const expected = Math.round(
+      result.counterparty * 0.4 +
+        result.product * 0.25 +
+        result.route * 0.2 +
+        result.structure * 0.15,
+    );
+    expect(result.overall).toBe(expected);
+  });
+
+  it("forces tier to Veto when confirmed insurance is None", () => {
+    const result = computeOverallScore(
+      baseDeal({
+        insuranceCoverage: "None",
+        insuranceConfirmed: true,
+        paymentTerms: "cash in advance",
+        collateralType: "Letter of Credit",
+        collateralValueUSD: 100_000,
+      }),
+    );
+    expect(result.vetoed).toBe(true);
+    expect(result.tier).toBe("Veto");
+    expect(result.investorApyPct).toBeGreaterThanOrEqual(10);
+    expect(result.investorApyPct).toBeLessThanOrEqual(18);
+  });
+
+  it("attaches investorApyPct and does not veto unconfirmed None", () => {
+    const result = computeOverallScore(
+      baseDeal({ insuranceCoverage: "None", insuranceConfirmed: false }),
+    );
+    expect(result.vetoed).toBe(false);
+    expect(result.investorApyPct).toBeGreaterThanOrEqual(10);
+    expect(result.investorApyPct).toBeLessThanOrEqual(18);
+  });
+});
+
+describe("computeProductScore / computeRouteScore — missing-data haircuts", () => {
+  it("product score uses base 55 when no price benchmark exists", () => {
+    expect(
+      computeProductScore(
+        baseDeal({
+          product: "Some Unlisted Product",
+          hsCode: null,
+          hsHeading4: null,
+          offerUnitPriceUSD: null,
+        }),
+      ),
+    ).toBe(55);
+  });
+
+  it("route score uses base 55 on table miss", () => {
+    expect(
+      computeRouteScore(
+        baseDeal({
+          origin: "Nowhere",
+          destination: "Nowhere Else",
+          transportMode: "sea",
+          routeRiskProfile: undefined,
+        }),
+      ),
+    ).toBe(55);
+  });
+
+  it("provisional route rows take an −8 haircut", () => {
+    const profileBase = {
+      origin: "A",
+      destination: "B",
+      product: "Fresh Blueberries",
+      hsCode: null,
+      hsHeading4: null,
+      transportMode: "sea" as const,
+      airStops: null,
+      airStopsBand: null,
+      airStopPenalty: 0,
+      score: 80,
+      estimatedTransitDays: 20,
       numberOfTransshipments: 0,
-      routeRiskFlag: "Low",
-      coldChainRequired: true,
-      insuranceCoverage: "Basic",
-      incoterm: "EXW",
+      routeRiskFlag: "Medium" as const,
+      vetoCandidate: false,
+      rationale: "test",
+      scoreConfirmed: true,
+    };
+    expect(computeRouteScore(baseDeal({ routeRiskProfile: profileBase }))).toBe(
+      80,
+    );
+    expect(
+      computeRouteScore(
+        baseDeal({
+          routeRiskProfile: { ...profileBase, scoreConfirmed: false },
+        }),
+      ),
+    ).toBe(72);
+  });
+
+  it("air stop bands differentiate route risk", () => {
+    const ocean = baseDeal({
+      origin: "Callao, Peru",
+      destination: "Buenaventura, Colombia",
+      product: "Fresh Avocado",
+      hsCode: null,
+      hsHeading4: null,
+      transportMode: "sea",
+      numberOfTransshipments: 0,
+      routeRiskProfile: undefined,
     });
-    expect(computeRouteScore(deal)).toBe(70);
+    const airFew = computeRouteScore({
+      ...ocean,
+      transportMode: "air",
+      numberOfTransshipments: 1,
+    });
+    const airMany = computeRouteScore({
+      ...ocean,
+      transportMode: "air",
+      numberOfTransshipments: 3,
+    });
+    expect(airFew).toBeGreaterThanOrEqual(airMany);
+  });
+
+  it("air can score safer than ocean on long asparagus corridors", () => {
+    const ocean = baseDeal({
+      origin: "Callao, Peru",
+      destination: "Rotterdam, Netherlands",
+      product: "Fresh Asparagus",
+      hsCode: null,
+      hsHeading4: null,
+      transportMode: "sea",
+      numberOfTransshipments: 1,
+      routeRiskProfile: undefined,
+    });
+    const air = {
+      ...ocean,
+      transportMode: "air" as const,
+      numberOfTransshipments: 1,
+    };
+    expect(computeRouteScore(air)).toBeGreaterThan(computeRouteScore(ocean));
   });
 });

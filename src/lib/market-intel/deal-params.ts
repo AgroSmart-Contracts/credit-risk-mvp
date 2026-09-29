@@ -110,8 +110,13 @@ export function customsVariety(product: string, variety?: string): string | null
   return null;
 }
 
-/** Narrowed from `Deal` so the batch build pipeline (which works with `PlatformDealRecord`, not `Deal`) can reuse these without constructing a full Deal object — both shapes carry `quantityLabel`/`dealValueUSD`. */
-type DealQuantityFields = { quantityLabel: string; dealValueUSD: number };
+/** Narrowed from `Deal` so the batch build pipeline (which works with `PlatformDealRecord`, not `Deal`) can reuse these without constructing a full Deal object — both shapes carry `quantityLabel`/`dealValueUSD` (and optionally canonical `quantityKg`). */
+type DealQuantityFields = {
+  quantityLabel: string;
+  dealValueUSD: number;
+  /** Canonical net kg when already derived (defaults CSV / prod). Prefer over re-parsing the label. */
+  quantityKg?: number | null;
+};
 
 function unitToKg(value: number, unit: string): number | null {
   if (!Number.isFinite(value)) return null;
@@ -155,6 +160,15 @@ function parsePerUnitKg(text: string): number | null {
 }
 
 export function parseDealKg(deal: DealQuantityFields): number | null {
+  // Prefer explicit net kg when present (defaults CSV / platform enrich).
+  if (
+    deal.quantityKg != null &&
+    Number.isFinite(deal.quantityKg) &&
+    deal.quantityKg > 0
+  ) {
+    return deal.quantityKg;
+  }
+
   const label = deal.quantityLabel;
 
   // Platform CSV convention (see scripts/build-platform-deals.ts): quantityLabel

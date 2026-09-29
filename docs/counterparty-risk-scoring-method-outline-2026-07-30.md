@@ -23,11 +23,10 @@ A weighted-average scoring model that takes in known facts about a buyer, a supp
 | Field | Weight | Scoring |
 |---|---|---|
 | Years in business | 7 | MIN(100, years × 10) |
-| Online verifiability | 2 | Verified = 90; found via less authoritative source = 55; not found = 15 |
-| Import license status | 2 | Valid = 100; invalid = 0 (left un-softened — this is a veto-grade signal) |
-| Import license — TM (only if TM itself is the importing buyer) | 1 | N/A = excluded; valid = 100; invalid = 0 |
-| Monthly purchase volume | 4 | Not provided = 50; under $10k = 25; $10k–50k = 40; $50k–200k = 60; $200k–1M = 80; over $1M = 90 |
-| Yearly sales | 4 | Not provided = 50; under $500K = 25; $500K–2M = 40; $2M–10M = 60; $10M–50M = 80; over $50M = 90 |
+| Frequency of deals | 4 | From customs shipments or platform deal count: 0 → 15; 1–2 → 35; 3–5 → 55; 6–11 → 70; 12–23 → 85; 24+ → 95. *(Renamed from Online verifiability 2026-08-07; import-license weight folded in.)* |
+| ~~Import license status~~ | — | **Removed 2026-08-07** from buyer counterparty formula (veto register may still check invalid license separately). |
+| Monthly purchase volume | 4 | Calendar monthly = yearly FOB ÷ 12. Bands aligned to yearly/12: under ~$42k = 25; ~$42–167k = 40; ~$167–833k = 60; ~$833k–4.17M = 80; over → 90 |
+| Yearly sales | 4 | Not provided = blank; under $500K = 25; $500K–2M = 40; $2M–10M = 60; $10M–50M = 80; over $50M = 90 |
 | Annual import volume | 4 | Not provided = 50; under 100 MT = 25; 100–500 MT = 40; 500–2,000 MT = 60; 2,000–10,000 MT = 80; over 10,000 MT = 90 |
 | Route diversity | 2 | Not researched = 50; 1 route = 35; 2 = 40; 3 = 55; 4 = 70; 5 = 80; 6–7 = 90; 8+ = 95 |
 | Credit rating | 7 | Not available = 50; AAA/AA = 90; A = 85; BBB = 70; BB = 55; B = 40; CCC or below = 28 |
@@ -40,7 +39,7 @@ A weighted-average scoring model that takes in known facts about a buyer, a supp
 | Field | Weight | Scoring |
 |---|---|---|
 | Years in business | 7 | MIN(100, years × 10) |
-| Online verifiability | 2 | Same tiers as Buyer |
+| Frequency of deals | 2 | Same shipment/deal-count bands as Buyer |
 | Export license status | 2 | Valid = 100; invalid = 0 (veto-grade, un-softened) |
 | Production capacity | 4 | Not provided = 50; under 100 MT = 25; 100–500 MT = 40; 500–2,000 MT = 60; 2,000–10,000 MT = 80; over 10,000 MT = 90 |
 | Yearly sales | 4 | Same tiers as Buyer |

@@ -10,7 +10,10 @@ import type { FinancingRecommendation } from "../types";
  * against realized outcomes (same caveat as every other constant in this
  * engine — see docs/counterparty-risk-scoring-method-outline-2026-07-30.md).
  */
-function uncertaintyPremiumFor(counterpartyCoveragePct: number | null): number {
+/** Exported so investor-APY / scoring can share the same uncertainty buckets. */
+export function uncertaintyPremiumFor(
+  counterpartyCoveragePct: number | null,
+): number {
   if (counterpartyCoveragePct == null) return 0;
   if (counterpartyCoveragePct >= 80) return 0;
   if (counterpartyCoveragePct >= 60) return 0.5;

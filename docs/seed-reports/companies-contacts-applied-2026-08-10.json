@@ -1,0 +1,718 @@
+{
+  "mode": "apply",
+  "db": "prod",
+  "at": "2026-08-10T10:29:49.617Z",
+  "companiesTotal": 40,
+  "counterpartiesExclTruMarket": 39,
+  "contactsTotal": 54,
+  "contactsRegistered": 21,
+  "contactsLead": 33,
+  "userCompaniesLinks": 21,
+  "companiesWithoutContact": [
+    "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+    "ICA BLUEBERRIES SAC",
+    "«Ardzhies» LLC"
+  ],
+  "companies": [
+    {
+      "legalName": "«Ardzhies» LLC",
+      "taxId": "PT517935392",
+      "country": "RU",
+      "yearsInBusiness": 1,
+      "isPlatformEntity": false,
+      "contactCount": 0
+    },
+    {
+      "legalName": "A.S.M International",
+      "taxId": "100170220006904",
+      "country": "IN",
+      "yearsInBusiness": 5,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "AGRICOLA MEDANO AZUL SAC",
+      "taxId": "20602492191",
+      "country": "PE",
+      "yearsInBusiness": 5,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "AGRICOLA VIÑASOL SAC",
+      "taxId": "20534208008",
+      "country": "PE",
+      "yearsInBusiness": 15,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "taxId": "77.394.695-7",
+      "country": "CL",
+      "yearsInBusiness": 8,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "AGRO SMART CONTRACTS LDA",
+      "taxId": "517935392",
+      "country": "PT",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 2
+    },
+    {
+      "legalName": "ALBORAN COMEX SL",
+      "taxId": "B75320598",
+      "country": "ES",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "Allied Trade Global",
+      "taxId": "54354228",
+      "country": "TW",
+      "yearsInBusiness": 14,
+      "isPlatformEntity": false,
+      "contactCount": 3
+    },
+    {
+      "legalName": "ANTERRA FARMS GMBH",
+      "taxId": "ATEOS1000126910",
+      "country": "AT",
+      "yearsInBusiness": 4,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "BC NATURE QUALITY FRUITS S.L",
+      "taxId": "B11882909",
+      "country": "ES",
+      "yearsInBusiness": 16,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+      "taxId": "04.052.176 / 0001-48",
+      "country": "BR",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "BIO FARMING PERU S.A.C.",
+      "taxId": "20612199974",
+      "country": "PE",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 3
+    },
+    {
+      "legalName": "BIOFRESHI BV",
+      "taxId": "NL853825828B01",
+      "country": "NL",
+      "yearsInBusiness": 17,
+      "isPlatformEntity": false,
+      "contactCount": 2
+    },
+    {
+      "legalName": "BLUE PACIFIC FOODS SAC",
+      "taxId": "20600326464",
+      "country": "PE",
+      "yearsInBusiness": 22,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "DAVIS GLOBAL BV",
+      "taxId": "NL861363103B01",
+      "country": "NL",
+      "yearsInBusiness": 6,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA",
+      "taxId": "901893567",
+      "country": "CO",
+      "yearsInBusiness": 4,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "Eagle Trading Agriculture Marketing Ltd",
+      "taxId": "515059509",
+      "country": "IL",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "FRESH EXPRESS LLC",
+      "taxId": "100295133600003",
+      "country": "AE",
+      "yearsInBusiness": 33,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "FUNDO LAS LOMAS SAC",
+      "taxId": "20535311210",
+      "country": "PE",
+      "yearsInBusiness": 16,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "GIDDINS PERU SAC",
+      "taxId": "20601552557",
+      "country": "PE",
+      "yearsInBusiness": 12,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
+      "taxId": "0105548144820",
+      "country": "TH",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 0
+    },
+    {
+      "legalName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+      "taxId": "91440101MA59L8UW3L",
+      "country": "CN",
+      "yearsInBusiness": 5,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "HACIENDA SOTOMAYOR SL",
+      "taxId": "B19277867",
+      "country": "ES",
+      "yearsInBusiness": 5,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "HAPPY FARMERS FAMILY CO., LTD",
+      "taxId": "69353149",
+      "country": "TW",
+      "yearsInBusiness": null,
+      "isPlatformEntity": false,
+      "contactCount": 2
+    },
+    {
+      "legalName": "Holy Fruit Peru",
+      "taxId": "20602722628",
+      "country": "PE",
+      "yearsInBusiness": 8,
+      "isPlatformEntity": false,
+      "contactCount": 3
+    },
+    {
+      "legalName": "ICA BLUEBERRIES SAC",
+      "taxId": "20601449837",
+      "country": "PE",
+      "yearsInBusiness": 9,
+      "isPlatformEntity": false,
+      "contactCount": 0
+    },
+    {
+      "legalName": "INDUSTRIAS SOLIMAR SAC",
+      "taxId": "20526450851",
+      "country": "PE",
+      "yearsInBusiness": 8,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "JUHINEJ LTD",
+      "taxId": "76.476.953-2",
+      "country": "CL",
+      "yearsInBusiness": 19,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "KHI INTERNATIONAL CORP",
+      "taxId": "1794711",
+      "country": "HK",
+      "yearsInBusiness": 12,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "LIMAX SP. Z O.O",
+      "taxId": "9231585471",
+      "country": "PL",
+      "yearsInBusiness": 24,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "MIKHUNA FOODS SAC",
+      "taxId": "20602283088",
+      "country": "PE",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+      "taxId": "20611718579",
+      "country": "PE",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 2
+    },
+    {
+      "legalName": "NATURAL SOUTH FRUIT LTD",
+      "taxId": "76.537.404-3",
+      "country": "CL",
+      "yearsInBusiness": 8,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "Open Markets Corporation",
+      "taxId": "65-1078039",
+      "country": "US",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
+      "taxId": "91310115MA1H83UR0Q",
+      "country": "CN",
+      "yearsInBusiness": 5,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "T.O.F.F. B.V",
+      "taxId": "NL854346533B01",
+      "country": "NL",
+      "yearsInBusiness": 1,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "TRADE CULTIVATORS LLC",
+      "taxId": "100412431700003",
+      "country": "AE",
+      "yearsInBusiness": 2,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    },
+    {
+      "legalName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "taxId": "20608082281",
+      "country": "PE",
+      "yearsInBusiness": 5,
+      "isPlatformEntity": true,
+      "contactCount": 4
+    },
+    {
+      "legalName": "Villaventura Peru SAC",
+      "taxId": "20610491104",
+      "country": "PE",
+      "yearsInBusiness": 3,
+      "isPlatformEntity": false,
+      "contactCount": 3
+    },
+    {
+      "legalName": "XARKI SL",
+      "taxId": "B65792942",
+      "country": "ES",
+      "yearsInBusiness": 66,
+      "isPlatformEntity": false,
+      "contactCount": 1
+    }
+  ],
+  "contacts": [
+    {
+      "email": "asminternational2@gmail.com",
+      "companyName": "A.S.M International",
+      "status": "lead",
+      "source": "manual_csv",
+      "role": "buyer"
+    },
+    {
+      "email": "lvergara@medano.com.pe",
+      "companyName": "AGRICOLA MEDANO AZUL SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "lgarcia@avsa.com.pe",
+      "companyName": "AGRICOLA VIÑASOL SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "amory.sepulveda@juhinej.com",
+      "companyName": "AGRICOLA Y COMERCIAL VALLES DEL NUBLE",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "alessandro.cordano@trumarket.tech",
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "alessandro@trumarket.tech",
+      "companyName": "AGRO SMART CONTRACTS LDA",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "chiara.rivas@trumarket.tech",
+      "companyName": "AGRO SMART CONTRACTS, LDA",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "antonio@alboranps.com",
+      "companyName": "ALBORAN COMEX SL",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "rita@alliedtrade.com",
+      "companyName": "Allied Trade Global",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "dganga@davisworldwide.nl",
+      "companyName": "Allied Trade Global",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "rita@alliedtradeglobal.com",
+      "companyName": "Allied Trade Global",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "anders.persson@anterrafarms.com",
+      "companyName": "ANTERRA FARMS GMBH",
+      "status": "lead",
+      "source": "manual_csv",
+      "role": "buyer"
+    },
+    {
+      "email": "jcortes@bcnature.es",
+      "companyName": "BC NATURE QUALITY FRUITS S.L",
+      "status": "lead",
+      "source": "manual_csv",
+      "role": "buyer"
+    },
+    {
+      "email": "benassi.importacao@benassisp.com.br",
+      "companyName": "BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA",
+      "status": "lead",
+      "source": "manual_csv",
+      "role": "buyer"
+    },
+    {
+      "email": "rony@villaventurapro.com",
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "rony@biofarmingperu.com",
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "andresti@biofarming.com",
+      "companyName": "BIO FARMING PERU S.A.C.",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "gerritjan@biofreshi.com",
+      "companyName": "BIOFRESHI BV",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "ian@khi-international.com",
+      "companyName": "BIOFRESHI BV",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "wli@bluepacificoils.com",
+      "companyName": "BLUE PACIFIC FOODS SAC",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "dganga@davisworldwide.nl",
+      "companyName": "DAVIS GLOBAL BV",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "andresmarin@drelifresh.com",
+      "companyName": "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "nir@eagle-import.com",
+      "companyName": "Eagle Trading Agriculture Marketing Ltd",
+      "status": "lead",
+      "source": "manual_csv",
+      "role": "buyer"
+    },
+    {
+      "email": "sales@freshexpress.ae",
+      "companyName": "FRESH EXPRESS LLC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "tesor1@fundolaslomas.com",
+      "companyName": "FUNDO LAS LOMAS SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "cesar.berrospi@giddingsfruit.com",
+      "companyName": "GIDDINS PERU SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "sales@buyrite-intl.com",
+      "companyName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "info@haciendasotomayor.es",
+      "companyName": "HACIENDA SOTOMAYOR SL",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "pamela@happyfarmers.com.tw",
+      "companyName": "HAPPY FARMERS FAMILY CO., LTD",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "peter@happyfarmersfamily.com.tw",
+      "companyName": "HAPPY FARMERS FAMILY CO., LTD",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "supply@trumarket.tech",
+      "companyName": "Holy Fruit Peru",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "alessandro@holyfruitperu.com",
+      "companyName": "Holy Fruit Peru",
+      "status": "registered",
+      "source": "user_company",
+      "role": "supplier"
+    },
+    {
+      "email": "ventas@holyfruitperu.com",
+      "companyName": "Holy Fruit Peru",
+      "status": "registered",
+      "source": "user_company",
+      "role": "supplier"
+    },
+    {
+      "email": "mvillarreal.almacen@solimar.com.pe",
+      "companyName": "INDUSTRIAS SOLIMAR SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "ivette.aedo@juhinej.com",
+      "companyName": "JUHINEJ LTD",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "ian@khi-international.com",
+      "companyName": "KHI INTERNATIONAL CORP",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "leo.klaassen@limax.pl",
+      "companyName": "LIMAX SP. Z O.O",
+      "status": "lead",
+      "source": "manual_csv",
+      "role": "buyer"
+    },
+    {
+      "email": "rsuarez@mikhunafoods.com.pe",
+      "companyName": "MIKHUNA FOODS SAC",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "rsuarez@mikhunafoods.com.pe",
+      "companyName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "lsalas@mikhunafoods.com.pe",
+      "companyName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "ivette.aedo@juhinej.com",
+      "companyName": "NATURAL SOUTH FRUIT LTD",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "andresticona@openmarketscorp.com",
+      "companyName": "Open Markets Corporation",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "jenny@internationalgreenco.com",
+      "companyName": "SHANGHAI GREEN CHAIN TRADING CO LTD",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "jarno.moret@toffbv.nl",
+      "companyName": "T.O.F.F. B.V",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "mohamed.nazer@tradecultivators.com",
+      "companyName": "TRADE CULTIVATORS LLC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    },
+    {
+      "email": "alessandro@holyfruitperu.com",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "julissa.ruiz@trumarket.tech",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "supply@trumarket.tech",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "tasneemsherif23@gmail.com",
+      "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+      "status": "registered",
+      "source": "user_company",
+      "role": "supplier"
+    },
+    {
+      "email": "soltarparaencontrar@gmail.com",
+      "companyName": "TRU MARKET BLOCKCHAIN SAC",
+      "status": "registered",
+      "source": "user_company",
+      "role": "supplier"
+    },
+    {
+      "email": "rony@villaventurapro.com",
+      "companyName": "Villaventura Peru SAC",
+      "status": "registered",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "andresti@biofarming.com",
+      "companyName": "Villaventura Peru SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "rony@villaventuraperu.com",
+      "companyName": "Villaventura Peru SAC",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "supplier"
+    },
+    {
+      "email": "miguel@xarki.com",
+      "companyName": "XARKI SL",
+      "status": "lead",
+      "source": "deal_participant",
+      "role": "buyer"
+    }
+  ]
+}

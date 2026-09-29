@@ -57,6 +57,7 @@ coverage
 
 # Local reference spreadsheets / raw customs dumps (not part of the app)
 docs/*.xlsx
+docs/*.xls
 docs/Veritrade_*.csv
 
 # Market-intel SUNAT lookup cache (regenerable)

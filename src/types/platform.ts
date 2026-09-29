@@ -15,11 +15,28 @@ export interface PlatformDealRecord {
   mongoId: string;
   dealRef: string;
   product: string;
+  /**
+   * Peru partida / HS code (10-digit preferred). Drives commodity identity for
+   * counterparty customs volumes + product risk / usual-price tables.
+   */
+  hsCode: string | null;
+  /** Derived 4-digit heading from hsCode when present. */
+  hsHeading4: string | null;
   variety: string;
   quantityLabel: string;
+  /** Pack presentation from prod (e.g. "Carton x 1.5 Kg"). */
+  presentation: string | null;
+  /** Net kg derived from quantity × presentation (or quantityLabel). */
+  quantityKg: number | null;
   dealValueUSD: number;
   origin: string;
   destination: string;
+  /** Named port / airport of loading when known (prod `portOfOrigin`). */
+  portOfOrigin: string | null;
+  /** Named port / airport of discharge when known (prod `portOfDestination`). */
+  portOfDestination: string | null;
+  /** Carrier / shipping line when known (defaults CSV `shipmentCompany`, Veritrade Agente Portuario). */
+  shipmentCompany: string | null;
   buyerName: string;
   supplierName: string;
   buyerYib: number | null;
@@ -167,6 +184,8 @@ export interface PlatformCounterpartyScore {
     /** Avg monthly FOB USD from customs (active months, else ÷12) */
     customsMonthlyFobUsd: number | null;
     customsRoutes: number | null;
+    /** HS heading used to filter customs (null = pooled all tariffs). */
+    customsHsHeading4: string | null;
     filledFieldIds: string[];
   };
 }

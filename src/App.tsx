@@ -16,7 +16,7 @@ import { recommendFinancingTerms } from "./lib/financing";
 import type { Deal, FinancingRecommendation, RiskAssessment, Step } from "./types";
 import type { TransactionStructureInput } from "./lib/transaction-structure/types";
 import type { AppView } from "./types/platform";
-import { AppNav } from "./components/AppNav";
+import { AppNav, HIDDEN_APP_TABS } from "./components/AppNav";
 import { StepIndicator } from "./components/StepIndicator";
 import { DealSelector } from "./components/DealSelector";
 import { DocumentIngestion } from "./components/DocumentIngestion";
@@ -103,6 +103,8 @@ function App() {
   };
 
   const handleViewChange = (next: AppView) => {
+    // Hidden nav tabs stay in code but are not selectable.
+    if (HIDDEN_APP_TABS.has(next)) return;
     setView(next);
     if (next === "assess" && !selectedDeal) {
       setStep(1);

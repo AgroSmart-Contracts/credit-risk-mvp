@@ -44,8 +44,8 @@
     ]
   },
   {
-    "key": "AGRICOLA MEDANO AZUL SAC",
-    "name": "AGRICOLA MEDANO AZUL SAC",
+    "key": "AGRICOLA LOS MEDANOS S.A.",
+    "name": "AGRICOLA LOS MEDANOS S.A.",
     "countries": [
       "Peru"
     ],
@@ -53,14 +53,16 @@
       "supplier"
     ],
     "taxIds": [
-      "20602492191"
+      "20389426891"
     ],
     "dealCount": 10,
     "yearsInBusiness": 5,
     "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
-    "nameVariantsSeen": []
+    "nameVariantsSeen": [
+      "AGRICOLA MEDANO AZUL SAC"
+    ]
   },
   {
     "key": "AGRICOLA VI\u00d1ASOL SAC",
@@ -266,8 +268,8 @@
     "nameVariantsSeen": []
   },
   {
-    "key": "BLUE PACIFIC FOODS SAC",
-    "name": "BLUE PACIFIC FOODS SAC",
+    "key": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
+    "name": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "countries": [
       "Peru"
     ],
@@ -275,14 +277,16 @@
       "supplier"
     ],
     "taxIds": [
-      "20600326464"
+      "20507873627"
     ],
     "dealCount": 7,
     "yearsInBusiness": 22,
     "yearsInBusinessSource": "verified",
     "licenseValid": true,
     "licenseValidSource": "default",
-    "nameVariantsSeen": []
+    "nameVariantsSeen": [
+      "BLUE PACIFIC FOODS SAC"
+    ]
   },
   {
     "key": "DAVIS GLOBAL BV",
@@ -365,8 +369,8 @@
     "nameVariantsSeen": []
   },
   {
-    "key": "GIDDINS PERU SAC",
-    "name": "GIDDINS PERU SAC",
+    "key": "GIDDINGS BERRIES PERU SAC",
+    "name": "GIDDINGS BERRIES PERU S.A.C.",
     "countries": [
       "Peru"
     ],
@@ -374,14 +378,16 @@
       "supplier"
     ],
     "taxIds": [
-      "20601552557"
+      "20565586247"
     ],
     "dealCount": 7,
     "yearsInBusiness": 12,
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
     "licenseValidSource": "default",
-    "nameVariantsSeen": []
+    "nameVariantsSeen": [
+      "GIDDINS PERU SAC"
+    ]
   },
   {
     "key": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO LTD",
@@ -462,8 +468,8 @@
     ]
   },
   {
-    "key": "ICA BLUEBERRIES SAC",
-    "name": "ICA BLUEBERRIES SAC",
+    "key": "BERRYCO S.A.C.",
+    "name": "BERRYCO S.A.C.",
     "countries": [
       "Peru"
     ],
@@ -471,18 +477,20 @@
       "supplier"
     ],
     "taxIds": [
-      "20601449837"
+      "20606396628"
     ],
     "dealCount": 4,
     "yearsInBusiness": 9,
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
     "licenseValidSource": "default",
-    "nameVariantsSeen": []
+    "nameVariantsSeen": [
+      "ICA BLUEBERRIES SAC"
+    ]
   },
   {
-    "key": "INDUSTRIAS SOLIMAR SAC",
-    "name": "INDUSTRIAS SOLIMAR SAC",
+    "key": "SOLIMAR INDUSTRIA E.I.R.L.",
+    "name": "SOLIMAR INDUSTRIA E.I.R.L.",
     "countries": [
       "Peru"
     ],
@@ -497,7 +505,9 @@
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
     "licenseValidSource": "default",
-    "nameVariantsSeen": []
+    "nameVariantsSeen": [
+      "INDUSTRIAS SOLIMAR SAC"
+    ]
   },
   {
     "key": "JUHINEJ LTD",
@@ -560,25 +570,6 @@
     ]
   },
   {
-    "key": "MIKHUNA FOODS SAC",
-    "name": "MIKHUNA FOODS SAC",
-    "countries": [
-      "Peru"
-    ],
-    "roles": [
-      "supplier"
-    ],
-    "taxIds": [
-      "20602283088"
-    ],
-    "dealCount": 9,
-    "yearsInBusiness": 2,
-    "yearsInBusinessSource": "csv",
-    "licenseValid": true,
-    "licenseValidSource": "default",
-    "nameVariantsSeen": []
-  },
-  {
     "key": "MIKHUNA PERUVIAN FOODS SOLUTIONS SAC",
     "name": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "countries": [
@@ -590,12 +581,15 @@
     "taxIds": [
       "20611718579"
     ],
-    "dealCount": 1,
+    "dealCount": 10,
     "yearsInBusiness": 2,
     "yearsInBusinessSource": "csv",
     "licenseValid": true,
     "licenseValidSource": "default",
-    "nameVariantsSeen": []
+    "nameVariantsSeen": [
+      "MIKHUNA FOODS SAC",
+      "MIKHUNA PERUVIAN FOODS S.A.C."
+    ]
   },
   {
     "key": "NATURAL SOUTH FRUIT LTD",

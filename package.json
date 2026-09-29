@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "validate": "tsx scripts/validate-cram-coverage.ts",
+    "export:deal-apy": "tsx scripts/export-prescored-deal-apy.ts",
     "build:route-risk": "tsx scripts/build-route-risk-table.ts",
     "apply-platform-defaults": "tsx scripts/apply-platform-defaults-csv.ts",
     "test": "vitest run",

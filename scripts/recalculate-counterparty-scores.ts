@@ -18,6 +18,7 @@ import {
   platformDeals,
 } from "../src/data/platform-deals";
 import {
+  monthlyFromYearlySalesUsd,
   scoreBuyer,
   scoreSupplier,
   type GroupScoreResult,
@@ -25,7 +26,7 @@ import {
   type SandboxSupplierInputs,
 } from "../src/lib/counterparty-sandbox-scoring";
 import type { PlatformCounterpartyScore } from "../src/types/platform";
-import { lookupOnlineVerifiability } from "../src/lib/counterparty-research-overrides";
+import { resolveHsProduct } from "../src/lib/hs-product-map";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, "..", "src", "data");
@@ -36,6 +37,13 @@ const MATCHING_CSV_CANDIDATES = [
   join(DOCS, "Matching Company customs data.csv"),
   join(DESKTOP, "Matching Company customs data.csv"),
 ];
+
+interface CustomsHsBucket {
+  shipments: number;
+  kgNet: number;
+  fobUsd: number;
+  volumeMt: number;
+}
 
 interface CustomsCompany {
   key: string;
@@ -52,6 +60,8 @@ interface CustomsCompany {
   activityMonths: number | null;
   monthlyFobUsd: number | null;
   sources: string[];
+  /** Optional per-HS-heading volumes (from aggregate-customs-companies.py). */
+  byHs?: Record<string, CustomsHsBucket>;
 }
 
 interface CustomsPayload {
@@ -105,6 +115,7 @@ interface MutableAgg {
   destPorts: Set<string>;
   dates: Date[];
   sources: Set<string>;
+  byHs: Map<string, { kgNet: number; fobUsd: number; shipments: number }>;
 }
 
 /**
@@ -141,13 +152,31 @@ function loadMatchingCompanyMap(): {
         destPorts: new Set(),
         dates: [],
         sources: new Set(),
+        byHs: new Map(),
       };
       store.set(key, a);
     }
     a.roles.add(role);
     a.shipments += 1;
-    a.kgNet += parseNum(row["Kg Neto"]);
-    a.fobUsd += parseNum(row["U$ FOB Tot"]);
+    const kg = parseNum(row["Kg Neto"]);
+    const fob = parseNum(row["U$ FOB Tot"]);
+    a.kgNet += kg;
+    a.fobUsd += fob;
+    const hsDigits = String(row["Partida Aduanera"] || "").replace(/\D/g, "");
+    const heading =
+      hsDigits.length >= 4
+        ? (hsDigits.length >= 10 ? hsDigits.slice(0, 10) : hsDigits.padStart(10, "0")).slice(
+            0,
+            4,
+          )
+        : null;
+    if (heading) {
+      const bucket = a.byHs.get(heading) ?? { kgNet: 0, fobUsd: 0, shipments: 0 };
+      bucket.kgNet += kg;
+      bucket.fobUsd += fob;
+      bucket.shipments += 1;
+      a.byHs.set(heading, bucket);
+    }
     const dest = (row["Pais de Destino"] || "").trim().toUpperCase();
     const port = (row["Puerto de destino"] || "").trim().toUpperCase();
     const office = (row["Aduana"] || "").trim().toUpperCase();
@@ -176,9 +205,10 @@ function loadMatchingCompanyMap(): {
       a.roles.has("exporter")
         ? a.destCountries.size
         : a.originOffices.size || a.destPorts.size || a.destCountries.size;
+    // Calendar monthly average (yearly/12). Do NOT divide by activeMonths —
+    // seasonal peaks made monthly×12 ≫ yearly and broke band consistency.
     let monthlyFobUsd: number | null = null;
-    if (activeMonths != null && activeMonths >= 1) monthlyFobUsd = a.fobUsd / activeMonths;
-    else if (a.fobUsd > 0) monthlyFobUsd = a.fobUsd / 12;
+    if (a.fobUsd > 0) monthlyFobUsd = a.fobUsd / 12;
     map.set(key, {
       key,
       name: a.name,
@@ -195,6 +225,17 @@ function loadMatchingCompanyMap(): {
       monthlyFobUsd:
         monthlyFobUsd != null ? Math.round(monthlyFobUsd * 100) / 100 : null,
       sources: [...a.sources],
+      byHs: Object.fromEntries(
+        [...a.byHs.entries()].map(([heading, b]) => [
+          heading,
+          {
+            shipments: b.shipments,
+            kgNet: Math.round(b.kgNet * 100) / 100,
+            fobUsd: Math.round(b.fobUsd * 100) / 100,
+            volumeMt: Math.round((b.kgNet / 1000) * 1000) / 1000,
+          },
+        ]),
+      ),
     });
   }
 
@@ -239,6 +280,9 @@ function buildRucIndex(customsMap: Map<string, CustomsCompany>): Map<string, Cus
 const CUSTOMS_NAME_ALIASES: Record<string, string> = {
   "GIDDINS PERU SAC": "GIDDINGS BERRIES PERU S.A.C.",
   "GIDDINGS PERU SAC": "GIDDINGS BERRIES PERU S.A.C.",
+  "MIKHUNA FOODS SAC": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+  "MIKHUNA PERUVIAN FOODS S.A.C.": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+  "MIKHUNA PERUVIAN FOODS S.A.C": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
   "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO LTD":
     "GOURMET Y BEVERAGE ONE GROUP THAILAND CO LTD",
   "GOURMET & BEVERAGE ONE GROUP THAILAND CO LTD":
@@ -259,6 +303,51 @@ function normalizeMatchKey(raw: string): string {
     .replace(/\b(SAC|SA|LTD|LLC|INC|CORP|BV|SL|GMBH|LDA|CO)\b/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/**
+ * Prefer customs volumes for the counterparty's commodity HS heading when
+ * byHs is present — otherwise keep company-wide pooled totals.
+ * Explicit hsCode (from platform deals) wins over product-name backfill.
+ */
+function customsForProduct(
+  customs: CustomsCompany | null,
+  product: string,
+  hsCode?: string | null,
+): { slice: CustomsCompany | null; hsHeading4: string | null } {
+  if (!customs) return { slice: null, hsHeading4: null };
+  const mapped = resolveHsProduct({ hsCode, product });
+  const heading = mapped?.hsHeading4 ?? null;
+  if (!heading || !customs.byHs?.[heading]) {
+    return { slice: customs, hsHeading4: null };
+  }
+  const bucket = customs.byHs[heading];
+  const monthlyFobUsd = bucket.fobUsd > 0 ? bucket.fobUsd / 12 : null;
+  return {
+    hsHeading4: heading,
+    slice: {
+      ...customs,
+      shipments: bucket.shipments,
+      kgNet: bucket.kgNet,
+      fobUsd: bucket.fobUsd,
+      volumeMt: bucket.volumeMt,
+      monthlyFobUsd,
+    },
+  };
+}
+
+/** Modal hsCode among this group's platform deals (buyer/supplier × product). */
+function hsCodeForGroup(group: PlatformCounterpartyScore): string | null {
+  const ids = new Set(group.deals.map((d) => d.mongoId));
+  const codes = platformDeals
+    .filter((d) => ids.has(d.mongoId) && d.hsCode)
+    .map((d) => d.hsCode as string);
+  if (codes.length === 0) {
+    return resolveHsProduct({ product: group.product })?.hsCode ?? null;
+  }
+  const counts = new Map<string, number>();
+  for (const c of codes) counts.set(c, (counts.get(c) ?? 0) + 1);
+  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]![0];
 }
 
 function findCustoms(
@@ -338,18 +427,19 @@ function buyerInputs(
   customs: CustomsCompany | null,
 ): SandboxBuyerInputs {
   const onPlatform = platformDealCount > 0;
+  const yearlySalesUsd = customs?.fobUsd ?? null;
+  const frequencyCount =
+    customs?.shipments != null && customs.shipments > 0
+      ? customs.shipments
+      : platformDealCount > 0
+        ? platformDealCount
+        : null;
   return {
     yearsInBusiness,
-    // Found in customs as importer → less_authoritative online presence signal
-    onlineVerifiability: customs?.roles.includes("importer")
-      ? 55
-      : customs
-        ? 55
-        : lookupOnlineVerifiability(companyName),
-    importLicenseStatus: 100, // platform default: valid (same as production mapper)
-    importLicenseTm: isTmEntity(companyName) ? 100 : null,
-    monthlyPurchaseVolumeUsd: customs?.monthlyFobUsd ?? null,
-    yearlySalesUsd: customs?.fobUsd ?? null,
+    frequencyOfDeals: frequencyCount,
+    // Calendar monthly = yearly/12 (not fob/activeMonths seasonal peak)
+    monthlyPurchaseVolumeUsd: monthlyFromYearlySalesUsd(yearlySalesUsd),
+    yearlySalesUsd,
     annualImportVolumeMt: customs?.roles.includes("importer")
       ? customs.volumeMt
       : null,
@@ -373,13 +463,15 @@ function supplierInputs(
     platformDealCount > 0
       ? Math.round((finishedDealCount / platformDealCount) * 100)
       : null;
+  const frequencyCount =
+    customs?.shipments != null && customs.shipments > 0
+      ? customs.shipments
+      : platformDealCount > 0
+        ? platformDealCount
+        : null;
   return {
     yearsInBusiness,
-    onlineVerifiability: customs?.roles.includes("exporter")
-      ? 55
-      : customs
-        ? 55
-        : lookupOnlineVerifiability(companyName),
+    frequencyOfDeals: frequencyCount,
     exportLicenseStatus: 100,
     productionCapacityMt: customs?.volumeMt ?? null,
     yearlySalesUsd: customs?.fobUsd ?? null,
@@ -399,6 +491,7 @@ interface ScoredRow {
   counterparty: PlatformCounterpartyScore;
   result: GroupScoreResult;
   customsMatch: CustomsCompany | null;
+  customsHsHeading4: string | null;
   coveragePct: number;
 }
 
@@ -409,12 +502,17 @@ function scoreGroup(
   masterRucs: Map<string, string[]>,
   matchingMap: Map<string, CustomsCompany>,
 ): ScoredRow {
-  const customs = findCustoms(
+  const customsRaw = findCustoms(
     customsMap,
     group.companyName,
     rucIndex,
     masterRucs,
     matchingMap,
+  );
+  const { slice: customs, hsHeading4 } = customsForProduct(
+    customsRaw,
+    group.product,
+    hsCodeForGroup(group),
   );
   const result =
     group.role === "buyer"
@@ -439,6 +537,7 @@ function scoreGroup(
     counterparty: group,
     result,
     customsMatch: customs,
+    customsHsHeading4: hsHeading4,
     coveragePct: Math.round(result.coverageFraction * 1000) / 10,
   };
 }
@@ -591,7 +690,7 @@ Customs sources: ${customsMeta.sourceFiles.map(escapeHtml).join(", ")}.</p>
     <li><strong>Coverage fraction</strong> = filled weight ÷ possible weight</li>
     <li><strong>Shrink</strong> = coverage × raw + (1 − coverage) × 50</li>
     <li><strong>TM platform trust</strong> = +3 flat after shrink (platform counterparties + TM affiliates)</li>
-    <li><strong>Customs enrichment</strong> fills annual volume (MT), yearly FOB sales proxy, monthly FOB, route diversity, online verifiability (less-authoritative = 55 when found in Veritrade/Datasur)</li>
+    <li><strong>Customs enrichment</strong> fills annual volume (MT), yearly FOB sales proxy, monthly FOB as yearly/12, route diversity, frequency of deals (shipment / platform deal count)</li>
     <li>Sandbox only — not wired into live CRAM Dimension A. Spec: <code>${escapeHtml(outlineNote)}</code></li>
   </ul>
 </div>
@@ -673,6 +772,7 @@ function main() {
         customsFobUsd: row.customsMatch?.fobUsd ?? null,
         customsMonthlyFobUsd: row.customsMatch?.monthlyFobUsd ?? null,
         customsRoutes: row.customsMatch?.routeCount ?? null,
+        customsHsHeading4: row.customsHsHeading4,
         filledFieldIds: row.result.fields
           .filter((f) => f.score != null)
           .map((f) => f.id),

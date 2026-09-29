@@ -25,6 +25,11 @@ export interface CounterpartyInput {
     routeCount: number | null;
     roles: string[];
     shipments: number;
+    /**
+     * When set, volumes were filtered to this HS heading (e.g. "0810") rather
+     * than pooling every tariff under the company.
+     */
+    hsHeading4?: string | null;
   } | null;
 }
 
@@ -105,11 +110,24 @@ export interface Deal {
   id: string;
   dealRef: string;
   product: string;
+  /**
+   * Harmonized System / Peru partida (prefer 10-digit). Keys commodity for
+   * Dimension A customs volumes and Dimension B product/price identity.
+   */
+  hsCode: string | null;
+  /** First 4 digits of hsCode (e.g. "0810"), derived when hsCode is set. */
+  hsHeading4: string | null;
   variety: string;
   quantityLabel: string;
+  presentation?: string | null;
+  quantityKg?: number | null;
   dealValueUSD: number;
   origin: string;
   destination: string;
+  portOfOrigin?: string | null;
+  portOfDestination?: string | null;
+  /** Carrier / shipping line when known. */
+  shipmentCompany?: string | null;
   incoterm: string;
   buyer: CounterpartyInput;
   supplier: CounterpartyInput;
@@ -125,6 +143,12 @@ export interface Deal {
     | "Letter of Credit";
   collateralValueUSD: number;
   insuranceCoverage: "None" | "Basic" | "Comprehensive" | "All Risk";
+  /**
+   * false = coverage not verified (typical platform CSV) — applies a Structure
+   * haircut and does NOT fire the cargo-insurance veto. true = user/wizard
+   * confirmed; `None` then hard-vetoes per spec §6.
+   */
+  insuranceConfirmed: boolean;
   insuranceValueUSD: number;
   productCategory: "Fresh Produce" | "Frozen" | "Dried" | "Processed";
   perishabilityClass:
@@ -210,6 +234,11 @@ export interface RiskAssessment {
   /** Composite counterparty data completeness, 0–100 — see financing.ts's uncertaintyPremium. */
   counterpartyCoveragePct: number;
   overall: number;
+  /**
+   * Investor-facing APY% in the 10–18 band (LP yield). Distinct from the
+   * platform's ~8% volume fee and from financing.interestRate.
+   */
+  investorApyPct: number;
   tier: RiskTier;
   /** Spec §6 single-veto register — true if any hard-stop condition fired, overriding the composite-based tier. */
   vetoed: boolean;
