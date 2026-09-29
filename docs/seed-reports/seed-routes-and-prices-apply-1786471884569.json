@@ -1,0 +1,48 @@
+{
+  "at": "2026-08-11T18:11:24.317Z",
+  "mode": "apply",
+  "db": "prod",
+  "engineVersion": "dimension-c-v2",
+  "productsInDb": 11,
+  "routes": {
+    "sourceRows": 936,
+    "linkedProductId": 858,
+    "unlinkedProductId": 78
+  },
+  "product_price_routes": {
+    "sourceRows": 1585,
+    "linkedProductId": 1251,
+    "unlinkedProductId": 334,
+    "unlinkedProductKeys": {
+      "AGUAJE": 3,
+      "BLACKBERRY": 4,
+      "CAMU_CAMU": 7,
+      "CHERIMOYA": 28,
+      "CHERRY": 6,
+      "COCONA": 3,
+      "GOOSEBERRY": 19,
+      "LUCUMA": 76,
+      "MAMEY": 5,
+      "PASSIONFRUIT": 76,
+      "PINEAPPLE": 77,
+      "RASPBERRY": 3,
+      "SOURSOP": 20,
+      "TAMARIND": 7
+    }
+  },
+  "productsStrip": {
+    "withMonthlyPrices": 0,
+    "unsetFields": [
+      "monthlyPrices",
+      "monthsWithPriceData"
+    ]
+  },
+  "applied": {
+    "routeTouched": 936,
+    "routesCount": 936,
+    "priceTouched": 1585,
+    "pricesCount": 1529,
+    "productsStripped": 0,
+    "productsStillWithMonthly": 0
+  }
+}
