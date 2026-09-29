@@ -22,7 +22,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -33,7 +33,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 055677-1 | 2024-06-19 | MARITIMO | FOB $50,400.00 | 21,760kg | PAISES BAJOS",
     "cofaceCoverageAmountUSD": 54720,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -163,16 +163,22 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Rotterdam",
+    "presentation": "Carton x 30 lb.",
+    "quantityKg": 21772.42,
+    "shipmentCompany": "HAPAG-LLOYD A G"
   },
   {
     "id": "plat-66fb1eb2",
     "mongoId": "66fb1eb20b1b5991fc6479ff",
-    "dealRef": "ArÃ¯Â¿Â½ndano fresco",
+    "dealRef": "Ar?ndano fresco",
     "product": "Fresh Blueberries",
     "variety": "",
     "quantityLabel": "1000 units",
@@ -188,9 +194,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30,
     "shippingStartDate": null,
@@ -216,7 +222,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Rotterdam",
+    "presentation": "Carton x 3kg",
+    "quantityKg": 3000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-670ed7c8",
@@ -248,7 +261,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 051837-1 | 2024-08-23 | AEREO | FOB $19,868.45 | 2,310kg | BRASIL (Guarulhos) | CONFIRMED under 2026-08-31 policy reset: supplier (Tru Market Blockchain S.A.C.) + route (Peru->Brazil) + product (blueberry) + volume (2,310kg, exact) + date (2024-08-23, exact) all match a real customs record. Real importer of record is Benassi Sao Paulo Importacao e Exportacao Ltda, not the recorded buyer Agro Smart Contracts LDA -- per the project-owner's explicit instruction, customs Importer/consignee name differing from the recorded buyer is expected/informational, not a blocking anomaly, when supplier+route+volume+product match this strongly.",
     "cofaceCoverageAmountUSD": 21677.04,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -575,11 +588,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Guarulhos",
+    "presentation": "Carton x 1.5 Kg (12*125 g) with labels",
+    "quantityKg": 2310,
+    "shipmentCompany": null
   },
   {
     "id": "plat-670edd03",
@@ -942,7 +961,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": ""
+    "createdAt": "",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Guarulhos",
+    "presentation": "Carton x 1.5 Kg (12 x 125 g)",
+    "quantityKg": 2310,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6750a959",
@@ -954,7 +980,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "dealValueUSD": 38556,
     "origin": "Puerto Bolivar, Ecuador",
     "destination": "St Petersburg, Russian Federation",
-    "buyerName": "Â«ArdzhiesÂ» LLC",
+    "buyerName": "«Ardzhies» LLC",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 1,
     "supplierYib": 5,
@@ -963,7 +989,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 30,
+    "estimatedTransitDays": 45,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "sea",
@@ -1153,7 +1179,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-04T19:11:21.445Z"
+    "createdAt": "2024-12-04T19:11:21.445Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Puerto Bolivar",
+    "portOfDestination": "St Petersburg",
+    "presentation": "1.5Kg boxes",
+    "quantityKg": 6426,
+    "shipmentCompany": null
   },
   {
     "id": "plat-675377df",
@@ -1165,7 +1198,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "dealValueUSD": 70200,
     "origin": "Puerto Bolivar, Ecuador",
     "destination": "St Petersburg, Russian Federation",
-    "buyerName": "Â«ArdzhiesÂ» LLC",
+    "buyerName": "«Ardzhies» LLC",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 1,
     "supplierYib": 5,
@@ -1174,7 +1207,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 30,
+    "estimatedTransitDays": 45,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "High",
     "transportMode": "sea",
@@ -1364,7 +1397,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-06T22:17:03.103Z"
+    "createdAt": "2024-12-06T22:17:03.103Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Puerto Bolivar",
+    "portOfDestination": "St Petersburg",
+    "presentation": "1.5Kg boxes",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6759b914",
@@ -1390,13 +1430,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 25,
-    "shippingStartDate": "2024-12-30T00:00:00.000Z",
+    "shippingStartDate": "2025-01-01T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 087484-1 | 2025-01-01 | AEREO | FOB $46,697.10 | 4,320kg | ISRAEL (Madrid transship) | CONFIRMED under 2026-08-31 policy reset: real exporter is Tru Market Blockchain S.A.C. (recorded supplier matches); kg exact (4,320kg); real importer Eagle Trading Agriculture Marketing Ltd matches recorded buyer. shipmentDate corrected: 15/02/2025 -> 2025-01-01 (customs date is authoritative once supplier+route+volume align). Reassigned off DUA 083159-2, which this row previously shared with FRESH BLUEBERRIES E001-50 (a pre-existing double-claim first flagged in the 2026-08-29 pass) -- 083159-2 now belongs solely to E001-50, resolving that collision as a byproduct of this reassignment.",
     "cofaceCoverageAmountUSD": 64800,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -1816,11 +1856,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-11T16:08:52.011Z"
+    "createdAt": "2024-12-11T16:08:52.011Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5 Kg",
+    "quantityKg": 4320,
+    "shipmentCompany": "AIR EUROPA LINEAS AEREAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-675a16e4",
@@ -1846,13 +1892,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30,
-    "shippingStartDate": "2024-10-28T00:00:00.000Z",
+    "shippingStartDate": "2025-11-21T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 010331-1 | 2025-11-21 | MARITIMO | FOB $48,509.22 | 17,280kg | ESPANA",
     "cofaceCoverageAmountUSD": 23760,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -2174,11 +2220,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-11T22:49:08.282Z"
+    "createdAt": "2024-12-11T22:49:08.282Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Madrid",
+    "presentation": "3.3 Kg",
+    "quantityKg": 2904,
+    "shipmentCompany": "MAERSK LINE PERU S.A.C."
   },
   {
     "id": "plat-675b6053",
@@ -2204,13 +2256,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 33.6,
-    "shippingStartDate": "2025-11-10T22:00:00.000Z",
+    "shippingStartDate": "2024-10-11T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 065413-1 | 2024-10-11 | AEREO | FOB $15,306.95 | 2,734.4kg | POLONIA (Amsterdam) | CONFIRMED under 2026-08-31 policy reset: real exporter is Tru Market Blockchain S.A.C. (recorded supplier matches); kg 2,734.4 vs recorded 2,816 (2.9% gap, right ballpark); real importer LIMAX SP. Z O.O. matches recorded buyer. Supersedes the prior low-confidence match (DUA 067126-1), whose real exporter was CONSORCIO DE PRODUCTORES DE FRUTA S.A. -- a genuine supplier mismatch that the new policy does NOT excuse, even though the buyer name (Limax) matched; that match came from the old buyer-only fallback logic and is superseded here by a real Tru-Market-as-exporter row. shipmentDate corrected: 11/11/2025 -> 2024-10-11.",
     "cofaceCoverageAmountUSD": 26611.2,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -2527,11 +2579,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-12T22:14:43.520Z"
+    "createdAt": "2024-12-12T22:14:43.520Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Amsterdam",
+    "presentation": "3.2 Kg",
+    "quantityKg": 2816,
+    "shipmentCompany": "TRAMARSA - TRABAJOS MARITIMOS S.A."
   },
   {
     "id": "plat-675b708f",
@@ -2557,13 +2615,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.57,
-    "shippingStartDate": "2025-11-10T22:00:00.000Z",
+    "shippingStartDate": "2024-09-24T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 059938-1 | 2024-09-24 | AEREO | FOB $34,158.70 | 2,690.5kg | POLONIA (Madrid transship) | CONFIRMED under 2026-08-31 policy reset: real exporter is Tru Market Blockchain S.A.C. (recorded supplier matches); kg 2,690.5 vs recorded 2,628 (2.4% gap, right ballpark); real importer LIMAX SP. Z O.O. matches recorded buyer. Supersedes the prior low-confidence match (DUA 063306-1), whose real exporter was Q'INTI FOODS S.A.C. -- a genuine supplier mismatch the new policy does not excuse, from the old buyer-only fallback logic; superseded here by a real Tru-Market-as-exporter row. shipmentDate corrected: 11/11/2025 -> 2024-09-24.",
     "cofaceCoverageAmountUSD": 20947.79,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -2880,11 +2938,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-12T23:23:59.174Z"
+    "createdAt": "2024-12-12T23:23:59.174Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Amsterdam",
+    "presentation": "3.00 Kg",
+    "quantityKg": 2628,
+    "shipmentCompany": "TRAMARSA - TRABAJOS MARITIMOS S.A."
   },
   {
     "id": "plat-675b7892",
@@ -2916,7 +2980,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 062002-1 | 2024-10-03 | AEREO | FOB $27,189.20 | 2,612.5kg | POLONIA",
     "cofaceCoverageAmountUSD": 36081.42,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -3233,11 +3297,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-12T23:58:10.517Z"
+    "createdAt": "2024-12-12T23:58:10.517Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Amsterdam",
+    "presentation": "3.2 Kg",
+    "quantityKg": 2691.2,
+    "shipmentCompany": "K L M CIA REAL HOLANDESA DE AVIACION"
   },
   {
     "id": "plat-675b799b",
@@ -3263,13 +3333,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 40.08,
-    "shippingStartDate": "2024-10-30T00:00:00.000Z",
+    "shippingStartDate": "2024-10-13T00:00:00.000Z",
     "priorDealsBetweenParties": 6,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 065959-1 | 2024-10-13 | AEREO | FOB $16,522.80 | 2,816kg | POLONIA (Amsterdam) | UPGRADED to confirmed under 2026-08-31 policy reset: supplier (Tru Market Blockchain S.A.C.), route, and product all match; kg exact (2,816kg); real importer LIMAX SP. Z O.O. matches recorded buyer. shipmentDate corrected: 2024-10-30 -> 2024-10-13 (the 17-day date-only gap previously kept this at low-confidence in the 2026-08-29 pass; policy now takes the customs date as authoritative once supplier+route+volume align, so this upgrades to confirmed with no DUA change).",
     "cofaceCoverageAmountUSD": 31743.36,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -3586,11 +3656,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-13T00:02:35.993Z"
+    "createdAt": "2024-12-13T00:02:35.993Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Amsterdam",
+    "presentation": "3.2 Kg",
+    "quantityKg": 2816,
+    "shipmentCompany": "AIR CANADA SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6761acdb",
@@ -3616,13 +3692,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 21.13,
-    "shippingStartDate": "2024-08-29T00:00:00.000Z",
+    "shippingStartDate": "2025-02-16T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 011894-1 | 2025-02-16 | AEREO | FOB $13,277.83 | 1,800kg | INDIA",
     "cofaceCoverageAmountUSD": 18256.32,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -3938,11 +4014,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-17T16:54:51.326Z"
+    "createdAt": "2024-12-17T16:54:51.326Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "MUMBAI",
+    "presentation": "1.5 Kg",
+    "quantityKg": 1440,
+    "shipmentCompany": "KLM CARGO"
   },
   {
     "id": "plat-676449d1",
@@ -3974,7 +4056,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 054171-1 | 2024-09-01 | AEREO | FOB $22,907.35 | 2,240kg | POLONIA",
     "cofaceCoverageAmountUSD": 24192,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -4291,11 +4373,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-19T16:29:05.939Z"
+    "createdAt": "2024-12-19T16:29:05.939Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Amsterdam",
+    "presentation": "2.8 Kg",
+    "quantityKg": 2240,
+    "shipmentCompany": "DELTA AIRLINES INC."
   },
   {
     "id": "plat-6764614c",
@@ -4321,13 +4409,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Low",
     "transportMode": "air",
     "offerUnitPriceUSD": 15.65,
-    "shippingStartDate": "2024-08-22T00:00:00.000Z",
+    "shippingStartDate": "2025-07-18T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 050719-1 | 2025-07-18 | AEREO | FOB $10,453.20 | 1,530kg | BRASIL",
     "cofaceCoverageAmountUSD": 21690.9,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -4736,11 +4824,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2024-12-19T18:09:16.362Z"
+    "createdAt": "2024-12-19T18:09:16.362Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Guarulhos",
+    "presentation": "1.5 Kg",
+    "quantityKg": 2310,
+    "shipmentCompany": "SKY AIRLINE PERU S.A.C."
   },
   {
     "id": "plat-677c2b8a",
@@ -4751,7 +4845,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "740 x 250G Boxes",
     "dealValueUSD": 17626.8,
     "origin": "Callao, Peru",
-    "destination": "Frankurt AM Main, Germany",
+    "destination": "Frankfurt AM Main, Germany",
     "buyerName": "ANTERRA FARMS GMBH",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 4,
@@ -5002,7 +5096,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-06T19:14:18.308Z"
+    "createdAt": "2025-01-06T19:14:18.308Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "FRANKFURT AM MAIN",
+    "presentation": "250G Boxes",
+    "quantityKg": 185,
+    "shipmentCompany": null
   },
   {
     "id": "plat-677c3e54",
@@ -5013,7 +5114,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "740 x 250G Boxes",
     "dealValueUSD": 17626.8,
     "origin": "Callao, Peru",
-    "destination": "Frankurt AM Main, Germany",
+    "destination": "Frankfurt AM Main, Germany",
     "buyerName": "ANTERRA FARMS GMBH",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 4,
@@ -5028,7 +5129,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.82,
-    "shippingStartDate": "2024-08-20T00:00:00.000Z",
+    "shippingStartDate": "2025-01-20T00:00:00.000Z",
     "priorDealsBetweenParties": 1,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -5264,7 +5365,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-06T20:34:28.700Z"
+    "createdAt": "2025-01-06T20:34:28.700Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "FRANKFURT AM MAIN",
+    "presentation": "250G Boxes",
+    "quantityKg": 185,
+    "shipmentCompany": null
   },
   {
     "id": "plat-677ec54e",
@@ -5285,7 +5393,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 8,
+    "estimatedTransitDays": 14,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -5296,7 +5404,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 113745 (items 1-4 combined) | 2024-11-01 | MARITIMO | FOB $28,553.75 | 16,090kg | CHILE (San Antonio) | mango congelado (frozen mango, chunks+cut) + pi?a congelada (frozen pineapple, chunks+cut) [found via widened TruMarket-exporter customs scan, not the original SOLIMAR INDUSTRIAS lead -- real exporter/importer pair confirmed but recorded buyer name 'AGRICOLA Y COMERCIAL VALLES DEL NUBLE' did not match customs name 'AGRICOLA Y COMERCIAL VALLES DEL ?UBLE SPA' under current company-name.ts normalization -- alias gap (missing ? + SPA suffix), follow-up needed. Date 4d from recorded shipmentDate; kg/FOB ~18-31% below recorded 19,600kg/$41,473.60 -- confident on buyer/supplier/product/date, volume gap flagged]",
     "cofaceCoverageAmountUSD": 37326.24,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -5711,12 +5819,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-08T18:34:54.134Z"
+    "createdAt": "2025-01-08T18:34:54.134Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "San Vicente",
+    "presentation": "10 kg",
+    "quantityKg": 19600,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6786a6e9",
@@ -5742,7 +5856,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
-    "shippingStartDate": "2025-08-01T21:00:00.000Z",
+    "shippingStartDate": "2025-02-08T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -6066,7 +6180,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-14T18:03:21.213Z"
+    "createdAt": "2025-01-14T18:03:21.213Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Mumbai",
+    "presentation": "1.5 Kg",
+    "quantityKg": 1800,
+    "shipmentCompany": "Air France"
   },
   {
     "id": "plat-6797c024",
@@ -6092,7 +6213,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 18,
-    "shippingStartDate": "2025-01-26T00:00:00.000Z",
+    "shippingStartDate": "2025-02-16T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -6416,7 +6537,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-27T17:19:32.692Z"
+    "createdAt": "2025-01-27T17:19:32.692Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Mumbai",
+    "presentation": "1.5 Kg",
+    "quantityKg": 2160,
+    "shipmentCompany": "KLM CARGO"
   },
   {
     "id": "plat-67a4c9a5",
@@ -6448,7 +6576,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 010095-1 | 2025-02-08 | AEREO | FOB $14,006.76 | 1,800kg | INDIA",
     "cofaceCoverageAmountUSD": 19440,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -6763,11 +6891,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-06T14:39:33.895Z"
+    "createdAt": "2025-02-06T14:39:33.895Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Mumbai",
+    "presentation": "1.5 Kg",
+    "quantityKg": 1800,
+    "shipmentCompany": "AIR FRANCE"
   },
   {
     "id": "plat-67d09655",
@@ -6788,7 +6922,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Perishable",
     "shelfLifeDays": 35,
     "coldChainRequired": true,
-    "estimatedTransitDays": 19,
+    "estimatedTransitDays": 27,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -6799,7 +6933,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 001414-1 | 2025-03-12 | MARITIMO | FOB $51,933.34 | 24,000kg | ESPANA",
     "cofaceCoverageAmountUSD": 47520,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -7015,11 +7149,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-11T20:00:21.994Z"
+    "createdAt": "2025-03-11T20:00:21.994Z",
+    "hsCode": "0804400000",
+    "hsHeading4": "0804",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ALGECIRAS",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-67e5642f",
@@ -7040,7 +7180,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Perishable",
     "shelfLifeDays": 35,
     "coldChainRequired": true,
-    "estimatedTransitDays": 7,
+    "estimatedTransitDays": 13,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -7051,7 +7191,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 001813-1 | 2025-03-22 | MARITIMO | FOB $4,084.99 | 18,044kg | CHILE [supplierName CONFIRMED 2026-08-30: buyer real importer this exact date (DUA 001813, items 1+2 combined); real exporter of record is VILLAVENTURA PRODUCE S.A.C., not recorded BIO FARMING PERU S.A.C. -- project owner has confirmed Bio Farming Peru S.A.C. and Villaventura Produce S.A.C. are both legitimate, interchangeable known suppliers specifically for the AVOCADO product line, so this substitution is expected, not a data error. Resolved/closed -- no longer needs sign-off. (Combined kg/FOB of the matched DUA lines still differ substantially from the deal's recorded 32,300kg/$27,035.10 -- volume gap not explained by the supplier-substitution note and is noted for visibility, not further investigated here.) NOTE: does NOT extend to the mandarin Bio Farming/Villaventura group (16 deals) -- that HS chapter (0805) stays flagged/unresolved per explicit scope of the 2026-08-30 confirmation.]",
     "cofaceCoverageAmountUSD": 24331.59,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -7377,11 +7517,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-27T14:43:59.093Z"
+    "createdAt": "2025-03-27T14:43:59.093Z",
+    "hsCode": "0804400000",
+    "hsHeading4": "0804",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "SAN ANTONIO",
+    "presentation": "CAJAS DE 10 KG Y 4 KG",
+    "quantityKg": 32300,
+    "shipmentCompany": null
   },
   {
     "id": "plat-67e564fc",
@@ -7402,7 +7548,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Perishable",
     "shelfLifeDays": 35,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
@@ -7413,7 +7559,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 002154-1 | 2025-04-01 | MARITIMO | FOB $19,940.00 | 24,000kg | ESPANA",
     "cofaceCoverageAmountUSD": 47520,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -7630,11 +7776,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-27T14:47:24.436Z"
+    "createdAt": "2025-03-27T14:47:24.436Z",
+    "hsCode": "0804400000",
+    "hsHeading4": "0804",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-67ec128e",
@@ -7660,7 +7812,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 25,
-    "shippingStartDate": "2024-12-31T22:00:00.000Z",
+    "shippingStartDate": "2025-01-01T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -8089,7 +8241,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-01T16:21:34.543Z"
+    "createdAt": "2025-04-01T16:21:34.543Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5 Kg",
+    "quantityKg": 5400,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-67ef392d",
@@ -8110,7 +8269,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Perishable",
     "shelfLifeDays": 35,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
@@ -8342,7 +8501,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-04T01:43:09.527Z"
+    "createdAt": "2025-04-04T01:43:09.527Z",
+    "hsCode": "0804400000",
+    "hsHeading4": "0804",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-67f41e49",
@@ -8352,7 +8518,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "HASS",
     "quantityLabel": "432 x CAJAS DE 4 KG",
     "dealValueUSD": 4320,
-    "origin": "Aereopuerto Jorge Chavez, Peru",
+    "origin": "Aeropuerto Jorge Chavez, Peru",
     "destination": "Bangkok, Thailand",
     "buyerName": "GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD",
     "supplierName": "BIO FARMING PERU S.A.C.",
@@ -8363,7 +8529,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Perishable",
     "shelfLifeDays": 35,
     "coldChainRequired": true,
-    "estimatedTransitDays": 34,
+    "estimatedTransitDays": 9,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "air",
@@ -8374,7 +8540,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 025347-1 | 2025-04-05 | MARITIMO | FOB $4,320.00 | 1,728kg | TAILANDIA | CONFIRMED under 2026-08-31 policy reset: exact match on supplier (Bio Farming Peru S.A.C.), product (avocado), destination country (Thailand), volume (1,728kg, exact) and FOB ($4,320.00, exact). Real importer of record is 'GOURMET Y BENERAGE ONE GROUP THAILAND CO LTD' -- the same company as the recorded buyer 'GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD' (minor spelling variant of 'Beverage' in the raw customs record, not a different company). shipmentDate corrected: 13/10/2025 -> 2025-04-05 (customs date authoritative; every other field was an exact match, only the date was off in the recorded deal data). Split-shipment check on Bio Farming's other Thailand-bound avocado rows found none nearby -- this is the only real Bio Farming/Thailand avocado shipment in either extract, so no summing was needed.",
     "cofaceCoverageAmountUSD": 3888,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -8588,11 +8754,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-07T18:49:45.830Z"
+    "createdAt": "2025-04-07T18:49:45.830Z",
+    "hsCode": "0804400000",
+    "hsHeading4": "0804",
+    "portOfOrigin": "AEROPUERTO JORGE CHAVEZ",
+    "portOfDestination": "BANGKOK",
+    "presentation": "CAJAS DE 4 KG",
+    "quantityKg": 1728,
+    "shipmentCompany": "EMPRESA DE TRANSPORTES CHANG HNOS S.A."
   },
   {
     "id": "plat-67f555dd",
@@ -8618,7 +8790,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 17.65,
-    "shippingStartDate": "2025-04-15T00:00:00.000Z",
+    "shippingStartDate": "2025-01-26T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 4,
     "status": "finished",
@@ -8944,7 +9116,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-08T16:59:09.789Z"
+    "createdAt": "2025-04-08T16:59:09.789Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Mumbai",
+    "presentation": "1.5 Kg",
+    "quantityKg": 2520,
+    "shipmentCompany": "KLM CARGO"
   },
   {
     "id": "plat-683780b5",
@@ -8965,7 +9144,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -8976,7 +9155,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 007132-1 | 2025-07-26 | MARITIMO | FOB $31,643.69 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -9108,11 +9287,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:31:33.349Z"
+    "createdAt": "2025-05-28T21:31:33.349Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-683781a0",
@@ -9133,7 +9318,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -9144,7 +9329,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 008338-1 | 2025-08-16 | MARITIMO | FOB $31,617.42 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -9276,11 +9461,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:35:28.626Z"
+    "createdAt": "2025-05-28T21:35:28.626Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-683781f5",
@@ -9301,7 +9492,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -9312,7 +9503,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006627-1 | 2025-07-12 | MARITIMO | FOB $31,716.16 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -9444,11 +9635,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:36:53.697Z"
+    "createdAt": "2025-05-28T21:36:53.697Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-68378236",
@@ -9469,7 +9666,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -9480,7 +9677,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 008340-1 | 2025-08-16 | MARITIMO | FOB $31,898.18 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -9612,11 +9809,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:37:58.130Z"
+    "createdAt": "2025-05-28T21:37:58.130Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6837826d",
@@ -9637,7 +9840,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -9648,7 +9851,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 007973-1 | 2025-08-09 | MARITIMO | FOB $31,312.43 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -9780,11 +9983,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:38:53.795Z"
+    "createdAt": "2025-05-28T21:38:53.795Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-68378613",
@@ -9805,7 +10014,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -9816,7 +10025,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 007637-1 | 2025-08-02 | MARITIMO | FOB $31,293.23 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -9948,11 +10157,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:54:27.038Z"
+    "createdAt": "2025-05-28T21:54:27.038Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6837865e",
@@ -9973,7 +10188,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -9984,7 +10199,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 010608-1 | 2025-10-18 | MARITIMO | FOB $31,191.62 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -10116,11 +10331,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:55:42.228Z"
+    "createdAt": "2025-05-28T21:55:42.228Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-683786bc",
@@ -10141,7 +10362,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -10152,7 +10373,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 007365-1 | 2025-07-26 | MARITIMO | FOB $31,146.79 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -10284,11 +10505,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:57:16.666Z"
+    "createdAt": "2025-05-28T21:57:16.666Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-683786f0",
@@ -10309,7 +10536,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -10320,7 +10547,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 008740-1 | 2025-08-30 | MARITIMO | FOB $31,125.34 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -10452,11 +10679,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:58:08.724Z"
+    "createdAt": "2025-05-28T21:58:08.724Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-68378716",
@@ -10477,7 +10710,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -10488,7 +10721,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 007636-1 | 2025-08-02 | MARITIMO | FOB $31,031.63 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -10620,11 +10853,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-28T21:58:46.310Z"
+    "createdAt": "2025-05-28T21:58:46.310Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6839e3e0",
@@ -10645,7 +10884,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -10656,7 +10895,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 010873-1 | 2025-10-25 | MARITIMO | FOB $30,925.99 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -10788,11 +11027,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T16:59:12.778Z"
+    "createdAt": "2025-05-30T16:59:12.778Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6839e4d4",
@@ -10813,7 +11058,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -10824,7 +11069,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006974-1 | 2025-07-20 | MARITIMO | FOB $32,526.03 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 28495.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -10956,11 +11201,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:03:16.523Z"
+    "createdAt": "2025-05-30T17:03:16.523Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6839e7fd",
@@ -10981,7 +11232,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -10992,7 +11243,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 005588-1 | 2025-06-21 | MARITIMO | FOB $32,748.11 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 29404.87,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -11124,11 +11375,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:16:45.506Z"
+    "createdAt": "2025-05-30T17:16:45.506Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6839e825",
@@ -11149,7 +11406,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -11160,7 +11417,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 005107-1 | 2025-06-14 | MARITIMO | FOB $33,051.69 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 29404.87,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -11292,11 +11549,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:17:25.028Z"
+    "createdAt": "2025-05-30T17:17:25.028Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6839e8a3",
@@ -11317,7 +11580,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -11328,7 +11591,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 005931-1 | 2025-06-28 | MARITIMO | FOB $33,194.04 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 29404.87,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -11460,11 +11723,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:19:31.353Z"
+    "createdAt": "2025-05-30T17:19:31.353Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-6839e8d0",
@@ -11485,7 +11754,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -11496,7 +11765,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006267-1 | 2025-07-05 | MARITIMO | FOB $33,194.44 | 22,960kg | ESTADOS UNIDOS [shipmentDate flagged: deal record created 2025-05-28/30 but recorded shipmentDate is 2024 (predates creation by ~11mo). Buyer (Open Markets Corporation) and volume (22,960kg) confirmed against 95 real 2025-2026 Veritrade rows for this buyer. Recorded supplier \"Villaventura Peru SAC\" and destination port \"Port Hueneme\" do NOT match this buyer's real trade: 93/95 real rows list exporter=BIO FARMING PERU S.A.C. (not Villaventura) and destination port=Balboa/Valparaiso/Miami (not Port Hueneme), same USA destination country. Year-typo hypothesis unaffected; supplier/port fields on this deal look independently wrong. Not confirmed to this specific DUA. See docs/veritrade-customs-fill-2026-08-24.md ?Bucket 2.]",
     "cofaceCoverageAmountUSD": 29404.87,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -11628,11 +11897,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-05-30T17:20:16.579Z"
+    "createdAt": "2025-05-30T17:20:16.579Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": "MAERSK LINES. INC."
   },
   {
     "id": "plat-683de11b",
@@ -11653,7 +11928,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Perishable",
     "shelfLifeDays": 35,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
@@ -11664,7 +11939,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 003073-1 | 2025-04-22 | MARITIMO | FOB $28,776.92 | 24,000kg | ESPANA",
     "cofaceCoverageAmountUSD": 47520,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -11881,11 +12156,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-02T17:36:27.306Z"
+    "createdAt": "2025-06-02T17:36:27.306Z",
+    "hsCode": "0804400000",
+    "hsHeading4": "0804",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6853637d",
@@ -11906,18 +12187,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.65,
-    "shippingStartDate": "2025-05-21T00:00:00.000Z",
+    "shippingStartDate": "2025-05-24T00:00:00.000Z",
     "priorDealsBetweenParties": 4,
     "relationshipAgeMonths": 3,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "Split-shipment match (5 containers, consistent with '5TEU' in the deal name) -- DUA 004039-1 (2025-05-24, 22,960kg, FOB $32,079.94) + 004620-1 (2025-05-31, 22,960kg, $34,244.49) + 004621-1 (2025-05-31, 22,960kg, $34,305.19) + 004942-1 (2025-06-08, 22,960kg, $34,732.49) + 004707-1 (2025-06-08, 22,960kg, $33,933.65) = 114,800kg combined (exact match to recorded quantityKg) / $169,295.76 combined FOB (8% above recorded $156,702, right ballpark). CONFIRMED under 2026-08-31 policy reset: all 5 real exporter = Bio Farming Peru S.A.C. (recorded supplier matches); real importer on all 5 is Open Markets Corporation, not the recorded buyer Agro Smart Contracts LDA -- informational per policy, not a blocking anomaly. shipmentDate corrected to the earliest container's date: 2025-05-21 -> 2025-05-24 (3-day gap, closest of the 5 real shipments; the other 4 run 10-18 days out).",
     "cofaceCoverageAmountUSD": 141031.8,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -12049,11 +12330,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-19T01:10:21.988Z"
+    "createdAt": "2025-06-19T01:10:21.988Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 114800,
+    "shipmentCompany": null
   },
   {
     "id": "plat-688120b2",
@@ -12079,13 +12366,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
-    "shippingStartDate": "2025-08-10T00:00:00.000Z",
+    "shippingStartDate": "2025-10-21T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 085431-1 | 2025-11-17 | AEREO | FOB $48,360.00 | 6,008kg | ISRAEL [low-confidence: buyer/supplier+volume match only, DUA date 27d from recorded shipmentDate]",
     "cofaceCoverageAmountUSD": 86994,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -12505,11 +12792,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-23T17:49:38.109Z"
+    "createdAt": "2025-07-23T17:49:38.109Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5kg",
+    "quantityKg": 5400,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-68839958",
@@ -12535,13 +12828,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
-    "shippingStartDate": "2025-08-11T00:00:00.000Z",
+    "shippingStartDate": "2025-10-21T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 083159-1 | 2025-11-10 | AEREO | FOB $26,939.00 | 2,607kg | ISRAEL [low-confidence: buyer/supplier+volume match only, DUA date 20d from recorded shipmentDate]",
     "cofaceCoverageAmountUSD": 86994,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -12961,11 +13254,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:48:56.800Z"
+    "createdAt": "2025-07-25T14:48:56.800Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5kg",
+    "quantityKg": 5400,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-68839a11",
@@ -12991,7 +13290,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
-    "shippingStartDate": "2025-03-10T22:00:00.000Z",
+    "shippingStartDate": "2025-11-03T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -13421,7 +13720,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:52:01.069Z"
+    "createdAt": "2025-07-25T14:52:01.069Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5kg",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-68839aad",
@@ -13447,13 +13753,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
-    "shippingStartDate": "2025-10-10T21:00:00.000Z",
+    "shippingStartDate": "2025-11-10T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 085431-1 | 2025-11-17 | AEREO | FOB $48,360.00 | 6,008kg | ISRAEL",
     "cofaceCoverageAmountUSD": 86994,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -13873,11 +14179,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:54:37.797Z"
+    "createdAt": "2025-07-25T14:54:37.797Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5kg",
+    "quantityKg": 5400,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-68839b61",
@@ -13903,7 +14215,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "High",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.85,
-    "shippingStartDate": "2025-08-18T00:00:00.000Z",
+    "shippingStartDate": "2025-03-10T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -14333,7 +14645,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-25T14:57:37.036Z"
+    "createdAt": "2025-07-25T14:57:37.036Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Tel Aviv",
+    "presentation": "1.5kg",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6890fd76",
@@ -14682,7 +15001,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T18:35:34.946Z"
+    "createdAt": "2025-08-04T18:35:34.946Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Vancouver",
+    "presentation": "12 x 6oz",
+    "quantityKg": 1175.71,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6890fdf0",
@@ -15031,7 +15357,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T18:37:36.353Z"
+    "createdAt": "2025-08-04T18:37:36.353Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Vancouver",
+    "presentation": "12 x 6oz",
+    "quantityKg": 1175.71,
+    "shipmentCompany": null
   },
   {
     "id": "plat-68910508",
@@ -15041,8 +15374,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "Ventura",
     "quantityLabel": "576 x 12 x 6oz",
     "dealValueUSD": 10368,
-    "origin": "Callao, Chile",
-    "destination": "Vancouver, Netherlands",
+    "origin": "Callao, Peru",
+    "destination": "Vancouver, Canada",
     "buyerName": "AGRO SMART CONTRACTS LDA",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 2,
@@ -15243,7 +15576,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T19:07:52.273Z"
+    "createdAt": "2025-08-04T19:07:52.273Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "Callao",
+    "portOfDestination": "Vancouver",
+    "presentation": "12 x 6oz",
+    "quantityKg": 1175.71,
+    "shipmentCompany": null
   },
   {
     "id": "plat-68d40b98",
@@ -15264,7 +15604,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 34,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
@@ -15593,7 +15933,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-24T15:17:44.813Z"
+    "createdAt": "2025-09-24T15:17:44.813Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CHANCAY",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "12 x 6oz",
+    "quantityKg": 15921.08,
+    "shipmentCompany": null
   },
   {
     "id": "plat-68d40e8c",
@@ -15614,7 +15961,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 34,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
@@ -15943,7 +16290,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-24T15:30:20.287Z"
+    "createdAt": "2025-09-24T15:30:20.287Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CHANCAY",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "12 x 6oz",
+    "quantityKg": 15921.08,
+    "shipmentCompany": null
   },
   {
     "id": "plat-690cf87e",
@@ -15964,7 +16318,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -15975,7 +16329,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": "DUA 118757-1 | 2025-11-11 | MARITIMO | FOB $117,308.40 | 19,551.4kg | PAÃªSES BAJOS",
+    "customsNarrative": "DUA 118757-1 | 2025-11-11 | MARITIMO | FOB $117,308.40 | 19,551.4kg | PA?SES BAJOS",
     "cofaceCoverageAmountUSD": 141120,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -16294,7 +16648,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-06T19:35:26.471Z"
+    "createdAt": "2025-11-06T19:35:26.471Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "BULK X 3.5KG",
+    "quantityKg": 19600,
+    "shipmentCompany": "TRAMARSA - TRABAJOS MARITIMOS S.A."
   },
   {
     "id": "plat-690cfba2",
@@ -16326,7 +16687,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 083159-2 | 2025-11-10 | AEREO | FOB $68,601.50 | 6,394.5kg | ISRAEL",
     "cofaceCoverageAmountUSD": 85536,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -16637,11 +16998,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-06T19:48:50.727Z"
+    "createdAt": "2025-11-06T19:48:50.727Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-690cfcb6",
@@ -16988,7 +17355,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-06T19:53:26.521Z"
+    "createdAt": "2025-11-06T19:53:26.521Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6915d77a",
@@ -17014,7 +17388,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22,
-    "shippingStartDate": "2025-11-11T00:00:00.000Z",
+    "shippingStartDate": "2025-11-03T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -17335,7 +17709,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-13T13:04:58.601Z"
+    "createdAt": "2025-11-13T13:04:58.601Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6915ee68",
@@ -17361,7 +17742,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22,
-    "shippingStartDate": "2025-11-11T00:00:00.000Z",
+    "shippingStartDate": "2025-11-03T00:00:00.000Z",
     "priorDealsBetweenParties": 10,
     "relationshipAgeMonths": 11,
     "status": "finished",
@@ -17682,7 +18063,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-13T14:42:48.825Z"
+    "createdAt": "2025-11-13T14:42:48.825Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6917a58b",
@@ -17703,7 +18091,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -17714,7 +18102,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 068863-1 | 2025-09-23 | AEREO | FOB $21,062.27 | 3,080kg | PAISES BAJOS [low-confidence: buyer/supplier+volume match only, DUA date 49d from recorded shipmentDate]",
     "cofaceCoverageAmountUSD": 97020,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -18030,11 +18418,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-14T21:56:27.780Z"
+    "createdAt": "2025-11-14T21:56:27.780Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "BULK X 3.5KG",
+    "quantityKg": 19600,
+    "shipmentCompany": "AIR CANADA SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6922fd4e",
@@ -18066,7 +18460,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 056607-1 | 2025-08-13 | AEREO | FOB $71,917.00 | 5,461.5kg | ISRAEL",
     "cofaceCoverageAmountUSD": 88738.45,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -18360,11 +18754,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:25:50.821Z"
+    "createdAt": "2025-11-23T12:25:50.821Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5461.5,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6922fe91",
@@ -18396,7 +18796,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 059014-1 | 2025-08-19 | AEREO | FOB $103,661.65 | 7,831.5kg | ISRAEL",
     "cofaceCoverageAmountUSD": 125695.58,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -18690,11 +19090,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:31:13.167Z"
+    "createdAt": "2025-11-23T12:31:13.167Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 7831.5,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-69230125",
@@ -18726,7 +19132,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 063040-1 | 2025-09-02 | AEREO | FOB $71,860.40 | 5,983.5kg | ISRAEL",
     "cofaceCoverageAmountUSD": 89178.08,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -19020,11 +19426,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:42:13.417Z"
+    "createdAt": "2025-11-23T12:42:13.417Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5983.5,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6923022c",
@@ -19056,7 +19468,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 067181-2 | 2025-09-16 | AEREO | FOB $35,706.74 | 2,880kg | ISRAEL",
     "cofaceCoverageAmountUSD": 43701.12,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -19350,11 +19762,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:46:36.395Z"
+    "createdAt": "2025-11-23T12:46:36.395Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 2880,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-69230430",
@@ -19386,7 +19804,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 070310-1 | 2025-09-28 | AEREO | FOB $72,882.33 | 6,238.5kg | ISRAEL",
     "cofaceCoverageAmountUSD": 91780.81,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -19680,11 +20098,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-23T12:55:12.590Z"
+    "createdAt": "2025-11-23T12:55:12.590Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6238.5,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6925c62b",
@@ -19716,7 +20140,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 075566-1 | 2025-10-15 | AEREO | FOB $92,274.96 | 7,903.5kg | ISRAEL",
     "cofaceCoverageAmountUSD": 114948.5,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -20010,11 +20434,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:07:23.818Z"
+    "createdAt": "2025-11-25T15:07:23.818Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 7903.5,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6925cc7b",
@@ -20046,7 +20476,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 076596-1 | 2025-10-20 | AEREO | FOB $38,983.60 | 3,600kg | ISRAEL",
     "cofaceCoverageAmountUSD": 49917.6,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -20340,11 +20770,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:34:19.854Z"
+    "createdAt": "2025-11-25T15:34:19.854Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 3600,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6925cf95",
@@ -20376,7 +20812,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 077466-2 | 2025-10-21 | AEREO | FOB $91,920.00 | 7,920kg | ISRAEL",
     "cofaceCoverageAmountUSD": 110198.88,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -20670,11 +21106,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:47:33.161Z"
+    "createdAt": "2025-11-25T15:47:33.161Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 7920,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6925d1ba",
@@ -20706,7 +21148,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 079557-1 | 2025-10-27 | AEREO | FOB $39,340.84 | 3,498kg | ISRAEL",
     "cofaceCoverageAmountUSD": 49951.44,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -21000,11 +21442,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T15:56:42.373Z"
+    "createdAt": "2025-11-25T15:56:42.373Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 3498,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6925d34c",
@@ -21036,7 +21484,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 081399-1 | 2025-11-03 | AEREO | FOB $66,744.00 | 6,480kg | ISRAEL",
     "cofaceCoverageAmountUSD": 86235.84,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -21330,11 +21778,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-25T16:03:24.595Z"
+    "createdAt": "2025-11-25T16:03:24.595Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": "AIR EUROPA LINEAS A?REAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-692eea6b",
@@ -21366,7 +21820,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 081399-1 | 2025-11-03 | AEREO | FOB $66,744.00 | 6,480kg | ISRAEL",
     "cofaceCoverageAmountUSD": 88244.1,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -21660,11 +22114,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-02T13:32:27.112Z"
+    "createdAt": "2025-12-02T13:32:27.112Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6394.5,
+    "shipmentCompany": "AIR EUROPA LINEAS AEREAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-692eeaed",
@@ -21690,13 +22150,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.08,
-    "shippingStartDate": "2025-11-10T00:00:00.000Z",
+    "shippingStartDate": "2025-10-06T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 073604-1 | 2025-10-06 | AEREO | FOB $72,640.45 | 6,766.5kg | ISRAEL (Madrid transship) | UPGRADED to confirmed under 2026-08-31 policy reset: real exporter Holy Fruit Peru S.A.C (recorded supplier matches); kg 6,766.5 vs recorded 6,394.5 (5.8% gap, right ballpark); real importer Eagle Trading Agriculture Marketing Ltd matches recorded buyer. Reassigned off DUA 059014-1, which this row previously shared with FRESH BLUEBERRIES E001-39 (a 2026-08-09-pass fill) -- 059014-1 now belongs solely to E001-39, resolving that pre-existing double-claim as a byproduct. shipmentDate corrected: 2025-11-10 -> 2025-10-06. Note: this dealRef appears on 3 separate CSV rows with an identical buyer/supplier/recorded date -- likely one physical air-waybill split across multiple MongoDB deal records. This row and row 1 (pre-existing DUA 081399-1) now each carry a distinct real DUA; the third row remains unresolved -- no further close-volume, unclaimed Holy Fruit Peru DUA exists in either extract (genuine scarcity, not a forced pick).",
     "cofaceCoverageAmountUSD": 88551.04,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -21990,11 +22450,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-02T13:34:37.517Z"
+    "createdAt": "2025-12-02T13:34:37.517Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6394.5,
+    "shipmentCompany": "AIR EUROPA LINEAS AEREAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-692f0927",
@@ -22020,13 +22486,13 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 23.08,
-    "shippingStartDate": "2025-11-17T00:00:00.000Z",
+    "shippingStartDate": "2025-11-10T00:00:00.000Z",
     "priorDealsBetweenParties": 12,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "real",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 075566-1 | 2025-10-15 | AEREO | FOB $92,274.96 | 7,903.5kg | ISRAEL [low-confidence: buyer/supplier+volume match only, DUA date 26d from recorded shipmentDate]",
     "cofaceCoverageAmountUSD": 88551.04,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -22320,11 +22786,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-02T15:43:35.425Z"
+    "createdAt": "2025-12-02T15:43:35.425Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6394.5,
+    "shipmentCompany": "AIR EUROPA LINEAS AEREAS S.A. SUCURSAL DEL PERU"
   },
   {
     "id": "plat-6972c745",
@@ -22345,7 +22817,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
@@ -22658,7 +23130,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-23T00:56:37.083Z"
+    "createdAt": "2026-01-23T00:56:37.083Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c67d82",
@@ -22679,7 +23158,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -22826,7 +23305,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T12:52:18.327Z"
+    "createdAt": "2026-03-27T12:52:18.327Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c6a452",
@@ -22847,7 +23333,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -22994,7 +23480,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:37:54.951Z"
+    "createdAt": "2026-03-27T15:37:54.951Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c6a642",
@@ -23015,7 +23508,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 15,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -23162,7 +23655,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:46:10.207Z"
+    "createdAt": "2026-03-27T15:46:10.207Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MIAMI",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c6a7d9",
@@ -23183,7 +23683,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -23330,7 +23830,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:52:57.914Z"
+    "createdAt": "2026-03-27T15:52:57.914Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c6a832",
@@ -23351,7 +23858,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 15,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -23498,7 +24005,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:54:26.108Z"
+    "createdAt": "2026-03-27T15:54:26.108Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MIAMI",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c6a855",
@@ -23519,7 +24033,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 15,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -23666,7 +24180,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:55:01.043Z"
+    "createdAt": "2026-03-27T15:55:01.043Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MIAMI",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69c6a889",
@@ -23687,7 +24208,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 12,
+    "estimatedTransitDays": 20,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
@@ -23834,7 +24355,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-03-27T15:55:53.974Z"
+    "createdAt": "2026-03-27T15:55:53.974Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PORT HUENEME",
+    "presentation": "CAJAS DE 10 KG",
+    "quantityKg": 22960,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69d3e6fb",
@@ -23845,9 +24373,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3600 x CARTON X 1.5KG",
     "dealValueUSD": 90612,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "Philadelphia, United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -23855,18 +24383,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
-    "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "estimatedTransitDays": 12,
+    "numberOfTransshipments": 0,
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 25.17,
-    "shippingStartDate": "2025-09-08T10:00:00.000Z",
+    "shippingStartDate": "2025-09-30T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 010039-1 | 2025-09-30 | MARITIMO | FOB $56,547.98 | 5,630.4kg | ESTADOS UNIDOS (PHILADELPHIA) | kg 4.3% above recorded 5,400; date corrected 2025-09-08 -> 2025-09-30 (22d). CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is SUN BELLE LLC, not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 81550.8,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -24084,11 +24612,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-08T10:00:00.000Z"
+    "createdAt": "2025-09-08T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "PHILADELPHIA",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-69d3e6fb",
@@ -24099,9 +24633,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3840 x CARTON X 1.5KG",
     "dealValueUSD": 88473.6,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -24109,18 +24643,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 14,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 23.04,
-    "shippingStartDate": "2025-09-22T10:00:00.000Z",
+    "shippingStartDate": "2025-10-23T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 033883-2 | 2025-10-23 | MARITIMO | FOB $40,425.20 | 6,113.88kg | ESTADOS UNIDOS (GUAYAQUIL) | kg 6.1% above recorded 5,760; date corrected 2025-09-22 -> 2025-10-23 (31d). Customs destination country ESTADOS UNIDOS via Guayaquil transshipment hub. CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is SUN BELLE INC, not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 79626.24,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -24338,11 +24872,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-22T10:00:00.000Z"
+    "createdAt": "2025-09-22T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "GUAYAQUIL",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5760,
+    "shipmentCompany": null
   },
   {
     "id": "plat-f8292a55",
@@ -24353,9 +24893,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3600 x CARTON X 1.5KG",
     "dealValueUSD": 88200,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "Miami, United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -24363,18 +24903,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
-    "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "estimatedTransitDays": 15,
+    "numberOfTransshipments": 0,
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 24.5,
-    "shippingStartDate": "2025-10-06T10:00:00.000Z",
+    "shippingStartDate": "2025-11-04T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 035221-2 | 2025-11-04 | MARITIMO | FOB $49,492.93 | 5,544.01kg | ESTADOS UNIDOS (MIAMI) | kg 2.7% above recorded 5,400; date corrected 2025-10-06 -> 2025-11-04 (29d). CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is SUN BELLE LLC, not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 79380,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -24592,11 +25132,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-06T10:00:00.000Z"
+    "createdAt": "2025-10-06T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MIAMI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-13d1c2e4",
@@ -24607,9 +25153,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3600 x CARTON X 1.5KG",
     "dealValueUSD": 91080,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -24617,18 +25163,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 14,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 25.3,
-    "shippingStartDate": "2025-10-20T10:00:00.000Z",
+    "shippingStartDate": "2025-11-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 011558-1 | 2025-11-20 | MARITIMO | FOB $53,661.97 | 5,630.4kg | ESTADOS UNIDOS (GUAYAQUIL) | kg 4.3% above recorded 5,400; date corrected 2025-10-20 -> 2025-11-20 (31d). Customs destination country ESTADOS UNIDOS via Guayaquil transshipment hub. CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is SUN BELLE INC, not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 81972,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -24846,11 +25392,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-20T10:00:00.000Z"
+    "createdAt": "2025-10-20T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "GUAYAQUIL",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-f9105911",
@@ -24861,9 +25413,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3840 x CARTON X 1.5KG",
     "dealValueUSD": 89126.4,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -24871,18 +25423,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 14,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 23.21,
-    "shippingStartDate": "2026-01-13T10:00:00.000Z",
+    "shippingStartDate": "2026-01-22T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 000288-1 | 2026-01-22 | MARITIMO | FOB $46,938.27 | 4,926.6kg | ESTADOS UNIDOS (GUAYAQUIL) | kg 14.5% below recorded 5,760 (still ballpark); date corrected 2026-01-13 -> 2026-01-22 (9d). Customs destination country ESTADOS UNIDOS via Guayaquil transshipment hub. CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is N/A (blank on DUA), not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 80213.76,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -25101,11 +25653,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-13T10:00:00.000Z"
+    "createdAt": "2026-01-13T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "GUAYAQUIL",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5760,
+    "shipmentCompany": null
   },
   {
     "id": "plat-02972b2d",
@@ -25116,9 +25674,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "3840 x CARTON X 1.5KG",
     "dealValueUSD": 89011.2,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -25126,18 +25684,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 14,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 23.18,
-    "shippingStartDate": "2025-12-10T10:00:00.000Z",
+    "shippingStartDate": "2025-11-27T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 011785-2 | 2025-11-27 | MARITIMO | FOB $44,316.22 | 6,103.68kg | ESTADOS UNIDOS (GUAYAQUIL) | kg 6.0% above recorded 5,760; date corrected 2025-12-10 -> 2025-11-27 (13d). Customs destination country ESTADOS UNIDOS via Guayaquil transshipment hub. CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is SUN BELLE INC, not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 80110.08,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -25355,11 +25913,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-10T10:00:00.000Z"
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "GUAYAQUIL",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5760,
+    "shipmentCompany": null
   },
   {
     "id": "plat-d1b96035",
@@ -25370,9 +25934,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "4320 x CARTON X 1.5KG",
     "dealValueUSD": 88905.6,
     "origin": "Callao, Peru",
-    "destination": "Dubai, United Arab Emirates",
+    "destination": "United States",
     "buyerName": "TRADE CULTIVATORS LLC",
-    "supplierName": "GIDDINS PERU SAC",
+    "supplierName": "GIDDINGS BERRIES PERU S.A.C.",
     "buyerYib": 2,
     "supplierYib": 12,
     "buyerYibSource": "default",
@@ -25380,18 +25944,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 14,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
-    "transportMode": "air",
+    "routeRiskFlag": "Low",
+    "transportMode": "sea",
     "offerUnitPriceUSD": 20.58,
-    "shippingStartDate": "2025-12-20T10:00:00.000Z",
+    "shippingStartDate": "2025-11-13T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 011386-1 | 2025-11-13 | MARITIMO | FOB $52,953.78 | 6,334.2kg | ESTADOS UNIDOS (GUAYAQUIL) | kg 2.3% below recorded 6,480; date corrected 2025-12-20 -> 2025-11-13 (37d). Customs destination country ESTADOS UNIDOS via Guayaquil transshipment hub. CONFIRMED 2026-09-14: ops confirmed recorded supplier GIDDINS PERU SAC is a misspelling of GIDDINGS BERRIES PERU S.A.C. (RUC 20565586247) and the recorded Dubai/UAE air route is wrong -- this exporter's Veritrade blueberry traffic is Peru->USA maritime (268 of 297 rows), not UAE. Real importer is SUN BELLE LLC, not Trade Cultivators LLC (informational per 2026-08-31 buyer-name policy). Recorded FOB ~$23-25/kg was air-UAE pricing; real sea-USA FOB is lower -- expected with the route correction, flagged not blocking.",
     "cofaceCoverageAmountUSD": 80015.04,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -25609,11 +26173,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-20T10:00:00.000Z"
+    "createdAt": "2025-12-20T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "GUAYAQUIL",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": null
   },
   {
     "id": "plat-23e57a6f",
@@ -25639,7 +26209,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 21.66,
-    "shippingStartDate": "2025-09-10T10:00:00.000Z",
+    "shippingStartDate": "2025-09-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -25867,7 +26437,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-10T10:00:00.000Z"
+    "createdAt": "2025-09-10T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": null
   },
   {
     "id": "plat-45135bc7",
@@ -25893,7 +26470,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25,
-    "shippingStartDate": "2025-09-24T10:00:00.000Z",
+    "shippingStartDate": "2025-09-24T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -26121,7 +26698,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-24T10:00:00.000Z"
+    "createdAt": "2025-09-24T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5760,
+    "shipmentCompany": null
   },
   {
     "id": "plat-bea2c0f9",
@@ -26147,7 +26731,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.95,
-    "shippingStartDate": "2025-10-08T10:00:00.000Z",
+    "shippingStartDate": "2025-10-08T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -26375,7 +26959,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-08T10:00:00.000Z"
+    "createdAt": "2025-10-08T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-0bd76140",
@@ -26401,7 +26992,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 26.6,
-    "shippingStartDate": "2025-10-22T10:00:00.000Z",
+    "shippingStartDate": "2025-10-22T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -26629,7 +27220,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-22T10:00:00.000Z"
+    "createdAt": "2025-10-22T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5400,
+    "shipmentCompany": null
   },
   {
     "id": "plat-3dc9aaae",
@@ -26655,7 +27253,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.01,
-    "shippingStartDate": "2026-01-21T10:00:00.000Z",
+    "shippingStartDate": "2026-01-21T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -26884,7 +27482,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-21T10:00:00.000Z"
+    "createdAt": "2026-01-21T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5760,
+    "shipmentCompany": null
   },
   {
     "id": "plat-72959fd4",
@@ -26910,7 +27515,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 25.17,
-    "shippingStartDate": "2025-12-10T10:00:00.000Z",
+    "shippingStartDate": "2025-12-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27138,7 +27743,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-10T10:00:00.000Z"
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 5760,
+    "shipmentCompany": null
   },
   {
     "id": "plat-c9626056",
@@ -27164,7 +27776,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "air",
     "offerUnitPriceUSD": 22.04,
-    "shippingStartDate": "2025-12-20T10:00:00.000Z",
+    "shippingStartDate": "2025-12-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27392,7 +28004,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-20T10:00:00.000Z"
+    "createdAt": "2025-12-20T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "DUBAI",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 6480,
+    "shipmentCompany": null
   },
   {
     "id": "plat-64f4e1cb",
@@ -27418,7 +28037,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.32,
-    "shippingStartDate": "2025-01-10T10:00:00.000Z",
+    "shippingStartDate": "2025-01-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27439,7 +28058,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-10T10:00:00.000Z"
+    "createdAt": "2025-01-10T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-a006862c",
@@ -27465,7 +28091,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 50.17,
-    "shippingStartDate": "2025-01-20T10:00:00.000Z",
+    "shippingStartDate": "2025-01-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27486,7 +28112,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-20T10:00:00.000Z"
+    "createdAt": "2025-01-20T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-5713177a",
@@ -27512,7 +28145,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.89,
-    "shippingStartDate": "2025-02-09T10:00:00.000Z",
+    "shippingStartDate": "2025-02-09T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27533,7 +28166,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-09T10:00:00.000Z"
+    "createdAt": "2025-02-09T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-ccc54d97",
@@ -27559,7 +28199,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.22,
-    "shippingStartDate": "2025-02-18T10:00:00.000Z",
+    "shippingStartDate": "2025-02-18T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27580,7 +28220,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-18T10:00:00.000Z"
+    "createdAt": "2025-02-18T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-1d8db98a",
@@ -27606,7 +28253,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.22,
-    "shippingStartDate": "2025-03-10T10:00:00.000Z",
+    "shippingStartDate": "2025-03-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27627,7 +28274,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-10T10:00:00.000Z"
+    "createdAt": "2025-03-10T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-58e792e2",
@@ -27653,7 +28307,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.33,
-    "shippingStartDate": "2025-04-15T10:00:00.000Z",
+    "shippingStartDate": "2025-04-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27674,7 +28328,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-15T10:00:00.000Z"
+    "createdAt": "2025-04-15T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-652fbae3",
@@ -27700,7 +28361,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 49.54,
-    "shippingStartDate": "2025-10-24T10:00:00.000Z",
+    "shippingStartDate": "2025-10-24T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27721,7 +28382,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-24T10:00:00.000Z"
+    "createdAt": "2025-10-24T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "CARTON X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-06c34a88",
@@ -27732,9 +28400,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "7800 x CARTON X 1.5KG",
     "dealValueUSD": 78936,
     "origin": "Callao, Peru",
-    "destination": "Malaga, China",
+    "destination": "Malaga, Spain",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-    "supplierName": "ICA BLUEBERRIES SAC",
+    "supplierName": "BERRYCO S.A.C.",
     "buyerYib": 5,
     "supplierYib": 10,
     "buyerYibSource": "verified",
@@ -27742,12 +28410,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.12,
-    "shippingStartDate": "2025-09-05T10:00:00.000Z",
+    "shippingStartDate": "2025-09-05T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -27985,7 +28653,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-05T10:00:00.000Z"
+    "createdAt": "2025-09-05T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-23e523e4",
@@ -27996,9 +28671,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "7800 x CARTON X 1.5KG",
     "dealValueUSD": 80106,
     "origin": "Callao, Peru",
-    "destination": "Malaga, China",
+    "destination": "Malaga, Spain",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-    "supplierName": "ICA BLUEBERRIES SAC",
+    "supplierName": "BERRYCO S.A.C.",
     "buyerYib": 5,
     "supplierYib": 10,
     "buyerYibSource": "verified",
@@ -28006,12 +28681,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.27,
-    "shippingStartDate": "2025-09-18T10:00:00.000Z",
+    "shippingStartDate": "2025-09-18T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -28249,7 +28924,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-18T10:00:00.000Z"
+    "createdAt": "2025-09-18T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-aa8a2204",
@@ -28262,7 +28944,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Shanghai, China",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-    "supplierName": "ICA BLUEBERRIES SAC",
+    "supplierName": "BERRYCO S.A.C.",
     "buyerYib": 5,
     "supplierYib": 10,
     "buyerYibSource": "verified",
@@ -28270,12 +28952,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 38,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.32,
-    "shippingStartDate": "2025-10-15T10:00:00.000Z",
+    "shippingStartDate": "2025-10-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -28502,7 +29184,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-15T10:00:00.000Z"
+    "createdAt": "2025-10-15T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "SHANGHAI",
+    "presentation": "BULK X 3.5KG",
+    "quantityKg": 27300,
+    "shipmentCompany": null
   },
   {
     "id": "plat-4957b340",
@@ -28513,9 +29202,9 @@ export const platformDeals: PlatformDealRecord[] = [
     "quantityLabel": "7800 x CARTON X 1.5KG",
     "dealValueUSD": 78078,
     "origin": "Callao, Peru",
-    "destination": "Malaga, China",
+    "destination": "Malaga, Spain",
     "buyerName": "GUANGZHOU FRESH LINK IMPORT CO LTD",
-    "supplierName": "ICA BLUEBERRIES SAC",
+    "supplierName": "BERRYCO S.A.C.",
     "buyerYib": 5,
     "supplierYib": 10,
     "buyerYibSource": "verified",
@@ -28523,12 +29212,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 10.01,
-    "shippingStartDate": "2026-01-17T10:00:00.000Z",
+    "shippingStartDate": "2026-01-17T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -28767,7 +29456,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-17T10:00:00.000Z"
+    "createdAt": "2026-01-17T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-19f4e57b",
@@ -28780,7 +29476,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -28788,12 +29484,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.09,
-    "shippingStartDate": "2025-09-06T10:00:00.000Z",
+    "shippingStartDate": "2025-09-06T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -29024,7 +29720,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-06T10:00:00.000Z"
+    "createdAt": "2025-09-06T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-bf0abb2c",
@@ -29037,7 +29740,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -29045,12 +29748,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.9,
-    "shippingStartDate": "2025-09-14T10:00:00.000Z",
+    "shippingStartDate": "2025-09-14T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -29281,7 +29984,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-14T10:00:00.000Z"
+    "createdAt": "2025-09-14T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-19c67a6f",
@@ -29294,7 +30004,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -29302,12 +30012,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.17,
-    "shippingStartDate": "2025-09-20T10:00:00.000Z",
+    "shippingStartDate": "2025-09-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -29538,7 +30248,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-20T10:00:00.000Z"
+    "createdAt": "2025-09-20T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-9155f4c1",
@@ -29551,7 +30268,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -29559,12 +30276,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.14,
-    "shippingStartDate": "2025-09-27T10:00:00.000Z",
+    "shippingStartDate": "2025-09-27T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -29795,7 +30512,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-27T10:00:00.000Z"
+    "createdAt": "2025-09-27T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-bfe19ddd",
@@ -29808,7 +30532,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -29816,12 +30540,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.16,
-    "shippingStartDate": "2025-11-03T10:00:00.000Z",
+    "shippingStartDate": "2025-11-03T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -30052,7 +30776,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-11-03T10:00:00.000Z"
+    "createdAt": "2025-11-03T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-bed0586c",
@@ -30065,7 +30796,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -30073,12 +30804,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.08,
-    "shippingStartDate": "2025-10-20T10:00:00.000Z",
+    "shippingStartDate": "2025-10-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -30309,7 +31040,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-20T10:00:00.000Z"
+    "createdAt": "2025-10-20T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-f0e79517",
@@ -30322,7 +31060,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -30330,12 +31068,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.02,
-    "shippingStartDate": "2026-01-09T10:00:00.000Z",
+    "shippingStartDate": "2026-01-09T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -30567,7 +31305,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-09T10:00:00.000Z"
+    "createdAt": "2026-01-09T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-ef921c5a",
@@ -30580,7 +31325,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -30588,12 +31333,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.91,
-    "shippingStartDate": "2026-01-25T10:00:00.000Z",
+    "shippingStartDate": "2026-01-25T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -30825,7 +31570,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-25T10:00:00.000Z"
+    "createdAt": "2026-01-25T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-18400fc8",
@@ -30838,7 +31590,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -30846,12 +31598,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.03,
-    "shippingStartDate": "2025-12-06T10:00:00.000Z",
+    "shippingStartDate": "2025-12-06T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -31082,7 +31834,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-06T10:00:00.000Z"
+    "createdAt": "2025-12-06T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-d4a8ed1f",
@@ -31095,7 +31854,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -31103,12 +31862,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.1,
-    "shippingStartDate": "2025-12-12T10:00:00.000Z",
+    "shippingStartDate": "2025-12-12T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -31339,7 +32098,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-12T10:00:00.000Z"
+    "createdAt": "2025-12-12T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-84eb9657",
@@ -31352,7 +32118,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -31360,12 +32126,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.94,
-    "shippingStartDate": "2025-12-18T10:00:00.000Z",
+    "shippingStartDate": "2025-12-18T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -31596,7 +32362,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-18T10:00:00.000Z"
+    "createdAt": "2025-12-18T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6ebcc56a",
@@ -31609,7 +32382,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Kaohsiung, Taiwan, Province of China",
     "buyerName": "Allied Trade Global",
-    "supplierName": "AGRICOLA VIÂASOL SAC",
+    "supplierName": "AGRICOLA VIASOL SAC",
     "buyerYib": 14,
     "supplierYib": 15,
     "buyerYibSource": "default",
@@ -31617,12 +32390,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.22,
-    "shippingStartDate": "2025-12-24T10:00:00.000Z",
+    "shippingStartDate": "2025-12-24T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -31853,33 +32626,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-24T10:00:00.000Z"
+    "createdAt": "2025-12-24T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-48498606",
     "mongoId": "484986066a7417fcfe592946",
-    "dealRef": "FRESH AVOCADO XRK-ESP-001",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-001",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 53568,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.32,
-    "shippingStartDate": "2025-03-10T10:00:00.000Z",
+    "shippingStartDate": "2025-03-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -32105,33 +32885,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-10T10:00:00.000Z"
+    "createdAt": "2025-03-10T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-8ba96f69",
     "mongoId": "8ba96f6965749c434694263e",
-    "dealRef": "FRESH AVOCADO XRK-ESP-002",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-002",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 50016,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 20.84,
-    "shippingStartDate": "2025-04-05T10:00:00.000Z",
+    "shippingStartDate": "2025-04-05T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -32358,33 +33145,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-05T10:00:00.000Z"
+    "createdAt": "2025-04-05T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-d309a243",
     "mongoId": "d309a2434ae0d85043332a28",
-    "dealRef": "FRESH AVOCADO XRK-ESP-003",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-003",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 53112,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.13,
-    "shippingStartDate": "2025-04-06T10:00:00.000Z",
+    "shippingStartDate": "2025-04-06T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -32611,33 +33405,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-06T10:00:00.000Z"
+    "createdAt": "2025-04-06T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-101ad782",
     "mongoId": "101ad782e9b05452df4e6de1",
-    "dealRef": "FRESH AVOCADO XRK-ESP-004",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-004",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 53304,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.21,
-    "shippingStartDate": "2025-07-07T10:00:00.000Z",
+    "shippingStartDate": "2025-07-07T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -32863,33 +33664,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-07T10:00:00.000Z"
+    "createdAt": "2025-07-07T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-de10bc4c",
     "mongoId": "de10bc4c6dc304f27f22c71b",
-    "dealRef": "FRESH AVOCADO XRK-ESP-005",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-005",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 50664,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.11,
-    "shippingStartDate": "2025-07-21T10:00:00.000Z",
+    "shippingStartDate": "2025-07-21T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -33115,33 +33923,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-21T10:00:00.000Z"
+    "createdAt": "2025-07-21T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-e3bd45be",
     "mongoId": "e3bd45be46c02a03587be9ff",
-    "dealRef": "FRESH AVOCADO XRK-ESP-006",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-006",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 52848,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 22.02,
-    "shippingStartDate": "2025-08-04T10:00:00.000Z",
+    "shippingStartDate": "2025-08-04T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -33368,33 +34183,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-04T10:00:00.000Z"
+    "createdAt": "2025-08-04T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-e5b159d4",
     "mongoId": "e5b159d4320d161759a80f86",
-    "dealRef": "FRESH AVOCADO XRK-ESP-007",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-007",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 51720,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.55,
-    "shippingStartDate": "2025-08-18T10:00:00.000Z",
+    "shippingStartDate": "2025-08-18T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -33620,33 +34442,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-18T10:00:00.000Z"
+    "createdAt": "2025-08-18T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-d19f70bf",
     "mongoId": "d19f70bf1eca33acc81de653",
-    "dealRef": "FRESH AVOCADO XRK-ESP-008",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-008",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "5540 x CARTON X 4KG",
     "dealValueUSD": 51411.2,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.28,
-    "shippingStartDate": "2025-10-06T10:00:00.000Z",
+    "shippingStartDate": "2025-10-06T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -33873,33 +34702,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-06T10:00:00.000Z"
+    "createdAt": "2025-10-06T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 4KG",
+    "quantityKg": 22160,
+    "shipmentCompany": null
   },
   {
     "id": "plat-8413cc04",
     "mongoId": "8413cc04d544fe53c0254173",
-    "dealRef": "FRESH AVOCADO XRK-ESP-009",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-009",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "5540 x CARTON X 4KG",
     "dealValueUSD": 51134.2,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 9.23,
-    "shippingStartDate": "2025-10-20T10:00:00.000Z",
+    "shippingStartDate": "2025-10-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -34126,33 +34962,40 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-20T10:00:00.000Z"
+    "createdAt": "2025-10-20T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 4KG",
+    "quantityKg": 22160,
+    "shipmentCompany": null
   },
   {
     "id": "plat-fbd21bec",
     "mongoId": "fbd21becdccde94e83865585",
-    "dealRef": "FRESH AVOCADO XRK-ESP-010",
-    "product": "Fresh Avocado",
-    "variety": "HASS",
+    "dealRef": "FRESH ASPARAGUS XRK-ESP-010",
+    "product": "Fresh Asparagus",
+    "variety": "ASPARAGUS",
     "quantityLabel": "2400 x BULK X 10KG",
     "dealValueUSD": 50640,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "XARKI SL",
-    "supplierName": "AGRICOLA MEDANO AZUL SAC",
+    "supplierName": "AGRICOLA LOS MEDANOS S.A.",
     "buyerYib": 66,
     "supplierYib": 5,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
     "perishabilityClass": "Perishable",
-    "shelfLifeDays": 35,
+    "shelfLifeDays": 14,
     "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "estimatedTransitDays": 0,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "Medium",
+    "routeRiskFlag": "High",
     "transportMode": "sea",
     "offerUnitPriceUSD": 21.1,
-    "shippingStartDate": "2025-06-15T10:00:00.000Z",
+    "shippingStartDate": "2025-06-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -34378,39 +35221,46 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-15T10:00:00.000Z"
+    "createdAt": "2025-06-15T10:00:00.000Z",
+    "hsCode": "0709200000",
+    "hsHeading4": "0709",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "BULK X 10KG",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-c8dcac55",
     "mongoId": "c8dcac5597b0e930ae253eff",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-001",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 48880,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.44,
-    "shippingStartDate": "2025-03-10T10:00:00.000Z",
+    "shippingStartDate": "2024-11-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 120193 (items 1-2 combined) | 2024-11-20 | MARITIMO | FOB $49,008.49 | 19,188kg | ESPANA (POSORJA) | split-shipment sum exact-lane (supplier+Spain+ginger). kg 4.1% below recorded 20,000; FOB $49,008 vs recorded $48,880 (0.3%). date corrected 2025-01-15 -> 2024-11-20 (56d). Real importer HERMANOS FERNANDEZ LOPEZ SAU, not Hacienda Sotomayor SL (informational per 2026-08-31 buyer-name policy). PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational.",
     "cofaceCoverageAmountUSD": 43992,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -34543,44 +35393,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-10T10:00:00.000Z"
+    "createdAt": "2025-03-10T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": "TRAMARSA - TRABAJOS MARITIMOS S.A."
   },
   {
     "id": "plat-7394319c",
     "mongoId": "7394319c4838862cd229de92",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-002",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 51920,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 25.96,
-    "shippingStartDate": "2025-10-08T21:00:00.000Z",
+    "shippingStartDate": "2025-09-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 094936 (items 1-2 combined) | 2025-09-10 | MARITIMO | FOB $28,524.24 | 16,488kg | ESPANA (SAN ANTONIO) | date exact. kg 17.6% below recorded 20,000 (right ballpark, split-shipment). FOB $28,524 vs recorded $51,920 (45% -- recorded asparagus unit price, real ginger is cheaper; flagged). Real importer AXARFRUIT SL, not Hacienda Sotomayor SL (informational per 2026-08-31 buyer-name policy). PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational.",
     "cofaceCoverageAmountUSD": 46728,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -34713,44 +35569,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-10T10:00:00.000Z"
+    "createdAt": "2025-04-10T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": "IAN TAYLOR AGENCIAS S.A.C."
   },
   {
     "id": "plat-2d19374d",
     "mongoId": "2d19374d4f8331ce5f4051d0",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-003",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 51120,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 25.56,
-    "shippingStartDate": "2025-04-07T10:00:00.000Z",
+    "shippingStartDate": "2025-04-07T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational. Spain ginger DUAs exist (Frutas Alhambra / Axarfruit / Hermanos Fernandez) but none cluster near this recorded date -- Jan-Jul 2025 is a real Spain-ginger gap between DUA 120193 (2024-11-20) and DUA 089279 (2025-08-27). Left unfilled on DUA pending a closer row or ops date correction.",
     "cofaceCoverageAmountUSD": 46008,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -34883,44 +35745,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-07T10:00:00.000Z"
+    "createdAt": "2025-04-07T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-4b8d7a5b",
     "mongoId": "4b8d7a5b4742bbf14f494eaf",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-004",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 49380,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.69,
-    "shippingStartDate": "2025-07-14T10:00:00.000Z",
+    "shippingStartDate": "2025-07-14T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational. Spain ginger DUAs exist (Frutas Alhambra / Axarfruit / Hermanos Fernandez) but none cluster near this recorded date -- Jan-Jul 2025 is a real Spain-ginger gap between DUA 120193 (2024-11-20) and DUA 089279 (2025-08-27). Left unfilled on DUA pending a closer row or ops date correction.",
     "cofaceCoverageAmountUSD": 44442,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -35053,44 +35921,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-14T10:00:00.000Z"
+    "createdAt": "2025-07-14T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-743a2854",
     "mongoId": "743a2854fbc7fef6e4dea5d3",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-005",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 48420,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.21,
-    "shippingStartDate": "2025-07-28T10:00:00.000Z",
+    "shippingStartDate": "2025-07-28T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational. Spain ginger DUAs exist (Frutas Alhambra / Axarfruit / Hermanos Fernandez) but none cluster near this recorded date -- Jan-Jul 2025 is a real Spain-ginger gap between DUA 120193 (2024-11-20) and DUA 089279 (2025-08-27). Left unfilled on DUA pending a closer row or ops date correction.",
     "cofaceCoverageAmountUSD": 43578,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -35223,44 +36097,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-28T10:00:00.000Z"
+    "createdAt": "2025-07-28T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-32897f09",
     "mongoId": "32897f091183db2f46a577ff",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-006",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 48380,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.19,
-    "shippingStartDate": "2025-08-11T10:00:00.000Z",
+    "shippingStartDate": "2025-08-11T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational. Spain ginger DUAs exist (Frutas Alhambra / Axarfruit / Hermanos Fernandez) but none cluster near this recorded date -- Jan-Jul 2025 is a real Spain-ginger gap between DUA 120193 (2024-11-20) and DUA 089279 (2025-08-27). Left unfilled on DUA pending a closer row or ops date correction.",
     "cofaceCoverageAmountUSD": 43542,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -35393,44 +36273,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-11T10:00:00.000Z"
+    "createdAt": "2025-08-11T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-30dc4ee7",
     "mongoId": "30dc4ee7d54082ca34ad0d59",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-007",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 49560,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.78,
-    "shippingStartDate": "2025-08-25T10:00:00.000Z",
+    "shippingStartDate": "2025-08-27T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 089279 (items 1-3 combined) | 2025-08-27 | MARITIMO | FOB $26,501.00 | 17,508kg | ESPANA (POSORJA) | date 2d from recorded 2025-08-25. kg 12.5% below recorded 20,000. FOB gap flagged (recorded asparagus pricing vs real ginger). Real importer FRUTAS ALHAMBRA S.L., not Hacienda Sotomayor SL (informational per 2026-08-31 buyer-name policy). PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational.",
     "cofaceCoverageAmountUSD": 44604,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -35563,44 +36449,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-25T10:00:00.000Z"
+    "createdAt": "2025-08-25T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-e2bf4fbe",
     "mongoId": "e2bf4fbe59c0c5bea91c0b26",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-008",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 48400,
     "origin": "Callao, Peru",
     "destination": "Algeciras, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 19,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 27,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.2,
-    "shippingStartDate": "2025-10-13T10:00:00.000Z",
+    "shippingStartDate": "2025-10-22T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 110993 (items 1-3 combined) | 2025-10-22 | MARITIMO | FOB $35,598.24 | 21,504kg | ESPANA (POSORJA) | date corrected 2025-10-13 -> 2025-10-22 (9d). kg 7.5% above recorded 20,000. FOB gap flagged (recorded asparagus pricing vs real ginger). Real importer FRUTAS ALHAMBRA S.L., not Hacienda Sotomayor SL (informational per 2026-08-31 buyer-name policy). PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational.",
     "cofaceCoverageAmountUSD": 43560,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -35733,44 +36625,50 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-13T10:00:00.000Z"
+    "createdAt": "2025-10-13T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ALGECIRAS",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-8d28be47",
     "mongoId": "8d28be47d037080eb35ce5a4",
     "dealRef": "FRESH ASPARAGUS HSM-ESP-009",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "variety": "GREEN",
     "quantityLabel": "2000 x CARTON X 10KG (22 x 450g Bunches)",
     "dealValueUSD": 49480,
     "origin": "Callao, Peru",
     "destination": "Malaga, Spain",
     "buyerName": "HACIENDA SOTOMAYOR SL",
-    "supplierName": "MIKHUNA FOODS SAC",
+    "supplierName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
     "buyerYib": 5,
     "supplierYib": 6,
     "buyerYibSource": "default",
     "supplierYibSource": "default",
-    "perishabilityClass": "Ultra-Perishable",
-    "shelfLifeDays": 14,
-    "coldChainRequired": true,
-    "estimatedTransitDays": 18,
+    "perishabilityClass": "Semi-Perishable",
+    "shelfLifeDays": 60,
+    "coldChainRequired": false,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
-    "routeRiskFlag": "High",
+    "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 24.74,
-    "shippingStartDate": "2025-06-15T10:00:00.000Z",
+    "shippingStartDate": "2025-06-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "PRODUCT CORRECTED 2026-09-14 (ops + Veritrade): recorded Fresh Asparagus HS 0709 is wrong. Real exporter is MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C (RUC 20611718579), whose 116 customs rows are overwhelmingly ginger HS 0910 (never asparagus). HS 0709 has zero rows in either Peru extract. Buyer Hacienda Sotomayor SL is a real avocado importer (not ginger) -- informational. Spain ginger DUAs exist (Frutas Alhambra / Axarfruit / Hermanos Fernandez) but none cluster near this recorded date -- Jan-Jul 2025 is a real Spain-ginger gap between DUA 120193 (2024-11-20) and DUA 089279 (2025-08-27). Left unfilled on DUA pending a closer row or ops date correction.",
     "cofaceCoverageAmountUSD": 44532,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -35903,12 +36801,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-15T10:00:00.000Z"
+    "createdAt": "2025-06-15T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "MALAGA",
+    "presentation": "CARTON X 10KG (22 x 450g Bunches)",
+    "quantityKg": 20000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-2ed7c1b1",
@@ -35929,18 +36833,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.52,
-    "shippingStartDate": "2025-06-09T10:00:00.000Z",
+    "shippingStartDate": "2025-06-08T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 004763-1 | 2025-06-08 | MARITIMO | FOB $34,542.61 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-06-09 -> 2025-06-08 (1-day gap).",
     "cofaceCoverageAmountUSD": 30115.01,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -36070,11 +36974,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-09T10:00:00.000Z"
+    "createdAt": "2025-06-09T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-f5773097",
@@ -36095,18 +37005,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.57,
-    "shippingStartDate": "2025-07-10T10:00:00.000Z",
+    "shippingStartDate": "2025-07-12T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006030-1 | 2025-07-12 | MARITIMO | FOB $33,307.34 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-07-10 -> 2025-07-12 (2-day gap).",
     "cofaceCoverageAmountUSD": 28271.63,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -36236,11 +37146,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-10T10:00:00.000Z"
+    "createdAt": "2025-07-10T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-248e0cca",
@@ -36261,18 +37177,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.06,
-    "shippingStartDate": "2025-08-12T10:00:00.000Z",
+    "shippingStartDate": "2025-08-09T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 007780-1 | 2025-08-09 | MARITIMO | FOB $30,679.30 | 22,960kg | ESTADOS UNIDOS (VALPARAISO) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-08-12 -> 2025-08-09 (3-day gap).",
     "cofaceCoverageAmountUSD": 29222.42,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -36402,11 +37318,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-12T10:00:00.000Z"
+    "createdAt": "2025-08-12T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-ad35696f",
@@ -36427,18 +37349,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.42,
-    "shippingStartDate": "2025-06-06T10:00:00.000Z",
+    "shippingStartDate": "2025-06-08T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 004941-1 | 2025-06-08 | MARITIMO | FOB $34,041.67 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-06-06 -> 2025-06-08 (2-day gap).",
     "cofaceCoverageAmountUSD": 27980.57,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -36568,11 +37490,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-06T10:00:00.000Z"
+    "createdAt": "2025-06-06T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-dbe9992e",
@@ -36593,18 +37521,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.45,
-    "shippingStartDate": "2025-06-12T10:00:00.000Z",
+    "shippingStartDate": "2025-06-14T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 005059-1 | 2025-06-14 | MARITIMO | FOB $33,306.54 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-06-12 -> 2025-06-14 (2-day gap).",
     "cofaceCoverageAmountUSD": 29979.18,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -36734,11 +37662,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-12T10:00:00.000Z"
+    "createdAt": "2025-06-12T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-0b42b541",
@@ -36759,18 +37693,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14,
-    "shippingStartDate": "2025-06-18T10:00:00.000Z",
+    "shippingStartDate": "2025-06-21T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 005589-1 | 2025-06-21 | MARITIMO | FOB $33,325.62 | 22,960kg | ESTADOS UNIDOS (MEJILLONES) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-06-18 -> 2025-06-21 (3-day gap).",
     "cofaceCoverageAmountUSD": 27165.6,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -36900,11 +37834,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-18T10:00:00.000Z"
+    "createdAt": "2025-06-18T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-484be526",
@@ -36925,18 +37865,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.3,
-    "shippingStartDate": "2025-06-24T10:00:00.000Z",
+    "shippingStartDate": "2025-06-21T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 005378-1 | 2025-06-21 | MARITIMO | FOB $33,306.54 | 22,960kg | ESTADOS UNIDOS (MEJILLONES) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-06-24 -> 2025-06-21 (3-day gap).",
     "cofaceCoverageAmountUSD": 29688.12,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -37066,11 +38006,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-24T10:00:00.000Z"
+    "createdAt": "2025-06-24T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-f476b4d2",
@@ -37091,18 +38037,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.79,
-    "shippingStartDate": "2025-07-07T10:00:00.000Z",
+    "shippingStartDate": "2025-07-05T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006305-1 | 2025-07-05 | MARITIMO | FOB $34,767.91 | 22,960kg | ESTADOS UNIDOS (VALPARAISO) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-07-07 -> 2025-07-05 (2-day gap).",
     "cofaceCoverageAmountUSD": 28698.52,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -37232,11 +38178,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-07T10:00:00.000Z"
+    "createdAt": "2025-07-07T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-4de32d0a",
@@ -37257,18 +38209,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.93,
-    "shippingStartDate": "2025-07-14T10:00:00.000Z",
+    "shippingStartDate": "2025-07-12T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006413-1 | 2025-07-12 | MARITIMO | FOB $33,306.54 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-07-14 -> 2025-07-12 (2-day gap).",
     "cofaceCoverageAmountUSD": 28970.17,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -37398,11 +38350,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-14T10:00:00.000Z"
+    "createdAt": "2025-07-14T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-17ab808c",
@@ -37423,18 +38381,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 14.15,
-    "shippingStartDate": "2025-07-21T10:00:00.000Z",
+    "shippingStartDate": "2025-07-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 006801-1 | 2025-07-20 | MARITIMO | FOB $23,904.42 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-07-21 -> 2025-07-20 (1-day gap).",
     "cofaceCoverageAmountUSD": 27456.66,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -37564,11 +38522,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-21T10:00:00.000Z"
+    "createdAt": "2025-07-21T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-846e9a2e",
@@ -37589,18 +38553,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.76,
-    "shippingStartDate": "2025-08-10T10:00:00.000Z",
+    "shippingStartDate": "2025-08-09T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 008009-1 | 2025-08-09 | MARITIMO | FOB $27,345.86 | 22,960kg | ESTADOS UNIDOS (VALPARAISO) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-08-10 -> 2025-08-09 (1-day gap).",
     "cofaceCoverageAmountUSD": 30580.7,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -37730,11 +38694,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-10T10:00:00.000Z"
+    "createdAt": "2025-08-10T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-84fc96e6",
@@ -37755,18 +38725,18 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 30,
     "coldChainRequired": true,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 15.67,
-    "shippingStartDate": "2025-08-20T10:00:00.000Z",
+    "shippingStartDate": "2025-08-16T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
     "likelyTest": "likely_test",
     "currentMilestone": 7,
-    "customsNarrative": null,
+    "customsNarrative": "DUA 008060-1 | 2025-08-16 | MARITIMO | FOB $29,481.70 | 22,960kg | ESTADOS UNIDOS (BALBOA) | CONFIRMED under 2026-08-31 policy reset: real exporter is Bio Farming Peru S.A.C. (recorded supplier matches); kg 22,960 vs recorded 21,560 (6.5% gap, consistent across the whole DAVIS-NL group -- right ballpark). Real importer of record is Open Markets Corporation, not the recorded buyer Davis Global BV -- 'Davis Global BV' does not appear anywhere in either customs extract; per policy this is informational, not a blocking anomaly (Veritrade's Importer field is a declared consignee, not necessarily the deal's actual commercial buyer). The recorded destination (Rotterdam, Netherlands) also does not match the real customs destination (Estados Unidos, via Panama-Canal-area transshipment ports Balboa/Valparaiso/Mejillones) -- treated as part of the same declared-party/consignee limitation flagged for buyer names, per explicit project-owner instruction to fill this lane using supplier+product+volume+date as the anchor. shipmentDate corrected: 2025-08-20 -> 2025-08-16 (4-day gap).",
     "cofaceCoverageAmountUSD": 30406.07,
     "cofaceCoveragePct": 90,
     "cofaceIsDefaulted": true,
@@ -37896,11 +38866,17 @@ export const platformDeals: PlatformDealRecord[] = [
     "htmlFormulaBase": null,
     "htmlFormulaBonus": null,
     "missingFields": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-20T10:00:00.000Z"
+    "createdAt": "2025-08-20T10:00:00.000Z",
+    "hsCode": "0805200000",
+    "hsHeading4": "0805",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 10KG (X1, X2, X3)",
+    "quantityKg": 21560,
+    "shipmentCompany": null
   },
   {
     "id": "plat-8805e0ea",
@@ -37921,12 +38897,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.99,
-    "shippingStartDate": "2025-09-12T10:00:00.000Z",
+    "shippingStartDate": "2025-09-12T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -38157,7 +39133,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-09-12T10:00:00.000Z"
+    "createdAt": "2025-09-12T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-4c357b6d",
@@ -38178,12 +39161,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.84,
-    "shippingStartDate": "2025-10-10T10:00:00.000Z",
+    "shippingStartDate": "2025-10-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -38414,7 +39397,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-10T10:00:00.000Z"
+    "createdAt": "2025-10-10T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-3d9c4632",
@@ -38435,12 +39425,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.08,
-    "shippingStartDate": "2026-01-06T10:00:00.000Z",
+    "shippingStartDate": "2026-01-06T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -38672,7 +39662,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-06T10:00:00.000Z"
+    "createdAt": "2026-01-06T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-3f0bfcf3",
@@ -38693,12 +39690,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 6.95,
-    "shippingStartDate": "2026-01-28T10:00:00.000Z",
+    "shippingStartDate": "2026-01-28T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -38930,7 +39927,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-28T10:00:00.000Z"
+    "createdAt": "2026-01-28T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-7eecdd72",
@@ -38951,12 +39955,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.23,
-    "shippingStartDate": "2025-12-10T10:00:00.000Z",
+    "shippingStartDate": "2025-12-10T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -39187,7 +40191,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-10T10:00:00.000Z"
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-2764c42c",
@@ -39208,12 +40219,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Ultra-Perishable",
     "shelfLifeDays": 21,
     "coldChainRequired": true,
-    "estimatedTransitDays": 35,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 7.12,
-    "shippingStartDate": "2025-12-20T10:00:00.000Z",
+    "shippingStartDate": "2025-12-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -39444,7 +40455,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-20T10:00:00.000Z"
+    "createdAt": "2025-12-20T10:00:00.000Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "KAOHSIUNG",
+    "presentation": "CARTON X 1.5KG",
+    "quantityKg": 11700,
+    "shipmentCompany": null
   },
   {
     "id": "plat-5fce0ffb",
@@ -39457,7 +40475,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Rotterdam, Netherlands",
     "buyerName": "BIOFRESHI BV",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 17,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -39465,12 +40483,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 38.56,
-    "shippingStartDate": "2025-04-20T10:00:00.000Z",
+    "shippingStartDate": "2025-04-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -39610,7 +40628,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-04-20T10:00:00.000Z"
+    "createdAt": "2025-04-20T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 30LB",
+    "quantityKg": 19595.17,
+    "shipmentCompany": null
   },
   {
     "id": "plat-1d3aa882",
@@ -39623,7 +40648,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Rotterdam, Netherlands",
     "buyerName": "BIOFRESHI BV",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 17,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -39631,12 +40656,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 39.32,
-    "shippingStartDate": "2025-08-20T10:00:00.000Z",
+    "shippingStartDate": "2025-08-20T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -39776,7 +40801,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-20T10:00:00.000Z"
+    "createdAt": "2025-08-20T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 30LB",
+    "quantityKg": 19595.17,
+    "shipmentCompany": null
   },
   {
     "id": "plat-67353f3c",
@@ -39789,7 +40821,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Rotterdam, Netherlands",
     "buyerName": "BIOFRESHI BV",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 17,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -39797,12 +40829,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 39.26,
-    "shippingStartDate": "2025-10-16T10:00:00.000Z",
+    "shippingStartDate": "2025-10-16T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -39942,7 +40974,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-16T10:00:00.000Z"
+    "createdAt": "2025-10-16T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 30LB",
+    "quantityKg": 19595.17,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6bf2efd8",
@@ -39955,7 +40994,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Rotterdam, Netherlands",
     "buyerName": "BIOFRESHI BV",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 17,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -39963,12 +41002,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 37.83,
-    "shippingStartDate": "2025-06-15T10:00:00.000Z",
+    "shippingStartDate": "2025-06-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40108,7 +41147,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-06-15T10:00:00.000Z"
+    "createdAt": "2025-06-15T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 30LB",
+    "quantityKg": 19595.17,
+    "shipmentCompany": null
   },
   {
     "id": "plat-dd8e0cca",
@@ -40121,7 +41167,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Rotterdam, Netherlands",
     "buyerName": "BIOFRESHI BV",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 17,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -40129,12 +41175,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 38.45,
-    "shippingStartDate": "2025-07-15T10:00:00.000Z",
+    "shippingStartDate": "2025-07-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40274,7 +41320,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-07-15T10:00:00.000Z"
+    "createdAt": "2025-07-15T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 30LB",
+    "quantityKg": 19595.17,
+    "shipmentCompany": null
   },
   {
     "id": "plat-741b7bd8",
@@ -40287,7 +41340,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Rotterdam, Netherlands",
     "buyerName": "BIOFRESHI BV",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 17,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -40295,12 +41348,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 22,
+    "estimatedTransitDays": 29,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 37.35,
-    "shippingStartDate": "2025-08-15T10:00:00.000Z",
+    "shippingStartDate": "2025-08-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40440,7 +41493,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-08-15T10:00:00.000Z"
+    "createdAt": "2025-08-15T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ROTTERDAM",
+    "presentation": "CARTON X 30LB",
+    "quantityKg": 19595.17,
+    "shipmentCompany": null
   },
   {
     "id": "plat-9b5a3454",
@@ -40450,7 +41510,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 75888,
-    "origin": "Callao, Chile",
+    "origin": "Callao, Peru",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -40461,12 +41521,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 31.62,
-    "shippingStartDate": "2025-01-15T10:00:00.000Z",
+    "shippingStartDate": "2025-01-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40487,7 +41547,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-01-15T10:00:00.000Z"
+    "createdAt": "2025-01-15T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "HONG KONG",
+    "presentation": "CARTON X 10KG (4X2.5KG)",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-9f9c08f8",
@@ -40497,7 +41564,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 73296,
-    "origin": "Callao, Chile",
+    "origin": "Callao, Peru",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -40508,12 +41575,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30.54,
-    "shippingStartDate": "2025-02-14T10:00:00.000Z",
+    "shippingStartDate": "2025-02-14T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40534,7 +41601,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-02-14T10:00:00.000Z"
+    "createdAt": "2025-02-14T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "HONG KONG",
+    "presentation": "CARTON X 10KG (4X2.5KG)",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-08428bc7",
@@ -40544,7 +41618,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "MIXED",
     "quantityLabel": "2400 x CARTON X 10KG (4X2.5KG)",
     "dealValueUSD": 73176,
-    "origin": "Callao, Chile",
+    "origin": "Callao, Peru",
     "destination": "Hong Kong, Hong Kong",
     "buyerName": "KHI INTERNATIONAL CORP",
     "supplierName": "NATURAL SOUTH FRUIT LTD",
@@ -40555,12 +41629,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 20,
+    "estimatedTransitDays": 40,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 30.49,
-    "shippingStartDate": "2025-03-15T10:00:00.000Z",
+    "shippingStartDate": "2025-03-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40581,7 +41655,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-03-15T10:00:00.000Z"
+    "createdAt": "2025-03-15T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "HONG KONG",
+    "presentation": "CARTON X 10KG (4X2.5KG)",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-1f4444e7",
@@ -40607,7 +41688,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "routeRiskFlag": "Medium",
     "transportMode": "sea",
     "offerUnitPriceUSD": 31.55,
-    "shippingStartDate": "2025-10-28T10:00:00.000Z",
+    "shippingStartDate": "2025-10-28T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40628,7 +41709,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-10-28T10:00:00.000Z"
+    "createdAt": "2025-10-28T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "SAN ANTONIO",
+    "portOfDestination": "HONG KONG",
+    "presentation": "CARTON X 10KG (4X2.5KG)",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-2764e7d7",
@@ -40641,7 +41729,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "Algeciras, Spain",
     "buyerName": "ALBORAN COMEX SL",
-    "supplierName": "BLUE PACIFIC FOODS SAC",
+    "supplierName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "buyerYib": 2,
     "supplierYib": 22,
     "buyerYibSource": "default",
@@ -40649,12 +41737,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 60,
     "coldChainRequired": false,
-    "estimatedTransitDays": 19,
+    "estimatedTransitDays": 27,
     "numberOfTransshipments": 1,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 13.33,
-    "shippingStartDate": "2025-12-12T10:00:00.000Z",
+    "shippingStartDate": "2025-12-12T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -40795,7 +41883,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2025-12-12T10:00:00.000Z"
+    "createdAt": "2025-12-12T10:00:00.000Z",
+    "hsCode": "0910110000",
+    "hsHeading4": "0910",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "ALGECIRAS",
+    "presentation": "BULK X 25KG",
+    "quantityKg": 22500,
+    "shipmentCompany": null
   },
   {
     "id": "plat-b6948e52",
@@ -40808,7 +41903,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "origin": "Callao, Peru",
     "destination": "SAN Antonio, Chile",
     "buyerName": "JUHINEJ LTD",
-    "supplierName": "INDUSTRIAS SOLIMAR SAC",
+    "supplierName": "SOLIMAR INDUSTRIA E.I.R.L.",
     "buyerYib": 19,
     "supplierYib": 9,
     "buyerYibSource": "default",
@@ -40816,12 +41911,12 @@ export const platformDeals: PlatformDealRecord[] = [
     "perishabilityClass": "Semi-Perishable",
     "shelfLifeDays": 365,
     "coldChainRequired": true,
-    "estimatedTransitDays": 7,
+    "estimatedTransitDays": 13,
     "numberOfTransshipments": 0,
     "routeRiskFlag": "Low",
     "transportMode": "sea",
     "offerUnitPriceUSD": 23.33,
-    "shippingStartDate": "2026-01-15T10:00:00.000Z",
+    "shippingStartDate": "2026-01-15T00:00:00.000Z",
     "priorDealsBetweenParties": 0,
     "relationshipAgeMonths": 0,
     "status": "finished",
@@ -41019,7 +42114,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-01-15T10:00:00.000Z"
+    "createdAt": "2026-01-15T10:00:00.000Z",
+    "hsCode": "0811900000",
+    "hsHeading4": "0811",
+    "portOfOrigin": "CALLAO",
+    "portOfDestination": "SAN ANTONIO",
+    "presentation": "CARTON X 10KG (10X1KG)",
+    "quantityKg": 24000,
+    "shipmentCompany": null
   },
   {
     "id": "plat-6a71bb19",
@@ -41029,8 +42131,8 @@ export const platformDeals: PlatformDealRecord[] = [
     "variety": "100",
     "quantityLabel": "100 x 1.5 Kg Carton",
     "dealValueUSD": 14400,
-    "origin": "Lima Jorge Chavez",
-    "destination": "El Dorado / Bogota",
+    "origin": "Lima Jorge Chavez, Peru",
+    "destination": "El Dorado / Bogota, Colombia",
     "buyerName": "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA",
     "supplierName": "TRU MARKET BLOCKCHAIN S.A.C.",
     "buyerYib": 4,
@@ -41382,7 +42484,14 @@ export const platformDeals: PlatformDealRecord[] = [
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ],
-    "createdAt": "2026-08-04T10:12:41.519Z"
+    "createdAt": "2026-08-04T10:12:41.519Z",
+    "hsCode": "0810400000",
+    "hsHeading4": "0810",
+    "portOfOrigin": "Lima Jorge Chavez",
+    "portOfDestination": "El Dorado / Bogota",
+    "presentation": null,
+    "quantityKg": 150,
+    "shipmentCompany": null
   }
 ];
 
@@ -41396,9 +42505,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 34,
     "finishedDealCount": 33,
-    "avgScore": 61,
-    "maxScore": 61,
-    "minScore": 61,
+    "avgScore": 62,
+    "maxScore": 62,
+    "minScore": 62,
     "deals": [
       {
         "mongoId": "670ed7c83fdd80df80736642",
@@ -41406,7 +42515,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 24085.6,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41415,7 +42524,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 24101,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41424,7 +42533,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 38556,
-        "score": 61,
+        "score": 62,
         "priorDeals": 1
       },
       {
@@ -41433,7 +42542,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 70200,
-        "score": 61,
+        "score": 62,
         "priorDeals": 1
       },
       {
@@ -41442,7 +42551,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 72000,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41451,7 +42560,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 26400,
-        "score": 61,
+        "score": 62,
         "priorDeals": 0
       },
       {
@@ -41460,7 +42569,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 29568,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41469,7 +42578,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 23275.32,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41478,7 +42587,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 40090.47,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41487,7 +42596,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 35270.4,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41496,7 +42605,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 20284.8,
-        "score": 61,
+        "score": 62,
         "priorDeals": 4
       },
       {
@@ -41505,7 +42614,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 26880,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41514,7 +42623,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 24101,
-        "score": 61,
+        "score": 62,
         "priorDeals": 0
       },
       {
@@ -41523,7 +42632,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 21600,
-        "score": 61,
+        "score": 62,
         "priorDeals": 4
       },
       {
@@ -41532,7 +42641,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 25920,
-        "score": 61,
+        "score": 62,
         "priorDeals": 4
       },
       {
@@ -41541,7 +42650,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 21600,
-        "score": 61,
+        "score": 62,
         "priorDeals": 4
       },
       {
@@ -41550,7 +42659,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 90000,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41559,7 +42668,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 29652,
-        "score": 61,
+        "score": 62,
         "priorDeals": 4
       },
       {
@@ -41568,7 +42677,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41577,7 +42686,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41586,7 +42695,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41595,7 +42704,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41604,7 +42713,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41613,7 +42722,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 10368,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41622,7 +42731,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 10368,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41631,7 +42740,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 85800,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41640,7 +42749,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 85800,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41649,7 +42758,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 156800,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41658,7 +42767,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41667,7 +42776,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41676,7 +42785,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41685,7 +42794,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 61,
+        "score": 62,
         "priorDeals": 10
       },
       {
@@ -41694,7 +42803,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 107800,
-        "score": 61,
+        "score": 62,
         "priorDeals": 6
       },
       {
@@ -41703,14 +42812,14 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "confirmed",
         "milestone": 3,
         "dealValue": 14400,
-        "score": 61,
+        "score": 62,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -41722,9 +42831,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 24,
     "finishedDealCount": 24,
-    "avgScore": 52,
-    "maxScore": 52,
-    "minScore": 52,
+    "avgScore": 51,
+    "maxScore": 51,
+    "minScore": 51,
     "deals": [
       {
         "mongoId": "6759b914b9fa43de6d86f192",
@@ -41732,7 +42841,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 72000,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41741,7 +42850,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 90000,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41750,7 +42859,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41759,7 +42868,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41768,7 +42877,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41777,7 +42886,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41786,7 +42895,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96660,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41795,7 +42904,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41804,7 +42913,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41813,7 +42922,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41822,7 +42931,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95040,
-        "score": 52,
+        "score": 51,
         "priorDeals": 10
       },
       {
@@ -41831,7 +42940,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 98598.28,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41840,7 +42949,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 139661.75,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41849,7 +42958,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 99086.76,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41858,7 +42967,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 48556.8,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41867,7 +42976,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 101978.68,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41876,7 +42985,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 127720.56,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41885,7 +42994,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55464,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41894,7 +43003,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 122443.2,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41903,7 +43012,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55501.6,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41912,7 +43021,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95817.6,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41921,7 +43030,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 98049,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41930,7 +43039,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 98390.04,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       },
       {
@@ -41939,14 +43048,14 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 98390.04,
-        "score": 52,
+        "score": 51,
         "priorDeals": 12
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -42144,9 +43253,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -42158,9 +43267,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 18,
     "finishedDealCount": 18,
-    "avgScore": 69,
-    "maxScore": 69,
-    "minScore": 69,
+    "avgScore": 68,
+    "maxScore": 68,
+    "minScore": 68,
     "deals": [
       {
         "mongoId": "19f4e57b930b0cc3a8609ea7",
@@ -42168,7 +43277,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55302,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42177,7 +43286,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53820,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42186,7 +43295,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55926,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42195,7 +43304,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55692,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42204,7 +43313,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55848,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42213,7 +43322,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55224,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42222,7 +43331,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54756,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42231,7 +43340,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53898,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42240,7 +43349,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54834,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42249,7 +43358,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55380,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42258,7 +43367,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54132,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42267,7 +43376,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56316,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42276,7 +43385,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54522,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42285,7 +43394,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53352,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42294,7 +43403,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55224,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42303,7 +43412,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54210,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42312,7 +43421,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56394,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       },
       {
@@ -42321,7 +43430,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55536,
-        "score": 69,
+        "score": 68,
         "priorDeals": 0
       }
     ],
@@ -42340,9 +43449,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 16,
     "finishedDealCount": 16,
-    "avgScore": 55,
-    "maxScore": 55,
-    "minScore": 55,
+    "avgScore": 56,
+    "maxScore": 56,
+    "minScore": 56,
     "deals": [
       {
         "mongoId": "683780b542a9e57e2b4729d8",
@@ -42350,7 +43459,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42359,7 +43468,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42368,7 +43477,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42377,7 +43486,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42386,7 +43495,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42395,7 +43504,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42404,7 +43513,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42413,7 +43522,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42422,7 +43531,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42431,7 +43540,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42440,7 +43549,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42449,7 +43558,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 31661.84,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42458,7 +43567,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 32672.08,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42467,7 +43576,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 32672.08,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42476,7 +43585,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 32672.08,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       },
       {
@@ -42485,12 +43594,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 32672.08,
-        "score": 55,
+        "score": 56,
         "priorDeals": 15
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -42654,7 +43762,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -42800,23 +43907,23 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
     "id": "cp-supplierAGRICOLAVIASOLSACFreshBlueberries",
-    "companyName": "AGRICOLA VIÂASOL SAC",
+    "companyName": "AGRICOLA VIASOL SAC",
     "role": "supplier",
     "product": "Fresh Blueberries",
     "yearsInBusiness": 15,
     "yearsInBusinessSource": "default",
     "dealCount": 12,
     "finishedDealCount": 12,
-    "avgScore": 77,
-    "maxScore": 77,
-    "minScore": 77,
+    "avgScore": 55,
+    "maxScore": 55,
+    "minScore": 55,
     "deals": [
       {
         "mongoId": "19f4e57b930b0cc3a8609ea7",
@@ -42824,7 +43931,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55302,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42833,7 +43940,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53820,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42842,7 +43949,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55926,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42851,7 +43958,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55692,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42860,7 +43967,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55848,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42869,7 +43976,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55224,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42878,7 +43985,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54756,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42887,7 +43994,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53898,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42896,7 +44003,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54834,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42905,7 +44012,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55380,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42914,7 +44021,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54132,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -42923,7 +44030,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56316,
-        "score": 77,
+        "score": 55,
         "priorDeals": 0
       }
     ],
@@ -43056,112 +44163,221 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
-    "id": "cp-buyerXARKISLFreshAvocado",
+    "id": "cp-supplierMIKHUNAPERUVIANFOODSSOLUTIONSSACFreshGinger",
+    "companyName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
+    "role": "supplier",
+    "product": "Fresh Ginger",
+    "yearsInBusiness": 2,
+    "yearsInBusinessSource": "csv",
+    "dealCount": 10,
+    "finishedDealCount": 10,
+    "avgScore": 63,
+    "maxScore": 63,
+    "minScore": 63,
+    "deals": [
+      {
+        "mongoId": "66670da1ba0490753e565ca0",
+        "name": "Fresh Ginger",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 60800,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "c8dcac5597b0e930ae253eff",
+        "name": "FRESH ASPARAGUS HSM-ESP-001",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 48880,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "7394319c4838862cd229de92",
+        "name": "FRESH ASPARAGUS HSM-ESP-002",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 51920,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "2d19374d4f8331ce5f4051d0",
+        "name": "FRESH ASPARAGUS HSM-ESP-003",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 51120,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "4b8d7a5b4742bbf14f494eaf",
+        "name": "FRESH ASPARAGUS HSM-ESP-004",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 49380,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "743a2854fbc7fef6e4dea5d3",
+        "name": "FRESH ASPARAGUS HSM-ESP-005",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 48420,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "32897f091183db2f46a577ff",
+        "name": "FRESH ASPARAGUS HSM-ESP-006",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 48380,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "30dc4ee7d54082ca34ad0d59",
+        "name": "FRESH ASPARAGUS HSM-ESP-007",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 49560,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "e2bf4fbe59c0c5bea91c0b26",
+        "name": "FRESH ASPARAGUS HSM-ESP-008",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 48400,
+        "score": 63,
+        "priorDeals": 0
+      },
+      {
+        "mongoId": "8d28be47d037080eb35ce5a4",
+        "name": "FRESH ASPARAGUS HSM-ESP-009",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 49480,
+        "score": 63,
+        "priorDeals": 0
+      }
+    ],
+    "missingForFullCram": [
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "product risk table row (provisional, not AC-confirmed)"
+    ]
+  },
+  {
+    "id": "cp-buyerXARKISLFreshAsparagus",
     "companyName": "XARKI SL",
     "role": "buyer",
-    "product": "Fresh Avocado",
+    "product": "Fresh Asparagus",
     "yearsInBusiness": 66,
     "yearsInBusinessSource": "default",
     "dealCount": 10,
     "finishedDealCount": 10,
-    "avgScore": 69,
-    "maxScore": 69,
-    "minScore": 69,
+    "avgScore": 56,
+    "maxScore": 56,
+    "minScore": 56,
     "deals": [
       {
         "mongoId": "484986066a7417fcfe592946",
-        "name": "FRESH AVOCADO XRK-ESP-001",
+        "name": "FRESH ASPARAGUS XRK-ESP-001",
         "status": "finished",
         "milestone": 7,
         "dealValue": 53568,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "8ba96f6965749c434694263e",
-        "name": "FRESH AVOCADO XRK-ESP-002",
+        "name": "FRESH ASPARAGUS XRK-ESP-002",
         "status": "finished",
         "milestone": 7,
         "dealValue": 50016,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "d309a2434ae0d85043332a28",
-        "name": "FRESH AVOCADO XRK-ESP-003",
+        "name": "FRESH ASPARAGUS XRK-ESP-003",
         "status": "finished",
         "milestone": 7,
         "dealValue": 53112,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "101ad782e9b05452df4e6de1",
-        "name": "FRESH AVOCADO XRK-ESP-004",
+        "name": "FRESH ASPARAGUS XRK-ESP-004",
         "status": "finished",
         "milestone": 7,
         "dealValue": 53304,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "de10bc4c6dc304f27f22c71b",
-        "name": "FRESH AVOCADO XRK-ESP-005",
+        "name": "FRESH ASPARAGUS XRK-ESP-005",
         "status": "finished",
         "milestone": 7,
         "dealValue": 50664,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "e3bd45be46c02a03587be9ff",
-        "name": "FRESH AVOCADO XRK-ESP-006",
+        "name": "FRESH ASPARAGUS XRK-ESP-006",
         "status": "finished",
         "milestone": 7,
         "dealValue": 52848,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "e5b159d4320d161759a80f86",
-        "name": "FRESH AVOCADO XRK-ESP-007",
+        "name": "FRESH ASPARAGUS XRK-ESP-007",
         "status": "finished",
         "milestone": 7,
         "dealValue": 51720,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "d19f70bf1eca33acc81de653",
-        "name": "FRESH AVOCADO XRK-ESP-008",
+        "name": "FRESH ASPARAGUS XRK-ESP-008",
         "status": "finished",
         "milestone": 7,
         "dealValue": 51411.2,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "8413cc04d544fe53c0254173",
-        "name": "FRESH AVOCADO XRK-ESP-009",
+        "name": "FRESH ASPARAGUS XRK-ESP-009",
         "status": "finished",
         "milestone": 7,
         "dealValue": 51134.2,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       },
       {
         "mongoId": "fbd21becdccde94e83865585",
-        "name": "FRESH AVOCADO XRK-ESP-010",
+        "name": "FRESH ASPARAGUS XRK-ESP-010",
         "status": "finished",
         "milestone": 7,
         "dealValue": 50640,
-        "score": 69,
+        "score": 56,
         "priorDeals": 0
       }
     ],
@@ -43172,106 +44388,106 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ]
   },
   {
-    "id": "cp-supplierAGRICOLAMEDANOAZULSACFreshAvocado",
-    "companyName": "AGRICOLA MEDANO AZUL SAC",
+    "id": "cp-supplierAGRICOLALOSMEDANOSSAFreshAsparagus",
+    "companyName": "AGRICOLA LOS MEDANOS S.A.",
     "role": "supplier",
-    "product": "Fresh Avocado",
+    "product": "Fresh Asparagus",
     "yearsInBusiness": 5,
     "yearsInBusinessSource": "default",
     "dealCount": 10,
     "finishedDealCount": 10,
-    "avgScore": 69,
-    "maxScore": 69,
-    "minScore": 69,
+    "avgScore": 50,
+    "maxScore": 50,
+    "minScore": 50,
     "deals": [
       {
         "mongoId": "484986066a7417fcfe592946",
-        "name": "FRESH AVOCADO XRK-ESP-001",
+        "name": "FRESH ASPARAGUS XRK-ESP-001",
         "status": "finished",
         "milestone": 7,
         "dealValue": 53568,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "8ba96f6965749c434694263e",
-        "name": "FRESH AVOCADO XRK-ESP-002",
+        "name": "FRESH ASPARAGUS XRK-ESP-002",
         "status": "finished",
         "milestone": 7,
         "dealValue": 50016,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "d309a2434ae0d85043332a28",
-        "name": "FRESH AVOCADO XRK-ESP-003",
+        "name": "FRESH ASPARAGUS XRK-ESP-003",
         "status": "finished",
         "milestone": 7,
         "dealValue": 53112,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "101ad782e9b05452df4e6de1",
-        "name": "FRESH AVOCADO XRK-ESP-004",
+        "name": "FRESH ASPARAGUS XRK-ESP-004",
         "status": "finished",
         "milestone": 7,
         "dealValue": 53304,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "de10bc4c6dc304f27f22c71b",
-        "name": "FRESH AVOCADO XRK-ESP-005",
+        "name": "FRESH ASPARAGUS XRK-ESP-005",
         "status": "finished",
         "milestone": 7,
         "dealValue": 50664,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "e3bd45be46c02a03587be9ff",
-        "name": "FRESH AVOCADO XRK-ESP-006",
+        "name": "FRESH ASPARAGUS XRK-ESP-006",
         "status": "finished",
         "milestone": 7,
         "dealValue": 52848,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "e5b159d4320d161759a80f86",
-        "name": "FRESH AVOCADO XRK-ESP-007",
+        "name": "FRESH ASPARAGUS XRK-ESP-007",
         "status": "finished",
         "milestone": 7,
         "dealValue": 51720,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "d19f70bf1eca33acc81de653",
-        "name": "FRESH AVOCADO XRK-ESP-008",
+        "name": "FRESH ASPARAGUS XRK-ESP-008",
         "status": "finished",
         "milestone": 7,
         "dealValue": 51411.2,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "8413cc04d544fe53c0254173",
-        "name": "FRESH AVOCADO XRK-ESP-009",
+        "name": "FRESH ASPARAGUS XRK-ESP-009",
         "status": "finished",
         "milestone": 7,
         "dealValue": 51134.2,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       },
       {
         "mongoId": "fbd21becdccde94e83865585",
-        "name": "FRESH AVOCADO XRK-ESP-010",
+        "name": "FRESH ASPARAGUS XRK-ESP-010",
         "status": "finished",
         "milestone": 7,
         "dealValue": 50640,
-        "score": 69,
+        "score": 50,
         "priorDeals": 0
       }
     ],
@@ -43282,17 +44498,17 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ]
   },
   {
-    "id": "cp-buyerHACIENDASOTOMAYORSLFreshAsparagus",
+    "id": "cp-buyerHACIENDASOTOMAYORSLFreshGinger",
     "companyName": "HACIENDA SOTOMAYOR SL",
     "role": "buyer",
-    "product": "Fresh Asparagus",
+    "product": "Fresh Ginger",
     "yearsInBusiness": 5,
     "yearsInBusinessSource": "default",
     "dealCount": 9,
     "finishedDealCount": 9,
-    "avgScore": 53,
-    "maxScore": 53,
-    "minScore": 53,
+    "avgScore": 47,
+    "maxScore": 47,
+    "minScore": 47,
     "deals": [
       {
         "mongoId": "c8dcac5597b0e930ae253eff",
@@ -43300,7 +44516,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 48880,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43309,7 +44525,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 51920,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43318,7 +44534,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 51120,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43327,7 +44543,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 49380,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43336,7 +44552,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 48420,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43345,7 +44561,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 48380,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43354,7 +44570,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 49560,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43363,7 +44579,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 48400,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       },
       {
@@ -43372,114 +44588,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 49480,
-        "score": 53,
+        "score": 47,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
-    ]
-  },
-  {
-    "id": "cp-supplierMIKHUNAFOODSSACFreshAsparagus",
-    "companyName": "MIKHUNA FOODS SAC",
-    "role": "supplier",
-    "product": "Fresh Asparagus",
-    "yearsInBusiness": 6,
-    "yearsInBusinessSource": "default",
-    "dealCount": 9,
-    "finishedDealCount": 9,
-    "avgScore": 69,
-    "maxScore": 69,
-    "minScore": 69,
-    "deals": [
-      {
-        "mongoId": "c8dcac5597b0e930ae253eff",
-        "name": "FRESH ASPARAGUS HSM-ESP-001",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 48880,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "7394319c4838862cd229de92",
-        "name": "FRESH ASPARAGUS HSM-ESP-002",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 51920,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "2d19374d4f8331ce5f4051d0",
-        "name": "FRESH ASPARAGUS HSM-ESP-003",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 51120,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "4b8d7a5b4742bbf14f494eaf",
-        "name": "FRESH ASPARAGUS HSM-ESP-004",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 49380,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "743a2854fbc7fef6e4dea5d3",
-        "name": "FRESH ASPARAGUS HSM-ESP-005",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 48420,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "32897f091183db2f46a577ff",
-        "name": "FRESH ASPARAGUS HSM-ESP-006",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 48380,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "30dc4ee7d54082ca34ad0d59",
-        "name": "FRESH ASPARAGUS HSM-ESP-007",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 49560,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "e2bf4fbe59c0c5bea91c0b26",
-        "name": "FRESH ASPARAGUS HSM-ESP-008",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 48400,
-        "score": 69,
-        "priorDeals": 0
-      },
-      {
-        "mongoId": "8d28be47d037080eb35ce5a4",
-        "name": "FRESH ASPARAGUS HSM-ESP-009",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 49480,
-        "score": 69,
-        "priorDeals": 0
-      }
-    ],
-    "missingForFullCram": [
-      "customs export narrative",
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
@@ -43563,9 +44676,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -43577,9 +44690,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "verified",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 62,
-    "maxScore": 62,
-    "minScore": 62,
+    "avgScore": 66,
+    "maxScore": 66,
+    "minScore": 66,
     "deals": [
       {
         "mongoId": "675b6053b9fa43de6d879470",
@@ -43587,7 +44700,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 29568,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       },
       {
@@ -43596,7 +44709,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 23275.32,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       },
       {
@@ -43605,7 +44718,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 40090.47,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       },
       {
@@ -43614,7 +44727,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 35270.4,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       },
       {
@@ -43623,7 +44736,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 26880,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       },
       {
@@ -43632,7 +44745,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 156800,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       },
       {
@@ -43641,12 +44754,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 107800,
-        "score": 62,
+        "score": 66,
         "priorDeals": 6
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -43812,23 +44924,22 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
   },
   {
-    "id": "cp-supplierGIDDINSPERUSACFreshBlueberries",
-    "companyName": "GIDDINS PERU SAC",
+    "id": "cp-supplierGIDDINGSBERRIESPERUSACFreshBlueberries",
+    "companyName": "GIDDINGS BERRIES PERU S.A.C.",
     "role": "supplier",
     "product": "Fresh Blueberries",
     "yearsInBusiness": 12,
     "yearsInBusinessSource": "default",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 84,
-    "maxScore": 84,
-    "minScore": 84,
+    "avgScore": 85,
+    "maxScore": 85,
+    "minScore": 85,
     "deals": [
       {
         "mongoId": "69d3e6fb9e76ea086ca4c1a0",
@@ -43836,7 +44947,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 90612,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       },
       {
@@ -43845,7 +44956,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 88473.6,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       },
       {
@@ -43854,7 +44965,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 88200,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       },
       {
@@ -43863,7 +44974,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 91080,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       },
       {
@@ -43872,7 +44983,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 89126.4,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       },
       {
@@ -43881,7 +44992,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 89011.2,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       },
       {
@@ -43890,12 +45001,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 88905.6,
-        "score": 84,
+        "score": 85,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -43909,9 +45019,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 66,
-    "maxScore": 66,
-    "minScore": 66,
+    "avgScore": 64,
+    "maxScore": 64,
+    "minScore": 64,
     "deals": [
       {
         "mongoId": "23e57a6f048a99b2289e172e",
@@ -43919,7 +45029,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 93571.2,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       },
       {
@@ -43928,7 +45038,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96000,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       },
       {
@@ -43937,7 +45047,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 93420,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       },
       {
@@ -43946,7 +45056,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95760,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       },
       {
@@ -43955,7 +45065,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96038.4,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       },
       {
@@ -43964,7 +45074,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96652.8,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       },
       {
@@ -43973,7 +45083,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95212.8,
-        "score": 66,
+        "score": 64,
         "priorDeals": 0
       }
     ],
@@ -43992,9 +45102,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 72,
-    "maxScore": 72,
-    "minScore": 72,
+    "avgScore": 73,
+    "maxScore": 73,
+    "minScore": 73,
     "deals": [
       {
         "mongoId": "23e57a6f048a99b2289e172e",
@@ -44002,7 +45112,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 93571.2,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       },
       {
@@ -44011,7 +45121,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96000,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       },
       {
@@ -44020,7 +45130,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 93420,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       },
       {
@@ -44029,7 +45139,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95760,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       },
       {
@@ -44038,7 +45148,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96038.4,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       },
       {
@@ -44047,7 +45157,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 96652.8,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       },
       {
@@ -44056,7 +45166,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 95212.8,
-        "score": 72,
+        "score": 73,
         "priorDeals": 0
       }
     ],
@@ -44075,9 +45185,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "verified",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 53,
-    "maxScore": 53,
-    "minScore": 53,
+    "avgScore": 57,
+    "maxScore": 57,
+    "minScore": 57,
     "deals": [
       {
         "mongoId": "64f4e1cb9e4b71a61ed3885a",
@@ -44085,7 +45195,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118368,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       },
       {
@@ -44094,7 +45204,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 120408,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       },
       {
@@ -44103,7 +45213,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 119736,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       },
       {
@@ -44112,7 +45222,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118128,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       },
       {
@@ -44121,7 +45231,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118128,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       },
       {
@@ -44130,7 +45240,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118392,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       },
       {
@@ -44139,7 +45249,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118896,
-        "score": 53,
+        "score": 57,
         "priorDeals": 0
       }
     ],
@@ -44159,9 +45269,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 74,
-    "maxScore": 74,
-    "minScore": 74,
+    "avgScore": 72,
+    "maxScore": 72,
+    "minScore": 72,
     "deals": [
       {
         "mongoId": "64f4e1cb9e4b71a61ed3885a",
@@ -44169,7 +45279,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118368,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       },
       {
@@ -44178,7 +45288,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 120408,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       },
       {
@@ -44187,7 +45297,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 119736,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       },
       {
@@ -44196,7 +45306,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118128,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       },
       {
@@ -44205,7 +45315,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118128,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       },
       {
@@ -44214,7 +45324,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118392,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       },
       {
@@ -44223,7 +45333,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 118896,
-        "score": 74,
+        "score": 72,
         "priorDeals": 0
       }
     ],
@@ -44235,17 +45345,17 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ]
   },
   {
-    "id": "cp-supplierBLUEPACIFICFOODSSACFreshGinger",
-    "companyName": "BLUE PACIFIC FOODS SAC",
+    "id": "cp-supplierBLUEPACIFICOILSINTERNATIONALISACFreshGinger",
+    "companyName": "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.",
     "role": "supplier",
     "product": "Fresh Ginger",
     "yearsInBusiness": 22,
     "yearsInBusinessSource": "default",
     "dealCount": 7,
     "finishedDealCount": 7,
-    "avgScore": 74,
-    "maxScore": 74,
-    "minScore": 74,
+    "avgScore": 55,
+    "maxScore": 55,
+    "minScore": 55,
     "deals": [
       {
         "mongoId": "5fce0ffb54b19c4c8e53dc2a",
@@ -44253,7 +45363,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55526.4,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44262,7 +45372,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56620.8,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44271,7 +45381,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56534.4,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44280,7 +45390,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54475.2,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44289,7 +45399,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55368,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44298,7 +45408,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53784,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44307,7 +45417,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 11997,
-        "score": 74,
+        "score": 55,
         "priorDeals": 0
       }
     ],
@@ -44386,9 +45496,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -44474,9 +45584,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 6,
     "finishedDealCount": 6,
-    "avgScore": 65,
-    "maxScore": 65,
-    "minScore": 65,
+    "avgScore": 63,
+    "maxScore": 63,
+    "minScore": 63,
     "deals": [
       {
         "mongoId": "5fce0ffb54b19c4c8e53dc2a",
@@ -44484,7 +45594,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55526.4,
-        "score": 65,
+        "score": 63,
         "priorDeals": 0
       },
       {
@@ -44493,7 +45603,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56620.8,
-        "score": 65,
+        "score": 63,
         "priorDeals": 0
       },
       {
@@ -44502,7 +45612,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 56534.4,
-        "score": 65,
+        "score": 63,
         "priorDeals": 0
       },
       {
@@ -44511,7 +45621,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 54475.2,
-        "score": 65,
+        "score": 63,
         "priorDeals": 0
       },
       {
@@ -44520,7 +45630,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55368,
-        "score": 65,
+        "score": 63,
         "priorDeals": 0
       },
       {
@@ -44529,7 +45639,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 53784,
-        "score": 65,
+        "score": 63,
         "priorDeals": 0
       }
     ],
@@ -44548,9 +45658,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 5,
     "finishedDealCount": 5,
-    "avgScore": 49,
-    "maxScore": 49,
-    "minScore": 49,
+    "avgScore": 47,
+    "maxScore": 47,
+    "minScore": 47,
     "deals": [
       {
         "mongoId": "6761acdbb9fa43de6d8a387f",
@@ -44558,7 +45668,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 20284.8,
-        "score": 49,
+        "score": 47,
         "priorDeals": 4
       },
       {
@@ -44567,7 +45677,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 21600,
-        "score": 49,
+        "score": 47,
         "priorDeals": 4
       },
       {
@@ -44576,7 +45686,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 25920,
-        "score": 49,
+        "score": 47,
         "priorDeals": 4
       },
       {
@@ -44585,7 +45695,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 21600,
-        "score": 49,
+        "score": 47,
         "priorDeals": 4
       },
       {
@@ -44594,14 +45704,14 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 29652,
-        "score": 49,
+        "score": 47,
         "priorDeals": 4
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -44613,9 +45723,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 4,
     "finishedDealCount": 4,
-    "avgScore": 49,
-    "maxScore": 49,
-    "minScore": 49,
+    "avgScore": 48,
+    "maxScore": 48,
+    "minScore": 48,
     "deals": [
       {
         "mongoId": "67d096556b3eee0b06f29d9a",
@@ -44623,7 +45733,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 52800,
-        "score": 49,
+        "score": 48,
         "priorDeals": 4
       },
       {
@@ -44632,7 +45742,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 52800,
-        "score": 49,
+        "score": 48,
         "priorDeals": 4
       },
       {
@@ -44641,7 +45751,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 50400,
-        "score": 49,
+        "score": 48,
         "priorDeals": 4
       },
       {
@@ -44650,14 +45760,14 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 52800,
-        "score": 49,
+        "score": 48,
         "priorDeals": 4
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)",
+      "customs export narrative"
     ]
   },
   {
@@ -44717,17 +45827,17 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ]
   },
   {
-    "id": "cp-supplierICABLUEBERRIESSACFreshBlueberries",
-    "companyName": "ICA BLUEBERRIES SAC",
+    "id": "cp-supplierBERRYCOSACFreshBlueberries",
+    "companyName": "BERRYCO S.A.C.",
     "role": "supplier",
     "product": "Fresh Blueberries",
     "yearsInBusiness": 10,
     "yearsInBusinessSource": "default",
     "dealCount": 4,
     "finishedDealCount": 4,
-    "avgScore": 71,
-    "maxScore": 71,
-    "minScore": 71,
+    "avgScore": 55,
+    "maxScore": 55,
+    "minScore": 55,
     "deals": [
       {
         "mongoId": "06c34a88f0952a2320f620a8",
@@ -44735,7 +45845,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 78936,
-        "score": 71,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44744,7 +45854,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 80106,
-        "score": 71,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44753,7 +45863,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 80496,
-        "score": 71,
+        "score": 55,
         "priorDeals": 0
       },
       {
@@ -44762,7 +45872,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 78078,
-        "score": 71,
+        "score": 55,
         "priorDeals": 0
       }
     ],
@@ -44781,9 +45891,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 4,
     "finishedDealCount": 4,
-    "avgScore": 63,
-    "maxScore": 63,
-    "minScore": 63,
+    "avgScore": 60,
+    "maxScore": 60,
+    "minScore": 60,
     "deals": [
       {
         "mongoId": "9b5a34548f5eba3c26485d7b",
@@ -44791,7 +45901,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 75888,
-        "score": 63,
+        "score": 60,
         "priorDeals": 0
       },
       {
@@ -44800,7 +45910,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 73296,
-        "score": 63,
+        "score": 60,
         "priorDeals": 0
       },
       {
@@ -44809,7 +45919,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 73176,
-        "score": 63,
+        "score": 60,
         "priorDeals": 0
       },
       {
@@ -44818,7 +45928,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 75720,
-        "score": 63,
+        "score": 60,
         "priorDeals": 0
       }
     ],
@@ -44838,9 +45948,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 4,
     "finishedDealCount": 4,
-    "avgScore": 68,
-    "maxScore": 68,
-    "minScore": 68,
+    "avgScore": 66,
+    "maxScore": 66,
+    "minScore": 66,
     "deals": [
       {
         "mongoId": "9b5a34548f5eba3c26485d7b",
@@ -44848,7 +45958,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 75888,
-        "score": 68,
+        "score": 66,
         "priorDeals": 0
       },
       {
@@ -44857,7 +45967,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 73296,
-        "score": 68,
+        "score": 66,
         "priorDeals": 0
       },
       {
@@ -44866,7 +45976,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 73176,
-        "score": 68,
+        "score": 66,
         "priorDeals": 0
       },
       {
@@ -44875,7 +45985,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 75720,
-        "score": 68,
+        "score": 66,
         "priorDeals": 0
       }
     ],
@@ -44888,16 +45998,16 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
   },
   {
     "id": "cp-buyerARDZHIESLLCFreshBlueberries",
-    "companyName": "Â«ArdzhiesÂ» LLC",
+    "companyName": "«Ardzhies» LLC",
     "role": "buyer",
     "product": "Fresh Blueberries",
     "yearsInBusiness": 1,
     "yearsInBusinessSource": "csv",
     "dealCount": 2,
     "finishedDealCount": 2,
-    "avgScore": 46,
-    "maxScore": 46,
-    "minScore": 46,
+    "avgScore": 44,
+    "maxScore": 44,
+    "minScore": 44,
     "deals": [
       {
         "mongoId": "6750a959b9fa43de6d85c9de",
@@ -44905,7 +46015,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 38556,
-        "score": 46,
+        "score": 44,
         "priorDeals": 1
       },
       {
@@ -44914,7 +46024,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 70200,
-        "score": 46,
+        "score": 44,
         "priorDeals": 1
       }
     ],
@@ -44933,9 +46043,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 2,
     "finishedDealCount": 2,
-    "avgScore": 51,
-    "maxScore": 51,
-    "minScore": 51,
+    "avgScore": 47,
+    "maxScore": 47,
+    "minScore": 47,
     "deals": [
       {
         "mongoId": "677c2b8ab9fa43de6d90a08a",
@@ -44943,7 +46053,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 17626.8,
-        "score": 51,
+        "score": 47,
         "priorDeals": 1
       },
       {
@@ -44952,7 +46062,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 17626.8,
-        "score": 51,
+        "score": 47,
         "priorDeals": 1
       }
     ],
@@ -44972,9 +46082,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 2,
     "finishedDealCount": 2,
-    "avgScore": 54,
-    "maxScore": 54,
-    "minScore": 54,
+    "avgScore": 56,
+    "maxScore": 56,
+    "minScore": 56,
     "deals": [
       {
         "mongoId": "677c2b8ab9fa43de6d90a08a",
@@ -44982,7 +46092,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 17626.8,
-        "score": 54,
+        "score": 56,
         "priorDeals": 1
       },
       {
@@ -44991,7 +46101,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 17626.8,
-        "score": 54,
+        "score": 56,
         "priorDeals": 1
       }
     ],
@@ -45011,9 +46121,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 45,
-    "maxScore": 45,
-    "minScore": 45,
+    "avgScore": 42,
+    "maxScore": 42,
+    "minScore": 42,
     "deals": [
       {
         "mongoId": "66670da1ba0490753e565ca0",
@@ -45021,41 +46131,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 60800,
-        "score": 45,
+        "score": 42,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
-      "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
-    ]
-  },
-  {
-    "id": "cp-supplierMIKHUNAPERUVIANFOODSSOLUTIONSSACFreshGinger",
-    "companyName": "MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C",
-    "role": "supplier",
-    "product": "Fresh Ginger",
-    "yearsInBusiness": 2,
-    "yearsInBusinessSource": "csv",
-    "dealCount": 1,
-    "finishedDealCount": 1,
-    "avgScore": 55,
-    "maxScore": 55,
-    "minScore": 55,
-    "deals": [
-      {
-        "mongoId": "66670da1ba0490753e565ca0",
-        "name": "Fresh Ginger",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 60800,
-        "score": 55,
-        "priorDeals": 0
-      }
-    ],
-    "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -45069,9 +46149,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "verified",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 58,
-    "maxScore": 58,
-    "minScore": 58,
+    "avgScore": 50,
+    "maxScore": 50,
+    "minScore": 50,
     "deals": [
       {
         "mongoId": "675a16e4b9fa43de6d873513",
@@ -45079,12 +46159,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 26400,
-        "score": 58,
+        "score": 50,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -45098,9 +46177,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 40,
-    "maxScore": 40,
-    "minScore": 40,
+    "avgScore": 38,
+    "maxScore": 38,
+    "minScore": 38,
     "deals": [
       {
         "mongoId": "6764614cb9fa43de6d8c1bc2",
@@ -45108,12 +46187,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 24101,
-        "score": 40,
+        "score": 38,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -45125,36 +46203,6 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "product": "Mixed Berries / Tropical Fruits (IQF)",
     "yearsInBusiness": 8,
     "yearsInBusinessSource": "default",
-    "dealCount": 1,
-    "finishedDealCount": 1,
-    "avgScore": 57,
-    "maxScore": 57,
-    "minScore": 57,
-    "deals": [
-      {
-        "mongoId": "677ec54eb9fa43de6d931ebd",
-        "name": "IQF TROPICAL FRUITS 40FT",
-        "status": "finished",
-        "milestone": 7,
-        "dealValue": 41473.6,
-        "score": 57,
-        "priorDeals": 0
-      }
-    ],
-    "missingForFullCram": [
-      "customs export narrative",
-      "product risk table row (provisional, not AC-confirmed)",
-      "cargo insurance coverage (defaults to None — triggers veto)",
-      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
-    ]
-  },
-  {
-    "id": "cp-supplierTRUMARKETBLOCKCHAINSACMixedBerriesTropicalFruitsIQF",
-    "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
-    "role": "supplier",
-    "product": "Mixed Berries / Tropical Fruits (IQF)",
-    "yearsInBusiness": 5,
-    "yearsInBusinessSource": "csv",
     "dealCount": 1,
     "finishedDealCount": 1,
     "avgScore": 53,
@@ -45172,7 +46220,35 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
+      "product risk table row (provisional, not AC-confirmed)",
+      "cargo insurance coverage (defaults to None — triggers veto)",
+      "buyer credit rating (Coface CRA/DRA — no document uploaded)"
+    ]
+  },
+  {
+    "id": "cp-supplierTRUMARKETBLOCKCHAINSACMixedBerriesTropicalFruitsIQF",
+    "companyName": "TRU MARKET BLOCKCHAIN S.A.C.",
+    "role": "supplier",
+    "product": "Mixed Berries / Tropical Fruits (IQF)",
+    "yearsInBusiness": 5,
+    "yearsInBusinessSource": "csv",
+    "dealCount": 1,
+    "finishedDealCount": 1,
+    "avgScore": 55,
+    "maxScore": 55,
+    "minScore": 55,
+    "deals": [
+      {
+        "mongoId": "677ec54eb9fa43de6d931ebd",
+        "name": "IQF TROPICAL FRUITS 40FT",
+        "status": "finished",
+        "milestone": 7,
+        "dealValue": 41473.6,
+        "score": 55,
+        "priorDeals": 0
+      }
+    ],
+    "missingForFullCram": [
       "product risk table row (provisional, not AC-confirmed)",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
@@ -45187,9 +46263,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 57,
-    "maxScore": 57,
-    "minScore": 57,
+    "avgScore": 53,
+    "maxScore": 53,
+    "minScore": 53,
     "deals": [
       {
         "mongoId": "67e5642f6b3eee0b06f42147",
@@ -45197,12 +46273,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 27035.1,
-        "score": 57,
+        "score": 53,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -45216,9 +46291,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 38,
-    "maxScore": 38,
-    "minScore": 38,
+    "avgScore": 34,
+    "maxScore": 34,
+    "minScore": 34,
     "deals": [
       {
         "mongoId": "67f41e496b3eee0b06f7769c",
@@ -45226,12 +46301,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 4320,
-        "score": 38,
+        "score": 34,
         "priorDeals": 0
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -45245,9 +46319,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 46,
-    "maxScore": 46,
-    "minScore": 46,
+    "avgScore": 43,
+    "maxScore": 43,
+    "minScore": 43,
     "deals": [
       {
         "mongoId": "6853637d46f5613e126c952e",
@@ -45255,12 +46329,11 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 156702,
-        "score": 46,
+        "score": 43,
         "priorDeals": 4
       }
     ],
     "missingForFullCram": [
-      "customs export narrative",
       "cargo insurance coverage (defaults to None — triggers veto)",
       "buyer credit rating (Coface CRA/DRA — no document uploaded)"
     ]
@@ -45274,9 +46347,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 46,
-    "maxScore": 46,
-    "minScore": 46,
+    "avgScore": 50,
+    "maxScore": 50,
+    "minScore": 50,
     "deals": [
       {
         "mongoId": "68910508438d2534fe4ed31f",
@@ -45284,7 +46357,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 10368,
-        "score": 46,
+        "score": 50,
         "priorDeals": 6
       }
     ],
@@ -45304,9 +46377,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "csv",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 53,
-    "maxScore": 53,
-    "minScore": 53,
+    "avgScore": 55,
+    "maxScore": 55,
+    "minScore": 55,
     "deals": [
       {
         "mongoId": "68910508438d2534fe4ed31f",
@@ -45314,7 +46387,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 10368,
-        "score": 53,
+        "score": 55,
         "priorDeals": 6
       }
     ],
@@ -45334,9 +46407,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 46,
-    "maxScore": 46,
-    "minScore": 46,
+    "avgScore": 43,
+    "maxScore": 43,
+    "minScore": 43,
     "deals": [
       {
         "mongoId": "2764e7d7dc151ee27893c05b",
@@ -45344,7 +46417,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 11997,
-        "score": 46,
+        "score": 43,
         "priorDeals": 0
       }
     ],
@@ -45363,9 +46436,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "default",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 60,
-    "maxScore": 60,
-    "minScore": 60,
+    "avgScore": 56,
+    "maxScore": 56,
+    "minScore": 56,
     "deals": [
       {
         "mongoId": "b6948e52fcced0daf3a48d45",
@@ -45373,7 +46446,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55992,
-        "score": 60,
+        "score": 56,
         "priorDeals": 0
       }
     ],
@@ -45385,17 +46458,17 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     ]
   },
   {
-    "id": "cp-supplierINDUSTRIASSOLIMARSACMixedBerriesTropicalFruitsIQF",
-    "companyName": "INDUSTRIAS SOLIMAR SAC",
+    "id": "cp-supplierSOLIMARINDUSTRIAEIRLMixedBerriesTropicalFruitsIQF",
+    "companyName": "SOLIMAR INDUSTRIA E.I.R.L.",
     "role": "supplier",
     "product": "Mixed Berries / Tropical Fruits (IQF)",
     "yearsInBusiness": 9,
     "yearsInBusinessSource": "default",
     "dealCount": 1,
     "finishedDealCount": 1,
-    "avgScore": 67,
-    "maxScore": 67,
-    "minScore": 67,
+    "avgScore": 58,
+    "maxScore": 58,
+    "minScore": 58,
     "deals": [
       {
         "mongoId": "b6948e52fcced0daf3a48d45",
@@ -45403,7 +46476,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "finished",
         "milestone": 7,
         "dealValue": 55992,
-        "score": 67,
+        "score": 58,
         "priorDeals": 0
       }
     ],
@@ -45423,9 +46496,9 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
     "yearsInBusinessSource": "verified",
     "dealCount": 1,
     "finishedDealCount": 0,
-    "avgScore": 51,
-    "maxScore": 51,
-    "minScore": 51,
+    "avgScore": 48,
+    "maxScore": 48,
+    "minScore": 48,
     "deals": [
       {
         "mongoId": "6a71bb190e42678faa034630",
@@ -45433,7 +46506,7 @@ export const platformCounterparties: PlatformCounterpartyScore[] = [
         "status": "confirmed",
         "milestone": 3,
         "dealValue": 14400,
-        "score": 51,
+        "score": 48,
         "priorDeals": 0
       }
     ],
@@ -45457,7 +46530,7 @@ export const platformCounterpartiesBlocked: PlatformCounterpartyBlocked[] = [
     "deals": [
       {
         "mongoId": "66fb1eb20b1b5991fc6479ff",
-        "name": "ArÃ¯Â¿Â½ndano fresco",
+        "name": "Ar?ndano fresco",
         "status": "finished",
         "milestone": 7,
         "dealValue": 30000
@@ -45474,7 +46547,7 @@ export const platformCounterpartiesBlocked: PlatformCounterpartyBlocked[] = [
     "deals": [
       {
         "mongoId": "66fb1eb20b1b5991fc6479ff",
-        "name": "ArÃ¯Â¿Â½ndano fresco",
+        "name": "Ar?ndano fresco",
         "status": "finished",
         "milestone": 7,
         "dealValue": 30000

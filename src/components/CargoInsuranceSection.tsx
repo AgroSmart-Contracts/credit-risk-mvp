@@ -14,13 +14,10 @@ interface CargoInsuranceSectionProps {
 }
 
 /**
- * Every platform deal defaults insuranceCoverage to "None" (no source in any
- * CSV) — and since the veto register went live, "None" is a mandatory spec
- * §6 hard stop, so every real deal is currently forced to the "Veto" tier
- * regardless of its actual score (confirmed via `npm run validate`). This is
- * the single highest-impact gap in the whole pipeline — surfaced as its own
- * section, not folded into the generic "missing fields" list below, so it
- * isn't easy to miss — decision 2026-07-27.
+ * Platform CSV has no cargo-insurance source. Unconfirmed `None` applies a
+ * Structure haircut (−8) without vetoing. Setting a real coverage level here
+ * marks insuranceConfirmed and re-scores live — decision 2026-08-09 (was
+ * forcing every deal to Veto before).
  */
 export function CargoInsuranceSection({ query }: CargoInsuranceSectionProps) {
   const { corrections, setInsuranceCoverage } = useDataCorrections();
@@ -44,7 +41,9 @@ export function CargoInsuranceSection({ query }: CargoInsuranceSectionProps) {
     () =>
       rows.map(({ record, deal }) => {
         const override = corrections.insuranceCoverageByDeal[record.mongoId];
-        const effectiveDeal: Deal = override ? { ...deal, insuranceCoverage: override } : deal;
+        const effectiveDeal: Deal = override
+          ? { ...deal, insuranceCoverage: override, insuranceConfirmed: true }
+          : deal;
         return { record, deal, preview: buildRiskAssessment(effectiveDeal), override };
       }),
     [rows, corrections],
@@ -65,10 +64,11 @@ export function CargoInsuranceSection({ query }: CargoInsuranceSectionProps) {
               Cargo insurance — {vetoedCount} of {rows.length} deals currently vetoed
             </h2>
             <p className="mt-1 text-xs text-tm-text-light">
-              No platform deal has a real cargo-insurance value on file — every one defaults to
-              "None", which is a mandatory spec §6 veto (hard stop, overriding the composite score
-              regardless of what it computes to). Set a real coverage level per deal to preview the
-              corrected outcome — computed live in your browser, same formula used everywhere else.
+              Platform CSV has no insurance on file (unconfirmed). That applies a Structure
+              haircut without a hard veto. Confirm coverage per deal to lift the haircut —
+              confirmed{" "}
+              <span className="font-medium text-tm-black">None</span> still vetoes per
+              spec §6.
             </p>
           </div>
         </div>

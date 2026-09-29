@@ -115,7 +115,8 @@ function FormulaPanel() {
             from Veritrade + Datasur when the company matches.
           </li>
           <li>
-            Found in customs → online verifiability = 55 (less-authoritative).
+            Found in customs → frequency of deals scored from shipment count
+            (yearly FOB ÷ 12 for monthly purchase volume).
           </li>
           <li>
             Sources: {counterpartySandboxMeta.customsSources.join("; ")}

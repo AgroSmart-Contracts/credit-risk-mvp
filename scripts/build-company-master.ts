@@ -79,14 +79,14 @@ const YIB_OVERRIDE_BY_KEY: Record<string, { years: number; source: string }> = {
   // Repo regenerations from company-master were wiping these because the Desktop
   // source CSV never had buyersYearsinBusiness/suppliersYearsinBusiness for them
   // — promoting into this override table so rebuilds keep them.
-  "AGRICOLA MEDANO AZUL SAC": { years: 5, source: "verified" },
+  "AGRICOLA LOS MEDANOS S.A.": { years: 5, source: "verified" },
   "AGRICOLA VIÑASOL SAC": { years: 15, source: "verified" },
   "AGRO SMART CONTRACTS LDA": { years: 2, source: "verified" },
   "ALBORAN COMEX SL": { years: 2, source: "verified" },
   "ANTERRA FARMS GMBH": { years: 4, source: "verified" },
   "ALLIED TRADE GLOBAL": { years: 14, source: "verified" },
   "BIOFRESHI BV": { years: 17, source: "verified" },
-  "BLUE PACIFIC FOODS SAC": { years: 22, source: "verified" },
+  "BLUE PACIFIC OILS INTERNATIONAL I S.A.C.": { years: 22, source: "verified" },
   "DAVIS GLOBAL BV": { years: 6, source: "verified" },
   "FRESH EXPRESS LLC": { years: 33, source: "verified" },
   "HACIENDA SOTOMAYOR SL": { years: 5, source: "verified" },

@@ -1,22 +1,13 @@
 /**
- * Counterparty risk scorers — weighted average + coverage shrink toward 50.
- * Spec: docs/counterparty-risk-scoring-method-outline-2026-07-30.md
+ * Counterparty risk sandbox scorer — weighted average + coverage shrink toward 50.
+ * Spec: Desktop counterparty-risk-scoring-method-outline-2026-07-30.md
  *
- * Live Dimension A (`dimension-a.ts` → computeBuyerScore / computeSupplierScore /
- * computeCounterpartyScore) calls these functions.
+ * Separate from live CRAM Dimension A (`computeBuyerScore` / `computeSupplierScore`
+ * in scoring.ts). Blank/null fields are excluded from both numerator and
+ * filled-weight; unfilled weight still counts toward coverage (possible weight).
  */
 
-/**
- * Hand-set judgment call, not calibrated against realized outcomes (payment
- * defaults, delays, etc.) — there's no historical outcome data in this repo
- * to fit it against yet. Revisit once that data exists.
- */
 export const SANDBOX_TRUST_BONUS_DEFAULT = 3;
-/**
- * Hand-set judgment call (midpoint of the 0–100 scale), not calibrated
- * against realized outcomes. Revisit once outcome data exists to check
- * whether a non-midpoint anchor predicts better.
- */
 export const SANDBOX_NEUTRAL = 50;
 
 export type FilledNumber = number | null | undefined;
@@ -33,27 +24,31 @@ export interface GroupScoreResult {
   rawAverage: number | null;
   filledWeight: number;
   possibleWeight: number;
-  /** filledWeight ÷ possibleWeight — ignores which/how many fields are filled */
+  /** filledWeight / possibleWeight */
   weightCoverageFraction: number;
-  /** filled field count ÷ total field count — ignores field weight */
+  /** filled field count / total field count */
   fieldCoverageFraction: number;
-  /** min(weightCoverageFraction, fieldCoverageFraction); drives shrinkage below */
+  /** min(weight, field) — conservative coverage used for shrink */
   coverageFraction: number;
   shrunkScore: number;
   trustBonus: number;
   score: number;
-  /** Worst case if every missing field turned out to score 0 */
+  /** If every blank field scored 0, then shrink + bonus */
   pessimisticScore: number;
-  /** Best case if every missing field turned out to score 100 */
+  /** If every blank field scored 100, then shrink + bonus */
   optimisticScore: number;
   fields: WeightedField[];
 }
 
 export interface SandboxBuyerInputs {
   yearsInBusiness?: FilledNumber;
-  onlineVerifiability?: FilledNumber; // 90 | 55 | 15
-  importLicenseStatus?: FilledNumber; // 100 | 0
-  importLicenseTm?: FilledNumber; // 100 | 0; omit when N/A
+  /**
+   * Customs shipments or platform deal count → scoreFrequencyOfDeals.
+   * (Formerly onlineVerifiability; renamed 2026-08-07.)
+   */
+  frequencyOfDeals?: FilledNumber;
+  /** @deprecated use frequencyOfDeals */
+  onlineVerifiability?: FilledNumber;
   monthlyPurchaseVolumeUsd?: FilledNumber;
   yearlySalesUsd?: FilledNumber;
   annualImportVolumeMt?: FilledNumber;
@@ -68,6 +63,8 @@ export interface SandboxBuyerInputs {
 
 export interface SandboxSupplierInputs {
   yearsInBusiness?: FilledNumber;
+  frequencyOfDeals?: FilledNumber;
+  /** @deprecated use frequencyOfDeals */
   onlineVerifiability?: FilledNumber;
   exportLicenseStatus?: FilledNumber;
   productionCapacityMt?: FilledNumber;
@@ -101,7 +98,21 @@ export function scoreYearsInBusiness(years: FilledNumber): FilledNumber {
   return Math.min(100, years * 10);
 }
 
-/** Online verifiability tiers */
+/**
+ * Frequency of deals — customs shipment count or platform deal count.
+ * Replaces the old online-verifiability tiers (2026-08-07).
+ */
+export function scoreFrequencyOfDeals(count: FilledNumber): FilledNumber {
+  if (!isFilled(count)) return null;
+  if (count <= 0) return 15;
+  if (count <= 2) return 35;
+  if (count <= 5) return 55;
+  if (count <= 11) return 70;
+  if (count <= 23) return 85;
+  return 95;
+}
+
+/** @deprecated kept for research-override callers; prefer scoreFrequencyOfDeals */
 export function scoreOnlineVerifiability(
   tier: "verified" | "less_authoritative" | "not_found" | null | undefined,
 ): FilledNumber {
@@ -117,13 +128,21 @@ export function scoreLicenseValid(valid: boolean | null | undefined): FilledNumb
   return null;
 }
 
-/** Monthly purchase volume USD bands */
+/**
+ * Monthly purchase volume USD bands — aligned to yearly/12 so the two fields
+ * cannot disagree when both come from the same customs FOB total.
+ *   yearly < $500k → monthly < ~$41.7k → 25
+ *   yearly < $2M   → monthly < ~$166.7k → 40
+ *   yearly < $10M  → monthly < ~$833k → 60
+ *   yearly < $50M  → monthly < ~$4.17M → 80
+ *   else → 90
+ */
 export function scoreMonthlyPurchaseVolumeUsd(usd: FilledNumber): FilledNumber {
   if (!isFilled(usd)) return null;
-  if (usd < 10_000) return 25;
-  if (usd < 50_000) return 40;
-  if (usd < 200_000) return 60;
-  if (usd < 1_000_000) return 80;
+  if (usd < 41_667) return 25;
+  if (usd < 166_667) return 40;
+  if (usd < 833_334) return 60;
+  if (usd < 4_166_667) return 80;
   return 90;
 }
 
@@ -135,6 +154,16 @@ export function scoreYearlySalesUsd(usd: FilledNumber): FilledNumber {
   if (usd < 10_000_000) return 60;
   if (usd < 50_000_000) return 80;
   return 90;
+}
+
+/**
+ * Derive a calendar-month average from yearly FOB so monthly and yearly
+ * always stay in the same band family. Prefer this over fob/activeMonths
+ * (seasonal peak), which previously made monthly×12 ≫ yearly.
+ */
+export function monthlyFromYearlySalesUsd(yearlyUsd: FilledNumber): FilledNumber {
+  if (!isFilled(yearlyUsd) || yearlyUsd <= 0) return null;
+  return Math.round((yearlyUsd / 12) * 100) / 100;
 }
 
 /** Annual volume / production capacity MT bands */
@@ -182,8 +211,7 @@ export function scorePlatformTransactionCount(count: FilledNumber): FilledNumber
 }
 
 export function scorePaymentDelayDays(days: FilledNumber): FilledNumber {
-  // Temporary optimistic default: no measured delay → full score until we have data.
-  if (!isFilled(days)) return 100;
+  if (!isFilled(days)) return null;
   return Math.max(15, 100 - days * 2);
 }
 
@@ -202,8 +230,7 @@ export function scoreOnTimeDeliveryRate(rate: FilledNumber): FilledNumber {
 }
 
 export function scoreQualityRejectionRate(rate: FilledNumber): FilledNumber {
-  // Temporary optimistic default: no measured rejection rate → full score until we have data.
-  if (!isFilled(rate)) return 100;
+  if (!isFilled(rate)) return null;
   return Math.max(15, 100 - rate);
 }
 
@@ -217,26 +244,32 @@ export function scoreRelationshipAgeMonths(months: FilledNumber): FilledNumber {
   return Math.min(100, (months * 100) / 24);
 }
 
+function shrinkWithCoverage(
+  rawAverage: number | null,
+  coverageFraction: number,
+): number {
+  if (rawAverage === null) return SANDBOX_NEUTRAL;
+  return coverageFraction * rawAverage + (1 - coverageFraction) * SANDBOX_NEUTRAL;
+}
+
 /**
  * Group raw average → coverage → shrink toward 50 → optional flat trust bonus.
- *
- * Coverage is the more conservative of two measures: weight-based (filled
- * weight ÷ possible weight) and field-count-based (filled fields ÷ total
- * fields). Taking the min means a profile propped up by a couple of heavy
- * fields (e.g. credit rating + years-in-business = 14/40 weight but only
- * 2/10 fields) shrinks as hard as its field count implies, not as little as
- * its weight fraction alone would suggest.
  */
 export function scoreWeightedGroup(
   fields: WeightedField[],
   trustBonus = 0,
 ): GroupScoreResult {
   const possibleWeight = fields.reduce((s, f) => s + f.weight, 0);
+  const totalFieldCount = fields.length;
   let filledWeight = 0;
   let filledFieldCount = 0;
   let weightedSum = 0;
+  let blankWeight = 0;
   for (const f of fields) {
-    if (!isFilled(f.score)) continue;
+    if (!isFilled(f.score)) {
+      blankWeight += f.weight;
+      continue;
+    }
     filledWeight += f.weight;
     filledFieldCount += 1;
     weightedSum += f.score * f.weight;
@@ -245,19 +278,28 @@ export function scoreWeightedGroup(
   const weightCoverageFraction =
     possibleWeight > 0 ? filledWeight / possibleWeight : 0;
   const fieldCoverageFraction =
-    fields.length > 0 ? filledFieldCount / fields.length : 0;
+    totalFieldCount > 0 ? filledFieldCount / totalFieldCount : 0;
   const coverageFraction = Math.min(weightCoverageFraction, fieldCoverageFraction);
-  const rawAverageOrZero = rawAverage ?? 0;
-  const shrunkScore =
-    rawAverage === null
-      ? SANDBOX_NEUTRAL
-      : coverageFraction * rawAverage + (1 - coverageFraction) * SANDBOX_NEUTRAL;
+  const shrunkScore = shrinkWithCoverage(rawAverage, coverageFraction);
   const bonus = Math.max(0, trustBonus);
   const score = clamp(shrunkScore + bonus);
-  const pessimisticScore = clamp(coverageFraction * rawAverageOrZero + bonus);
-  const optimisticScore = clamp(
-    coverageFraction * rawAverageOrZero + (1 - coverageFraction) * 100 + bonus,
+
+  const pessimisticRaw =
+    filledWeight + blankWeight > 0
+      ? weightedSum / (filledWeight + blankWeight)
+      : null;
+  const optimisticRaw =
+    filledWeight + blankWeight > 0
+      ? (weightedSum + blankWeight * 100) / (filledWeight + blankWeight)
+      : null;
+  // Range uses full weight coverage (=1) so blanks are the only variable.
+  const pessimisticScore = clamp(
+    shrinkWithCoverage(pessimisticRaw, 1) + bonus,
   );
+  const optimisticScore = clamp(
+    shrinkWithCoverage(optimisticRaw, 1) + bonus,
+  );
+
   return {
     rawAverage,
     filledWeight,
@@ -274,7 +316,20 @@ export function scoreWeightedGroup(
   };
 }
 
+function resolveFrequencyScore(input: {
+  frequencyOfDeals?: FilledNumber;
+  onlineVerifiability?: FilledNumber;
+}): FilledNumber {
+  if (isFilled(input.frequencyOfDeals)) {
+    return scoreFrequencyOfDeals(input.frequencyOfDeals);
+  }
+  // Legacy path: pre-scored 0–100 verifiability tiers still accepted.
+  if (isFilled(input.onlineVerifiability)) return input.onlineVerifiability;
+  return null;
+}
+
 export function buildBuyerFields(input: SandboxBuyerInputs): WeightedField[] {
+  // Import license removed 2026-08-07 — weight 2 redistributed into frequency of deals (2→4).
   return [
     {
       id: "yearsInBusiness",
@@ -283,28 +338,11 @@ export function buildBuyerFields(input: SandboxBuyerInputs): WeightedField[] {
       score: scoreYearsInBusiness(input.yearsInBusiness),
     },
     {
-      id: "onlineVerifiability",
-      label: "Online verifiability",
-      weight: 2,
-      score: input.onlineVerifiability ?? null,
+      id: "frequencyOfDeals",
+      label: "Frequency of deals",
+      weight: 4,
+      score: resolveFrequencyScore(input),
     },
-    {
-      id: "importLicenseStatus",
-      label: "Import license status",
-      weight: 2,
-      score: input.importLicenseStatus ?? null,
-    },
-    // Import license — TM only when TM is the importing buyer (weight 1); omit field when N/A
-    ...(isFilled(input.importLicenseTm)
-      ? [
-          {
-            id: "importLicenseTm",
-            label: "Import license — TM",
-            weight: 1,
-            score: input.importLicenseTm,
-          } satisfies WeightedField,
-        ]
-      : []),
     {
       id: "monthlyPurchaseVolume",
       label: "Monthly purchase volume",
@@ -359,10 +397,10 @@ export function buildSupplierFields(input: SandboxSupplierInputs): WeightedField
       score: scoreYearsInBusiness(input.yearsInBusiness),
     },
     {
-      id: "onlineVerifiability",
-      label: "Online verifiability",
+      id: "frequencyOfDeals",
+      label: "Frequency of deals",
       weight: 2,
-      score: input.onlineVerifiability ?? null,
+      score: resolveFrequencyScore(input),
     },
     {
       id: "exportLicenseStatus",

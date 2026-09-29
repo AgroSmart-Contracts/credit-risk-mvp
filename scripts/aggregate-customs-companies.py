@@ -140,6 +140,7 @@ class Agg:
         "partners",
         "dates",
         "sources",
+        "by_hs",  # heading4 → {kg_net, fob_usd, shipments}
     )
 
     def __init__(self, name: str):
@@ -155,6 +156,33 @@ class Agg:
         self.partners = set()
         self.dates = []
         self.sources = set()
+        self.by_hs = defaultdict(lambda: {"kg_net": 0.0, "fob_usd": 0.0, "shipments": 0})
+
+
+def normalize_hs(raw) -> str | None:
+    if raw is None or raw == "":
+        return None
+    digits = re.sub(r"\D", "", str(raw))
+    if not digits:
+        return None
+    if len(digits) >= 10:
+        return digits[:10]
+    return digits.zfill(10)
+
+
+def hs_heading4(raw) -> str | None:
+    code = normalize_hs(raw)
+    return code[:4] if code else None
+
+
+def bump_hs(a: Agg, hs_raw, kg_net: float, fob: float):
+    heading = hs_heading4(hs_raw)
+    if not heading:
+        return
+    bucket = a.by_hs[heading]
+    bucket["kg_net"] += kg_net
+    bucket["fob_usd"] += fob
+    bucket["shipments"] += 1
 
 
 def ensure_agg(store: dict, key: str, display: str) -> Agg:
@@ -178,6 +206,7 @@ def add_shipment(
     source: str,
     seen_shipments: set | None = None,
     dua: str = "",
+    hs_code: str = "",
 ):
     # Deduplicate across Matching Company extract + full Veritrade book.
     fp = "|".join(
@@ -188,6 +217,7 @@ def add_shipment(
             company_group_key(importer),
             f"{kg_net:.2f}",
             f"{fob:.2f}",
+            normalize_hs(hs_code) or "",
         ]
     )
     if seen_shipments is not None:
@@ -205,6 +235,7 @@ def add_shipment(
         a.kg_net += kg_net
         a.fob_usd += fob
         a.shipments += 1
+        bump_hs(a, hs_code, kg_net, fob)
         if dest_country:
             a.dest_countries.add(dest_country.strip().upper())
         if dest_port:
@@ -222,6 +253,7 @@ def add_shipment(
         a.kg_net += kg_net
         a.fob_usd += fob
         a.shipments += 1
+        bump_hs(a, hs_code, kg_net, fob)
         if dest_country:
             a.dest_countries.add(dest_country.strip().upper())
         if dest_port:
@@ -262,6 +294,7 @@ def load_veritrade_csv(path: Path, store: dict, seen_shipments: set | None = Non
             source=path.name,
             seen_shipments=seen_shipments,
             dua=str(row.get("DUA / DAM") or ""),
+            hs_code=str(row.get("Partida Aduanera") or ""),
         )
         n += 1
         if ok:
@@ -309,6 +342,7 @@ def load_veritrade_xlsx(path: Path, store: dict, seen_shipments: set | None = No
             source=path.name,
             seen_shipments=seen_shipments,
             dua=str(cell(row, "DUA / DAM") or ""),
+            hs_code=str(cell(row, "Partida Aduanera") or row[0] or ""),
         )
         n += 1
         if ok:
@@ -356,6 +390,12 @@ def load_datasur_xlsx(path: Path, store: dict, seen_shipments: set | None = None
             source=path.name,
             seen_shipments=seen_shipments,
             dua=str(cell(row, "DUA") or cell(row, "DAM") or ""),
+            hs_code=str(
+                cell(row, "PARTIDA ARANCELARIA")
+                or cell(row, "PARTIDA")
+                or cell(row, "Partida Aduanera")
+                or ""
+            ),
         )
         n += 1
         if ok:
@@ -437,6 +477,16 @@ def main():
                 "activityMonths": active_months,
                 "monthlyFobUsd": round(monthly_usd, 2) if monthly_usd is not None else None,
                 "sources": sorted(a.sources),
+                "byHs": {
+                    heading: {
+                        "shipments": bucket["shipments"],
+                        "kgNet": round(bucket["kg_net"], 2),
+                        "fobUsd": round(bucket["fob_usd"], 2),
+                        "volumeMt": round(bucket["kg_net"] / 1000.0, 3),
+                    }
+                    for heading, bucket in sorted(a.by_hs.items())
+                    if bucket["shipments"] > 0
+                },
             }
         )
 

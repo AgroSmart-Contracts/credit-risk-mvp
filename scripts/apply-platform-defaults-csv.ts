@@ -15,6 +15,11 @@ import { parseCsvRecords } from "./lib/csv";
 import { companyGroupKey } from "./lib/company-name";
 import { lookupProductRisk } from "../src/lib/product-risk-tables";
 import { lookupRouteRisk } from "../src/lib/route-risk-tables";
+import {
+  hsHeading4,
+  normalizeHsCode,
+  resolveHsProduct,
+} from "../src/lib/hs-product-map";
 import { platformDealToDeal } from "../src/lib/platform-deal-mapper";
 import { computeBuyerScore, computeSupplierScore } from "../src/lib/scoring";
 import type {
@@ -47,6 +52,23 @@ function parseBool(raw: string | undefined | null): boolean | null {
   return null;
 }
 
+// `new Date("21/11/2025")` is Invalid Date in V8, and `new Date("08/02/2025")`
+// silently misreads it as MM/DD (day↔month swapped) — neither is caught by a
+// plain Number.isNaN check on the happy path, so DD/MM/YYYY values from the
+// defaults CSV must be parsed explicitly rather than handed to `new Date`.
+function parseCsvDate(raw: string): Date | null {
+  const s = raw.trim();
+  if (!s) return null;
+  const dmy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (dmy) {
+    const [, dd, mm, yyyy] = dmy;
+    const d = new Date(Date.UTC(Number(yyyy), Number(mm) - 1, Number(dd)));
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+  const d = new Date(s);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
 function matchKey(dealRef: string, buyer: string, supplier: string, value: number): string {
   return `${dealRef.trim()}::${normName(buyer)}::${normName(supplier)}::${Math.round(value)}`;
 }
@@ -67,7 +89,18 @@ function applyOverlay(
   row: Record<string, string>,
 ): PlatformDealRecord {
   const product = (row.product || record.product).trim() || record.product;
-  const productProfile = lookupProductRisk(product);
+  const hsFromRow = (row.hsCode || row.hs_code || "").trim();
+  const hsResolved = resolveHsProduct({
+    hsCode: hsFromRow || record.hsCode,
+    product,
+  });
+  const hsCode =
+    normalizeHsCode(hsFromRow) ??
+    normalizeHsCode(record.hsCode) ??
+    hsResolved?.hsCode ??
+    null;
+  const hsHeading4Val = hsHeading4(hsCode);
+  const productProfile = lookupProductRisk(product, hsCode);
   const origin = (row.origin || record.origin).trim() || record.origin;
   const destination = (row.destination || record.destination).trim() || record.destination;
   const transportRaw = (row.transportMode || "").trim().toLowerCase();
@@ -128,22 +161,53 @@ function applyOverlay(
     likelyTest = rowType as DataQualityFlag;
   }
 
+  // Refresh route table hit after ports are known (below).
+
+  const shippingStartDate =
+    row.shipmentDate && row.shipmentDate.trim()
+      ? (() => {
+          const d = parseCsvDate(row.shipmentDate);
+          return d ? d.toISOString() : record.shippingStartDate;
+        })()
+      : record.shippingStartDate;
+
+  const presentation =
+    (row.presentation || "").trim() || record.presentation || null;
+  const quantityKg = parseNum(row.quantityKg) ?? record.quantityKg ?? null;
+  const portOfOrigin =
+    (row.portOfOrigin || "").trim() || record.portOfOrigin || null;
+  const portOfDestination =
+    (row.portOfDestination || "").trim() || record.portOfDestination || null;
+  const shipmentCompany =
+    (row.shipmentCompany || "").trim() || record.shipmentCompany || null;
+
+  const customsNarrative =
+    row.customsNarrative?.trim() === ""
+      ? null
+      : row.customsNarrative?.trim() || record.customsNarrative || null;
+
+  // Prefer named ports for Dimension C when present.
+  const originForRoute = portOfOrigin || origin;
+  const destinationForRoute = portOfDestination || destination;
+
   // Refresh route table hit with overlay OD/mode/stops (Dimension C v2).
   const routeProfile = lookupRouteRisk(
-    origin,
-    destination,
+    originForRoute,
+    destinationForRoute,
     product,
     transportMode,
     numberOfTransshipments,
   );
 
-  const shippingStartDate =
-    row.shipmentDate && row.shipmentDate.trim()
-      ? (() => {
-          const d = new Date(row.shipmentDate);
-          return Number.isNaN(d.getTime()) ? record.shippingStartDate : d.toISOString();
-        })()
-      : record.shippingStartDate;
+  const missingFields = (record.missingFields || []).filter((f) => {
+    if (
+      customsNarrative &&
+      f.toLowerCase().includes("customs export narrative")
+    ) {
+      return false;
+    }
+    return true;
+  });
 
   const buyerYibSource = (row.buyerYearsInBusinessSource ||
     record.buyerYibSource) as PlatformDealRecord["buyerYibSource"];
@@ -154,9 +218,16 @@ function applyOverlay(
     ...record,
     dealRef: (row.dealRef || record.dealRef).trim() || record.dealRef,
     product,
+    hsCode,
+    hsHeading4: hsHeading4Val,
     dealValueUSD,
     origin,
     destination,
+    portOfOrigin,
+    portOfDestination,
+    presentation,
+    quantityKg,
+    shipmentCompany,
     buyerName: (row.buyerName || record.buyerName).trim() || record.buyerName,
     supplierName:
       (row.supplierName || record.supplierName).trim() || record.supplierName,
@@ -175,7 +246,8 @@ function applyOverlay(
     perishabilityClass,
     shelfLifeDays: productProfile?.shelfLifeDays ?? record.shelfLifeDays,
     coldChainRequired,
-    estimatedTransitDays,
+    estimatedTransitDays:
+      routeProfile?.estimatedTransitDays ?? estimatedTransitDays,
     numberOfTransshipments,
     routeRiskFlag: routeProfile?.routeRiskFlag ?? routeRiskFlag,
     transportMode,
@@ -185,10 +257,8 @@ function applyOverlay(
     relationshipAgeMonths,
     status: (row.status || record.status).trim() || record.status,
     likelyTest,
-    customsNarrative:
-      row.customsNarrative?.trim() === ""
-        ? null
-        : row.customsNarrative?.trim() || record.customsNarrative,
+    customsNarrative,
+    missingFields,
     cofaceCoverageAmountUSD,
     cofaceCoveragePct,
     cofaceIsDefaulted,

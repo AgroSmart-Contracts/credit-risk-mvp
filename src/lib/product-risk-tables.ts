@@ -4,6 +4,7 @@
  * used by `computeProductScore` — Dimension B is unit price vs usual only.
  */
 import type { ProductRiskProfile } from "../types";
+import { resolveHsProduct } from "./hs-product-map";
 
 export type PerishabilityClass = ProductRiskProfile["perishabilityClass"];
 
@@ -154,8 +155,14 @@ function normalizeProductName(value: string): string {
   return value.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
-export function lookupProductRisk(product: string): ProductRiskProfile | null {
-  const normalized = normalizeProductName(product);
+export function lookupProductRisk(
+  product: string,
+  hsCode?: string | null,
+): ProductRiskProfile | null {
+  // Prefer HS identity when present — commodity is tariff-defined.
+  const fromHs = resolveHsProduct({ hsCode: hsCode ?? null, product });
+  const label = fromHs?.product ?? product;
+  const normalized = normalizeProductName(label);
   return (
     PRODUCT_RISK_TABLE.find(
       (entry) => normalizeProductName(entry.product) === normalized,

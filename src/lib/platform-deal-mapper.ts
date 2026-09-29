@@ -1,9 +1,13 @@
 import type { Deal } from "../types";
 import type { PlatformDealRecord } from "../types/platform";
-import { normalizeDealMilestone } from "./deal-milestone";
 import { lookupProductRisk } from "./product-risk-tables";
 import { lookupRouteRisk } from "./route-risk-tables";
 import { scoreDealBuyer, scoreDealSupplier } from "./dimension-a";
+import {
+  hsHeading4,
+  normalizeHsCode,
+  resolveHsProduct,
+} from "./hs-product-map";
 
 /**
  * Dimension A blank fields for this deal's buyer/supplier, labeled to match
@@ -13,7 +17,7 @@ import { scoreDealBuyer, scoreDealSupplier } from "./dimension-a";
  * drift out of sync with what actually gets excluded from the raw average —
  * previously this tab only knew about a small hand-picked set of gaps
  * (customs narrative, risk-table fallback, YIB) with no visibility into
- * credit rating, online verifiability, volumes, route diversity, quality
+ * credit rating, frequency of deals, volumes, route diversity, quality
  * certifications, or quality rejection rate.
  */
 function dimensionAMissingFields(deal: Deal): string[] {
@@ -28,23 +32,34 @@ function dimensionAMissingFields(deal: Deal): string[] {
 
 /** Map a CSV-backed platform deal into the MVP Deal shape for scoring / wizard. */
 export function platformDealToDeal(record: PlatformDealRecord): Deal {
-  const productProfile = lookupProductRisk(record.product);
+  const hsResolved = resolveHsProduct({
+    hsCode: record.hsCode,
+    product: record.product,
+  });
+  const hsCode =
+    normalizeHsCode(record.hsCode) ?? hsResolved?.hsCode ?? null;
+  const heading = hsHeading4(hsCode) ?? record.hsHeading4 ?? null;
+  // Prefer HS-derived product label when the tariff maps to a known commodity.
+  const product = hsResolved?.product ?? record.product;
+  const productProfile = lookupProductRisk(product, hsCode);
+  // Prefer named ports for Dimension C when present (aliases include bare port names).
+  const originForRoute =
+    record.portOfOrigin?.trim() || record.origin;
+  const destinationForRoute =
+    record.portOfDestination?.trim() || record.destination;
   const routeProfile = lookupRouteRisk(
-    record.origin,
-    record.destination,
-    record.product,
+    originForRoute,
+    destinationForRoute,
+    product,
     record.transportMode,
     record.numberOfTransshipments,
   );
-  const milestone = normalizeDealMilestone(
-    record.status,
-    record.currentMilestone,
-  );
 
   const fieldsNeedingConfirmation = [
-    ...record.missingFields.filter(
-      (f) => f.includes("customs") || f.includes("risk table"),
-    ),
+    ...record.missingFields.filter((f) => {
+      if (f.includes("customs") && record.customsNarrative) return false;
+      return f.includes("customs") || f.includes("risk table");
+    }),
   ];
 
   if (record.buyerYib === null) {
@@ -68,31 +83,37 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
   const supplierLicenseValid = supplierSunat?.resolved
     ? (!supplierSunat.estado || supplierSunat.estado === "ACTIVO") &&
       (!supplierSunat.condicion || supplierSunat.condicion === "HABIDO")
-    : true;
+    : null;
 
   const deal: Deal = {
     id: record.id,
     dealRef: record.dealRef,
-    product: record.product,
+    product,
+    hsCode,
+    hsHeading4: heading,
     variety: record.variety,
     quantityLabel: record.quantityLabel,
+    presentation: record.presentation,
+    quantityKg: record.quantityKg,
     dealValueUSD: record.dealValueUSD,
     origin: record.origin,
     destination: record.destination,
+    portOfOrigin: record.portOfOrigin,
+    portOfDestination: record.portOfDestination,
+    shipmentCompany: record.shipmentCompany,
     incoterm: "FOB",
     buyer: {
       name: record.buyerName,
       role: "buyer",
       yearsInBusiness: record.buyerYib,
-      /** DEFAULT (decision 2026-07-24, unchanged): assumed true for all platform users — no license/KYC source in any CSV. See docs/cram-defaults-and-formula-2026-07.md. */
-      licenseValid: true,
+      /** Unknown until KYC — blank in Dimension A (not scored as valid). */
+      licenseValid: null,
       platformDealsCompleted: record.priorDealsBetweenParties,
-      platformCompletionRate:
-        milestone >= 7
-          ? 100
-          : record.priorDealsBetweenParties > 0
-            ? 85
-            : null,
+      /**
+       * Do not invent completion rates from milestone/priors — blanks shrink
+       * toward 50 instead of padding A with fake 85/100%.
+       */
+      platformCompletionRate: null,
       /** No payment-timing source — leave blank for Dimension A (excludes blanks). */
       avgPaymentDelayDays: null,
     },
@@ -102,12 +123,7 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
       yearsInBusiness: record.supplierYib,
       licenseValid: supplierLicenseValid,
       platformDealsCompleted: record.priorDealsBetweenParties,
-      platformCompletionRate:
-        milestone >= 7
-          ? 100
-          : record.priorDealsBetweenParties > 0
-            ? 85
-            : null,
+      platformCompletionRate: null,
       /** No quality-rejection source — leave blank for Dimension A. */
       qualityRejectionRatePct: null,
     },
@@ -117,6 +133,8 @@ export function platformDealToDeal(record: PlatformDealRecord): Deal {
     collateralType: "None",
     collateralValueUSD: 0,
     insuranceCoverage: "None",
+    /** CSV has no insurance source — haircut in D, do not veto. */
+    insuranceConfirmed: false,
     insuranceValueUSD: 0,
     /** productCategory now sourced from the product table (ERD Product.productCategory) instead of hardcoded "Fresh Produce" — was wrong for Frozen/IQF products. Falls back to "Fresh Produce" only when no table row exists. */
     productCategory: productProfile?.productCategory ?? "Fresh Produce",

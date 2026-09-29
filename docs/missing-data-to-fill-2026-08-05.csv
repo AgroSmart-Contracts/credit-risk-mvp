@@ -12,7 +12,7 @@ no_company_email,high,Holy Fruit Peru,supplier,,,,"company invite email on deals
 no_company_email,high,AGRO SMART CONTRACTS LDA,buyer,,,,"company invite email (non-TM)",TM staff only,,,13 deals
 no_company_email,high,LIMAX SP. Z O.O.,buyer,Leo.Klaassen@limax.pl,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,Leo.Klaassen@limax.pl,,7 deals — email collected; wire onto deals
 no_company_email,high,A.S.M International,buyer,asminternational2@gmail.com,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,asminternational2@gmail.com,,5 deals — email collected; wire onto deals
-no_company_email,high,ICA BLUEBERRIES SAC,supplier,,,,"company invite email (non-TM)",supply@trumarket.tech only,,,4 deals
+no_company_email,high,BERRYCO S.A.C.,supplier,,,,"company invite email (non-TM)",supply@trumarket.tech only,,,4 deals; recorded ICA BLUEBERRIES SAC is BerryCo (RUC 20606396628)
 no_company_email,medium,ANTERRA FARMS GMBH,buyer,anders.persson@anterrafarms.com,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,anders.persson@anterrafarms.com,,2 deals — email collected; wire onto deals
 no_company_email,medium,«Ardzhies» LLC,buyer,,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,,,2 deals
 no_company_email,medium,BC NATURE QUALITY FRUITS S.L,buyer,jcortes@bcnature.es,,,"company invite email (non-TM)",alessandro.cordano@trumarket.tech only,jcortes@bcnature.es,,1 deal — email collected; wire onto deals
@@ -23,12 +23,12 @@ create_user,high,BIO FARMING PERU S.A.C.,supplier,,andresti@biofarming.com,,crea
 create_user,high,DAVIS GLOBAL BV,buyer,,dganga@davisworldwide.nl,,create prod User + company.name,,,13 deals
 create_user,high,AGRICOLA VIÑASOL SAC,supplier,,lgarcia@avsa.com.pe,,create prod User + company.name,,,12 deals
 create_user,high,JUHINEJ LTD,buyer/supplier,,ivette.aedo@juhinej.com,,create prod User + company.name,,,12 deals
-create_user,high,AGRICOLA MEDANO AZUL SAC,supplier,,lvergara@medano.com.pe,,create prod User + company.name,,,10 deals
+create_user,high,AGRICOLA LOS MEDANOS S.A.,supplier,,lvergara@medano.com.pe,,create prod User + company.name,,,10 deals; recorded AGRICOLA MEDANO AZUL SAC is this exporter (RUC 20389426891)
 create_user,high,XARKI SL,buyer,,miguel@xarki.com,,create prod User + company.name,,,10 deals
 create_user,high,HACIENDA SOTOMAYOR SL,buyer,,info@haciendasotomayor.es,,create prod User + company.name,,,9 deals
 create_user,medium,FRESH EXPRESS LLC,buyer,,sales@freshexpress.ae,,create prod User + company.name,,,7 deals
 create_user,medium,FUNDO LAS LOMAS SAC,supplier,,tesor1@fundolaslomas.com,,create prod User + company.name,,,7 deals
-create_user,medium,GIDDINS PERU SAC,supplier,,cesar.berrospi@giddingsfruit.com,,create prod User + company.name,,,7 deals
+create_user,medium,GIDDINGS BERRIES PERU S.A.C.,supplier,,cesar.berrospi@giddingsfruit.com,,create prod User + company.name,,,7 deals (TRD-CULT; RUC 20565586247)
 create_user,medium,SHANGHAI GREEN CHAIN TRADING CO LTD,buyer,,jenny@internationalgreenco.com,,create prod User + company.name,,,7 deals; also needs YIB
 create_user,medium,TRADE CULTIVATORS LLC,buyer,,mohamed.nazer@tradecultivators.com,,create prod User + company.name,,,7 deals
 create_user,medium,BIOFRESHI BV,buyer,,gerritjan@biofreshi.com,,create prod User + company.name,,,5 deals
@@ -37,10 +37,10 @@ create_user,medium,VILLAVENTURA PERU SAC,supplier,,rony@villaventuraperu.com,,cr
 create_user,medium,GUANGZHOU FRESH LINK IMPORT CO LTD,buyer,,sales@buyrite-intl.com,,create prod User + company.name,,,4 deals; also needs YIB
 create_user,low,AGRÍCOLA Y COMERCIAL VALLES DEL ÑUBLE,buyer,,amory.sepulveda@juhinej.com,,create prod User + company.name,,,1 deal
 create_user,high,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,,andresmarin@drelifresh.com,TM-2026-018,create prod User + company.name/country/taxId,,Colombia / 901893567,1 deal; also needs YIB
-create_user,low,INDUSTRIAS SOLIMAR SAC,supplier,,mvillarreal.almacen@solimar.com.pe,,create prod User + company.name,,,1 deal
-fill_user_company,medium,BLUE PACIFIC FOODS SAC,supplier,,wli@bluepacificoils.com,,User.company.name/country/taxId,empty,,,User exists; company fields empty
-fill_user_company,medium,MIKHUNA FOODS SAC,supplier,,rsuarez@mikhunafoods.com.pe,,User.company.name/country/taxId,empty,,,
-fill_user_company,medium,MIKHUNA FOODS SAC,supplier,,lsalas@mikhunafoods.com.pe,,User.company.name/country/taxId,empty,,,
+create_user,low,SOLIMAR INDUSTRIA E.I.R.L.,supplier,,mvillarreal.almacen@solimar.com.pe,,create prod User + company.name,,,1 deal; recorded INDUSTRIAS SOLIMAR SAC is this EIRL (RUC 20526450851)
+fill_user_company,medium,BLUE PACIFIC OILS INTERNATIONAL I S.A.C.,supplier,,wli@bluepacificoils.com,,User.company.name/country/taxId,empty,20507873627,,User exists; recorded FOODS SAC is Oils; Veritrade also has International I as 20613692305
+fill_user_company,medium,MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C,supplier,,rsuarez@mikhunafoods.com.pe,,User.company.name/country/taxId,empty,20611718579,,
+fill_user_company,medium,MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C,supplier,,lsalas@mikhunafoods.com.pe,,User.company.name/country/taxId,empty,20611718579,,
 fill_user_company,medium,T.O.F.F. B.V,buyer,,jarno.moret@toffbv.nl,,User.company.name/country/taxId,empty,,,
 fill_user_company,medium,Holy Fruit Peru,supplier,,alessandro@holyfruitperu.com,,User.company.name/country/taxId,empty,,,
 fill_user_company,medium,Holy Fruit Peru,supplier,,ventas@holyfruitperu.com,,User.company.name/country/taxId,empty,,,

@@ -1,7 +1,7 @@
 import type { Deal, RiskTier } from "../types";
 import { DIMENSION_WEIGHTS } from "./scoring-constants";
 import { lookupRouteRisk, MAX_AIR_STOPS } from "./route-risk-tables";
-import { priceVsMarketPoints } from "./price-benchmarks";
+import { priceVsMarketDetail } from "./price-benchmarks";
 import {
   buildTransactionStructureReport,
   hasTransactionStructureInput,
@@ -16,6 +16,8 @@ import {
   type PartyScoreAudit,
   type PartyScoreLine,
 } from "./dimension-a";
+import { uncertaintyPremiumFor } from "./financing";
+import { investorApyPct } from "./investor-apy";
 
 export {
   computeBuyerScore,
@@ -44,25 +46,25 @@ function externalCreditBonus(deal: Deal): number {
 }
 
 /**
- * Dimension B (Product) — driven by unit price vs usual for the same
+ * Dimension B (Product) — unit price vs usual for the same
  * product × origin→destination × shipment month (price-benchmarks.ts).
  *
  * Spec §4.B called price-vs-market the highest-signal fraud variable. The old
- * PRODUCT_RISK_TABLE `.score` was a baked AC structural shortcut; it is no
- * longer added into the deal score. That table is kept only for product
- * attributes (perishability, shelf life, cold chain) used when hydrating deals.
+ * PRODUCT_RISK_TABLE `.score` / Grade A overlay is no longer added.
  *
- * Score = base 70 + price-vs-usual band points (−35 … +20). No grade / table overlay.
+ * Score = base + price band (−35 … +10). Missing benchmark uses base 55
+ * (haircut vs neutral 70) so unknown price is not scored as “fine.”
  */
 export function computeProductScore(deal: Deal): number {
-  return clamp(70 + priceVsMarketPoints(deal));
+  const detail = priceVsMarketDetail(deal);
+  const base = detail.fallback === "none" ? 55 : 70;
+  return clamp(base + detail.pts);
 }
 
 /**
- * Dimension C v2 owns the route score (transit / stops / corridor flag / perish /
- * cold-treatment). TS never recomputes the formula and does not layer Incoterms
- * on top — Incoterms are deal commercial terms, not corridor risk.
- * On a table miss return base 70 only (HANDOFF: engine never guesses).
+ * Dimension C v2 owns the route score (transit / stops / corridor flag).
+ * Table miss → 55 (not neutral 70). Provisional (unconfirmed) corridors
+ * take an −8 haircut so they do not price like AC-confirmed lanes.
  */
 export function computeRouteScore(deal: Deal): number {
   const tableMatch =
@@ -74,21 +76,21 @@ export function computeRouteScore(deal: Deal): number {
       deal.transportMode,
       deal.numberOfTransshipments,
     );
-  // Veto rows carry score 0 in the rendered table; composite still runs but
-  // checkVetoRegister hard-stops the deal.
-  return clamp(tableMatch ? tableMatch.score : 70);
+  if (!tableMatch) return 55;
+  const raw = tableMatch.score;
+  return clamp(tableMatch.scoreConfirmed ? raw : raw - 8);
 }
 
 /**
- * Payment terms — spec §4.D, 25% weight. Cash-in-advance +25 / LC +20 /
- * CAD (cash against documents / BL) +15 / 30d +10 / 60d 0 / 90d −10 / 120d+ −18.
- * Previously ran at roughly half these magnitudes and had no ≥120d bucket
- * distinct from 90d — resynced 2026-07-24.
+ * Payment terms — spec §4.D. Platform CSV uses an unverified Documentary
+ * default (`… (platform default)`) scored softer (+5) than confirmed CAD/BL (+15).
  */
 export function paymentTermsAdjustment(paymentTerms: string): number {
   const t = paymentTerms.toLowerCase();
   if (t.includes("cash in advance") || t.includes("prepaid")) return 25;
   if (t.includes("letter of credit") || t.includes(" l/c")) return 20;
+  // Unverified platform default — do not award full CAD/BL points.
+  if (t.includes("platform default")) return 5;
   if (t.includes("against") && (t.includes("bl") || t.includes("doc")))
     return 15;
   if (/\b30\s*day/.test(t)) return 10;
@@ -99,12 +101,11 @@ export function paymentTermsAdjustment(paymentTerms: string): number {
 }
 
 /**
- * Relationship history — spec §4.D, 25% weight: ≥10 +15 / ≥5 +12 / ≥1 +8 / 0 −12.
- * Distinct from Dimension A's cross-applied relationship signal (different
- * point values, spec explicitly calls for both — see computeCounterpartyScore).
- * Previously missing the ≥10 tier entirely and used unrelated point values.
+ * Relationship history lives in Dimension A only. Kept here as a helper for
+ * diagnostics / docs — not added into the Dimension D flat fallback (avoids
+ * double-counting `priorDealsBetweenParties` across A and D).
  */
-function structureRelationshipAdjustment(deal: Deal): number {
+export function structureRelationshipAdjustment(deal: Deal): number {
   if (deal.priorDealsBetweenParties >= 10) return 15;
   if (deal.priorDealsBetweenParties >= 5) return 12;
   if (deal.priorDealsBetweenParties >= 1) return 8;
@@ -145,29 +146,22 @@ function collateralPoints(deal: Deal): number {
 }
 
 /**
- * Insurance — spec §4.D, 5% weight, **mandatory floor**: All-Risk +5 /
- * Comprehensive +3 / Basic +1 / None → does not execute (veto, see
- * checkVetoRegister — not a negative point value here, spec treats it as a
- * hard stop rather than a penalty).
+ * Insurance — All-Risk +5 / Comprehensive +3 / Basic +1.
+ * Unknown (not confirmed) → −8 Structure haircut (not a veto).
+ * Confirmed None → 0 here; veto register hard-stops separately.
  */
-function insurancePoints(insuranceCoverage: Deal["insuranceCoverage"]): number {
-  if (insuranceCoverage === "All Risk") return 5;
-  if (insuranceCoverage === "Comprehensive") return 3;
-  if (insuranceCoverage === "Basic") return 1;
+function insurancePoints(deal: Deal): number {
+  if (!deal.insuranceConfirmed) return -8;
+  if (deal.insuranceCoverage === "All Risk") return 5;
+  if (deal.insuranceCoverage === "Comprehensive") return 3;
+  if (deal.insuranceCoverage === "Basic") return 1;
   return 0;
 }
 
 /**
- * Dimension D (Transaction Structure) — replaced 2026-07-28 with the Kanato
- * CRAM Transaction Structure model (docs/transaction-structure-model-reference.md),
- * extended with the deal-sensitivity-playbook.md's legs/cost-stack/insurance
- * overlay (src/lib/transaction-structure/compute.ts) — a real cash-flow
- * engine (peak negative position, upside:downside ratio, tiers) instead of
- * the flat category-lookup formula below. Falls back to that flat formula
- * when the deal has no transaction-structure input at all (e.g. every
- * platform-CSV-sourced deal today — that data was never captured for the
- * bulk deal book, only for hand-modeled deals), same "matched vs fallback"
- * convention used throughout scoring.ts for Product/Route.
+ * Dimension D (Transaction Structure) — Kanato cash-flow model when present;
+ * otherwise flat formula. Relationship is NOT included here (counted in A).
+ * Typical platform CSV: 60 − 5 collateral + 5 payment-default − 8 insurance-unknown = 52.
  */
 export function computeStructureScore(deal: Deal): number {
   if (hasTransactionStructureInput(deal.transactionStructure)) {
@@ -183,9 +177,8 @@ export function computeStructureScore(deal: Deal): number {
     60 +
       collateralPoints(deal) +
       paymentTermsAdjustment(deal.paymentTerms) +
-      structureRelationshipAdjustment(deal) +
       advancePaymentPoints(deal.advancePaymentPct) +
-      insurancePoints(deal.insuranceCoverage),
+      insurancePoints(deal),
   );
 }
 
@@ -220,7 +213,8 @@ export function checkVetoRegister(deal: Deal): VetoResult {
   if (deal.supplier.licenseValid === false) {
     reasons.push("Supplier export license invalid");
   }
-  if (deal.insuranceCoverage === "None") {
+  // Only veto when insurance is confirmed absent — platform CSV leaves coverage unverified.
+  if (deal.insuranceConfirmed && deal.insuranceCoverage === "None") {
     reasons.push("No cargo insurance on file (mandatory baseline)");
   }
   // AC ruling 2026-07-30: air ≥4 stops is a hard veto (supersedes legacy ≥2).
@@ -266,6 +260,8 @@ export interface ScoreBreakdown {
    * told apart downstream (see financing.ts's uncertaintyPremium).
    */
   counterpartyCoveragePct: number;
+  /** Investor-facing APY% (10–18), from overall + uncertainty premium. */
+  investorApyPct: number;
   /** Dimension A relationship group score (0–100). */
   relationshipAdj: number;
   paymentTermsAdj: number;
@@ -294,6 +290,7 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
   );
 
   const veto = checkVetoRegister(deal);
+  const uncertaintyPremium = uncertaintyPremiumFor(counterpartyCoveragePct);
 
   return {
     buyer,
@@ -308,6 +305,7 @@ export function computeOverallScore(deal: Deal): ScoreBreakdown {
     vetoReasons: veto.reasons,
     externalCreditBonus: externalCreditBonus(deal),
     counterpartyCoveragePct,
+    investorApyPct: investorApyPct(overall, uncertaintyPremium),
     relationshipAdj,
     paymentTermsAdj: paymentTermsAdjustment(deal.paymentTerms),
     structureReport,

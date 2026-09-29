@@ -46,8 +46,9 @@ function counterpartyWhy(deal: Deal, externalBonus: number): string {
 
 function productWhy(deal: Deal): string {
   const price = priceVsMarketDetail(deal);
+  const base = price.fallback === "none" ? 55 : 70;
   if (price.fallback === "none" || price.usualUsdPerKg == null) {
-    return `Unit price vs usual: no month×route benchmark — base 70 (neutral). Deal unit ${
+    return `Unit price vs usual: no month×route benchmark — base ${base} (missing-data haircut). Deal unit ${
       price.dealUnitPriceUSD != null ? `$${price.dealUnitPriceUSD.toFixed(2)}/kg` : "unknown"
     }.`;
   }
@@ -55,7 +56,7 @@ function productWhy(deal: Deal): string {
     price.deflatedPctOverUsual != null && price.deflatedPctOverUsual > 0
       ? `+${price.deflatedPctOverUsual}`
       : `${price.deflatedPctOverUsual}`;
-  return `Unit price vs usual ${pct}% ($${price.dealUnitPriceUSD?.toFixed(2)}/kg vs usual $${price.usualUsdPerKg.toFixed(2)}/kg, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts) → base 70 ${price.pts >= 0 ? "+" : ""}${price.pts}.`;
+  return `Unit price vs usual ${pct}% ($${price.dealUnitPriceUSD?.toFixed(2)}/kg vs usual $${price.usualUsdPerKg.toFixed(2)}/kg, ${price.match?.matchLevel ?? price.fallback}, ${price.pts >= 0 ? "+" : ""}${price.pts} pts) → base ${base} ${price.pts >= 0 ? "+" : ""}${price.pts}.`;
 }
 
 function routeWhy(deal: Deal): string {
@@ -69,7 +70,9 @@ function routeWhy(deal: Deal): string {
       deal.numberOfTransshipments,
     );
   if (tableMatch) {
-    const provisional = tableMatch.scoreConfirmed ? "" : " (provisional, not AC-confirmed)";
+    const provisional = tableMatch.scoreConfirmed
+      ? ""
+      : " (provisional −8 haircut)";
     const mode =
       tableMatch.transportMode === "air"
         ? `air ${tableMatch.airStops ?? 0} stops`
@@ -77,10 +80,12 @@ function routeWhy(deal: Deal): string {
     if (tableMatch.vetoCandidate) {
       return `Dimension C veto (${mode}) for ${tableMatch.origin} → ${tableMatch.destination} — ${tableMatch.rationale}`;
     }
-    return `Table score ${tableMatch.score} (${mode}) for ${tableMatch.origin} → ${tableMatch.destination}${provisional} — ${tableMatch.rationale}`;
+    const scored = tableMatch.scoreConfirmed
+      ? tableMatch.score
+      : tableMatch.score - 8;
+    return `Table score ${scored} (${mode}) for ${tableMatch.origin} → ${tableMatch.destination}${provisional} — ${tableMatch.rationale}`;
   }
-
-  return `No Dimension C table row for ${deal.origin} → ${deal.destination} / ${deal.product} (${deal.transportMode ?? "unknown mode"}, ${deal.numberOfTransshipments} stops) — using base 70`;
+  return `No route-risk table match for ${deal.origin} → ${deal.destination} — base 55 (missing corridor haircut)`;
 }
 
 function structureWhy(
@@ -154,6 +159,7 @@ export function buildRiskAssessment(deal: Deal): RiskAssessment {
     relationshipAdj: scores.relationshipAdj,
     counterpartyCoveragePct: scores.counterpartyCoveragePct,
     overall: scores.overall,
+    investorApyPct: scores.investorApyPct,
     tier: scores.tier,
     vetoed: scores.vetoed,
     vetoReasons: scores.vetoReasons,

@@ -4,11 +4,11 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=16;" value="TruMarket MongoDB — prod database (TruMarket-dev cluster)&#xa;14 collections · string FK refs unless noted" vertex="1">
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=16;" value="TruMarket MongoDB — prod database (TruMarket-dev cluster)&#xa;14 live collections + planned risk/CRM · string FK refs unless noted" vertex="1">
           <mxGeometry height="50" width="800" x="450" y="-830" as="geometry" />
         </mxCell>
-        <mxCell id="users" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;users&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;email (unique sparse)&lt;br&gt;accountType (buyer|supplier|investor)&lt;br&gt;walletAddress (unique)&lt;br&gt;walletType&lt;br&gt;role&lt;br&gt;createdAt&lt;br&gt;desktopNotifications {…}&lt;br&gt;emailNotifications {…}&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;companies via user_companies (M:N)&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="205" width="240" x="-30" y="95" as="geometry" />
+        <mxCell id="users" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;users&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;email (unique sparse)&lt;br&gt;accountType (buyer|supplier|investor)&lt;br&gt;walletAddress (unique)&lt;br&gt;walletType&lt;br&gt;role&lt;br&gt;createdAt&lt;br&gt;desktopNotifications {…}&lt;br&gt;emailNotifications {…}&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;companies via user_companies (M:N)&lt;/i&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;pre-user emails → company_contacts&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="220" width="240" x="-30" y="95" as="geometry" />
         </mxCell>
         <mxCell id="bankaccounts" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;bankaccounts&lt;/b&gt;&#xa;────────────────&#xa;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&#xa;userId &lt;font color=&quot;#006600&quot;&gt;FK→users&lt;/font&gt;&#xa;accountType (buyer|supplier)&#xa;provider (OSN|LEGACY)&#xa;providerAccountId&#xa;status (ACTIVE|PENDING)&#xa;currencyCode, countryCode&#xa;bankName, accountHolderName&#xa;accountNumberEncrypted&#xa;accountLast4, swiftBic&#xa;isDefault, archived&#xa;createdAt, updatedAt" vertex="1">
           <mxGeometry height="240" width="240" x="-430" y="80" as="geometry" />
@@ -279,8 +279,8 @@
         <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-8" connectable="0" parent="1" style="group" value="" vertex="1">
           <mxGeometry height="480" width="760" x="450" y="1740" as="geometry" />
         </mxCell>
-        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-9" parent="jPfcLwfYIzK7OQ5M1FgJ-8" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;Product&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;tariffCode&lt;br&gt;tariffDescription / product name&lt;br&gt;product type (in case of non agro fields)&lt;br&gt;productRiskScore&lt;br&gt;shelfLifeDays&lt;br&gt;perishability_class&lt;br&gt;productCategory&lt;br&gt;coldChain&lt;br&gt;productPriceRange&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;effectiveFrom, effectiveTo&lt;/font&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="210" width="204.08" x="-20" y="250" as="geometry" />
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-9" parent="jPfcLwfYIzK7OQ5M1FgJ-8" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;products&lt;/b&gt;&lt;div&gt;&lt;i&gt;HS-driven commodity · CRAM Dimension B&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;hsCode / tariffCode (10-digit)&lt;br&gt;hsHeading4&lt;br&gt;productKey (BLUEBERRY|…)&lt;br&gt;name (tariffDescription)&lt;br&gt;productCategory&lt;br&gt;perishabilityClass&lt;br&gt;shelfLifeDays&lt;br&gt;coldChainRequired&lt;br&gt;productRiskScore (legacy ref)&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;prices → product_price_routes (not nested)&lt;/i&gt;&lt;/font&gt;&lt;br&gt;effectiveFrom, effectiveTo&lt;br&gt;createdAt, updatedAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="240" width="240" x="-40" y="200" as="geometry" />
         </mxCell>
         <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-10" connectable="0" parent="jPfcLwfYIzK7OQ5M1FgJ-8" style="group" value="" vertex="1">
           <mxGeometry height="270" width="495" x="265" y="140" as="geometry" />
@@ -288,8 +288,8 @@
         <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-16" parent="jPfcLwfYIzK7OQ5M1FgJ-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Reference tables (versioned · ref-vA.B)" vertex="1">
           <mxGeometry height="30" width="520" x="-170" y="18" as="geometry" />
         </mxCell>
-        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-7" parent="jPfcLwfYIzK7OQ5M1FgJ-10" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;Route(T2)&lt;/b&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;originCountry, destinationCountry&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;originPortLocode, destinationPortLocode&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;ports null = country-level fallback&lt;/i&gt;&lt;/font&gt;&lt;br&gt;transitDays&lt;br&gt;bestRouteRiskFlag&lt;br&gt;riskOverrideValue&lt;br&gt;effectiveFrom, effectiveTo&lt;/div&gt;" vertex="1">
-          <mxGeometry height="160" width="204.08" x="-25" y="110" as="geometry" />
+        <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-7" parent="jPfcLwfYIzK7OQ5M1FgJ-10" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#6c8ebf;fontSize=11;gradientColor=none;" value="&lt;b&gt;routes&lt;/b&gt; &lt;i&gt;(Route T2 · Dimension C)&lt;/i&gt;&lt;div&gt;&lt;i&gt;grain: origin×dest×product×mode×airStops&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;routeKey UNIQUE&lt;br&gt;origin, destination&lt;br&gt;product, productKey&lt;br&gt;productId &lt;font color=&quot;#6600cc&quot;&gt;FK→products&lt;/font&gt;&lt;br&gt;transportMode (sea|air)&lt;br&gt;airStops, airStopsBand&lt;br&gt;airStopPenalty, score&lt;br&gt;estimatedTransitDays&lt;br&gt;numberOfTransshipments&lt;br&gt;routeRiskFlag (Low|Med|High)&lt;br&gt;vetoCandidate, scoreConfirmed&lt;br&gt;laneId, rationale&lt;br&gt;originAliases[], destinationAliases[]&lt;br&gt;engineVersion&lt;br&gt;effectiveFrom, effectiveTo&lt;/div&gt;" vertex="1">
+          <mxGeometry height="290" width="230" x="-25" y="60" as="geometry" />
         </mxCell>
         <mxCell id="jPfcLwfYIzK7OQ5M1FgJ-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;TxStructure&lt;/b&gt;&lt;div&gt;&lt;i&gt;deal-owned — NOT reference data. Extended 2026-07-28 per deal-sensitivity-playbook.md — see docs/transaction-structure-model-reference.md&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;dealId &lt;font color=&quot;#6600cc&quot;&gt;FK→deals&lt;/font&gt; UNIQUE&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;───── cash-flow tranches (2026-07-28) ─────&lt;/font&gt;&lt;br&gt;purchaseTotalUsd, saleTotalUsd, salePricePerKg&lt;br&gt;supAdvDay, supAdvPct, supFinDay, supFinPct&lt;br&gt;buyFirstDay, buyFirstPct, buyFinalDay, buyFinalPct&lt;br&gt;dealPurpose, tmProductOwnership, collectionRights&lt;br&gt;contractType&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;───── insurance overlay (2026-07-28, was flat coverage+value) ─────&lt;/font&gt;&lt;br&gt;insuranceIndemnityPct, insuranceCoverageCapUsd&lt;br&gt;insurancePolicyValidityDate, insurancePolicyholder&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;───── legacy summary fields, superseded by tranches above ─────&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;advancePaymentPct, paymentTerms&lt;/font&gt;&lt;br&gt;collateralType, collateralValueUsd&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;&lt;i&gt;— priorDealsBetweenParties removed 2026-07-28: counterparty-relationship fact, belongs on Counterparty not here — leg removed&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;&lt;b&gt;TxStructureLeg&lt;/b&gt; &lt;font color=&quot;#6600cc&quot;&gt;(1:N)&lt;/font&gt;&lt;br&gt;legType, grossKg, discardPct, kgPerCarton&lt;br&gt;priceBasis, purchasePricePerKg&lt;br&gt;&lt;b&gt;TxStructureCostLine&lt;/b&gt; &lt;font color=&quot;#6600cc&quot;&gt;(1:N, per leg or per deal)&lt;/font&gt;&lt;br&gt;label, amountPerUnit, unit, taxRatePct&lt;/div&gt;" vertex="1">
           <mxGeometry height="185" width="250" x="1450" y="1990" as="geometry" />
@@ -386,6 +386,34 @@
         </mxCell>
         <mxCell id="user_companies" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#B85C00;strokeWidth=2;fontSize=11;" value="&lt;b&gt;user_companies&lt;/b&gt;&lt;div&gt;&lt;i&gt;a user may hold several companies&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;userId &lt;font color=&quot;#6600cc&quot;&gt;FK→users&lt;/font&gt;&lt;br&gt;companyId &lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;relationship (owner|signatory|&lt;br&gt;&amp;#160;&amp;#160;employee)&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;UNIQUE (userId, companyId)&lt;/font&gt;&lt;br&gt;createdAt&lt;/div&gt;" vertex="1">
           <mxGeometry height="140" width="250" x="-230" y="-450" as="geometry" />
+        </mxCell>
+        <mxCell id="company_contacts" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=#dae8fc;strokeColor=#B85C00;strokeWidth=2;fontSize=11;" value="&lt;b&gt;company_contacts&lt;/b&gt;&lt;div&gt;&lt;i&gt;pre-user emails for invite + promo · ≠ waitlist_entries · ≠ users&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;companyId &lt;font color=&quot;#6600cc&quot;&gt;FK→companies&lt;/font&gt;&lt;br&gt;email&lt;br&gt;&lt;font color=&quot;#B85C00&quot;&gt;UNIQUE (companyId, email)&lt;/font&gt;&lt;br&gt;email unique sparse (global)&lt;br&gt;role (buyer|supplier|other)&lt;br&gt;purpose[] (invite|promo)&lt;br&gt;status (lead|invited|&lt;br&gt;&amp;#160;&amp;#160;registered|unsubscribed)&lt;br&gt;source (deal_participant|&lt;br&gt;&amp;#160;&amp;#160;manual|csv|…)&lt;br&gt;sourceDealId &lt;font color=&quot;#6600cc&quot;&gt;FK→deals&lt;/font&gt; opt&lt;br&gt;userId &lt;font color=&quot;#6600cc&quot;&gt;FK→users&lt;/font&gt; opt&lt;br&gt;consentPromo (bool|null)&lt;br&gt;invitedAt, registeredAt&lt;br&gt;createdAt, updatedAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="250" x="-520" y="-450" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_co_cc" edge="1" parent="1" source="companies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;exitX=0;exitY=0.35;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="company_contacts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-100" y="-318" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_co_cc_l" connectable="0" parent="rel_co_cc" style="edgeLabel;html=1;fontSize=9;" value="companyId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_u_cc" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERzeroToOne;endArrow=ERmany;startFill=0;endFill=0;strokeWidth=1;dashed=1;strokeColor=#B85C00;exitX=0;exitY=0.2;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="company_contacts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-395" y="136" />
+              <mxPoint x="-395" y="-170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_u_cc_l" connectable="0" parent="rel_u_cc" style="edgeLabel;html=1;fontSize=9;" value="userId (when registered)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="country_risk" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;CountryRisk&lt;/b&gt;&lt;div&gt;&lt;i&gt;append-only · one fact per country&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;countryCode ISO 3166-1 α-2&lt;br&gt;countryRiskGrade (CRA)&lt;br&gt;observedAt&lt;br&gt;source&lt;br&gt;UNIQUE (countryCode, observedAt)&lt;/div&gt;" vertex="1">
           <mxGeometry height="145" width="225" x="610" y="970" as="geometry" />
@@ -528,6 +556,17 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="rel_deals_rte_l" connectable="0" parent="rel_deals_rte" style="edgeLabel;html=1;fontSize=9;" value="routeId" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="product_price_routes" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fillColor=light-dark(#DAE8FC,#06574F);strokeColor=#B85C00;strokeWidth=2;fontSize=11;gradientColor=none;" value="&lt;b&gt;product_price_routes&lt;/b&gt;&lt;div&gt;&lt;i&gt;Dim B price · product×origin×dest×month&lt;/i&gt;&lt;/div&gt;&lt;div&gt;────────────────&lt;br&gt;_id &lt;font color=&quot;#990000&quot;&gt;PK&lt;/font&gt;&lt;br&gt;priceKey UNIQUE&lt;br&gt;productKey&lt;br&gt;productId &lt;font color=&quot;#6600cc&quot;&gt;FK→products&lt;/font&gt;&lt;br&gt;originCountry, destinationCountry&lt;br&gt;month (YYYY-MM)&lt;br&gt;transportMode?&lt;br&gt;usualUsdPerKg&lt;br&gt;minUsdPerKg, maxUsdPerKg&lt;br&gt;spreadPct, priceRangeDisplay&lt;br&gt;nObservations, source&lt;br&gt;createdAt, updatedAt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="270" width="250" x="1000" y="1940" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_ppr_prod" edge="1" parent="1" source="product_price_routes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;endArrow=ERone;startFill=0;endFill=0;strokeWidth=1;strokeColor=#B85C00;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="jPfcLwfYIzK7OQ5M1FgJ-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_ppr_prod_l" connectable="0" parent="rel_ppr_prod" style="edgeLabel;html=1;fontSize=9;" value="productId" vertex="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>

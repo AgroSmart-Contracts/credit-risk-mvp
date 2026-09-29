@@ -8,8 +8,8 @@
  */
 import type { Deal } from "../types";
 import { sandboxCounterparties } from "../data/counterparty-sandbox-scores";
-import { lookupOnlineVerifiability } from "./counterparty-research-overrides";
 import {
+  monthlyFromYearlySalesUsd,
   scoreBuyer,
   scoreComposite,
   scoreCreditRating,
@@ -55,15 +55,19 @@ export function buildBuyerInputs(deal: Deal): SandboxBuyerInputs {
   const customs = buyer.customsEnrichment;
   const dealCount = profileDealCount(buyer);
   const onPlatform = dealCount > 0;
+  const yearlySalesUsd = customs?.fobUsd ?? null;
+  // Always yearly/12 — do not use customs monthlyFobUsd (fob/activeMonths),
+  // which inflated seasonal buyers (monthly×12 ≫ yearly).
+  const monthlyPurchaseVolumeUsd = monthlyFromYearlySalesUsd(yearlySalesUsd);
+  const frequencyCount =
+    customs?.shipments != null && customs.shipments > 0
+      ? customs.shipments
+      : null;
   return {
     yearsInBusiness: buyer.yearsInBusiness,
-    onlineVerifiability: customs?.matched
-      ? 55
-      : lookupOnlineVerifiability(buyer.name),
-    importLicenseStatus: scoreLicenseValid(buyer.licenseValid) ?? null,
-    importLicenseTm: isTmEntity(buyer.name) ? 100 : null,
-    monthlyPurchaseVolumeUsd: customs?.monthlyFobUsd ?? null,
-    yearlySalesUsd: customs?.fobUsd ?? null,
+    frequencyOfDeals: frequencyCount,
+    monthlyPurchaseVolumeUsd,
+    yearlySalesUsd,
     annualImportVolumeMt: customs?.roles.includes("importer")
       ? customs.volumeMt
       : null,
@@ -92,14 +96,17 @@ export function buildSupplierInputs(deal: Deal): SandboxSupplierInputs {
       : dealCount > 0 && finished > 0
         ? Math.round((finished / dealCount) * 100)
         : null;
+  const yearlySalesUsd = customs?.fobUsd ?? null;
+  const frequencyCount =
+    customs?.shipments != null && customs.shipments > 0
+      ? customs.shipments
+      : null;
   return {
     yearsInBusiness: supplier.yearsInBusiness,
-    onlineVerifiability: customs?.matched
-      ? 55
-      : lookupOnlineVerifiability(supplier.name),
+    frequencyOfDeals: frequencyCount,
     exportLicenseStatus: scoreLicenseValid(supplier.licenseValid) ?? null,
     productionCapacityMt: customs?.volumeMt ?? null,
-    yearlySalesUsd: customs?.fobUsd ?? null,
+    yearlySalesUsd,
     annualExportVolumeMt: customs?.roles.includes("exporter")
       ? customs.volumeMt
       : (customs?.volumeMt ?? null),
@@ -130,12 +137,12 @@ export function dealWithSandboxEnrichment(deal: Deal): Deal {
     (buyerCp?.sandbox
       ? {
           matched: buyerCp.sandbox.customsMatched,
+          // Calendar monthly average (yearly/12) — not seasonal peak.
           monthlyFobUsd:
-            buyerCp.sandbox.customsMonthlyFobUsd ??
-            (buyerCp.sandbox.customsFobUsd != null &&
+            buyerCp.sandbox.customsFobUsd != null &&
             buyerCp.sandbox.customsFobUsd > 0
               ? Math.round((buyerCp.sandbox.customsFobUsd / 12) * 100) / 100
-              : null),
+              : null,
           fobUsd: buyerCp.sandbox.customsFobUsd,
           volumeMt: buyerCp.sandbox.customsVolumeMt,
           routeCount: buyerCp.sandbox.customsRoutes,
@@ -150,11 +157,10 @@ export function dealWithSandboxEnrichment(deal: Deal): Deal {
       ? {
           matched: supplierCp.sandbox.customsMatched,
           monthlyFobUsd:
-            supplierCp.sandbox.customsMonthlyFobUsd ??
-            (supplierCp.sandbox.customsFobUsd != null &&
+            supplierCp.sandbox.customsFobUsd != null &&
             supplierCp.sandbox.customsFobUsd > 0
               ? Math.round((supplierCp.sandbox.customsFobUsd / 12) * 100) / 100
-              : null),
+              : null,
           fobUsd: supplierCp.sandbox.customsFobUsd,
           volumeMt: supplierCp.sandbox.customsVolumeMt,
           routeCount: supplierCp.sandbox.customsRoutes,

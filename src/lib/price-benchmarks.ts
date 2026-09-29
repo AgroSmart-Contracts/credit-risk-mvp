@@ -3,7 +3,7 @@
  * called out in §3 as "the single highest-signal fraud variable").
  *
  * Rebuild 2026-07-30: product risk now keys primarily off the deal's
- * unit $/kg versus the usual unit price for that product on the
+ * `offerUnitPriceUSD` versus the usual unit price for that product on the
  * same origin→destination corridor in the shipment-start month.
  *
  * Usual-price sources (see product-price-month-route.ts):
@@ -17,9 +17,10 @@
  * is not penalized.
  *
  * DEAL_VALUE_MARKUP_RATIO — when the usual price is customs FOB, the deal's
- * $/kg still embeds the financed-transaction markup (~1.63× FOB,
+ * offerUnitPrice still embeds the financed-transaction markup (~1.63× FOB,
  * from 4 DUA-matched ground-truth deals). Deflate before comparing to customs.
- * Platform-sheet usual prices are already on the deal $/kg scale.
+ * Platform-sheet usual prices are already on the deflated/FOB-like scale (their
+ * own notes document the 1.5× raw ratio), so the same deflation applies.
  */
 import type { Deal } from "../types";
 import { dealPricePerKg } from "./market-intel/deal-params";
@@ -31,11 +32,6 @@ import {
 
 export const DEAL_VALUE_MARKUP_RATIO = 1.628;
 
-/** ±15% of usual is the Dimension B "safe" band (full +20 pts). */
-export const PRICE_SAFE_BAND_PCT = 15;
-
-export const PRICE_UNIT = "USD/kg" as const;
-
 /** Removes the structural dealValue/offerUnitPrice-vs-FOB markup. */
 export function deflateForDealValueMarkup(rawPct: number): number {
   return ((1 + rawPct / 100) / DEAL_VALUE_MARKUP_RATIO - 1) * 100;
@@ -43,18 +39,8 @@ export function deflateForDealValueMarkup(rawPct: number): number {
 
 export interface PriceVsMarketDetail {
   pts: number;
-  /** Always USD per kg for comparisons. */
-  priceUnit: typeof PRICE_UNIT;
   dealUnitPriceUSD: number | null;
   usualUsdPerKg: number | null;
-  /** Observed or score-band safe range low. */
-  safeMinUsdPerKg: number | null;
-  /** Observed or score-band safe range high. */
-  safeMaxUsdPerKg: number | null;
-  /** Human range, e.g. "$2.82 – $2.89" or sheet display. */
-  safeRangeDisplay: string | null;
-  /** "observed" from sheet min/max; "score-band" = usual ±15%; null if no usual. */
-  safeRangeSource: "observed" | "score-band" | null;
   rawPctOverUsual: number | null;
   deflatedPctOverUsual: number | null;
   match: UsualPriceMatch | null;
@@ -64,12 +50,15 @@ export interface PriceVsMarketDetail {
 /**
  * Deal unit price in USD/kg for comparison to customs FOB and the month-route
  * sheets. Prefer `dealValue / netKg` (presentation-aware) over raw
- * `offerUnitPriceUSD`, which is a per-carton/pack figure on the platform CSV.
+ * `offerUnitPriceUSD`, which is a per-carton/pack figure on the platform CSV
+ * (e.g. $15.64 per 1.5kg carton = $10.43/kg — comparing the carton price to
+ * customs $/kg was what put 125/169 deals into the severe band).
  */
 function dealUnitPricePerKg(deal: Deal): number | null {
   const fromQty = dealPricePerKg(deal);
   if (fromQty != null && fromQty > 0) return fromQty;
 
+  // Last resorts: market-intel extracted price, then raw offer (may be pack-priced).
   const bench = deal.marketIntel?.dim_b_price_benchmark;
   if (bench && !("status" in bench) && bench.deal_price_usd_per_kg != null) {
     return bench.deal_price_usd_per_kg;
@@ -81,76 +70,18 @@ function dealUnitPricePerKg(deal: Deal): number | null {
 }
 
 function bandPoints(deflatedPct: number): number {
-  if (deflatedPct <= PRICE_SAFE_BAND_PCT) return 20;
+  // Higher than usual → higher product risk (lower score).
+  // Under-usual windfall capped at +10 (was +20) so "at market" does not look A+.
+  if (deflatedPct <= 15) return 10;
   if (deflatedPct <= 30) return 0;
   if (deflatedPct <= 100) return -22;
-  return -35;
-}
-
-function formatUsdKg(n: number): string {
-  return `$${n.toFixed(2)}`;
-}
-
-function safeRangeFromUsual(
-  usual: number,
-  match: UsualPriceMatch | null,
-): Pick<
-  PriceVsMarketDetail,
-  "safeMinUsdPerKg" | "safeMaxUsdPerKg" | "safeRangeDisplay" | "safeRangeSource"
-> {
-  const observedMin = match?.minUsdPerKg;
-  const observedMax = match?.maxUsdPerKg;
-  const hasRealSpread =
-    observedMin != null &&
-    observedMax != null &&
-    observedMin > 0 &&
-    observedMax > 0 &&
-    // Single-observation rows store min === max — not a usable range.
-    Math.abs(observedMax - observedMin) > 1e-9;
-
-  if (hasRealSpread) {
-    return {
-      safeMinUsdPerKg: observedMin,
-      safeMaxUsdPerKg: observedMax,
-      safeRangeDisplay:
-        match?.priceRangeDisplay?.trim() ||
-        `${formatUsdKg(observedMin)} – ${formatUsdKg(observedMax)} /kg`,
-      safeRangeSource: "observed",
-    };
-  }
-  const lo = usual * (1 - PRICE_SAFE_BAND_PCT / 100);
-  const hi = usual * (1 + PRICE_SAFE_BAND_PCT / 100);
-  return {
-    safeMinUsdPerKg: Math.round(lo * 1000) / 1000,
-    safeMaxUsdPerKg: Math.round(hi * 1000) / 1000,
-    safeRangeDisplay: `${formatUsdKg(lo)} – ${formatUsdKg(hi)} /kg (±${PRICE_SAFE_BAND_PCT}% of usual)`,
-    safeRangeSource: "score-band",
-  };
-}
-
-function emptyDetail(
-  unit: number | null,
-  partial: Partial<PriceVsMarketDetail> = {},
-): PriceVsMarketDetail {
-  return {
-    pts: 0,
-    priceUnit: PRICE_UNIT,
-    dealUnitPriceUSD: unit,
-    usualUsdPerKg: null,
-    safeMinUsdPerKg: null,
-    safeMaxUsdPerKg: null,
-    safeRangeDisplay: null,
-    safeRangeSource: null,
-    rawPctOverUsual: null,
-    deflatedPctOverUsual: null,
-    match: null,
-    fallback: "none",
-    ...partial,
-  };
+  return -35; // severe over-usual for the month/route
 }
 
 /**
  * Points contribution to Dimension B from price-vs-usual (month × route).
+ * Prefer offerUnitPriceUSD + shippingStartDate against the month-route table;
+ * fall back to market-intel's adaptive window when no month-route usual exists.
  */
 export function priceVsMarketPoints(deal: Deal): number {
   return priceVsMarketDetail(deal).pts;
@@ -169,18 +100,20 @@ export function priceVsMarketDetail(deal: Deal): PriceVsMarketDetail {
       destination: deal.destination,
       shipmentMonth: month,
       transportMode: deal.transportMode,
+      hsCode: deal.hsCode,
     });
     if (match) {
       const rawPct = ((unit - match.usualUsdPerKg) / match.usualUsdPerKg) * 100;
+      // Customs usual = true FOB $/kg; deal $/kg still embeds the financed
+      // markup → deflate. Platform-sheet usual prices are already on the same
+      // platform $/kg scale as dealValue/kg (often literally the same deals),
+      // so do not deflate against them or exact matches look "under market".
       const deflatedPct =
         match.source === "customs" ? deflateForDealValueMarkup(rawPct) : rawPct;
-      const range = safeRangeFromUsual(match.usualUsdPerKg, match);
       return {
         pts: bandPoints(deflatedPct),
-        priceUnit: PRICE_UNIT,
         dealUnitPriceUSD: unit,
         usualUsdPerKg: match.usualUsdPerKg,
-        ...range,
         rawPctOverUsual: Math.round(rawPct * 100) / 100,
         deflatedPctOverUsual: Math.round(deflatedPct * 100) / 100,
         match,
@@ -189,45 +122,36 @@ export function priceVsMarketDetail(deal: Deal): PriceVsMarketDetail {
     }
   }
 
+  // Fallback: market-intel adaptive window (already persisted on the deal).
   const benchmark = deal.marketIntel?.dim_b_price_benchmark;
   if (!benchmark || "status" in benchmark) {
-    return emptyDetail(unit, { fallback: "none" });
+    return {
+      pts: 0,
+      dealUnitPriceUSD: unit,
+      usualUsdPerKg: null,
+      rawPctOverUsual: null,
+      deflatedPctOverUsual: null,
+      match: null,
+      fallback: "none",
+    };
   }
   const rawPct = benchmark.deal_vs_p50_pct;
   if (rawPct === null || rawPct === undefined) {
-    const usual = benchmark.p50 ?? null;
-    const range =
-      usual != null && usual > 0
-        ? safeRangeFromUsual(usual, null)
-        : {
-            safeMinUsdPerKg: null,
-            safeMaxUsdPerKg: null,
-            safeRangeDisplay: null,
-            safeRangeSource: null,
-          };
-    return emptyDetail(unit, {
-      usualUsdPerKg: usual,
-      ...range,
+    return {
+      pts: 0,
+      dealUnitPriceUSD: unit,
+      usualUsdPerKg: benchmark.p50 ?? null,
+      rawPctOverUsual: null,
+      deflatedPctOverUsual: null,
+      match: null,
       fallback: "market-intel",
-    });
+    };
   }
   const deflatedPct = deflateForDealValueMarkup(rawPct);
-  const usual = benchmark.p50 ?? null;
-  const range =
-    usual != null && usual > 0
-      ? safeRangeFromUsual(usual, null)
-      : {
-          safeMinUsdPerKg: null,
-          safeMaxUsdPerKg: null,
-          safeRangeDisplay: null,
-          safeRangeSource: null,
-        };
   return {
     pts: bandPoints(deflatedPct),
-    priceUnit: PRICE_UNIT,
     dealUnitPriceUSD: unit,
-    usualUsdPerKg: usual,
-    ...range,
+    usualUsdPerKg: benchmark.p50 ?? null,
     rawPctOverUsual: rawPct,
     deflatedPctOverUsual: Math.round(deflatedPct * 100) / 100,
     match: null,

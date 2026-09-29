@@ -164,6 +164,9 @@ function PrescoredCard({
             Score {Math.round(assessment.overall)} ·{" "}
             {assessment.tier.replace(" Risk", "")}
           </span>
+          <span className="rounded-full border border-tm-border bg-tm-neutral-light px-2 py-0.5 text-[10px] font-semibold tabular-nums text-tm-text">
+            APY {assessment.investorApyPct.toFixed(1)}%
+          </span>
         </div>
         <p className="mt-0.5 text-sm text-tm-text-light">
           {routeLabel(deal.origin, deal.destination)}
