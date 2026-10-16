@@ -1,52 +1,93 @@
 companyName,role,product,status,dealCount,finishedDealCount,yearsInBusiness,yearsInBusinessSource,sandboxScore,coveragePct,rawAverage,trustBonus,customsShipments,customsVolumeMt,customsFobUsd,customsRoutes,customsMatch,filledFields
-GIDDINGS BERRIES PERU S.A.C.,supplier,Fresh Blueberries,scored,7,7,12,default,84.6,81.8,88.6,3,280,2472.986,18814324.45,5,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-AGRICOLA VIÃÂASOL SAC,supplier,Fresh Blueberries,scored,12,12,15,default,75.1,45.5,98.6,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-FUNDO LAS LOMAS SAC,supplier,Fresh Blueberries,scored,7,7,15,default,73.2,81.8,74.7,3,38,186.648,1259085.18,4,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-JUHINEJ LTD,supplier,Mixed Berries / Tropical Fruits (IQF),scored,7,7,19,default,72,45.5,91.8,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-BLUE PACIFIC FOODS SAC,supplier,Fresh Ginger,scored,7,7,22,default,72,45.5,91.8,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-ICA BLUEBERRIES SAC,supplier,Fresh Blueberries,scored,4,4,10,default,68.9,45.5,85,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-Allied Trade Global,buyer,Fresh Blueberries,scored,18,18,14,default,68.3,33.3,96,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-Holy Fruit Peru,supplier,Fresh Blueberries,scored,14,14,8,csv,68.2,81.8,68.6,3,18,74.643,865218.77,2,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-AGRICOLA MEDANO AZUL SAC,supplier,Fresh Avocado,scored,10,10,5,default,67.3,45.5,81.4,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-XARKI SL,buyer,Fresh Avocado,scored,10,10,66,default,67,33.3,92,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-NATURAL SOUTH FRUIT LTD,supplier,Mixed Berries / Tropical Fruits (IQF),scored,4,4,8,default,66,45.5,78.6,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-LIMAX SP. Z O.O.,buyer,Fresh Blueberries,scored,7,7,24,verified,65.5,72.5,67.2,3,32,142.926,943512.04,3,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-Villaventura Peru SAC,supplier,Fresh Mandarin,scored,16,16,3,csv,65,45.5,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-FRESH EXPRESS LLC,buyer,Fresh Blueberries,scored,7,7,33,default,64.3,33.3,84,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-INDUSTRIAS SOLIMAR SAC,supplier,Mixed Berries / Tropical Fruits (IQF),scored,1,1,9,default,64.2,45.5,74.5,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-BIO FARMING PERU S.A.C.,supplier,Fresh Mandarin,scored,20,20,2,csv,63.5,45.5,73.2,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-BIOFRESHI BV,buyer,Fresh Ginger,scored,6,6,17,default,63.4,33.3,81.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C,supplier,Fresh Ginger,scored,10,10,2,csv,62.9,45.5,71.8,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-TRU MARKET BLOCKCHAIN S.A.C.,supplier,Fresh Blueberries,scored,34,33,5,csv,62.3,81.8,61.4,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-DAVIS GLOBAL BV,buyer,Fresh Mandarin,scored,12,12,6,default,62.1,33.3,77.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-Villaventura Peru SAC,supplier,Fresh Blueberries,scored,6,6,3,csv,61.1,45.5,67.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-KHI INTERNATIONAL CORP,buyer,Mixed Berries / Tropical Fruits (IQF),scored,4,4,12,default,60.3,33.3,72,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-BIO FARMING PERU S.A.C.,supplier,Fresh Avocado,scored,6,6,2,csv,59.6,45.5,64.5,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|platformTransactionHistory|onTimeDeliveryRate
-SHANGHAI GREEN CHAIN TRADING CO LTD,buyer,Mixed Berries / Tropical Fruits (IQF),scored,7,7,5,verified,56.6,33.3,60.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-Open Markets Corporation,buyer,Fresh Mandarin,scored,16,16,2,csv,55.9,33.3,58.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-JUHINEJ LTD,buyer,Mixed Berries / Tropical Fruits (IQF),scored,1,1,19,default,55.9,33.3,58.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-TRU MARKET BLOCKCHAIN S.A.C.,supplier,Fresh Asparagus,scored,2,2,5,csv,55.5,81.8,53.1,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-TRU MARKET BLOCKCHAIN S.A.C.,supplier,Mixed Berries / Tropical Fruits (IQF),scored,1,1,5,csv,54.6,81.8,51.9,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-TRU MARKET BLOCKCHAIN S.A.C.,supplier,Frozen Tropical Fruits,scored,1,1,5,csv,54.6,81.8,51.9,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|productionCapacity|yearlySales|annualExportVolume|routeDiversity|platformTransactionHistory|onTimeDeliveryRate
-AGRICOLA Y COMERCIAL VALLES DEL NUBLE,buyer,Mixed Berries / Tropical Fruits (IQF),scored,1,1,8,default,52.8,33.3,49.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-AGRICOLA Y COMERCIAL VALLES DEL NUBLE,buyer,Fresh Avocado,scored,1,1,8,default,52.8,33.3,49.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-GUANGZHOU FRESH LINK IMPORT CO LTD,buyer,Fresh Blueberries,scored,4,4,5,verified,52.6,33.3,48.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-AGRO SMART CONTRACTS LDA,buyer,Fresh Blueberries,scored,7,7,2,default,51.9,33.3,46.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-BIO FARMING PERU S.A.C.,buyer,Fresh Mandarin,scored,7,7,2,csv,51.9,33.3,46.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-TRADE CULTIVATORS LLC,buyer,Fresh Blueberries,scored,7,7,2,default,51.9,33.3,46.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-Eagle Trading Agriculture Marketing Ltd,buyer,Fresh Blueberries,scored,24,24,2,csv,51,72.5,47.2,3,19,86.326,976703.77,1,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-BC NATURE QUALITY FRUITS S.L,buyer,Fresh Blueberries,scored,1,1,16,verified,50,72.5,45.9,3,5,86.4,435176.81,1,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,scored,1,0,4,verified,48.3,72.5,43.4,3,98,168.5,1115429.82,2,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-AGRO SMART CONTRACTS LDA,buyer,Fresh Avocado,scored,4,4,2,default,47.9,33.3,34.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-ANTERRA FARMS GMBH,buyer,Fresh Asparagus,scored,2,2,4,default,47.4,33.3,33.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-HACIENDA SOTOMAYOR SL,buyer,Fresh Ginger,scored,9,9,5,default,47.3,72.5,42.1,3,2,28.934,158585.76,1,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-A.S.M International,buyer,Fresh Blueberries,scored,5,5,5,default,46.8,72.5,41.4,3,7,11.52,106457.87,1,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-AGRO SMART CONTRACTS LDA,buyer,Fresh Mandarin,scored,1,1,2,default,43.4,33.3,21.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-AGRO SMART CONTRACTS LDA,buyer,Frozen Tropical Fruits,scored,1,1,2,default,43.4,33.3,21.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-ALBORAN COMEX SL,buyer,Fresh Ginger,scored,1,1,2,default,43.4,33.3,21.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-ÃÂ«ArdzhiesÃÂ» LLC,buyer,Fresh Blueberries,scored,2,2,1,csv,42.8,33.3,19.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-T.O.F.F. B.V,buyer,Fresh Ginger,scored,1,1,1,csv,41.9,33.3,16.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|platformTransactionHistory
-BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA,buyer,Fresh Blueberries,scored,1,1,2,csv,37.5,72.5,28.6,3,7,12.668,93415.94,1,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD,buyer,Fresh Avocado,scored,1,1,2,csv,34,72.5,23.8,3,1,1.08,5444.04,1,yes,yearsInBusiness|frequencyOfDeals|monthlyPurchaseVolume|yearlySales|annualImportVolume|routeDiversity|platformTransactionHistory
-Unknown buyer,buyer,Fresh Blueberries,blocked_missing_yib,1,1,,,,,,,,,,,,
+"COOPERATIVA AGRARIA CAFETALERA ""LA PROSPERIDAD"" DE CHIRINOS",supplier,Green Coffee,scored,1,1,58,verified,86.9,77.8,93.6,3,216,3954.918,28169720.13,12,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+GIDDINGS BERRIES PERU S.A.C.,supplier,Fresh Blueberries,scored,9,9,12,default,86.1,77.8,92.5,3,280,2472.986,18814324.45,5,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+GIDDINGS BERRIES PERU S.A.C.,supplier,Fresh Avocado,scored,5,5,12,csv,86.1,77.8,92.5,3,280,2472.986,18814324.45,5,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+FUNDO LAS LOMAS SAC,supplier,Fresh Blueberries,scored,7,7,15,default,76.6,77.8,80.4,3,38,186.648,1259085.18,4,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+FUNDO LAS LOMAS SAC,supplier,Fresh Mandarin,scored,3,3,16,csv,76.6,77.8,80.4,3,38,186.648,1259085.18,4,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+SUSTAINABLE HARVEST INC,buyer,Green Coffee,scored,1,1,29,verified,76.4,65.6,85.7,3,146,2167.199,18412992.05,2,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+JUHINEJ LTD,supplier,Mixed Berries / Tropical Fruits (IQF),scored,25,25,19,default,75,44.4,99.4,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+BLUE PACIFIC OILS INTERNATIONAL I S.A.C.,supplier,Fresh Ginger,scored,15,15,22,default,74.5,44.4,98.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+AGRICOLA VIÑASOL SAC,supplier,Fresh Blueberries,scored,12,12,15,verified,74.5,44.4,98.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+AGRICOLA VIÑASOL SAC,supplier,Fresh Avocado,scored,10,10,15,verified,73.7,44.4,96.7,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+BERRYCO S.A.C.,supplier,Fresh Blueberries,scored,4,4,10,default,73,44.4,95,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+BERRYCO S.A.C.,supplier,Fresh Pomegranate,scored,10,10,9,csv,72,44.4,92.8,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+SOLIMAR INDUSTRIA E.I.R.L.,supplier,Mixed Berries / Tropical Fruits (IQF),scored,1,1,9,default,70.3,44.4,88.9,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+NATURAL SOUTH FRUIT LTD,supplier,Mixed Berries / Tropical Fruits (IQF),scored,4,4,8,default,69.5,44.4,87.2,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+EXPORTADORA FRUTICOLA DEL SUR SA,supplier,Fresh Blueberries,scored,6,6,38,verified,69.1,77.8,70.7,3,5,7.268,48464.18,1,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+Holy Fruit Peru,supplier,Fresh Blueberries,scored,18,18,8,csv,68.8,77.8,70.4,3,18,74.643,865218.77,2,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+QORI FOODS S.A.C,supplier,Fresh Avocado,scored,10,10,11,verified,68,77.8,69.3,3,1,15.974,93785.76,1,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+LIMAX SP. Z O.O.,buyer,Fresh Blueberries,scored,7,7,24,verified,67.4,65.6,71.9,3,32,142.926,943512.04,3,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+Allied Trade Global,buyer,Fresh Blueberries,scored,18,18,14,default,65.7,28.6,94.5,3,,,,,no,yearsInBusiness|frequencyOfDeals
+SPREAFICO FRANCESCO & F.LLI S.P.A,buyer,Fresh Avocado,scored,1,1,63,verified,65.2,65.6,68.6,3,12,156.096,925004.88,2,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+AGRICOLA LOS MEDANOS S.A.,supplier,Fresh Asparagus,scored,10,10,5,default,65.1,44.4,77.2,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+AGRICOLA LOS MEDANOS S.A.,supplier,Fresh Pomegranate,scored,6,6,5,verified,65.1,44.4,77.2,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+XARKI SL,buyer,Fresh Asparagus,scored,10,10,66,default,64.2,28.6,89.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+INTERNATIONAL SPECIALTY PRODUCE INC,buyer,Fresh Ginger,scored,8,8,32,verified,64.2,28.6,89.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+FRESH EXPRESS LLC,buyer,Fresh Blueberries,scored,7,7,33,default,64.2,28.6,89.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+BIOFRESHI BV,buyer,Fresh Ginger,scored,6,6,17,default,64.2,28.6,89.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+YOUNGSTOWN GRAPE DISTRIBUTORS INC,buyer,Fresh Pomegranate,scored,6,6,43,verified,64.2,28.6,89.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+Villaventura Peru SAC,supplier,Fresh Mandarin,scored,24,24,3,csv,62.9,44.4,72.2,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+FRUTAS ALHAMBRA S.L,buyer,Fresh Ginger,scored,5,5,29,verified,62.6,28.6,83.6,3,,,,,no,yearsInBusiness|frequencyOfDeals
+KHI INTERNATIONAL CORP,buyer,Mixed Berries / Tropical Fruits (IQF),scored,4,4,12,default,62.6,28.6,83.6,3,,,,,no,yearsInBusiness|frequencyOfDeals
+INGMAR HEUER GMBH,buyer,Fresh Ginger,scored,4,4,24,verified,62.6,28.6,83.6,3,,,,,no,yearsInBusiness|frequencyOfDeals
+TRU MARKET BLOCKCHAIN S.A.C.,supplier,Fresh Asparagus,scored,2,2,5,csv,62.2,77.8,61.8,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+TRU MARKET BLOCKCHAIN S.A.C.,supplier,Mixed Berries / Tropical Fruits (IQF),scored,1,1,5,csv,62.2,77.8,61.8,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+TRU MARKET BLOCKCHAIN S.A.C.,supplier,Frozen Tropical Fruits,scored,1,1,5,csv,62.2,77.8,61.8,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+TRU MARKET BLOCKCHAIN S.A.C.,supplier,Fresh Mandarin,scored,1,1,5,csv,62.2,77.8,61.8,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+Villaventura Peru SAC,supplier,Fresh Blueberries,scored,6,6,3,csv,61.6,44.4,69.4,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+TRU MARKET BLOCKCHAIN S.A.C.,supplier,Fresh Blueberries,scored,38,37,5,csv,61.6,77.8,61,3,12,51.046,399650.18,3,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+BIO FARMING PERU S.A.C.,supplier,Fresh Mandarin,scored,33,33,2,csv,61.1,44.4,68.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C,supplier,Fresh Ginger,scored,25,25,2,csv,61.1,44.4,68.3,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+NANAK PRODUCE & MARKETING INC,buyer,Fresh Mandarin,scored,2,2,17,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+SWEET FRUITS S.A,buyer,Fresh Avocado,scored,2,2,16,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+CLASSIC HARVEST PRODUCE LLC,buyer,Fresh Mandarin,scored,2,2,12,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+SOCIEDAD SUBSOLE COMERCIAL SA,buyer,Fresh Avocado,scored,2,2,25,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+JUHINEJ LTD,buyer,Mixed Berries / Tropical Fruits (IQF),scored,1,1,19,default,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+SWEET SEASONS LLC,buyer,Fresh Ginger,scored,1,1,18,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+AXARFRUIT SL,buyer,Fresh Ginger,scored,1,1,13,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+ENERGY FOOD INGREDIENTS B.V,buyer,Fresh Ginger,scored,1,1,11,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+ALL CITRUS S.R.L,buyer,Fresh Ginger,scored,1,1,24,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+BIOTROPIC B.V,buyer,Fresh Ginger,scored,1,1,29,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+AGRICOLA GLORIA SRL,buyer,Fresh Ginger,scored,1,1,10,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+SUN 7 FRUITS,buyer,Fresh Avocado,scored,1,1,13,verified,60.5,28.6,76.4,3,,,,,no,yearsInBusiness|frequencyOfDeals
+BIO FARMING PERU S.A.C.,supplier,Fresh Avocado,scored,6,6,2,csv,59.9,44.4,65.6,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+DAVIS GLOBAL BV,buyer,Fresh Mandarin,scored,12,12,6,default,58.5,28.6,69.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+BC NATURE QUALITY FRUITS S.L,buyer,Fresh Blueberries,scored,1,1,16,verified,57.4,65.6,56.7,3,5,86.4,435176.81,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+AGRICOLA Y COMERCIAL VALLES DEL NUBLE,buyer,Mixed Berries / Tropical Fruits (IQF),scored,1,1,8,default,56.9,28.6,63.6,3,,,,,no,yearsInBusiness|frequencyOfDeals
+AGRICOLA Y COMERCIAL VALLES DEL NUBLE,buyer,Fresh Avocado,scored,1,1,8,default,56.9,28.6,63.6,3,,,,,no,yearsInBusiness|frequencyOfDeals
+LAND FOOD EXPORTS S.A.C,supplier,Fresh Ginger,scored,1,1,1,verified,56.5,44.4,57.8,3,,,,,no,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|onTimeDeliveryRate
+CONSORCIO NEW DE LUZ E.I.R.L,supplier,Fresh Blueberries,scored,1,1,4,verified,56.3,77.8,54.3,3,2,4.56,39672,1,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+SHANGHAI GREEN CHAIN TRADING CO LTD,buyer,Mixed Berries / Tropical Fruits (IQF),scored,7,7,5,verified,55.1,28.6,57.3,3,,,,,no,yearsInBusiness|frequencyOfDeals
+SHEEMIT AGRO FRESH,buyer,Fresh Blueberries,scored,1,1,13,verified,54.9,65.6,52.9,3,1,0.72,6631.2,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+INKA PRODUCE S.A.C,supplier,Fresh Avocado,scored,7,7,3,verified,54.4,77.8,51.8,3,1,12.96,64800,1,yes,yearsInBusiness|frequencyOfDeals|exportLicenseStatus|yearlySales|annualExportVolume|routeDiversity|onTimeDeliveryRate
+GUANGZHOU FRESH LINK IMPORT CO LTD,buyer,Fresh Blueberries,scored,4,4,5,verified,53.5,28.6,51.8,3,,,,,no,yearsInBusiness|frequencyOfDeals
+DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,buyer,Fresh Blueberries,scored,8,7,4,verified,53.3,65.6,50.5,3,98,168.5,1115429.82,2,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+CULTIPALTA S.L,buyer,Fresh Avocado,scored,1,1,6,verified,53.3,28.6,50.9,3,,,,,no,yearsInBusiness|frequencyOfDeals
+Open Markets Corporation,buyer,Fresh Mandarin,scored,36,36,2,csv,52.2,28.6,47.3,3,,,,,no,yearsInBusiness|frequencyOfDeals
+FRESHIPS INTERNATIONAL LLC,buyer,Fresh Mandarin,scored,1,1,5,verified,51.4,28.6,44.5,3,,,,,no,yearsInBusiness|frequencyOfDeals
+AGRO SMART CONTRACTS LDA,buyer,Fresh Blueberries,scored,7,7,2,default,49.6,28.6,38.2,3,,,,,no,yearsInBusiness|frequencyOfDeals
+TRADE CULTIVATORS LLC,buyer,Fresh Blueberries,scored,7,7,2,default,49.6,28.6,38.2,3,,,,,no,yearsInBusiness|frequencyOfDeals
+ANTERRA FARMS GMBH,buyer,Fresh Asparagus,scored,2,2,4,default,49.6,28.6,38.2,3,,,,,no,yearsInBusiness|frequencyOfDeals
+A.S.M International,buyer,Fresh Blueberries,scored,8,8,5,default,48.3,65.6,42.9,3,7,11.52,106457.87,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+AGRO SMART CONTRACTS LDA,buyer,Fresh Avocado,scored,4,4,2,default,48.1,28.6,32.7,3,,,,,no,yearsInBusiness|frequencyOfDeals
+AGRO SMART CONTRACTS LDA,buyer,Fresh Mandarin,scored,1,1,2,default,46,28.6,25.5,3,,,,,no,yearsInBusiness|frequencyOfDeals
+AGRO SMART CONTRACTS LDA,buyer,Frozen Tropical Fruits,scored,1,1,2,default,46,28.6,25.5,3,,,,,no,yearsInBusiness|frequencyOfDeals
+ALBORAN COMEX SL,buyer,Fresh Ginger,scored,1,1,2,default,46,28.6,25.5,3,,,,,no,yearsInBusiness|frequencyOfDeals
+Eagle Trading Agriculture Marketing Ltd,buyer,Fresh Blueberries,scored,26,26,2,csv,45.5,65.6,38.6,3,19,86.326,976703.77,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+T.O.F.F. B.V,buyer,Fresh Ginger,scored,2,2,1,csv,44.2,28.6,19.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+«Ardzhies» LLC,buyer,Fresh Blueberries,scored,2,2,1,csv,44.2,28.6,19.1,3,,,,,no,yearsInBusiness|frequencyOfDeals
+HACIENDA SOTOMAYOR SL,buyer,Fresh Avocado,scored,17,17,5,verified,43.9,65.6,36.2,3,2,28.934,158585.76,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+HACIENDA SOTOMAYOR SL,buyer,Fresh Ginger,scored,9,9,5,default,43.9,65.6,36.2,3,2,28.934,158585.76,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+BENASSI SAO PAULO IMPORTACAO E EXPORTACAO LTDA,buyer,Fresh Blueberries,scored,1,1,2,csv,41.8,65.6,32.9,3,7,12.668,93415.94,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+GOURMET & BEVERAGE ONE GROUP (THAILAND) CO. LTD,buyer,Fresh Avocado,scored,1,1,2,csv,37.4,65.6,26.2,3,1,1.08,5444.04,1,yes,yearsInBusiness|frequencyOfDeals|yearlySales|annualImportVolume|routeDiversity
+Unknown buyer,buyer,Mixed Berries / Tropical Fruits (IQF),blocked_missing_yib,18,18,,,,,,,,,,,,
+Unknown buyer,buyer,Fresh Avocado,blocked_missing_yib,8,8,,,,,,,,,,,,
+Unknown buyer,buyer,Fresh Pomegranate,blocked_missing_yib,8,8,,,,,,,,,,,,
+Unknown buyer,buyer,Fresh Mandarin,blocked_missing_yib,5,5,,,,,,,,,,,,
+Unknown buyer,buyer,Fresh Blueberries,blocked_missing_yib,3,3,,,,,,,,,,,,
+NUEVA VISTA,buyer,Fresh Pomegranate,blocked_missing_yib,2,2,,,,,,,,,,,,
 Unknown supplier,supplier,Fresh Blueberries,blocked_missing_yib,1,1,,,,,,,,,,,,
+G Y S MARKETING S DE RL DE CV,buyer,Fresh Mandarin,blocked_missing_yib,1,1,,,,,,,,,,,,
+DALIAN NEL CASO TRADE CO.LTD | FRESHIPS INTERNATIONAL LLC,buyer,Fresh Mandarin,blocked_missing_yib,1,1,,,,,,,,,,,,
+JOY LEE CO LTD,buyer,Fresh Blueberries,blocked_missing_yib,1,1,,,,,,,,,,,,
+ALLIED TRADE INTERNATIONAL LINK CO LTD,buyer,Fresh Blueberries,blocked_missing_yib,1,1,,,,,,,,,,,,
