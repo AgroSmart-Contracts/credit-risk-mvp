@@ -25,6 +25,11 @@ describe("lookupByHsCode", () => {
   it("maps coffee heading 0901", () => {
     expect(lookupByHsCode("0901119000")?.productKey).toBe("COFFEE");
   });
+
+  it("does not map 0810.90 (pomegranate) onto Fresh Blueberries", () => {
+    expect(lookupByHsCode("0810909000")).toBeNull();
+    expect(resolveHsProduct({ hsCode: "810909000", product: "Fresh Pomegranate" })).toBeNull();
+  });
 });
 
 describe("resolveHsProduct", () => {
