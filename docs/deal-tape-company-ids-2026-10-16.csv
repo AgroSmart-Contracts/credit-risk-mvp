@@ -1,0 +1,51 @@
+role,company,deals,country,id_type,id_value,source_or_status
+buyer,Unknown buyer,41,,,,"ops: Veritrade hides importer (Peru N/A, Chile no column)"
+buyer,HACIENDA SOTOMAYOR SL,17,,tax ID,B19277867,company-master
+buyer,Open Markets Corporation,13,,tax ID,65-1078039,company-master
+buyer,INTERNATIONAL SPECIALTY PRODUCE INC,8,US,PACA licence,19941368,https://www.producemarketguide.com/company/138068/international-specialty-produce-inc
+buyer,DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA,7,,tax ID,901893567,company-master
+buyer,YOUNGSTOWN GRAPE DISTRIBUTORS INC,6,US,SAM UEI,KA77LFNKY8R9,https://opengovus.com/sam-entity/KA77LFNKY8R9
+buyer,FRUTAS ALHAMBRA S.L,5,ES,NIF,B18433698,https://www.einforma.com/informacion-empresa/frutas-alhambra
+buyer,INGMAR HEUER GMBH,4,DE,Handelsregister,HRB 80120 (Amtsgericht Hamburg),"https://www.northdata.de/Ingmar+Heuer+GmbH,+Hamburg"
+buyer,A.S.M International,3,,tax ID,100170220006904/10017022006904,company-master
+buyer,NANAK PRODUCE & MARKETING INC,2,US,PACA licence,20191002,https://www.producemarketguide.com/company/500516/nanak-produce-marketing-inc
+buyer,Eagle Trading Agriculture Marketing Ltd,2,,tax ID,515059509,company-master
+buyer,CLASSIC HARVEST PRODUCE LLC,2,US,PACA licence (legal entity ASB Produce Inc),20210242,https://www.producemarketguide.com/company/1016747/asb-produce-inc-2
+buyer,SOCIEDAD SUBSOLE COMERCIAL SA,2,CL,RUT of parent Exportadora Subsole S.A. (own RUT not found),96615800-K,https://www.portalchile.org/empresa/exportadora-subsole-sa-96615800
+buyer,SUSTAINABLE HARVEST INC,1,US,Oregon registry no.,254717-98,https://lei.bloomberg.com/leis/view/549300Q4LM9SHT7CVV76
+buyer,AXARFRUIT SL,1,ES,CIF,B93225811,https://infonif.economia3.com/ficha-empresa/axarfruit-sl
+buyer,ALL CITRUS S.R.L,1,IT,P.IVA,01197460296,https://www.ufficiocamerale.it/3801/agricola-lusia-srl
+buyer,AGRICOLA GLORIA SRL,1,IT,P.IVA,02207690567,https://registroaziende.it/azienda/agricola-gloria-srl-milano (LEI 815600026CCCDBC48055)
+buyer,SUN 7 FRUITS,1,FR,SIREN (VAT FR13794423566 derived),794423566,https://www.pappers.fr/entreprise/sun-7-fruits-794423566
+buyer,SPREAFICO FRANCESCO & F.LLI S.P.A,1,IT,P.IVA,00348240136,https://atoka.io/public/it/azienda/spreafico-francesco-e-flli-spa/c820f414fff1
+buyer,CULTIPALTA S.L,1,ES,CIF,B67532325,https://infonif.economia3.com/ficha-empresa/cultipalta-sl
+buyer,T.O.F.F. B.V,1,,tax ID,NL854346533B01,company-master
+buyer,JOY LEE CO LTD,1,TW,Unified business no.,94094509,https://twincn.com/item.aspx?no=94094509
+buyer,SWEET FRUITS S.A,2,,,,not found publicly
+buyer,NUEVA VISTA,2,,,,not found publicly
+buyer,G Y S MARKETING S DE RL DE CV,1,,,,not found publicly
+buyer,SHEEMIT AGRO FRESH,1,,,,not found publicly
+buyer,SWEET SEASONS LLC,1,,,,not found publicly
+buyer,ENERGY FOOD INGREDIENTS B.V,1,,,,not found publicly
+buyer,BIOTROPIC B.V,1,,,,not found publicly
+buyer,DALIAN NEL CASO TRADE CO.LTD | FRESHIPS INTERNATIONAL LLC,1,,,,not found publicly
+buyer,FRESHIPS INTERNATIONAL LLC,1,,,,not found publicly
+buyer,ALLIED TRADE INTERNATIONAL LINK CO LTD,1,,,,not found publicly
+supplier,JUHINEJ LTD,18,CL,RUT,76.476.953-2,"company-master; Chile customs hides exporter (X), RUT from company-master"
+supplier,MIKHUNA PERUVIAN FOODS SOLUTIONS S.A.C,15,PE,RUC,20611718579,company-master; declarations also show RUC 20606873418 (conflict)
+supplier,BIO FARMING PERU S.A.C.,13,PE,RUC,20612199974,company-master
+supplier,QORI FOODS S.A.C,10,PE,RUC,20566127181,Veritrade declaration (Cod. Tributario)
+supplier,AGRICOLA VIÑASOL SAC,10,PE,RUC,20534208008,company-master; declarations also show RUC 20543521401 (conflict)
+supplier,BERRYCO S.A.C.,10,PE,RUC,20606396628,company-master
+supplier,Villaventura Peru SAC,8,PE,RUC,20610491104/20601777273,company-master
+supplier,BLUE PACIFIC OILS INTERNATIONAL I S.A.C.,8,PE,RUC,20507873627,company-master; declarations also show RUC 20613692305 (conflict)
+supplier,GIDDINGS BERRIES PERU S.A.C.,7,PE,RUC,20565586247,company-master
+supplier,INKA PRODUCE S.A.C,7,PE,RUC,20610526234,Veritrade declaration (Cod. Tributario)
+supplier,AGRICOLA LOS MEDANOS S.A.,6,PE,RUC,20389426891,company-master
+supplier,EXPORTADORA FRUTICOLA DEL SUR SA,6,PE,RUC,20104902864,Veritrade declaration (Cod. Tributario)
+supplier,TRU MARKET BLOCKCHAIN S.A.C.,5,PE,RUC,20608082281,company-master
+supplier,Holy Fruit Peru,4,PE,RUC,20602722628,company-master
+supplier,FUNDO LAS LOMAS SAC,3,PE,RUC,20535311210,company-master; declarations also show RUC 20538421279 (conflict)
+supplier,"COOPERATIVA AGRARIA CAFETALERA ""LA PROSPERIDAD"" DE CHIRINOS",1,PE,RUC,20147123052,Veritrade declaration (Cod. Tributario)
+supplier,LAND FOOD EXPORTS S.A.C,1,PE,RUC,20614245850,Veritrade declaration (Cod. Tributario)
+supplier,CONSORCIO NEW DE LUZ E.I.R.L,1,PE,RUC,20608620312,Veritrade declaration (Cod. Tributario)
