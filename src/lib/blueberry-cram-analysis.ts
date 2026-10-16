@@ -335,16 +335,10 @@ export function buildBlueberryCramCase(
       input:
         f.id === "yearsInBusiness"
           ? `${deal.buyer.yearsInBusiness ?? "—"} yrs (source ${record.buyerYibSource})`
-          : f.id === "platformTransactionCount"
-            ? `${deal.buyer.platformDealsCompleted} platform deals`
-            : f.id === "paymentDelay"
+          : f.id === "paymentDelay"
                 ? deal.buyer.avgPaymentDelayDays == null
                   ? "unmeasured"
                   : `${deal.buyer.avgPaymentDelayDays} days`
-                  : f.id === "monthlyPurchaseVolume"
-                  ? customs?.fobUsd != null
-                    ? `$${Math.round(customs.fobUsd / 12).toLocaleString()}/mo`
-                    : "blank — no customs"
                   : f.id === "yearlySales"
                     ? customs?.fobUsd != null
                       ? `$${Math.round(customs.fobUsd).toLocaleString()} FOB`
@@ -371,9 +365,7 @@ export function buildBlueberryCramCase(
       score,
       weight: f.weight,
       note:
-        f.id === "monthlyPurchaseVolume" && customs?.fobUsd != null
-          ? "Yearly FOB ÷ 12"
-          : f.id === "paymentDelay" && deal.buyer.avgPaymentDelayDays == null
+        f.id === "paymentDelay" && deal.buyer.avgPaymentDelayDays == null
             ? "Unmeasured — excluded"
             : f.id === "creditRating" && score == null
               ? "Needs Coface"
@@ -392,9 +384,7 @@ export function buildBlueberryCramCase(
       input:
         f.id === "yearsInBusiness"
           ? `${deal.supplier.yearsInBusiness ?? "—"} yrs (source ${record.supplierYibSource})`
-          : f.id === "platformTransactionCount"
-            ? `${deal.supplier.platformDealsCompleted} platform deals`
-            : f.id === "frequencyOfDeals"
+          : f.id === "frequencyOfDeals"
               ? customs?.shipments != null && customs.shipments > 0
                 ? `${customs.shipments} customs shipments`
                 : deal.supplier.platformDealsCompleted > 0

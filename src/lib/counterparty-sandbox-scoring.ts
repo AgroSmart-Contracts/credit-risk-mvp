@@ -49,12 +49,10 @@ export interface SandboxBuyerInputs {
   frequencyOfDeals?: FilledNumber;
   /** @deprecated use frequencyOfDeals */
   onlineVerifiability?: FilledNumber;
-  monthlyPurchaseVolumeUsd?: FilledNumber;
   yearlySalesUsd?: FilledNumber;
   annualImportVolumeMt?: FilledNumber;
   routeDiversity?: FilledNumber; // route count
   creditRating?: FilledNumber; // mapped 0–100
-  platformTransactionCount?: FilledNumber;
   paymentDelayDays?: FilledNumber;
   /** true → +trustBonus (default 3); false/undefined → +0 */
   tmPlatformTrust?: boolean;
@@ -67,12 +65,11 @@ export interface SandboxSupplierInputs {
   /** @deprecated use frequencyOfDeals */
   onlineVerifiability?: FilledNumber;
   exportLicenseStatus?: FilledNumber;
-  productionCapacityMt?: FilledNumber;
   yearlySalesUsd?: FilledNumber;
+  /** Same underlying customs volumeMt as the old productionCapacityMt (removed 2026-10-02 — identical value, double-counted). */
   annualExportVolumeMt?: FilledNumber;
   routeDiversity?: FilledNumber;
   qualityCertifications?: FilledNumber; // 28 | 60 | 90
-  platformTransactionCount?: FilledNumber;
   onTimeDeliveryRate?: FilledNumber; // 0–100 pass-through
   qualityRejectionRate?: FilledNumber; // 0–100, scored as MAX(15, 100 − rate)
   tmPlatformTrust?: boolean;
@@ -205,11 +202,6 @@ export function scoreCreditRating(
   return null;
 }
 
-export function scorePlatformTransactionCount(count: FilledNumber): FilledNumber {
-  if (!isFilled(count)) return null;
-  return Math.min(100, count * 10);
-}
-
 export function scorePaymentDelayDays(days: FilledNumber): FilledNumber {
   if (!isFilled(days)) return null;
   return Math.max(15, 100 - days * 2);
@@ -330,6 +322,9 @@ function resolveFrequencyScore(input: {
 
 export function buildBuyerFields(input: SandboxBuyerInputs): WeightedField[] {
   // Import license removed 2026-08-07 — weight 2 redistributed into frequency of deals (2→4).
+  // Monthly purchase volume removed 2026-10-16: it was yearly sales ÷ 12, so the
+  // same customs FOB total was scored twice (36→32), as with the supplier's
+  // production capacity on 2026-10-02.
   return [
     {
       id: "yearsInBusiness",
@@ -342,12 +337,6 @@ export function buildBuyerFields(input: SandboxBuyerInputs): WeightedField[] {
       label: "Frequency of deals",
       weight: 4,
       score: resolveFrequencyScore(input),
-    },
-    {
-      id: "monthlyPurchaseVolume",
-      label: "Monthly purchase volume",
-      weight: 4,
-      score: scoreMonthlyPurchaseVolumeUsd(input.monthlyPurchaseVolumeUsd),
     },
     {
       id: "yearlySales",
@@ -372,12 +361,6 @@ export function buildBuyerFields(input: SandboxBuyerInputs): WeightedField[] {
       label: "Credit rating",
       weight: 7,
       score: input.creditRating ?? null,
-    },
-    {
-      id: "platformTransactionHistory",
-      label: "Platform transaction history",
-      weight: 4,
-      score: scorePlatformTransactionCount(input.platformTransactionCount),
     },
     {
       id: "paymentDelay",
@@ -409,12 +392,6 @@ export function buildSupplierFields(input: SandboxSupplierInputs): WeightedField
       score: input.exportLicenseStatus ?? null,
     },
     {
-      id: "productionCapacity",
-      label: "Production capacity",
-      weight: 4,
-      score: scoreVolumeMt(input.productionCapacityMt),
-    },
-    {
       id: "yearlySales",
       label: "Yearly sales",
       weight: 4,
@@ -437,12 +414,6 @@ export function buildSupplierFields(input: SandboxSupplierInputs): WeightedField
       label: "Quality certifications",
       weight: 2,
       score: input.qualityCertifications ?? null,
-    },
-    {
-      id: "platformTransactionHistory",
-      label: "Platform transaction history",
-      weight: 4,
-      score: scorePlatformTransactionCount(input.platformTransactionCount),
     },
     {
       id: "onTimeDeliveryRate",

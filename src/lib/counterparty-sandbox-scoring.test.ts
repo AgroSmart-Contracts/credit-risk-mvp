@@ -102,8 +102,9 @@ describe("scoreBuyer / scoreSupplier / composite", () => {
       frequencyOfDeals: 8,
       tmPlatformTrust: true,
     });
-    // Buyer possible weight = 40 (import license removed; frequency weight 4)
-    expect(r.possibleWeight).toBe(40);
+    // Buyer possible weight = 32 (import license, platform transaction history and the monthly-volume duplicate of yearly sales removed)
+    expect(r.possibleWeight).toBe(32);
+    expect(r.fields.some((f) => f.id === "monthlyPurchaseVolume")).toBe(false);
     expect(r.filledWeight).toBe(11); // YIB 7 + frequency 4
     expect(r.fields.some((f) => f.id === "importLicenseStatus")).toBe(false);
     expect(r.fields.find((f) => f.id === "frequencyOfDeals")?.label).toBe(
@@ -119,10 +120,8 @@ describe("scoreBuyer / scoreSupplier / composite", () => {
       yearsInBusiness: 10,
       exportLicenseStatus: 100,
       annualExportVolumeMt: 3_000,
-      productionCapacityMt: 3_000,
       yearlySalesUsd: 5_000_000,
       routeDiversity: 4,
-      platformTransactionCount: 5,
       frequencyOfDeals: 12,
       tmPlatformTrust: true,
     });
