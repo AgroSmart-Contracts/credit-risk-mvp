@@ -11,3 +11,4 @@ MANGO,Fresh Mango,PERISHABLE,-4,25,16,2,US,NEEDS_CONFIRM,NOT IN TABLE 1 - seeded
 STRAWBERRY,Fresh Strawberries,ULTRA,-12,10,6,1,,NEEDS_CONFIRM,NOT IN TABLE 1 - seeded from agro norms 🔶
 FROZEN_TROP,Frozen Tropical Fruits,NON_PERISHABLE,18,540,540,4,,NEEDS_CONFIRM,NOT IN TABLE 1 - frozen chain; risk is chain-break not decay 🔶
 IQF_BERRIES,Mixed Berries / Tropical Fruits (IQF),NON_PERISHABLE,18,540,540,4,,NEEDS_CONFIRM,NOT IN TABLE 1 - frozen chain 🔶
+POMEGRANATE,Fresh Pomegranate,PERISHABLE,-4,60,45,2,,NEEDS_CONFIRM,NOT IN TABLE 1 - whole fruit up to 8 weeks at 5C (UC Davis postharvest); arils far shorter 🔶
