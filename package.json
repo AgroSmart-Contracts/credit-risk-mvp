@@ -12,6 +12,7 @@
     "export:deal-apy": "tsx scripts/export-prescored-deal-apy.ts",
     "build:route-risk": "tsx scripts/build-route-risk-table.ts",
     "apply-platform-defaults": "tsx scripts/apply-platform-defaults-csv.ts",
+    "apply-deal-tape": "tsx scripts/apply-deal-tape.ts",
     "test": "vitest run",
     "aggregate-customs": "python3 scripts/aggregate-customs-companies.py",
     "recalc-counterparties": "tsx scripts/recalculate-counterparty-scores.ts",
