@@ -33,3 +33,26 @@ PELIM-ATVIE-A,LIM,VIE,AIR,2,3,1,3,LOW,REF,REF,"Callao -> Vienna, Austria",OCEAN_
 PECLL-CNSHA-O,CLL,SHA,OCEAN,28,34,0,4,MED,VERITRADE,REF,"Callao Peru -> Shanghai, China (unmatched)",ADDED,"31.2M kg 2025 - was in the unmatched list with no table row"
 PECLL-HKHKG-O,CLL,HKG,OCEAN,30,36,1,4,MED,VERITRADE,REF,"Callao Chile -> Hong Kong (unmatched)",ADDED,"8.0M kg 2025 - was unmatched. 'Callao, Chile' was a country error"
 PECLL-CLVAP-O,CLL,VAP,OCEAN,7,10,0,3,LOW,VERITRADE,REF,"SAN Antonio, Chile -> Shanghai (unmatched)",ADDED,"Valparaiso is the dominant Asia transship hub (21.7M kg)"
+PECHY-USHUE-O,CHN,HUE,OCEAN,13,18,0,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from Callao-Port Hueneme 13/17 (Chancay 60 km north); wider p90 - no published Chancay-US West Coast schedule found ❓
+PECHY-USMIA-O,CHN,MIA,OCEAN,10,14,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from Callao-Miami 9/12 +1d ❓
+PECHY-USPHL-O,CHN,PHL,OCEAN,20,24,1,3,LOW,REF,NEEDS_CONFIRM,,ADDED,Peru-Philadelphia ~21d cold-treatment voyage (foodlogistics); Chancay not confirmed ❓
+PECHY-MXZLO-O,CHN,ZLO,OCEAN,9,13,0,4,MED,VERITRADE,NEEDS_CONFIRM,,ADDED,WCSA-Mexico Pacific direct; seeded ❓
+PECHY-COBUN-O,CHN,BUN,OCEAN,7,10,0,5,MED,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from Callao-Buenaventura 7/10 ❓
+PECHY-CLVAP-O,CHN,VAP,OCEAN,7,10,0,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from Callao-Valparaiso 7/10 ❓
+PECLL-USPHL-O,CLL,PHL,OCEAN,20,24,1,3,LOW,REF,REF,,ADDED,Peru-Philadelphia ~21d (foodlogistics); main US mandarin entry port with Port Hueneme (MSC Peru citrus)
+PECLL-CNDLC-O,CLL,DLC,OCEAN,31,37,1,4,MED,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from Callao-Shanghai 28/34 +3d ❓
+PEPIO-NLRTM-O,PIO,RTM,OCEAN,20,25,0,3,LOW,VERITRADE,REF,,ADDED,"Paracas-Rotterdam direct: MSC 21d, Maersk 20d (agraria.pe 2024)"
+PEPIO-USPHL-O,PIO,PHL,OCEAN,20,24,1,3,LOW,VERITRADE,REF,,ADDED,MSC citrus services from Pisco (MSC Peru citrus); Peru-Philadelphia ~21d
+PEPIO-TWKHH-O,PIO,KHH,OCEAN,30,36,1,4,MED,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from Callao-Kaohsiung 30/36 ❓
+PESVY-USMIA-O,SVY,MIA,OCEAN,15,20,1,3,LOW,VERITRADE,REF,,ADDED,MSC North Peru Feeder from Salaverry (2024); Peru-Port Everglades ~15d (foodlogistics)
+PEPAI-USPHL-O,PAI,PHL,OCEAN,11,15,0,3,LOW,REF,REF,,ADDED,Hamburg Sud weekly direct Paita-Philadelphia 11d
+CLSVE-NLRTM-O,SVI,RTM,OCEAN,27,32,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Valparaiso-Rotterdam 25d (Hamburg Sud) +2d further south ❓
+CLSVE-DEHAM-O,SVI,HAM,OCEAN,29,34,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Seeded from San Vicente-Rotterdam +2d ❓
+CLSVE-USORF-O,SVI,ORF,OCEAN,21,26,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Chile-US East Coast via Panama; seeded ❓
+CLSVE-USPHL-O,SVI,PHL,OCEAN,21,26,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Chile-US East Coast via Panama; seeded ❓
+CLSVE-USSAV-O,SVI,SAV,OCEAN,20,25,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Chile-US East Coast via Panama; seeded ❓
+CLSVE-USHOU-O,SVI,HOU,OCEAN,21,26,1,3,LOW,VERITRADE,NEEDS_CONFIRM,,ADDED,Chile-US Gulf via Panama; seeded ❓
+CLSVE-MXZLO-O,SVI,ZLO,OCEAN,14,18,0,4,MED,VERITRADE,NEEDS_CONFIRM,,ADDED,Chile-Mexico Pacific direct; seeded ❓
+PELIM-COMDE-A,LIM,MDE,AIR,1,2,0,5,MED,VERITRADE,REF,,ADDED,Lima-Medellin direct ~3.5h; blueberry declarations clear at Medellin
+PELIM-USLAX-A,LIM,LAX,AIR,1,2,0,3,LOW,VERITRADE,REF,,ADDED,Lima-Los Angeles direct freighter; pomegranate-aril declarations clear at LA
+PECHY-CNSHA-O,CHN,SHA,OCEAN,24,28,0,4,MED,REF,REF,,ADDED,"Chancay-Shanghai direct ~23-25d since Dec 2024 (Hortifrut 25d vs 32d via Callao; andina/freshplaza 2025)"

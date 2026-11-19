@@ -90,6 +90,8 @@ const ALIAS_MAP: Record<string, string> = {
   "INDUSTRIAS SOLIMAR SAC": "SOLIMAR INDUSTRIA E.I.R.L.",
   "SOLIMAR INDUSTRIA E.I.R.L.": "SOLIMAR INDUSTRIA E.I.R.L.",
   "SOLIMAR INDUSTRIA EIRL": "SOLIMAR INDUSTRIA E.I.R.L.",
+  // Platform records carry the buyer's address in the name; customs uses the bare name.
+  "DRELIFRESH SAS": "DRELIFRESH SAS VEREDA EL PORTENTO VIA RETIRO LA CEJA",
   // Windows-1252 Ñ (U+0091) mis-decoded as a control char in the source export.
   "AGRICOLA VI\u0091ASOL SAC": "AGRICOLA VIÑASOL SAC",
   "AGRICOLA VIÑASOL SAC": "AGRICOLA VIÑASOL SAC",

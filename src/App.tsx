@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { deals as sampleDeals } from "./data/deals";
 import {
@@ -16,7 +16,9 @@ import { recommendFinancingTerms } from "./lib/financing";
 import type { Deal, FinancingRecommendation, RiskAssessment, Step } from "./types";
 import type { TransactionStructureInput } from "./lib/transaction-structure/types";
 import type { AppView } from "./types/platform";
-import { AppNav, HIDDEN_APP_TABS } from "./components/AppNav";
+import { AppNav, AppSidebar } from "./components/AppNav";
+import { TopBar } from "./components/Sidebar";
+import { HIDDEN_APP_TABS } from "./components/app-tabs";
 import { StepIndicator } from "./components/StepIndicator";
 import { DealSelector } from "./components/DealSelector";
 import { DocumentIngestion } from "./components/DocumentIngestion";
@@ -28,8 +30,40 @@ import { DealMissingFieldsTab } from "./components/DealMissingFieldsTab";
 import { RouteRiskTableTab } from "./components/RouteRiskTableTab";
 import { BlueberryCramAnalysisTab } from "./components/BlueberryCramAnalysisTab";
 
+// Pre-harvest pulls in Recharts and the monitoring fixtures; load it only when opened.
+const PreHarvestView = lazy(() =>
+  import("./components/pre-harvest/PreHarvestView").then((m) => ({ default: m.PreHarvestView })),
+);
+
+const VIEW_TITLE: Record<AppView, { title: string; sub: string }> = {
+  assess: { title: "Credit Risk Assessment", sub: "Score a trade-finance deal from its documents" },
+  "pre-harvest": { title: "Pre-harvest loans", sub: "Crop-stage financing · satellite, weather and market monitoring" },
+  counterparties: { title: "Counterparty scores", sub: "Scored platform counterparties" },
+  platform: { title: "Platform deals", sub: "Pre-scored TruMarket deals" },
+  missing: { title: "Missing fields", sub: "Data gaps per deal" },
+  "route-table": { title: "Route risk", sub: "Origin–destination risk table" },
+  "blueberry-cram": { title: "Blueberry CRAM", sub: "Blueberry credit risk analysis" },
+};
+
 function App() {
-  const [view, setView] = useState<AppView>("assess");
+  // `#pre-harvest` opens the pre-harvest module directly (shareable link).
+  const [view, setViewState] = useState<AppView>(() =>
+    typeof window !== "undefined" && window.location.hash === "#pre-harvest" ? "pre-harvest" : "assess",
+  );
+  const setView = (next: AppView) => {
+    setViewState(next);
+    try {
+      const hash = next === "pre-harvest" ? "#pre-harvest" : "";
+      // Pre-harvest view state lives in the query string; drop it when leaving.
+      const search = next === "pre-harvest" ? window.location.search : "";
+      const url = `${window.location.pathname}${search}${hash}`;
+      if (url !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+        window.history.replaceState(null, "", url);
+      }
+    } catch {
+      /* history unavailable */
+    }
+  };
   const [step, setStep] = useState<Step>(1);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
   const [assessment, setAssessment] = useState<RiskAssessment | null>(null);
@@ -123,35 +157,49 @@ function App() {
     setStep(2);
   };
 
-  return (
-    <div className="min-h-screen bg-tm-neutral-light">
-      <header className="border-b border-tm-border bg-tm-surface">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
-          <button
-            type="button"
-            className="flex items-center gap-3 text-left"
-            onClick={() => {
-              handleReset();
-              setView("assess");
-            }}
-          >
-            <img
-              src="/logo.svg"
-              alt="TruMarket"
-              className="h-10 w-auto shrink-0"
-            />
-            <div>
-              <p className="text-sm font-semibold text-tm-black">TruMarket</p>
-              <p className="text-xs text-tm-text-muted">
-                Credit Risk Assessment
-              </p>
+  // The bank's pre-harvest workspace has its own shell (navigation, search, language); the
+  // internal TruMarket tools are one switch away and never shown inside it.
+  if (view === "pre-harvest") {
+    return (
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen bg-tm-neutral-light" aria-busy="true">
+            <div className="hidden w-60 shrink-0 border-r border-tm-border bg-tm-surface lg:block" />
+            <div className="mx-auto w-full max-w-6xl space-y-5 px-4 py-8 sm:px-8">
+              <div className="h-40 animate-pulse rounded-xl bg-tm-border/60" />
+              <div className="h-32 animate-pulse rounded-xl bg-tm-border/40" />
             </div>
-          </button>
-          <span className="hidden text-xs text-tm-text-muted sm:block">
-            Documentation-driven · 4-dimension scoring
-          </span>
-        </div>
-      </header>
+          </div>
+        }
+      >
+        <PreHarvestView
+          onOpenPostHarvest={() => {
+            handleReset();
+            setView("assess");
+          }}
+          onExitWorkspace={() => setView("assess")}
+        />
+      </Suspense>
+    );
+  }
+
+  return (
+    <div className="flex min-h-screen bg-tm-neutral-light">
+      <AppSidebar
+        view={view}
+        onChange={handleViewChange}
+        platformCount={prescoredPlatformDeals.length}
+        onHome={() => {
+          handleReset();
+          setView("assess");
+        }}
+      />
+      <div className="min-w-0 flex-1">
+      <TopBar
+        title={VIEW_TITLE[view].title}
+        sub={VIEW_TITLE[view].sub}
+        right={<span className="hidden shrink-0 text-xs text-tm-text-muted sm:block">TruMarket · Credit risk</span>}
+      />
 
       <AppNav
         view={view}
@@ -163,7 +211,7 @@ function App() {
 
       {view === "assess" && <StepIndicator currentStep={step} />}
 
-      <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-8">
         <AnimatePresence mode="wait">
           {view === "counterparties" && (
             <motion.div
@@ -306,10 +354,11 @@ function App() {
         </AnimatePresence>
       </main>
 
-      <footer className="border-t border-tm-border py-6 text-center text-xs text-tm-text-muted">
-        TruMarket agro trade-finance credit scoring — demo · CRAM data from
+      <footer className={`border-t border-tm-border py-6 text-center text-xs text-tm-text-muted print:hidden`}>
+        TruMarket agro trade-finance credit scoring · CRAM data from
         platform CSV enrichment (does not mutate live TruMarket schemas)
       </footer>
+      </div>
     </div>
   );
 }

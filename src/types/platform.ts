@@ -192,6 +192,7 @@ export interface PlatformCounterpartyScore {
 
 export type AppView =
   | "assess"
+  | "pre-harvest"
   | "counterparties"
   | "platform"
   | "missing"

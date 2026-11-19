@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #4e8c37;
-  --color-primary-hover: #3a6b2a;
-  --color-accent: #f2a007;
-  --color-accent-secondary: #f28705;
-  --color-text-body: #2d3e57;
-  --color-text-heading: #1f2d42;
-  --color-bg-page: #f2f2f2;
+  /* TruMarket brand tokens: kept in sync with trumarket/web/src/styles/globals.css :root. */
+  --color-primary: #0f9d6b;
+  --color-primary-hover: #0b4732;
+  --color-accent: #d9a93b;
+  --color-accent-secondary: #d47404;
+  --color-text-body: #3a4550;
+  --color-text-heading: #102a40;
+  --color-bg-page: #f4f6f9;
   --color-bg-card: #ffffff;
   --color-danger: #f25e6b;
   --color-mascot-skin: #e8b48c;
@@ -17,20 +18,23 @@
 @theme {
   --color-tm-primary: var(--color-primary);
   --color-tm-primary-dark: var(--color-primary-hover);
-  --color-tm-primary-light: #5fa84a;
+  --color-tm-primary-light: #7fd3a6;
   --color-tm-accent: var(--color-accent);
-  --color-tm-accent-dark: #d48806;
+  --color-tm-accent-dark: #b8893f;
   --color-tm-secondary: var(--color-accent-secondary);
   --color-tm-danger: var(--color-danger);
   --color-tm-danger-dark: #d9486e;
   --color-tm-blue: #4ea4d9;
   --color-tm-neutral: var(--color-bg-page);
-  --color-tm-neutral-light: #fafafa;
+  --color-tm-neutral-light: #f7f9fb;
   --color-tm-black: var(--color-text-heading);
   --color-tm-text: var(--color-text-body);
-  --color-tm-text-light: #6b7280;
-  --color-tm-text-muted: #9ca3af;
-  --color-tm-border: #e5e7eb;
+  --color-tm-text-light: #6b7785;
+  --color-tm-text-muted: #94a3b8;
+  --color-tm-border: #e2e4e7;
+  --color-tm-border-hover: #cbd5e1;
+  --color-tm-forest: #1e4a3a;
+  --color-tm-tint: #e6f6ef;
   --color-tm-surface: var(--color-bg-card);
 
   --font-sans: var(--font-family), system-ui, -apple-system, sans-serif;
@@ -53,3 +57,73 @@ body {
 .font-display {
   font-family: var(--font-display);
 }
+
+/* Pre-harvest campaign timeline: a transparent range input laid over the status ribbon. */
+.ph-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.ph-range:focus-visible {
+  outline: none;
+}
+.ph-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+.ph-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+.ph-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  background: var(--color-tm-black);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
+}
+.ph-range::-moz-range-thumb {
+  width: 4px;
+  height: 28px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--color-tm-black);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
+}
+.ph-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--color-tm-primary);
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  body {
+    background: #fff;
+  }
+}
+
+/* Pulsing ring on the latest reading of a chart (pre-harvest monitoring). */
+@keyframes tm-ping {
+  0% { transform: scale(0.5); opacity: 0.45; }
+  80%, 100% { transform: scale(1.6); opacity: 0; }
+}
+.tm-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tm-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tm-ping { animation: none; opacity: 0; }
+}
+
+/* Open loans needing attention pulse on the portfolio map. */
+@keyframes tm-map-pulse {
+  0%, 100% { stroke-width: 2; stroke-opacity: 1; }
+  50% { stroke-width: 9; stroke-opacity: 0.35; }
+}
+.tm-map-pulse { animation: tm-map-pulse 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .tm-map-pulse { animation: none; } }

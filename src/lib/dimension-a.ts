@@ -9,7 +9,6 @@
 import type { Deal } from "../types";
 import { sandboxCounterparties } from "../data/counterparty-sandbox-scores";
 import {
-  monthlyFromYearlySalesUsd,
   scoreBuyer,
   scoreComposite,
   scoreCreditRating,
@@ -56,9 +55,6 @@ export function buildBuyerInputs(deal: Deal): SandboxBuyerInputs {
   const dealCount = profileDealCount(buyer);
   const onPlatform = dealCount > 0;
   const yearlySalesUsd = customs?.fobUsd ?? null;
-  // Always yearly/12 — do not use customs monthlyFobUsd (fob/activeMonths),
-  // which inflated seasonal buyers (monthly×12 ≫ yearly).
-  const monthlyPurchaseVolumeUsd = monthlyFromYearlySalesUsd(yearlySalesUsd);
   const frequencyCount =
     customs?.shipments != null && customs.shipments > 0
       ? customs.shipments
@@ -66,7 +62,6 @@ export function buildBuyerInputs(deal: Deal): SandboxBuyerInputs {
   return {
     yearsInBusiness: buyer.yearsInBusiness,
     frequencyOfDeals: frequencyCount,
-    monthlyPurchaseVolumeUsd,
     yearlySalesUsd,
     annualImportVolumeMt: customs?.roles.includes("importer")
       ? customs.volumeMt
@@ -75,7 +70,6 @@ export function buildBuyerInputs(deal: Deal): SandboxBuyerInputs {
     creditRating: buyer.creditRating
       ? scoreCreditRating(buyer.creditRating)
       : null,
-    platformTransactionCount: dealCount > 0 ? dealCount : null,
     paymentDelayDays:
       buyer.avgPaymentDelayDays === undefined || buyer.avgPaymentDelayDays === null
         ? null
@@ -105,14 +99,12 @@ export function buildSupplierInputs(deal: Deal): SandboxSupplierInputs {
     yearsInBusiness: supplier.yearsInBusiness,
     frequencyOfDeals: frequencyCount,
     exportLicenseStatus: scoreLicenseValid(supplier.licenseValid) ?? null,
-    productionCapacityMt: customs?.volumeMt ?? null,
     yearlySalesUsd,
     annualExportVolumeMt: customs?.roles.includes("exporter")
       ? customs.volumeMt
       : (customs?.volumeMt ?? null),
     routeDiversity: customs?.routeCount ?? null,
     qualityCertifications: null,
-    platformTransactionCount: dealCount > 0 ? dealCount : null,
     onTimeDeliveryRate: onTime,
     qualityRejectionRate:
       supplier.qualityRejectionRatePct === undefined ||

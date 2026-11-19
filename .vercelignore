@@ -1,0 +1,10 @@
+# Keep deploy uploads small and keep raw data off Vercel.
+# docs/ holds reference material and raw Veritrade customs exports (300+ MB, licensed);
+# none of it is read at build time. The one exception is the market-intel bundle that
+# api/market-intel-rate.py loads at runtime (see vercel.json includeFiles).
+docs/*
+!docs/market-intel-peru-2025-2026-07-10/
+docs/market-intel-peru-2025-2026-07-10/marts/sunat_cache/
+
+# Vercel builds from source.
+dist

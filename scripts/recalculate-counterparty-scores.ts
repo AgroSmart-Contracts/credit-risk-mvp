@@ -18,7 +18,6 @@ import {
   platformDeals,
 } from "../src/data/platform-deals";
 import {
-  monthlyFromYearlySalesUsd,
   scoreBuyer,
   scoreSupplier,
   type GroupScoreResult,
@@ -438,14 +437,12 @@ function buyerInputs(
     yearsInBusiness,
     frequencyOfDeals: frequencyCount,
     // Calendar monthly = yearly/12 (not fob/activeMonths seasonal peak)
-    monthlyPurchaseVolumeUsd: monthlyFromYearlySalesUsd(yearlySalesUsd),
     yearlySalesUsd,
     annualImportVolumeMt: customs?.roles.includes("importer")
       ? customs.volumeMt
       : null,
     routeDiversity: customs?.routeCount ?? null,
     creditRating: null,
-    platformTransactionCount: platformDealCount > 0 ? platformDealCount : null,
     paymentDelayDays: null, // no measured source yet → excluded from raw average & coverage
     tmPlatformTrust: onPlatform || isTmEntity(companyName),
   };
@@ -473,14 +470,12 @@ function supplierInputs(
     yearsInBusiness,
     frequencyOfDeals: frequencyCount,
     exportLicenseStatus: 100,
-    productionCapacityMt: customs?.volumeMt ?? null,
     yearlySalesUsd: customs?.fobUsd ?? null,
     annualExportVolumeMt: customs?.roles.includes("exporter")
       ? customs.volumeMt
       : customs?.volumeMt ?? null,
     routeDiversity: customs?.routeCount ?? null,
     qualityCertifications: null,
-    platformTransactionCount: platformDealCount > 0 ? platformDealCount : null,
     onTimeDeliveryRate: onTime,
     qualityRejectionRate: null, // no measured source yet → excluded from raw average & coverage
     tmPlatformTrust: onPlatform || isTmEntity(companyName),
@@ -789,7 +784,7 @@ function main() {
     join(DATA, "counterparty-sandbox-scores.json"),
     JSON.stringify(
       {
-        formula: "sandbox-weighted-shrink-2026-07-30",
+        formula: "sandbox-weighted-shrink-2026-10-16", // platform transaction history removed (buyer 40→36, supplier 42→38); supplier production capacity removed as a duplicate of annual export volume (38→34); buyer monthly purchase volume removed as a duplicate of yearly sales (36→32)
         generatedAt: new Date().toISOString(),
         customsGeneratedAt: customsPayload.generatedAt,
         customsSources,

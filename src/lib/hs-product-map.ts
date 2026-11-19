@@ -150,10 +150,20 @@ function toMapping(
   };
 }
 
+/**
+ * Subheadings the 4-digit catch-alls above must not swallow: 0810.90 is
+ * "other fresh fruit" (pomegranate arils in the 2026 customs book), which
+ * would otherwise fall through to the 0810 → Fresh Blueberries row and be
+ * priced and risk-scored as blueberries. No product table row exists for it
+ * yet, so it stays unmapped (the product dimension reports it as missing).
+ */
+const UNMAPPED_PREFIXES = ["081090"];
+
 /** Resolve product / price key from an HS / partida code. */
 export function lookupByHsCode(raw: string | null | undefined): HsProductMapping | null {
   const code = normalizeHsCode(raw);
   if (!code) return null;
+  if (UNMAPPED_PREFIXES.some((prefix) => code.startsWith(prefix))) return null;
   for (const { prefix, mapping } of BY_PREFIX) {
     if (code.startsWith(prefix)) {
       return toMapping(mapping);

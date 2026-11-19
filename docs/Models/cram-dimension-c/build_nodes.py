@@ -71,7 +71,7 @@ NODES = [
  ("DXB","IATA","DXB","Dubai Intl","AE","AIRPORT","A","DUBAI|Dubai, United Arab Emirates"),
  ("HUE","UNLOCODE","USHUE","Port Hueneme","US","SEAPORT","A","PORT HUENEME|Port Hueneme, United States|HUENEME|Hueneme, United States"),
  ("NSA","UNLOCODE","INNSA","Nhava Sheva (Mumbai)","IN","SEAPORT","B","MUMBAI|Mumbai, India"),
- ("BOM","IATA","BOM","Mumbai Chhatrapati Shivaji","IN","AIRPORT","B","MUMBAI APT"),
+ ("BOM","IATA","BOM","Mumbai Chhatrapati Shivaji","IN","AIRPORT","B","MUMBAI APT|MUMBAI|Mumbai, India"),  # MUMBAI also on NSA; lookup filters by mode
  ("GDN","UNLOCODE","PLGDN","Gdansk","PL","SEAPORT","A","GDANSK|Gdansk, Poland"),
  ("VIE","IATA","VIE","Vienna Schwechat","AT","AIRPORT","A","VIENNA|Vienna, Austria"),
  ("FRA","IATA","FRA","Frankfurt am Main","DE","AIRPORT","A","FRANKFURT|Frankurt Am Main|Frankurt Am Main, Germany"),
@@ -80,7 +80,16 @@ NODES = [
  ("YVR","BOTH","CAVAN/YVR","Vancouver BC","CA","BOTH","A","VANCOUVER|Vancouver, Canada|Vancouver, Netherlands"),
  ("LCH","UNLOCODE","THLCH","Laem Chabang","TH","SEAPORT","B","LAEM CHABANG"),
  ("BKK","IATA","BKK","Bangkok Suvarnabhumi","TH","AIRPORT","A","BANGKOK|Bangkok, Thailand"),
- ("SVI","UNLOCODE","CLSVE","San Vicente","CL","SEAPORT","B","SAN VICENTE|San Vicente, Chile"),
+ ("SVI","UNLOCODE","CLSVE","San Vicente","CL","SEAPORT","B","SAN VICENTE|San Vicente, Chile|TALCAHUANO|Talcahuano, Chile"),  # Talcahuano customs office clears via the San Vicente terminal (same bay)
+ # ---- added 2026-10-16 for the ops deal tape (customs-derived deals); reference-derived ----
+ ("PIO","UNLOCODE","PEPIO","Pisco / Paracas","PE","SEAPORT","A","PISCO|Pisco, Peru|PARACAS|GENERAL SAN MARTIN"),
+ ("SVY","UNLOCODE","PESVY","Salaverry","PE","SEAPORT","B","SALAVERRY|Salaverry, Peru"),
+ ("PAI","UNLOCODE","PEPAI","Paita","PE","SEAPORT","A","PAITA|Paita, Peru"),
+ ("ORF","UNLOCODE","USORF","Norfolk","US","SEAPORT","A","NORFOLK|Norfolk, United States"),
+ ("SAV","UNLOCODE","USSAV","Savannah","US","SEAPORT","A","SAVANNAH|Savannah, United States"),
+ ("HOU","UNLOCODE","USHOU","Houston","US","SEAPORT","A","HOUSTON|Houston, United States"),  # HOUSTON also on IAH (air)
+ ("HAM","UNLOCODE","DEHAM","Hamburg","DE","SEAPORT","A","HAMBURG|Hamburg, Germany"),
+ ("ZLO","UNLOCODE","MXZLO","Manzanillo MX","MX","SEAPORT","B","Manzanillo, Mexico|MANZANILLO MX"),
 ]
 COLS=["node_id","code_type","code","name","country_iso","node_type","cold_chain_grade","aliases"]
 nodes=pd.DataFrame(NODES,columns=COLS)

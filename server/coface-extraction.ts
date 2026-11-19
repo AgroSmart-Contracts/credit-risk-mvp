@@ -55,24 +55,24 @@ function parseRiskGrade(
       ? [
           new RegExp(`\\bCRA\\b[^A-Z0-9]{0,24}${grade}\\b`, 'i'),
           new RegExp(
-            `Country\\s+risk\\s+(?:assessment\\s*)?[:\s]+${grade}\\b`,
+            `Country\\s+risk\\s+(?:assessment\\s*)?[:\\s]+${grade}\\b`,
             'i',
           ),
-          new RegExp(`Country\\s+risk\\s+rating[:\s]+${grade}\\b`, 'i'),
+          new RegExp(`Country\\s+risk\\s+rating[:\\s]+${grade}\\b`, 'i'),
           new RegExp(
-            `National\\s+risk\\s+(?:assessment\\s*)?[:\s]+${grade}\\b`,
+            `National\\s+risk\\s+(?:assessment\\s*)?[:\\s]+${grade}\\b`,
             'i',
           ),
         ]
       : [
           new RegExp(`\\bDRA\\b[^A-Z0-9]{0,24}${grade}\\b`, 'i'),
           new RegExp(
-            `Company\\s+risk\\s+(?:assessment\\s*)?[:\s]+${grade}\\b`,
+            `Company\\s+risk\\s+(?:assessment\\s*)?[:\\s]+${grade}\\b`,
             'i',
           ),
-          new RegExp(`Company\\s+risk\\s+rating[:\s]+${grade}\\b`, 'i'),
+          new RegExp(`Company\\s+risk\\s+rating[:\\s]+${grade}\\b`, 'i'),
           new RegExp(
-            `(?:Debtor|Buyer)\\s+risk\\s+(?:assessment\\s*)?[:\s]+${grade}\\b`,
+            `(?:Debtor|Buyer)\\s+risk\\s+(?:assessment\\s*)?[:\\s]+${grade}\\b`,
             'i',
           ),
         ];
@@ -87,9 +87,9 @@ function parseRiskGrade(
 
 function parseCountryName(text: string): string | undefined {
   const patterns = [
-    /Country[:\s]+([A-Za-z][A-Za-z\s]{2,48}?)(?:\s+(?:RNC|NIT|Tax|Debtor|Company)|$)/i,
-    /Debtor\s+country[:\s]+([A-Za-z][A-Za-z\s]{2,48}?)(?:\s|$)/i,
-    /Country\s+of\s+risk[:\s]+([A-Za-z][A-Za-z\s]{2,48}?)(?:\s|$)/i,
+    /Country[:\\s]+([A-Za-z][A-Za-z\s]{2,48}?)(?:\s+(?:RNC|NIT|Tax|Debtor|Company)|$)/i,
+    /Debtor\s+country[:\\s]+([A-Za-z][A-Za-z\s]{2,48}?)(?:\s|$)/i,
+    /Country\s+of\s+risk[:\\s]+([A-Za-z][A-Za-z\s]{2,48}?)(?:\s|$)/i,
   ];
   for (const pattern of patterns) {
     const m = text.match(pattern);
