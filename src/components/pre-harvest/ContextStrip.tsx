@@ -1,17 +1,17 @@
 /**
  * The outside forces on this loan, in one line under the header: coastal El Niño,
  * the export price against its normal range, and water, then what they mean for
- * the money. Each item opens a sheet with its explanation, source and history.
+ * what each one does to the money. Each item opens a sheet with its explanation, source and history.
  */
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { WEATHER_THRESHOLDS as WT } from "../../lib/pre-harvest/config";
-import { financialImpact, moneyPosition } from "../../lib/pre-harvest/finance";
+import { signalMoney } from "../../lib/pre-harvest/finance";
 import { formatDate, formatMonth, tb } from "../../lib/pre-harvest/i18n";
 import { addDays, ensoAt, ensoCategory, marketAt } from "../../lib/pre-harvest/monitoring";
-import { PANEL_LABELS, type CampaignSimulation } from "../../lib/pre-harvest/timeline";
+import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
 import type { Bilingual, Lang, PreHarvestDeal, Severity, TimelineFrame } from "../../lib/pre-harvest/types";
 import { CHART_COLORS as C } from "./theme";
 
@@ -183,32 +183,11 @@ function Sheet({ item, lang, onClose }: { item: Item; lang: Lang; onClose: () =>
   );
 }
 
-export function ContextStrip({
-  deal,
-  sim,
-  frame,
-  lang,
-  onImpact,
-}: {
-  deal: PreHarvestDeal;
-  sim: CampaignSimulation;
-  frame: TimelineFrame;
-  lang: Lang;
-  onImpact: () => void;
-}) {
+export function ContextStrip({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: CampaignSimulation; frame: TimelineFrame; lang: Lang }) {
   const [open, setOpen] = useState<ItemId | null>(null);
   const list = items(sim, frame);
   const worst = list.some((i) => i.severity === "red") ? "red" : list.some((i) => i.severity === "yellow") ? "yellow" : "green";
-  const m = moneyPosition(deal, sim, frame);
-  const declined = deal.status === "application" && sim.origination.tier === "VETO";
-  // A settled file has no live impact: say so instead of repeating the last week's action.
-  const headline: Bilingual = m.repaid
-    ? { en: "Loan repaid: nothing outstanding", es: "Préstamo repagado: nada pendiente" }
-    : declined
-      ? { en: "Application declined: nothing disbursed", es: "Solicitud rechazada: nada desembolsado" }
-      : financialImpact(deal, sim, { date: frame.date }).headline;
   const current = list.find((i) => i.id === open);
-  const off = (["crop", "weather", "market", "takeout"] as const).filter((p) => frame.panels[p].severity !== "green");
   return (
     <>
       <div
@@ -216,32 +195,25 @@ export function ContextStrip({
           worst === "red" ? "border-tm-danger/40 divide-tm-danger/20" : worst === "yellow" ? "border-tm-accent/50 divide-tm-accent/20" : "border-tm-border divide-tm-border"
         }`}
       >
-        {list.map((i) => (
-          <button key={i.id} type="button" onClick={() => setOpen(i.id)} className="flex flex-1 items-center gap-2 px-4 py-2.5 text-left transition-colors hover:bg-tm-neutral-light">
-            <span className={`h-2 w-2 shrink-0 rounded-full ${i.severity === "red" ? "bg-tm-danger" : i.severity === "yellow" ? "bg-tm-accent" : "bg-tm-primary"}`} />
-            <span className="min-w-0">
-              <span className="block text-[11px] text-tm-text-muted">{tb(i.label, lang)}</span>
-              <span className="font-semibold tabular-nums text-tm-black">{i.value}</span> <span className={`text-xs ${SEV_TEXT[i.severity]}`}>{tb(i.qualifier, lang)}</span>
-            </span>
-          </button>
-        ))}
-        <button type="button" onClick={onImpact} className="flex flex-[1.4] items-center gap-2 px-4 py-2.5 text-left transition-colors hover:bg-tm-neutral-light">
-          <span className="min-w-0 flex-1">
-            <span className="block text-[11px] text-tm-text-muted">
-              {lang === "es" ? "Impacto en el préstamo" : "Impact on the loan"}
-              {!m.repaid && !declined && off.map((p) => (
-                <span key={p} className={`ml-1.5 font-semibold ${frame.panels[p].severity === "red" ? "text-tm-danger-dark" : "text-tm-accent-dark"}`}>
-                  · {tb(PANEL_LABELS[p], lang)}
+        {list.map((i) => {
+          const money = signalMoney(i.id, i.severity, deal, sim, frame);
+          return (
+            <button key={i.id} type="button" onClick={() => setOpen(i.id)} className="group flex flex-1 items-start gap-2 px-4 py-2.5 text-left transition-colors hover:bg-tm-neutral-light">
+              <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${i.severity === "red" ? "bg-tm-danger" : i.severity === "yellow" ? "bg-tm-accent" : "bg-tm-primary"}`} />
+              {/* Money first; the reading behind it is the small line (full chart on click). */}
+              <span className="min-w-0 flex-1">
+                <span className="block text-[11px] font-semibold uppercase tracking-wide text-tm-text-muted">{tb(i.label, lang)}</span>
+                {money ? (
+                  <span className="block text-sm font-medium leading-snug text-tm-black">{tb(money, lang)}</span>
+                ) : null}
+                <span className="mt-0.5 block text-xs text-tm-text-light">
+                  <span className="tabular-nums">{i.value}</span> <span className={SEV_TEXT[i.severity]}>{tb(i.qualifier, lang)}</span>
                 </span>
-              ))}
-            </span>
-            <span className="text-tm-black">
-              {tb(headline, lang)}
-              {!m.repaid && !declined && m.coverage !== null && <span className="text-tm-text-light"> · {m.coverage.toFixed(2)}×</span>}
-            </span>
-          </span>
-          <ArrowRight className="h-4 w-4 shrink-0 text-tm-text-muted" />
-        </button>
+              </span>
+              <ArrowRight className="mt-1 h-3.5 w-3.5 shrink-0 text-tm-text-muted opacity-0 transition-opacity group-hover:opacity-100" />
+            </button>
+          );
+        })}
       </div>
       <AnimatePresence>{current && <Sheet item={current} lang={lang} onClose={() => setOpen(null)} />}</AnimatePresence>
     </>

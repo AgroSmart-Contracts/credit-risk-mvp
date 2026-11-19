@@ -5,7 +5,7 @@
  */
 import { simulateFile } from "../../data/pre-harvest/files";
 import { trancheConditions } from "../../lib/pre-harvest/credit-metrics";
-import { moneyPosition, type MoneyPosition } from "../../lib/pre-harvest/finance";
+import { bankView, moneyPosition, type BankView, type MoneyPosition } from "../../lib/pre-harvest/finance";
 import { addDays, yieldAdjustment } from "../../lib/pre-harvest/monitoring";
 import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
 import type { PreHarvestDeal, Severity, TimelineFrame, TrancheState, Trigger } from "../../lib/pre-harvest/types";
@@ -35,6 +35,8 @@ export interface FileRow {
   status: FileStatus;
   action: Bilingual;
   money: MoneyPosition;
+  /** How the bank should feel about the file, in money. */
+  view: BankView;
   worst: Severity;
   decision: PendingDecision | null;
   alerts: ActiveAlert[];
@@ -89,5 +91,5 @@ export function buildRow(deal: PreHarvestDeal): FileRow {
   }
   const alerts: ActiveAlert[] =
     deal.status === "live" ? Object.values(frame.panels).flatMap((p) => p.triggers.map((trigger) => ({ trigger, recheckBy: recheck(trigger, sim, dataDate) }))) : [];
-  return { deal, sim, frame, status: fs.status, action: fs.action, money: moneyPosition(deal, sim, frame), worst: deal.status === "live" ? worst : "green", decision, alerts };
+  return { deal, sim, frame, status: fs.status, action: fs.action, money: moneyPosition(deal, sim, frame), view: bankView(deal, sim, frame), worst: deal.status === "live" ? worst : "green", decision, alerts };
 }

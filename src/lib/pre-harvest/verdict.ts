@@ -213,6 +213,12 @@ export const FILE_STATUS_TEXT: Record<FileStatus, Bilingual> = {
   repaid: { en: "Repaid", es: "Cancelado" },
 };
 
+/** A file's status as the bank reads it: an application TruMarket would decline is a recommendation until the analyst decides. */
+export function fileStatusLabel(status: FileStatus, dealStatus: string): Bilingual {
+  if (status === "declined" && dealStatus === "application") return { en: "Decline recommended", es: "Rechazo recomendado" };
+  return FILE_STATUS_TEXT[status];
+}
+
 /**
  * The single status the bank sees for a file, with one next action and one reason.
  * Everything on the file's header reads from here, so the page cannot show

@@ -11,14 +11,12 @@ import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
 import type { Bilingual, Lang, NdviPoint, PreHarvestAssessment, PreHarvestDeal, TimelineFrame } from "../../lib/pre-harvest/types";
 import type { LiveCheck } from "./live";
 import { MonitoringPanels } from "./MonitoringPanels";
-import { Card, SectionTitle } from "./ui";
+import { Card, DetailDialog, FoldCard, SectionTitle } from "./ui";
+import { PD_BY_TIER } from "../../lib/pre-harvest/config";
 
 const L = (en: string, es: string): Bilingual => ({ en, es });
 const TX = {
   scoreFrom: L("Score at approval", "Score a la aprobación"),
-  whySub: L("Only what changed since approval, with its effect on the score", "Solo lo que cambió desde la aprobación, con su efecto en el score"),
-  noChange: L("Nothing has changed since approval.", "Nada ha cambiado desde la aprobación."),
-  total: L("Change since approval", "Cambio desde la aprobación"),
   ensoNote: L(
     "The approval score already priced the El Niño outlook at that date; monitoring adds what has been observed since, so the two are not the same risk counted twice.",
     "El score de aprobación ya incorporó el pronóstico de El Niño a esa fecha; el monitoreo agrega lo observado desde entonces, por lo que no es el mismo riesgo contado dos veces.",
@@ -53,61 +51,134 @@ const DIM_NAME: Record<string, Bilingual> = {
   counterparty: L("Buyer", "Comprador"),
 };
 
-/** What moved the score since approval: only the lines that changed, each with its effect on the composite. */
-function ScoreDrivers({ current, origination, lang, onCredit }: { current: PreHarvestAssessment; origination: PreHarvestAssessment; lang: Lang; onCredit: () => void }) {
+/**
+ * What changed since approval, in money first: expected loss and cushion then and
+ * now. The points-and-weights breakdown is one click away.
+ */
+function ScoreDrivers({
+  deal,
+  sim,
+  frame,
+  current,
+  origination,
+  application,
+  lang,
+  onCredit,
+}: {
+  deal: PreHarvestDeal;
+  sim: CampaignSimulation;
+  frame: TimelineFrame;
+  current: PreHarvestAssessment;
+  origination: PreHarvestAssessment;
+  application: boolean;
+  lang: Lang;
+  onCredit: () => void;
+}) {
+  const es = lang === "es";
+  const fmt = (n: number) => formatUsd(Math.round(n), lang);
+  const since: Bilingual = application ? L("since the application", "desde la solicitud") : L("since approval", "desde la aprobación");
+  const now = moneyPosition(deal, sim, frame);
+  const then = moneyPosition(deal, sim, sim.frames[0] ?? frame);
+  // Expected loss on the full line, so the two dates compare like for like.
+  const line = deal.envelopeUsd;
+  const lgd = now.lgdPct / 100;
+  const elThen = line * PD_BY_TIER[origination.tier] * lgd;
+  const elNow = line * PD_BY_TIER[current.tier] * lgd;
+  const cushion = (m: typeof now) => (m.expectedRepaymentUsd === null ? null : m.expectedRepaymentUsd - m.amountDueUsd);
+  const cThen = cushion(then);
+  const cNow = cushion(now);
   const changes = current.dimensions
     .filter((d) => !d.dormant)
     .flatMap((d) => {
       const before = new Map((origination.dimensions.find((o) => o.key === d.key)?.lines ?? []).map((l) => [l.label.en, l.points]));
-      return d.lines
-        .map((l) => ({ line: l, dim: d, diff: l.points - (before.get(l.label.en) ?? 0) }))
-        .filter((x) => x.diff !== 0);
+      return d.lines.map((l) => ({ line: l, dim: d, diff: l.points - (before.get(l.label.en) ?? 0) })).filter((x) => x.diff !== 0);
     })
-    .sort((a, b) => a.diff * a.dim.weight - b.diff * b.dim.weight);
+    .sort((x, y) => x.diff * x.dim.weight - y.diff * y.dim.weight);
   const delta = current.composite - origination.composite;
+  const rows: Array<{ label: string; then: string; now: string; worse: boolean }> = [
+    { label: es ? "Pérdida esperada (línea completa)" : "Expected loss (full line)", then: fmt(elThen), now: fmt(elNow), worse: elNow > elThen },
+    ...(cThen !== null && cNow !== null ? [{ label: es ? "Holgura al vencimiento" : "Cushion at maturity", then: fmt(cThen), now: fmt(cNow), worse: cNow < cThen }] : []),
+    { label: "Score", then: `${origination.composite} · ${origination.tier}`, now: `${current.composite} · ${current.tier}`, worse: delta < 0 },
+  ];
   return (
     <Card>
-      <SectionTitle
-        title={`${tb(TX.scoreFrom, lang)} ${origination.composite} · ${origination.tier} → ${current.composite} · ${current.tier}`}
-        hint={tb(TX.whySub, lang)}
-      />
-      {changes.length === 0 ? (
-        <p className="text-sm text-tm-text-light">{tb(TX.noChange, lang)}</p>
-      ) : (
-        <ul className="space-y-2.5">
-          {changes.map(({ line, dim, diff }, i) => {
-            const effect = Math.round(diff * dim.weight * 10) / 10;
-            return (
-              <li key={i} className="flex items-start justify-between gap-3 text-sm">
-                <span className="min-w-0">
-                  <span className="font-medium text-tm-black">{tb(line.label, lang).replace(/^(Monitoring|Monitoreo): /, "")}</span>
-                  <span className="text-tm-text-light"> · {tb(line.value, lang)}</span>
-                  <span className="block text-xs text-tm-text-muted">
-                    {diff > 0 ? "+" : ""}
-                    {diff} {lang === "es" ? "pts en" : "pts in"} {tb(DIM_NAME[dim.key], lang)} × {Math.round(dim.weight * 100)}%
-                  </span>
-                </span>
-                <span className={`shrink-0 font-semibold tabular-nums ${effect < 0 ? "text-tm-danger-dark" : "text-tm-primary-dark"}`}>
-                  {effect > 0 ? "+" : ""}
-                  {effect}
-                </span>
-              </li>
-            );
-          })}
-          <li className="flex justify-between border-t border-tm-border pt-2 text-sm font-semibold text-tm-black">
-            <span>{tb(TX.total, lang)}</span>
-            <span className="tabular-nums">
-              {delta > 0 ? "+" : ""}
-              {delta}
-            </span>
-          </li>
-        </ul>
-      )}
-      <p className="mt-3 text-xs text-tm-text-light">{tb(TX.ensoNote, lang)}</p>
-      <button type="button" onClick={onCredit} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-tm-black hover:underline">
-        {tb(TX.full, lang)} <ArrowRight className="h-3.5 w-3.5" />
-      </button>
+      <SectionTitle title={es ? `Qué cambió ${since.es}, en dinero` : `What changed ${since.en}, in money`} />
+      <table className="w-full text-sm">
+        <thead className="border-b border-tm-border text-[11px] uppercase tracking-wide text-tm-text-muted">
+          <tr>
+            <th className="py-1.5 text-left font-semibold"></th>
+            <th className="py-1.5 text-right font-semibold">{application ? (es ? "Solicitud" : "Application") : es ? "Aprobación" : "Approval"}</th>
+            <th className="py-1.5 text-right font-semibold">{es ? "Hoy" : "Today"}</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-tm-border">
+          {rows.map((r) => (
+            <tr key={r.label}>
+              <td className="py-2 text-tm-black">{r.label}</td>
+              <td className="py-2 text-right text-tm-text-light">{r.then}</td>
+              <td className={`py-2 text-right font-semibold ${r.worse ? "text-tm-danger-dark" : "text-tm-black"}`}>{r.now}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-2 text-xs text-tm-text-light">
+        {changes.length === 0
+          ? es
+            ? `Nada ha cambiado ${since.es}.`
+            : `Nothing has changed ${since.en}.`
+          : `${es ? "Por qué" : "Why"}: ${changes
+              .slice(0, 2)
+              .map((c) => tb(c.line.label, lang).replace(/^(Monitoring|Monitoreo): /, ""))
+              .join(" · ")}`}
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-3">
+        <DetailDialog label={es ? "Ver desglose del score" : "View score breakdown"} title={es ? "Desglose del score" : "Score breakdown"} lang={lang}>
+          <ScoreBreakdown changes={changes} delta={delta} since={since} lang={lang} />
+        </DetailDialog>
+        <button type="button" onClick={onCredit} className="inline-flex items-center gap-1 text-xs font-semibold text-tm-black hover:underline">
+          {tb(TX.full, lang)} <ArrowRight className="h-3.5 w-3.5" />
+        </button>
+      </div>
     </Card>
+  );
+}
+
+type Change = { line: PreHarvestAssessment["dimensions"][number]["lines"][number]; dim: PreHarvestAssessment["dimensions"][number]; diff: number };
+
+/** The technical layer: each scoring line that moved, its points and weight. */
+function ScoreBreakdown({ changes, delta, since, lang }: { changes: Change[]; delta: number; since: Bilingual; lang: Lang }) {
+  return (
+    <div>
+      <ul className="space-y-2.5">
+        {changes.map(({ line, dim, diff }, i) => {
+          const effect = Math.round(diff * dim.weight * 10) / 10;
+          return (
+            <li key={i} className="flex items-start justify-between gap-3 text-sm">
+              <span className="min-w-0">
+                <span className="font-medium text-tm-black">{tb(line.label, lang).replace(/^(Monitoring|Monitoreo): /, "")}</span>
+                <span className="text-tm-text-light"> · {tb(line.value, lang)}</span>
+                <span className="block text-xs text-tm-text-muted">
+                  {diff > 0 ? "+" : ""}
+                  {diff} {lang === "es" ? "pts en" : "pts in"} {tb(DIM_NAME[dim.key], lang)} × {Math.round(dim.weight * 100)}%
+                </span>
+              </span>
+              <span className={`shrink-0 font-semibold tabular-nums ${effect < 0 ? "text-tm-danger-dark" : "text-tm-primary-dark"}`}>
+                {effect > 0 ? "+" : ""}
+                {effect}
+              </span>
+            </li>
+          );
+        })}
+        <li className="flex justify-between border-t border-tm-border pt-2 text-sm font-semibold text-tm-black">
+          <span>{lang === "es" ? `Cambio ${since.es}` : `Change ${since.en}`}</span>
+          <span className="tabular-nums">
+            {delta > 0 ? "+" : ""}
+            {delta}
+          </span>
+        </li>
+      </ul>
+      <p className="mt-3 text-xs text-tm-text-light">{tb(TX.ensoNote, lang)}</p>
+    </div>
   );
 }
 
@@ -171,9 +242,21 @@ function CounterpartyChecks({ deal, sim, checks, lang }: { deal: PreHarvestDeal;
       ],
     ],
   ];
+  const allRows = groups.flatMap(([, rows]) => rows);
+  const okCount = allRows.filter((r) => r.state === "ok").length;
   return (
-    <Card>
-      <SectionTitle title={tb(TX.counterparty, lang)} hint={tb(TX.counterpartySub, lang)} />
+    <FoldCard
+      title={tb(TX.counterparty, lang)}
+      hint={tb(TX.counterpartySub, lang)}
+      lang={lang}
+      // Open by default only when a check failed.
+      defaultOpen={allRows.some((r) => r.state === "fail")}
+      summary={
+        es
+          ? `${okCount} de ${allRows.length} verificaciones en orden${allRows.length - okCount ? ` · ${allRows.length - okCount} por revisar` : ""}`
+          : `${okCount} of ${allRows.length} checks clear${allRows.length - okCount ? ` · ${allRows.length - okCount} to review` : ""}`
+      }
+    >
       <div className="space-y-3">
         {groups.map(([title, rows]) => (
           <div key={title.en}>
@@ -196,17 +279,20 @@ function CounterpartyChecks({ deal, sim, checks, lang }: { deal: PreHarvestDeal;
           </div>
         ))}
       </div>
-    </Card>
+    </FoldCard>
   );
 }
 
 function CashFlows({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: CampaignSimulation; frame: TimelineFrame; lang: Lang }) {
+  const es = lang === "es";
   const m = moneyPosition(deal, sim, frame);
   const tk = sim.takeout;
   const poValue = tk.poVolumeKg * tk.poPriceUsdPerKg;
   const advance = tk.coface === "declined" ? 0 : poValue * (tk.cofaceCoveragePct / 100) * (tk.advanceRatePct / 100);
-  const stateText: Record<string, Bilingual> = { done: TX.done, planned: TX.planned, held: TX.held, stopped: TX.stopped };
-  type Row = { date: string; flow: Bilingual; note?: Bilingual; direction: Bilingual; principal: number; amount: number; state: "done" | "planned" | "held" | "stopped" };
+  // An application has moved no money: every row is a proposal.
+  const application = deal.status === "application";
+  const stateText: Record<string, Bilingual> = { done: TX.done, planned: TX.planned, held: TX.held, stopped: TX.stopped, proposed: L("Proposed", "Propuesto") };
+  type Row = { date: string; flow: Bilingual; note?: Bilingual; direction: Bilingual; principal: number; amount: number; state: "done" | "planned" | "held" | "stopped" | "proposed" };
   const repaid = frame.m3Reached && tk.poSignedDate !== null && tk.poSignedDate <= frame.date && frame.date >= addDays(m.maturityDate, -7);
   const rows: Row[] = [
     ...frame.tranches.map(
@@ -214,9 +300,9 @@ function CashFlows({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: Camp
         date: t.releasedOn ?? t.dueDate,
         flow: { en: `Tranche ${t.pct}% · ${t.label.en}`, es: `Tramo ${t.pct}% · ${t.label.es}` },
         direction: L("Bank → Grower", "Banco → Productor"),
-        principal: t.status === "stopped" ? 0 : t.amountUsd,
+        principal: application || t.status === "stopped" ? 0 : t.amountUsd,
         amount: -t.amountUsd,
-        state: t.status === "released" ? "done" : t.status === "pending" ? "planned" : t.status,
+        state: application ? "proposed" : t.status === "released" ? "done" : t.status === "pending" ? "planned" : t.status,
       }),
     ),
     {
@@ -229,7 +315,7 @@ function CashFlows({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: Camp
       direction: L("Grower → Bank", "Productor → Banco"),
       principal: -Infinity,
       amount: m.amountDueUsd,
-      state: repaid ? "done" : "planned",
+      state: application ? "proposed" : repaid ? "done" : "planned",
     },
   ];
   rows.sort((a, b) => a.date.localeCompare(b.date));
@@ -238,10 +324,19 @@ function CashFlows({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: Camp
     running = r.principal === -Infinity ? 0 : running + r.principal;
     return { ...r, exposure: running };
   });
-  const nextIdx = withExposure.findIndex((r) => r.state !== "done");
+  // "Next" marks the next money that will actually move: never a stopped or proposed row.
+  const nextIdx = withExposure.findIndex((r) => r.state === "planned" || r.state === "held");
   return (
-    <Card>
-      <SectionTitle title={tb(TX.cash, lang)} hint={tb(TX.cashSub, lang)} />
+    <FoldCard
+      title={tb(TX.cash, lang)}
+      hint={tb(TX.cashSub, lang)}
+      lang={lang}
+      summary={
+        nextIdx >= 0
+          ? `${es ? "Próximo" : "Next"}: ${formatDate(withExposure[nextIdx].date, lang)} · ${tb(withExposure[nextIdx].flow, lang)} · ${withExposure[nextIdx].amount < 0 ? "−" : "+"}${formatUsd(Math.abs(withExposure[nextIdx].amount), lang)}`
+          : `${withExposure.length} ${es ? "movimientos" : "movements"}`
+      }
+    >
       <div className="-mx-5 overflow-x-auto px-5">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="text-[11px] uppercase tracking-wide text-tm-text-muted">
@@ -274,7 +369,7 @@ function CashFlows({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: Camp
                 <td className="py-2">
                   <span
                     className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-                      r.state === "done" ? "bg-tm-neutral text-tm-black" : r.state === "planned" ? "text-tm-text-muted" : r.state === "held" ? "bg-tm-accent/15 text-tm-accent-dark" : "bg-tm-danger/15 text-tm-danger-dark"
+                      r.state === "done" ? "bg-tm-neutral text-tm-black" : r.state === "planned" || r.state === "proposed" ? "text-tm-text-muted" : r.state === "held" ? "bg-tm-accent/15 text-tm-accent-dark" : "bg-tm-danger/15 text-tm-danger-dark"
                     }`}
                   >
                     {tb(stateText[r.state], lang)}
@@ -285,7 +380,7 @@ function CashFlows({ deal, sim, frame, lang }: { deal: PreHarvestDeal; sim: Camp
           </tbody>
         </table>
       </div>
-    </Card>
+    </FoldCard>
   );
 }
 
@@ -311,7 +406,7 @@ export function RiskDetails({
   return (
     <div className="space-y-5">
       <div className="grid gap-5 lg:grid-cols-2">
-        <ScoreDrivers current={current} origination={sim.origination} lang={lang} onCredit={onCredit} />
+        <ScoreDrivers deal={deal} sim={sim} frame={frame} current={current} origination={sim.origination} application={deal.status === "application"} lang={lang} onCredit={onCredit} />
         <CounterpartyChecks deal={deal} sim={sim} checks={checks} lang={lang} />
       </div>
       <CashFlows deal={deal} sim={sim} frame={frame} lang={lang} />

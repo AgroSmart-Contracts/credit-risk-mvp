@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { ChevronRight, FilePlus2, Search } from "lucide-react";
 import { formatDate, formatUsd, tb } from "../../lib/pre-harvest/i18n";
-import { FILE_STATUS_TEXT, type FileStatus } from "../../lib/pre-harvest/verdict";
+import { fileStatusLabel, type FileStatus } from "../../lib/pre-harvest/verdict";
 import type { Bilingual, Lang } from "../../lib/pre-harvest/types";
 import { FILE_KIND, STATUS_STYLE } from "./file-style";
 import type { FileRow } from "./portfolio";
@@ -25,13 +25,14 @@ const TX = {
   overdue: L("overdue", "vencida"),
 };
 
-const TILES: Array<{ id: "live" | "decisions" | "red" | "watch" | "repaid" | "declined"; label: Bilingual }> = [
+type View = "attention" | "live" | "applications" | "completed" | "all";
+/** One row of views, as in a bank work queue: what needs me, open loans, applications, completed, everything. */
+const VIEWS: Array<{ id: View; label: Bilingual }> = [
+  { id: "attention", label: L("Needs attention", "Requiere atención") },
   { id: "live", label: L("Open loans", "Préstamos vigentes") },
-  { id: "decisions", label: L("Decisions due", "Decisiones pendientes") },
-  { id: "red", label: L("High risk", "Riesgo alto") },
-  { id: "watch", label: L("Watch", "Vigilar") },
-  { id: "repaid", label: L("Repaid", "Repagados") },
-  { id: "declined", label: L("Declined", "Rechazados") },
+  { id: "applications", label: L("Applications", "Solicitudes") },
+  { id: "completed", label: L("Completed", "Concluidos") },
+  { id: "all", label: L("All files", "Todos") },
 ];
 
 const attention = (r: FileRow) => !(["normal", "repaid", "declined"] as FileStatus[]).includes(r.status) || r.decision !== null;
@@ -41,20 +42,18 @@ const short = (s: string, n = 70) => (s.length > n ? `${s.slice(0, n - 1)}…` :
 export function Inbox({ rows, lang, onOpen, onNew }: { rows: FileRow[]; lang: Lang; onOpen: (id: string) => void; onNew: () => void }) {
   const [q, setQ] = useState("");
   const anyAttention = rows.some(attention);
-  // On by default whenever something needs the analyst; one click shows the whole book.
-  const [needs, setNeeds] = useState(anyAttention);
-
-  const counts = {
-    live: rows.filter((r) => r.deal.status === "live").length,
-    decisions: rows.filter((r) => r.decision).length,
-    red: rows.filter((r) => r.deal.status === "live" && r.worst === "red").length,
-    watch: rows.filter((r) => r.deal.status === "live" && r.worst === "yellow").length,
-    repaid: rows.filter((r) => r.status === "repaid").length,
-    declined: rows.filter((r) => r.status === "declined").length,
+  // Starts on what needs the analyst; completed campaigns are one click away.
+  const [view, setView] = useState<View>(anyAttention ? "attention" : "all");
+  const inView: Record<View, (r: FileRow) => boolean> = {
+    attention,
+    live: (r) => r.deal.status === "live",
+    applications: (r) => r.deal.status === "application",
+    completed: (r) => r.deal.status === "closed" || r.status === "repaid",
+    all: () => true,
   };
   const term = q.trim().toLowerCase();
   const filtered = rows
-    .filter((r) => !needs || attention(r))
+    .filter(inView[view])
     .filter((r) => !term || [r.deal.id, r.deal.name.en, r.deal.location.en, r.deal.location.es, r.deal.formato.ruc, r.deal.campaign.en].some((x) => x.toLowerCase().includes(term)));
   const groups = new Map<string, FileRow[]>();
   for (const r of filtered) (groups.get(clientOf(r)) ?? groups.set(clientOf(r), []).get(clientOf(r))!).push(r);
@@ -73,36 +72,34 @@ export function Inbox({ rows, lang, onOpen, onNew }: { rows: FileRow[]; lang: La
         </button>
       </div>
 
-      {/* Summary tiles: the colour sits on the left border; only the worst tile is filled. */}
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-        {TILES.map((t) => {
-          const n = counts[t.id];
-          const border = t.id === "red" && n ? "border-l-tm-danger bg-tm-danger/5" : t.id === "watch" && n ? "border-l-tm-accent" : t.id === "decisions" && n ? "border-l-tm-black" : "border-l-tm-border";
-          return (
-            <div key={t.id} className={`rounded-lg border border-l-[3px] border-tm-border bg-tm-surface px-3 py-2 ${border}`}>
-              <p className="text-[11px] text-tm-text-muted">{tb(t.label, lang)}</p>
-              <p className="font-display text-xl text-tm-black">{n}</p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="relative min-w-[16rem] flex-1">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-tm-border">
+        <div className="-mb-px flex gap-1 overflow-x-auto [scrollbar-width:none]" role="tablist">
+          {VIEWS.map((v) => {
+            const n = rows.filter(inView[v.id]).length;
+            const on = view === v.id;
+            return (
+              <button
+                key={v.id}
+                type="button"
+                role="tab"
+                aria-selected={on}
+                onClick={() => setView(v.id)}
+                className={`shrink-0 border-b-2 px-3 py-2 text-sm font-medium ${on ? "border-tm-primary text-tm-black" : "border-transparent text-tm-text-light hover:text-tm-black"}`}
+              >
+                {tb(v.label, lang)} <span className={`ml-1 text-xs ${on ? "text-tm-text-light" : "text-tm-text-muted"}`}>{n}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="relative mb-2 w-full sm:w-72">
           <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-tm-text-muted" />
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder={tb(TX.search, lang)}
-            className="w-full rounded-lg border border-tm-border bg-tm-surface py-2 pl-8 pr-3 text-sm placeholder:text-tm-text-muted focus:border-tm-text-muted focus:outline-none"
+            className="w-full rounded-lg border border-tm-border bg-tm-surface py-1.5 pl-8 pr-3 text-sm placeholder:text-tm-text-muted focus:border-tm-text-muted focus:outline-none"
           />
         </div>
-        {anyAttention && (
-          <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-tm-black">
-            <input type="checkbox" checked={needs} onChange={(e) => setNeeds(e.target.checked)} className="accent-tm-black" />
-            {tb(TX.needs, lang)}
-          </label>
-        )}
       </div>
 
       <div className="overflow-hidden rounded-xl border border-tm-border bg-tm-surface shadow-tm-sm">
@@ -183,7 +180,7 @@ export function Inbox({ rows, lang, onOpen, onNew }: { rows: FileRow[]; lang: La
                       <td className="block py-1 md:table-cell md:px-4 md:py-3">
                         <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold ${style.pill}`}>
                           <span className="h-1.5 w-1.5 rounded-full" style={{ background: style.dot }} />
-                          {tb(FILE_STATUS_TEXT[r.status], lang)}
+                          {tb(fileStatusLabel(r.status, r.deal.status), lang)}
                         </span>
                       </td>
                       <td className="block max-w-xs md:table-cell md:px-4 md:py-3" title={tb(r.action, lang)}>
@@ -193,7 +190,7 @@ export function Inbox({ rows, lang, onOpen, onNew }: { rows: FileRow[]; lang: La
                               {d.kind === "approval" ? (lang === "es" ? "Aprobación" : "Approval") : `${tb(d.tranche!.label, lang)} ${d.tranche!.pct}%`} · {formatUsd(d.amountUsd, lang)}
                             </p>
                             <p className={`text-xs ${d.daysLeft < 0 ? "font-semibold text-tm-accent-dark" : "text-tm-text-muted"}`}>
-                              {formatDate(d.dueDate, lang)} · {d.daysLeft < 0 ? `${Math.abs(d.daysLeft)} ${tb(TX.days, lang)} ${tb(TX.overdue, lang)}` : `${d.daysLeft} ${tb(TX.days, lang)}`} · {d.met}/{d.total} ✓
+                              {formatDate(d.dueDate, lang)} · {d.daysLeft === 0 ? (lang === "es" ? "vence hoy" : "due today") : d.daysLeft < 0 ? `${Math.abs(d.daysLeft)} ${Math.abs(d.daysLeft) === 1 ? (lang === "es" ? "día" : "day") : tb(TX.days, lang)} ${tb(TX.overdue, lang)}` : `${d.daysLeft} ${d.daysLeft === 1 ? (lang === "es" ? "día" : "day") : tb(TX.days, lang)}`} · {d.met}/{d.total} ✓
                             </p>
                           </>
                         ) : (

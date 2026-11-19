@@ -12,7 +12,7 @@ import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
 import { formatRate, formatUsd, t, tb } from "../../lib/pre-harvest/i18n";
 import type { Lang, PreHarvestAssessment, PreHarvestDeal, TimelineFrame } from "../../lib/pre-harvest/types";
 import { FieldMap } from "./FieldMap";
-import { Card, SectionTitle } from "./ui";
+import { DetailDialog, Card, SectionTitle } from "./ui";
 
 function Fact({ label, value }: { label: string; value: string }) {
   return (
@@ -57,7 +57,11 @@ export function SummaryPanel({
   yieldAdj: number;
   lang: Lang;
 }) {
-  const { risks, mitigants } = keyRisksAndMitigants(current);
+  const all = keyRisksAndMitigants(current);
+  // One El Niño line: when monitoring already flags it today, drop the score line from the application date.
+  const ensoNow = all.risks.some((r) => /^(Monitoring|Monitoreo): /.test(r.label.en) && /El Niño/.test(r.value.en));
+  const risks = ensoNow ? all.risks.filter((r) => /^(Monitoring|Monitoreo): /.test(r.label.en) || !/El Niño/.test(r.label.en)) : all.risks;
+  const mitigants = all.mitigants;
   const el = expectedLoss(deal, current.tier);
   const prov = sbsProvision(deal);
   // The loan rate is contractual: fixed at origination, not re-priced by monitoring.
@@ -66,9 +70,9 @@ export function SummaryPanel({
 
   return (
     <div className="space-y-5">
-      <div className="grid gap-5 lg:grid-cols-5">
-        <Card className="lg:col-span-3">
-          <SectionTitle title={t("facility", lang)} hint={t("analystConfirm", lang)} />
+      <div>
+        <Card>
+          <SectionTitle title={lang === "es" ? "Condiciones del préstamo" : "Loan terms"} hint={t("analystConfirm", lang)} />
           <dl className="text-sm">
             <Fact label={t("facility", lang)} value={t("facilityType", lang)} />
             <Fact label={t("amount", lang)} value={`${formatUsd(deal.envelopeUsd, lang)} · ${deal.tenorDays} ${t("days", lang)}`} />
@@ -76,17 +80,16 @@ export function SummaryPanel({
             <Fact label={t("ltv", lang)} value={`${current.ltvPct.toFixed(0)}%`} />
             <Fact label={t("repaymentSource", lang)} value={t("repaymentSourceText", lang)} />
           </dl>
+          {/* The parcel is evidence, not money: on demand. */}
+          <div className="mt-3">
+            <DetailDialog label={lang === "es" ? "Ver el predio en el mapa" : "View the parcel on the map"} title={t("field", lang)} subtitle={`${tb(deal.location, lang)} · ${t("coordinates", lang)} ${deal.lat.toFixed(4)}, ${deal.lon.toFixed(4)}`} lang={lang}>
+              <div className="relative z-0 h-[420px]">
+                <FieldMap lat={deal.lat} lon={deal.lon} areaHa={deal.formato.areaHa} ring={deal.parcel} severity={frame.panels.crop.severity} />
+              </div>
+            </DetailDialog>
+          </div>
         </Card>
 
-        <Card className="lg:col-span-2">
-          <SectionTitle title={t("field", lang)} hint={t("fieldHint", lang)} />
-          <div className="relative z-0">
-            <FieldMap lat={deal.lat} lon={deal.lon} areaHa={deal.formato.areaHa} ring={deal.parcel} severity={frame.panels.crop.severity} />
-          </div>
-          <p className="mt-2 text-xs text-tm-text-light">
-            {tb(deal.location, lang)} · {t("coordinates", lang)} {deal.lat.toFixed(4)}, {deal.lon.toFixed(4)}
-          </p>
-        </Card>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -105,7 +108,7 @@ export function SummaryPanel({
           </ul>
         </Card>
         <Card>
-          <SectionTitle title={t("mitigants", lang)} />
+          <SectionTitle title={t("mitigants", lang)} hint={lang === "es" ? "Evaluados en la solicitud" : "Assessed at application"} />
           <ul className="space-y-2">
             {mitigants.map((m, i) => (
               <li key={i} className="flex gap-2 text-sm">
@@ -125,7 +128,7 @@ export function SummaryPanel({
         <Metric label={t("sbsRating", lang)} value={deal.checks.credit.rating} sub={deal.checks.credit.bureau} />
         <Metric label={t("provision", lang)} value={formatUsd(prov.amountUsd, lang)} sub={`${prov.ratePct}% · Res. SBS 11356-2008`} />
         <Metric
-          label={`${t("expectedLoss", lang)} (${t("indicative", lang)})`}
+          label={lang === "es" ? "Pérdida esperada sobre la línea completa" : "Expected loss on the full line"}
           value={formatUsd(el.elUsd, lang)}
           sub={`${t("pd", lang)} ${el.pdPct.toFixed(1)}% · ${t("lgd", lang)} ${el.lgdPct.toFixed(0)}%`}
         />

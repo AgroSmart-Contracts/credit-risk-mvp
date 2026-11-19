@@ -34,9 +34,7 @@ const TX = {
   today: L("Today", "Hoy"),
   exposure: L("Exposure", "Exposición"),
   plan: L("Plan", "Plan"),
-  update: L("update", "actualización"),
-  updates: L("updates", "actualizaciones"),
-  see: L("See what happened", "Ver qué pasó"),
+  proposed: L("proposed", "propuesto"),
 };
 
 type StepState = "done" | "current" | "problem" | "future";
@@ -52,24 +50,27 @@ export function CreditTimeline({
   deal,
   sim,
   frame,
-  updates,
-  onInvestigate,
   lang,
 }: {
   deal: PreHarvestDeal;
   sim: CampaignSimulation;
   frame: TimelineFrame;
-  updates: number;
-  onInvestigate: () => void;
+  /** Kept for callers; the update count lives on the "What happened" tab. */
+  updates?: number;
+  onInvestigate?: () => void;
   lang: Lang;
 }) {
   const m = moneyPosition(deal, sim, frame);
   const repaid = fileStatus(frame).status === "repaid";
   const curve = exposureCurve(deal, sim, frame, repaid).map((p) => ({ ...p, t: toTime(p.date) }));
   const fmt = (n: number) => formatUsd(n, lang);
+  const dayWord = (n: number) => `${n} ${n === 1 ? (lang === "es" ? "día" : "day") : tb(TX.days, lang)}`;
   const tr = (id: TrancheState["id"]) => frame.tranches.find((t) => t.id === id)!;
 
+  // An application has lent nothing: every step is a proposal, never "stopped" or "back to the bank".
+  const application = deal.status === "application";
   const trancheStep = (t: TrancheState, label: Bilingual) => {
+    if (application) return { label, state: "future" as StepState, sub: `${fmt(t.amountUsd)} · ${tb(TX.proposed, lang)}`, late: false };
     let state: StepState = "future";
     let sub = `${fmt(t.amountUsd)} · ${tb(TX.planned, lang)} ${formatDate(t.dueDate, lang, false)}`;
     let late = false;
@@ -77,11 +78,11 @@ export function CreditTimeline({
       state = "done";
       const lateDays = daysBetween(t.dueDate, t.releasedOn!);
       late = lateDays > 7;
-      sub = `${fmt(t.amountUsd)} ${tb(TX.out, lang)} · ${formatDate(t.releasedOn!, lang, false)}${late ? ` · ${tb(TX.held, lang)} ${lateDays} ${tb(TX.days, lang)}` : ""}`;
+      sub = `${fmt(t.amountUsd)} ${tb(TX.out, lang)} · ${formatDate(t.releasedOn!, lang, false)}${late ? ` · ${tb(TX.held, lang)} ${dayWord(lateDays)}` : ""}`;
     } else if (t.status === "held") {
       state = "problem";
       late = true;
-      sub = `${fmt(t.amountUsd)} ${tb(TX.held, lang)} ${daysBetween(t.dueDate, frame.date)} ${tb(TX.days, lang)} · ${tb(TX.awaiting, lang)}`;
+      sub = `${fmt(t.amountUsd)} ${tb(TX.held, lang)} ${dayWord(daysBetween(t.dueDate, frame.date))} · ${tb(TX.awaiting, lang)}`;
     } else if (t.status === "stopped") {
       state = "problem";
       late = true;
@@ -108,7 +109,9 @@ export function CreditTimeline({
     {
       label: TX.maturity,
       state: (repaid ? "done" : frame.date >= addDays(m.maturityDate, -21) ? "current" : "future") as StepState,
-      sub: repaid
+      sub: application
+        ? `${fmt(m.amountDueUsd)} · ${tb(TX.proposed, lang)}`
+        : repaid
         ? `${fmt(m.amountDueUsd)} ${tb(TX.repaid, lang)}`
         : `${fmt(m.amountDueUsd)} ${tb(TX.back, lang)} · ${formatDate(m.maturityDate, lang, false)}`,
       late: false,
@@ -123,12 +126,9 @@ export function CreditTimeline({
         <div>
           <h3 className="font-display text-base text-tm-black">{tb(TX.title, lang)}</h3>
           <p className="text-xs text-tm-text-light">
-            {formatDate(m.startDate, lang)} → {formatDate(m.maturityDate, lang)} · {tb(TX.sub, lang)}
+            {application ? (lang === "es" ? "Propuesta" : "Proposed") + ": " : ""}{formatDate(m.startDate, lang)} → {formatDate(m.maturityDate, lang)} · {tb(TX.sub, lang)}
           </p>
         </div>
-        <button type="button" onClick={onInvestigate} className="text-xs font-medium text-tm-text-light hover:text-tm-black print:hidden">
-          {updates} {tb(updates === 1 ? TX.update : TX.updates, lang)} · {tb(TX.see, lang)} →
-        </button>
       </div>
 
       <div className="h-28" aria-hidden>

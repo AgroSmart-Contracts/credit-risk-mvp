@@ -172,7 +172,12 @@ export function simulateCampaign(
   let stopped = origination.tier === "VETO";
 
   const stop = until && until < end ? until : end;
-  for (let date = deal.approvalDate; date <= stop; date = addDays(date, STEP_DAYS)) {
+  // Weekly steps, plus a last step at the cut-off for an open file, so the file is read
+  // "as of" its newest data and every page (file, inbox, decisions) counts from the same day.
+  const dates: string[] = [];
+  for (let d = deal.approvalDate; d <= stop; d = addDays(d, STEP_DAYS)) dates.push(d);
+  if (until && dates.length && dates[dates.length - 1] < stop) dates.push(stop);
+  for (const date of dates) {
     const cropState = evaluateCrop(crop, date, deal, fruitSetDelayDays);
     const weatherState = evaluateWeather(weather, data.climate, date, deal, fruitSetDelayDays);
     const marketEval = evaluateMarket(market, date, deal, amountDue, yieldAdjustment(crop, date), referencePrice);

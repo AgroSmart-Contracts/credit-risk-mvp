@@ -4,6 +4,8 @@
  * the latest data and its expected path, and reports what it means for the loan.
  */
 import { useEffect, useState } from "react";
+import { WEATHER_THRESHOLDS as WT } from "../../lib/pre-harvest/config";
+import { moneyPosition, signalMoney } from "../../lib/pre-harvest/finance";
 import { ensoAt, ensoCategory, yieldAdjustment } from "../../lib/pre-harvest/monitoring";
 import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
 import type { Bilingual, PreHarvestDeal, TimelineFrame } from "../../lib/pre-harvest/types";
@@ -40,6 +42,11 @@ function buildCheck(n: number, at: number, deal: PreHarvestDeal, sim: CampaignSi
   const source = ORDER[n % ORDER.length];
   const usd = (v: number, es = false) => `USD ${Math.round(v).toLocaleString(es ? "es-PE" : "en-US")}`;
   const base = { id: n, at, source, label: CHECK_LABEL[source], dataDate: frame.date };
+  // Every check ends in money: what it does to the cushion (expected repayment − amount due).
+  const m = moneyPosition(deal, sim, frame);
+  const cushion = m.expectedRepaymentUsd === null ? null : m.expectedRepaymentUsd - m.amountDueUsd;
+  const cushionText = (es = false) => (cushion === null ? "" : cushion >= 0 ? (es ? `${usd(cushion, true)} de holgura` : `${usd(cushion)} cushion`) : es ? `faltan ${usd(-cushion, true)}` : `${usd(-cushion)} short`);
+  const sev = (v: number, y: number, r: number) => (v >= r ? "red" : v >= y ? "yellow" : "green") as "green" | "yellow" | "red";
   switch (source) {
     case "satellite": {
       const crop = sim.series.crop.filter((p) => p.date <= frame.date).at(-1);
@@ -51,7 +58,9 @@ function buildCheck(n: number, at: number, deal: PreHarvestDeal, sim: CampaignSi
         reading: ndvi === null
           ? { en: "No clear pass over the parcel yet", es: "Aún sin pase despejado sobre el predio" }
           : { en: `Canopy greenness ${ndvi.toFixed(2)} on the latest pass, ${crop!.pctVsMedian >= -5 ? "on" : "below"} its expected path`, es: `Verdor del follaje ${ndvi.toFixed(2)} en el último pase, ${crop!.pctVsMedian >= -5 ? "en" : "bajo"} su trayectoria esperada` },
-        forLoan: { en: `Expected harvest ${y}% of declared volume`, es: `Cosecha esperada ${y}% del volumen declarado` },
+        forLoan: cushion !== null
+          ? { en: `Harvest ${y}% of declared: ${cushionText()}`, es: `Cosecha ${y}% de lo declarado: ${cushionText(true)}` }
+          : { en: `Expected harvest ${y}% of declared volume`, es: `Cosecha esperada ${y}% del volumen declarado` },
       };
     }
     case "weather": {
@@ -65,8 +74,8 @@ function buildCheck(n: number, at: number, deal: PreHarvestDeal, sim: CampaignSi
           : { en: "Waiting for today's reading", es: "Esperando la lectura de hoy" },
         forLoan:
           cov !== null && cov < 1
-            ? { en: "Water short of demand: yield at risk if it persists", es: "Agua por debajo de la demanda: rendimiento en riesgo si persiste" }
-            : { en: "No effect on the yield outlook", es: "Sin efecto en la proyección de rendimiento" },
+            ? (signalMoney("water", cov < WT.waterCoverageRed ? "red" : "yellow", deal, sim, frame) ?? { en: "Water short of demand", es: "Agua por debajo de la demanda" })
+            : { en: "No cost to the loan", es: "Sin costo para el préstamo" },
       };
     }
     case "market": {
@@ -81,7 +90,7 @@ function buildCheck(n: number, at: number, deal: PreHarvestDeal, sim: CampaignSi
           ? { en: `Expected harvest price USD ${price.toFixed(2)}/kg FOB`, es: `Precio esperado en cosecha USD ${price.toFixed(2)}/kg FOB` }
           : { en: "No price this month yet", es: "Aún sin precio este mes" },
         forLoan: cov !== null
-          ? { en: `Harvest revenue covers the ${usd(sim.amountDue)} due ${cov.toFixed(2)}×`, es: `El ingreso de la cosecha cubre ${cov.toFixed(2)}× los ${usd(sim.amountDue, true)} adeudados` }
+          ? (signalMoney("price", "green", deal, sim, frame) ?? { en: `Covers the amount due ${cov.toFixed(2)}×`, es: `Cubre lo adeudado ${cov.toFixed(2)}×` })
           : { en: "Coverage pending", es: "Cobertura pendiente" },
       };
     }
@@ -112,8 +121,8 @@ function buildCheck(n: number, at: number, deal: PreHarvestDeal, sim: CampaignSi
         dataDate: tk.poSignedDate && tk.poSignedDate <= frame.date ? tk.poSignedDate : deal.checksDate,
         reading: { en: `Coface cover on the buyer (${tk.buyerCountry}) ${status[tk.coface].en}`, es: `Cobertura Coface del comprador (${tk.buyerCountry}) ${status[tk.coface].es}` },
         forLoan: tk.coface === "declined"
-          ? { en: "Repayment source not insured", es: "Fuente de repago sin seguro" }
-          : { en: "Repayment source in place", es: "Fuente de repago vigente" },
+          ? { en: `The ${usd(m.amountDueUsd)} repayment is not insured`, es: `El repago de ${usd(m.amountDueUsd, true)} no está asegurado` }
+          : { en: `Coface insures ${tk.cofaceCoveragePct}% of the buyer's payment that repays the ${usd(m.amountDueUsd)} due`, es: `Coface asegura ${tk.cofaceCoveragePct}% del pago del comprador que repaga los ${usd(m.amountDueUsd, true)}` },
       };
     }
     case "enso": {
@@ -125,9 +134,9 @@ function buildCheck(n: number, at: number, deal: PreHarvestDeal, sim: CampaignSi
         reading: e
           ? { en: `Coastal El Niño ${e.value >= 0 ? "+" : ""}${e.value.toFixed(1)} °C, ${ensoCategory(e.value).en} (Niño 1+2, 3-month mean)`, es: `El Niño costero ${e.value >= 0 ? "+" : ""}${e.value.toFixed(1)} °C, ${ensoCategory(e.value).es} (Niño 1+2, media 3 meses)` }
           : { en: "No reading", es: "Sin lectura" },
-        forLoan: e && e.value >= 1
-          ? { en: "Warm coast: flowering and yield at risk", es: "Costa cálida: floración y rendimiento en riesgo" }
-          : { en: "No El Niño pressure on this harvest", es: "Sin presión de El Niño sobre esta cosecha" },
+        forLoan: e
+          ? (signalMoney("enso", sev(e.value, WT.ensoYellow, WT.ensoRed), deal, sim, frame) ?? { en: "No cost to the loan", es: "Sin costo para el préstamo" })
+          : { en: "No reading", es: "Sin lectura" },
       };
     }
   }

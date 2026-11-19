@@ -5,7 +5,7 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Bell, X } from "lucide-react";
+import { ArrowRight, Bell, CheckCircle2, ChevronDown, X } from "lucide-react";
 import { financialImpact, updateTitle } from "../../lib/pre-harvest/finance";
 import { formatDate, formatMonth, tb } from "../../lib/pre-harvest/i18n";
 import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
@@ -42,10 +42,6 @@ const KIND: Record<CheckSource | AlertLogEntry["panel"], Bilingual> = {
   takeout: L("Repayment", "Repago"),
 };
 
-type FeedItem =
-  | { kind: "check"; date: string; c: LiveCheck }
-  | { kind: "alert"; date: string; a: AlertLogEntry };
-
 export function UpdatesFeed({
   deal,
   sim,
@@ -67,81 +63,102 @@ export function UpdatesFeed({
   onAct: () => void;
 }) {
   const reduce = useReducedMotion();
-  const items: FeedItem[] = [
-    ...checks.map((c): FeedItem => ({ kind: "check", date: c.monthly ? c.dataDate.slice(0, 7) : c.dataDate, c })),
-    ...sim.alerts.filter((a) => a.date <= frame.date).slice(-4).map((a): FeedItem => ({ kind: "alert", date: a.date, a })),
-  ].sort((x, y) => y.date.localeCompare(x.date) || (x.kind === "alert" ? -1 : 1));
-  const groups = new Map<string, FeedItem[]>();
-  for (const it of items) (groups.get(it.date) ?? groups.set(it.date, []).get(it.date)!).push(it);
+  const [showChecks, setShowChecks] = useState(false);
+  // Cards only for what changed (TruMarket alerts); routine checks fold into one line.
+  const alerts = sim.alerts.filter((a) => a.date <= frame.date).slice(-4).reverse();
+  // Alerts with the same effect on the money share one card: the effect once, the alerts under it.
+  const groups: Array<{ money: string; list: AlertLogEntry[]; sev: "yellow" | "red"; act: boolean }> = [];
+  for (const a of alerts) {
+    const impact = financialImpact(deal, sim, a);
+    const money = [impact.headline, ...impact.details.slice(0, 1)].map((d) => tb(d, lang)).join(" · ");
+    const g = groups.find((x) => x.money === money);
+    const act = a.action !== "continue" && deal.status === "live";
+    if (g) {
+      g.list.push(a);
+      if (a.severity === "red") g.sev = "red";
+      g.act = g.act || act;
+    } else groups.push({ money, list: [a], sev: a.severity, act });
+  }
 
   return (
     <section className="rounded-xl border border-tm-border bg-tm-surface p-4 sm:p-5">
       <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <h3 className="inline-flex items-center gap-2 font-display text-base text-tm-black">
-            <Bell className="h-4 w-4" />
-            {tb(TX.title, lang)}
-            {running && (
-              <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-tm-text-light">
-                <LiveDot /> {tb(TX.checking, lang)}
-              </span>
-            )}
-          </h3>
-          <p className="text-xs text-tm-text-light">{tb(TX.sub, lang)}</p>
-        </div>
+        <h3 className="inline-flex items-center gap-2 font-display text-base text-tm-black">
+          {tb(TX.title, lang)}
+          {running && (
+            <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-tm-text-light">
+              <LiveDot /> {tb(TX.checking, lang)}
+            </span>
+          )}
+        </h3>
         <button type="button" onClick={onOpenAll} className="inline-flex items-center gap-1 text-xs font-medium text-tm-text-light hover:text-tm-black print:hidden">
           {tb(TX.all, lang)} <ArrowRight className="h-3.5 w-3.5" />
         </button>
       </div>
 
-      {items.length === 0 && <p className="text-sm text-tm-text-light">{tb(TX.none, lang)}</p>}
-      <div className="space-y-4">
-        {[...groups.entries()].map(([date, list]) => (
-          <div key={date}>
-            <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-tm-text-muted">{date.length === 7 ? formatMonth(date, lang) : formatDate(date, lang)}</p>
-            <ul className="space-y-2">
-              <AnimatePresence initial={false}>
-                {list.map((it) => {
-                  const sev = it.kind === "alert" ? it.a.severity : null;
-                  const border = sev === "red" ? "border-l-tm-danger" : sev === "yellow" ? "border-l-tm-accent" : "border-l-tm-border";
-                  const impact = it.kind === "alert" ? financialImpact(deal, sim, it.a) : null;
-                  const act = it.kind === "alert" && it.a.action !== "continue";
-                  return (
-                    <motion.li
-                      key={it.kind === "check" ? `c${it.c.id}` : key(it.a)}
-                      layout={!reduce}
-                      initial={reduce ? false : { opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className={`rounded-r-lg border-l-[3px] bg-tm-neutral-light py-2 pl-3 pr-3 text-sm ${border}`}
-                    >
-                      <p className="flex flex-wrap items-center gap-1.5 text-xs text-tm-text-muted">
-                        <span className="rounded bg-tm-surface px-1.5 py-0.5 font-semibold text-tm-black ring-1 ring-tm-border">
-                          {tb(KIND[it.kind === "check" ? it.c.source : it.a.panel], lang)}
-                        </span>
-                        {sev && (
-                          <span className={sev === "red" ? "font-semibold text-tm-danger-dark" : "font-semibold text-tm-accent-dark"}>{tb(sev === "red" ? TX.high : TX.watch, lang)}</span>
-                        )}
-                        {it.kind === "check" && <span>{tb(TX.checkedToday, lang)}</span>}
-                      </p>
-                      <p className="mt-0.5 text-tm-black">{it.kind === "check" ? tb(it.c.reading, lang) : tb(it.a.message, lang)}</p>
-                      <p className="text-tm-text-light">
-                        <b className="font-semibold text-tm-black">{tb(TX.forLoan, lang)}:</b>{" "}
-                        {it.kind === "check" ? tb(it.c.forLoan, lang) : `${tb(impact!.headline, lang)}${impact!.details.length ? ` · ${impact!.details.map((d) => tb(d, lang)).join(" · ")}` : ""}`}
-                      </p>
-                      {act && (
-                        <button type="button" onClick={onAct} className="mt-1.5 inline-flex items-center gap-1 rounded-md border border-tm-border bg-tm-surface px-2 py-1 text-xs font-semibold text-tm-black hover:border-tm-black print:hidden">
-                          {tb(TX.decide, lang)} <ArrowRight className="h-3 w-3" />
-                        </button>
-                      )}
-                    </motion.li>
-                  );
-                })}
-              </AnimatePresence>
+      {alerts.length === 0 && checks.length === 0 && <p className="text-sm text-tm-text-light">{tb(TX.none, lang)}</p>}
+      <ul className="space-y-2">
+        <AnimatePresence initial={false}>
+          {groups.map(({ money, list, sev, act }) => (
+            <motion.li
+              key={list.map(key).join("|")}
+              layout={!reduce}
+              initial={reduce ? false : { opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className={`rounded-r-lg border-l-[3px] bg-tm-neutral-light py-2 pl-3 pr-3 text-sm ${sev === "red" ? "border-l-tm-danger" : "border-l-tm-accent"}`}
+            >
+              {/* The money effect once; the TruMarket alerts behind it underneath. */}
+              <p className="font-medium text-tm-black">{money}</p>
+              <ul className="mt-1 space-y-0.5">
+                {list.map((a) => (
+                  <li key={key(a)} className="text-xs text-tm-text-light">
+                    <span className={a.severity === "red" ? "font-semibold text-tm-danger-dark" : "font-semibold text-tm-accent-dark"}>{tb(a.severity === "red" ? TX.high : TX.watch, lang)}</span> · {tb(KIND[a.panel], lang)} · {formatDate(a.date, lang)} · {tb(a.message, lang)}
+                  </li>
+                ))}
+              </ul>
+              {act && (
+                <button type="button" onClick={onAct} className="mt-1.5 inline-flex items-center gap-1 rounded-md border border-tm-border bg-tm-surface px-2 py-1 text-xs font-semibold text-tm-black hover:border-tm-black print:hidden">
+                  {tb(TX.decide, lang)} <ArrowRight className="h-3 w-3" />
+                </button>
+              )}
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </ul>
+
+      {checks.length > 0 && (
+        <div className="mt-2 rounded-lg border border-tm-border">
+          <button
+            type="button"
+            onClick={() => setShowChecks((v) => !v)}
+            aria-expanded={showChecks}
+            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-tm-text-light hover:text-tm-black"
+          >
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-tm-primary" />
+            <span className="flex-1">
+              {lang === "es"
+                ? `${checks.length} revisiones de rutina hoy (satélite, clima, precio, registros, comprador, El Niño)`
+                : `${checks.length} routine checks today (satellite, weather, price, registry, buyer, El Niño)`}
+            </span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${showChecks ? "rotate-180" : ""}`} />
+          </button>
+          {showChecks && (
+            <ul className="divide-y divide-tm-border border-t border-tm-border">
+              {[...checks].sort((x, y) => y.dataDate.localeCompare(x.dataDate)).map((c) => (
+                <li key={c.id} className="grid gap-x-3 px-3 py-1.5 text-xs sm:grid-cols-[6rem_1fr_1fr]">
+                  <span className="font-semibold text-tm-black">
+                    {tb(KIND[c.source], lang)}
+                    <span className="block font-normal text-tm-text-muted">{c.monthly ? formatMonth(c.dataDate, lang) : formatDate(c.dataDate, lang)}</span>
+                  </span>
+                  <span className="text-tm-text-light">{tb(c.reading, lang)}</span>
+                  <span className="text-tm-black">{tb(c.forLoan, lang)}</span>
+                </li>
+              ))}
             </ul>
-          </div>
-        ))}
-      </div>
+          )}
+        </div>
+      )}
     </section>
   );
 }

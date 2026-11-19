@@ -54,7 +54,7 @@ export function DecisionsPage({ rows, lang, onOpen }: { rows: FileRow[]; lang: L
                       {formatDate(d.dueDate, lang)}
                       <span className={d.daysLeft < 0 ? "text-tm-accent-dark" : ""}>
                         {" "}
-                        ({d.daysLeft < 0 ? `${Math.abs(d.daysLeft)} ${lang === "es" ? "días vencida" : "days overdue"}` : `${d.daysLeft} ${lang === "es" ? "días" : "days"}`})
+                        ({d.daysLeft === 0 ? (lang === "es" ? "vence hoy" : "due today") : d.daysLeft < 0 ? `${Math.abs(d.daysLeft)} ${lang === "es" ? (d.daysLeft === -1 ? "día vencida" : "días vencida") : d.daysLeft === -1 ? "day overdue" : "days overdue"}` : `${d.daysLeft} ${lang === "es" ? (d.daysLeft === 1 ? "día" : "días") : d.daysLeft === 1 ? "day" : "days"}`})
                       </span>
                     </p>
                     <p className="mt-0.5 text-lg font-semibold text-tm-black">

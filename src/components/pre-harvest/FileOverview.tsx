@@ -8,7 +8,6 @@ import { useState, type ReactNode } from "react";
 import {
   AlertTriangle,
   ArrowLeft,
-  Banknote,
   Check,
   CheckCircle2,
   Circle,
@@ -27,10 +26,11 @@ import {
 } from "../../lib/pre-harvest/credit-metrics";
 import { DECISION_TEXT, saveDecision, type DecisionEntry, type DecisionKind } from "../../lib/pre-harvest/decisions";
 import { formatDate, formatUsd, tb } from "../../lib/pre-harvest/i18n";
+import { moneyPosition } from "../../lib/pre-harvest/finance";
 import { expectedKg, toTime } from "../../lib/pre-harvest/monitoring";
 import { ringAreaHa } from "../../lib/pre-harvest/application-reader";
 import { type CampaignSimulation } from "../../lib/pre-harvest/timeline";
-import { fileStatus, FILE_STATUS_TEXT, mainTrigger } from "../../lib/pre-harvest/verdict";
+import { fileStatus, fileStatusLabel, mainTrigger } from "../../lib/pre-harvest/verdict";
 import type { Bilingual, Lang, PreHarvestAssessment, PreHarvestDeal, TimelineFrame, TrancheState } from "../../lib/pre-harvest/types";
 import { STATUS_STYLE } from "./file-style";
 import { LiveDot } from "./motion";
@@ -56,6 +56,7 @@ const TX = {
   recommended: L("Recommended", "Recomendado"),
   met: L("met", "cumplidas"),
   ofConditions: L("of", "de"),
+  conditionsTitle: L("Conditions to release", "Condiciones para liberar"),
   approve: L("Approve", "Aprobar"),
   hold: L("Hold", "Retener"),
   inspect: L("Request inspection", "Solicitar inspección"),
@@ -193,12 +194,16 @@ export function FileHeader({
         <ParcelImage ring={deal.parcel} badge={null} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-semibold ${style.pill}`}>
-              <span className="h-1.5 w-1.5 rounded-full" style={{ background: style.dot }} />
-              {tb(FILE_STATUS_TEXT[fs.status], lang)}
-            </span>
+            {/* While replaying an earlier week the verdict below is that week's; the status pill is only for the replay. */}
+            {!atEnd && (
+              <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-semibold ${style.pill}`}>
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: style.dot }} />
+                {tb(fileStatusLabel(fs.status, deal.status), lang)}
+              </span>
+            )}
             <span className="rounded-full bg-tm-neutral px-2.5 py-0.5 text-tm-text-light">{tb(deal.campaign, lang)}</span>
-            <span className="rounded-full bg-tm-neutral px-2.5 py-0.5 text-tm-text-light">{stage}</span>
+            {/* Applications and closed files: the status pill already says it. */}
+            {deal.status === "live" || !atEnd ? <span className="rounded-full bg-tm-neutral px-2.5 py-0.5 text-tm-text-light">{stage}</span> : null}
           </div>
           <h2 className="mt-2 font-display text-[26px] leading-tight text-tm-black sm:text-[32px]">{tb(deal.name, lang)}</h2>
           <p className="mt-0.5 flex flex-wrap items-center gap-x-1 text-sm text-tm-text-light">
@@ -244,17 +249,18 @@ function ConditionChip({ c, lang }: { c: Condition; lang: Lang }) {
   const Icon = c.status === "met" ? CheckCircle2 : c.status === "failed" ? XCircle : Circle;
   const tone =
     c.status === "failed" ? "border-tm-danger/40 bg-tm-danger/5" : c.status === "pending" ? "border-tm-border bg-tm-surface" : "border-tm-border bg-tm-neutral-light";
+  void tone;
   return (
-    <div className={`flex gap-2 rounded-lg border px-3 py-2 ${tone}`}>
+    <li className="flex max-w-md gap-1.5 text-sm">
       <Icon
         className={`mt-0.5 h-4 w-4 shrink-0 ${c.status === "met" ? "text-tm-primary" : c.status === "failed" ? "text-tm-danger-dark" : "text-tm-text-muted"}`}
         aria-label={c.status}
       />
-      <div className="min-w-0">
-        <p className={`text-sm font-medium leading-snug ${c.status === "failed" ? "text-tm-danger-dark" : "text-tm-black"}`}>{tb(c.label, lang)}</p>
-        {c.detail && <p className="text-xs leading-snug text-tm-text-light">{tb(c.detail, lang)}</p>}
-      </div>
-    </div>
+      <span className="min-w-0">
+        <span className={c.status === "failed" ? "font-medium text-tm-danger-dark" : "text-tm-black"}>{tb(c.label, lang)}</span>
+        {c.detail && <span className="text-xs text-tm-text-light"> · {tb(c.detail, lang)}</span>}
+      </span>
+    </li>
   );
 }
 
@@ -350,12 +356,15 @@ function DecisionActions({
         <div className="flex flex-wrap items-start gap-2">
           {/* Every option starts neutral: the analyst decides; TruMarket's suggestion is only tagged. */}
           {kinds.map((k) => (
-            <div key={k} className="flex flex-col items-center gap-1">
-              <button type="button" onClick={() => setPending(k)} className={`${btn} ${k === primary ? "border-tm-primary text-tm-primary-dark" : ""}`}>
-                {tb(label[k], lang)}
-              </button>
-              {k === primary && <span className="text-[10px] font-semibold uppercase tracking-wide text-tm-text-muted">{tb(TX.recommended, lang)}</span>}
-            </div>
+            <button
+              key={k}
+              type="button"
+              onClick={() => setPending(k)}
+              className={k === primary ? "inline-flex items-center gap-2 rounded-lg border border-tm-black bg-tm-black px-3 py-1.5 text-sm font-semibold text-white hover:opacity-90" : btn}
+            >
+              {tb(label[k], lang)}
+              {k === primary && <span className="rounded bg-white/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide">{tb(TX.recommended, lang)}</span>}
+            </button>
           ))}
         </div>
       )}
@@ -436,7 +445,10 @@ export function DecisionCard({
 
   const { risks } = keyRisksAndMitigants(current);
   const rec: Bilingual = veto
-    ? (sim.origination.vetoReasons[0] ?? fs.action)
+    ? {
+        en: "Decline: no money is lent. If the grower disputes the finding, request a field inspection before reconsidering.",
+        es: "Rechazar: no se presta dinero. Si el productor objeta el hallazgo, solicitar una inspección de campo antes de reconsiderar.",
+      }
     : isApplication
       ? {
           en: `${RECOMMENDATION_TEXT[recommendationFor(sim.origination.tier as Exclude<typeof sim.origination.tier, "VETO">)].en}. ${met} of ${conditions.length} conditions met${risks[0] ? `; main risk: ${risks[0].label.en.toLowerCase()} (${risks[0].value.en})` : ""}.`,
@@ -449,22 +461,45 @@ export function DecisionCard({
 
   const tone = veto || failed ? "border-tm-danger/40" : fs.status === "watch" || fs.status === "followup" ? "border-tm-accent/50" : "border-tm-primary/40";
 
+  // The decision in money: what moves, and what it does to exposure and expected loss.
+  const mp = moneyPosition(deal, sim, frame);
+  const el = (outUsd: number) => Math.round(outUsd * (mp.pdPct / 100) * (mp.lgdPct / 100));
+  const fmt = (n: number) => formatUsd(n, lang);
+  const money: Bilingual | null = veto
+    ? {
+        en: `Declining moves no money. Approving would put ${fmt(deal.envelopeUsd)} out over ${deal.tenorDays} days, ${fmt(frame.tranches[0].amountUsd)} at signing.`,
+        es: `Rechazar no mueve dinero. Aprobar pondría ${fmt(deal.envelopeUsd)} durante ${deal.tenorDays} días, ${fmt(frame.tranches[0].amountUsd)} a la firma.`,
+      }
+    : isApplication
+      ? {
+          en: `Approving puts ${fmt(frame.tranches[0].amountUsd)} out at signing and ${fmt(deal.envelopeUsd)} over the campaign; ${fmt(mp.amountDueUsd)} comes back in ${deal.tenorDays} days. Expected loss on the full line: ${fmt(el(deal.envelopeUsd))}.`,
+          es: `Aprobar desembolsa ${fmt(frame.tranches[0].amountUsd)} a la firma y ${fmt(deal.envelopeUsd)} en la campaña; vuelven ${fmt(mp.amountDueUsd)} en ${deal.tenorDays} días. Pérdida esperada sobre la línea: ${fmt(el(deal.envelopeUsd))}.`,
+        }
+      : tranche
+        ? {
+            en: `Releasing takes what is out from ${fmt(mp.exposureUsd)} to ${fmt(mp.exposureUsd + tranche.amountUsd)} and expected loss from ${fmt(el(mp.exposureUsd))} to ${fmt(el(mp.exposureUsd + tranche.amountUsd))}. Holding keeps ${fmt(tranche.amountUsd)} with the bank.`,
+            es: `Liberar lleva lo desembolsado de ${fmt(mp.exposureUsd)} a ${fmt(mp.exposureUsd + tranche.amountUsd)} y la pérdida esperada de ${fmt(el(mp.exposureUsd))} a ${fmt(el(mp.exposureUsd + tranche.amountUsd))}. Retener mantiene ${fmt(tranche.amountUsd)} en el banco.`,
+          }
+        : null;
+
   return (
     <section id="decision-card" className={`scroll-mt-4 rounded-xl border-2 bg-tm-surface p-4 shadow-tm-sm sm:p-5 ${tone}`}>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-tm-neutral">
-            <Banknote className="h-5 w-5 text-tm-black" />
-          </div>
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wide text-tm-text-muted">
               {tb(TX.decisionNeeded, lang)}
               {tranche && !veto && ` · ${tb(TX.due, lang)} ${formatDate(tranche.dueDate, lang)}`}
-              {conditions.length > 0 && !veto && (
-                <span className={failed ? "text-tm-danger-dark" : met < conditions.length ? "text-tm-accent-dark" : "text-tm-primary-dark"}>
-                  {` · ${met} ${tb(TX.ofConditions, lang)} ${conditions.length} ${tb(TX.met, lang)}`}
+              {tranche && !veto && tranche.dueDate < frame.date && (
+                <span className="text-tm-danger-dark">
+                  {" · "}
+                  {(() => {
+                    const n = Math.round((Date.parse(frame.date) - Date.parse(tranche.dueDate)) / 86_400_000);
+                    return lang === "es" ? `${n} ${n === 1 ? "día" : "días"} vencida` : `${n} ${n === 1 ? "day" : "days"} overdue`;
+                  })()}
                 </span>
               )}
+
             </p>
             <h3 className="text-lg font-semibold text-tm-black sm:text-xl">{title}</h3>
           </div>
@@ -494,17 +529,27 @@ export function DecisionCard({
           </span>
         )}
       </div>
-      <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        {conditions.map((c, i) => (
-          <ConditionChip key={i} c={c} lang={lang} />
-        ))}
+      {/* What the decision does to the money, before the conditions behind it. */}
+      {money && <p className="mt-3 text-[15px] leading-snug text-tm-black">{tb(money, lang)}</p>}
+      <div className="mt-3 border-t border-tm-border pt-2.5">
+        <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-tm-text-muted">
+          {veto ? (lang === "es" ? "Motivo" : "Reason") : `${tb(TX.conditionsTitle, lang)} · ${met}/${conditions.length}`}
+        </p>
+        <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+          {conditions.map((c, i) => (
+            <ConditionChip key={i} c={c} lang={lang} />
+          ))}
+        </ul>
       </div>
-      <p className="mt-3 flex gap-2 rounded-lg bg-tm-neutral-light px-3 py-2 text-sm text-tm-black">
-        <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-tm-text-light" />
-        <span>
-          <b>{tb(TX.recommends, lang)}:</b> {tb(rec, lang)}
-        </span>
-      </p>
+      {/* A red condition already says why; the line is only for files where nothing failed. */}
+      {failed === 0 && (
+        <p className="mt-3 flex gap-2 rounded-lg bg-tm-neutral-light px-3 py-2 text-sm text-tm-black">
+          <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-tm-text-light" />
+          <span>
+            <b>{tb(TX.recommends, lang)}:</b> {tb(rec, lang)}
+          </span>
+        </p>
+      )}
     </section>
   );
 }

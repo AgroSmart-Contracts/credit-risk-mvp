@@ -22,7 +22,6 @@ import { ReplayBar } from "./ReplayBar";
 import { ResearchTimeline } from "./ResearchTimeline";
 import { DecisionCard, DecisionLog, FileHeader } from "./FileOverview";
 import { MoneyOverview } from "./MoneyOverview";
-import { CreditTimeline } from "./CreditTimeline";
 import { UpdateToasts, UpdatesFeed } from "./TruMarketUpdates";
 import { RiskDetails } from "./RiskDetails";
 import { useLiveChecks } from "./live";
@@ -386,7 +385,6 @@ function FileWorkspace({
 
       <MoneyOverview deal={deal} sim={sim} frame={frame} current={current} lang={lang} onOpenRisk={() => goTab("monitoring")} />
       <DecisionCard {...panelProps} atEnd={atEnd} decisions={decisions} onDecisions={setDecisions} onInvestigate={investigate} />
-      <CreditTimeline deal={deal} sim={sim} frame={frame} updates={updates} onInvestigate={investigate} lang={lang} />
       <UpdatesFeed deal={deal} sim={sim} frame={frame} checks={checks} running={checking} lang={lang} onOpenAll={investigate} onAct={() => document.getElementById("decision-card")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" })} />
 
       {/* One line; swipes sideways (no scrollbar) when it does not fit. overflow-y stays hidden so the underline never makes the row scroll. */}

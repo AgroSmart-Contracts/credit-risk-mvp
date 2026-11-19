@@ -1,4 +1,3 @@
-import { CheckCircle2 } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 import {
   Area,
@@ -17,7 +16,9 @@ import { addDays, toTime } from "../../lib/pre-harvest/monitoring";
 import { formatDate, formatMonth, formatUsd, t, tb } from "../../lib/pre-harvest/i18n";
 import type { Bilingual, Lang, PanelId, PreHarvestDeal, TimelineFrame } from "../../lib/pre-harvest/types";
 import type { CampaignSimulation } from "../../lib/pre-harvest/timeline";
-import { ActionChip, Card, SectionTitle, SeverityChip } from "./ui";
+import { ActionChip, DetailDialog, SectionTitle, SeverityChip } from "./ui";
+
+const capitalFirst = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 import { SatellitePanel } from "./SatellitePanel";
 import { panelConclusions, type PanelConclusion } from "../../lib/pre-harvest/verdict";
 import { cropOutlook, panelMoneyReading, priceOutlook } from "../../lib/pre-harvest/finance";
@@ -117,6 +118,7 @@ function PanelShell({
   conclusion,
   height = CHART_HEIGHT,
   forLoan,
+  more,
 }: {
   title: string;
   subtitle: string;
@@ -131,52 +133,44 @@ function PanelShell({
   height?: number;
   /** What this area means for the loan, in money. */
   forLoan?: Bilingual;
+  /** More evidence behind the reading (e.g. the field images), opened on demand. */
+  more?: ReactNode;
 }) {
   const state = frame.panels[panel];
-  return (
-    <div id={`panel-${panel}`} className="scroll-mt-20">
-    <Card>
-      <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <h4 className="font-display text-base text-tm-black">{title}</h4>
-          <p className="text-xs text-tm-text-light">{subtitle}</p>
-        </div>
-        <SeverityChip severity={state.severity} lang={lang} />
-      </div>
-      {/* Conclusion first: what the panel says, and what the bank should do about it. */}
-      <div className="mb-3 flex flex-wrap items-start justify-between gap-3 rounded-lg bg-tm-neutral-light px-4 py-3">
-        <div className="min-w-0">
-          <p className="font-display text-lg leading-snug text-tm-black">{tb(conclusion.headline, lang)}</p>
-          <p className="mt-0.5 text-xs text-tm-text-light">{tb(conclusion.detail, lang)}</p>
-          {forLoan && (
-            <p className="mt-1.5 text-sm text-tm-black">
-              <b className="font-semibold">{lang === "es" ? "Para el préstamo" : "For the loan"}:</b> {tb(forLoan, lang)}
-            </p>
-          )}
-        </div>
-        <ActionChip action={conclusion.action} lang={lang} />
-      </div>
+  const sevBorder = state.severity === "red" ? "border-l-tm-danger" : state.severity === "yellow" ? "border-l-tm-accent" : "border-l-tm-primary";
+  const chart = (
+    <>
       {extra}
       {legend && <Legend items={legend} />}
       <div style={{ height }}>{children}</div>
-      <p className="mt-1 text-[11px] text-tm-text-muted">{source}</p>
-      <ul className="mt-2 space-y-1">
-        {state.triggers.length === 0 ? (
-          <li className="text-xs text-tm-text-light">{t("noAlerts", lang)}</li>
-        ) : (
-          state.triggers.map((tr) => (
-            <li key={tr.metric} className="flex items-start gap-2 text-xs">
-              <span
-                className="mt-1 h-2 w-2 shrink-0 rounded-full"
-                style={{ background: tr.severity === "red" ? C.red : C.yellow }}
-              />
-              <span className="text-tm-black">{tb(tr.message, lang)}</span>
-            </li>
-          ))
-        )}
-      </ul>
-      <p className="mt-2 text-[11px] text-tm-text-muted">{lang === "es" ? "Lectura de TruMarket" : "TruMarket reading"} · {formatDate(frame.date, lang)}</p>
-    </Card>
+      <p className="mt-1 text-[11px] text-tm-text-muted">
+        {source} · {lang === "es" ? "lectura de TruMarket" : "TruMarket reading"} {formatDate(frame.date, lang)}
+      </p>
+    </>
+  );
+  return (
+    <div id={`panel-${panel}`} className="scroll-mt-20">
+      {/* The money reading leads; what TruMarket saw is the supporting line; the chart opens on demand. */}
+      <div className={`rounded-xl border border-l-4 border-tm-border bg-tm-surface p-4 shadow-tm-sm ${sevBorder}`}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-tm-text-muted">{title.replace(/^\d+ · /, "")}</p>
+          <span className="flex items-center gap-2">
+            <SeverityChip severity={state.severity} lang={lang} />
+            <ActionChip action={conclusion.action} lang={lang} />
+          </span>
+        </div>
+        {forLoan && <p className="mt-1.5 text-[15px] font-medium leading-snug text-tm-black">{capitalFirst(tb(forLoan, lang))}</p>}
+        <p className="mt-1 text-xs text-tm-text-light">
+          <span className="font-medium text-tm-black">{tb(conclusion.headline, lang)}</span> · {tb(conclusion.detail, lang)}
+        </p>
+        <div className="mt-2.5 flex flex-wrap gap-2 print:hidden">
+          <DetailDialog title={title.replace(/^\d+ · /, "")} subtitle={subtitle} lang={lang}>
+            {chart}
+          </DetailDialog>
+          {more}
+        </div>
+        <div className="mt-3 hidden print:block">{chart}</div>
+      </div>
     </div>
   );
 }
@@ -259,6 +253,11 @@ function CropPanel({
         ...(outlook.length ? [{ label: lang === "es" ? "Trayectoria esperada a cosecha" : "Expected path to harvest", color: C.ink, kind: "dashed" as const }] : []),
       ]}
       forLoan={panelMoneyReading("crop", deal, sim, frame)}
+      more={
+        <DetailDialog label={lang === "es" ? "Ver imágenes del campo" : "View field images"} title={lang === "es" ? "Imágenes satelitales del predio" : "Parcel satellite images"} lang={lang}>
+          <SatellitePanel cutoff={frame.date} parcelId={deal.parcelId} lang={lang} />
+        </DetailDialog>
+      }
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ top: 12, right: 8, left: -18, bottom: 0 }}>
@@ -695,112 +694,24 @@ function TakeoutPanel({
   );
 }
 
-const PANEL_TITLE: Record<PanelId | "satellite", Bilingual> = {
-  satellite: { en: "Satellite", es: "Satélite" },
-  crop: { en: "Crop", es: "Cultivo" },
-  weather: { en: "Weather", es: "Clima" },
-  market: { en: "Market", es: "Mercado" },
-  takeout: { en: "Repayment", es: "Repago" },
-};
-const SEV_WORD: Record<"green" | "yellow" | "red", Bilingual> = {
-  green: { en: "Normal", es: "Normal" },
-  yellow: { en: "Watch", es: "Vigilar" },
-  red: { en: "High risk", es: "Riesgo alto" },
-};
-
-/** A Normal panel folded to its one-line conclusion while the "Watch and above" filter is on. */
-function FoldedPanel({ id, title, conclusion, forLoan, lang, onOpen }: { id: string; title: Bilingual; conclusion: PanelConclusion; forLoan?: Bilingual; lang: Lang; onOpen: () => void }) {
-  return (
-    <div id={`panel-${id}`} className="scroll-mt-20">
-      <button type="button" onClick={onOpen} className="flex w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-tm-border bg-tm-surface px-4 py-3 text-left text-sm hover:border-tm-text-muted">
-        <CheckCircle2 className="h-4 w-4 shrink-0 text-tm-primary" />
-        <span className="font-semibold text-tm-black">{tb(title, lang)}</span>
-        <span className="text-tm-text-light">{tb(conclusion.headline, lang)}</span>
-        {forLoan && <span className="hidden text-tm-text-muted lg:inline">· {tb(forLoan, lang)}</span>}
-        <span className="ml-auto text-xs font-medium text-tm-text-light">{lang === "es" ? "Mostrar" : "Show"}</span>
-      </button>
-    </div>
-  );
-}
-
 export function MonitoringPanels(props: { sim: CampaignSimulation; deal: PreHarvestDeal; frame: TimelineFrame; lang: Lang; ndviSeries?: NdviPoint[] }) {
   const { sim, deal, frame, lang } = props;
   const conclusions = panelConclusions(sim, frame, deal);
-  const sev = (id: PanelId | "satellite") => frame.panels[id === "satellite" ? "crop" : id].severity;
-  const ids: Array<PanelId | "satellite"> = ["satellite", "crop", "weather", "market", "takeout"];
-  const anyOff = ids.some((id) => sev(id) !== "green");
-  // On by default whenever something needs attention: Normal panels fold to one line.
-  const [onlyWatch, setOnlyWatch] = useState(anyOff);
-  const [opened, setOpened] = useState<Set<string>>(() => new Set());
-  const folded = (id: PanelId | "satellite") => onlyWatch && sev(id) === "green" && !opened.has(id);
-  const open = (id: string) => setOpened((s0) => new Set(s0).add(id));
-  const jump = (id: string) => {
-    open(id);
-    window.setTimeout(() => document.getElementById(`panel-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
-  };
   return (
     <div>
-      <SectionTitle title={t("monitoring", lang)} hint={`${t("monitoringHint", lang)} ${t("thresholdPolicy", lang)}.`} />
-      <div className="sticky top-0 z-[500] -mx-1 mb-4 flex flex-wrap items-center gap-2 bg-tm-neutral-light/95 px-1 py-2 backdrop-blur print:hidden">
-        {ids.map((id) => {
-          const s0 = sev(id);
-          return (
-            <button
-              key={id}
-              type="button"
-              onClick={() => jump(id)}
-              className={`inline-flex items-center gap-1.5 rounded-full border bg-tm-surface px-3 py-1 text-xs font-semibold transition-colors hover:border-tm-black ${
-                s0 === "red" ? "border-tm-danger/50 text-tm-danger-dark" : s0 === "yellow" ? "border-tm-accent/60 text-tm-accent-dark" : "border-tm-border text-tm-black"
-              }`}
-            >
-              {s0 === "green" ? <CheckCircle2 className="h-3.5 w-3.5 text-tm-primary" /> : <span className={`h-2 w-2 rounded-full ${s0 === "red" ? "bg-tm-danger" : "bg-tm-accent"}`} />}
-              {tb(PANEL_TITLE[id], lang)}
-              {s0 !== "green" && <span className="font-normal">· {tb(SEV_WORD[s0], lang)}</span>}
-            </button>
-          );
-        })}
-        {anyOff && (
-          <span className="ml-auto inline-flex items-center gap-1 rounded-full border border-tm-border bg-tm-surface py-0.5 pl-3 pr-1 text-xs">
-            <span className={onlyWatch ? "font-semibold text-tm-black" : "text-tm-text-light"}>{lang === "es" ? "Solo Vigilar o más" : "Only Watch and above"}</span>
-            <button type="button" onClick={() => setOnlyWatch(!onlyWatch)} className="rounded-full px-2 py-0.5 font-medium text-tm-text-light hover:bg-tm-neutral hover:text-tm-black">
-              {onlyWatch ? (lang === "es" ? "Mostrar todo" : "Show all") : lang === "es" ? "Filtrar" : "Filter"}
-            </button>
-          </span>
-        )}
-      </div>
-      <p className="mb-3 text-[11px] text-tm-text-muted">
-        {lang === "es"
-          ? "Color = nivel (Normal · Vigilar · Riesgo alto) · Línea continua = observado · Discontinua = esperado · Banda = rango"
-          : "Colour = level (Normal · Watch · High risk) · Solid line = observed · Dashed = expected · Band = range"}
-      </p>
-      <div className="space-y-5">
-        {folded("satellite") ? (
-          <FoldedPanel id="satellite" title={PANEL_TITLE.satellite} conclusion={conclusions.crop} lang={lang} onOpen={() => open("satellite")} />
-        ) : (
-          <div id="panel-satellite" className="scroll-mt-20">
-            <SatellitePanel cutoff={frame.date} parcelId={deal.parcelId} lang={lang} />
-          </div>
-        )}
-        {folded("crop") ? (
-          <FoldedPanel id="crop" title={PANEL_TITLE.crop} conclusion={conclusions.crop} forLoan={panelMoneyReading("crop", deal, sim, frame)} lang={lang} onOpen={() => open("crop")} />
-        ) : (
-          <CropPanel {...props} conclusion={conclusions.crop} />
-        )}
-        {folded("weather") ? (
-          <FoldedPanel id="weather" title={PANEL_TITLE.weather} conclusion={conclusions.weather} forLoan={panelMoneyReading("weather", deal, sim, frame)} lang={lang} onOpen={() => open("weather")} />
-        ) : (
-          <WeatherPanel {...props} conclusion={conclusions.weather} />
-        )}
-        {folded("market") ? (
-          <FoldedPanel id="market" title={PANEL_TITLE.market} conclusion={conclusions.market} forLoan={panelMoneyReading("market", deal, sim, frame)} lang={lang} onOpen={() => open("market")} />
-        ) : (
-          <MarketPanel {...props} conclusion={conclusions.market} />
-        )}
-        {folded("takeout") ? (
-          <FoldedPanel id="takeout" title={PANEL_TITLE.takeout} conclusion={conclusions.takeout} forLoan={panelMoneyReading("takeout", deal, sim, frame)} lang={lang} onOpen={() => open("takeout")} />
-        ) : (
-          <TakeoutPanel {...props} conclusion={conclusions.takeout} />
-        )}
+      <SectionTitle
+        title={t("monitoring", lang)}
+        hint={
+          lang === "es"
+            ? `Cada tarjeta dice primero qué significa para el préstamo; el gráfico y los datos se abren aparte. Normal · Vigilar (alerta y re-score) · Riesgo alto (detener desembolsos). ${t("thresholdPolicy", lang)}.`
+            : `Each card says first what it means for the loan; the chart and data open separately. Normal · Watch (alert and re-score) · High risk (stop disbursement). ${t("thresholdPolicy", lang)}.`
+        }
+      />
+      <div className="grid gap-3 lg:grid-cols-2">
+        <CropPanel {...props} conclusion={conclusions.crop} />
+        <WeatherPanel {...props} conclusion={conclusions.weather} />
+        <MarketPanel {...props} conclusion={conclusions.market} />
+        <TakeoutPanel {...props} conclusion={conclusions.takeout} />
       </div>
     </div>
   );

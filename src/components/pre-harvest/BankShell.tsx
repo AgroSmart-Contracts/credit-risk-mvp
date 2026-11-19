@@ -169,7 +169,7 @@ export function BankShell({
   );
 
   return (
-    <div className="flex min-h-screen bg-tm-neutral-light">
+    <div className="bank-ui flex min-h-screen bg-tm-neutral-light">
       <Sidebar
         product={lang === "es" ? "Crédito agro · pre-cosecha" : "Agro credit · pre-harvest"}
         active={active}
