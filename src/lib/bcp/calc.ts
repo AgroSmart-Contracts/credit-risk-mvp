@@ -14,7 +14,8 @@ export const L = (es: string, en: string): Tx => ({ es, en });
 
 export const usd = (n: number) => `USD ${Math.round(n).toLocaleString("en-US")}`;
 export const cov = (n: number) => `${n.toFixed(2)}x`;
-export const signedCov = (n: number) => `${n > 0 ? "+" : n < 0 ? "-" : ""}${Math.abs(n).toFixed(2)}x`;
+/** Signed coverage change; a true minus sign (U+2212) keeps figures aligned. */
+export const signedCov = (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : ""}${Math.abs(n).toFixed(2)}x`;
 export const pct = (n: number) => `${Math.round(n)}%`;
 export const range = (lo: number, hi: number, lang: Lang) => `${cov(lo)} ${lang === "es" ? "a" : "to"} ${cov(hi)}`;
 
@@ -60,12 +61,15 @@ export const toDisburse = (l: Loan) => l.lineUsd - l.disbursedUsd - l.frozenUsd;
 // Half-up rounding to two decimals (1.75 × 0.7 = 1.225 → 1.23), robust to binary float error.
 export const shocked = (c: number, shock: number) => Math.round(c * (1 + shock) * 100 + 1e-6) / 100;
 
-export function scenarios(l: Loan): { label: Tx; coverage: number }[] {
+/** The two standard stress cases on a coverage figure (loan today, or an application). */
+export function stressCases(c: number): { label: Tx; coverage: number }[] {
   return [
-    { label: L("Si el precio cae 20%", "If the price falls 20%"), coverage: shocked(l.coverageToday, -0.2) },
-    { label: L("Si el volumen cae 30%", "If the volume falls 30%"), coverage: shocked(l.coverageToday, -0.3) },
+    { label: L("Si el precio cae 20%", "If the price falls 20%"), coverage: shocked(c, -0.2) },
+    { label: L("Si el volumen cae 30%", "If the volume falls 30%"), coverage: shocked(c, -0.3) },
   ];
 }
+
+export const scenarios = (l: Loan) => stressCases(l.coverageToday);
 
 export const DRIVERS: Driver[] = ["volumen", "precio", "calidad", "cobranza", "prestatario"];
 export const DRIVER_TEXT: Record<Driver, Tx> = {
