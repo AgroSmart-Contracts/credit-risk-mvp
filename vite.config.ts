@@ -46,6 +46,25 @@ function analyzeDocumentsApiPlugin(): Plugin {
       )
 
       server.middlewares.use(
+        '/api/pre-harvest-data',
+        (req, res, next) => {
+          if (req.method !== 'GET') {
+            next()
+            return
+          }
+
+          void import('./server/pre-harvest/live-data')
+            .then(({ handlePreHarvestData }) =>
+              handlePreHarvestData(
+                req as IncomingMessage,
+                res as ServerResponse,
+              ),
+            )
+            .catch(next)
+        },
+      )
+
+      server.middlewares.use(
         '/api/market-intel-rate',
         (req, res, next) => {
           if (req.method !== 'POST') {
