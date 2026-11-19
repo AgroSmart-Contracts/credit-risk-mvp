@@ -3,7 +3,7 @@ import { LIVE_0188_2627 } from "../../data/pre-harvest/deals";
 import { CLOSED_VIR_0311_2324 as VIRU } from "../../data/pre-harvest/deal-viru-0311";
 import { monitoringDataFor } from "../../data/pre-harvest";
 import { simulateFile } from "../../data/pre-harvest/files";
-import { cropOutlook, exposureCurve, financialImpact, moneyPosition, panelMoneyReading } from "./finance";
+import { bankView, cropOutlook, exposureCurve, financialImpact, moneyPosition, panelMoneyReading, signalMoney } from "./finance";
 
 describe("money position", () => {
   const sim = simulateFile(VIRU);
@@ -87,5 +87,35 @@ describe("expected path to harvest", () => {
       expect(p.low).toBeLessThanOrEqual(p.expected);
       expect(p.high).toBeGreaterThanOrEqual(p.expected);
     }
+  });
+});
+
+describe("the bank's bottom line", () => {
+  it("a repaid loan has nothing at stake and reports the interest earned", () => {
+    const sim = simulateFile(VIRU);
+    const v = bankView(VIRU, sim, sim.frames.at(-1)!);
+    expect(v.mood).toBe("settled");
+    expect(v.headline.en).toMatch(/interest/);
+    expect(v.badCase).toBeNull();
+  });
+
+  it("a live loan states what is out, what is due and the cushion in USD, and says why when it is not on track", () => {
+    const sim = simulateFile(LIVE_0188_2627);
+    const frame = sim.frames.at(-1)!;
+    const v = bankView(LIVE_0188_2627, sim, frame);
+    const m = moneyPosition(LIVE_0188_2627, sim, frame);
+    expect(v.cushionUsd).toBe(m.expectedRepaymentUsd! - m.amountDueUsd);
+    expect(v.headline.en).toContain("out");
+    if (v.mood !== "comfortable") expect(v.headline.en).toMatch(/^(Weather and water|Crop health|Market|Repayment|Thin cover)[^.]*\./i);
+    // The bad case can only be worse than the expected case.
+    if (v.badCase) expect(v.badCase.cushionUsd).toBeLessThanOrEqual(v.cushionUsd!);
+  });
+
+  it("the price line names the break-even price, consistent with the coverage", () => {
+    const sim = simulateFile(LIVE_0188_2627);
+    const frame = sim.frames.at(-1)!;
+    const line = signalMoney("price", "green", LIVE_0188_2627, sim, frame);
+    const be = frame.expectedHarvestPrice! / moneyPosition(LIVE_0188_2627, sim, frame).coverage!;
+    expect(line?.en).toContain(`USD ${be.toFixed(2)}/kg`);
   });
 });

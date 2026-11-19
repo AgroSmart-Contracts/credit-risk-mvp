@@ -1,364 +1,144 @@
-import { lazy, Suspense, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { deals as sampleDeals } from "./data/deals";
-import {
-  platformCounterparties,
-  platformDealsBlocked,
-} from "./data/platform-deals";
-import {
-  prescoredByDealId,
-  prescoredByMongoId,
-  prescoredPlatformDeals,
-} from "./data/prescored-deals";
-import { buildRiskAssessment } from "./lib/assessment";
-import { createBlankDeal } from "./lib/deal-builder";
-import { recommendFinancingTerms } from "./lib/financing";
-import type { Deal, FinancingRecommendation, RiskAssessment, Step } from "./types";
-import type { TransactionStructureInput } from "./lib/transaction-structure/types";
+/**
+ * App shell: one persistent sidebar for the whole app, and a content area that
+ * swaps sections. The bank's pre-harvest workspace and the internal TruMarket
+ * tools are separate chunks loaded on demand (and prefetched when the browser
+ * is idle), so switching never tears down the layout or reloads the page.
+ */
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { Briefcase, Cherry, FileSearch } from "lucide-react";
+import { Sidebar } from "./components/Sidebar";
+import { VISIBLE_APP_TABS } from "./components/app-tabs";
+import { useAnswers } from "./components/bcp/answers";
+import { BCP_VIEWS, NAV_ACTIVE, bcpNavItems, bcpUrl, readBcpUrl, readLang, type BcpView } from "./components/bcp/nav";
+import { PORTFOLIO } from "./data/bcp/dataset";
+import { date } from "./lib/bcp/calc";
+import type { Lang } from "./lib/bcp/types";
 import type { AppView } from "./types/platform";
-import { AppNav, AppSidebar } from "./components/AppNav";
-import { TopBar } from "./components/Sidebar";
-import { HIDDEN_APP_TABS } from "./components/app-tabs";
-import { StepIndicator } from "./components/StepIndicator";
-import { DealSelector } from "./components/DealSelector";
-import { DocumentIngestion } from "./components/DocumentIngestion";
-import { RiskDashboard } from "./components/RiskDashboard";
-import { FinancingRecommendationPanel } from "./components/FinancingRecommendation";
-import { CounterpartyScoresTab } from "./components/CounterpartyScoresTab";
-import { PrescoredDealsTab } from "./components/PrescoredDealsTab";
-import { DealMissingFieldsTab } from "./components/DealMissingFieldsTab";
-import { RouteRiskTableTab } from "./components/RouteRiskTableTab";
-import { BlueberryCramAnalysisTab } from "./components/BlueberryCramAnalysisTab";
 
-// Pre-harvest pulls in Recharts and the monitoring fixtures; load it only when opened.
-const PreHarvestView = lazy(() =>
-  import("./components/pre-harvest/PreHarvestView").then((m) => ({ default: m.PreHarvestView })),
-);
+const loadBcp = () => import("./components/bcp/Workspace");
+const loadInternal = () => import("./InternalApp");
+const BcpWorkspace = lazy(() => loadBcp().then((m) => ({ default: m.BcpWorkspace })));
+const InternalApp = lazy(loadInternal);
 
-const VIEW_TITLE: Record<AppView, { title: string; sub: string }> = {
-  assess: { title: "Credit Risk Assessment", sub: "Score a trade-finance deal from its documents" },
-  "pre-harvest": { title: "Pre-harvest loans", sub: "Crop-stage financing · satellite, weather and market monitoring" },
-  counterparties: { title: "Counterparty scores", sub: "Scored platform counterparties" },
-  platform: { title: "Platform deals", sub: "Pre-scored TruMarket deals" },
-  missing: { title: "Missing fields", sub: "Data gaps per deal" },
-  "route-table": { title: "Route risk", sub: "Origin–destination risk table" },
-  "blueberry-cram": { title: "Blueberry CRAM", sub: "Blueberry credit risk analysis" },
-};
+type Section = "bcp" | "internal";
+
+const INTERNAL_ICON: Partial<Record<AppView, typeof FileSearch>> = { assess: FileSearch, platform: Briefcase, "blueberry-cram": Cherry };
+
+function ContentSkeleton() {
+  return (
+    <div className="min-w-0 flex-1" aria-busy="true">
+      <div className="h-[73px] border-b border-tm-border bg-tm-surface" />
+      <div className="mx-auto max-w-6xl space-y-5 px-4 py-8 sm:px-8">
+        <div className="h-10 w-1/3 rounded-lg bg-tm-border/60" />
+        <div className="h-40 rounded-xl bg-tm-border/50" />
+        <div className="h-64 rounded-xl bg-tm-border/40" />
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  // `#pre-harvest` opens the pre-harvest module directly (shareable link).
-  const [view, setViewState] = useState<AppView>(() =>
-    typeof window !== "undefined" && window.location.hash === "#pre-harvest" ? "pre-harvest" : "assess",
+  const [section, setSection] = useState<Section>(() => (typeof window !== "undefined" && window.location.hash === "#pre-harvest" ? "bcp" : "internal"));
+  const [internalView, setInternalView] = useState<AppView>("assess");
+  const [bcp, setBcp] = useState<{ view: BcpView; id: string | null }>(readBcpUrl);
+  const [lang, setLang] = useState<Lang>(readLang);
+  const [answers, setAnswer] = useAnswers();
+  const [platformCount, setPlatformCount] = useState<number | undefined>(undefined);
+
+  // Warm both sections once the first screen is up, so the first switch is instant.
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (f: () => void) => number };
+    const idle = (cb: () => void) => (w.requestIdleCallback ? w.requestIdleCallback(cb) : setTimeout(cb, 1500));
+    // The internal tools are heavy (they score every platform deal when loaded), so they are
+    // fetched when the pointer reaches their menu item, not in the background.
+    idle(() => {
+      void loadBcp().then(() => import("./components/bcp/pages")).then((m) => m.prefetchBcpPages());
+    });
+  }, []);
+
+  // One history entry per page, so the browser's Back and Forward move between pages.
+  const goBcp = useCallback(
+    (view: BcpView, id: string | null = null) => {
+      setSection("bcp");
+      setBcp({ view, id });
+      const url = bcpUrl(view, id, lang);
+      // Never stack two entries for the same page (e.g. a row and its button both handling one click).
+      if (url !== `${window.location.pathname}${window.location.search}${window.location.hash}`) window.history.pushState({ section: "bcp", view, id }, "", url);
+    },
+    [lang],
   );
-  const setView = (next: AppView) => {
-    setViewState(next);
-    try {
-      const hash = next === "pre-harvest" ? "#pre-harvest" : "";
-      // Pre-harvest view state lives in the query string; drop it when leaving.
-      const search = next === "pre-harvest" ? window.location.search : "";
-      const url = `${window.location.pathname}${search}${hash}`;
-      if (url !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
-        window.history.replaceState(null, "", url);
+
+  const goInternal = useCallback(
+    (v: AppView) => {
+      if (v === "pre-harvest") {
+        goBcp("cartera");
+        return;
       }
-    } catch {
-      /* history unavailable */
-    }
-  };
-  const [step, setStep] = useState<Step>(1);
-  const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
-  const [assessment, setAssessment] = useState<RiskAssessment | null>(null);
-  const [financing, setFinancing] = useState<FinancingRecommendation | null>(
-    null,
+      setSection("internal");
+      setInternalView(v);
+      window.history.pushState({ section: "internal", view: v }, "", window.location.pathname);
+    },
+    [goBcp],
   );
 
-  const missingDealCount =
-    prescoredPlatformDeals.filter(
-      (e) => e.deal.fieldsNeedingConfirmation.length > 0,
-    ).length + platformDealsBlocked.length;
+  useEffect(() => {
+    const onPop = (e: PopStateEvent) => {
+      const st = e.state as { section?: Section; view?: string; id?: string | null } | null;
+      if (st?.section === "internal") {
+        setSection("internal");
+        setInternalView((st.view as AppView) ?? "assess");
+      } else if (window.location.hash === "#pre-harvest") {
+        setSection("bcp");
+        setBcp(readBcpUrl());
+      } else {
+        setSection("internal");
+        setInternalView("assess");
+      }
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
-  const openPrescored = (dealId: string) => {
-    const entry = prescoredByDealId.get(dealId);
-    if (!entry) return;
-    setSelectedDeal(entry.deal);
-    setAssessment(entry.assessment);
-    setFinancing(entry.financing);
-    setView("assess");
-    setStep(3);
-  };
-
-  const handleSelectDeal = (deal: Deal) => {
-    setSelectedDeal(deal);
-    setAssessment(null);
-    setFinancing(null);
-    setView("assess");
-    setStep(2);
-  };
-
-  const handleCreateDeal = () => {
-    setSelectedDeal(createBlankDeal());
-    setAssessment(null);
-    setFinancing(null);
-    setView("assess");
-    setStep(2);
-  };
-
-  const handleRunAssessment = (dealToAssess: Deal, stayOnFinancing = false) => {
-    setSelectedDeal(dealToAssess);
-    const result = buildRiskAssessment(dealToAssess);
-    const terms = recommendFinancingTerms(
-      result.overall,
-      dealToAssess.dealValueUSD,
-      result.counterpartyCoveragePct,
-    );
-    setAssessment(result);
-    setFinancing(terms);
-    setView("assess");
-    setStep(stayOnFinancing ? 4 : 3);
-  };
-
-  const handleApplyStructure = (structure: TransactionStructureInput) => {
-    if (!selectedDeal) return;
-    // Re-score but keep the financing page open so what-if Apply updates live.
-    handleRunAssessment({ ...selectedDeal, transactionStructure: structure }, true);
-  };
-
-  const handleReset = () => {
-    setStep(1);
-    setSelectedDeal(null);
-    setAssessment(null);
-    setFinancing(null);
-  };
-
-  const openByMongoId = (mongoId: string) => {
-    const entry = prescoredByMongoId.get(mongoId);
-    if (entry) {
-      openPrescored(entry.deal.id);
-    }
-  };
-
-  const handleViewChange = (next: AppView) => {
-    // Hidden nav tabs stay in code but are not selectable.
-    if (HIDDEN_APP_TABS.has(next)) return;
-    setView(next);
-    if (next === "assess" && !selectedDeal) {
-      setStep(1);
-    }
-  };
-
-  const backFromRiskDashboard = () => {
-    if (selectedDeal && prescoredByDealId.has(selectedDeal.id)) {
-      setView("platform");
-      setStep(1);
-      setSelectedDeal(null);
-      setAssessment(null);
-      setFinancing(null);
-      return;
-    }
-    setStep(2);
-  };
-
-  // The bank's pre-harvest workspace has its own shell (navigation, search, language); the
-  // internal TruMarket tools are one switch away and never shown inside it.
-  if (view === "pre-harvest") {
-    return (
-      <Suspense
-        fallback={
-          <div className="flex min-h-screen bg-tm-neutral-light" aria-busy="true">
-            <div className="hidden w-60 shrink-0 border-r border-tm-border bg-tm-surface lg:block" />
-            <div className="mx-auto w-full max-w-6xl space-y-5 px-4 py-8 sm:px-8">
-              <div className="h-40 animate-pulse rounded-xl bg-tm-border/60" />
-              <div className="h-32 animate-pulse rounded-xl bg-tm-border/40" />
-            </div>
-          </div>
-        }
-      >
-        <PreHarvestView
-          onOpenPostHarvest={() => {
-            handleReset();
-            setView("assess");
-          }}
-          onExitWorkspace={() => setView("assess")}
-        />
-      </Suspense>
-    );
-  }
+  const t = (es: string, en: string) => (lang === "es" ? es : en);
+  const internalItems = VISIBLE_APP_TABS.filter((tab) => tab.id !== "pre-harvest").map((tab) => ({
+    id: tab.id,
+    label: tab.label,
+    icon: INTERNAL_ICON[tab.id] ?? FileSearch,
+    count: tab.id === "platform" ? platformCount : undefined,
+  }));
+  const active = section === "bcp" ? NAV_ACTIVE[bcp.view] : internalView;
 
   return (
     <div className="flex min-h-screen bg-tm-neutral-light">
-      <AppSidebar
-        view={view}
-        onChange={handleViewChange}
-        platformCount={prescoredPlatformDeals.length}
-        onHome={() => {
-          handleReset();
-          setView("assess");
+      <Sidebar
+        product={section === "bcp" ? t("Pre-cosecha · BCP", "Pre-harvest · BCP") : "Credit risk"}
+        active={active}
+        onHome={() => goBcp("cartera")}
+        toggleLabels={{ collapse: t("Contraer menú", "Collapse menu"), expand: t("Expandir menú", "Expand menu") }}
+        onSelect={(id) => ((BCP_VIEWS as string[]).includes(id) ? goBcp(id as BcpView) : goInternal(id as AppView))}
+        onPrefetch={(id) => {
+          if (!(BCP_VIEWS as string[]).includes(id)) void loadInternal();
         }}
+        groups={[
+          { label: t("Pre-cosecha · BCP", "Pre-harvest · BCP"), items: bcpNavItems(lang, answers) },
+          { label: t("TruMarket interno", "TruMarket internal"), items: internalItems },
+        ]}
+        footer={
+          <div className="space-y-0.5 border-t border-tm-border pt-3 text-xs">
+            <p className="font-semibold text-tm-black">{t("Analista de Riesgos · BCP", "Risk analyst · BCP")}</p>
+            <p className="text-tm-text-muted">{t(`Datos al ${date(PORTFOLIO.cutoff, "es")}`, `Data as of ${date(PORTFOLIO.cutoff, "en")}`)}</p>
+          </div>
+        }
       />
-      <div className="min-w-0 flex-1">
-      <TopBar
-        title={VIEW_TITLE[view].title}
-        sub={VIEW_TITLE[view].sub}
-        right={<span className="hidden shrink-0 text-xs text-tm-text-muted sm:block">TruMarket · Credit risk</span>}
-      />
-
-      <AppNav
-        view={view}
-        onChange={handleViewChange}
-        scoredCount={platformCounterparties.length}
-        platformCount={prescoredPlatformDeals.length}
-        missingCount={missingDealCount}
-      />
-
-      {view === "assess" && <StepIndicator currentStep={step} />}
-
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-8">
-        <AnimatePresence mode="wait">
-          {view === "counterparties" && (
-            <motion.div
-              key="counterparties"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <CounterpartyScoresTab
-                onAssessDealId={openByMongoId}
-                onGoToMissingFields={() => setView("missing")}
-              />
-            </motion.div>
-          )}
-
-          {view === "platform" && (
-            <motion.div
-              key="platform"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <PrescoredDealsTab onSelect={openPrescored} />
-            </motion.div>
-          )}
-
-          {view === "missing" && (
-            <motion.div
-              key="missing"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <DealMissingFieldsTab onViewDeal={openPrescored} />
-            </motion.div>
-          )}
-
-          {view === "route-table" && (
-            <motion.div
-              key="route-table"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <RouteRiskTableTab />
-            </motion.div>
-          )}
-
-          {view === "blueberry-cram" && (
-            <motion.div
-              key="blueberry-cram"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <BlueberryCramAnalysisTab />
-            </motion.div>
-          )}
-
-          {view === "assess" && step === 1 && (
-            <motion.div
-              key="step-1"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}
-              className="mx-auto max-w-3xl"
-            >
-              <DealSelector
-                deals={sampleDeals}
-                onSelect={handleSelectDeal}
-                onCreateNew={handleCreateDeal}
-              />
-            </motion.div>
-          )}
-
-          {view === "assess" && step === 2 && selectedDeal && (
-            <motion.div
-              key="step-2"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}
-              className="mx-auto max-w-3xl"
-            >
-              <DocumentIngestion
-                deal={selectedDeal}
-                onBack={handleReset}
-                onRunAssessment={handleRunAssessment}
-              />
-            </motion.div>
-          )}
-
-          {view === "assess" && step === 3 && selectedDeal && assessment && (
-            <motion.div
-              key="step-3"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}
-              className="mx-auto max-w-3xl"
-            >
-              <RiskDashboard
-                deal={selectedDeal}
-                assessment={assessment}
-                onBack={backFromRiskDashboard}
-                onContinue={() => setStep(4)}
-              />
-            </motion.div>
-          )}
-
-          {view === "assess" &&
-            step === 4 &&
-            selectedDeal &&
-            assessment &&
-            financing && (
-              <motion.div
-                key="step-4"
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 12 }}
-                transition={{ duration: 0.25 }}
-                className="mx-auto max-w-5xl"
-              >
-                <FinancingRecommendationPanel
-                  deal={selectedDeal}
-                  assessment={assessment}
-                  financing={financing}
-                  onBack={() => setStep(3)}
-                  onAssessAnother={handleReset}
-                  onApplyStructure={handleApplyStructure}
-                />
-              </motion.div>
-            )}
-        </AnimatePresence>
-      </main>
-
-      <footer className={`border-t border-tm-border py-6 text-center text-xs text-tm-text-muted print:hidden`}>
-        TruMarket agro trade-finance credit scoring · CRAM data from
-        platform CSV enrichment (does not mutate live TruMarket schemas)
-      </footer>
-      </div>
+      <Suspense fallback={<ContentSkeleton />}>
+        {section === "bcp" ? (
+          <BcpWorkspace view={bcp.view} id={bcp.id} go={goBcp} lang={lang} setLang={setLang} answers={answers} setAnswer={setAnswer} onExit={() => goInternal("assess")} />
+        ) : (
+          <div className="min-w-0 flex-1">
+            <InternalApp view={internalView} onView={goInternal} onPlatformCount={setPlatformCount} />
+          </div>
+        )}
+      </Suspense>
     </div>
   );
 }

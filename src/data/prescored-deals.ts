@@ -13,20 +13,32 @@ export interface PrescoredDeal {
   source: "platform";
 }
 
-function buildPrescored(deal: Deal, mongoId: string): PrescoredDeal {
-  const assessment = buildRiskAssessment(deal);
-  const financing = recommendFinancingTerms(
-    assessment.overall,
-    deal.dealValueUSD,
-    assessment.counterpartyCoveragePct,
-  );
-  return { deal, assessment, financing, mongoId, source: "platform" };
+/**
+ * Scored on first read, not on import: the internal tool opens without running
+ * the CRAM model over every platform deal; a deal is scored when a screen needs
+ * its assessment (and the result is kept).
+ */
+class LazyPrescored implements PrescoredDeal {
+  readonly source = "platform" as const;
+  private a?: RiskAssessment;
+  private f?: FinancingRecommendation;
+  readonly deal: Deal;
+  readonly mongoId: string;
+  constructor(deal: Deal, mongoId: string) {
+    this.deal = deal;
+    this.mongoId = mongoId;
+  }
+  get assessment(): RiskAssessment {
+    return (this.a ??= buildRiskAssessment(this.deal));
+  }
+  get financing(): FinancingRecommendation {
+    return (this.f ??= recommendFinancingTerms(this.assessment.overall, this.deal.dealValueUSD, this.assessment.counterpartyCoveragePct));
+  }
 }
 
-export const prescoredPlatformDeals: PrescoredDeal[] =
-  platformDealsReadyForCounterparty.map((record) =>
-    buildPrescored(platformDealToDeal(record), record.mongoId),
-  );
+export const prescoredPlatformDeals: PrescoredDeal[] = platformDealsReadyForCounterparty.map(
+  (record) => new LazyPrescored(platformDealToDeal(record), record.mongoId),
+);
 
 export const prescoredByDealId = new Map(
   prescoredPlatformDeals.map((entry) => [entry.deal.id, entry]),

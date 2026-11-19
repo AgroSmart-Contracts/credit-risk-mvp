@@ -5,7 +5,7 @@
  */
 import { PD_BY_TIER } from "./config";
 import { lgdPct } from "./credit-metrics";
-import { addDays, ndviBaseline, toTime, yieldAdjustment, type CropPoint } from "./monitoring";
+import { addDays, ndviBaseline, toTime, type CropPoint } from "./monitoring";
 import { PANEL_LABELS, type CampaignSimulation } from "./timeline";
 import { fileStatus } from "./verdict";
 import type { AlertLogEntry, Bilingual, NdviPoint, PanelId, PreHarvestDeal, TimelineFrame, TrancheState } from "./types";
@@ -148,19 +148,26 @@ export function financialImpact(deal: PreHarvestDeal, sim: CampaignSimulation, a
   const riskFrom = Math.round(deal.envelopeUsd * pd(prev?.tier ?? sim.origination.tier) * lgd);
   const riskTo = Math.round(deal.envelopeUsd * pd(frame.tier) * lgd);
 
+  // The cushion: what the repayment leaves over the amount due, in USD (coverage in brackets).
+  const due = sim.amountDue;
+  const cushion = (c: number) => Math.round(c * due - due);
+  const signed = (n: number, es = false) => (n < 0 ? `−${usd(-n, es)}` : usd(n, es));
   const details: Bilingual[] = [];
   if (covTo !== null) {
     const moved = covFrom !== null && Math.abs(covTo - covFrom) >= 0.01;
     details.push(
       moved
-        ? { en: `Repayment coverage ${x2(covFrom!)} → ${x2(covTo)}`, es: `Cobertura del repago ${x2(covFrom!)} → ${x2(covTo)}` }
-        : { en: `Repayment coverage holds at ${x2(covTo)}`, es: `Cobertura del repago se mantiene en ${x2(covTo)}` },
+        ? {
+            en: `Cushion ${signed(cushion(covFrom!))} → ${signed(cushion(covTo))} (${x2(covFrom!)} → ${x2(covTo)})`,
+            es: `Holgura ${signed(cushion(covFrom!), true)} → ${signed(cushion(covTo), true)} (${x2(covFrom!)} → ${x2(covTo)})`,
+          }
+        : { en: `Cushion unchanged at ${signed(cushion(covTo))} (${x2(covTo)})`, es: `Holgura sin cambio en ${signed(cushion(covTo), true)} (${x2(covTo)})` },
     );
   }
   if (riskTo !== riskFrom) {
     details.push({
-      en: `Money at risk on the full line ${usd(riskFrom)} → ${usd(riskTo)}`,
-      es: `Dinero en riesgo sobre la línea completa ${usd(riskFrom, true)} → ${usd(riskTo, true)}`,
+      en: `Expected loss on the full line ${usd(riskFrom)} → ${usd(riskTo)}`,
+      es: `Pérdida esperada sobre la línea completa ${usd(riskFrom, true)} → ${usd(riskTo, true)}`,
     });
   }
   if (scoreDelta !== 0) {
@@ -171,6 +178,17 @@ export function financialImpact(deal: PreHarvestDeal, sim: CampaignSimulation, a
   }
 
   const adverse = (covFrom !== null && covTo !== null && covTo < covFrom - 0.005) || riskTo > riskFrom || scoreDelta < 0 || frame.action !== "continue";
+  // An application has no disbursements to stop or hold: the update weighs on the approval instead.
+  if (deal.status === "application") {
+    return {
+      headline:
+        frame.tier === "VETO"
+          ? { en: `Counts against approval: TruMarket recommends declining the ${usd(deal.envelopeUsd)} request`, es: `Pesa contra la aprobación: TruMarket recomienda rechazar los ${usd(deal.envelopeUsd, true)} solicitados` }
+          : { en: `Weighs on the approval of ${usd(deal.envelopeUsd)}; nothing is lent yet`, es: `Pesa en la aprobación de ${usd(deal.envelopeUsd, true)}; aún no se presta nada` },
+      details,
+      adverse,
+    };
+  }
   return {
     headline: { en: capital(trancheEffect(frame, false)), es: capital(trancheEffect(frame, true)) },
     details,
@@ -290,45 +308,47 @@ export function panelMoneyReading(panel: PanelId, deal: PreHarvestDeal, sim: Cam
   const cov = frame.coverageRatio;
   const rev = frame.expectedRevenueUsd;
   const sev = frame.panels[panel].severity;
+  // The cushion: harvest value minus the amount due. Each panel says what it does to it, once.
+  const cushion = rev !== null ? rev - due : null;
+  const signed = (n: number, es = false) => (n < 0 ? `−${usd(-n, es)}` : usd(n, es));
   switch (panel) {
-    case "crop": {
-      const y = Math.round(yieldAdjustment(sim.series.crop, frame.date) * 100);
-      return rev !== null && cov !== null
+    case "crop":
+      return rev !== null && cushion !== null
         ? {
-            en: `Expected harvest ${y}% of declared: about ${usd(rev)} for the grower, ${x2(cov)} the ${usd(due)} due.`,
-            es: `Cosecha esperada ${y}% de lo declarado: unos ${usd(rev, true)} para el productor, ${x2(cov)} los ${usd(due, true)} adeudados.`,
+            en: `the harvest is worth about ${usd(rev)} against ${usd(due)} due: ${signed(cushion)} cushion (${x2(cov!)}).`,
+            es: `la cosecha vale unos ${usd(rev, true)} frente a ${usd(due, true)} adeudados: ${signed(cushion, true)} de holgura (${x2(cov!)}).`,
           }
-        : { en: `Expected harvest ${y}% of declared.`, es: `Cosecha esperada ${y}% de lo declarado.` };
-    }
+        : { en: "no harvest value yet.", es: "aún sin valor de cosecha." };
     case "weather": {
-      if (sev === "green") return { en: "No weather cost to the loan so far: the yield outlook is unchanged.", es: "Sin costo climático para el préstamo: la proyección de rendimiento no cambia." };
-      const perTen = cov !== null ? cov * 0.1 : null;
-      return {
-        en: `Weather stress puts yield at risk${perTen !== null ? `: every 10% of harvest lost takes about ${perTen.toFixed(2)}× off the ${x2(cov!)} coverage` : ""}.`,
-        es: `El estrés climático pone en riesgo el rendimiento${perTen !== null ? `: cada 10% de cosecha perdida resta ~${perTen.toFixed(2)}× a la cobertura de ${x2(cov!)}` : ""}.`,
-      };
+      if (sev === "green") return { en: "no weather cost so far; the harvest outlook is unchanged.", es: "sin costo climático por ahora; la proyección de cosecha no cambia." };
+      return rev !== null && cushion !== null
+        ? {
+            en: `every 10% of harvest lost takes about ${usd(rev * 0.1)} off the ${signed(cushion)} cushion.`,
+            es: `cada 10% de cosecha perdida resta unos ${usd(rev * 0.1, true)} a la holgura de ${signed(cushion, true)}.`,
+          }
+        : { en: "weather stress puts the harvest at risk.", es: "el estrés climático pone en riesgo la cosecha." };
     }
     case "market": {
       const p = frame.expectedHarvestPrice;
-      return p !== null && rev !== null && cov !== null
-        ? {
-            en: `At USD ${p.toFixed(2)}/kg the harvest brings about ${usd(rev)} to the grower: ${x2(cov)} principal + interest.`,
-            es: `A USD ${p.toFixed(2)}/kg la cosecha deja unos ${usd(rev, true)} al productor: ${x2(cov)} capital + intereses.`,
-          }
-        : { en: "No price yet to value the harvest.", es: "Aún sin precio para valorar la cosecha." };
+      if (p === null || rev === null || cushion === null || p <= 0) return { en: "no price yet to value the harvest.", es: "aún sin precio para valorar la cosecha." };
+      const per10c = (rev / p) * 0.1;
+      return {
+        en: `each USD 0.10/kg lower price takes about ${usd(per10c)} off the cushion; the loan is short below USD ${(p / cov!).toFixed(2)}/kg.`,
+        es: `cada USD 0,10/kg menos resta unos ${usd(per10c, true)} a la holgura; falta para el repago bajo USD ${(p / cov!).toFixed(2)}/kg.`,
+      };
     }
     case "takeout": {
       const tk = sim.takeout;
-      const signed = tk.poSignedDate !== null && tk.poSignedDate <= frame.date;
+      const signedPo = tk.poSignedDate !== null && tk.poSignedDate <= frame.date;
       const advance = tk.coface === "declined" ? 0 : tk.poVolumeKg * tk.poPriceUsdPerKg * (tk.cofaceCoveragePct / 100) * (tk.advanceRatePct / 100);
-      return signed
+      return signedPo
         ? {
-            en: `The buyer's PO funds a ${usd(advance)} advance against ${usd(due)} due: ${x2(advance / due)}.`,
-            es: `La OC del comprador financia un adelanto de ${usd(advance, true)} frente a ${usd(due, true)} adeudados: ${x2(advance / due)}.`,
+            en: `the buyer's PO funds a ${usd(advance)} advance against ${usd(due)} due: ${signed(advance - due)} cushion.`,
+            es: `la OC del comprador financia un adelanto de ${usd(advance, true)} frente a ${usd(due, true)} adeudados: ${signed(advance - due, true)} de holgura.`,
           }
         : {
-            en: `Repayment depends on the buyer's PO at harvest (${formatShort(deal.m3Date)}); until then the harvest outlook is the only cover.`,
-            es: `El repago depende de la OC del comprador en cosecha (${formatShort(deal.m3Date, true)}); hasta entonces la proyección de cosecha es la única cobertura.`,
+            en: `repayment comes from the buyer's PO at harvest (${formatShort(deal.m3Date)}); until then the harvest value is the only cover.`,
+            es: `el repago sale de la OC del comprador en cosecha (${formatShort(deal.m3Date, true)}); hasta entonces el valor de la cosecha es la única cobertura.`,
           };
     }
   }
@@ -369,4 +389,233 @@ export function priceOutlook(sim: CampaignSimulation, asOf: string, untilMonth: 
     out.push({ month: m, expected: Math.round(band.p50 * (1 + (ratio - 1) * 0.5) * 100) / 100, p10: band.p10, p25: band.p25, p50: band.p50, p75: band.p75 });
   }
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// The bank's bottom line: how to feel about this file, in money
+// ---------------------------------------------------------------------------
+
+/** How the bank should feel about a file, from its money position. */
+export type BankMood = "comfortable" | "watch" | "act" | "decide" | "settled";
+
+export interface BadCase {
+  /** What the bad case assumes, in one line. */
+  label: Bilingual;
+  /** Repayment ÷ amount due in the bad case. */
+  coverage: number;
+  /** Money the repayment would leave over (positive) or be short (negative). */
+  cushionUsd: number;
+}
+
+export interface BankView {
+  mood: BankMood;
+  /** The one sentence the bank reads first. */
+  headline: Bilingual;
+  /** Expected repayment − amount due: what the bank has to spare. Null with no harvest value yet. */
+  cushionUsd: number | null;
+  /** How far the harvest value (yield or price) can fall before the repayment is short, %. */
+  maxDropPct: number | null;
+  badCase: BadCase | null;
+  /** The next money decision, if one is coming. */
+  nextMove: Bilingual | null;
+}
+
+/** Yield cut the realistic bad case assumes: the stress test's moderate (Watch) or severe (High risk) harvest loss. */
+function yieldCutFor(frame: TimelineFrame): number {
+  const sev = [frame.panels.crop.severity, frame.panels.weather.severity];
+  return sev.includes("red") ? 0.3 : sev.includes("yellow") ? 0.15 : 0;
+}
+
+export function bankView(deal: PreHarvestDeal, sim: CampaignSimulation, frame: TimelineFrame): BankView {
+  const m = moneyPosition(deal, sim, frame);
+  const fs = fileStatus(frame);
+  const due = m.amountDueUsd;
+  const cushionUsd = m.expectedRepaymentUsd === null ? null : m.expectedRepaymentUsd - due;
+  const maxDropPct = m.coverage !== null && m.coverage > 0 ? Math.max(0, Math.round((1 - 1 / m.coverage) * 100)) : null;
+  const maturity = formatShort(m.maturityDate);
+  const maturityEs = formatShort(m.maturityDate, true);
+
+  // Bad case: before the PO, the harvest sells at a 1-in-10 low price for its month, and if
+  // crop or weather is off, the harvest is also 15% (Watch) or 30% (High risk) smaller.
+  let badCase: BadCase | null = null;
+  if (m.coverage !== null && !m.repaid && m.coverageSource === "harvest") {
+    const low = lowPriceRatio(sim, deal);
+    const cut = yieldCutFor(frame);
+    const factor = Math.min(1, low ?? 1) * (1 - cut);
+    if (factor < 1) {
+      const coverage = Math.round(m.coverage * factor * 100) / 100;
+      const pct = (n: number) => Math.round(n * 100);
+      badCase = {
+        label:
+          low !== null && cut > 0
+            ? { en: `price at a 1-in-10 low (−${pct(1 - low)}%) and a ${pct(cut)}% smaller harvest`, es: `precio en un mínimo de 1 en 10 años (−${pct(1 - low)}%) y una cosecha ${pct(cut)}% menor` }
+            : cut > 0
+              ? { en: `a ${pct(cut)}% smaller harvest`, es: `una cosecha ${pct(cut)}% menor` }
+              : { en: `price at a 1-in-10 low (−${pct(1 - (low ?? 1))}%)`, es: `precio en un mínimo de 1 en 10 años (−${pct(1 - (low ?? 1))}%)` },
+        coverage,
+        cushionUsd: Math.round(m.expectedRepaymentUsd! * factor) - due,
+      };
+    }
+  }
+
+  // Next money decision.
+  let nextMove: Bilingual | null = null;
+  const t = m.nextTranche;
+  if (deal.status === "live" && t && frame.action !== "stop") {
+    const verb =
+      frame.action === "hold_tranche" || t.status === "held"
+        ? { en: "TruMarket says hold it", es: "TruMarket recomienda retenerlo" }
+        : frame.action === "call_inspection"
+          ? { en: "inspect the field first", es: "inspeccionar el campo antes" }
+          : { en: "on track to release", es: "en camino a liberarse" };
+    nextMove = {
+      en: `Next money out: ${usd(t.amountUsd)} on ${formatShort(t.dueDate)} (${verb.en}).`,
+      es: `Próximo desembolso: ${usd(t.amountUsd, true)} el ${formatShort(t.dueDate, true)} (${verb.es}).`,
+    };
+  } else if (deal.status === "live" && frame.action === "stop") {
+    const left = frame.tranches.filter((x) => x.status !== "released").reduce((s, x) => s + x.amountUsd, 0);
+    if (left > 0) nextMove = { en: `Disbursements stopped: ${usd(left)} stays with the bank.`, es: `Desembolsos detenidos: ${usd(left, true)} se quedan en el banco.` };
+  }
+
+  // Settled files: nothing at stake.
+  if (m.repaid) {
+    return {
+      mood: "settled",
+      headline: {
+        en: `Repaid in full: ${usd(due)} came back by ${maturity}, including ${usd(due - deal.envelopeUsd)} interest. Nothing is at stake.`,
+        es: `Cancelado: volvieron ${usd(due, true)} al ${maturityEs}, con ${usd(due - deal.envelopeUsd, true)} de intereses. Nada en juego.`,
+      },
+      cushionUsd: null,
+      maxDropPct: null,
+      badCase: null,
+      nextMove: null,
+    };
+  }
+  if (deal.status === "closed") {
+    return { mood: "settled", headline: { en: "Campaign closed; nothing is at stake.", es: "Campaña cerrada; nada en juego." }, cushionUsd: null, maxDropPct: null, badCase: null, nextMove: null };
+  }
+
+  // Applications: nothing is lent yet; say what approving would put at stake.
+  if (deal.status === "application") {
+    const stake = `${usd(deal.envelopeUsd)} for ${deal.tenorDays} days`;
+    const stakeEs = `${usd(deal.envelopeUsd, true)} por ${deal.tenorDays} días`;
+    if (fs.status === "declined") {
+      // The reason is on the decision card; here only what is at stake.
+      return {
+        mood: "decide",
+        headline: {
+          en: `Nothing is lent yet. TruMarket recommends declining: approving would put ${stake} on a harvest it cannot verify.`,
+          es: `Aún no se presta nada. TruMarket recomienda rechazar: aprobar pondría ${stakeEs} sobre una cosecha que no puede verificar.`,
+        },
+        cushionUsd: null,
+        maxDropPct: null,
+        badCase: null,
+        nextMove: null,
+      };
+    }
+    return {
+      mood: "decide",
+      headline:
+        cushionUsd !== null
+          ? {
+              en: `Nothing is lent yet. Approving puts ${stake}; the expected harvest repays the ${usd(due)} due with ${usd(cushionUsd)} to spare.`,
+              es: `Aún no se presta nada. Aprobar pone ${stakeEs}; la cosecha esperada repaga los ${usd(due, true)} con ${usd(cushionUsd, true)} de holgura.`,
+            }
+          : { en: `Nothing is lent yet. Approving puts ${stake}.`, es: `Aún no se presta nada. Aprobar pone ${stakeEs}.` },
+      cushionUsd,
+      maxDropPct,
+      badCase,
+      nextMove: null,
+    };
+  }
+
+  // Live loans.
+  const panels = Object.values(frame.panels).map((p) => p.severity);
+  const short = (badCase && badCase.cushionUsd < 0) || (m.coverage !== null && m.coverage < 1);
+  // Act now = disbursements stopped or the repayment no longer covered; anything off-normal is Watch.
+  const mood: BankMood =
+    frame.action === "stop" || (m.coverage !== null && m.coverage < 1)
+      ? "act"
+      : panels.includes("red") || panels.includes("yellow") || frame.action !== "continue" || short || (m.coverage !== null && m.coverage < 1.2)
+        ? "watch"
+        : "comfortable";
+  const out = { en: `BCP has ${usd(m.exposureUsd)} out`, es: `BCP tiene ${usd(m.exposureUsd, true)} desembolsados` };
+  const back =
+    cushionUsd === null
+      ? { en: `${usd(due)} is due on ${maturity}`, es: `vencen ${usd(due, true)} el ${maturityEs}` }
+      : cushionUsd >= 0
+        ? {
+            en: `${m.coverageSource === "po" ? "the buyer's PO" : "the expected harvest"} repays the ${usd(due)} due on ${maturity} with ${usd(cushionUsd)} to spare`,
+            es: `${m.coverageSource === "po" ? "la OC del comprador" : "la cosecha esperada"} repaga los ${usd(due, true)} del ${maturityEs} con ${usd(cushionUsd, true)} de holgura`,
+          }
+        : {
+            en: `the expected repayment is ${usd(-cushionUsd)} short of the ${usd(due)} due on ${maturity}`,
+            es: `al repago esperado le faltan ${usd(-cushionUsd, true)} de los ${usd(due, true)} del ${maturityEs}`,
+          };
+  // Watch and Act say why, in one phrase: the worst monitoring area, or the money itself.
+  const worstPanel = (["weather", "crop", "market", "takeout"] as const)
+    .filter((p) => frame.panels[p].severity !== "green")
+    .sort((a, b) => Number(frame.panels[b].severity === "red") - Number(frame.panels[a].severity === "red"))[0];
+  const why = worstPanel
+    ? {
+        en: `${PANEL_LABELS[worstPanel].en} ${frame.panels[worstPanel].severity === "red" ? "at high risk" : "on watch"}`,
+        es: `${PANEL_LABELS[worstPanel].es} ${frame.panels[worstPanel].severity === "red" ? "en riesgo alto" : "en vigilancia"}`,
+      }
+    : { en: "thin cover", es: "cobertura ajustada" };
+  // The mood pill already says "Watch closely" / "Act now": the sentence starts with the reason.
+  const lead: Record<Exclude<BankMood, "decide" | "settled">, Bilingual> = {
+    comfortable: { en: "On track.", es: "En curso." },
+    watch: { en: `${capital(why.en)}.`, es: `${capital(why.es)}.` },
+    act: { en: `${capital(why.en)}.`, es: `${capital(why.es)}.` },
+  };
+  const bad =
+    badCase && badCase.cushionUsd < 0 && (cushionUsd ?? 0) >= 0
+      ? { en: ` In a bad case it would be ${usd(-badCase.cushionUsd)} short.`, es: ` En un mal escenario faltarían ${usd(-badCase.cushionUsd, true)}.` }
+      : { en: "", es: "" };
+  return {
+    mood,
+    headline: {
+      en: `${lead[mood as keyof typeof lead].en} ${out.en}; ${back.en}.${bad.en}`,
+      es: `${lead[mood as keyof typeof lead].es} ${out.es}; ${back.es}.${bad.es}`,
+    },
+    cushionUsd,
+    maxDropPct,
+    badCase,
+    nextMove,
+  };
+}
+
+
+/**
+ * What one outside signal does to the money: the cushion in USD under the
+ * harvest cut it implies, or how far the price can fall before the loan is short.
+ */
+export function signalMoney(kind: "enso" | "price" | "water", severity: "green" | "yellow" | "red", deal: PreHarvestDeal, sim: CampaignSimulation, frame: TimelineFrame): Bilingual | null {
+  const m = moneyPosition(deal, sim, frame);
+  // Nothing to say in money for a settled file or an application TruMarket would decline.
+  if (m.repaid || deal.status === "closed" || (deal.status === "application" && sim.origination.tier === "VETO")) return null;
+  if (m.expectedRepaymentUsd === null || m.coverage === null) return null;
+  const due = m.amountDueUsd;
+  const cushion = m.expectedRepaymentUsd - due;
+  if (kind === "price") {
+    if (m.coverageSource === "po") return { en: "Price fixed by the buyer's PO: no effect now", es: "Precio fijado por la OC: sin efecto ahora" };
+    const p = frame.expectedHarvestPrice;
+    const drop = Math.max(0, Math.round((1 - 1 / m.coverage) * 100));
+    return p !== null
+      ? { en: `Can fall to USD ${(p / m.coverage).toFixed(2)}/kg (−${drop}%) before the loan is short`, es: `Puede caer a USD ${(p / m.coverage).toFixed(2)}/kg (−${drop}%) antes de que falte para el repago` }
+      : null;
+  }
+  if (severity === "green") return { en: "No cost to the loan", es: "Sin costo para el préstamo" };
+  if (m.coverageSource === "po") return { en: "Repayment now rests on the buyer's PO", es: "El repago ya depende de la OC del comprador" };
+  const cut = severity === "red" ? 0.3 : 0.15;
+  const after = Math.round(m.expectedRepaymentUsd * (1 - cut)) - due;
+  return after >= 0
+    ? {
+        en: `A ${cut * 100}% smaller harvest cuts the cushion from ${usd(cushion)} to ${usd(after)}`,
+        es: `Una cosecha ${cut * 100}% menor reduce la holgura de ${usd(cushion, true)} a ${usd(after, true)}`,
+      }
+    : {
+        en: `A ${cut * 100}% smaller harvest leaves the loan ${usd(-after)} short`,
+        es: `Una cosecha ${cut * 100}% menor deja al préstamo ${usd(-after, true)} corto`,
+      };
 }
