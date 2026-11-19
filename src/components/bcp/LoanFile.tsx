@@ -32,7 +32,7 @@ function csvOf(loan: Loan, lang: "es" | "en") {
   return [head, ...loan.auditLog.map((a) => [a.date, a.event[lang], a.responsible[lang], a.rule[lang], a.evidence[lang], a.engineVersion])].map((r) => r.map(q).join(",")).join("\n");
 }
 
-export function LoanFile({ loan, data, onBack, onMap, answers, onAnswer }: { loan: Loan; data: Portfolio; onBack: () => void; onMap: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
+export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer }: { loan: Loan; data: Portfolio; onBack: () => void; onMap: () => void; onMemo: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
   const lang = useLang();
   const [fundsIdx, setFundsIdx] = useState(loan.useOfFunds.length - 1);
@@ -92,7 +92,7 @@ export function LoanFile({ loan, data, onBack, onMap, answers, onAnswer }: { loa
             </p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
-            <Btn onClick={() => window.print()}>{t("Memorando de crédito", "Credit memo")}</Btn>
+            <Btn onClick={onMemo}>{t("Memorando de crédito (PDF)", "Credit memo (PDF)")}</Btn>
             <Btn onClick={exportCsv}>{t("Exportar registro (CSV)", "Export log (CSV)")}</Btn>
             <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>
           </div>

@@ -10,9 +10,9 @@ import { pendingDecisions } from "../../lib/bcp/calc";
 import type { Lang } from "../../lib/bcp/types";
 import { appKey, decisionKey, type Answer } from "./answers";
 
-export type BcpView = "cartera" | "expedientes" | "expediente" | "solicitudes" | "solicitud" | "decision" | "excepciones" | "excepcion" | "reportes" | "reporte" | "mapa" | "metodo";
+export type BcpView = "cartera" | "expedientes" | "expediente" | "solicitudes" | "solicitud" | "decision" | "excepciones" | "excepcion" | "reportes" | "reporte" | "memo" | "evaluacion" | "mapa" | "metodo";
 
-export const BCP_VIEWS: BcpView[] = ["cartera", "expedientes", "expediente", "solicitudes", "solicitud", "decision", "excepciones", "excepcion", "reportes", "reporte", "mapa", "metodo"];
+export const BCP_VIEWS: BcpView[] = ["cartera", "expedientes", "expediente", "solicitudes", "solicitud", "decision", "excepciones", "excepcion", "reportes", "reporte", "memo", "evaluacion", "mapa", "metodo"];
 
 /** The sidebar item each view belongs to. */
 export const NAV_ACTIVE: Record<BcpView, string> = {
@@ -26,6 +26,8 @@ export const NAV_ACTIVE: Record<BcpView, string> = {
   excepcion: "excepciones",
   reportes: "reportes",
   reporte: "reportes",
+  memo: "expedientes",
+  evaluacion: "solicitudes",
   mapa: "mapa",
   metodo: "metodo",
 };

@@ -24,6 +24,8 @@ const LoanFile = lazy(() => loadLoanFile().then((m) => ({ default: m.LoanFile })
 const MapView = lazy(() => loadMap().then((m) => ({ default: m.MapView })));
 const MonthlyReport = lazy(() => loadReports().then((m) => ({ default: m.MonthlyReport })));
 const ExceptionNoticeReport = lazy(() => loadReports().then((m) => ({ default: m.ExceptionNoticeReport })));
+const CreditMemo = lazy(() => loadReports().then((m) => ({ default: m.CreditMemo })));
+const AssessmentMemo = lazy(() => loadReports().then((m) => ({ default: m.AssessmentMemo })));
 const EvidenceDrawer = lazy(() => import("./EvidenceDrawer").then((m) => ({ default: m.EvidenceDrawer })));
 
 function PageSkeleton() {
@@ -98,14 +100,14 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
           {view === "cartera" && <Portfolio data={PORTFOLIO} onOpen={(x) => go("expediente", x)} onOpenApp={(x) => go("solicitud", x)} onReport={() => go("reporte")} onDecisions={() => go("decision")} onException={(x) => go("excepcion", x)} answers={answers} onAnswer={setAnswer} />}
           {view === "expediente" && (() => {
             const loan = id ? loanById(id) : null;
-            return loan ? <LoanFile key={loan.id} loan={loan} data={PORTFOLIO} onBack={() => go("cartera")} onMap={() => go("mapa", loan.id)} answers={answers} onAnswer={setAnswer} /> : <Files go={go} />;
+            return loan ? <LoanFile key={loan.id} loan={loan} data={PORTFOLIO} onBack={() => go("cartera")} onMap={() => go("mapa", loan.id)} onMemo={() => go("memo", loan.id)} answers={answers} onAnswer={setAnswer} /> : <Files go={go} />;
           })()}
           {view === "expedientes" && <Files go={go} />}
           {view === "solicitudes" && <ApplicationsPage data={PORTFOLIO} onOpen={(x) => go("solicitud", x)} answers={answers} />}
           {view === "solicitud" && (() => {
             const app = id ? applicationById(id) : null;
             return app ? (
-              <ApplicationFile key={app.id} app={app} data={PORTFOLIO} onBack={() => go("solicitudes")} onMap={() => go("mapa", app.id)} answer={answers[appKey(app)]} onAnswer={(a) => setAnswer(appKey(app), a)} />
+              <ApplicationFile key={app.id} app={app} data={PORTFOLIO} onBack={() => go("solicitudes")} onMap={() => go("mapa", app.id)} onMemo={() => go("evaluacion", app.id)} answer={answers[appKey(app)]} onAnswer={(a) => setAnswer(appKey(app), a)} />
             ) : (
               <ApplicationsPage data={PORTFOLIO} onOpen={(x) => go("solicitud", x)} answers={answers} />
             );
@@ -118,6 +120,22 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
               <MonthlyReport data={PORTFOLIO} />
             </ReportFrame>
           )}
+          {view === "memo" && (() => {
+            const loan = id ? loanById(id) : null;
+            return loan ? (
+              <ReportFrame onBack={() => go("expediente", loan.id)} docTitle={lang === "es" ? `Memorando de crédito ${loan.id}` : `Credit memo ${loan.id}`}>
+                <CreditMemo data={PORTFOLIO} loan={loan} />
+              </ReportFrame>
+            ) : <Files go={go} />;
+          })()}
+          {view === "evaluacion" && (() => {
+            const app = id ? applicationById(id) : null;
+            return app ? (
+              <ReportFrame onBack={() => go("solicitud", app.id)} docTitle={lang === "es" ? `Memorando de evaluación ${app.id}` : `Assessment memo ${app.id}`}>
+                <AssessmentMemo data={PORTFOLIO} app={app} />
+              </ReportFrame>
+            ) : <ApplicationsPage data={PORTFOLIO} onOpen={(x) => go("solicitud", x)} answers={answers} />;
+          })()}
           {view === "excepcion" && (() => {
             const notice = PORTFOLIO.exceptions.find((e) => e.loanId === id) ?? PORTFOLIO.exceptions[0];
             return (
@@ -167,6 +185,8 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
     excepcion: t("Aviso de excepción", "Exception notice"),
     reportes: t("Reportes mensuales", "Monthly reports"),
     reporte: t("Reporte mensual", "Monthly report"),
+    memo: t("Memorando de crédito", "Credit memo"),
+    evaluacion: t("Memorando de evaluación", "Assessment memo"),
     mapa: t("Mapa de predios", "Parcel map"),
     metodo: t("Metodología y umbrales", "Methodology and thresholds"),
   };
@@ -332,8 +352,17 @@ function Reports({ go }: { go: (v: View, id?: string | null) => void }) {
   );
 }
 
-function ReportFrame({ onBack, children }: { onBack: () => void; children: React.ReactNode }) {
+function ReportFrame({ onBack, docTitle, children }: { onBack: () => void; docTitle?: string; children: React.ReactNode }) {
   const t = useT();
+  // The browser names the saved PDF after the document title.
+  useEffect(() => {
+    if (!docTitle) return;
+    const prev = document.title;
+    document.title = docTitle;
+    return () => {
+      document.title = prev;
+    };
+  }, [docTitle]);
   return (
     <div>
       <div className="mx-auto mb-4 flex max-w-[794px] flex-wrap items-center justify-between gap-2 print:hidden">
@@ -345,7 +374,7 @@ function ReportFrame({ onBack, children }: { onBack: () => void; children: React
         </Btn>
       </div>
       {/* Fixed A4 pages scroll sideways on narrow screens, never reflow. */}
-      <div className="overflow-x-auto pb-4 print:overflow-visible">{children}</div>
+      <div className="overflow-x-auto pb-4 print:overflow-visible print:pb-0">{children}</div>
     </div>
   );
 }

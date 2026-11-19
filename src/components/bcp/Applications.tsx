@@ -95,7 +95,7 @@ export function ApplicationsPage({ data, onOpen, answers }: { data: Portfolio; o
   );
 }
 
-export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: { app: Application; data: Portfolio; onBack: () => void; onMap: () => void; answer?: Answer; onAnswer: (a: Answer) => void }) {
+export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAnswer }: { app: Application; data: Portfolio; onBack: () => void; onMap: () => void; onMemo: () => void; answer?: Answer; onAnswer: (a: Answer) => void }) {
   const t = useT();
   const lang = useLang();
   const [stress, setStress] = useState(false);
@@ -128,7 +128,7 @@ export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: 
             <p className="lbl mt-0.5">{t(`Decidir antes del ${date(app.decisionDueDate, "es")}`, `Decide by ${date(app.decisionDueDate, "en")}`)}</p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
-            <Btn onClick={() => window.print()}>{t("Memorando de evaluación", "Assessment memo")}</Btn>
+            <Btn onClick={onMemo}>{t("Memorando de evaluación (PDF)", "Assessment memo (PDF)")}</Btn>
             <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>
           </div>
         </div>
