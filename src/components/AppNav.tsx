@@ -1,7 +1,5 @@
-import { Briefcase, Cherry, FileSearch, Sprout } from "lucide-react";
 import type { AppView } from "../types/platform";
 import { VISIBLE_APP_TABS } from "./app-tabs";
-import { Sidebar } from "./Sidebar";
 
 interface AppNavProps {
   view: AppView;
@@ -62,35 +60,5 @@ export function AppNav({
         })}
       </div>
     </nav>
-  );
-}
-
-const SIDE_ICON: Partial<Record<AppView, typeof Sprout>> = {
-  assess: FileSearch,
-  "pre-harvest": Sprout,
-  platform: Briefcase,
-  "blueberry-cram": Cherry,
-};
-
-/** Desktop navigation for the internal workspace, on the shared sidebar. */
-export function AppSidebar({ view, onChange, platformCount, onHome }: { view: AppView; onChange: (v: AppView) => void; platformCount: number; onHome: () => void }) {
-  return (
-    <Sidebar
-      product="Credit risk"
-      active={view}
-      onHome={onHome}
-      onSelect={(id) => onChange(id as AppView)}
-      groups={[
-        {
-          items: VISIBLE_APP_TABS.map((tab) => ({
-            id: tab.id,
-            label: tab.id === "pre-harvest" ? "Pre-harvest loans" : tab.label,
-            icon: SIDE_ICON[tab.id] ?? FileSearch,
-            count: tab.id === "platform" ? platformCount : undefined,
-          })),
-        },
-      ]}
-      footer={<p className="px-3 text-[11px] leading-snug text-tm-text-muted">Agro trade-finance credit risk · Peru</p>}
-    />
   );
 }
