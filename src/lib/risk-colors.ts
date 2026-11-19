@@ -12,10 +12,10 @@ export function getTierColors(tier: RiskTier): TierColors {
   switch (tier) {
     case "Low Risk":
       return {
-        arc: "#4e8c37",
+        arc: "#0f9d6b",
         badge: "border-tm-primary bg-tm-primary/10 text-tm-primary-dark",
-        badgeBg: "#4e8c3720",
-        badgeText: "#3a6b2a",
+        badgeBg: "#0f9d6b20",
+        badgeText: "#0b4732",
         bar: "bg-tm-primary",
       };
     case "Medium-Low Risk":
@@ -28,10 +28,10 @@ export function getTierColors(tier: RiskTier): TierColors {
       };
     case "Medium-High Risk":
       return {
-        arc: "#f2a007",
+        arc: "#d9a93b",
         badge: "border-tm-accent bg-tm-accent/10 text-tm-accent-dark",
-        badgeBg: "#f2a00720",
-        badgeText: "#d48806",
+        badgeBg: "#d9a93b20",
+        badgeText: "#b8893f",
         bar: "bg-tm-accent",
       };
     case "High Risk":

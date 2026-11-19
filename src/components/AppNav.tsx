@@ -1,42 +1,7 @@
+import { Briefcase, Cherry, FileSearch, Sprout } from "lucide-react";
 import type { AppView } from "../types/platform";
-
-const TABS: { id: AppView; label: string; short: string }[] = [
-  { id: "assess", label: "Assess deal", short: "Assess" },
-  {
-    id: "counterparties",
-    label: "Counterparty scores",
-    short: "Counterparties",
-  },
-  {
-    id: "platform",
-    label: "Platform deals",
-    short: "Platform",
-  },
-  {
-    id: "missing",
-    label: "Missing fields",
-    short: "Missing",
-  },
-  {
-    id: "route-table",
-    label: "Route risk table",
-    short: "Routes",
-  },
-  {
-    id: "blueberry-cram",
-    label: "Blueberry CRAM",
-    short: "Blueberries",
-  },
-];
-
-/** Hidden from nav for now — views/code kept so they can be re-enabled. */
-export const HIDDEN_APP_TABS = new Set<AppView>([
-  "counterparties",
-  "missing",
-  "route-table",
-]);
-
-export const VISIBLE_APP_TABS = TABS.filter((t) => !HIDDEN_APP_TABS.has(t.id));
+import { VISIBLE_APP_TABS } from "./app-tabs";
+import { Sidebar } from "./Sidebar";
 
 interface AppNavProps {
   view: AppView;
@@ -60,8 +25,8 @@ export function AppNav({
   };
 
   return (
-    <nav className="border-b border-tm-border bg-tm-surface">
-      <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-4 sm:px-6">
+    <nav className="border-b border-tm-border bg-tm-surface lg:hidden print:hidden">
+      <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto overflow-y-hidden px-4 [scrollbar-width:none] sm:px-6 [&::-webkit-scrollbar]:hidden">
         {VISIBLE_APP_TABS.map((tab) => {
           const active = view === tab.id;
           const count = badge[tab.id];
@@ -97,5 +62,35 @@ export function AppNav({
         })}
       </div>
     </nav>
+  );
+}
+
+const SIDE_ICON: Partial<Record<AppView, typeof Sprout>> = {
+  assess: FileSearch,
+  "pre-harvest": Sprout,
+  platform: Briefcase,
+  "blueberry-cram": Cherry,
+};
+
+/** Desktop navigation for the internal workspace, on the shared sidebar. */
+export function AppSidebar({ view, onChange, platformCount, onHome }: { view: AppView; onChange: (v: AppView) => void; platformCount: number; onHome: () => void }) {
+  return (
+    <Sidebar
+      product="Credit risk"
+      active={view}
+      onHome={onHome}
+      onSelect={(id) => onChange(id as AppView)}
+      groups={[
+        {
+          items: VISIBLE_APP_TABS.map((tab) => ({
+            id: tab.id,
+            label: tab.id === "pre-harvest" ? "Pre-harvest loans" : tab.label,
+            icon: SIDE_ICON[tab.id] ?? FileSearch,
+            count: tab.id === "platform" ? platformCount : undefined,
+          })),
+        },
+      ]}
+      footer={<p className="px-3 text-[11px] leading-snug text-tm-text-muted">Agro trade-finance credit risk · Peru</p>}
+    />
   );
 }

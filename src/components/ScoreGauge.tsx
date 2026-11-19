@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { RiskTier } from "../types";
 import { getTierColors } from "../lib/risk-colors";
@@ -14,18 +14,25 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 export function ScoreGauge({ score, tier }: ScoreGaugeProps) {
   const [animatedScore, setAnimatedScore] = useState(0);
+  // Count from the value on screen, not from 0, so a score update does not
+  // reset the gauge (the pre-harvest replay changes the score every step).
+  const shown = useRef(0);
   const colors = getTierColors(tier);
-  const offset = CIRCUMFERENCE - (animatedScore / 100) * CIRCUMFERENCE;
+  // The ring animates straight to the target; only the number is ticked by hand.
+  const offset = CIRCUMFERENCE - (score / 100) * CIRCUMFERENCE;
 
   useEffect(() => {
     const duration = 900;
+    const from = shown.current;
     const start = performance.now();
     let frame: number;
 
     const tick = (now: number) => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setAnimatedScore(Math.round(score * eased));
+      const value = Math.round(from + (score - from) * eased);
+      shown.current = value;
+      setAnimatedScore(value);
       if (progress < 1) frame = requestAnimationFrame(tick);
     };
 
