@@ -55,6 +55,20 @@ import type {
   DataQualityFlag,
 } from "../src/types/platform";
 
+
+/**
+ * Short, stable deal ids ("plat-" + first 8 hex of the Mongo id). Two Mongo ids can
+ * share those 8 characters (sequential inserts: ...a0 / ...a1), so a colliding
+ * deal takes its full Mongo id instead of silently sharing the first one's id.
+ */
+const usedDealIds = new Set<string>();
+function uniqueDealId(mongoId: string): string {
+  const short = `plat-${mongoId.slice(0, 8)}`;
+  const id = usedDealIds.has(short) ? `plat-${mongoId}` : short;
+  usedDealIds.add(id);
+  return id;
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DESKTOP = join(process.env.HOME ?? "", "Desktop");
 const SOURCE_CSV = join(DESKTOP, "full-deals-dataset-2026-07 (1).csv");
@@ -615,7 +629,7 @@ function main() {
     const currentMilestone = normalizeDealMilestone(status, parseNumber(row.currentMilestone));
 
     const record: PlatformDealRecord = {
-      id: `plat-${row._id.slice(0, 8)}`,
+      id: uniqueDealId(row._id),
       mongoId: row._id,
       dealRef: row.name || row._id,
       product,

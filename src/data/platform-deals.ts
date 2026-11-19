@@ -24615,7 +24615,7 @@ export const platformDeals: PlatformDealRecord[] = [
     "shipmentCompany": null
   },
   {
-    "id": "plat-69d3e6fb",
+    "id": "plat-69d3e6fb9e76ea086ca4c1a1",
     "mongoId": "69d3e6fb9e76ea086ca4c1a1",
     "dealRef": "FRESH BLUEBERRIES TRD-CULT-002",
     "product": "Fresh Blueberries",
