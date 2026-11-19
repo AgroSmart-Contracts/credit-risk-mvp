@@ -287,7 +287,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
         </ul>
       </Card>
 
-      {/* 04 Requiere su decisión */}
+      {/* 04 Decisiones pendientes */}
       {pending.length > 0 && <SectionTitle no="04" title={t("Decisiones pendientes", "Pending decisions")} sub={t("conformidades del banco", "the bank's conformities")} />}
       {pending.map((p) => (
         <DecisionBlock

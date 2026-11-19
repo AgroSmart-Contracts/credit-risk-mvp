@@ -1,5 +1,5 @@
 /**
- * "Requiere su decisión": a pending bank conformity, with what is at stake, the
+ * A pending bank conformity, with what is at stake, the
  * checklist, the coverage and TruMarket's recommendation. The bank answers with
  * "Dar conformidad" or "Pedir información"; the answer is recorded with its date.
  */

@@ -234,7 +234,7 @@ const ICA_0188: Loan = {
     L("Cosecha esperada **10% menor**: vigor del cultivo 16% bajo lo normal", "Expected harvest **10% smaller**: crop vigour 16% below normal"),
     L("Cobertura **1.75x**, sobre el umbral de 1.50x", "Coverage **1.75x**, above the 1.50x threshold"),
     L("Expuesto: **USD 10,800**. El T2 se calcula sobre el aforo del 15 nov", "Exposed: **USD 10,800**. T2 is sized on the 15 Nov field estimate"),
-    L("Productor, agua y uso de fondos en orden. **No requiere su decisión hoy**", "Grower, water and use of funds in order. **No bank decision required today**"),
+    L("Productor, agua y uso de fondos en orden. **No requiere decisión del banco hoy**", "Grower, water and use of funds in order. **No bank decision required today**"),
   ],
 };
 
@@ -362,7 +362,7 @@ const ICA_0201: Loan = {
     L("**T3 de USD 7,200 congelado** el 06 nov, el mismo día del desvío", "**T3 of USD 7,200 frozen** on 06 Nov, the day of the deviation"),
     L("Cobertura **1.57x** confirmada; estimado **1.15x a 1.30x** si no se remedia", "Coverage **1.57x** confirmed; estimated **1.15x to 1.30x** if not remedied"),
     L("Expuesto: **USD 16,800**, limitado a lo desembolsado", "Exposed: **USD 16,800**, limited to what was disbursed"),
-    L("Plan de remediación al 05 dic. **No requiere su decisión hoy**", "Remediation plan due 05 Dec. **No bank decision required today**"),
+    L("Plan de remediación al 05 dic. **No requiere decisión del banco hoy**", "Remediation plan due 05 Dec. **No bank decision required today**"),
   ],
 };
 
@@ -479,7 +479,7 @@ const ICA_0215: Loan = {
     L("Nueva deuda del productor: **24% de la línea**", "New grower debt: **24% of the line**"),
     L("Cobertura **1.60x**, sobre el umbral de 1.50x", "Coverage **1.60x**, above the 1.50x threshold"),
     L("Expuesto: **USD 9,600**. El T2 se calcula sobre el aforo del 20 nov", "Exposed: **USD 9,600**. T2 is sized on the 20 Nov field estimate"),
-    L("Cultivo, agua y uso de fondos en orden. **No requiere su decisión hoy**", "Crop, water and use of funds in order. **No bank decision required today**"),
+    L("Cultivo, agua y uso de fondos en orden. **No requiere decisión del banco hoy**", "Crop, water and use of funds in order. **No bank decision required today**"),
   ],
 };
 
@@ -706,7 +706,7 @@ const ICA_0142: Loan = {
     L("Aforo **3% sobre lo declarado**", "Field estimate **3% above declared**"),
     L("Cobertura **2.05x**, sobre el umbral de 1.50x", "Coverage **2.05x**, above the 1.50x threshold"),
     L("Expuesto: **USD 21,000**. T3 de USD 9,000 previsto el 15 feb", "Exposed: **USD 21,000**. T3 of USD 9,000 planned 15 Feb"),
-    L("Todo en orden. **No requiere su decisión hoy**", "All in order. **No bank decision required today**"),
+    L("Todo en orden. **No requiere decisión del banco hoy**", "All in order. **No bank decision required today**"),
   ],
 };
 
@@ -864,7 +864,7 @@ export const PORTFOLIO: Portfolio = {
       since: "2026-11-06",
       state: "naranja",
       oneLine: L(
-        "Las facturas de la fase 2 cubren solo 68% de lo desembolsado y la fertilización se aplicó 3 semanas tarde. TruMarket congeló el T3 de USD 7,200 el mismo día; su exposición queda limitada a USD 16,800. No requiere su decisión hoy.",
+        "Las facturas de la fase 2 cubren solo 68% de lo desembolsado y la fertilización se aplicó 3 semanas tarde. TruMarket congeló el T3 de USD 7,200 el mismo día; la exposición del banco queda limitada a USD 16,800. No requiere decisión del banco hoy.",
         "Phase 2 invoices cover only 68% of what was disbursed and fertiliser was applied 3 weeks late. TruMarket froze the T3 of USD 7,200 the same day; the bank's exposure stays limited to USD 16,800. No bank decision required today.",
       ),
       whatHappened: [
@@ -886,7 +886,7 @@ export const PORTFOLIO: Portfolio = {
       ],
       bankDecision: [
         L("Hoy: nada. El congelamiento es mecánico y ya está ejecutado.", "Today: nothing. The freeze is mechanical and already in place."),
-        L("Si la remediación se verifica al 05 dic: TruMarket propondrá liberar el T3 ajustado al aforo, con su conformidad.", "If remediation is verified by 05 Dec: TruMarket will propose releasing the T3 adjusted to the field estimate, with the bank's conformity."),
+        L("Si la remediación se verifica al 05 dic: TruMarket propondrá liberar el T3 ajustado al aforo, con la conformidad del banco.", "If remediation is verified by 05 Dec: TruMarket will propose releasing the T3 adjusted to the field estimate, with the bank's conformity."),
         L("Si no se verifica: TruMarket le enviará una recomendación escrita de pasar a rojo. Pasar a rojo es decisión del banco.", "If it is not verified: TruMarket will send you a written recommendation to move to red. Moving to red is the bank's decision."),
       ],
       evidence: [
