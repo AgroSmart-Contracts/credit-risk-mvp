@@ -37,6 +37,30 @@
   --color-tm-tint: #e6f6ef;
   --color-tm-surface: var(--color-bg-card);
 
+  /* BCP bank workspace (spec 2026-11-19, section 4.1) */
+  --color-bcp-ink: #102a40;
+  --color-bcp-muted: #4a5b6c;
+  --color-bcp-bg: #f4f6f8;
+  --color-bcp-border: #d9e1e8;
+  --color-bcp-divider: #eef2f5;
+  --color-bcp-fill: #e8edf1;
+  --color-bcp-fill-strong: #c3ccd5;
+  --color-bcp-green: #0f9d6b;
+  --color-bcp-green-text: #0b6b48;
+  --color-bcp-control: #f3faf6;
+  --color-bcp-control-border: #bfe3d0;
+  --color-bcp-verde-bg: #e3f4ec;
+  --color-bcp-ambar: #d9a93b;
+  --color-bcp-ambar-bg: #fbf1d9;
+  --color-bcp-ambar-text: #6e4a00;
+  --color-bcp-naranja: #e0702a;
+  --color-bcp-naranja-bg: #fde4d3;
+  --color-bcp-naranja-text: #8a3a0b;
+  --color-bcp-rojo: #d63a4d;
+  --color-bcp-rojo-bg: #fbe0e3;
+  --color-bcp-rojo-text: #9b1c2c;
+  --color-bcp-label: #c9d6e2;
+
   --font-sans: var(--font-family), system-ui, -apple-system, sans-serif;
   --font-display: "DM Serif Display", Georgia, serif;
 
@@ -127,3 +151,86 @@ body {
 }
 .tm-map-pulse { animation: tm-map-pulse 1.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .tm-map-pulse { animation: none; } }
+
+/*
+ * Bank workspace (pre-harvest): the sober look of a bank credit system, scoped so
+ * the internal app is unchanged. One typeface (Inter, as TruMarket), aligned
+ * figures, tight corners, rules instead of shadows. Follows IBCS-style reporting:
+ * message first, no decoration, colour only for meaning.
+ */
+.bank-ui {
+  --font-display: var(--font-sans);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --radius-2xl: 8px;
+}
+/* Aligned figures where numbers are compared (tables, amounts), not in running text. */
+.bank-ui table {
+  font-variant-numeric: tabular-nums;
+}
+.bank-ui .font-display {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.bank-ui [class*="shadow-tm"]:not([role="dialog"]) {
+  box-shadow: none;
+}
+
+/* BCP workspace: Arial labels, tabular numbers, no motion theatre (spec 2.8, 2.9, 4.2). */
+.bcp {
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--color-bcp-ink);
+}
+.bcp .lbl {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: var(--color-bcp-muted);
+}
+.bcp .num,
+.bcp table {
+  font-variant-numeric: tabular-nums;
+}
+.bcp .hatch {
+  background-image: repeating-linear-gradient(135deg, var(--color-bcp-naranja) 0 4px, var(--color-bcp-naranja-bg) 4px 8px);
+}
+.bcp .hatch-est {
+  background-image: repeating-linear-gradient(135deg, var(--color-bcp-fill-strong) 0 3px, transparent 3px 7px);
+}
+/* A4 report pages: 794 × 1123 px at 96 dpi. */
+.a4 {
+  width: 794px;
+  height: 1123px;
+  padding: 48px 56px;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .a4 {
+    box-shadow: none !important;
+    margin: 0 !important;
+    break-after: page;
+  }
+}
+
+/* Map marker labels: the loan and its state in words (never colour alone). */
+.bcp-map-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #102a40;
+  background: #ffffff;
+  border: 1px solid #d9e1e8;
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 2px 6px;
+}
+.bcp-map-label::before {
+  display: none;
+}
