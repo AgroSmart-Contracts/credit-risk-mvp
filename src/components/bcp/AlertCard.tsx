@@ -26,7 +26,7 @@ export function AlertCard({ loan, onOpen }: { loan: Loan; onOpen: () => void }) 
   const projState = p ? stateFromCoverage(p.low) : null;
   const tmDoes =
     loan.state === "naranja"
-      ? { h: t("Tramo congelado", "Tranche frozen"), s: t(`El T3 de ${usd(loan.frozenUsd)} no sale hasta verificar la remediación.`, `The T3 of ${usd(loan.frozenUsd)} does not go out until remediation is verified.`) }
+      ? { h: t("Tramo congelado", "Tranche frozen"), s: t(`El T3 de ${usd(loan.frozenUsd)} no se desembolsa hasta verificar la remediación.`, `The T3 of ${usd(loan.frozenUsd)} is not disbursed until remediation is verified.`) }
       : loan.state === "ambar"
         ? { h: t("Seguimiento reforzado", "Reinforced follow-up"), s: t("El T2 se calcula sobre el volumen verificado en el aforo, no sobre lo declarado.", "T2 is sized on the volume verified in the field estimate, not on the declaration.") }
         : { h: t("Monitoreo regular", "Regular monitoring"), s: t("Cada tramo se desembolsa solo contra su checklist y la conformidad del banco.", "Each tranche is disbursed only against its checklist and the bank's conformity.") };
@@ -85,7 +85,7 @@ export function AlertCard({ loan, onOpen }: { loan: Loan; onOpen: () => void }) 
 
       <div className="mt-4 grid gap-4 md:grid-cols-3">
         {[
-          { h: t("Exposición del banco", "Bank exposure"), big: usd(loan.disbursedUsd), s: loan.frozenUsd ? t(`desembolsado. ${usd(loan.frozenUsd)} congelado; ${usd(toDisburse(loan))} solo salen contra hitos verificados.`, `disbursed. ${usd(loan.frozenUsd)} frozen; ${usd(toDisburse(loan))} goes out only against verified milestones.`) : t(`desembolsado. Los ${usd(toDisburse(loan))} restantes solo salen contra hitos verificados.`, `disbursed. The remaining ${usd(toDisburse(loan))} goes out only against verified milestones.`) },
+          { h: t("Exposición del banco", "Bank exposure"), big: usd(loan.disbursedUsd), s: loan.frozenUsd ? t(`desembolsado. ${usd(loan.frozenUsd)} congelado; ${usd(toDisburse(loan))} solo se desembolsan contra hitos verificados.`, `disbursed. ${usd(loan.frozenUsd)} frozen; ${usd(toDisburse(loan))} is disbursed only against verified milestones.`) : t(`desembolsado. Los ${usd(toDisburse(loan))} restantes solo se desembolsan contra hitos verificados.`, `disbursed. The remaining ${usd(toDisburse(loan))} is disbursed only against verified milestones.`) },
           { h: t("Acción de TruMarket", "TruMarket action"), big: tmDoes.h, s: tmDoes.s },
           { h: t("Decisión del banco", "Bank decision"), big: pending ? t("Conformidad", "Conformity") : t("Ninguna hoy", "None today"), s: pending ? t(`${t(pending.title)}. Vence ${date(pending.dueDate ?? pending.date, "es")}.`, `${t(pending.title)}. Due ${date(pending.dueDate ?? pending.date, "en")}.`) : t(loan.next.label) },
         ].map((c) => (

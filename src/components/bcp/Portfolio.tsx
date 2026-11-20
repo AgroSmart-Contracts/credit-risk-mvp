@@ -474,7 +474,7 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
   for (let v = min; v <= max; v += 50_000) ticks.push(v);
   const line = [[L + 4, Y(F.disbursed)], ...pts.map((p, i) => [L + bw * i + bw / 2, Y(p)])];
   const aria = t(
-    `Calendario de caja. ${rows.map((r) => `${month(r.month, "es")}: sale ${usd(r.out)}, vuelve ${usd(r.back)}`).join("; ")}. Saldo máximo expuesto ${usd(peak)}${peakMonth ? ` en ${month(peakMonth, "es")}` : ""}.`,
+    `Calendario de caja. ${rows.map((r) => `${month(r.month, "es")}: desembolsos ${usd(r.out)}, repagos ${usd(r.back)}`).join("; ")}. Saldo máximo expuesto ${usd(peak)}${peakMonth ? ` en ${month(peakMonth, "es")}` : ""}.`,
     `Cash calendar. ${rows.map((r) => `${month(r.month, "en")}: out ${usd(r.out)}, back ${usd(r.back)}`).join("; ")}. Peak balance exposed ${usd(peak)}${peakMonth ? ` in ${month(peakMonth, "en")}` : ""}.`,
   );
   return (

@@ -48,7 +48,7 @@ export function frozenDetail(d: Portfolio, t: T, lang: Lang): DrawerContent {
     title: t("Fondos congelados", "Frozen funds"),
     body: (
       <>
-        <ImpactBox label={t("Congelado", "Frozen")} value={usd(F.frozen)} note={t("No sale hasta verificar la remediación. La exposición queda limitada a lo desembolsado.", "Not released until remediation is verified. Exposure stays limited to what was disbursed.")} />
+        <ImpactBox label={t("Congelado", "Frozen")} value={usd(F.frozen)} note={t("No se desembolsa hasta verificar la remediación. La exposición queda limitada a lo desembolsado.", "Not released until remediation is verified. Exposure stays limited to what was disbursed.")} />
         <DrawerTable
           head={[t("Préstamo", "Loan"), t("Tramo", "Tranche"), t("Monto", "Amount"), t("Desde", "Since"), t("Motivo y plan", "Reason and plan")]}
           right={[2]}
@@ -72,7 +72,7 @@ export function undrawnDetail(d: Portfolio, t: T, lang: Lang): DrawerContent {
     title: t("Por desembolsar contra hitos", "Undrawn, against milestones"),
     body: (
       <>
-        <ImpactBox label={t("Compromiso no desembolsado", "Undrawn commitment")} value={usd(total)} note={t("Cada tramo sale solo con su checklist completo y la conformidad del banco. El tramo de cuajado se calcula sobre el volumen verificado.", "Each tranche goes out only with its checklist complete and the bank's conformity. The fruit-set tranche is sized on the verified volume.")} />
+        <ImpactBox label={t("Compromiso no desembolsado", "Undrawn commitment")} value={usd(total)} note={t("Cada tramo se desembolsa solo con su checklist completo y la conformidad del banco. El tramo de cuajado se calcula sobre el volumen verificado.", "Each tranche is disbursed only with its checklist complete and the bank's conformity. The fruit-set tranche is sized on the verified volume.")} />
         <DrawerTable
           head={[t("Préstamo", "Loan"), t("Tramo", "Tranche"), t("Monto máx.", "Max amount"), t("Hito", "Milestone"), t("Checklist", "Checklist")]}
           right={[2]}
