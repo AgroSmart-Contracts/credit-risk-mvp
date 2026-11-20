@@ -6,10 +6,16 @@
  * use of funds 93% reconciled, 72% paid direct, 4,930 unexplained.
  */
 import type { Application, Condition, ConditionState, Loan, Portfolio, Provenance, Tx } from "../../lib/bcp/types";
+import { ensoAt, ninoAnomaly } from "./enso";
 
 const L = (es: string, en: string): Tx => ({ es, en });
 const ENGINE = "pre-harvest-v0.1";
 const CUTOFF = "2026-11-10";
+
+// Real readings: the coastal El Niño class (NOAA Niño 1+2, ENFEN classes) and export prices (customs).
+const ENSO_SOURCE = L("ENFEN, comunicado 19-2026 · Niño 1+2 (NOAA) oct 2026", "ENFEN, communiqué 19-2026 · Niño 1+2 (NOAA) Oct 2026");
+const PRICE_SOURCE = L("Exportaciones de palta Hass (aduanas) · ago 2026", "Hass avocado exports (customs) · Aug 2026");
+const OCT_ANOM = ninoAnomaly("2026-10")!.toFixed(1);
 
 // ---------------------------------------------------------------------------
 // Conditions: one table per loan, grouped as in the spec (9.3).
@@ -30,6 +36,8 @@ const row = ([group, label, atApproval, today, threshold, state, effectOnRepayme
 const NONE = L("Ninguno", "None");
 
 interface CondOpts {
+  /** Approval date: the El Niño class known then. */
+  approval: string;
   newDebt: [string, string, ConditionState, Tx];
   vigor: [string, string, ConditionState, Tx, string];
   water: [string, string];
@@ -49,10 +57,10 @@ function conditions(o: CondOpts): Condition[] {
     row(["Prestatario", L("Licencia de agua", "Water licence"), L("Vigente", "Valid"), L("Vigente", "Valid"), L("vencida o suspendida", "expired or suspended"), "verde", NONE, "doc_verificado", L("ANA · 15 set", "ANA · 15 Sep")]),
     row(["Cultivo y volumen", L("Vigor del cultivo vs lo normal del lote", "Crop vigour vs the lot's normal"), L(o.vigor[0], o.vigor[0]), L(o.vigor[1], o.vigor[1]), L("-15% ámbar · -30% naranja", "-15% amber · -30% orange"), o.vigor[2], o.vigor[3], "satelital", L(`Sentinel-2 · ${o.vigor[4]}`, `Sentinel-2 · ${o.vigor[4]}`)]),
     row(["Cultivo y volumen", L("Agua disponible vs necesidad", "Water available vs need"), L(o.water[0], o.water[0]), L(o.water[1], o.water[1]), L("bajo 100%", "below 100%"), "verde", NONE, "satelital", L("ERA5 + licencia · 09 nov", "ERA5 + licence · 09 Nov")]),
-    row(["Cultivo y volumen", L("El Niño costero", "Coastal El Niño"), L("Moderado", "Moderate"), L("Fuerte", "Strong"), L("alerta temprana TM", "TM early warning"), "observacion", L("Volumen -5% a -10% · cobertura -0.10x a -0.20x", "Volume -5% to -10% · coverage -0.10x to -0.20x"), "estimado", L("ENFEN · oct 2026", "ENFEN · Oct 2026")]),
+    row(["Cultivo y volumen", L("El Niño costero", "Coastal El Niño"), ensoAt(o.approval).label, ensoAt(CUTOFF).label, L("alerta temprana TM", "TM early warning"), "observacion", L("Volumen -5% a -10% · cobertura -0.10x a -0.20x", "Volume -5% to -10% · coverage -0.10x to -0.20x"), "estimado", ENSO_SOURCE]),
     row(["Cultivo y volumen", L("Seguro agrícola", "Crop insurance"), L("Vigente", "In force"), L("Vigente al 30 abr 2027", "In force to 30 Apr 2027"), L("vencido o sin pago", "expired or unpaid"), "verde", NONE, "doc_verificado", L("Póliza · 10 set", "Policy · 10 Sep")]),
     row(["Cultivo y volumen", L("Eventos de zona (paros, bloqueos)", "Zone events (strikes, blockades)"), L("Ninguno", "None"), L("Ninguno", "None"), L("evento que afecte un hito", "event affecting a milestone"), "verde", NONE, "declarado", L("Monitoreo de zona TM · 10 nov", "TM zone monitoring · 10 Nov")]),
-    row(["Precio y calidad", L("Precio esperado a cosecha", "Expected harvest price"), L(o.price[0], o.price[0]), L(o.price[1], o.price[1]), L("-15% ámbar · -30% naranja", "-15% amber · -30% orange"), "verde", o.price[2], "doc_verificado", L("Precios FOB de exportación · oct", "Export FOB prices · Oct")]),
+    row(["Precio y calidad", L("Precio esperado a cosecha", "Expected harvest price"), L(o.price[0], o.price[0]), L(o.price[1], o.price[1]), L("-15% ámbar · -30% naranja", "-15% amber · -30% orange"), "verde", o.price[2], "doc_verificado", PRICE_SOURCE]),
     row(["Precio y calidad", L("Fruta exportable", "Exportable fruit"), L(o.exportable[0], o.exportable[0]), L(o.exportable[1], o.exportable[1]), L("bajo 70%", "below 70%"), "verde", o.exportable[2], "estimado", L("Visita · 08 sep + sanidad", "Visit · 08 Sep + plant health")]),
     row(["Uso de fondos y cobranza", L("Facturas de tramos vs presupuesto", "Tranche invoices vs budget"), o.invoices[0], o.invoices[1], L("brecha 15% ámbar · 30% naranja", "gap 15% amber · 30% orange"), o.invoices[2], o.invoices[3], "doc_verificado", L(`Facturas electrónicas · ${o.invoices[4]}`, `E-invoices · ${o.invoices[4]}`)]),
     row(["Uso de fondos y cobranza", L("Labores en ventana", "Field work in window"), L("Plan de fase", "Phase plan"), o.work[0], L("+2 sem ámbar · +4 naranja", "+2 wk amber · +4 orange"), o.work[1], o.work[2], "satelital", L("Sentinel-2 + fotos · 08 nov", "Sentinel-2 + photos · 08 Nov")]),
@@ -161,6 +169,7 @@ const ICA_0188: Loan = {
     { date: "2026-11-10", value: 1.75, note: L("vigor -16%", "vigour -16%") },
   ],
   conditions: conditions({
+    approval: "2026-09-15",
     newDebt: ["USD 18,200", "USD 19,100", "verde", L("Ninguno (+2.5% de la línea)", "None (+2.5% of the line)")],
     vigor: ["+2%", "-16%", "ambar", L("Volumen -10% · cobertura -0.20x", "Volume -10% · coverage -0.20x"), "08 nov"],
     water: ["111%", "104%"],
@@ -294,6 +303,7 @@ const ICA_0201: Loan = {
   ],
   coverageHistory: weekly("2026-08-25", CUTOFF, [[1.65], [1.65], [1.65], [1.65], [1.65], [1.65], [1.65], [1.62, L("precio", "price")], [1.62], [1.6], [1.6], [1.57, L("precio", "price")]]),
   conditions: conditions({
+    approval: "2026-08-25",
     newDebt: ["USD 6,000", "USD 6,000", "verde", NONE],
     vigor: ["0%", "-6%", "verde", NONE, "08 nov"],
     water: ["108%", "103%"],
@@ -422,6 +432,7 @@ const ICA_0215: Loan = {
   ],
   coverageHistory: weekly("2026-10-01", CUTOFF, [[1.62], [1.62], [1.62], [1.61], [1.6, L("precio", "price")], [1.6], [1.6]]),
   conditions: conditions({
+    approval: "2026-10-01",
     newDebt: ["USD 0", "USD 7,680", "ambar", L("Capacidad de pago en seguimiento · cobertura sin cambio", "Repayment capacity under follow-up · coverage unchanged")],
     vigor: ["+1%", "-3%", "verde", NONE, "08 nov"],
     water: ["110%", "106%"],
@@ -536,6 +547,7 @@ const PIS_0034: Loan = {
   ],
   coverageHistory: weekly("2026-09-22", CUTOFF, [[1.95], [1.95], [1.95], [1.93, L("precio", "price")], [1.92], [1.9], [1.9], [1.9]]),
   conditions: conditions({
+    approval: "2026-09-22",
     newDebt: ["USD 4,000", "USD 4,000", "verde", NONE],
     vigor: ["+3%", "+1%", "verde", NONE, "08 nov"],
     water: ["112%", "107%"],
@@ -639,6 +651,7 @@ const ICA_0142: Loan = {
   ],
   coverageHistory: weekly("2026-09-01", CUTOFF, [[2.0], [2.0], [2.0], [2.0], [2.0], [2.0], [2.0], [2.0], [2.0], [2.05, L("aforo +3%", "estimate +3%")], [2.05]]),
   conditions: conditions({
+    approval: "2026-09-01",
     newDebt: ["USD 0", "USD 0", "verde", NONE],
     vigor: ["+4%", "+6%", "verde", NONE, "08 nov"],
     water: ["115%", "109%"],
@@ -791,8 +804,8 @@ const ICA_0244_APP: Application = {
   ],
   recommendation: "aprobar",
   summary: L(
-    "Aprobar pone USD 12,000 a la firma y hasta USD 40,000 contra hitos; la cosecha esperada paga 1.85 veces los USD 42,000 al vencimiento.",
-    "Approving puts USD 12,000 out at signing and up to USD 40,000 against milestones; the expected harvest pays 1.85 times the USD 42,000 due at maturity.",
+    "Si se aprueba, se desembolsan USD 12,000 a la firma y hasta USD 40,000 contra hitos verificados; el ingreso esperado de cosecha cubre 1.85 veces los USD 42,000 al vencimiento.",
+    "If approved, USD 12,000 is disbursed at signing and up to USD 40,000 against verified milestones; expected harvest revenue covers 1.85 times the USD 42,000 due at maturity.",
   ),
   reasons: [
     L("Huerto de 7 años con vigor 4% sobre lo normal del lote y cosechas verificadas en dos campañas.", "7-year orchard with vigour 4% above the lot's normal and harvests verified in two campaigns."),
@@ -802,8 +815,8 @@ const ICA_0244_APP: Application = {
   checks: [
     { group: "Cultivo y volumen", label: L("Vigor del cultivo vs lo normal del lote", "Crop vigour vs the lot's normal"), value: L("+4%", "+4%"), state: "verde", effect: NONE, provenance: "satelital", source: L("Sentinel-2 · 06 nov", "Sentinel-2 · 06 Nov") },
     { group: "Cultivo y volumen", label: L("Agua disponible vs necesidad", "Water available vs need"), value: L("112%", "112%"), state: "verde", effect: NONE, provenance: "satelital", source: L("ERA5 + licencia · 09 nov", "ERA5 + licence · 09 Nov") },
-    { group: "Cultivo y volumen", label: L("El Niño costero", "Coastal El Niño"), value: L("Fuerte", "Strong"), state: "observacion", effect: L("Cobertura -0.10x a -0.20x · estimado", "Coverage -0.10x to -0.20x · estimated"), provenance: "estimado", source: L("ENFEN · oct 2026", "ENFEN · Oct 2026") },
-    { group: "Precio y calidad", label: L("Precio esperado a cosecha", "Expected harvest price"), value: L("USD 1.94/kg", "USD 1.94/kg"), state: "verde", effect: NONE, provenance: "doc_verificado", source: L("Precios FOB de exportación · oct", "Export FOB prices · Oct") },
+    { group: "Cultivo y volumen", label: L("El Niño costero", "Coastal El Niño"), value: ensoAt(CUTOFF).label, state: "observacion", effect: L("Cobertura -0.10x a -0.20x · estimado", "Coverage -0.10x to -0.20x · estimated"), provenance: "estimado", source: ENSO_SOURCE },
+    { group: "Precio y calidad", label: L("Precio esperado a cosecha", "Expected harvest price"), value: L("USD 1.94/kg", "USD 1.94/kg"), state: "verde", effect: NONE, provenance: "doc_verificado", source: PRICE_SOURCE },
     { group: "Prestatario", label: L("Clasificación SBS", "SBS rating"), value: L("Normal · 0 protestos", "Normal · 0 protested debts"), state: "verde", effect: NONE, provenance: "doc_verificado", source: L("Central de riesgos · 05 nov", "Credit bureau · 05 Nov") },
     { group: "Prestatario", label: L("Tenencia del predio y gravámenes", "Land tenure and liens"), value: L("Título propio · 0", "Own title · 0"), state: "verde", effect: NONE, provenance: "doc_verificado", source: L("SUNARP · 05 nov", "SUNARP · 05 Nov") },
     { group: "Uso de fondos y cobranza", label: L("Contrato de packing", "Packhouse contract"), value: L("Firmado", "Signed"), state: "verde", effect: NONE, provenance: "doc_verificado", source: L("Contrato · 03 nov", "Contract · 03 Nov") },
@@ -854,7 +867,7 @@ export const PORTFOLIO: Portfolio = {
       from: "neutral",
       to: "observacion",
       impact: L("Cobertura podría bajar 0.10x a 0.20x. Aún no confirmado en campo.", "Coverage could fall 0.10x to 0.20x. Not yet confirmed in the field."),
-      cause: L("El Niño costero pasó a fuerte; en 2017 y 2023 redujo el cuajado de palta en Ica", "Coastal El Niño turned strong; in 2017 and 2023 it reduced avocado fruit set in Ica"),
+      cause: L(`El Niño costero de magnitud extraordinaria: el mar frente a la costa estuvo +${OCT_ANOM} °C sobre lo normal en octubre; en 2017 y 2023 redujo el cuajado de palta en Ica`, `Extraordinary coastal El Niño: the sea off the coast was +${OCT_ANOM} °C above normal in October; in 2017 and 2023 it reduced avocado fruit set in Ica`),
       evidence: { loanId: "ICA-0188", condition: "El Niño costero" },
     },
   ],
@@ -873,7 +886,7 @@ export const PORTFOLIO: Portfolio = {
         L("Ambos desvíos superan la banda naranja acordada (brecha de facturas 30%, labores +2 semanas).", "Both deviations exceed the agreed orange band (invoice gap 30%, field work +2 weeks)."),
       ],
       impact: [
-        L("Exposición: USD 16,800 (T1 USD 7,200 + T2 USD 9,600). No sale más dinero.", "Exposure: USD 16,800 (T1 USD 7,200 + T2 USD 9,600). No more money goes out."),
+        L("Exposición: USD 16,800 (T1 USD 7,200 + T2 USD 9,600). No se desembolsa más.", "Exposure: USD 16,800 (T1 USD 7,200 + T2 USD 9,600). No further disbursement."),
         L("T3 de USD 7,200 congelado desde el 06 nov.", "T3 of USD 7,200 frozen since 06 Nov."),
         L("Cobertura hoy 1.57x (aprobación 1.65x). Estimado 1.15x a 1.30x si la fertilización tardía reduce calibre y volumen.", "Coverage today 1.57x (approval 1.65x). Estimated 1.15x to 1.30x if late fertilisation reduces fruit size and volume."),
         L("Cesión de cobros vigente y cuenta de recaudo abierta: el repago sigue canalizado al banco.", "Assignment of receivables in force and collection account open: repayment still flows to the bank."),
