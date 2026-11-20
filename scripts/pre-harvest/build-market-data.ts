@@ -9,15 +9,17 @@
  *
  * Usage: npx tsx scripts/pre-harvest/build-market-data.ts
  */
-import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createReadStream, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
-const VERITRADE_FILES = [
-  "docs/Veritrade_ALESSANDRO.CORDANO@TRUMARKET.TECH_PE_E_20260827071252.xls",
-  "docs/Veritrade_CHIARA.RIVAS@TRUMARKET.TECH_PE_E_20260818044149.xls",
-];
+/** Peru export extracts kept locally in docs/ (git-ignored: licensed raw data). */
+const VERITRADE_FILES = readdirSync(path.join(ROOT, "docs"))
+  .filter((f) => /^Veritrade_.*_PE_E_\d+\.xls$/.test(f))
+  .sort()
+  .map((f) => `docs/${f}`);
+if (VERITRADE_FILES.length === 0) throw new Error("No Peru export extracts (docs/Veritrade_*_PE_E_*.xls) found locally.");
 const HS_PREFIX = "080440"; // Avocados, fresh or dried
 const COMTRADE_START = { year: 2019, month: 1 };
 
