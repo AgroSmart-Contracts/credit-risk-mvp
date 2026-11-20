@@ -9,7 +9,7 @@ import { PORTFOLIO } from "../../data/bcp/dataset";
 import { SERIES_OF_CONDITION, technicalSeries } from "../../data/bcp/technical";
 import { date } from "../../lib/bcp/calc";
 import type { Condition, Loan } from "../../lib/bcp/types";
-import { PROV_TEXT, useT } from "./shared";
+import { PROV_TEXT, sourceTx, useT } from "./shared";
 import { Prov, StateChip } from "./ui";
 
 const TechChart = lazy(() => import("./TechCharts").then((m) => ({ default: m.TechChart })));
@@ -57,7 +57,7 @@ export function EvidenceDrawer({ loanId, condition, onClose }: { loanId: string;
     [t("Estado", "State"), <StateChip key="s" state={c.state} />],
     [t("Qué afecta", "What it affects"), t(AFFECTS[c.group])],
     [t("Verificado o estimado", "Verified or estimated"), t(PROV_TEXT[c.provenance])],
-    [t("Fuente y fecha", "Source and date"), t(c.source)],
+    [t("Fuente y fecha", "Source and date"), t(sourceTx(c))],
     [t("Revisión humana", "Human review"), reviewed],
   ];
 
@@ -104,7 +104,7 @@ export function EvidenceDrawer({ loanId, condition, onClose }: { loanId: string;
 
           <p className="flex flex-wrap items-center gap-2">
             <Prov p={c.provenance} />
-            <span className="lbl">{t(c.source)}</span>
+            <span className="lbl">{t(sourceTx(c))}</span>
           </p>
           <p className="lbl">
             {t(

@@ -15,7 +15,7 @@ import { CoverageChart } from "./CoverageChart";
 import { decisionKey, type Answer } from "./answers";
 import { DecisionBlock } from "./Decision";
 import { Btn, Card, CheckIcon, Chip, Dialog, Estimado, ExampleChip, Lbl, Prov, Rich, SectionTitle, StateChip } from "./ui";
-import { useDrawer, useEvidence, useLang, useT } from "./shared";
+import { sourceTx, useDrawer, useEvidence, useLang, useT } from "./shared";
 import { loanMoneyDetail, trancheDetail } from "./details";
 
 const GROUPS: Condition["group"][] = ["Prestatario", "Cultivo y volumen", "Precio y calidad", "Uso de fondos y cobranza"];
@@ -134,7 +134,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         </div>
 
         <Card className="mt-3">
-          <h3 className="text-[16px] font-bold">{t("Tramos: cada dólar sale solo contra un hito verificado", "Tranches: every dollar goes out only against a verified milestone")}</h3>
+          <h3 className="text-[16px] font-bold">{t("Tramos: cada desembolso solo contra un hito verificado", "Tranches: each disbursement only against a verified milestone")}</h3>
           <Lbl>{t("checklist firmado por TruMarket + conformidad del banco", "checklist signed by TruMarket + the bank's conformity")}</Lbl>
           <div role="img" aria-label={t(`${released}% de la línea desembolsado`, `${released}% of the line disbursed`)} className="mt-3 h-1.5 overflow-hidden rounded-full bg-bcp-fill">
             <span className="block h-full bg-bcp-ink" style={{ width: `${released}%` }} />
@@ -300,7 +300,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                       <td className={`py-2 pr-3 ${c.state === "verde" ? "text-bcp-muted" : "font-semibold"}`}>{t(c.effectOnRepayment)}</td>
                       <td className="py-2 pr-3">
                         <Prov p={c.provenance} />
-                        <span className="lbl block">{t(c.source)}</span>
+                        <span className="lbl block">{t(sourceTx(c))}</span>
                       </td>
                       <td className="py-2 pr-1 text-right">
                         <button type="button" onClick={() => openEvidence(loan.id, c.label.es)} className="min-h-[36px] whitespace-nowrap text-xs font-semibold text-bcp-green-text underline-offset-2 hover:underline print:hidden">
@@ -499,8 +499,8 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               <>
                 <p className="lbl mb-3">
                   {t(
-                    "Lecturas técnicas detrás del expediente. Temperatura y lluvia: historia real de Ica. Vigor, agua, El Niño y precio: series de ejemplo calibradas a los valores del expediente.",
-                    "Technical readings behind the file. Temperature and rain: real Ica history. Vigour, water, El Niño and price: example series calibrated to the file's values.",
+                    "Lecturas técnicas detrás del expediente. Historia real: temperatura y lluvia de Ica, El Niño costero (NOAA, clases de ENFEN) y precios de exportación de palta Hass (aduanas). Vigor y agua: series de ejemplo calibradas a los valores del expediente.",
+                    "Technical readings behind the file. Real history: Ica temperature and rain, coastal El Niño (NOAA, ENFEN classes) and Hass avocado export prices (customs). Vigour and water: example series calibrated to the file's values.",
                   )}
                 </p>
                 <div className="grid gap-3 lg:grid-cols-2">

@@ -7,7 +7,7 @@
 import type { ReactNode } from "react";
 import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd } from "../../lib/bcp/calc";
 import type { Application, ExceptionNotice, Loan, Portfolio } from "../../lib/bcp/types";
-import { STATE_TEXT, useLang, useT } from "./shared";
+import { STATE_TEXT, sourceTx, useLang, useT } from "./shared";
 import { Rich } from "./ui";
 
 /** The rule behind a decision, short: the part before the first colon or full stop. */
@@ -572,7 +572,7 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
       <T
         head={[t("Verificación", "Check"), t("Resultado", "Result"), t("Estado", "State"), t("Efecto", "Effect"), t("Fuente", "Source")]}
         nowrap={[2]}
-        rows={app.checks.map((c) => [<span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>, t(c.value), stateWord(c.state, lang), t(c.effect), <span key="s" className="text-bcp-muted">{t(c.source)}</span>])}
+        rows={app.checks.map((c) => [<span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>, t(c.value), stateWord(c.state, lang), t(c.effect), <span key="s" className="text-bcp-muted">{t(sourceTx(c))}</span>])}
       />
 
       <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">

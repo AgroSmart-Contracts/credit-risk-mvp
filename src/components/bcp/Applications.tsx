@@ -10,7 +10,7 @@ import type { Application, Portfolio } from "../../lib/bcp/types";
 import { appKey, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { useLang, useT, useToast } from "./shared";
+import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
 import { Btn, Card, Chip, ExampleChip, Lbl, Prov, SectionTitle, StateChip } from "./ui";
 
@@ -214,7 +214,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
                   <td className={`py-2 pr-3 ${c.state === "verde" ? "text-bcp-muted" : "font-semibold"}`}>{t(c.effect)}</td>
                   <td className="py-2 pr-3">
                     <Prov p={c.provenance} />
-                    <span className="lbl block">{t(c.source)}</span>
+                    <span className="lbl block">{t(sourceTx(c))}</span>
                   </td>
                 </tr>
               ))}
