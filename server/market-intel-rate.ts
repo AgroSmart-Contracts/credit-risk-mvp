@@ -117,10 +117,10 @@ export async function handleMarketIntelRate(
 
     const result = await spawnMarketIntelRate(body);
     sendJson(res, result.ok ? 200 : result.unavailable ? 503 : 500, result);
-  } catch (err) {
+  } catch {
     sendJson(res, 400, {
       ok: false,
-      error: err instanceof Error ? err.message : "bad request",
+      error: "Rating unavailable",
     });
   }
 }
