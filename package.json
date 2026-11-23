@@ -16,7 +16,10 @@
     "test": "vitest run",
     "aggregate-customs": "python3 scripts/aggregate-customs-companies.py",
     "recalc-counterparties": "tsx scripts/recalculate-counterparty-scores.ts",
-    "sandbox-counterparties": "npm run aggregate-customs && npm run recalc-counterparties"
+    "sandbox-counterparties": "npm run aggregate-customs && npm run recalc-counterparties",
+    "build:bank": "node scripts/bank/build.mjs",
+    "bank:add-user": "node scripts/bank/add-user.mjs",
+    "verify:bank": "node scripts/bank/verify.mjs"
   },
   "dependencies": {
     "@vercel/node": "^5.8.22",

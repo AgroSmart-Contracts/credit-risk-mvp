@@ -8,3 +8,7 @@ docs/market-intel-peru-2025-2026-07-10/marts/sunat_cache/
 
 # Vercel builds from source.
 dist
+
+# The bank edition is deployed from its own package.
+.bank-build
+bank-server
