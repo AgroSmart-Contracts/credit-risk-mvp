@@ -399,7 +399,7 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
             rows={[
               [t("Cobertura en la aprobación", "Coverage at approval"), cov(loan.coverageAtApproval)],
               [t("Cobertura hoy (confirmada)", "Coverage today (confirmed)"), cov(loan.coverageToday)],
-              [t("Proyección (estimado)", "Projection (estimated)"), loan.projection ? range(loan.projection.low, loan.projection.high, lang) : t("sin cambio", "no change")],
+              [t("Proyección (estimado)", "Projection (estimated)"), loan.projection ? range(loan.projection.low, loan.projection.high, lang) : t("sin cambio proyectado", "no projected change")],
               ...scenarios(loan).map((s) => [t(s.label), cov(s.coverage)] as [string, string]),
               [t("Precio de equilibrio", "Break-even price"), `USD ${loan.breakEvenPriceUsdKg.toFixed(2)}/kg`],
               [t("Precio esperado a cosecha", "Expected harvest price"), `USD ${loan.expectedPriceUsdKg.toFixed(2)}/kg`],

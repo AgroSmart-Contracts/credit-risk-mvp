@@ -132,7 +132,7 @@ export function coverageDetail(d: Portfolio, t: T, lang: Lang): DrawerContent {
             <StateChip key="s" state={l.state} />,
             cov(l.coverageAtApproval),
             <b key="c">{cov(l.coverageToday)}</b>,
-            l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio", "no change"),
+            l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio proyectado", "no projected change"),
             pct((l.disbursedUsd / F.disbursed) * 100),
           ])}
           foot={[t("Cartera", "Portfolio"), "", "", cov(F.coverage), range(d.projection.low, d.projection.high, lang), "100%"]}
@@ -353,7 +353,7 @@ export function loanMoneyDetail(loan: Loan, kind: "line" | "disbursed" | "undraw
             rows={[
               [t("Saldo al vencimiento", "Due at maturity"), usd(loan.dueAtMaturityUsd)],
               [t("Cobertura de repago hoy", "Repayment coverage today"), cov(loan.coverageToday)],
-              [t("Proyección", "Projection"), loan.projection ? range(loan.projection.low, loan.projection.high, lang) : t("sin cambio", "no change")],
+              [t("Proyección", "Projection"), loan.projection ? range(loan.projection.low, loan.projection.high, lang) : t("sin cambio proyectado", "no projected change")],
               [t("Día del ciclo", "Day of cycle"), `${loan.dayOfCycle} ${t("de", "of")} ${loan.cycleDays}`],
             ]}
           />

@@ -26,9 +26,9 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
     expect(Object.values(F.byState).reduce((s, x) => s + x.usd, 0)).toBe(F.disbursed);
   });
 
-  it("capital maturities: mar 2027 90,000 and abr 2027 60,000", () => {
+  it("principal maturities match the cash calendar: mar 2027 82,800 (frozen T3 excluded) and abr 2027 60,000", () => {
     expect(F.maturities).toEqual([
-      ["2027-03", 90_000],
+      ["2027-03", 82_800],
       ["2027-04", 60_000],
     ]);
   });
@@ -143,5 +143,27 @@ describe("evidence links", () => {
       expect(loan.conditions.some((x) => x.label.es === c.evidence!.condition)).toBe(true);
     }
     for (const l of PORTFOLIO.loans) for (const cause of l.causes) if (cause.condition) expect(l.conditions.some((x) => x.label.es === cause.condition)).toBe(true);
+  });
+});
+
+describe("projections include every estimated risk on a loan", () => {
+  it("every loan under the El Niño watch carries it in its projection (-0.10x to -0.20x at least)", () => {
+    for (const l of PORTFOLIO.loans) {
+      const watched = l.conditions.some((c) => c.label.es === "El Niño costero" && c.state === "observacion");
+      if (!watched) continue;
+      expect(l.projection, l.id).toBeDefined();
+      expect(l.projection!.high).toBeLessThanOrEqual(Math.round((l.coverageToday - 0.1) * 100) / 100);
+      expect(l.projection!.low).toBeLessThanOrEqual(Math.round((l.coverageToday - 0.2) * 100) / 100);
+    }
+  });
+  it("ICA-0201 adds the late fertilisation (-0.27x to -0.42x) to El Niño", () => {
+    const l = PORTFOLIO.loans.find((x) => x.id === "ICA-0201")!;
+    expect(l.projection).toMatchObject({ low: 0.95, high: 1.2 });
+  });
+  it("the portfolio projection is the disbursement-weighted loan projections", () => {
+    const w = PORTFOLIO.loans.reduce((s, l) => s + l.disbursedUsd, 0);
+    const at = (k: "low" | "high") => Math.round((PORTFOLIO.loans.reduce((s, l) => s + l.disbursedUsd * l.projection![k], 0) / w) * 100) / 100;
+    expect(PORTFOLIO.projection).toMatchObject({ low: at("low"), high: at("high") });
+    expect(PORTFOLIO.projection.text.es).toContain(`${at("low").toFixed(2)}x a ${at("high").toFixed(2)}x`);
   });
 });

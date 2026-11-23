@@ -46,6 +46,8 @@ export interface Condition {
   effectOnRepayment: Tx;
   provenance: Provenance;
   source: Tx;
+  /** The source is real data (not example data). */
+  real?: boolean;
 }
 
 export interface UseOfFundsLine {
@@ -212,6 +214,8 @@ export interface AppCheck {
   effect: Tx;
   provenance: Provenance;
   source: Tx;
+  /** The source is real data (not example data). */
+  real?: boolean;
 }
 
 /** A loan application awaiting the bank's decision (discretionary: bank lane). */

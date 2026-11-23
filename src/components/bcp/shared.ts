@@ -40,11 +40,9 @@ export const PROV_TEXT: Record<Provenance, Tx> = {
 };
 
 
-/** Condition rows whose source is real public data (NOAA and ENFEN; customs export prices). Every other source and date is example data. */
-export const REAL_SOURCE_ROWS = new Set(["El Niño costero", "Precio esperado a cosecha"]);
-/** A row's source, marked as example data unless it is backed by real data. */
-export const sourceTx = (row: { label: Tx; source: Tx }): Tx =>
-  REAL_SOURCE_ROWS.has(row.label.es) ? row.source : { es: `${row.source.es} · dato de ejemplo`, en: `${row.source.en} · example data` };
+/** A row's source, marked as example data unless the row is backed by real data (`real`). */
+export const sourceTx = (row: { source: Tx; real?: boolean }): Tx =>
+  row.real ? row.source : { es: `${row.source.es} · dato de ejemplo`, en: `${row.source.en} · example data` };
 
 /** Opens the evidence drawer for a loan's condition row (Spanish label). */
 export const EvidenceContext = createContext<(loanId: string, condition: string) => void>(() => {});

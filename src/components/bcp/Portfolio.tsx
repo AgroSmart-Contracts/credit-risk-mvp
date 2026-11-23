@@ -381,7 +381,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">
                 {cov(l.coverageAtApproval)} → <b>{cov(l.coverageToday)}</b>
-                <span className="lbl block">{l.projection ? `${t("proyección", "projection")} ${range(l.projection.low, l.projection.high, lang)}` : t("sin cambio", "no change")}</span>
+                <span className="lbl block">{l.projection ? `${t("proyección", "projection")} ${range(l.projection.low, l.projection.high, lang)}` : t("sin cambio proyectado", "no projected change")}</span>
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">{date(l.maturityDate, lang)}</td>
               <td className="max-w-[18rem] py-2.5 text-bcp-ink">{t(l.summary)}</td>

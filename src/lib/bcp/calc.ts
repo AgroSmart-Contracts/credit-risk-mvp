@@ -120,9 +120,9 @@ export function portfolioFigures(loans: Loan[]) {
     byState[l.state].usd += l.disbursedUsd;
     byState[l.state].n += 1;
   }
-  // Capital maturities by month (the line is repaid in full at maturity).
+  // Principal maturities by month: the line less any frozen tranche (as in the cash calendar).
   const maturities = new Map<string, number>();
-  for (const l of loans) maturities.set(l.maturityDate.slice(0, 7), (maturities.get(l.maturityDate.slice(0, 7)) ?? 0) + l.lineUsd);
+  for (const l of loans) maturities.set(l.maturityDate.slice(0, 7), (maturities.get(l.maturityDate.slice(0, 7)) ?? 0) + l.lineUsd - l.frozenUsd);
   const funds = loans.map(loanFunds);
   const fundsDisbursed = funds.reduce((s, f) => s + f.budget, 0);
   const reconciled = funds.reduce((s, f) => s + f.reconciled, 0);
