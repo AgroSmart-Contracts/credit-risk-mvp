@@ -1,7 +1,7 @@
 /**
  * Printed reports, designed natively for A4 portrait (spec 7): the two-page
- * monthly portfolio report, the one-page exception notice, the three-page
- * credit memo of a loan and the one-page assessment memo of an application. Fixed 794 × 1123
+ * monthly portfolio report, the one-page exception notice, the credit memo of a
+ * loan (three pages, two in the bank edition) and the one-page assessment memo of an application. Fixed 794 × 1123
  * px pages, 1px rules, numbers right-aligned, readable in grayscale.
  */
 import type { ReactNode } from "react";
@@ -17,7 +17,7 @@ const shortBasis = (s: string) => s.split(/[:.]\s/)[0];
 function Page({ children, n, of, title, sub }: { children: ReactNode; n: number; of: number; title: string; sub: string }) {
   const t = useT();
   return (
-    <div className="a4 mx-auto mb-6 shadow-[0_1px_8px_rgba(16,42,64,0.12)] text-[12.5px] leading-[1.35] text-bcp-ink print:mb-0">
+    <div translate="no" className="notranslate a4 mx-auto mb-6 shadow-[0_1px_8px_rgba(16,42,64,0.12)] text-[12.5px] leading-[1.35] text-bcp-ink print:mb-0">
       {/* Every printed copy names who it was issued to. */}
       {BANK_EDITION && <p className="lbl absolute right-14 top-5">{t("Copia emitida a", "Copy issued to")} {getViewer()} · {new Date().toISOString().slice(0, 10)}</p>}
       <header className="border-b-2 border-bcp-ink pb-2">
@@ -335,9 +335,85 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
     </footer>
   );
 
+  const conditionsSection = (
+    <>
+        <H>{t("4. Cambios desde la aprobación", "4. Changes since approval")}</H>
+        <p className="mb-1 text-[11.5px] text-bcp-muted">
+          {t(
+            `${BANK_EDITION ? `${loan.conditions.length} condiciones que afectan el repago` : `${loan.conditions.length} condiciones monitoreadas; ${notGreen} fuera de verde`}. Aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}.`,
+            `${BANK_EDITION ? `${loan.conditions.length} conditions affecting repayment` : `${loan.conditions.length} conditions monitored; ${notGreen} not green`}. Approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}.`,
+          )}
+        </p>
+        <T
+          head={[t("Condición", "Condition"), t("Aprobación", "Approval"), t("Hoy", "Today"), ...(BANK_EDITION ? [] : [t("Umbral", "Threshold")]), t("Estado", "State"), t("Efecto en el repago", "Effect on repayment")]}
+          nowrap={[BANK_EDITION ? 3 : 4]}
+          rows={groups.flatMap((g) => [
+            [<b key="g">{groupText[g]}</b>, ...Array(BANK_EDITION ? 4 : 5).fill("")],
+            ...loan.conditions
+              .filter((c) => c.group === g)
+              .map((c) => [
+                <span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>,
+                t(c.atApproval),
+                t(c.today),
+                ...(BANK_EDITION ? [] : [<span key="u" className="text-bcp-muted">{t(c.threshold)}</span>]),
+                <span key="s" className={c.state !== "verde" ? "font-bold" : ""}>{stateWord(c.state, lang)}</span>,
+                t(c.effectOnRepayment),
+              ]),
+          ])}
+        />
+        <p className="mt-1 text-[11px] text-bcp-muted">{t("Cada fila tiene su fuente y fecha en el expediente.", "Every row has its source and date in the file.")}</p>
+    </>
+  );
+  const closingSections = (
+    <>
+        <H>{t("5. Uso de fondos", "5. Use of funds")}</H>
+        <T
+          head={[t("Tramo", "Tranche"), t("Partida", "Item"), t("Presupuesto", "Budget"), t("Conciliado", "Reconciled"), t("Pago directo", "Direct pay"), t("Sin sustento", "Unexplained"), t("Campo", "Field")]}
+          right={[2, 3, 4, 5]}
+          nowrap={[0]}
+          rows={loan.useOfFunds.flatMap((u) => {
+            const tot = fundsTotals(u.lines);
+            return [
+              ...u.lines.map((x, i) => [i === 0 ? u.tranche : "", t(x.item), usd(x.budgetUsd).slice(4), usd(x.reconciledUsd).slice(4), usd(x.directPayUsd).slice(4), usd(x.budgetUsd - x.reconciledUsd).slice(4), t(x.fieldMatch)]),
+              [
+                "",
+                <b key="t">{t(`Total ${u.tranche}`, `${u.tranche} total`)}</b>,
+                <b key="b">{usd(tot.budget).slice(4)}</b>,
+                <b key="r">{pct(tot.reconciledPct)}</b>,
+                <b key="d">{pct(tot.directPct)}</b>,
+                <b key="u">{usd(tot.unexplained).slice(4)}</b>,
+                t(`efectivo ${usd(u.cashWithdrawnUsd)}`, `cash ${usd(u.cashWithdrawnUsd)}`),
+              ],
+            ];
+          })}
+        />
+
+        <H>{t("6. Decisiones", "6. Decisions")}</H>
+        <T
+          head={[t("Fecha", "Date"), t("Decisión", "Decision"), t("Base", "Basis"), t("Responsable", "Responsible")]}
+          nowrap={[0]}
+          rows={[...loan.decisions].sort((a, b) => b.date.localeCompare(a.date)).map((d) => [date(d.date, lang, false), <b key="d">{t(d.title)}</b>, t(d.basis), d.lane === "bank" && !d.conformityDate ? t("BCP, pendiente", "BCP, pending") : t(d.responsible)])}
+        />
+
+        <H>{t("7. Registro de auditoría", "7. Audit log")}</H>
+        <T
+          head={[t("Fecha", "Date"), t("Evento", "Event"), t("Responsable", "Responsible"), t("Regla", "Rule"), t("Evidencia", "Evidence")]}
+          nowrap={[0]}
+          rows={loan.auditLog.map((a) => [date(a.date, lang, false), t(a.event), t(a.responsible), t(a.rule), t(a.evidence)])}
+        />
+        <p className="mt-1 text-[11px] text-bcp-muted">{t("Las entradas son inmutables; las correcciones son entradas nuevas vinculadas.", "Entries are immutable; corrections are new linked entries.")}</p>
+    </>
+  );
+  const signOff = (
+        <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
+          <p className="lbl">{t(`Próximo hito: ${date(loan.next.date, "es")} · ${loan.next.label.es}. Motor ${data.engineVersion}.`, `Next milestone: ${date(loan.next.date, "en")} · ${loan.next.label.en}. Engine ${data.engineVersion}.`)}</p>
+          <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
+        </footer>
+  );
+
   return (
     <div>
-      <Page n={1} of={3} title={title} sub={sub}>
+      <Page n={1} of={BANK_EDITION ? 2 : 3} title={title} sub={sub}>
         <div className="mt-3 flex items-start gap-3">
           <div className="shrink-0 rounded border-2 border-bcp-ink px-2 py-1 text-center">
             <p className="font-[Arial,Helvetica,sans-serif] text-[13px] font-bold uppercase">{stateWord(loan.state, lang)}</p>
@@ -430,78 +506,25 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
         {footer}
       </Page>
 
-      <Page n={2} of={3} title={title} sub={sub}>
-        <H>{t("4. Cambios desde la aprobación", "4. Changes since approval")}</H>
-        <p className="mb-1 text-[11.5px] text-bcp-muted">
-          {t(
-            `${BANK_EDITION ? `${loan.conditions.length} condiciones que afectan el repago` : `${loan.conditions.length} condiciones monitoreadas; ${notGreen} fuera de verde`}. Aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}.`,
-            `${BANK_EDITION ? `${loan.conditions.length} conditions affecting repayment` : `${loan.conditions.length} conditions monitored; ${notGreen} not green`}. Approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}.`,
-          )}
-        </p>
-        <T
-          head={[t("Condición", "Condition"), t("Aprobación", "Approval"), t("Hoy", "Today"), ...(BANK_EDITION ? [] : [t("Umbral", "Threshold")]), t("Estado", "State"), t("Efecto en el repago", "Effect on repayment")]}
-          nowrap={[BANK_EDITION ? 3 : 4]}
-          rows={groups.flatMap((g) => [
-            [<b key="g">{groupText[g]}</b>, ...Array(BANK_EDITION ? 4 : 5).fill("")],
-            ...loan.conditions
-              .filter((c) => c.group === g)
-              .map((c) => [
-                <span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>,
-                t(c.atApproval),
-                t(c.today),
-                ...(BANK_EDITION ? [] : [<span key="u" className="text-bcp-muted">{t(c.threshold)}</span>]),
-                <span key="s" className={c.state !== "verde" ? "font-bold" : ""}>{stateWord(c.state, lang)}</span>,
-                t(c.effectOnRepayment),
-              ]),
-          ])}
-        />
-        <p className="mt-1 text-[11px] text-bcp-muted">{t("Cada fila tiene su fuente y fecha en el expediente.", "Every row has its source and date in the file.")}</p>
-        {footer}
-      </Page>
-
-      <Page n={3} of={3} title={title} sub={sub}>
-        <H>{t("5. Uso de fondos", "5. Use of funds")}</H>
-        <T
-          head={[t("Tramo", "Tranche"), t("Partida", "Item"), t("Presupuesto", "Budget"), t("Conciliado", "Reconciled"), t("Pago directo", "Direct pay"), t("Sin sustento", "Unexplained"), t("Campo", "Field")]}
-          right={[2, 3, 4, 5]}
-          nowrap={[0]}
-          rows={loan.useOfFunds.flatMap((u) => {
-            const tot = fundsTotals(u.lines);
-            return [
-              ...u.lines.map((x, i) => [i === 0 ? u.tranche : "", t(x.item), usd(x.budgetUsd).slice(4), usd(x.reconciledUsd).slice(4), usd(x.directPayUsd).slice(4), usd(x.budgetUsd - x.reconciledUsd).slice(4), t(x.fieldMatch)]),
-              [
-                "",
-                <b key="t">{t(`Total ${u.tranche}`, `${u.tranche} total`)}</b>,
-                <b key="b">{usd(tot.budget).slice(4)}</b>,
-                <b key="r">{pct(tot.reconciledPct)}</b>,
-                <b key="d">{pct(tot.directPct)}</b>,
-                <b key="u">{usd(tot.unexplained).slice(4)}</b>,
-                t(`efectivo ${usd(u.cashWithdrawnUsd)}`, `cash ${usd(u.cashWithdrawnUsd)}`),
-              ],
-            ];
-          })}
-        />
-
-        <H>{t("6. Decisiones", "6. Decisions")}</H>
-        <T
-          head={[t("Fecha", "Date"), t("Decisión", "Decision"), t("Base", "Basis"), t("Responsable", "Responsible")]}
-          nowrap={[0]}
-          rows={[...loan.decisions].sort((a, b) => b.date.localeCompare(a.date)).map((d) => [date(d.date, lang, false), <b key="d">{t(d.title)}</b>, t(d.basis), d.lane === "bank" && !d.conformityDate ? t("BCP, pendiente", "BCP, pending") : t(d.responsible)])}
-        />
-
-        <H>{t("7. Registro de auditoría", "7. Audit log")}</H>
-        <T
-          head={[t("Fecha", "Date"), t("Evento", "Event"), t("Responsable", "Responsible"), t("Regla", "Rule"), t("Evidencia", "Evidence")]}
-          nowrap={[0]}
-          rows={loan.auditLog.map((a) => [date(a.date, lang, false), t(a.event), t(a.responsible), t(a.rule), t(a.evidence)])}
-        />
-        <p className="mt-1 text-[11px] text-bcp-muted">{t("Las entradas son inmutables; las correcciones son entradas nuevas vinculadas.", "Entries are immutable; corrections are new linked entries.")}</p>
-
-        <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
-          <p className="lbl">{t(`Próximo hito: ${date(loan.next.date, "es")} · ${loan.next.label.es}. Motor ${data.engineVersion}.`, `Next milestone: ${date(loan.next.date, "en")} · ${loan.next.label.en}. Engine ${data.engineVersion}.`)}</p>
-          <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
-        </footer>
-      </Page>
+      {BANK_EDITION ? (
+        // The bank's shorter condition list leaves room for one closing page.
+        <Page n={2} of={2} title={title} sub={sub}>
+          {conditionsSection}
+          {closingSections}
+          {signOff}
+        </Page>
+      ) : (
+        <>
+          <Page n={2} of={3} title={title} sub={sub}>
+            {conditionsSection}
+            {footer}
+          </Page>
+          <Page n={3} of={3} title={title} sub={sub}>
+            {closingSections}
+            {signOff}
+          </Page>
+        </>
+      )}
     </div>
   );
 }
