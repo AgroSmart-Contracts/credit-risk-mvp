@@ -33,6 +33,9 @@ const row = ([group, label, atApproval, today, threshold, state, effectOnRepayme
   provenance,
   source,
 });
+const MONTH_EN: Record<string, string> = { ene: "Jan", feb: "Feb", mar: "Mar", abr: "Apr", may: "May", jun: "Jun", jul: "Jul", ago: "Aug", set: "Sep", oct: "Oct", nov: "Nov", dic: "Dec" };
+/** "04 nov" → "04 Nov" for the English copy. */
+const dayEn = (d: string) => d.replace(/[a-z]{3}$/, (m) => MONTH_EN[m] ?? m);
 const NONE = L("Ninguno", "None");
 
 interface CondOpts {
@@ -50,19 +53,19 @@ interface CondOpts {
 
 function conditions(o: CondOpts): Condition[] {
   return [
-    row(["Prestatario", L("Clasificación SBS", "SBS rating"), L("Normal", "Normal"), L("Normal", "Normal"), L("cualquier baja", "any downgrade"), "verde", NONE, "doc_verificado", L(`Central de riesgos · ${o.bureauDate}`, `Credit bureau · ${o.bureauDate}`)]),
-    row(["Prestatario", L("Deuda nueva en el sistema", "New debt in the system"), L(o.newDebt[0], o.newDebt[0]), L(o.newDebt[1], o.newDebt[1]), L("+20% de la línea", "+20% of the line"), o.newDebt[2], o.newDebt[3], "doc_verificado", L(`Central de riesgos · ${o.bureauDate}`, `Credit bureau · ${o.bureauDate}`)]),
+    row(["Prestatario", L("Clasificación SBS", "SBS rating"), L("Normal", "Normal"), L("Normal", "Normal"), L("cualquier baja", "any downgrade"), "verde", NONE, "doc_verificado", L(`Central de riesgos · ${o.bureauDate}`, `Credit bureau · ${dayEn(o.bureauDate)}`)]),
+    row(["Prestatario", L("Deuda nueva en el sistema", "New debt in the system"), L(o.newDebt[0], o.newDebt[0]), L(o.newDebt[1], o.newDebt[1]), L("+20% de la línea", "+20% of the line"), o.newDebt[2], o.newDebt[3], "doc_verificado", L(`Central de riesgos · ${o.bureauDate}`, `Credit bureau · ${dayEn(o.bureauDate)}`)]),
     row(["Prestatario", L("Deuda no declarada detectada", "Undeclared debt detected"), L("Ninguna", "None"), L("Ninguna", "None"), L("cualquiera congela el tramo", "any freezes the tranche"), "verde", NONE, "doc_verificado", L("Visita + proveedores de la zona · 08 nov", "Visit + local suppliers · 08 Nov")]),
     row(["Prestatario", L("Tenencia del predio y gravámenes", "Land tenure and liens"), L("Título propio · 0", "Own title · 0"), L("Título propio · 0", "Own title · 0"), L("cualquier gravamen nuevo", "any new lien"), "verde", NONE, "doc_verificado", L("SUNARP · 05 nov", "SUNARP · 05 Nov")]),
     row(["Prestatario", L("Licencia de agua", "Water licence"), L("Vigente", "Valid"), L("Vigente", "Valid"), L("vencida o suspendida", "expired or suspended"), "verde", NONE, "doc_verificado", L("ANA · 15 set", "ANA · 15 Sep")]),
-    row(["Cultivo y volumen", L("Vigor del cultivo vs lo normal del lote", "Crop vigour vs the lot's normal"), L(o.vigor[0], o.vigor[0]), L(o.vigor[1], o.vigor[1]), L("-15% ámbar · -30% naranja", "-15% amber · -30% orange"), o.vigor[2], o.vigor[3], "satelital", L(`Sentinel-2 · ${o.vigor[4]}`, `Sentinel-2 · ${o.vigor[4]}`)]),
+    row(["Cultivo y volumen", L("Vigor del cultivo vs lo normal del lote", "Crop vigour vs the lot's normal"), L(o.vigor[0], o.vigor[0]), L(o.vigor[1], o.vigor[1]), L("-15% ámbar · -30% naranja", "-15% amber · -30% orange"), o.vigor[2], o.vigor[3], "satelital", L(`Sentinel-2 · ${o.vigor[4]}`, `Sentinel-2 · ${dayEn(o.vigor[4])}`)]),
     row(["Cultivo y volumen", L("Agua disponible vs necesidad", "Water available vs need"), L(o.water[0], o.water[0]), L(o.water[1], o.water[1]), L("bajo 100%", "below 100%"), "verde", NONE, "satelital", L("ERA5 + licencia · 09 nov", "ERA5 + licence · 09 Nov")]),
     { ...row(["Cultivo y volumen", L("El Niño costero", "Coastal El Niño"), ensoAt(o.approval).label, ensoAt(CUTOFF).label, L("alerta temprana TM", "TM early warning"), "observacion", L("Volumen -5% a -10% · cobertura -0.10x a -0.20x", "Volume -5% to -10% · coverage -0.10x to -0.20x"), "estimado", ENSO_SOURCE]), real: true },
     row(["Cultivo y volumen", L("Seguro agrícola", "Crop insurance"), L("Vigente", "In force"), L("Vigente al 30 abr 2027", "In force to 30 Apr 2027"), L("vencido o sin pago", "expired or unpaid"), "verde", NONE, "doc_verificado", L("Póliza · 10 set", "Policy · 10 Sep")]),
     row(["Cultivo y volumen", L("Eventos de zona (paros, bloqueos)", "Zone events (strikes, blockades)"), L("Ninguno", "None"), L("Ninguno", "None"), L("evento que afecte un hito", "event affecting a milestone"), "verde", NONE, "declarado", L("Monitoreo de zona TM · 10 nov", "TM zone monitoring · 10 Nov")]),
     { ...row(["Precio y calidad", L("Precio esperado a cosecha", "Expected harvest price"), L(o.price[0], o.price[0]), L(o.price[1], o.price[1]), L("-15% ámbar · -30% naranja", "-15% amber · -30% orange"), "verde", o.price[2], "doc_verificado", PRICE_SOURCE]), real: true },
     row(["Precio y calidad", L("Fruta exportable", "Exportable fruit"), L(o.exportable[0], o.exportable[0]), L(o.exportable[1], o.exportable[1]), L("bajo 70%", "below 70%"), "verde", o.exportable[2], "estimado", L("Visita · 08 sep + sanidad", "Visit · 08 Sep + plant health")]),
-    row(["Uso de fondos y cobranza", L("Facturas de tramos vs presupuesto", "Tranche invoices vs budget"), o.invoices[0], o.invoices[1], L("brecha 15% ámbar · 30% naranja", "gap 15% amber · 30% orange"), o.invoices[2], o.invoices[3], "doc_verificado", L(`Facturas electrónicas · ${o.invoices[4]}`, `E-invoices · ${o.invoices[4]}`)]),
+    row(["Uso de fondos y cobranza", L("Facturas de tramos vs presupuesto", "Tranche invoices vs budget"), o.invoices[0], o.invoices[1], L("brecha 15% ámbar · 30% naranja", "gap 15% amber · 30% orange"), o.invoices[2], o.invoices[3], "doc_verificado", L(`Facturas electrónicas · ${o.invoices[4]}`, `E-invoices · ${dayEn(o.invoices[4])}`)]),
     row(["Uso de fondos y cobranza", L("Labores en ventana", "Field work in window"), L("Plan de fase", "Phase plan"), o.work[0], L("+2 sem ámbar · +4 naranja", "+2 wk amber · +4 orange"), o.work[1], o.work[2], "satelital", L("Sentinel-2 + fotos · 08 nov", "Sentinel-2 + photos · 08 Nov")]),
     row(["Uso de fondos y cobranza", L("Cesión de cobros exclusiva", "Exclusive assignment of receivables"), L("Inscrita", "Registered"), L("Vigente, sin cesiones a terceros", "In force, no third-party assignments"), L("cualquier cesión a terceros", "any third-party assignment"), "verde", NONE, "doc_verificado", L("Registro de facturas negociables · 05 nov", "Negotiable invoice registry · 05 Nov")]),
     row(["Uso de fondos y cobranza", L("Cuenta de recaudo", "Collection account"), L("Abierta", "Open"), L("Abierta", "Open"), L("pago fuera de la cuenta = rojo", "payment outside the account = red"), "verde", NONE, "doc_verificado", L("Banco · 14 set", "Bank · 14 Sep")]),
@@ -85,7 +88,7 @@ const T3_PENDING = [
 const T2_DONE = (pctReconciled: number, bureau: string) => [
   { label: L(`Facturas de T1 conciliadas (${pctReconciled}%)`, `T1 invoices reconciled (${pctReconciled}%)`), status: "ok" as const },
   { label: L("Aforo independiente de cuajado", "Independent fruit-set yield estimate"), status: "ok" as const },
-  { label: L(`Central de riesgos re-consultada ${bureau}`, `Credit bureau re-checked ${bureau}`), status: "ok" as const },
+  { label: L(`Central de riesgos re-consultada ${bureau}`, `Credit bureau re-checked ${dayEn(bureau)}`), status: "ok" as const },
   { label: L("Labores en ventana", "Field work within window"), status: "ok" as const },
 ];
 
@@ -435,7 +438,7 @@ const ICA_0215: Loan = {
   coverageHistory: weekly("2026-10-01", CUTOFF, [[1.62], [1.62], [1.62], [1.61], [1.6, L("precio", "price")], [1.6], [1.6]]),
   conditions: conditions({
     approval: "2026-10-01",
-    newDebt: ["USD 0", "USD 7,680", "ambar", L("Capacidad de pago en seguimiento · cobertura sin cambio", "Repayment capacity under follow-up · coverage unchanged")],
+    newDebt: ["USD 0", "USD 7,680", "ambar", L("Capacidad de pago en seguimiento · sin efecto en la cobertura", "Repayment capacity under follow-up · no effect on coverage")],
     vigor: ["+1%", "-3%", "verde", NONE, "08 nov"],
     water: ["110%", "106%"],
     price: ["USD 1.98/kg", "USD 1.94/kg", L("Cobertura -0.02x", "Coverage -0.02x")],
@@ -481,7 +484,7 @@ const ICA_0215: Loan = {
     { date: "2026-11-03", event: L("Estado verde → ámbar", "State green → amber"), responsible: L("Motor · confirmado por analista TM", "Engine · confirmed by TM analyst"), rule: L("Deuda nueva > 20% de la línea", "New debt > 20% of the line"), evidence: L("Central de riesgos 03 nov", "Credit bureau 03 Nov"), engineVersion: ENGINE },
     { date: "2026-10-01", event: L("T1 liberado · USD 9,600", "T1 released · USD 9,600"), responsible: L("Operaciones TM · conformidad BCP", "TM Operations · BCP conformity"), rule: L("Checklist T1", "T1 checklist"), evidence: L("4 documentos", "4 documents"), engineVersion: ENGINE },
   ],
-  summary: L("Nueva deuda del productor por 24% de la línea. Capacidad de pago en seguimiento; cobertura sin cambio (1.60x).", "Grower took new debt of 24% of the line. Repayment capacity under follow-up; coverage unchanged (1.60x)."),
+  summary: L("Nueva deuda del productor por 24% de la línea. Capacidad de pago en seguimiento; cobertura 1.60x.", "Grower took new debt of 24% of the line. Repayment capacity under follow-up; coverage 1.60x."),
   next: { date: "2026-11-20", label: L("T2 USD 12,800 · 20 nov", "T2 USD 12,800 · 20 Nov"), amountUsd: 12_800 },
   causes: [
     { status: "confirmado", text: L("El productor tomó nueva deuda por 24% de la línea.", "The grower took new debt of 24% of the line."), effect: L("0.00x · capacidad en seguimiento", "0.00x · capacity under follow-up"), condition: "Deuda nueva en el sistema" },
@@ -580,8 +583,8 @@ const PIS_0034: Loan = {
       lane: "bank",
       title: L("Conformidad del T2 por USD 11,200", "T2 conformity for USD 11,200"),
       basis: L(
-        "Checklist T2 completo: facturas de T1 99% conciliadas, aforo del 07 nov confirma el volumen declarado, central de riesgos sin cambios. Cobertura 1.90x. TruMarket recomienda dar conformidad por el monto completo.",
-        "T2 checklist complete: T1 invoices 99% reconciled, the 07 Nov field estimate confirms the declared volume, credit bureau unchanged. Coverage 1.90x. TruMarket recommends conformity for the full amount.",
+        "Checklist T2 completo: facturas de T1 99% conciliadas, aforo del 07 nov confirma el volumen declarado, central de riesgos sin cambios.",
+        "T2 checklist complete: T1 invoices 99% reconciled, the 07 Nov field estimate confirms the declared volume, credit bureau unchanged.",
       ),
       evidence: [L("Aforo 07 nov", "Field estimate 07 Nov"), L("Facturas 04 nov", "Invoices 04 Nov"), L("Central 05 nov", "Bureau 05 Nov")],
       engineVersion: ENGINE,
@@ -872,7 +875,7 @@ export const PORTFOLIO: Portfolio = {
       date: "2026-11-03",
       from: "verde",
       to: "ambar",
-      impact: L("Capacidad de pago del productor en seguimiento. Cobertura sin cambio (1.60x).", "Grower's repayment capacity under follow-up. Coverage unchanged (1.60x)."),
+      impact: L("Capacidad de pago del productor en seguimiento. Cobertura 1.60x.", "Grower's repayment capacity under follow-up. Coverage 1.60x."),
       cause: L("nueva deuda en el sistema financiero por 24% de la línea (central de riesgos)", "new debt in the financial system of 24% of the line (credit bureau)"),
       evidence: { loanId: "ICA-0215", condition: "Deuda nueva en el sistema" },
     },

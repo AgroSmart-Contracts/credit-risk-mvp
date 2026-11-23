@@ -51,7 +51,6 @@ export function stateFromCoverage(c: number): Exclude<State, "veto"> {
 }
 
 export const SEVERITY: Record<State, number> = { verde: 0, ambar: 1, naranja: 2, rojo: 3, veto: 4 };
-export const worstState = (a: State, b: State): State => (SEVERITY[a] >= SEVERITY[b] ? a : b);
 
 // ---------------------------------------------------------------------------
 // Loan figures (5.3)
@@ -175,13 +174,13 @@ export function cashCalendar(loans: Loan[], cutoff: string) {
       const m = ym(t.milestoneDate) < start ? start : ym(t.milestoneDate);
       const r = row(m);
       r.out += t.amountUsd;
-      r.items.push({ loanId: l.id, label: L(`${t.id} contra hito`, `${t.id} against milestone`), amount: t.amountUsd, dir: "out" });
+      r.items.push({ loanId: l.id, label: L(t.id, t.id), amount: t.amountUsd, dir: "out" });
     }
     // Principal back at maturity: what was and will be disbursed (frozen money is not lent).
     const principal = l.lineUsd - l.frozenUsd;
     const r = row(ym(l.maturityDate));
     r.back += principal;
-    r.items.push({ loanId: l.id, label: L("capital al vencimiento", "principal at maturity"), amount: principal, dir: "back" });
+    r.items.push({ loanId: l.id, label: L("capital", "principal"), amount: principal, dir: "back" });
   }
   return [...rows.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([m, r]) => ({ month: `${m}-01`, ...r }));
 }
