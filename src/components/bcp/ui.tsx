@@ -3,7 +3,7 @@
  * with a text label (never colour alone), provenance badges, the "Estimado"
  * badge, buttons, and a stacked bar with its numbers stated for screen readers.
  */
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { ConditionState, Provenance } from "../../lib/bcp/types";
 import { BANK_EDITION } from "./edition";
 import { PROV_TEXT, STATE_TEXT, useT } from "./shared";
@@ -26,14 +26,71 @@ export function Lbl({ children, className = "", as: As = "p" }: { children: Reac
 
 /** Page-level tabs: every kind of data has one fixed place on the page. */
 export function PageTabs<T extends string>({ tabs, value, onChange, label }: { tabs: { id: T; label: string; count?: number }[]; value: T; onChange: (id: T) => void; label: string }) {
+  const anchor = useRef<HTMLDivElement>(null);
+  const [top, setTop] = useState(0);
+  // The bar sticks right below the app header, whose height depends on the screen width.
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>(".bcp header.sticky");
+    if (!header) return;
+    const measure = () => setTop(header.offsetHeight);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+  const select = (id: T) => {
+    onChange(id);
+    const y = anchor.current?.getBoundingClientRect().top;
+    if (y !== undefined && y < top) window.scrollBy({ top: y - top });
+  };
   return (
-    <div role="tablist" aria-label={label} className="sticky top-0 z-20 -mx-4 flex gap-1 overflow-x-auto border-b border-bcp-border bg-bcp-bg px-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 print:hidden">
-      {tabs.map((x) => (
-        <button key={x.id} type="button" role="tab" aria-selected={value === x.id} onClick={() => onChange(x.id)} className={`-mb-px min-h-[46px] shrink-0 whitespace-nowrap border-b-2 px-3.5 text-sm font-semibold ${value === x.id ? "border-bcp-ink text-bcp-ink" : "border-transparent text-bcp-muted hover:text-bcp-ink"}`}>
-          {x.label}
-          {x.count !== undefined && <span className="ml-1.5 rounded-full bg-bcp-fill px-1.5 py-[1px] text-[11px]">{x.count}</span>}
-        </button>
-      ))}
+    <>
+      <div ref={anchor} aria-hidden />
+      <div role="tablist" aria-label={label} style={{ top }} className="sticky z-20 -mx-4 flex gap-1 overflow-x-auto border-b border-bcp-border bg-bcp-bg px-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 print:hidden">
+        {tabs.map((x) => (
+          <button key={x.id} type="button" role="tab" aria-selected={value === x.id} onClick={() => select(x.id)} className={`-mb-px min-h-[46px] shrink-0 whitespace-nowrap border-b-2 px-3.5 text-sm font-semibold ${value === x.id ? "border-bcp-ink text-bcp-ink" : "border-transparent text-bcp-muted hover:text-bcp-ink"}`}>
+            {x.label}
+            {x.count !== undefined && <span className="ml-1.5 rounded-full bg-bcp-fill px-1.5 py-[1px] text-[11px]">{x.count}</span>}
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/** A small centred dialog: Escape or the backdrop closes it, and focus returns to what opened it. */
+export function Modal({ title, onClose, children, footer }: { title: string; onClose: () => void; children: ReactNode; footer: ReactNode }) {
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null;
+    box.current?.querySelector<HTMLElement>("button")?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key !== "Tab" || !box.current) return;
+      const items = [...box.current.querySelectorAll<HTMLElement>("button")];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      opener?.focus();
+    };
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-[1200] flex items-center justify-center bg-bcp-ink/40 p-4 print:hidden" onClick={onClose}>
+      <div ref={box} role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()} className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-5 text-left shadow-xl sm:p-6">
+        <h2 className="text-[18px] font-bold leading-snug text-bcp-ink">{title}</h2>
+        <div className="mt-3">{children}</div>
+        <div className="mt-5 flex flex-wrap justify-end gap-2">{footer}</div>
+      </div>
     </div>
   );
 }

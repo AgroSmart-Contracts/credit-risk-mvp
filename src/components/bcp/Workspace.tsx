@@ -109,7 +109,7 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
           {view === "excepciones" && <Exceptions go={go} />}
           {view === "reportes" && <Reports go={go} />}
           {view === "reporte" && (
-            <ReportFrame onBack={() => go("reportes")}>
+            <ReportFrame onBack={() => go("cartera")}>
               <MonthlyReport data={PORTFOLIO} />
             </ReportFrame>
           )}
@@ -197,9 +197,11 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
             {it.count ? <span className="ml-1 text-bcp-muted">{it.count}</span> : null}
           </button>
         ))}
-        <button type="button" onClick={onExit} className="min-h-[44px] shrink-0 px-2.5 text-sm font-medium text-bcp-muted">
+        {!BANK_EDITION && (
+          <button type="button" onClick={onExit} className="min-h-[44px] shrink-0 px-2.5 text-sm font-medium text-bcp-muted">
           {t("Interno TruMarket", "TruMarket internal")} →
         </button>
+        )}
       </nav>
       <main className="px-4 py-6 sm:px-8 lg:px-10 print:p-0">{children}</main>
     </div>
@@ -207,12 +209,10 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
 }
 
 function Files({ go }: { go: (v: View, id?: string | null) => void }) {
-  const t = useT();
   return (
     <div className="mx-auto max-w-[1200px] space-y-4">
       <ExampleChip kind="portfolio" />
       <Card>
-        <SectionTitle title={t("Expedientes de crédito", "Credit files")} sub={t("ordenados por estado y exposición", "sorted by state and exposure")} />
         <LoansTable data={{ ...PORTFOLIO, loans: [...PORTFOLIO.loans].sort(bySeverity) }} onOpen={(x) => go("expediente", x)} />
       </Card>
     </div>
@@ -233,13 +233,12 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
   };
   return (
     <div className="mx-auto max-w-[1100px] space-y-4">
-      <SectionTitle title={t("Decisiones pendientes", "Pending decisions")} sub={t("Conformidades y aprobaciones del banco. Lo mecánico lo ejecuta TruMarket según contrato y se reporta el mismo día.", "The bank's conformities and approvals. Mechanical steps are executed by TruMarket under contract and reported the same day.")} />
       {all.length === 0 && PORTFOLIO.applications.length === 0 && <p className="text-sm text-bcp-muted">{t("Nada pendiente.", "Nothing pending.")}</p>}
       {all.map((p) => (
         <DecisionBlock key={decisionKey(p.loan, p.decision)} loan={p.loan} decision={p.decision} cutoff={PORTFOLIO.cutoff} answer={answers[decisionKey(p.loan, p.decision)]} onAnswer={(a) => onAnswer(decisionKey(p.loan, p.decision), a)} onOpen={() => go("expediente", p.loan.id)} />
       ))}
 
-      <SectionTitle no="··" title={t("Próximas", "Upcoming")} sub={t("hitos de los próximos 30 días y lo que ponen en juego", "milestones in the next 30 days and what they put at stake")} />
+      <SectionTitle title={t("Próximos 30 días", "Next 30 days")} />
       <Card>
         <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
           <table className="w-full min-w-[720px] text-sm">
@@ -273,7 +272,7 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
 
       {PORTFOLIO.applications.length > 0 && (
         <>
-          <SectionTitle no="··" title={t("Solicitudes por aprobar o rechazar", "Applications to approve or decline")} sub={t("nada se desembolsa hasta su aprobación", "nothing is disbursed until you approve")} />
+          <SectionTitle title={t("Solicitudes por aprobar o rechazar", "Applications to approve or decline")} />
           <Card>
             <ApplicationsTable apps={PORTFOLIO.applications} onOpen={(x) => go("solicitud", x)} answers={answers} />
           </Card>
@@ -287,7 +286,6 @@ function Exceptions({ go }: { go: (v: View, id?: string | null) => void }) {
   const t = useT();
   return (
     <div className="mx-auto max-w-[1000px] space-y-4">
-      <SectionTitle title={t("Excepciones abiertas", "Open exceptions")} sub={t("Avisos emitidos el mismo día del gatillo", "Notices issued on the day of the trigger")} />
       {PORTFOLIO.exceptions.map((e) => {
         const l = loanById(e.loanId)!;
         return (

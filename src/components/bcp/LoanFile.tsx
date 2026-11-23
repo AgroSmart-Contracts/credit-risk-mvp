@@ -7,13 +7,13 @@ import { GEO, technicalSeries } from "../../data/bcp/technical";
 import { FieldImages } from "./FieldImages";
 import { TechChart } from "./TechCharts";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { COVERAGE_BANDS, DRIVERS, DRIVER_TEXT, cov, date, daysBetween, fundsTotals, pct, provision, range, scenarios, signedCov, toDisburse, usd, haLabel } from "../../lib/bcp/calc";
+import { DRIVERS, DRIVER_TEXT, date, daysBetween, fundsTotals, pct, provision, signedCov, toDisburse, usd, haLabel } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Condition, Loan, Portfolio } from "../../lib/bcp/types";
 import { CoverageChart } from "./CoverageChart";
 import { decisionKey, type Answer } from "./answers";
 import { DecisionBlock } from "./Decision";
-import { Btn, Card, CheckIcon, Chip, Estimado, ExampleChip, Lbl, PageTabs, Prov, Rich, SectionTitle, StateChip } from "./ui";
+import { Btn, Card, CheckIcon, Chip, ExampleChip, Lbl, PageTabs, Prov, Rich, SectionTitle, StateChip } from "./ui";
 import { sourceTx, useEvidence, useLang, useT } from "./shared";
 
 const GROUPS: Condition["group"][] = ["Prestatario", "Cultivo y volumen", "Precio y calidad", "Uso de fondos y cobranza"];
@@ -62,7 +62,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
 
   return (
     <div className="mx-auto max-w-[1280px] space-y-6">
-      {/* 1. Header */}
       <header className="space-y-2">
         <button type="button" onClick={onBack} className="min-h-[44px] text-sm font-semibold text-bcp-ink hover:underline print:hidden">
           ← {t("Cartera", "Portfolio")}
@@ -81,7 +80,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
             </p>
             {/* Freshness without animation: the last reading and the next one expected. */}
             <p className="lbl mt-0.5">
-              {t(`Última lectura ${date(data.cutoff, "es")} · próxima: ${loan.next.label.es} (${date(loan.next.date, "es", false)})`, `Last reading ${date(data.cutoff, "en")} · next: ${loan.next.label.en} (${date(loan.next.date, "en", false)})`)}
+              {t("Próximo hito", "Next milestone")}: {t(loan.next.label)} ({date(loan.next.date, lang, false)})
             </p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
@@ -91,20 +90,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
           </div>
         </div>
       </header>
-
-      {/* 2. Situation */}
-      <Card tone="dark">
-        <ul className="grid gap-x-8 gap-y-2 text-[15px] md:grid-cols-2">
-          {loan.situation.map((s, i) => (
-            <li key={i} className="flex gap-2">
-              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-bcp-label" />
-              <span>
-                <Rich text={t(s)} />
-              </span>
-            </li>
-          ))}
-        </ul>
-      </Card>
 
       <PageTabs
         label={t("Secciones del expediente", "File sections")}
@@ -120,13 +105,25 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
       />
 
       {page === "resumen" && <>
+      <Card tone="dark">
+        <ul className="grid gap-x-8 gap-y-2 text-[15px] md:grid-cols-2">
+          {loan.situation.map((s, i) => (
+            <li key={i} className="flex gap-2">
+              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-bcp-label" />
+              <span>
+                <Rich text={t(s)} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Card>
       {bankDecision && <DecisionBlock loan={loan} decision={bankDecision} cutoff={data.cutoff} answer={answers[decisionKey(loan, bankDecision)]} onAnswer={(a) => onAnswer(decisionKey(loan, bankDecision), a)} />}
       <section>
         <SectionTitle title={t("Posición financiera", "Financial position")} />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { k: t("Línea aprobada", "Approved line"), v: usd(loan.lineUsd), s: t(`${loan.cycleDays} días · 3 tramos`, `${loan.cycleDays} days · 3 tranches`), kind: "line" as const },
-            { k: t("Desembolsado", "Disbursed"), v: usd(loan.disbursedUsd), s: loan.tranches.filter((x) => x.status === "liberado").map((x) => `${x.id} · ${date(x.milestoneDate, lang)}`).join(" · "), kind: "disbursed" as const },
+            { k: t("Desembolsado", "Disbursed"), v: usd(loan.disbursedUsd), s: t(`${loan.tranches.filter((x) => x.status === "liberado").length} de ${loan.tranches.length} tramos`, `${loan.tranches.filter((x) => x.status === "liberado").length} of ${loan.tranches.length} tranches`), kind: "disbursed" as const },
             { k: loan.frozenUsd ? t("Congelado", "Frozen") : t("Por desembolsar", "Undrawn"), v: usd(loan.frozenUsd || toDisburse(loan)), s: loan.frozenUsd ? t(`por desembolsar ${usd(toDisburse(loan))}`, `undrawn ${usd(toDisburse(loan))}`) : t("contra hitos verificados", "against verified milestones"), kind: "undrawn" as const },
             { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(loan.dueAtMaturityUsd), s: t("capital más costo del banco", "principal plus bank cost"), kind: "due" as const },
             { k: t("Vence", "Maturity"), v: date(loan.maturityDate, lang), s: t(`${daysLeft} días`, `${daysLeft} days`), kind: "maturity" as const },
@@ -140,8 +137,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         </div>
 
         <Card className="mt-3">
-          <h3 className="text-[16px] font-bold">{t("Tramos: cada desembolso solo contra un hito verificado", "Tranches: each disbursement only against a verified milestone")}</h3>
-          <Lbl>{t("checklist firmado por TruMarket + conformidad del banco", "checklist signed by TruMarket + the bank's conformity")}</Lbl>
+          <h3 className="text-[16px] font-bold">{t("Tramos", "Tranches")}</h3>
           <div role="img" aria-label={t(`${released}% de la línea desembolsado`, `${released}% of the line disbursed`)} className="mt-3 h-1.5 overflow-hidden rounded-full bg-bcp-fill">
             <span className="block h-full bg-bcp-ink" style={{ width: `${released}%` }} />
           </div>
@@ -176,15 +172,8 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                 </div>
               );
             })}
-            <div className="rounded-lg border-2 border-dashed border-bcp-fill-strong p-3">
-              <p className="lbl">{t("Repago", "Repayment")}</p>
-              <p className="num text-[20px] font-bold">{usd(loan.dueAtMaturityUsd)}</p>
-              <div className="my-1.5">
-                <Chip>{date(loan.maturityDate, lang)}</Chip>
-              </div>
-              <p className="text-sm">{t("Desde los cobros del comprador, antes que cualquier pago al productor.", "From the buyer's payments, before any payment to the grower.")}</p>
-            </div>
           </div>
+        <p className="lbl mt-3">{t("Repago desde los cobros del comprador, antes que cualquier pago al productor.", "Repaid from the buyer's payments, before any payment to the grower.")}</p>
         </Card>
       </section>
 
@@ -192,7 +181,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
 
       {page === "riesgo" && <>
       <section>
-        <SectionTitle title={t("Evaluación de riesgo", "Risk assessment")} />
         <div className="grid gap-3 lg:grid-cols-[2fr_1fr]">
           <Card>
             <h3 className="text-[16px] font-bold">{t("Cobertura de repago en el tiempo", "Repayment coverage over time")}</h3>
@@ -201,7 +189,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               <CoverageChart loan={loan} cutoff={data.cutoff} />
             </div>
             <div className="mt-2 flex flex-wrap gap-1.5">
-              {DRIVERS.map((d) => (
+              {DRIVERS.filter((d) => loan.driverDeltas[d] !== 0).map((d) => (
                 <span key={d} className="rounded-full border border-bcp-border px-2.5 py-[3px] font-[Arial,Helvetica,sans-serif] text-[12px] font-bold">
                   {t(DRIVER_TEXT[d])} {signedCov(loan.driverDeltas[d]).replace(/^0/, "0")}
                 </span>
@@ -210,18 +198,10 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
             <p className="lbl mt-2">{t("Línea sólida: confirmado · línea punteada: estimado", "Solid line: confirmed · dotted line: estimated")}</p>
           </Card>
           <Card>
-            <Lbl>{t("Cobertura hoy", "Coverage today")}</Lbl>
-            <p className="num text-[36px] font-bold leading-tight">{cov(loan.coverageToday)}</p>
-            {loan.projection && (
-              <p className="mt-1 flex flex-wrap items-center gap-2 text-sm">
-                {t("proyección", "projection")} {range(loan.projection.low, loan.projection.high, lang)} <Estimado />
-              </p>
-            )}
-            <dl className="mt-3 divide-y divide-bcp-divider text-sm">
+<dl className="divide-y divide-bcp-divider text-sm">
               {[
                 [t("Precio de equilibrio", "Break-even price"), `USD ${loan.breakEvenPriceUsdKg.toFixed(2)}/kg`],
                 [t("Precio esperado a cosecha", "Expected harvest price"), `USD ${loan.expectedPriceUsdKg.toFixed(2)}/kg`],
-                ...scenarios(loan).map((s) => [t(s.label), cov(s.coverage)]),
                 [t("Clasificación SBS", "SBS rating"), loan.sbsRating],
                 [t("Provisión requerida", "Required provision"), usd(provision(loan))],
                 ["Score", t(`${loan.scoreAtApproval} → ${loan.scoreToday} · tier aprobado ${loan.approvedTier}`, `${loan.scoreAtApproval} → ${loan.scoreToday} · approved tier ${loan.approvedTier}`)],
@@ -240,7 +220,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               )}
             </p>
             )}
-            <p className="lbl mt-1">{t(`Umbral ámbar ${cov(COVERAGE_BANDS.ambar)} · naranja ${cov(COVERAGE_BANDS.naranja)} · rojo ${cov(COVERAGE_BANDS.rojo)}`, `Amber threshold ${cov(COVERAGE_BANDS.ambar)} · orange ${cov(COVERAGE_BANDS.naranja)} · red ${cov(COVERAGE_BANDS.rojo)}`)}</p>
           </Card>
         </div>
       </section>
@@ -331,21 +310,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         <Card>
           <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
             <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5 lg:mx-0 lg:px-0">
-              {(() => {
-                const worst = [...funds.lines].sort((a, b) => b.budgetUsd - b.reconciledUsd - (a.budgetUsd - a.reconciledUsd))[0];
-                return (
-                  <div className="space-y-2 text-sm">
-                    <p>
-                      {t(`${funds.lines.length} partidas por ${usd(ft.budget)}: ${usd(ft.reconciled)} con factura conciliada y ${usd(ft.unexplained)} sin sustento.`, `${funds.lines.length} items for ${usd(ft.budget)}: ${usd(ft.reconciled)} with a reconciled invoice and ${usd(ft.unexplained)} unexplained.`)}
-                    </p>
-                    {worst && worst.budgetUsd > worst.reconciledUsd && (
-                      <p className="text-bcp-muted">
-                        {t(`Mayor brecha: ${worst.item.es}, ${usd(worst.budgetUsd - worst.reconciledUsd)} sin sustento.`, `Largest gap: ${worst.item.en}, ${usd(worst.budgetUsd - worst.reconciledUsd)} unexplained.`)}
-                      </p>
-                    )}
-                  </div>
-                );
-              })()}
               <table className="w-full min-w-[620px] text-sm">
                 <thead>
                   <tr className="border-b border-bcp-border">
@@ -399,60 +363,40 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
 
       </>}
 
-      {page === "historial" && <>
-      <section>
-        <SectionTitle title={t("Decisiones", "Decisions")} />
-        <div>
-          <Card>
-            <Lbl>{t("Ejecutado por TruMarket según contrato · informativo", "Executed by TruMarket under contract · for information")}</Lbl>
-            <ul className="mt-2 divide-y divide-bcp-divider">
-              {tmDecisions.map((d, i) => (
-                <li key={i} className="py-2 text-sm">
-                  <p className="font-semibold">
-                    {date(d.date, lang)} · {t(d.title)}
-                  </p>
-                  <p className="text-bcp-muted">{t(d.basis)}</p>
-                  <p className="lbl">{t(d.responsible)} · {d.engineVersion}</p>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        </div>
-      </section>
-
-      {/* 8. Registro de auditoría */}
-      <SectionTitle title={t("Registro de auditoría", "Audit log")} sub={t("entradas inmutables; las correcciones son nuevas entradas vinculadas", "entries are immutable; corrections are new linked entries")} />
-      <Card>
-        <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
-          <table className="w-full min-w-[860px] text-sm">
-            <thead>
-              <tr className="border-b border-bcp-border text-left">
-                {[t("Fecha", "Date"), t("Evento", "Event"), t("Responsable", "Responsible"), t("Regla o gatillo", "Rule or trigger"), t("Evidencia", "Evidence"), t("Versión del motor", "Engine version")].map((h) => (
-                  <Lbl key={h} as="th" className="py-2 pr-3 font-normal">
-                    {h}
-                  </Lbl>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-bcp-divider">
-              {loan.auditLog.map((a, i) => (
-                <tr key={i} className="align-top">
-                  <td className="whitespace-nowrap py-2 pr-3">{date(a.date, lang)}</td>
-                  <td className="py-2 pr-3 font-semibold">{t(a.event)}</td>
-                  <td className="py-2 pr-3">{t(a.responsible)}</td>
-                  <td className="py-2 pr-3">{t(a.rule)}</td>
-                  <td className="py-2 pr-3">
-                    {t(a.evidence)}
-                  </td>
-                  <td className="py-2 pr-3">{a.engineVersion}</td>
+      {page === "historial" && (
+        <Card>
+          <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
+            <table className="w-full min-w-[860px] text-sm">
+              <thead>
+                <tr className="border-b border-bcp-border text-left">
+                  {[t("Fecha", "Date"), t("Decisión o evento", "Decision or event"), t("Base", "Basis"), t("Responsable", "Responsible"), t("Evidencia", "Evidence")].map((h) => (
+                    <Lbl key={h} as="th" className="py-2 pr-3 font-normal">
+                      {h}
+                    </Lbl>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
-
-      </>}
+              </thead>
+              <tbody className="divide-y divide-bcp-divider">
+                {[...loan.auditLog].sort((x, y) => y.date.localeCompare(x.date)).map((a, i) => {
+                  const decision = tmDecisions.find((d) => d.date === a.date);
+                  return (
+                    <tr key={i} className="align-top">
+                      <td className="whitespace-nowrap py-2.5 pr-3">{date(a.date, lang)}</td>
+                      <td className="py-2.5 pr-3 font-semibold">{t(a.event)}</td>
+                      <td className="py-2.5 pr-3 text-bcp-muted">{t(decision?.basis ?? a.rule)}</td>
+                      <td className="py-2.5 pr-3">{t(a.responsible)}</td>
+                      <td className="py-2.5 pr-3">{t(a.evidence)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="lbl mt-2">
+            {t(`Entradas inmutables; las correcciones son nuevas entradas vinculadas. Motor ${data.engineVersion}.`, `Entries are immutable; corrections are new linked entries. Engine ${data.engineVersion}.`)}
+          </p>
+        </Card>
+      )}
 
       {!BANK_EDITION && page === "evidencia" && <>
       <SectionTitle title={t("Evidencia", "Evidence")} />

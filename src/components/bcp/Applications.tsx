@@ -3,7 +3,7 @@
  * discretionary (bank lane): TruMarket recommends in writing, the bank decides.
  * Each file says first what approving would put at stake, in money.
  */
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { GEO } from "../../data/bcp/technical";
 import { cov, date, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
@@ -14,7 +14,7 @@ import { VigourPattern } from "./VigourPattern";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
-import { Btn, Card, Chip, ExampleChip, Lbl, Prov, SectionTitle, StateChip } from "./ui";
+import { Btn, Card, Chip, ExampleChip, Lbl, Modal, Prov, SectionTitle, StateChip } from "./ui";
 
 
 const ANSWER_TEXT = {
@@ -32,6 +32,8 @@ export function RecommendationChip({ a }: { a: Application }) {
 export function ApplicationsTable({ apps, onOpen, answers }: { apps: Application[]; onOpen: (id: string) => void; answers: Record<string, Answer> }) {
   const t = useT();
   const lang = useLang();
+  const [reasonsOf, setReasonsOf] = useState<Application | null>(null);
+  const closeReasons = useCallback(() => setReasonsOf(null), []);
   return (
     <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
       <table className="w-full min-w-[820px] text-sm">
@@ -57,7 +59,9 @@ export function ApplicationsTable({ apps, onOpen, answers }: { apps: Application
                 </td>
                 <td className="py-2.5 pr-3">
                   <RecommendationChip a={a} />
-                  <span className="mt-1 block max-w-[18rem] text-xs text-bcp-muted">{t(a.reasons[0])}</span>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); setReasonsOf(a); }} className="mt-1 block min-h-[28px] text-xs font-semibold text-bcp-green-text underline-offset-2 hover:underline">
+                    {t("Ver motivos", "View reasons")}
+                  </button>
                 </td>
                 <td className="whitespace-nowrap py-2.5 pr-3 text-right">
                   <b>{usd(a.requestedUsd)}</b>
@@ -76,21 +80,34 @@ export function ApplicationsTable({ apps, onOpen, answers }: { apps: Application
           })}
         </tbody>
       </table>
+      {reasonsOf && (
+        <Modal
+          title={t(`Motivos de la recomendación · ${reasonsOf.id}`, `Reasons for the recommendation · ${reasonsOf.id}`)}
+          onClose={closeReasons}
+          footer={
+            <>
+              <Btn onClick={closeReasons}>{t("Cerrar", "Close")}</Btn>
+              <Btn primary onClick={() => onOpen(reasonsOf.id)}>{t("Abrir solicitud", "Open application")}</Btn>
+            </>
+          }
+        >
+          <RecommendationChip a={reasonsOf} />
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-bcp-ink">
+            {reasonsOf.reasons.map((r, i) => (
+              <li key={i}>{t(r)}</li>
+            ))}
+          </ul>
+        </Modal>
+      )}
     </div>
   );
 }
 
 export function ApplicationsPage({ data, onOpen, answers }: { data: Portfolio; onOpen: (id: string) => void; answers: Record<string, Answer> }) {
-  const t = useT();
-  const stake = data.applications.reduce((s, a) => s + a.requestedUsd, 0);
   return (
     <div className="mx-auto max-w-[1200px] space-y-4">
       <ExampleChip kind="portfolio" />
       <Card>
-        <SectionTitle
-          title={t("Solicitudes", "Applications")}
-          sub={t(`${data.applications.length} en evaluación · ${usd(stake)} solicitados · aprobar es decisión del banco con la recomendación escrita de TruMarket`, `${data.applications.length} under review · ${usd(stake)} requested · approval is the bank's decision on TruMarket's written recommendation`)}
-        />
         <ApplicationsTable apps={data.applications} onOpen={onOpen} answers={answers} />
       </Card>
     </div>
@@ -128,7 +145,6 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
             <p className="text-sm text-bcp-muted">
               {t(app.zone)} · {haLabel(app.areaHa)} {t("ha medidas", "ha measured")} · {t("campaña", "campaign")} {app.campaign} · {t("recibida", "received")} {date(app.receivedDate, lang)}
             </p>
-            <p className="lbl mt-0.5">{t(`Decidir antes del ${date(app.decisionDueDate, "es")}`, `Decide by ${date(app.decisionDueDate, "en")}`)}</p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
             <Btn onClick={onMemo}>{t("Memorando de evaluación (PDF)", "Assessment memo (PDF)")}</Btn>
@@ -142,13 +158,13 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
       </Card>
 
       <section>
-        <SectionTitle title={t("Exposición si se aprueba", "Exposure if approved")} sub={t("si el banco aprueba", "if the bank approves")} />
+        <SectionTitle title={t("Exposición si se aprueba", "Exposure if approved")} />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { k: t("Línea solicitada", "Requested line"), v: usd(app.requestedUsd), s: t(`${app.tenorDays} días · 3 tramos`, `${app.tenorDays} days · 3 tranches`) },
-            { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: t("T1 · el resto solo contra hitos", "T1 · the rest only against milestones") },
+            { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "T1" },
             { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: t("capital más costo del banco", "principal plus bank cost") },
-            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("sin cultivo verificable", "no verifiable crop") : t("cosecha esperada ÷ saldo", "expected harvest ÷ amount due") },
+            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("veto", "veto") : t("cosecha esperada ÷ saldo", "expected harvest ÷ amount due") },
             { k: t("Precio de equilibrio", "Break-even price"), v: app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`, s: t(`esperado USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`) },
           ].map((c) => (
             <Card key={c.k}>
@@ -179,9 +195,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
             <p className="mt-3">
               <Stamp text={ANSWER_TEXT[answer.kind as keyof typeof ANSWER_TEXT]?.[lang] ?? ""} when={date(answer.at.slice(0, 10), lang)} />
             </p>
-          ) : BANK_EDITION ? (
-            <p className="lbl mt-3">{t("Vista ilustrativa: las decisiones se registran durante el piloto.", "Illustrative view: decisions are recorded during the pilot.")}</p>
-          ) : (
+          ) : BANK_EDITION ? null : (
             <div className="mt-3 flex flex-wrap gap-2">
               {kinds.map((k) => (
                 <Btn key={k} primary={k === app.recommendation} onClick={() => {
@@ -198,7 +212,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
       </div>
 
       <Card>
-        <SectionTitle title={t("Verificaciones a la solicitud", "Checks at application")} sub={t("cada valor con su fuente y fecha", "each value with its source and date")} />
+        <SectionTitle title={t("Verificaciones a la solicitud", "Checks at application")} />
         <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
           <table className="w-full min-w-[860px] text-sm">
             <thead>
@@ -232,13 +246,9 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         <Card className="min-w-0">
           <ScoreBreakdown dims={app.scoreDims} scores={{ approval: app.score, today: app.score }} single />
         </Card>
+        {app.coverage !== null && (
         <Card className="min-w-0">
-          {app.coverage === null ? (
-            <>
-              <h3 className="text-[16px] font-bold">{t("Prueba de estrés de la cobertura", "Coverage stress test")}</h3>
-              <p className="mt-2 text-sm text-bcp-muted">{t("No aplica: sin cultivo verificable no hay cobertura que estresar.", "Not applicable: without a verifiable crop there is no coverage to stress.")}</p>
-            </>
-          ) : stress ? (
+          {stress ? (
             <StressGrid coverage={app.coverage} />
           ) : (
             <>
@@ -250,6 +260,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
             </>
           )}
         </Card>
+        )}
       </div>
 
       {app.vigourPattern && (

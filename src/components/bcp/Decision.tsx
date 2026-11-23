@@ -9,7 +9,7 @@ import type { Decision, Loan } from "../../lib/bcp/types";
 import type { Answer } from "./answers";
 import { useLang, useT, useToast } from "./shared";
 import { BANK_EDITION } from "./edition";
-import { Btn, Card, CheckIcon, Lbl, StateChip } from "./ui";
+import { Btn, Card, CheckIcon, StateChip } from "./ui";
 
 export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen }: { loan: Loan; decision: Decision; answer?: Answer; onAnswer: (a: Answer) => void; cutoff: string; onOpen?: () => void }) {
   const t = useT();
@@ -36,7 +36,6 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
     <Card tone="decision">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Lbl>{t("Decisión del banco", "Bank decision")}</Lbl>
           <h3 className="text-[16px] font-bold text-bcp-ink">
             {loan.id} · {t(decision.title)}
           </h3>
@@ -96,9 +95,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {answer ? (
           <Stamp text={answer.kind === "conformidad" ? t("Conformidad registrada", "Conformity recorded") : t("Información solicitada", "Information requested")} when={date(answer.at.slice(0, 10), lang)} />
-        ) : BANK_EDITION ? (
-          <span className="lbl">{t("Vista ilustrativa: las decisiones se registran durante el piloto.", "Illustrative view: decisions are recorded during the pilot.")}</span>
-        ) : (
+        ) : BANK_EDITION ? null : (
           <>
             <Btn disabled={!open} onClick={() => answerWith("info")}>
               {t("Pedir información", "Request information")}
