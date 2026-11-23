@@ -60,7 +60,7 @@ const STEPS = [
     scene: "3 · Coverage and El Niño",
     click: () => tab("Riesgo", "Risk"),
     secs: 30,
-    point: () => [heading(L("Riesgo de la cartera", "Portfolio risk"))],
+    point: () => [text(L("Cobertura por préstamo", "Coverage by loan"))],
     say: "Weighted coverage is 1.80x. Coastal El Niño is at Extraordinary, from real sea temperature data. If it cuts fruit set, and ICA-0201's late fertilisation isn't fixed, we project 1.49 to 1.63x. Every loan carries the El Niño estimate in its own projection. A forecast moves the projection, but never a loan's state: only damage measured in the field does that. The thresholds of 1.50, 1.30 and 1.10 are a proposal we want to agree with you.",
     coach: "If asked where 5 to 10% comes from: a conservative starting assumption, calibrated with the first real campaigns. If asked 'why only under watch?': we don't freeze healthy growers on a forecast; the Nov and Dec field estimates measure the real fruit set.",
   },
@@ -68,7 +68,7 @@ const STEPS = [
     scene: "3 · Changes this month",
     click: () => tab("Resumen", "Summary"),
     secs: 15,
-    point: () => [text(L("magnitud extraordinaria", "Extraordinary coastal El Niño"), false)],
+    point: () => [heading(L("Cambios del mes", "Changes this month"))],
     say: "And this is what changed this month: one loan to orange with a tranche frozen, and the El Niño alert on the whole portfolio.",
   },
   {
@@ -96,7 +96,7 @@ const STEPS = [
     scene: "5 · ICA-0201: risk",
     click: () => tab("Riesgo", "Risk"),
     secs: 25,
-    point: () => [heading(L("Evaluación de riesgo", "Risk assessment"))],
+    point: () => [text(L("Cobertura de repago en el tiempo", "Repayment coverage over time"))],
     say: "Coverage today is 1.57x. On coverage alone it would be green, but the state is the most severe of coverage and the triggers, and the invoice gap crossed the orange trigger. The projection, 0.95 to 1.20x, adds the two estimated risks: the late fertilisation if it isn't remedied, and El Niño. That's exactly why T3 is frozen.",
     coach: "If asked why 'due at maturity' is 25,200 with T3 frozen: it's the conservative figure. Without T3 it would be about 17,640, and coverage would be higher.",
   },
@@ -112,7 +112,7 @@ const STEPS = [
     scene: "5 · ICA-0201: audit log",
     click: () => tab("Decisiones e historial", "Decisions and history"),
     secs: 15,
-    point: () => [heading(L("Registro de auditoría", "Audit log"))],
+    point: () => [page.locator("main table").first()],
     say: "The audit log is designed as append-only: a correction is a new entry linked to the original, so you always see the history.",
   },
   {
@@ -126,7 +126,7 @@ const STEPS = [
   {
     scene: "6 · Upcoming",
     secs: 10,
-    point: () => [heading(L("Próximas", "Upcoming"))],
+    point: () => [heading(L("Próximos 30 días", "Next 30 days"))],
     say: "And the next 30 days: every milestone and the money it puts at stake.",
   },
   {
@@ -164,7 +164,7 @@ const STEPS = [
     scene: "8 · Parcel map",
     secs: 15,
     click: () => nav("(Mapa de predios|Vista regional|Parcel map|Regional view)"),
-    point: () => [page.getByRole("heading", { name: /Mapa de predios|Vista regional|Parcel map|Regional view/ }).first()],
+    point: () => [page.locator("main")],
     say: "A secondary view: where the money is, by region and state. Exact locations and the parcel map are enabled for pilot files.",
   },
   {
@@ -173,7 +173,7 @@ const STEPS = [
     go: url("v=solicitud&id=ICA-0244"),
     click: () => button(L("Memorando de evaluación (PDF)", "Assessment memo (PDF)")),
     point: () => [page.locator(".a4").first()],
-    say: "Every file produces a memo for the credit committee: one page for an application, three for a loan.",
+    say: "Every file produces a short A4 memo for the credit committee.",
   },
   {
     scene: "9 · Monthly report and close",
