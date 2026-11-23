@@ -5,10 +5,12 @@
  */
 import { useState } from "react";
 import { GEO } from "../../data/bcp/technical";
-import { cov, date, stateFromCoverage, usd } from "../../lib/bcp/calc";
+import { cov, date, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
+import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
 import { appKey, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
+import { VigourPattern } from "./VigourPattern";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
@@ -124,13 +126,13 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
               {t("Solicitud", "Application")} {app.id} · {t(app.crop)}
             </h1>
             <p className="text-sm text-bcp-muted">
-              {t(app.zone)} · {app.areaHa.toFixed(2)} {t("ha medidas", "ha measured")} · {t("campaña", "campaign")} {app.campaign} · {t("recibida", "received")} {date(app.receivedDate, lang)}
+              {t(app.zone)} · {haLabel(app.areaHa)} {t("ha medidas", "ha measured")} · {t("campaña", "campaign")} {app.campaign} · {t("recibida", "received")} {date(app.receivedDate, lang)}
             </p>
             <p className="lbl mt-0.5">{t(`Decidir antes del ${date(app.decisionDueDate, "es")}`, `Decide by ${date(app.decisionDueDate, "en")}`)}</p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
             <Btn onClick={onMemo}>{t("Memorando de evaluación (PDF)", "Assessment memo (PDF)")}</Btn>
-            <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>
+            {!BANK_EDITION && <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
           </div>
         </div>
       </header>
@@ -177,6 +179,8 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
             <p className="mt-3">
               <Stamp text={ANSWER_TEXT[answer.kind as keyof typeof ANSWER_TEXT]?.[lang] ?? ""} when={date(answer.at.slice(0, 10), lang)} />
             </p>
+          ) : BANK_EDITION ? (
+            <p className="lbl mt-3">{t("Vista ilustrativa: las decisiones se registran durante el piloto.", "Illustrative view: decisions are recorded during the pilot.")}</p>
           ) : (
             <div className="mt-3 flex flex-wrap gap-2">
               {kinds.map((k) => (
@@ -226,7 +230,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
 
       <div className="grid gap-3 lg:grid-cols-2">
         <Card className="min-w-0">
-          <ScoreBreakdown dims={app.scoreDims} single />
+          <ScoreBreakdown dims={app.scoreDims} scores={{ approval: app.score, today: app.score }} single />
         </Card>
         <Card className="min-w-0">
           {app.coverage === null ? (
@@ -247,6 +251,12 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           )}
         </Card>
       </div>
+
+      {app.vigourPattern && (
+        <Card>
+          <VigourPattern points={app.vigourPattern} />
+        </Card>
+      )}
 
       {geo?.parcelId && geo.ring && (
         <Card>

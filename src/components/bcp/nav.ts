@@ -9,10 +9,13 @@ import { PORTFOLIO } from "../../data/bcp/dataset";
 import { pendingDecisions } from "../../lib/bcp/calc";
 import type { Lang } from "../../lib/bcp/types";
 import { appKey, decisionKey, type Answer } from "./answers";
+import { BANK_EDITION } from "./edition";
 
 export type BcpView = "cartera" | "expedientes" | "expediente" | "solicitudes" | "solicitud" | "decision" | "excepciones" | "excepcion" | "reportes" | "reporte" | "memo" | "evaluacion" | "mapa" | "metodo";
 
-export const BCP_VIEWS: BcpView[] = ["cartera", "expedientes", "expediente", "solicitudes", "solicitud", "decision", "excepciones", "excepcion", "reportes", "reporte", "memo", "evaluacion", "mapa", "metodo"];
+const ALL_VIEWS: BcpView[] = ["cartera", "expedientes", "expediente", "solicitudes", "solicitud", "decision", "excepciones", "excepcion", "reportes", "reporte", "memo", "evaluacion", "mapa", "metodo"];
+/** The methodology page is never part of the bank edition. */
+export const BCP_VIEWS: BcpView[] = BANK_EDITION ? ALL_VIEWS.filter((v) => v !== "metodo") : ALL_VIEWS;
 
 /** The sidebar item each view belongs to. */
 export const NAV_ACTIVE: Record<BcpView, string> = {
@@ -68,11 +71,11 @@ export function bcpNavItems(lang: Lang, answers: Record<string, Answer>): Sideba
     { id: "cartera", label: t("Cartera", "Portfolio"), icon: LayoutDashboard },
     { id: "expedientes", label: t("Expedientes", "Credit files"), icon: Folder, count: PORTFOLIO.loans.length },
     { id: "solicitudes", label: t("Solicitudes", "Applications"), icon: FilePlus2, count: PORTFOLIO.applications.length },
-    { id: "decision", label: t("Decisiones pendientes", "Pending decisions"), icon: Gavel, count: pendingCount(answers), tone: "high" },
+    { id: "decision", label: t("Decisiones", "Decisions"), icon: Gavel, count: pendingCount(answers), tone: "high" },
     { id: "excepciones", label: t("Excepciones", "Exceptions"), icon: AlertTriangle, count: PORTFOLIO.exceptions.length, tone: "watch" },
     // Monthly reports and Methodology are hidden from the menu; their pages stay reachable
     // (the portfolio's "Download monthly report" button, direct links).
-    { id: "mapa", label: t("Mapa de predios", "Parcel map"), icon: MapIcon },
+    { id: "mapa", label: BANK_EDITION ? t("Vista regional", "Regional view") : t("Mapa de predios", "Parcel map"), icon: MapIcon },
   ];
 }
 

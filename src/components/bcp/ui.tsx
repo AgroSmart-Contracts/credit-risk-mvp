@@ -3,8 +3,9 @@
  * with a text label (never colour alone), provenance badges, the "Estimado"
  * badge, buttons, and a stacked bar with its numbers stated for screen readers.
  */
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { ConditionState, Provenance } from "../../lib/bcp/types";
+import { BANK_EDITION } from "./edition";
 import { PROV_TEXT, STATE_TEXT, useT } from "./shared";
 
 export function Card({ children, className = "", tone = "plain" }: { children: ReactNode; className?: string; tone?: "plain" | "dark" | "control" | "decision" }) {
@@ -21,6 +22,20 @@ export function Card({ children, className = "", tone = "plain" }: { children: R
 
 export function Lbl({ children, className = "", as: As = "p" }: { children: ReactNode; className?: string; as?: "p" | "span" | "th" }) {
   return <As className={`lbl ${className}`}>{children}</As>;
+}
+
+/** Page-level tabs: every kind of data has one fixed place on the page. */
+export function PageTabs<T extends string>({ tabs, value, onChange, label }: { tabs: { id: T; label: string; count?: number }[]; value: T; onChange: (id: T) => void; label: string }) {
+  return (
+    <div role="tablist" aria-label={label} className="sticky top-0 z-20 -mx-4 flex gap-1 overflow-x-auto border-b border-bcp-border bg-bcp-bg px-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 print:hidden">
+      {tabs.map((x) => (
+        <button key={x.id} type="button" role="tab" aria-selected={value === x.id} onClick={() => onChange(x.id)} className={`-mb-px min-h-[46px] shrink-0 whitespace-nowrap border-b-2 px-3.5 text-sm font-semibold ${value === x.id ? "border-bcp-ink text-bcp-ink" : "border-transparent text-bcp-muted hover:text-bcp-ink"}`}>
+          {x.label}
+          {x.count !== undefined && <span className="ml-1.5 rounded-full bg-bcp-fill px-1.5 py-[1px] text-[11px]">{x.count}</span>}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 export function SectionTitle({ title, sub, right, no }: { title: string; sub?: string; right?: ReactNode; no?: string }) {
@@ -168,124 +183,7 @@ export function CheckIcon({ status }: { status: "ok" | "pending" | "warn" | "fai
 /** The example-data chips required on every screen (spec 2.6). */
 export function ExampleChip({ kind }: { kind: "portfolio" | "file" }) {
   const t = useT();
+  // Bank edition: stated once, in the header of every page.
+  if (BANK_EDITION) return null;
   return <Chip>{kind === "portfolio" ? t("Cartera de ejemplo · datos ilustrativos", "Example portfolio · illustrative data") : t("Expediente de ejemplo", "Example file")}</Chip>;
-}
-
-/** Large dialog for evidence and history charts: Esc or the backdrop closes it. */
-export function Dialog({ open, onClose, title, sub, children, closeLabel }: { open: boolean; onClose: () => void; title: string; sub?: string; children: ReactNode; closeLabel: string }) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [open, onClose]);
-  if (!open) return null;
-  return (
-    <div className="bcp fixed inset-0 z-[1200] flex items-end justify-center bg-bcp-ink/40 sm:items-center sm:p-6" onClick={onClose}>
-      <div role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()} className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-t-2xl bg-white p-5 sm:rounded-2xl sm:p-6">
-        <div className="mb-3 flex items-start justify-between gap-3">
-          <div>
-            <h2 className="text-[20px] font-bold text-bcp-ink">{title}</h2>
-            {sub && <p className="lbl">{sub}</p>}
-          </div>
-          <button type="button" onClick={onClose} aria-label={closeLabel} className="min-h-[44px] min-w-[44px] rounded-lg text-2xl leading-none text-bcp-muted hover:text-bcp-ink">
-            ×
-          </button>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-/**
- * Side drawer: detail behind a figure or a reading, from the right, with the page
- * still in view. Esc, the close button or a click outside closes it; focus returns.
- */
-export function SideDrawer({ eyebrow, title, sub, onClose, closeLabel, children }: { eyebrow: string; title: string; sub?: string; onClose: () => void; closeLabel: string; children: ReactNode }) {
-  useEffect(() => {
-    const prev = document.activeElement as HTMLElement | null;
-    document.getElementById("side-drawer-close")?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      prev?.focus?.();
-    };
-  }, [onClose]);
-  return (
-    <div className="bcp fixed inset-0 z-[1200] print:hidden" role="presentation">
-      <div className="absolute inset-0 bg-bcp-ink/35" onClick={onClose} aria-hidden />
-      <aside role="dialog" aria-modal="true" aria-labelledby="side-drawer-title" className="absolute right-0 top-0 flex h-full w-[min(560px,100vw)] flex-col overflow-y-auto bg-white shadow-[-12px_0_32px_rgba(16,42,64,0.15)]">
-        <header className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b border-bcp-border bg-white px-6 pb-3 pt-5">
-          <div className="min-w-0">
-            <p className="font-[Arial,Helvetica,sans-serif] text-[12px] font-bold uppercase tracking-[0.06em] text-bcp-muted">{eyebrow}</p>
-            <h2 id="side-drawer-title" className="mt-1 text-[20px] font-bold leading-tight">
-              {title}
-            </h2>
-            {sub && <p className="lbl">{sub}</p>}
-          </div>
-          <button id="side-drawer-close" type="button" onClick={onClose} className="min-h-[44px] shrink-0 rounded-lg border border-bcp-border px-4 text-sm font-semibold hover:border-bcp-ink">
-            {closeLabel}
-          </button>
-        </header>
-        <div className="space-y-5 px-6 pb-10 pt-5">{children}</div>
-      </aside>
-    </div>
-  );
-}
-
-/** The dark box a drawer opens with: what this means for the bank's money. */
-export function ImpactBox({ label, value, note }: { label: string; value: ReactNode; note?: ReactNode }) {
-  return (
-    <div className="rounded-xl bg-bcp-ink px-4 py-3.5 text-white">
-      <p className="font-[Arial,Helvetica,sans-serif] text-[12px] text-bcp-label">{label}</p>
-      <p className="mt-1 text-[18px] font-bold leading-snug">{value}</p>
-      {note && <p className="mt-1 text-[13px] text-white/85">{note}</p>}
-    </div>
-  );
-}
-
-/** Compact table for drawers: label column left, figures right-aligned. */
-export function DrawerTable({ head, rows, right = [], foot }: { head: string[]; rows: ReactNode[][]; right?: number[]; foot?: ReactNode[] }) {
-  return (
-    <div className="-mx-1 overflow-x-auto px-1">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-bcp-border">
-            {head.map((h, i) => (
-              <th key={i} className={`lbl whitespace-nowrap py-2 pr-3 font-normal ${right.includes(i) ? "text-right" : "text-left"}`}>
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-bcp-divider">
-          {rows.map((r, i) => (
-            <tr key={i} className="align-top">
-              {r.map((c, j) => (
-                <td key={j} className={`py-2 pr-3 ${right.includes(j) ? "whitespace-nowrap text-right" : ""}`}>
-                  {c}
-                </td>
-              ))}
-            </tr>
-          ))}
-          {foot && (
-            <tr className="border-t-2 border-bcp-ink font-bold">
-              {foot.map((c, j) => (
-                <td key={j} className={`py-2 pr-3 ${right.includes(j) ? "whitespace-nowrap text-right" : ""}`}>
-                  {c}
-                </td>
-              ))}
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  );
 }

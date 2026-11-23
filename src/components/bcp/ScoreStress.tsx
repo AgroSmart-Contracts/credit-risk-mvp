@@ -6,10 +6,23 @@
 import { COVERAGE_BANDS, STRESS_PRICE, cov, scoreOf, stateFromCoverage, stressGrid } from "../../lib/bcp/calc";
 import type { ScoreDim } from "../../lib/bcp/types";
 import { STATE_TEXT, useT } from "./shared";
+import { BANK_EDITION } from "./edition";
 import { Lbl } from "./ui";
 
-export function ScoreBreakdown({ dims, single = false }: { dims: ScoreDim[]; single?: boolean }) {
+/** Bank edition: the score only: no dimensions, weights or points. */
+function BankScore({ scores, single }: { scores: { approval: number; today: number }; single: boolean }) {
   const t = useT();
+  return (
+    <div>
+      <h3 className="text-[16px] font-bold">{single ? t("Score a la solicitud", "Score at application") : t("Qué movió el score", "What moved the score")}</h3>
+      <p className="num mt-1 text-[24px] font-bold">{single ? scores.today : `${scores.approval} → ${scores.today}`}</p>
+    </div>
+  );
+}
+
+export function ScoreBreakdown({ dims, scores, single = false }: { dims: ScoreDim[]; scores: { approval: number; today: number }; single?: boolean }) {
+  const t = useT();
+  if (BANK_EDITION) return <BankScore scores={scores} single={single} />;
   const a = scoreOf(dims, "approval");
   const b = scoreOf(dims, "today");
   return (

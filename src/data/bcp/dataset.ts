@@ -854,7 +854,7 @@ export const PORTFOLIO: Portfolio = {
       date: "2026-11-06",
       from: "ambar",
       to: "naranja",
-      impact: L("T3 de USD 7,200 congelado. Su exposición queda en USD 16,800.", "T3 of USD 7,200 frozen. The bank's exposure stays at USD 16,800."),
+      impact: L("T3 de USD 7,200 congelado. Exposición: USD 16,800.", "T3 of USD 7,200 frozen. The bank's exposure stays at USD 16,800."),
       cause: L("facturas de la fase 2 conciliadas al 68% y fertilización 3 semanas tarde", "phase 2 invoices 68% reconciled and fertilisation 3 weeks late"),
       evidence: { loanId: "ICA-0201", condition: "Facturas de tramos vs presupuesto" },
     },

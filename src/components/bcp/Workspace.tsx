@@ -13,11 +13,12 @@ import type { Lang } from "../../lib/bcp/types";
 import { appKey, decisionKey, type Answer } from "./answers";
 import { ApplicationFile, ApplicationsPage, ApplicationsTable } from "./Applications";
 import { DecisionBlock } from "./Decision";
+import { BANK_EDITION } from "./edition";
 import { NAV_ACTIVE, bcpNavItems, bcpUrl, type BcpView as View } from "./nav";
 import { loadLoanFile, loadMap, loadReports } from "./pages";
 import { LoansTable, Portfolio } from "./Portfolio";
-import { Btn, Card, Chip, ExampleChip, Lbl, SectionTitle, SideDrawer, StateChip } from "./ui";
-import { DrawerContext, EvidenceContext, LangContext, ToastContext, useT, type DrawerContent } from "./shared";
+import { Btn, Card, Chip, ExampleChip, Lbl, SectionTitle, StateChip } from "./ui";
+import { EvidenceContext, LangContext, ToastContext, useT } from "./shared";
 
 // Recharts and Leaflet are only needed on these pages.
 const LoanFile = lazy(() => loadLoanFile().then((m) => ({ default: m.LoanFile })));
@@ -62,15 +63,8 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
     toastTimer.current = window.setTimeout(() => setToast(null), 2800);
   }, []);
   useEffect(() => () => window.clearTimeout(toastTimer.current), []);
-  const [panel, setPanel] = useState<DrawerContent | null>(null);
-  const closePanel = useCallback(() => setPanel(null), []);
-  const openPanel = useCallback((c: DrawerContent) => {
-    setEvidence(null);
-    setPanel(c);
-  }, []);
   useEffect(() => {
     setEvidence(null);
-    setPanel(null);
   }, [view, id]);
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -93,11 +87,10 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
   return (
     <LangContext.Provider value={lang}>
       <EvidenceContext.Provider value={openEvidence}>
-      <DrawerContext.Provider value={openPanel}>
       <ToastContext.Provider value={showToast}>
       <Frame view={view} go={go} lang={lang} setLang={setLang} answers={answers} onExit={onExit}>
         <Suspense fallback={<PageSkeleton />}>
-          {view === "cartera" && <Portfolio data={PORTFOLIO} onOpen={(x) => go("expediente", x)} onOpenApp={(x) => go("solicitud", x)} onReport={() => go("reporte")} onDecisions={() => go("decision")} onException={(x) => go("excepcion", x)} answers={answers} onAnswer={setAnswer} />}
+          {view === "cartera" && <Portfolio data={PORTFOLIO} onOpen={(x) => go("expediente", x)} onOpenApp={(x) => go("solicitud", x)} onReport={() => go("reporte")} onDecisions={() => go("decision")} answers={answers} onAnswer={setAnswer} />}
           {view === "expediente" && (() => {
             const loan = id ? loanById(id) : null;
             return loan ? <LoanFile key={loan.id} loan={loan} data={PORTFOLIO} onBack={() => go("cartera")} onMap={() => go("mapa", loan.id)} onMemo={() => go("memo", loan.id)} answers={answers} onAnswer={setAnswer} /> : <Files go={go} />;
@@ -145,7 +138,7 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
             );
           })()}
           {view === "mapa" && <MapView data={PORTFOLIO} focus={id} onOpen={(x) => go(PORTFOLIO.applications.some((a) => a.id === x) ? "solicitud" : "expediente", x)} />}
-          {view === "metodo" && <Method />}
+          {import.meta.env.VITE_BANK_EDITION !== "1" && view === "metodo" && <Method />}
         </Suspense>
       </Frame>
       {evidence && (
@@ -153,18 +146,12 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
           <EvidenceDrawer loanId={evidence.loanId} condition={evidence.condition} onClose={closeEvidence} />
         </Suspense>
       )}
-      {panel && (
-        <SideDrawer eyebrow={panel.eyebrow} title={panel.title} sub={panel.sub} onClose={closePanel} closeLabel={lang === "es" ? "Cerrar" : "Close"}>
-          {panel.body}
-        </SideDrawer>
-      )}
       {toast && (
         <div role="status" className="bcp fixed bottom-6 left-1/2 z-[1300] -translate-x-1/2 rounded-lg bg-bcp-ink px-4 py-3 text-sm font-semibold text-white shadow-lg print:hidden">
           {toast}
         </div>
       )}
       </ToastContext.Provider>
-      </DrawerContext.Provider>
       </EvidenceContext.Provider>
     </LangContext.Provider>
   );
@@ -187,7 +174,7 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
     reporte: t("Reporte mensual", "Monthly report"),
     memo: t("Memorando de crédito", "Credit memo"),
     evaluacion: t("Memorando de evaluación", "Assessment memo"),
-    mapa: t("Mapa de predios", "Parcel map"),
+    mapa: BANK_EDITION ? t("Vista regional", "Regional view") : t("Mapa de predios", "Parcel map"),
     metodo: t("Metodología y umbrales", "Methodology and thresholds"),
   };
   const langToggle = (
@@ -201,7 +188,7 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
   );
   return (
     <div className="bcp min-w-0 flex-1 bg-bcp-bg print:bg-white">
-      <TopBar title={titles[view]} sub={t(`TruMarket · Pre-cosecha · datos al ${date(PORTFOLIO.cutoff, "es")}`, `TruMarket · Pre-harvest · data as of ${date(PORTFOLIO.cutoff, "en")}`)} right={langToggle} />
+      <TopBar title={titles[view]} sub={`${t(`TruMarket · Pre-cosecha · datos al ${date(PORTFOLIO.cutoff, "es")}`, `TruMarket · Pre-harvest · data as of ${date(PORTFOLIO.cutoff, "en")}`)}${BANK_EDITION ? ` · ${t("cartera ilustrativa", "illustrative portfolio")}` : ""}`} right={langToggle} />
       {/* Phones: the sidebar becomes a row of tabs. */}
       <nav className="flex gap-1 overflow-x-auto border-b border-bcp-border bg-white px-3 [scrollbar-width:none] lg:hidden print:hidden">
         {items.map((it) => (

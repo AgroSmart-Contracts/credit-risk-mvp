@@ -5,9 +5,10 @@
  * px pages, 1px rules, numbers right-aligned, readable in grayscale.
  */
 import type { ReactNode } from "react";
-import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd } from "../../lib/bcp/calc";
+import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, haLabel, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd } from "../../lib/bcp/calc";
 import type { Application, ExceptionNotice, Loan, Portfolio } from "../../lib/bcp/types";
 import { STATE_TEXT, sourceTx, useLang, useT } from "./shared";
+import { BANK_EDITION, getViewer } from "./edition";
 import { Rich } from "./ui";
 
 /** The rule behind a decision, short: the part before the first colon or full stop. */
@@ -17,6 +18,8 @@ function Page({ children, n, of, title, sub }: { children: ReactNode; n: number;
   const t = useT();
   return (
     <div className="a4 mx-auto mb-6 shadow-[0_1px_8px_rgba(16,42,64,0.12)] text-[12.5px] leading-[1.35] text-bcp-ink print:mb-0">
+      {/* Every printed copy names who it was issued to. */}
+      {BANK_EDITION && <p className="lbl absolute right-14 top-5">{t("Copia emitida a", "Copy issued to")} {getViewer()} · {new Date().toISOString().slice(0, 10)}</p>}
       <header className="border-b-2 border-bcp-ink pb-2">
         <p className="lbl">{t("TruMarket · para BCP Riesgos · confidencial", "TruMarket · for BCP Risk · confidential")}</p>
         <div className="flex items-end justify-between gap-3">
@@ -67,7 +70,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
   const t = useT();
   const lang = useLang();
   const F = portfolioFigures(data.loans);
-  const sub = t(`${"Noviembre 2026"} · corte ${date(data.cutoff, "es")} · datos de ejemplo`, `November 2026 · cut-off ${date(data.cutoff, "en")} · example data`);
+  const sub = t(`${"Noviembre 2026"} · corte ${date(data.cutoff, "es")} · datos ilustrativos`, `November 2026 · cut-off ${date(data.cutoff, "en")} · illustrative data`);
   const title = t("Reporte mensual de cartera pre-cosecha", "Monthly pre-harvest portfolio report");
   const loans = [...data.loans].sort(bySeverity);
   const frozenLoan = data.loans.find((l) => l.frozenUsd > 0);
@@ -232,7 +235,7 @@ export function ExceptionNoticeReport({ data, notice }: { data: Portfolio; notic
   const lang = useLang();
   const loan = data.loans.find((l) => l.id === notice.loanId)!;
   return (
-    <Page n={1} of={1} title={t(`Aviso de excepción · ${loan.id}`, `Exception notice · ${loan.id}`)} sub={t(`${t(loan.crop)} · ${t(loan.zone)} · emitido el ${date(notice.since, "es")} · datos de ejemplo`, `${t(loan.crop)} · ${t(loan.zone)} · issued on ${date(notice.since, "en")} · example data`)}>
+    <Page n={1} of={1} title={t(`Aviso de excepción · ${loan.id}`, `Exception notice · ${loan.id}`)} sub={t(`${t(loan.crop)} · ${t(loan.zone)} · emitido el ${date(notice.since, "es")} · datos ilustrativos`, `${t(loan.crop)} · ${t(loan.zone)} · issued on ${date(notice.since, "en")} · illustrative data`)}>
       <div className="mt-3 flex items-start gap-3">
         <span className="shrink-0 rounded border-2 border-bcp-naranja px-2 py-1 font-[Arial,Helvetica,sans-serif] text-[13px] font-bold uppercase text-bcp-naranja-text">{STATE_TEXT[notice.state][lang]}</span>
         <div className="rounded bg-bcp-naranja-bg px-3 py-2">
@@ -311,8 +314,8 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
   const lang = useLang();
   const title = t(`Memorando de crédito · ${loan.id}`, `Credit memo · ${loan.id}`);
   const sub = t(
-    `${t(loan.crop)} · ${t(loan.zone)} · ${loan.areaHa.toFixed(2)} ha · campaña ${loan.campaign} · corte ${date(data.cutoff, "es")} · datos de ejemplo`,
-    `${t(loan.crop)} · ${t(loan.zone)} · ${loan.areaHa.toFixed(2)} ha · campaign ${loan.campaign} · cut-off ${date(data.cutoff, "en")} · example data`,
+    `${t(loan.crop)} · ${t(loan.zone)} · ${haLabel(loan.areaHa)} ha · campaña ${loan.campaign} · corte ${date(data.cutoff, "es")} · datos ilustrativos`,
+    `${t(loan.crop)} · ${t(loan.zone)} · ${haLabel(loan.areaHa)} ha · campaign ${loan.campaign} · cut-off ${date(data.cutoff, "en")} · illustrative data`,
   );
   const daysLeft = daysBetween(data.cutoff, loan.maturityDate);
   const groups = [...new Set(loan.conditions.map((c) => c.group))];
@@ -431,22 +434,22 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
         <H>{t("4. Cambios desde la aprobación", "4. Changes since approval")}</H>
         <p className="mb-1 text-[11.5px] text-bcp-muted">
           {t(
-            `${loan.conditions.length} condiciones monitoreadas; ${notGreen} fuera de verde. Aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}.`,
-            `${loan.conditions.length} conditions monitored; ${notGreen} not green. Approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}.`,
+            `${BANK_EDITION ? `${loan.conditions.length} condiciones que afectan el repago` : `${loan.conditions.length} condiciones monitoreadas; ${notGreen} fuera de verde`}. Aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}.`,
+            `${BANK_EDITION ? `${loan.conditions.length} conditions affecting repayment` : `${loan.conditions.length} conditions monitored; ${notGreen} not green`}. Approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}.`,
           )}
         </p>
         <T
-          head={[t("Condición", "Condition"), t("Aprobación", "Approval"), t("Hoy", "Today"), t("Umbral", "Threshold"), t("Estado", "State"), t("Efecto en el repago", "Effect on repayment")]}
-          nowrap={[4]}
+          head={[t("Condición", "Condition"), t("Aprobación", "Approval"), t("Hoy", "Today"), ...(BANK_EDITION ? [] : [t("Umbral", "Threshold")]), t("Estado", "State"), t("Efecto en el repago", "Effect on repayment")]}
+          nowrap={[BANK_EDITION ? 3 : 4]}
           rows={groups.flatMap((g) => [
-            [<b key="g">{groupText[g]}</b>, "", "", "", "", ""],
+            [<b key="g">{groupText[g]}</b>, ...Array(BANK_EDITION ? 4 : 5).fill("")],
             ...loan.conditions
               .filter((c) => c.group === g)
               .map((c) => [
                 <span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>,
                 t(c.atApproval),
                 t(c.today),
-                <span key="u" className="text-bcp-muted">{t(c.threshold)}</span>,
+                ...(BANK_EDITION ? [] : [<span key="u" className="text-bcp-muted">{t(c.threshold)}</span>]),
                 <span key="s" className={c.state !== "verde" ? "font-bold" : ""}>{stateWord(c.state, lang)}</span>,
                 t(c.effectOnRepayment),
               ]),
@@ -508,8 +511,8 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
   const lang = useLang();
   const title = t(`Memorando de evaluación · ${app.id}`, `Assessment memo · ${app.id}`);
   const sub = t(
-    `${t(app.crop)} · ${t(app.zone)} · ${app.areaHa.toFixed(2)} ha · campaña ${app.campaign} · recibida ${date(app.receivedDate, "es")} · datos de ejemplo`,
-    `${t(app.crop)} · ${t(app.zone)} · ${app.areaHa.toFixed(2)} ha · campaign ${app.campaign} · received ${date(app.receivedDate, "en")} · example data`,
+    `${t(app.crop)} · ${t(app.zone)} · ${haLabel(app.areaHa)} ha · campaña ${app.campaign} · recibida ${date(app.receivedDate, "es")} · datos ilustrativos`,
+    `${t(app.crop)} · ${t(app.zone)} · ${haLabel(app.areaHa)} ha · campaign ${app.campaign} · received ${date(app.receivedDate, "en")} · illustrative data`,
   );
   const rec = app.recommendation === "aprobar" ? t("Aprobar", "Approve") : t("Rechazar", "Decline");
   return (
@@ -559,11 +562,15 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
           ]}
         />
       </div>
-      <T
-        head={[t("Dimensión", "Dimension"), t("Peso", "Weight"), t("Puntos", "Points"), t("Motivo", "Reason")]}
-        right={[1, 2]}
-        rows={app.scoreDims.map((d) => [t(d.dim), pct(d.weight * 100), d.today, d.why ? t(d.why) : ""])}
-      />
+      {BANK_EDITION ? (
+        null
+      ) : (
+        <T
+          head={[t("Dimensión", "Dimension"), t("Peso", "Weight"), t("Puntos", "Points"), t("Motivo", "Reason")]}
+          right={[1, 2]}
+          rows={app.scoreDims.map((d) => [t(d.dim), pct(d.weight * 100), d.today, d.why ? t(d.why) : ""])}
+        />
+      )}
 
       <H>{t("3. Fundamentos de la recomendación", "3. Basis for the recommendation")}</H>
       <ul className="list-disc space-y-0.5 pl-4">{app.reasons.map((r, i) => <li key={i}>{t(r)}</li>)}</ul>
