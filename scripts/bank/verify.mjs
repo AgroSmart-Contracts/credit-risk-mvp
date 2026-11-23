@@ -50,6 +50,9 @@ check("cookie is HttpOnly, Secure, SameSite=Strict", /HttpOnly/.test(cookie) && 
 check("a used code cannot be replayed", (await post("/api/login", { email: "verify@bank.test", password, code: totp(b32, step) })).status === 401);
 check("password-only account signs in", (await post("/api/login", { email: "password@bank.test", password })).status === 200);
 check("password-only account refuses a wrong password", (await post("/api/login", { email: "password@bank.test", password: "wrong" })).status === 401);
+check("malformed login body is rejected", (await fetch(`${base}/api/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{nope" })).status === 400);
+check("non-text credentials are rejected", (await post("/api/login", { email: { a: 1 }, password: ["x"] })).status === 401);
+check("oversized password is rejected", (await post("/api/login", { email: "password@bank.test", password: "x".repeat(300) })).status === 401);
 const session = cookie.split(";")[0];
 const data = await fetch(`${base}/api/data`, { headers: { cookie: session } });
 const text = await data.text();

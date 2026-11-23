@@ -3,16 +3,23 @@ import { audit, authenticate, clientIp, isLocked, readJson, sameOrigin, send, se
 export default async function handler(req, res) {
   if (req.method !== "POST" || !sameOrigin(req)) return send(res, 405, { ok: false });
   try {
-    const { email, password, code } = await readJson(req);
-    const key = `${String(email ?? "").trim().toLowerCase()}|${clientIp(req)}`;
+    let body;
+    try {
+      body = await readJson(req);
+    } catch {
+      return send(res, 400, { ok: false });
+    }
+    const { email, password, code } = body ?? {};
+    const id = String(email ?? "").trim().toLowerCase().slice(0, 256);
+    const key = `${id}|${clientIp(req)}`;
     if (isLocked(key)) {
-      audit("login_locked", req, { email });
+      audit("login_locked", req, { email: id });
       return send(res, 429, { ok: false });
     }
     const { user, needsCode } = await authenticate(email, password, code, key);
     if (needsCode) return send(res, 401, { ok: false, needsCode: true });
     if (!user) {
-      audit("login_failed", req, { email });
+      audit("login_failed", req, { email: id });
       return send(res, 401, { ok: false });
     }
     audit("login_ok", req, { user: user.id });
