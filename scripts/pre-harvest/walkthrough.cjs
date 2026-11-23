@@ -39,11 +39,12 @@ const STEPS = [
     secs: 25,
     go: url(),
     point: () => [text(L("Cartera de ejemplo · datos ilustrativos", "Example portfolio · illustrative data"))],
-    say: "This is a sample portfolio with illustrative data, at the November monthly cut-off. Four things are real: Ica weather, coastal El Niño, export prices from customs declarations, and satellite imagery on some parcels. Up top, four numbers: how much of the bank's money is out, whether the expected harvest covers repayment, what changed, and what needs your decision.",
+    say: "This is a sample portfolio with illustrative data, at the November monthly cut-off. Real data: Ica weather, coastal El Niño, export prices from customs declarations, and one anonymized satellite vigour pattern. Up top, four numbers: how much of the bank's money is out, whether the expected harvest covers repayment, what changed, and what needs your decision.",
     coach: "Say 'sample portfolio' once, then move on. Never apologise for it.",
   },
   {
     scene: "2 · Cash calendar",
+    click: () => tab("Posición y fondos", "Position and funds"),
     secs: 25,
     point: () => [text(L("Calendario de caja", "Cash calendar"))],
     say: "Of a USD 150,000 line, 66,600 is disbursed. The rest is released only against verified milestones and with your conformity. This calendar shows disbursements and repayments by month: exposure peaks before harvest and comes back from March.",
@@ -57,6 +58,7 @@ const STEPS = [
   },
   {
     scene: "3 · Coverage and El Niño",
+    click: () => tab("Riesgo", "Risk"),
     secs: 30,
     point: () => [heading(L("Riesgo de la cartera", "Portfolio risk"))],
     say: "Weighted coverage is 1.80x. Coastal El Niño is at Extraordinary, from real sea temperature data. If it cuts fruit set, and ICA-0201's late fertilisation isn't fixed, we project 1.49 to 1.63x. Every loan carries the El Niño estimate in its own projection. A forecast moves the projection, but never a loan's state: only damage measured in the field does that. The thresholds of 1.50, 1.30 and 1.10 are a proposal we want to agree with you.",
@@ -64,6 +66,7 @@ const STEPS = [
   },
   {
     scene: "3 · Changes this month",
+    click: () => tab("Resumen", "Summary"),
     secs: 15,
     point: () => [text(L("magnitud extraordinaria", "Extraordinary coastal El Niño"), false)],
     say: "And this is what changed this month: one loan to orange with a tranche frozen, and the El Niño alert on the whole portfolio.",
@@ -91,22 +94,23 @@ const STEPS = [
   },
   {
     scene: "5 · ICA-0201: risk",
+    click: () => tab("Riesgo", "Risk"),
     secs: 25,
     point: () => [heading(L("Evaluación de riesgo", "Risk assessment"))],
     say: "Coverage today is 1.57x. On coverage alone it would be green, but the state is the most severe of coverage and the triggers, and the invoice gap crossed the orange trigger. The projection, 0.95 to 1.20x, adds the two estimated risks: the late fertilisation if it isn't remedied, and El Niño. That's exactly why T3 is frozen.",
     coach: "If asked why 'due at maturity' is 25,200 with T3 frozen: it's the conservative figure. Without T3 it would be about 17,640, and coverage would be higher.",
   },
   {
-    scene: "5 · ICA-0201: evidence",
-    secs: 25,
+    scene: "5 · ICA-0201: what affects repayment",
+    secs: 20,
+    click: () => tab("Riesgo", "Risk"),
     point: () => [heading(L("Cambios desde la aprobación", "Changes since approval"))],
-    click: () => page.locator("tr", { hasText: L("Facturas de tramos vs presupuesto", "Tranche invoices vs budget") }).getByRole("button", { name: /Evidencia|Evidence/ }),
-    say: "We monitor 18 conditions; only the ones that affect repayment are shown. Every row opens its evidence: what happened, the threshold, the effect on repayment, the source and the date.",
-    coach: "Sources marked 'dato de ejemplo' are illustrative. Say so if asked.",
-    after: closeDrawer,
+    say: "Here are the conditions that affect repayment on this file: what it was at approval, what it is today, its state and the effect on repayment.",
+    coach: "Sources marked 'dato de ejemplo' are illustrative. The full monitoring set and evidence documents open with the pilot.",
   },
   {
     scene: "5 · ICA-0201: audit log",
+    click: () => tab("Decisiones e historial", "Decisions and history"),
     secs: 15,
     point: () => [heading(L("Registro de auditoría", "Audit log"))],
     say: "The audit log is designed as append-only: a correction is a new entry linked to the original, so you always see the history.",
@@ -114,10 +118,10 @@ const STEPS = [
   {
     scene: "6 · Pending decisions: PIS-0034",
     secs: 25,
-    click: () => nav(L("Decisiones pendientes", "Pending decisions")),
+    click: () => nav(L("Decisiones", "Decisions")),
     point: () => [text("PIS-0034", false)],
     say: "This one does need your conformity: T2 for 11,200. T1 invoices are 99% reconciled, the 7 November field estimate confirms the volume, and coverage is 1.90x. With the price down 20%, it's still 1.52x.",
-    coach: "Do NOT click 'Dar conformidad'. If asked about the date: we're showing the November cut-off; live, you'd have 72 hours.",
+    coach: "This view is read-only until the pilot. If asked about the date: we're showing the November cut-off; live, you'd have 72 hours.",
   },
   {
     scene: "6 · Upcoming",
@@ -133,9 +137,9 @@ const STEPS = [
       await wait(1200);
       return page.locator("tr", { hasText: "ICA-0177" }).first();
     },
-    point: () => [heading(L("Imagen del predio", "Parcel image"))],
+    point: () => [page.getByRole("heading", { name: /Imagen del predio|Parcel image|Patrón de vigor|Parcel vigour/ }).first()],
     say: "It declares Hass avocado, but the real satellite history shows a crop that is pruned or rests: vigour drops to 0.26 at its low point every year. Avocado is evergreen. With no verifiable crop there is no coverage to measure. We recommend declining, or a field inspection if the grower disputes it.",
-    coach: "Vigour is an index from 0 to 1; a healthy avocado orchard sits around 0.7 to 0.8 all year. Don't click Approve or Decline.",
+    coach: "Vigour is an index from 0 to 1; a healthy avocado orchard sits around 0.7 to 0.8 all year. Decisions are read-only until the pilot.",
   },
   {
     scene: "7 · Application ICA-0244",
@@ -159,9 +163,9 @@ const STEPS = [
   {
     scene: "8 · Parcel map",
     secs: 15,
-    click: () => nav(L("Mapa de predios", "Parcel map")),
-    point: () => [page.locator(".leaflet-container")],
-    say: "A secondary view: where the money is, by state. On a real file every parcel has a surveyed outline, checked on the field visit before the first tranche.",
+    click: () => nav("(Mapa de predios|Vista regional|Parcel map|Regional view)"),
+    point: () => [page.getByRole("heading", { name: /Mapa de predios|Vista regional|Parcel map|Regional view/ }).first()],
+    say: "A secondary view: where the money is, by region and state. Exact locations and the parcel map are enabled for pilot files.",
   },
   {
     scene: "9 · Assessment memo",
@@ -191,13 +195,9 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const text = (s, exact = true) => page.getByText(s, { exact }).first();
 const heading = (s) => page.getByRole("heading", { name: s }).first();
 const button = (s) => page.getByRole("button", { name: s }).first();
+const tab = (es, en) => page.getByRole("tab", { name: new RegExp(`^${L(es, en)}`) }).first();
 /** A sidebar item (its accessible name may include a count badge). */
 const nav = (s) => page.getByRole("button", { name: new RegExp(`^${s}`) }).first();
-
-async function closeDrawer() {
-  await page.keyboard.press("Escape");
-  await wait(400);
-}
 
 async function show(locator) {
   try {
@@ -278,7 +278,6 @@ async function caption(i, s) {
       advance = resolve;
       if (AUTO) setTimeout(resolve, s.secs * 1000 * SPEED);
     });
-    if (s.after) await s.after();
   }
   console.log("\nDone.");
   await browser.close();
