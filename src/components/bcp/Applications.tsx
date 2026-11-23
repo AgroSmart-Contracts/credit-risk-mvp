@@ -5,12 +5,14 @@
  */
 import { useState } from "react";
 import { GEO } from "../../data/bcp/technical";
-import { cov, date, stateFromCoverage, usd } from "../../lib/bcp/calc";
+import { cov, date, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
+import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
 import { appKey, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
+import { VigourPattern } from "./VigourPattern";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { useLang, useT, useToast } from "./shared";
+import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
 import { Btn, Card, Chip, ExampleChip, Lbl, Prov, SectionTitle, StateChip } from "./ui";
 
@@ -95,14 +97,15 @@ export function ApplicationsPage({ data, onOpen, answers }: { data: Portfolio; o
   );
 }
 
-export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: { app: Application; data: Portfolio; onBack: () => void; onMap: () => void; answer?: Answer; onAnswer: (a: Answer) => void }) {
+export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAnswer }: { app: Application; data: Portfolio; onBack: () => void; onMap: () => void; onMemo: () => void; answer?: Answer; onAnswer: (a: Answer) => void }) {
   const t = useT();
   const lang = useLang();
   const [stress, setStress] = useState(false);
   const toast = useToast();
   const geo = GEO[app.id];
   const t1 = app.tranches[0];
-  const kinds = app.recommendation === "aprobar" ? (["rechazar", "info", "aprobar"] as const) : (["aprobar", "info", "rechazar"] as const);
+  // Fixed order on every application, so a button is never in a different place; the recommended one is highlighted.
+  const kinds = ["aprobar", "rechazar", "info"] as const;
   const label = { aprobar: t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or information") };
 
   return (
@@ -123,13 +126,13 @@ export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: 
               {t("Solicitud", "Application")} {app.id} · {t(app.crop)}
             </h1>
             <p className="text-sm text-bcp-muted">
-              {t(app.zone)} · {app.areaHa.toFixed(2)} {t("ha medidas", "ha measured")} · {t("campaña", "campaign")} {app.campaign} · {t("recibida", "received")} {date(app.receivedDate, lang)}
+              {t(app.zone)} · {haLabel(app.areaHa)} {t("ha medidas", "ha measured")} · {t("campaña", "campaign")} {app.campaign} · {t("recibida", "received")} {date(app.receivedDate, lang)}
             </p>
             <p className="lbl mt-0.5">{t(`Decidir antes del ${date(app.decisionDueDate, "es")}`, `Decide by ${date(app.decisionDueDate, "en")}`)}</p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
-            <Btn onClick={() => window.print()}>{t("Memorando de evaluación", "Assessment memo")}</Btn>
-            <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>
+            <Btn onClick={onMemo}>{t("Memorando de evaluación (PDF)", "Assessment memo (PDF)")}</Btn>
+            {!BANK_EDITION && <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
           </div>
         </div>
       </header>
@@ -176,6 +179,8 @@ export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: 
             <p className="mt-3">
               <Stamp text={ANSWER_TEXT[answer.kind as keyof typeof ANSWER_TEXT]?.[lang] ?? ""} when={date(answer.at.slice(0, 10), lang)} />
             </p>
+          ) : BANK_EDITION ? (
+            <p className="lbl mt-3">{t("Vista ilustrativa: las decisiones se registran durante el piloto.", "Illustrative view: decisions are recorded during the pilot.")}</p>
           ) : (
             <div className="mt-3 flex flex-wrap gap-2">
               {kinds.map((k) => (
@@ -214,7 +219,7 @@ export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: 
                   <td className={`py-2 pr-3 ${c.state === "verde" ? "text-bcp-muted" : "font-semibold"}`}>{t(c.effect)}</td>
                   <td className="py-2 pr-3">
                     <Prov p={c.provenance} />
-                    <span className="lbl block">{t(c.source)}</span>
+                    <span className="lbl block">{t(sourceTx(c))}</span>
                   </td>
                 </tr>
               ))}
@@ -225,7 +230,7 @@ export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: 
 
       <div className="grid gap-3 lg:grid-cols-2">
         <Card className="min-w-0">
-          <ScoreBreakdown dims={app.scoreDims} single />
+          <ScoreBreakdown dims={app.scoreDims} scores={{ approval: app.score, today: app.score }} single />
         </Card>
         <Card className="min-w-0">
           {app.coverage === null ? (
@@ -246,6 +251,12 @@ export function ApplicationFile({ app, data, onBack, onMap, answer, onAnswer }: 
           )}
         </Card>
       </div>
+
+      {app.vigourPattern && (
+        <Card>
+          <VigourPattern points={app.vigourPattern} />
+        </Card>
+      )}
 
       {geo?.parcelId && geo.ring && (
         <Card>

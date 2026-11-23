@@ -1,33 +1,30 @@
 /**
- * Cartera (spec 6.1): Mi dinero → Control del dinero → Mi riesgo → Qué cambió,
- * then the decision waiting for the bank and the loans table.
+ * Cartera: the four headline figures, then one tab per kind of data
+ * (summary, position and funds, risk, loans, applications).
  */
 import { Fragment, useState } from "react";
 import { bySeverity, cashCalendar, cov, date, month, pct, pendingDecisions, portfolioFigures, range, usd } from "../../lib/bcp/calc";
 import type { Portfolio as P, State } from "../../lib/bcp/types";
-import { AlertCard } from "./AlertCard";
 import { ApplicationsTable } from "./Applications";
 import { appKey, decisionKey, type Answer } from "./answers";
 import { DecisionBlock } from "./Decision";
-import { Btn, Card, Estimado, ExampleChip, Lbl, SectionTitle, StackBar, StateChip } from "./ui";
-import { useDrawer, useEvidence, useLang, useT } from "./shared";
-import { concentrationDetail, coverageDetail, disbursedDetail, frozenDetail, fundsDetail, maturityDetail, provisionDetail, tranchesReleasedDetail, undrawnDetail } from "./details";
+import { BANK_EDITION } from "./edition";
+import { Btn, Card, Estimado, ExampleChip, Lbl, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
+import { useEvidence, useLang, useT } from "./shared";
 
-export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onException, answers, onAnswer }: { data: P; onOpen: (id: string) => void; onOpenApp: (id: string) => void; onReport: () => void; onDecisions: () => void; onException: (id: string) => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
+export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answers, onAnswer }: { data: P; onOpen: (id: string) => void; onOpenApp: (id: string) => void; onReport: () => void; onDecisions: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
   const lang = useLang();
   const F = portfolioFigures(data.loans);
   const pending = pendingDecisions(data.loans, data.cutoff);
-  const [openChange, setOpenChange] = useState<string | null>(null);
+  const [page, setPage] = useState<"resumen" | "posicion" | "riesgo" | "prestamos" | "solicitudes">("resumen");
   const openEvidence = useEvidence();
-  const open = useDrawer();
   // Clicking a state in "exposure by state" filters the loans table.
   const [stateFilter, setStateFilter] = useState<State | null>(null);
   const filterBy = (st: State) => {
     setStateFilter(st);
-    window.setTimeout(() => document.getElementById("prestamos")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+    setPage("prestamos");
   };
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   const [season, setSeason] = useState(false);
   const appsOpen = data.applications.filter((a) => !answers[appKey(a)]);
   const loanChanges = data.changes.filter((c) => c.loanId);
@@ -54,7 +51,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
 
       {/* Statement strip: the four things the bank reads first, joined like a statement. */}
       <section aria-label={t("Situación de la cartera", "Portfolio situation")} className="grid overflow-hidden rounded-xl border border-bcp-border bg-white sm:grid-cols-2 xl:grid-cols-[1.25fr_1fr_1fr_1fr]">
-        <button type="button" onClick={() => open(disbursedDetail(data, t, lang))} className="group bg-bcp-ink px-5 py-4 text-left text-white hover:bg-[#15354f]">
+        <button type="button" onClick={() => setPage("posicion")} className="group bg-bcp-ink px-5 py-4 text-left text-white hover:bg-[#15354f]">
           <p className="font-[Arial,Helvetica,sans-serif] text-[12px] text-bcp-label">{t("Desembolsado", "Disbursed")}</p>
           <p className="num mb-2 mt-1 text-[28px] font-bold">{usd(F.disbursed)}</p>
           <ul className="list-disc space-y-0.5 pl-4 text-[13px] text-white/90">
@@ -63,7 +60,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
           </ul>
           <More dark />
         </button>
-        <button type="button" onClick={() => open(coverageDetail(data, t, lang))} className="group border-t border-bcp-border px-5 py-4 text-left hover:bg-bcp-bg sm:border-l sm:border-t-0">
+        <button type="button" onClick={() => setPage("riesgo")} className="group border-t border-bcp-border px-5 py-4 text-left hover:bg-bcp-bg sm:border-l sm:border-t-0">
           <Lbl>{t("Cobertura de repago", "Repayment coverage")}</Lbl>
           <p className="num mb-2 mt-1 text-[28px] font-bold">{cov(F.coverage)}</p>
           <ul className="list-disc space-y-0.5 pl-4 text-[13px] text-bcp-muted">
@@ -72,7 +69,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
           </ul>
           <More />
         </button>
-        <button type="button" onClick={() => scrollTo("cambios")} className="group border-t border-bcp-border px-5 py-4 text-left hover:bg-bcp-bg xl:border-l xl:border-t-0">
+        <button type="button" onClick={() => setPage("resumen")} className="group border-t border-bcp-border px-5 py-4 text-left hover:bg-bcp-bg xl:border-l xl:border-t-0">
           <Lbl>{t("Cambios del mes", "Changes this month")}</Lbl>
           <p className="num mb-2 mt-1 text-[28px] font-bold">
             {loanChanges.length} {t("préstamos", "loans")}
@@ -98,8 +95,21 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
         </button>
       </section>
 
-      {/* 01 Mi dinero: the line as a rail, the ledger, and the cash calendar open */}
-      <SectionTitle no="01" title={t("Posición de la cartera", "Portfolio position")} sub={t(`línea total ${usd(F.line)}`, `total line ${usd(F.line)}`)} />
+      <PageTabs
+        label={t("Secciones de la cartera", "Portfolio sections")}
+        value={page}
+        onChange={setPage}
+        tabs={[
+          { id: "resumen", label: t("Resumen", "Summary") },
+          { id: "posicion", label: t("Posición y fondos", "Position and funds") },
+          { id: "riesgo", label: t("Riesgo", "Risk") },
+          { id: "prestamos", label: t("Préstamos", "Loans"), count: data.loans.length },
+          { id: "solicitudes", label: t("Solicitudes", "Applications"), count: data.applications.length },
+        ]}
+      />
+
+      {page === "posicion" && <>
+      <SectionTitle title={t("Posición de la cartera", "Portfolio position")} sub={t(`línea total ${usd(F.line)}`, `total line ${usd(F.line)}`)} />
       <Card>
         <StackBar
           height="h-[22px]"
@@ -113,21 +123,20 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
         />
         <div className="mt-4 grid gap-y-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
-            { k: t("Desembolsado", "Disbursed"), v: usd(F.disbursed), n: t("capital vigente", "outstanding principal"), rule: "border-bcp-ink", sw: "bg-bcp-ink", go: () => open(disbursedDetail(data, t, lang)) },
-            { k: t("Congelado", "Frozen"), v: usd(F.frozen), n: frozenLoan ? t(`T3 de ${frozenLoan.id}`, `T3 of ${frozenLoan.id}`) : "", rule: "border-bcp-naranja", sw: "hatch", go: () => open(frozenDetail(data, t, lang)) },
-            { k: t("Por desembolsar", "Undrawn"), v: usd(F.pending), n: t("contra hitos, nov a feb", "against milestones, Nov to Feb"), rule: "border-bcp-fill-strong", sw: "bg-bcp-fill", go: () => open(undrawnDetail(data, t, lang)) },
-            { k: t("Repagado", "Repaid"), v: usd(F.repaid), n: t("cosechas desde mar 2027", "harvests from Mar 2027"), rule: "border-bcp-green", sw: "", go: () => open(maturityDetail(data, t, lang)) },
-            { k: t("Vencimientos de capital", "Principal maturities"), v: "", n: F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} ${usd(v)}`).join(" · "), rule: "border-bcp-green", sw: "", go: () => open(maturityDetail(data, t, lang)) },
+            { k: t("Desembolsado", "Disbursed"), v: usd(F.disbursed), n: t("capital vigente", "outstanding principal"), rule: "border-bcp-ink", sw: "bg-bcp-ink" },
+            { k: t("Congelado", "Frozen"), v: usd(F.frozen), n: frozenLoan ? t(`T3 de ${frozenLoan.id}`, `T3 of ${frozenLoan.id}`) : "", rule: "border-bcp-naranja", sw: "hatch" },
+            { k: t("Por desembolsar", "Undrawn"), v: usd(F.pending), n: t("contra hitos, nov a feb", "against milestones, Nov to Feb"), rule: "border-bcp-fill-strong", sw: "bg-bcp-fill" },
+            { k: t("Repagado", "Repaid"), v: usd(F.repaid), n: t("cosechas desde mar 2027", "harvests from Mar 2027"), rule: "border-bcp-green", sw: "" },
+            { k: t("Vencimientos de capital", "Principal maturities"), v: "", n: F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} ${usd(v)}`).join(" · "), rule: "border-bcp-green", sw: "" },
           ].map((x) => (
-            <button type="button" key={x.k} onClick={x.go} className={`group block border-l-[3px] pl-3.5 pr-4 text-left hover:bg-bcp-bg ${x.rule}`}>
+            <div key={x.k} className={`border-l-[3px] pl-3.5 pr-4 ${x.rule}`}>
               <span className="lbl block">
                 {x.sw && <span className={`mr-1.5 inline-block h-2.5 w-2.5 rounded-sm align-[-1px] ${x.sw}`} aria-hidden />}
                 {x.k}
               </span>
               {x.v && <span className="num block text-[22px] font-bold">{x.v}</span>}
               {x.n && <span className={x.v ? "lbl block" : "block text-[15px] font-bold"}>{x.n}</span>}
-              <More />
-            </button>
+            </div>
           ))}
         </div>
         <CashCalendar data={data} F={F} />
@@ -140,16 +149,15 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {[
-            { big: sevenOfSeven, s: t("tramos liberados con checklist completo y conformidad del banco", "tranches released with a complete checklist and the bank's conformity"), go: () => open(tranchesReleasedDetail(data, t, lang)) },
-            { big: pct(F.reconciledPct), s: t(`de los fondos con factura conciliada · ${usd(F.unexplained)} en revisión`, `of funds with a reconciled invoice · ${usd(F.unexplained)} under review`), go: () => open(fundsDetail(data, t, "reconciled")) },
-            { big: pct(F.directPct), s: t(`pagado directo a proveedores · ${usd(F.cash)} retirado en efectivo`, `paid directly to suppliers · ${usd(F.cash)} withdrawn in cash`), go: () => open(fundsDetail(data, t, "direct")) },
-            { big: t("Mismo día", "Same day"), s: t(`congelamiento ejecutado y reportado al detectar el desvío (${frozenLoan?.id ?? ""})`, `freeze executed and reported when the deviation was detected (${frozenLoan?.id ?? ""})`), go: () => frozenLoan && onException(frozenLoan.id) },
+            { big: sevenOfSeven, s: t("tramos liberados con checklist completo y conformidad del banco", "tranches released with a complete checklist and the bank's conformity") },
+            { big: pct(F.reconciledPct), s: t(`de los fondos con factura conciliada · ${usd(F.unexplained)} en revisión`, `of funds with a reconciled invoice · ${usd(F.unexplained)} under review`) },
+            { big: pct(F.directPct), s: t(`pagado directo a proveedores · ${usd(F.cash)} retirado en efectivo`, `paid directly to suppliers · ${usd(F.cash)} withdrawn in cash`) },
+            { big: t("Mismo día", "Same day"), s: t(`congelamiento ejecutado y reportado al detectar el desvío (${frozenLoan?.id ?? ""})`, `freeze executed and reported when the deviation was detected (${frozenLoan?.id ?? ""})`) },
           ].map((c) => (
-            <button type="button" key={c.s} onClick={c.go} className="group rounded-md p-1 text-left hover:bg-white/70">
+            <div key={c.s} className="p-1">
               <p className="num text-[26px] font-extrabold text-bcp-green-text">{c.big}</p>
               <p className="text-sm text-bcp-ink">{c.s}</p>
-              <More />
-            </button>
+            </div>
           ))}
         </div>
         <ul className="mt-4 list-disc gap-x-8 pl-5 text-[13px] text-bcp-ink sm:columns-2">
@@ -160,9 +168,32 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
         </ul>
       </Card>
 
-      {/* 5. Mi riesgo */}
+
+      <Card>
+        <h3 className="text-[16px] font-bold">{t("Posición por préstamo", "Position by loan")}</h3>
+        <div className="mt-2 overflow-x-auto">
+          <table className="w-full min-w-[640px] text-sm">
+            <thead><tr className="border-b border-bcp-border">{[t("Préstamo", "Loan"), t("Línea", "Line"), t("Desembolsado", "Disbursed"), t("Congelado", "Frozen"), t("Por desembolsar", "Undrawn"), t("Vence", "Maturity")].map((h, i) => <Lbl key={h} as="th" className={`py-1.5 font-normal ${i ? "text-right" : "text-left"}`}>{h}</Lbl>)}</tr></thead>
+            <tbody className="divide-y divide-bcp-divider">
+              {[...data.loans].sort(bySeverity).map((l) => (
+                <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer hover:bg-bcp-bg">
+                  <td className="py-2 font-semibold">{l.id}</td>
+                  <td className="py-2 text-right">{usd(l.lineUsd)}</td>
+                  <td className="py-2 text-right font-semibold">{usd(l.disbursedUsd)}</td>
+                  <td className="py-2 text-right">{usd(l.frozenUsd)}</td>
+                  <td className="py-2 text-right">{usd(l.lineUsd - l.disbursedUsd - l.frozenUsd)}</td>
+                  <td className="py-2 text-right">{date(l.maturityDate, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+      </>}
+
+      {page === "riesgo" && <>
       <section>
-        <SectionTitle no="02" title={t("Riesgo de la cartera", "Portfolio risk")} />
+        <SectionTitle title={t("Riesgo de la cartera", "Portfolio risk")} />
         <div className="grid gap-3 lg:grid-cols-3">
           <Card>
             <h3 className="text-[16px] font-bold">{t("Exposición por estado", "Exposure by state")}</h3>
@@ -200,16 +231,16 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
           </Card>
           <Card>
             <h3 className="text-[16px] font-bold">{t("Cobertura de repago de la cartera", "Portfolio repayment coverage")}</h3>
-            <button type="button" onClick={() => open(coverageDetail(data, t, lang))} className="num mt-1 block text-[36px] font-bold hover:underline">
-              {cov(F.coverage)}
-            </button>
+            <p className="num mt-1 text-[36px] font-bold">{cov(F.coverage)}</p>
             <p className="mt-2 flex flex-wrap items-start gap-2 rounded-lg bg-bcp-ambar-bg px-3 py-2 text-sm text-bcp-ambar-text">
               <Estimado />
               <span>
                 {t(data.projection.text)}{" "}
-                <button type="button" onClick={() => openEvidence("ICA-0188", "El Niño costero")} className="font-semibold underline underline-offset-2">
+                {!BANK_EDITION && (
+                  <button type="button" onClick={() => openEvidence("ICA-0188", "El Niño costero")} className="font-semibold underline underline-offset-2">
                   {t("Ver evidencia", "View evidence")}
                 </button>
+                )}
               </span>
             </p>
             <p className="lbl mt-3">
@@ -226,25 +257,46 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
                 [t("Cultivo", "Crop"), t("palta Hass 100%", "Hass avocado 100%")],
                 [t("Zona", "Zone"), `Ica ${pct((ica / F.line) * 100)} · Pisco ${pct(((F.line - ica) / F.line) * 100)}`],
                 [t("Packing principal", "Main packhouse"), t(`${data.mainPackhousePct}% de la línea`, `${data.mainPackhousePct}% of the line`)],
-              ].map(([k, v], i) => (
-                <button type="button" key={k} onClick={() => open(i < 3 ? provisionDetail(data, t) : concentrationDetail(data, t))} className="flex w-full justify-between gap-3 py-1.5 text-left hover:bg-bcp-bg">
+              ].map(([k, v]) => (
+                <div key={k} className="flex w-full justify-between gap-3 py-1.5">
                   <span className="lbl">{k}</span>
-                  <span className="num text-right font-semibold">{v} <span aria-hidden className="text-bcp-muted">›</span></span>
-                </button>
+                  <span className="num text-right font-semibold">{v}</span>
+                </div>
               ))}
             </div>
           </Card>
         </div>
       </section>
 
+
+      <Card>
+        <h3 className="text-[16px] font-bold">{t("Cobertura por préstamo", "Coverage by loan")}</h3>
+        <div className="mt-2 overflow-x-auto">
+          <table className="w-full min-w-[620px] text-sm">
+            <thead><tr className="border-b border-bcp-border">{[t("Préstamo", "Loan"), t("Estado", "State"), t("Aprobación", "Approval"), t("Hoy", "Today"), t("Proyección", "Projection")].map((h, i) => <Lbl key={h} as="th" className={`py-1.5 font-normal ${i > 1 ? "text-right" : "text-left"}`}>{h}</Lbl>)}</tr></thead>
+            <tbody className="divide-y divide-bcp-divider">
+              {[...data.loans].sort(bySeverity).map((l) => (
+                <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer hover:bg-bcp-bg">
+                  <td className="py-2 font-semibold">{l.id}</td>
+                  <td className="py-2"><StateChip state={l.state} /></td>
+                  <td className="py-2 text-right">{cov(l.coverageAtApproval)}</td>
+                  <td className="py-2 text-right font-semibold">{cov(l.coverageToday)}</td>
+                  <td className="py-2 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio proyectado", "no projected change")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+      </>}
+
+      {page === "resumen" && <>
       {/* 03 Qué cambió este mes */}
-      <div id="cambios" className="scroll-mt-20" />
-      <SectionTitle no="03" title={t("Cambios en la cartera este mes", "Portfolio changes this month")} sub={t(`${date(data.monthFrom, "es")} a ${date(data.cutoff, "es")}`, `${date(data.monthFrom, "en")} to ${date(data.cutoff, "en")}`)} />
+      <SectionTitle title={t("Cambios en la cartera este mes", "Portfolio changes this month")} sub={t(`${date(data.monthFrom, "es")} a ${date(data.cutoff, "es")}`, `${date(data.monthFrom, "en")} to ${date(data.cutoff, "en")}`)} />
       <Card className="py-1.5 sm:py-1.5">
         <ul className="divide-y divide-bcp-divider">
           {data.changes.map((c, i) => {
             const loan = c.loanId ? data.loans.find((l) => l.id === c.loanId) ?? null : null;
-            const k = `${c.loanId}:${c.date}`;
             return (
               <li key={i} className="py-3">
                 <div className="grid gap-2 md:grid-cols-[11rem_13rem_1fr_auto] md:items-start">
@@ -264,31 +316,26 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
                     </span>
                   </p>
                   <span className="flex flex-wrap items-center gap-3">
-                    {c.evidence && (
+                    {!BANK_EDITION && c.evidence && (
                       <button type="button" onClick={() => openEvidence(c.evidence!.loanId, c.evidence!.condition)} className="min-h-[44px] text-sm font-semibold text-bcp-green-text hover:underline">
                         {t("Evidencia", "Evidence")} ›
                       </button>
                     )}
                     {loan && (
-                      <button type="button" onClick={() => setOpenChange(openChange === k ? null : k)} aria-expanded={openChange === k} className="min-h-[44px] text-sm font-semibold text-bcp-ink hover:underline">
-                        {openChange === k ? t("Cerrar", "Close") : t("Ver", "View")}
+                      <button type="button" onClick={() => onOpen(loan.id)} className="min-h-[44px] text-sm font-semibold text-bcp-ink hover:underline">
+                        {t("Abrir expediente", "Open file")} →
                       </button>
                     )}
                   </span>
                 </div>
-                {loan && openChange === k && (
-                  <div className="mt-3">
-                    <AlertCard loan={loan} onOpen={() => onOpen(loan.id)} />
-                  </div>
-                )}
               </li>
             );
           })}
         </ul>
       </Card>
 
-      {/* 04 Requiere su decisión */}
-      {pending.length > 0 && <SectionTitle no="04" title={t("Decisiones pendientes", "Pending decisions")} sub={t("conformidades del banco", "the bank's conformities")} />}
+      {/* 04 Decisiones pendientes */}
+      {pending.length > 0 && <SectionTitle title={t("Decisiones pendientes", "Pending decisions")} sub={t("conformidades del banco", "the bank's conformities")} />}
       {pending.map((p) => (
         <DecisionBlock
           key={decisionKey(p.loan, p.decision)}
@@ -301,11 +348,10 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
         />
       ))}
 
-      {/* 05 Préstamos */}
-      <div id="prestamos" className="scroll-mt-20" />
-      <SectionTitle
-        no={pending.length > 0 ? "05" : "04"}
-        title={t("Préstamos", "Loans")}
+      </>}
+
+      {page === "prestamos" && <>
+      <SectionTitle title={t("Préstamos", "Loans")}
         sub={t("ordenados por estado y exposición", "sorted by state and exposure")}
         right={
           stateFilter ? (
@@ -321,20 +367,22 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
           {season ? t("Ocultar calendario de campaña", "Hide campaign calendar") : t("Ver calendario de campaña: tramos, cosecha y vencimiento de cada préstamo", "View campaign calendar: each loan's tranches, harvest and maturity")}
         </button>
         {season && <SeasonCalendar data={data} onOpen={onOpen} />}
+        {!BANK_EDITION && (
         <p className="lbl mt-3">
           {t(
             "Cada dato muestra su fuente y fecha en el expediente. Estado = el más severo entre cobertura de repago y los gatillos acordados (vigor, facturas, labores, cuajado, aforo, deuda).",
             "Each figure shows its source and date in the file. State = the most severe of repayment coverage and the agreed triggers (vigour, invoices, field work, fruit set, field estimate, debt).",
           )}
         </p>
+        )}
       </Card>
 
-      {/* Applications: the pipeline the bank still has to approve or decline. */}
+      </>}
+
+      {page === "solicitudes" && <>
       {data.applications.length > 0 && (
         <>
-          <SectionTitle
-            no={pending.length > 0 ? "06" : "05"}
-            title={t("Solicitudes en evaluación", "Applications under review")}
+          <SectionTitle title={t("Solicitudes en evaluación", "Applications under review")}
             sub={t(`${data.applications.length} por ${usd(data.applications.reduce((s, a) => s + a.requestedUsd, 0))} · nada desembolsado hasta su aprobación`, `${data.applications.length} for ${usd(data.applications.reduce((s, a) => s + a.requestedUsd, 0))} · nothing disbursed until you approve`)}
           />
           <Card>
@@ -342,6 +390,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, onEx
           </Card>
         </>
       )}
+      </>}
     </div>
   );
 }
@@ -381,7 +430,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">
                 {cov(l.coverageAtApproval)} → <b>{cov(l.coverageToday)}</b>
-                <span className="lbl block">{l.projection ? `${t("proyección", "projection")} ${range(l.projection.low, l.projection.high, lang)}` : t("sin cambio", "no change")}</span>
+                <span className="lbl block">{l.projection ? `${t("proyección", "projection")} ${range(l.projection.low, l.projection.high, lang)}` : t("sin cambio proyectado", "no projected change")}</span>
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">{date(l.maturityDate, lang)}</td>
               <td className="max-w-[18rem] py-2.5 text-bcp-ink">{t(l.summary)}</td>
@@ -474,7 +523,7 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
   for (let v = min; v <= max; v += 50_000) ticks.push(v);
   const line = [[L + 4, Y(F.disbursed)], ...pts.map((p, i) => [L + bw * i + bw / 2, Y(p)])];
   const aria = t(
-    `Calendario de caja. ${rows.map((r) => `${month(r.month, "es")}: sale ${usd(r.out)}, vuelve ${usd(r.back)}`).join("; ")}. Saldo máximo expuesto ${usd(peak)}${peakMonth ? ` en ${month(peakMonth, "es")}` : ""}.`,
+    `Calendario de caja. ${rows.map((r) => `${month(r.month, "es")}: desembolsos ${usd(r.out)}, repagos ${usd(r.back)}`).join("; ")}. Saldo máximo expuesto ${usd(peak)}${peakMonth ? ` en ${month(peakMonth, "es")}` : ""}.`,
     `Cash calendar. ${rows.map((r) => `${month(r.month, "en")}: out ${usd(r.out)}, back ${usd(r.back)}`).join("; ")}. Peak balance exposed ${usd(peak)}${peakMonth ? ` in ${month(peakMonth, "en")}` : ""}.`,
   );
   return (
@@ -556,5 +605,5 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
 /** "See detail" hint on clickable tiles. */
 function More({ dark = false }: { dark?: boolean }) {
   const t = useT();
-  return <span className={`mt-1.5 inline-block font-[Arial,Helvetica,sans-serif] text-[12px] font-bold underline-offset-2 group-hover:underline ${dark ? "text-bcp-label" : "text-bcp-green-text"}`}>{t("Ver detalle", "View detail")} ›</span>;
+  return <span className={`mt-1.5 inline-block font-[Arial,Helvetica,sans-serif] text-[12px] font-bold underline-offset-2 group-hover:underline ${dark ? "text-bcp-label" : "text-bcp-green-text"}`}>{t("Ir a la sección", "Go to section")} ›</span>;
 }

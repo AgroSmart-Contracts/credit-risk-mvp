@@ -3,17 +3,21 @@
  * history series a credit analyst can open from "Datos técnicos" or a condition
  * row ("Ver serie").
  *
- * - Temperature and rain are the real daily history for Ica (ERA5).
- * - Crop vigour, water, coastal El Niño and expected price are example series
- *   calibrated to the file: each starts at the condition's approval value and
- *   ends at its value today, so a chart never contradicts the table above it
- *   (see technical.test.ts).
+ * Real history:
+ * - Temperature and rain: daily ERA5 history for Ica.
+ * - Coastal El Niño: NOAA's monthly Niño 1+2 anomaly as ENFEN's 3-month index (enso.ts);
+ *   the file's El Niño words are read from the same data.
+ * - Export prices: Hass avocado FOB by month from customs declarations (median and
+ *   interquartile range). The file's expected harvest price is an estimate shown over it.
+ * Example series: crop vigour and water, calibrated to the file (each starts at the
+ * condition's approval value and ends at today's, see technical.test.ts).
  */
 import climate from "../pre-harvest/climate-villacuri.json";
+import real from "./market-real.json";
+import { ensoSeries } from "./enso";
+export { ENSO_CLASSES, ensoClass } from "./enso-classes";
 import { PARCELS } from "../../lib/pre-harvest/site";
-import type { Loan, Tx } from "../../lib/bcp/types";
-
-const L = (es: string, en: string): Tx => ({ es, en });
+import type { Loan } from "../../lib/bcp/types";
 
 export interface LoanGeo {
   lat: number;
@@ -25,14 +29,15 @@ export interface LoanGeo {
   /** True when the point is the zone, not a surveyed parcel. */
   approximate: boolean;
   /** Side of the map label, so neighbouring labels do not overlap. */
-  labelSide?: "left" | "right";
+  labelSide?: "left" | "right" | "top" | "bottom";
 }
 
 export const GEO: Record<string, LoanGeo> = {
-  "ICA-0188": { ...PARCELS["ica-0188"].site, ring: PARCELS["ica-0188"].ring, parcelId: "ica-0188", approximate: false, labelSide: "left" },
-  "ICA-0142": { ...PARCELS["ica-0142"].site, ring: PARCELS["ica-0142"].ring, parcelId: "ica-0142", approximate: false },
-  "ICA-0201": { lat: -14.186, lon: -75.713, ring: null, parcelId: null, approximate: true },
-  "ICA-0215": { lat: -14.121, lon: -75.703, ring: null, parcelId: null, approximate: true },
+  "ICA-0188": { ...PARCELS["ica-0188"].site, ring: PARCELS["ica-0188"].ring, parcelId: "ica-0188", approximate: false },
+  // Zone point only: the surveyed parcel near here was cleared in May 2026 and would contradict this example file.
+  "ICA-0142": { lat: -13.915, lon: -75.87, ring: null, parcelId: null, approximate: true, labelSide: "left" },
+  "ICA-0201": { lat: -14.186, lon: -75.713, ring: null, parcelId: null, approximate: true, labelSide: "left" },
+  "ICA-0215": { lat: -14.121, lon: -75.703, ring: null, parcelId: null, approximate: true, labelSide: "top" },
   "PIS-0034": { lat: -13.694, lon: -76.031, ring: null, parcelId: null, approximate: true },
   // Applications
   "ICA-0177": { ...PARCELS["ica-0177"].site, ring: PARCELS["ica-0177"].ring, parcelId: "ica-0177", approximate: false },
@@ -43,27 +48,36 @@ export const GEO: Record<string, LoanGeo> = {
 // Series
 // ---------------------------------------------------------------------------
 
-export type SeriesId = "vigor" | "agua" | "enso" | "precio" | "clima";
+export { SERIES_OF_CONDITION, SERIES_TEXT, type SeriesId } from "./series-text";
 
 export interface Pt {
   date: string;
   v: number;
 }
 
+/** Real monthly export price: median and interquartile range, USD/kg FOB. */
+export interface PricePt {
+  date: string;
+  p25: number;
+  p50: number;
+  p75: number;
+  shipments: number;
+}
+
 export interface TechSeries {
   vigor: Pt[];
   agua: Pt[];
+  /** Real coastal index by month, to the last complete month before the cut-off. */
   enso: Pt[];
-  precio: Pt[];
+  /** Real export prices by month, from a year before approval. */
+  precio: PricePt[];
+  /** The file's expected harvest price (estimate): at approval and today. */
+  esperado: Pt[];
   clima: Array<{ date: string; tmax: number; tmin: number; rain: number }>;
 }
 
 const DAY = 86_400_000;
 const addDays = (d: string, n: number) => new Date(Date.parse(`${d}T00:00:00Z`) + n * DAY).toISOString().slice(0, 10);
-const nextMonth = (m: string) => {
-  const [y, mo] = m.split("-").map(Number);
-  return mo === 12 ? `${y + 1}-01` : `${y}-${String(mo + 1).padStart(2, "0")}`;
-};
 /** "+2%" → 2, "USD 1.94/kg" → 1.94, "104%" → 104. */
 export const num = (s: string) => Number((s.match(/[-+]?\d+(?:\.\d+)?/) ?? ["NaN"])[0]);
 /** Deterministic small wobble so series look like readings, never random between renders. */
@@ -92,56 +106,25 @@ function path(from: string, to: string, a: number, b: number, seed: number, amp:
 
 const cond = (loan: Loan, es: string) => loan.conditions.find((c) => c.label.es === es)!;
 
-/** ENFEN coastal El Niño classes on Niño 1+2 (°C): the scale the table's words come from. */
-export const ENSO_CLASSES: Array<{ min: number; label: Tx }> = [
-  { min: 3.0, label: L("Extraordinario", "Extraordinary") },
-  { min: 1.7, label: L("Fuerte", "Strong") },
-  { min: 1.0, label: L("Moderado", "Moderate") },
-  { min: 0.4, label: L("Débil", "Weak") },
-  { min: -Infinity, label: L("Neutro", "Neutral") },
-];
-export const ensoClass = (v: number) => ENSO_CLASSES.find((c) => v >= c.min)!.label;
-/** Representative anomaly for a class word, to calibrate the example series. */
-const ENSO_VALUE: Record<string, number> = { Neutro: 0.1, Débil: 0.7, Moderado: 1.3, Fuerte: 2.2, Extraordinario: 3.4 };
-
 export function technicalSeries(loan: Loan, cutoff: string): TechSeries {
   const seed = seedOf(loan.id);
   const vig = cond(loan, "Vigor del cultivo vs lo normal del lote");
   const water = cond(loan, "Agua disponible vs necesidad");
-  const enso = cond(loan, "El Niño costero");
   const price = cond(loan, "Precio esperado a cosecha");
   const sharp = num(vig.today.es) - num(vig.atApproval.es) < -10;
 
-  // Coastal El Niño: monthly, from five months before approval to the cut-off month.
-  const months: string[] = [];
-  const first = addDays(loan.approvalDate, -150).slice(0, 7);
-  for (let m = first; m <= cutoff.slice(0, 7); m = nextMonth(m)) months.push(m);
-  const appMonth = loan.approvalDate.slice(0, 7);
-  const eA = ENSO_VALUE[enso.atApproval.es];
-  const eB = ENSO_VALUE[enso.today.es];
-  // What was known at approval is the last complete month before it.
-  const iA = Math.max(0, months.indexOf(appMonth) - 1);
-  // The latest month counts is the last complete one (the class is a 3-month reading).
-  const iB = months.length - 2;
-  const ensoPts = months.map((m, i) => {
-    let v: number;
-    if (i <= iA) v = 0.2 + (eA - 0.2) * Math.pow(i / Math.max(1, iA), 1.3);
-    else if (i <= iB) v = eA + (eB - eA) * ((i - iA) / Math.max(1, iB - iA));
-    else v = eB + 0.15;
-    if (i === iA) v = eA;
-    if (i === iB) v = eB;
-    return { date: `${m}-01`, v: Math.round(v * 100) / 100 };
-  });
+  // Coastal El Niño (real): from five months before approval to the last complete month.
+  const ensoPts = ensoSeries(addDays(loan.approvalDate, -150), cutoff);
 
-  // Expected harvest price: monthly from the approval month to the cut-off month.
-  const pMonths: string[] = [];
-  for (let m = appMonth; m <= cutoff.slice(0, 7); m = nextMonth(m)) pMonths.push(m);
-  const pA = num(price.atApproval.es);
-  const pB = num(price.today.es);
-  const pricePts = pMonths.map((m, i) => ({
-    date: i === 0 ? loan.approvalDate : i === pMonths.length - 1 ? cutoff : `${m}-01`,
-    v: i === 0 ? pA : i === pMonths.length - 1 ? pB : Math.round((pA + ((pB - pA) * i) / (pMonths.length - 1) + wobble(i, seed, 0.02)) * 100) / 100,
-  }));
+  // Export prices (real): monthly, from a year before approval to the latest month published.
+  const yearBefore = addDays(loan.approvalDate, -365).slice(0, 7);
+  const pricePts: PricePt[] = real.fob.months
+    .filter((m) => m.month >= yearBefore && m.month <= cutoff.slice(0, 7))
+    .map((m) => ({ date: `${m.month}-15`, p25: m.p25, p50: m.p50, p75: m.p75, shipments: m.shipments }));
+  const esperado: Pt[] = [
+    { date: loan.approvalDate, v: num(price.atApproval.es) },
+    { date: cutoff, v: num(price.today.es) },
+  ];
 
   const from = addDays(loan.approvalDate, -30);
   const weather = (climate as { weather: Array<{ date: string; tmax: number | null; tmin: number | null; precip: number | null }> }).weather
@@ -153,42 +136,7 @@ export function technicalSeries(loan: Loan, cutoff: string): TechSeries {
     agua: path(loan.approvalDate, cutoff, num(water.atApproval.es), num(water.today.es), seed + 3, 1.5, 1, 4),
     enso: ensoPts,
     precio: pricePts,
+    esperado,
     clima: weather,
   };
 }
-
-/** Which condition row opens which series. */
-export const SERIES_OF_CONDITION: Record<string, SeriesId> = {
-  "Vigor del cultivo vs lo normal del lote": "vigor",
-  "Agua disponible vs necesidad": "agua",
-  "El Niño costero": "enso",
-  "Precio esperado a cosecha": "precio",
-};
-
-export const SERIES_TEXT: Record<SeriesId, { title: Tx; sub: Tx; source: Tx }> = {
-  vigor: {
-    title: L("Vigor del cultivo vs lo normal del lote", "Crop vigour vs the lot's normal"),
-    sub: L("Diferencia semanal del índice de vigor frente a la mediana de 5 años del mismo lote", "Weekly vigour index difference against the lot's own 5-year median"),
-    source: L("Satelital · Sentinel-2 · serie de ejemplo calibrada al expediente", "Satellite · Sentinel-2 · example series calibrated to the file"),
-  },
-  agua: {
-    title: L("Agua disponible vs necesidad del cultivo", "Water available vs crop need"),
-    sub: L("Dotación de la licencia frente a la demanda del cultivo (evapotranspiración)", "Licensed allocation against crop demand (evapotranspiration)"),
-    source: L("Satelital · ERA5 + licencia ANA · serie de ejemplo calibrada al expediente", "Satellite · ERA5 + ANA licence · example series calibrated to the file"),
-  },
-  enso: {
-    title: L("El Niño costero", "Coastal El Niño"),
-    sub: L("Anomalía de temperatura del mar (Niño 1+2) y clases de ENFEN", "Sea temperature anomaly (Niño 1+2) and ENFEN classes"),
-    source: L("Estimado · ENFEN · serie de ejemplo calibrada al expediente", "Estimated · ENFEN · example series calibrated to the file"),
-  },
-  precio: {
-    title: L("Precio esperado a cosecha", "Expected harvest price"),
-    sub: L("Precio FOB de exportación esperado para el mes de cosecha", "Expected export FOB price for the harvest month"),
-    source: L("Doc. verificado · precios FOB de exportación · serie de ejemplo calibrada al expediente", "Verified doc. · export FOB prices · example series calibrated to the file"),
-  },
-  clima: {
-    title: L("Temperatura y lluvia", "Temperature and rain"),
-    sub: L("Máxima y mínima diaria y lluvia, desde un mes antes de la aprobación", "Daily maximum and minimum and rain, from a month before approval"),
-    source: L("ERA5 · estación de referencia Ica · historia real", "ERA5 · Ica reference station · real history"),
-  },
-};

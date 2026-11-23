@@ -4,6 +4,7 @@ node_modules
 # Build output
 dist
 dist-ssr
+.bank-build
 *.tsbuildinfo
 
 # Local env and secrets (never commit)

@@ -3,7 +3,7 @@
  * evidence tabs). Each chart states its thresholds, today's value and its source;
  * opened from "Datos técnicos" or a condition row's "Ver serie".
  */
-import { Bar, CartesianGrid, ComposedChart, Line, ReferenceArea, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, Bar, CartesianGrid, ComposedChart, Line, ReferenceArea, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { date, month } from "../../lib/bcp/calc";
 import type { Loan } from "../../lib/bcp/types";
 import { ENSO_CLASSES, SERIES_TEXT, ensoClass, type SeriesId, type TechSeries } from "../../data/bcp/technical";
@@ -26,9 +26,8 @@ function Frame({ id, aria, children, today, extra }: { id: SeriesId; aria: strin
           <figcaption className="text-[15px] font-bold">{t(s.title)}</figcaption>
           <p className="lbl">{t(s.sub)}</p>
         </div>
-        <p className="num text-right text-sm">
-          <span className="lbl block">{t("Hoy", "Today")}</span>
-          <b>{today}</b>
+        <p className="num text-sm">
+          <span className="lbl">{t("Hoy", "Today")}:</span> <b>{today}</b>
         </p>
       </div>
       {extra}
@@ -36,7 +35,7 @@ function Frame({ id, aria, children, today, extra }: { id: SeriesId; aria: strin
         {children}
       </div>
       <p className="lbl mt-1 flex flex-wrap items-center gap-1.5">
-        {id !== "clima" && <Prov p={id === "enso" ? "estimado" : id === "precio" ? "doc_verificado" : "satelital"} />}
+        {id !== "clima" && id !== "enso" && <Prov p={id === "precio" ? "doc_verificado" : "satelital"} />}
         {t(s.source)}
       </p>
     </figure>
@@ -100,16 +99,22 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
 
   if (id === "enso") {
     const data = s.enso.map((p) => ({ t: ts(p.date), v: p.v }));
-    const lastComplete = s.enso.at(-2)!;
+    const lastComplete = s.enso.at(-1)!;
+    // The coastal index is the mean of the last three complete months (e.g. "ago a oct").
+    const short = (d: string) => month(d, lang).split(" ")[0];
+    const startMonth = new Date(Date.parse(`${lastComplete.date}T00:00:00Z`));
+    startMonth.setUTCMonth(startMonth.getUTCMonth() - 2);
+    const threeMonths = `(${short(startMonth.toISOString().slice(0, 10))} ${t("a", "to")} ${short(lastComplete.date)})`;
+    const top = Math.max(4, Math.ceil(Math.max(...s.enso.map((p) => p.v)) + 0.5));
     const bands = [
       [1.0, 1.7, "#fbf1d9"],
       [1.7, 3.0, "#fde4d3"],
-      [3.0, 4.0, "#fbe0e3"],
+      [3.0, top, "#fbe0e3"],
     ] as const;
     return (
       <Frame
         id={id}
-        today={`+${lastComplete.v.toFixed(1)} °C · ${t(ensoClass(lastComplete.v))}`}
+        today={`+${lastComplete.v.toFixed(1)} °C · ${t(ensoClass(lastComplete.v))} · ${t("media de 3 meses", "3-month average")} ${threeMonths}`}
         aria={t(`El Niño costero: +${lastComplete.v.toFixed(1)} °C en ${month(lastComplete.date, "es")}, ${ensoClass(lastComplete.v).es}.`, `Coastal El Niño: +${lastComplete.v.toFixed(1)} °C in ${month(lastComplete.date, "en")}, ${ensoClass(lastComplete.v).en}.`)}
         extra={
           <p className="lbl mb-1">
@@ -125,11 +130,11 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
             {bands.map(([a, b, c]) => (
               <ReferenceArea key={a} y1={a} y2={b} fill={c} />
             ))}
-            <XAxis dataKey="t" type="number" scale="time" domain={[data[0].t, data.at(-1)!.t]} tickFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} tick={tick} minTickGap={24} />
-            <YAxis domain={[-0.5, 4]} ticks={[0, 1, 1.7, 3]} tickFormatter={(v: number) => `${v}`} tick={tick} width={32} />
+            <XAxis dataKey="t" type="number" scale="time" domain={[data[0].t, data.at(-1)!.t]} ticks={data.map((d) => d.t)} interval={0} tickFormatter={(v: number) => { const d = new Date(v).toISOString().slice(0, 10); return v === data[0].t || d.slice(5, 7) === "01" ? month(d, lang) : short(d); }} tick={tick} />
+            <YAxis domain={[-0.5, top]} ticks={[0, 1, 1.7, 3]} tickFormatter={(v: number) => `${v}`} tick={tick} width={32} />
             {approval}
             <Line dataKey="v" stroke={INK} strokeWidth={2} dot={{ r: 3, fill: INK }} isAnimationActive={false} />
-            <Tooltip labelFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`+${v.toFixed(1)} °C · ${t(ensoClass(v))}`, "Niño 1+2"]} />
+            <Tooltip labelFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`${v >= 0 ? "+" : ""}${v.toFixed(1)} °C · ${t(ensoClass(v))}`, t("índice costero, media de 3 meses", "coastal index, 3-month average")]} />
           </ComposedChart>
         </ResponsiveContainer>
       </Frame>
@@ -137,22 +142,54 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
   }
 
   if (id === "precio") {
-    const data = s.precio.map((p) => ({ t: ts(p.date), v: p.v }));
-    const a = s.precio[0].v;
-    const last = s.precio.at(-1)!.v;
+    // Real monthly export prices (median, middle range) with the file's expected harvest price over them.
+    const a = s.esperado[0].v;
+    const last = s.esperado.at(-1)!.v;
+    const latest = s.precio.at(-1)!;
+    const data = [
+      ...s.precio.map((p) => ({ t: ts(p.date), p50: p.p50, band: [p.p25, p.p75] as [number, number], n: p.shipments })),
+      ...s.esperado.map((p) => ({ t: ts(p.date), exp: p.v })),
+    ].sort((x, y) => x.t - y.t);
+    const lo = Math.min(a * 0.6, ...s.precio.map((p) => p.p25));
+    const hi = Math.max(a * 1.1, ...s.precio.map((p) => p.p75));
     return (
-      <Frame id={id} today={`USD ${last.toFixed(2)}/kg`} aria={t(`Precio esperado a cosecha: USD ${last.toFixed(2)} por kg; aprobación USD ${a.toFixed(2)}. Ámbar a -15%, naranja a -30%.`, `Expected harvest price: USD ${last.toFixed(2)} per kg; approval USD ${a.toFixed(2)}. Amber at -15%, orange at -30%.`)}>
+      <Frame
+        id={id}
+        today={`USD ${last.toFixed(2)}/kg`}
+        aria={t(
+          `Precio esperado a cosecha: USD ${last.toFixed(2)} por kg; aprobación USD ${a.toFixed(2)}. Precio real de exportación en ${month(latest.date, "es")}: mediana USD ${latest.p50.toFixed(2)}, rango central ${latest.p25.toFixed(2)} a ${latest.p75.toFixed(2)}.`,
+          `Expected harvest price: USD ${last.toFixed(2)} per kg; approval USD ${a.toFixed(2)}. Real export price in ${month(latest.date, "en")}: median USD ${latest.p50.toFixed(2)}, middle range ${latest.p25.toFixed(2)} to ${latest.p75.toFixed(2)}.`,
+        )}
+        extra={
+          <p className="lbl mb-1">
+            {t(
+              `Línea continua: mediana real de los embarques · franja: mitad central de los embarques · línea discontinua: precio esperado del expediente (estimado). Último mes publicado: ${month(latest.date, "es")}, mediana USD ${latest.p50.toFixed(2)}/kg.`,
+              `Solid line: real median of shipments · band: middle half of shipments · dashed line: the file's expected price (estimated). Latest month published: ${month(latest.date, "en")}, median USD ${latest.p50.toFixed(2)}/kg.`,
+            )}
+          </p>
+        }
+      >
         <ResponsiveContainer>
           <ComposedChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
             <CartesianGrid stroke={GRID} vertical={false} />
             <ReferenceArea y1={a * 0.7} y2={a * 0.85} fill="#fbf1d9" />
             <ReferenceArea y1={a * 0.6} y2={a * 0.7} fill="#fde4d3" />
-            <XAxis dataKey="t" {...axisDates(loan.approvalDate, cutoff, lang)} />
-            <YAxis domain={[Math.floor(a * 0.6 * 10) / 10, Math.ceil(a * 1.1 * 10) / 10]} tickFormatter={(v: number) => v.toFixed(2)} tick={tick} width={40} />
-            <ReferenceLine y={a} stroke={MUTED} strokeDasharray="4 3" label={{ value: t("aprobación", "approval"), position: "insideTopRight", fontSize: 10, fill: MUTED }} />
+            <XAxis dataKey="t" type="number" scale="time" domain={[data[0].t, ts(cutoff)]} tickFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} tick={tick} minTickGap={24} />
+            <YAxis domain={[Math.floor(lo * 10) / 10, Math.ceil(hi * 10) / 10]} tickFormatter={(v: number) => v.toFixed(2)} tick={tick} width={40} />
+            {/* Approval and today are close here: the approval label sits on the left of its line. */}
+            <ReferenceLine x={ts(loan.approvalDate)} stroke={MUTED} strokeDasharray="2 3" label={{ value: t("aprobación", "approval"), position: "insideTopRight", fontSize: 10, fill: MUTED }} />
             {now}
-            <Line dataKey="v" stroke={INK} strokeWidth={2} dot={{ r: 3, fill: INK }} isAnimationActive={false} />
-            <Tooltip labelFormatter={(v: number) => date(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`USD ${v.toFixed(2)}/kg`, t("esperado", "expected")]} />
+            <Area dataKey="band" stroke="none" fill="#d6e2ec" connectNulls isAnimationActive={false} />
+            <Line dataKey="p50" stroke={INK} strokeWidth={2} dot={{ r: 2.5, fill: INK }} connectNulls isAnimationActive={false} />
+            <Line dataKey="exp" stroke="#0f7a55" strokeWidth={2} strokeDasharray="5 4" dot={{ r: 3.5, fill: "#0f7a55" }} connectNulls isAnimationActive={false} />
+            <Tooltip
+              labelFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)}
+              formatter={(v: number | [number, number], n: string) =>
+                n === "band"
+                  ? [`USD ${(v as [number, number])[0].toFixed(2)} ${t("a", "to")} ${(v as [number, number])[1].toFixed(2)}`, t("mitad central", "middle half")]
+                  : [`USD ${(v as number).toFixed(2)}/kg`, n === "exp" ? t("esperado (estimado)", "expected (estimated)") : t("mediana real", "real median")]
+              }
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </Frame>

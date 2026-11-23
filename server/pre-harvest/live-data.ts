@@ -118,6 +118,7 @@ export async function handlePreHarvestData(req: IncomingMessage, res: ServerResp
   } catch (err) {
     res.statusCode = 502;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: (err as Error).message }));
+    console.error("pre-harvest-data error", (err as Error).message);
+    res.end(JSON.stringify({ error: "Data unavailable" }));
   }
 }

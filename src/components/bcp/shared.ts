@@ -2,7 +2,7 @@
  * Shared state of the BCP workspace (not components): the language context and
  * translation hook, and the words for states and provenance.
  */
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useContext } from "react";
 import { L, tx } from "../../lib/bcp/calc";
 import type { ConditionState, Lang, Provenance, Tx } from "../../lib/bcp/types";
 
@@ -40,6 +40,10 @@ export const PROV_TEXT: Record<Provenance, Tx> = {
 };
 
 
+/** A row's source, marked as illustrative data unless the row is backed by real data (`real`). */
+export const sourceTx = (row: { source: Tx; real?: boolean }): Tx =>
+  row.real ? row.source : { es: `${row.source.es} · dato ilustrativo`, en: `${row.source.en} · illustrative data` };
+
 /** Opens the evidence drawer for a loan's condition row (Spanish label). */
 export const EvidenceContext = createContext<(loanId: string, condition: string) => void>(() => {});
 export const useEvidence = () => useContext(EvidenceContext);
@@ -47,13 +51,3 @@ export const useEvidence = () => useContext(EvidenceContext);
 /** Short confirmation after the bank acts (conformity, approval, request). */
 export const ToastContext = createContext<(text: string) => void>(() => {});
 export const useToast = () => useContext(ToastContext);
-
-/** Detail behind a figure: opened in the side drawer from any page. */
-export interface DrawerContent {
-  eyebrow: string;
-  title: string;
-  sub?: string;
-  body: ReactNode;
-}
-export const DrawerContext = createContext<(c: DrawerContent) => void>(() => {});
-export const useDrawer = () => useContext(DrawerContext);

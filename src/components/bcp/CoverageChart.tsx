@@ -37,9 +37,10 @@ export function CoverageChart({ loan, cutoff }: { loan: Loan; cutoff: string }) 
     return `${date(d, lang, false)} · ${tag}`;
   };
   const yMax = Math.max(2.4, ...hist.map((h) => h.conf + 0.1));
+  const yMin = p && p.low < 1 ? Math.floor(p.low * 10) / 10 : 1.0;
   const aria = t(
-    `Cobertura de repago de ${cov(loan.coverageAtApproval)} al aprobar a ${cov(loan.coverageToday)} hoy${p ? `, proyección ${range(p.low, p.high, "es")} al vencimiento` : ""}. Umbral ámbar 1.50x, zona naranja bajo 1.30x.`,
-    `Repayment coverage from ${cov(loan.coverageAtApproval)} at approval to ${cov(loan.coverageToday)} today${p ? `, projection ${range(p.low, p.high, "en")} at maturity` : ""}. Amber threshold 1.50x, orange zone below 1.30x.`,
+    `Cobertura de repago de ${cov(loan.coverageAtApproval)} al aprobar a ${cov(loan.coverageToday)} hoy${p ? `, proyección ${range(p.low, p.high, "es")} al vencimiento` : ""}. Umbral ámbar 1.50x, zona naranja bajo 1.30x, zona roja bajo 1.10x.`,
+    `Repayment coverage from ${cov(loan.coverageAtApproval)} at approval to ${cov(loan.coverageToday)} today${p ? `, projection ${range(p.low, p.high, "en")} at maturity` : ""}. Amber threshold 1.50x, orange zone below 1.30x, red zone below 1.10x.`,
   );
 
   return (
@@ -47,11 +48,14 @@ export function CoverageChart({ loan, cutoff }: { loan: Loan; cutoff: string }) 
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ top: 16, right: 16, bottom: 4, left: 0 }}>
           <ReferenceArea y1={1.3} y2={1.5} fill="#fbf1d9" fillOpacity={1} ifOverflow="hidden" />
-          <ReferenceArea y1={1.0} y2={1.3} fill="#fde4d3" fillOpacity={1} ifOverflow="hidden" />
+          <ReferenceArea y1={1.1} y2={1.3} fill="#fde4d3" fillOpacity={1} ifOverflow="hidden" />
+          {/* Red below 1.10x; drawn only as far as the axis goes. */}
+          <ReferenceArea y1={yMin} y2={1.1} fill="#fbe0e3" fillOpacity={1} ifOverflow="hidden" />
           <ReferenceLine y={1.5} stroke="#d9a93b" strokeDasharray="5 4" label={{ value: t("umbral ámbar", "amber threshold"), position: "insideTopLeft", fontSize: 11, fill: "#6e4a00" }} />
           <ReferenceLine y={1.3} stroke="#e0702a" strokeDasharray="5 4" label={{ value: t("zona naranja", "orange zone"), position: "insideBottomLeft", fontSize: 11, fill: "#8a3a0b" }} />
+          <ReferenceLine y={1.1} stroke="#d63a4d" strokeDasharray="5 4" label={{ value: t("zona roja", "red zone"), position: "insideBottomLeft", fontSize: 11, fill: "#8a1c2b" }} />
           <XAxis dataKey="t" type="number" scale="time" domain={[t2(loan.approvalDate), t2(loan.maturityDate)]} ticks={ticks} tickFormatter={tickLabel} tick={{ fontSize: 11, fill: "#4a5b6c" }} />
-          <YAxis domain={[1.0, yMax]} ticks={[1.0, 1.3, 1.5, 1.8, 2.1, 2.4].filter((v) => v <= yMax)} tickFormatter={(v: number) => `${v.toFixed(1)}x`} tick={{ fontSize: 11, fill: "#4a5b6c" }} width={40} />
+          <YAxis domain={[yMin, yMax]} ticks={[0.9, 1.0, 1.1, 1.3, 1.5, 1.8, 2.1, 2.4].filter((v) => v >= yMin && v <= yMax)} tickFormatter={(v: number) => `${v.toFixed(1)}x`} tick={{ fontSize: 11, fill: "#4a5b6c" }} width={40} />
           <ReferenceLine x={t2(cutoff)} stroke={INK} strokeDasharray="2 3" />
           {p && <Area dataKey="band" stroke="none" fill="#0f9d6b" fillOpacity={0.15} isAnimationActive={false} connectNulls />}
           {p && <Line dataKey="med" stroke="#0f9d6b" strokeWidth={2} strokeDasharray="6 4" dot={false} isAnimationActive={false} connectNulls />}

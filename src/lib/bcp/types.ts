@@ -46,6 +46,8 @@ export interface Condition {
   effectOnRepayment: Tx;
   provenance: Provenance;
   source: Tx;
+  /** The source is real data (not example data). */
+  real?: boolean;
 }
 
 export interface UseOfFundsLine {
@@ -98,6 +100,8 @@ export interface ScoreDim {
   today: number;
   /** What moved it, in plain words (when it moved). */
   why?: Tx;
+  /** Bank edition: direction only; weights and points stay on the server side. */
+  trend?: "up" | "flat" | "down";
 }
 
 export interface Loan {
@@ -212,6 +216,8 @@ export interface AppCheck {
   effect: Tx;
   provenance: Provenance;
   source: Tx;
+  /** The source is real data (not example data). */
+  real?: boolean;
 }
 
 /** A loan application awaiting the bank's decision (discretionary: bank lane). */
@@ -240,4 +246,6 @@ export interface Application {
   summary: Tx;
   reasons: Tx[];
   checks: AppCheck[];
+  /** Bank edition: anonymised seasonal vigour by calendar month, instead of parcel imagery. */
+  vigourPattern?: { month: number; value: number; reference: number }[];
 }

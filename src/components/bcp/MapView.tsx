@@ -1,8 +1,8 @@
 /**
  * Mapa de predios: a secondary view (spec section 3). Where the money is, by
- * state: every marker is labelled with the loan and its state in words, never
- * colour alone. Surveyed parcels show their outline; the rest are marked at
- * their zone and say so.
+ * state: markers are labelled with the loan ID and coloured by state; the state
+ * in words is in each popup and the list beside the map. Surveyed parcels show
+ * their outline; the rest are marked at their zone and say so.
  */
 import { useEffect, useRef } from "react";
 import L from "leaflet";
@@ -13,6 +13,8 @@ import type { Portfolio } from "../../lib/bcp/types";
 import { STATE_SOLID, STATE_TEXT, useLang, useT } from "./shared";
 import { Card, ExampleChip, Lbl, SectionTitle, StateChip } from "./ui";
 
+/** Label offset from its marker, by side. */
+const LABEL_OFFSET: Record<"left" | "right" | "top" | "bottom", [number, number]> = { left: [-10, 0], right: [10, 0], top: [0, -10], bottom: [0, 10] };
 const IMAGERY = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
 function LeafletMap({ data, focus, onOpen }: { data: Portfolio; focus: string | null; onOpen: (id: string) => void }) {
@@ -37,8 +39,8 @@ function LeafletMap({ data, focus, onOpen }: { data: Portfolio; focus: string | 
         L.polygon(ring, { color, weight: 2, fillOpacity: 0.25 }).addTo(m);
       }
       const marker = L.circleMarker([g.lat, g.lon], { radius: g.approximate ? 7 : 9, color: "#ffffff", weight: 2, fillColor: color, fillOpacity: 1, dashArray: g.approximate ? "3 3" : undefined }).addTo(m);
-      // Permanent label: the state in words next to every marker.
-      marker.bindTooltip(`${loan.id} · ${STATE_TEXT[loan.state][lang]}`, { permanent: true, direction: g.labelSide ?? "right", offset: [g.labelSide === "left" ? -10 : 10, 0], className: "bcp-map-label" });
+      // Permanent label: the ID only. The state in words is in the popup and the list beside the map.
+      marker.bindTooltip(loan.id, { permanent: true, direction: g.labelSide ?? "right", offset: LABEL_OFFSET[g.labelSide ?? "right"], className: "bcp-map-label" });
       const div = document.createElement("div");
       div.style.fontFamily = "Inter, system-ui, sans-serif";
       div.innerHTML = `<p style="margin:0;font-weight:700;font-size:13px">${loan.id} · ${loan.zone[lang]}</p>
@@ -60,7 +62,7 @@ function LeafletMap({ data, focus, onOpen }: { data: Portfolio; focus: string | 
       if (!g) continue;
       if (g.ring) L.polygon(g.ring.map(([x, y]) => [y, x] as [number, number]), { color: "#ffffff", weight: 2, dashArray: "4 4", fillOpacity: 0.1 }).addTo(m);
       const marker = L.circleMarker([g.lat, g.lon], { radius: 7, color: "#ffffff", weight: 2, fillColor: "#102a40", fillOpacity: 1, dashArray: g.approximate ? "3 3" : undefined }).addTo(m);
-      marker.bindTooltip(`${a.id} · ${lang === "es" ? "Solicitud" : "Application"}`, { permanent: true, direction: g.labelSide ?? "right", offset: [10, 0], className: "bcp-map-label" });
+      marker.bindTooltip(a.id, { permanent: true, direction: g.labelSide ?? "right", offset: LABEL_OFFSET[g.labelSide ?? "right"], className: "bcp-map-label" });
       const div = document.createElement("div");
       div.style.fontFamily = "Inter, system-ui, sans-serif";
       div.innerHTML = `<p style="margin:0;font-weight:700;font-size:13px">${a.id} · ${a.zone[lang]}</p>
