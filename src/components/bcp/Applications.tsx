@@ -102,7 +102,8 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
   const toast = useToast();
   const geo = GEO[app.id];
   const t1 = app.tranches[0];
-  const kinds = app.recommendation === "aprobar" ? (["rechazar", "info", "aprobar"] as const) : (["aprobar", "info", "rechazar"] as const);
+  // Fixed order on every application, so a button is never in a different place; the recommended one is highlighted.
+  const kinds = ["aprobar", "rechazar", "info"] as const;
   const label = { aprobar: t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or information") };
 
   return (

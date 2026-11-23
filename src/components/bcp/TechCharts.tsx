@@ -26,9 +26,8 @@ function Frame({ id, aria, children, today, extra }: { id: SeriesId; aria: strin
           <figcaption className="text-[15px] font-bold">{t(s.title)}</figcaption>
           <p className="lbl">{t(s.sub)}</p>
         </div>
-        <p className="num text-right text-sm">
-          <span className="lbl block">{t("Hoy", "Today")}</span>
-          <b>{today}</b>
+        <p className="num text-sm">
+          <span className="lbl">{t("Hoy", "Today")}:</span> <b>{today}</b>
         </p>
       </div>
       {extra}
@@ -36,7 +35,7 @@ function Frame({ id, aria, children, today, extra }: { id: SeriesId; aria: strin
         {children}
       </div>
       <p className="lbl mt-1 flex flex-wrap items-center gap-1.5">
-        {id !== "clima" && <Prov p={id === "precio" ? "doc_verificado" : "satelital"} />}
+        {id !== "clima" && id !== "enso" && <Prov p={id === "precio" ? "doc_verificado" : "satelital"} />}
         {t(s.source)}
       </p>
     </figure>
@@ -101,6 +100,11 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
   if (id === "enso") {
     const data = s.enso.map((p) => ({ t: ts(p.date), v: p.v }));
     const lastComplete = s.enso.at(-1)!;
+    // The coastal index is the mean of the last three complete months (e.g. "ago a oct").
+    const short = (d: string) => month(d, lang).split(" ")[0];
+    const startMonth = new Date(Date.parse(`${lastComplete.date}T00:00:00Z`));
+    startMonth.setUTCMonth(startMonth.getUTCMonth() - 2);
+    const threeMonths = `(${short(startMonth.toISOString().slice(0, 10))} ${t("a", "to")} ${short(lastComplete.date)})`;
     const top = Math.max(4, Math.ceil(Math.max(...s.enso.map((p) => p.v)) + 0.5));
     const bands = [
       [1.0, 1.7, "#fbf1d9"],
@@ -110,7 +114,7 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
     return (
       <Frame
         id={id}
-        today={`+${lastComplete.v.toFixed(1)} °C · ${t(ensoClass(lastComplete.v))}`}
+        today={`+${lastComplete.v.toFixed(1)} °C · ${t(ensoClass(lastComplete.v))} · ${t("media de 3 meses", "3-month average")} ${threeMonths}`}
         aria={t(`El Niño costero: +${lastComplete.v.toFixed(1)} °C en ${month(lastComplete.date, "es")}, ${ensoClass(lastComplete.v).es}.`, `Coastal El Niño: +${lastComplete.v.toFixed(1)} °C in ${month(lastComplete.date, "en")}, ${ensoClass(lastComplete.v).en}.`)}
         extra={
           <p className="lbl mb-1">
@@ -126,11 +130,11 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
             {bands.map(([a, b, c]) => (
               <ReferenceArea key={a} y1={a} y2={b} fill={c} />
             ))}
-            <XAxis dataKey="t" type="number" scale="time" domain={[data[0].t, data.at(-1)!.t]} tickFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} tick={tick} minTickGap={24} />
+            <XAxis dataKey="t" type="number" scale="time" domain={[data[0].t, data.at(-1)!.t]} ticks={data.map((d) => d.t)} interval={0} tickFormatter={(v: number) => { const d = new Date(v).toISOString().slice(0, 10); return v === data[0].t || d.slice(5, 7) === "01" ? month(d, lang) : short(d); }} tick={tick} />
             <YAxis domain={[-0.5, top]} ticks={[0, 1, 1.7, 3]} tickFormatter={(v: number) => `${v}`} tick={tick} width={32} />
             {approval}
             <Line dataKey="v" stroke={INK} strokeWidth={2} dot={{ r: 3, fill: INK }} isAnimationActive={false} />
-            <Tooltip labelFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`${v >= 0 ? "+" : ""}${v.toFixed(1)} °C · ${t(ensoClass(v))}`, t("índice costero", "coastal index")]} />
+            <Tooltip labelFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`${v >= 0 ? "+" : ""}${v.toFixed(1)} °C · ${t(ensoClass(v))}`, t("índice costero, media de 3 meses", "coastal index, 3-month average")]} />
           </ComposedChart>
         </ResponsiveContainer>
       </Frame>
@@ -182,7 +186,7 @@ export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries
               labelFormatter={(v: number) => month(new Date(v).toISOString().slice(0, 10), lang)}
               formatter={(v: number | [number, number], n: string) =>
                 n === "band"
-                  ? [`USD ${(v as [number, number])[0].toFixed(2)} a ${(v as [number, number])[1].toFixed(2)}`, t("mitad central", "middle half")]
+                  ? [`USD ${(v as [number, number])[0].toFixed(2)} ${t("a", "to")} ${(v as [number, number])[1].toFixed(2)}`, t("mitad central", "middle half")]
                   : [`USD ${(v as number).toFixed(2)}/kg`, n === "exp" ? t("esperado (estimado)", "expected (estimated)") : t("mediana real", "real median")]
               }
             />

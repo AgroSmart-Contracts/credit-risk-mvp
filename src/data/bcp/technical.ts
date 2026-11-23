@@ -31,15 +31,15 @@ export interface LoanGeo {
   /** True when the point is the zone, not a surveyed parcel. */
   approximate: boolean;
   /** Side of the map label, so neighbouring labels do not overlap. */
-  labelSide?: "left" | "right";
+  labelSide?: "left" | "right" | "top" | "bottom";
 }
 
 export const GEO: Record<string, LoanGeo> = {
-  "ICA-0188": { ...PARCELS["ica-0188"].site, ring: PARCELS["ica-0188"].ring, parcelId: "ica-0188", approximate: false, labelSide: "left" },
+  "ICA-0188": { ...PARCELS["ica-0188"].site, ring: PARCELS["ica-0188"].ring, parcelId: "ica-0188", approximate: false },
   // Zone point only: the surveyed parcel near here was cleared in May 2026 and would contradict this example file.
-  "ICA-0142": { lat: -13.915, lon: -75.87, ring: null, parcelId: null, approximate: true },
-  "ICA-0201": { lat: -14.186, lon: -75.713, ring: null, parcelId: null, approximate: true },
-  "ICA-0215": { lat: -14.121, lon: -75.703, ring: null, parcelId: null, approximate: true },
+  "ICA-0142": { lat: -13.915, lon: -75.87, ring: null, parcelId: null, approximate: true, labelSide: "left" },
+  "ICA-0201": { lat: -14.186, lon: -75.713, ring: null, parcelId: null, approximate: true, labelSide: "left" },
+  "ICA-0215": { lat: -14.121, lon: -75.703, ring: null, parcelId: null, approximate: true, labelSide: "top" },
   "PIS-0034": { lat: -13.694, lon: -76.031, ring: null, parcelId: null, approximate: true },
   // Applications
   "ICA-0177": { ...PARCELS["ica-0177"].site, ring: PARCELS["ica-0177"].ring, parcelId: "ica-0177", approximate: false },
