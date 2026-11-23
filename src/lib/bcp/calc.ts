@@ -16,6 +16,8 @@ export const usd = (n: number) => `USD ${Math.round(n).toLocaleString("en-US")}`
 export const cov = (n: number) => `${n.toFixed(2)}x`;
 /** Signed coverage change; a true minus sign (U+2212) keeps figures aligned. */
 export const signedCov = (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : ""}${Math.abs(n).toFixed(2)}x`;
+/** Hectares: exact, or "~9" when the bank edition has rounded the area. */
+export const haLabel = (n: number) => (Number.isInteger(n) ? `~${n}` : n.toFixed(2));
 export const pct = (n: number) => `${Math.round(n)}%`;
 export const range = (lo: number, hi: number, lang: Lang) => `${cov(lo)} ${lang === "es" ? "a" : "to"} ${cov(hi)}`;
 
