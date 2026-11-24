@@ -39,7 +39,7 @@ const STEPS = [
     secs: 25,
     go: url(),
     point: () => [text(L("Cartera de ejemplo · datos ilustrativos", "Example portfolio · illustrative data"))],
-    say: "This is a sample portfolio with illustrative data, at the November monthly cut-off. Real data: Ica weather, coastal El Niño, export prices from customs declarations, and one anonymized satellite vigour pattern. Up top, four numbers: how much of the bank's money is out, whether the expected harvest covers repayment, what changed, and what needs your decision.",
+    say: "This is a sample portfolio with illustrative data, at the November monthly cut-off. Real data: Ica weather, coastal El Niño, export prices from customs declarations, and one anonymized satellite vigour pattern. Up top, five numbers: the bank's exposure today and at most, coverage today and under a 20% price drop, the loans on the watchlist and why, control of funds, and what is at stake in the next 30 days.",
     coach: "Say 'sample portfolio' once, then move on. Never apologise for it.",
   },
   {
@@ -47,7 +47,7 @@ const STEPS = [
     click: () => tab("Posición y fondos", "Position and funds"),
     secs: 25,
     point: () => [text(L("Calendario de caja", "Cash calendar"))],
-    say: "Of a USD 150,000 line, 66,600 is disbursed. The rest is released only against verified milestones and with your conformity. This calendar shows disbursements and repayments by month: exposure peaks before harvest and comes back from March.",
+    say: "Of a USD 150,000 line, 66,600 is disbursed. The rest is released only against verified milestones and with your conformity. This calendar shows disbursements and repayments by month on the same basis as coverage: the frozen tranche counted as if released, and each maturity as the full amount due. Exposure peaks before harvest and comes back from March.",
     coach: "If asked about the new applications: they would need a line increase or a second line.",
   },
   {
@@ -60,16 +60,16 @@ const STEPS = [
     scene: "3 · Coverage and El Niño",
     click: () => tab("Riesgo", "Risk"),
     secs: 30,
-    point: () => [text(L("Cobertura por préstamo", "Coverage by loan"))],
-    say: "Weighted coverage is 1.80x. Coastal El Niño is at Extraordinary, from real sea temperature data. If it cuts fruit set, and ICA-0201's late fertilisation isn't fixed, we project 1.49 to 1.63x. Every loan carries the El Niño estimate in its own projection. A forecast moves the projection, but never a loan's state: only damage measured in the field does that. The thresholds of 1.50, 1.30 and 1.10 are a proposal we want to agree with you.",
-    coach: "If asked where 5 to 10% comes from: a conservative starting assumption, calibrated with the first real campaigns. If asked 'why only under watch?': we don't freeze healthy growers on a forecast; the Nov and Dec field estimates measure the real fruit set.",
+    point: () => [text(L("Estrés de la cartera", "Portfolio stress"))],
+    say: "Portfolio coverage is 1.78x: total net revenue over total amounts due, and every loan file shows how its figure is built, from kilos to net revenue. Stress is on net revenue, because packing and freight to port don't fall with the price: a 20% price drop takes the portfolio to 1.27x, a 30% volume drop to 1.24x. Coastal El Niño is at Extraordinary, from real sea temperature data; with it and ICA-0201's late fertilisation we project 1.51 to 1.63x. A forecast moves the projection, never a loan's state. The thresholds of 1.50, 1.30 and 1.10 are a proposal we want to agree with you.",
+    coach: "Costs are USD 0.57 per exportable kg, estimated: packing, harvest, transport to port and fees. No ocean freight, because the price is FOB. If asked where 5 to 10% comes from: a conservative starting assumption, calibrated with the first real campaigns.",
   },
   {
-    scene: "3 · Changes this month",
+    scene: "3 · Watchlist",
     click: () => tab("Resumen", "Summary"),
-    secs: 15,
-    point: () => [heading(L("Cambios del mes", "Changes this month"))],
-    say: "And this is what changed this month: one loan to orange with a tranche frozen, and the El Niño alert on the whole portfolio.",
+    secs: 20,
+    point: () => [heading(L("En seguimiento", "On the watchlist"))],
+    say: "The watchlist says why each loan has its colour. A loan's state is the worse of two signals: its coverage band and its contract controls. ICA-0201 and ICA-0215 are there on a control; their coverage is still in the green band. ICA-0188 is amber on a technical signal, crop vigour, which we're proposing to treat as follow-up only.",
   },
   {
     scene: "4 · Exceptions",
@@ -83,7 +83,7 @@ const STEPS = [
     secs: 25,
     click: () => button(L("Abrir expediente", "Open file")),
     point: () => [text(L("congelado", "frozen"), false)],
-    say: "On 6 November, phase-2 invoices were only 68% reconciled and fertilisation was 3 weeks late. That same day we froze the T3 tranche of 7,200 and reported it to you. The bank's exposure stays at 16,800, which is only what was already disbursed. No decision is needed today: the remediation plan is due on 5 December.",
+    say: "On 6 November, phase-2 invoices were only 68% reconciled and fertilisation was 3 weeks late. That same day we froze the T3 tranche of 7,200 and reported it to you. The bank's exposure today is 16,800; at most 25,200 if T3 is ever released, with the estimated cost. No decision is needed today: the remediation plan is due on 5 December.",
   },
   {
     scene: "5 · ICA-0201: tranches",
@@ -97,8 +97,8 @@ const STEPS = [
     click: () => tab("Riesgo", "Risk"),
     secs: 25,
     point: () => [text(L("Cobertura de repago en el tiempo", "Repayment coverage over time"))],
-    say: "Coverage today is 1.57x. On coverage alone it would be green, but the state is the most severe of coverage and the triggers, and the invoice gap crossed the orange trigger. The projection, 0.95 to 1.20x, adds the two estimated risks: the late fertilisation if it isn't remedied, and El Niño. That's exactly why T3 is frozen.",
-    coach: "If asked why 'due at maturity' is 25,200 with T3 frozen: it's the conservative figure. Without T3 it would be about 17,640, and coverage would be higher.",
+    say: "Coverage today is 1.57x, and you can rebuild it here: 3.4 hectares, about 29 tonnes exportable at 1.94, less costs, is 39,565 of net revenue over 25,200 due. On coverage alone it's green, but the state is the worse of coverage and controls, and the invoice control is orange. The bridge marks use of funds as the driver behind the alert, even though its effect isn't in coverage yet. Break-even is 1.44 a kilo.",
+    coach: "If asked why 'due at maturity' is 25,200 with T3 frozen: it's the conservative figure, and the cash calendar uses the same one.",
   },
   {
     scene: "5 · ICA-0201: what affects repayment",
@@ -120,7 +120,7 @@ const STEPS = [
     secs: 25,
     click: () => nav(L("Decisiones", "Decisions")),
     point: () => [text("PIS-0034", false)],
-    say: "This one does need your conformity: T2 for 11,200. T1 invoices are 99% reconciled, the 7 November field estimate confirms the volume, and coverage is 1.90x. With the price down 20%, it's still 1.52x.",
+    say: "This one does need your conformity: T2 for 11,200. Our checklist is 4 of 4: invoices 99% reconciled, the 7 November field estimate confirms the volume, bureau unchanged. Coverage is 1.90x. With the price down 20% it would be 1.36x, below 1.50, so we propose resizing T3 to the price at its milestone.",
     coach: "This view is read-only until the pilot. If asked about the date: we're showing the November cut-off; live, you'd have 72 hours.",
   },
   {
@@ -150,13 +150,13 @@ const STEPS = [
       return page.locator("tr", { hasText: "ICA-0244" }).first();
     },
     point: () => [heading(L("Exposición si se aprueba", "Exposure if approved"))],
-    say: "A 7-year orchard with two verified campaigns, its own title with no liens, and coverage of 1.85x. 12,000 is disbursed at signing and the rest only against milestones.",
-    coach: "If they say 1.48x with price -20%: only the 12,000 of T1 is at risk at signing; T2 is sized on the measured fruit set. Offer: no T2 if the projection is below 1.50x.",
+    say: "A 7-year orchard with two verified campaigns, its own title with no liens, and coverage of 1.85x. But at 40,000 it fails our standard stress: 1.33x if the price falls 20%, 1.30x if volume falls 30%. So we recommend approving with a 34,000 line, which stays above 1.50 in both cases.",
+    coach: "The memo shows both amounts side by side. Whether the 150,000 is a programme limit is still to be confirmed with BCP.",
   },
   {
     scene: "7 · ICA-0244: stress test",
     secs: 15,
-    click: () => button(L("Ver la prueba de estrés completa", "View the full stress test")),
+    click: () => button(L("Ver la grilla de precio y volumen", "View the price and volume grid")),
     // The full stress grid opens in place, under the button.
     say: "Every recommendation comes with its stress cases: price and volume, side by side.",
   },
