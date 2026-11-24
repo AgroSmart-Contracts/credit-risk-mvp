@@ -8,6 +8,7 @@ import { PORTFOLIO } from "../../src/data/bcp/dataset";
 import { technicalSeries } from "../../src/data/bcp/technical";
 import series0177 from "../../src/data/pre-harvest/sentinel-series-ica-0177.json";
 import series0188 from "../../src/data/pre-harvest/sentinel-series-ica-0188.json";
+import { RULINGS } from "../../src/data/bcp/rulings";
 import type { Application, Cause, Condition, Loan, Tx } from "../../src/lib/bcp/types";
 
 const OUT = path.resolve(import.meta.dirname, "../../.bank-build/private/view-model.json");
@@ -71,8 +72,8 @@ const loans: Loan[] = PORTFOLIO.loans.map(({ scoreAtApproval: _a, scoreToday: _b
   zone: region(l.zone),
   areaHa: area(l.areaHa),
   scoreDims: [],
-  // Per-driver projected ranges stay internal until that is ruled on.
-  alert: l.alert && { driver: l.alert.driver, text: l.alert.text },
+  // Per-driver projected ranges stay internal unless ruled otherwise (src/data/bcp/rulings.ts).
+  alert: l.alert && (RULINGS.bankSeesDriverProjections ? l.alert : { driver: l.alert.driver, text: l.alert.text }),
   conditions: l.conditions.filter(matters).map(condition),
   causes: l.causes.map(cause),
   auditLog: l.auditLog.filter((a) => !SCORELESS.test(a.event.es + a.rule.es)).map((a) => ({ ...a, rule: /%|semana|week|trigger|gatillo/i.test(a.rule.es + a.rule.en) ? TRIGGER : a.rule })),

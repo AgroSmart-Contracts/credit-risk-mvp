@@ -11,6 +11,10 @@
 import { daysBetween, dueAt, harvestBuild } from "../../lib/bcp/calc";
 import type { Application, Condition, ConditionState, Loan, Portfolio, Provenance, Tx } from "../../lib/bcp/types";
 import { ensoAt, ensoIndex } from "./enso";
+import { RULINGS } from "./rulings";
+
+/** ICA-0188 is amber on crop vigour alone only while technical signals may set a state (pending ruling). */
+const VIGOUR_SETS_STATE = RULINGS.technicalSignalsSetState;
 
 const L = (es: string, en: string): Tx => ({ es, en });
 const ENGINE = "pre-harvest-v0.1";
@@ -143,8 +147,8 @@ const ICA_0188: Loan = withBuild({
   frozenUsd: 0,
   dueAtMaturityUsd: dueAt(36_000, daysBetween("2026-09-15", "2027-03-14")),
   maturityDate: "2027-03-14",
-  state: "ambar",
-  stateSince: "2026-11-08",
+  state: VIGOUR_SETS_STATE ? "ambar" : "verde",
+  stateSince: VIGOUR_SETS_STATE ? "2026-11-08" : "2026-09-15",
   coverageAtApproval: 2.1,
   controlsState: "verde",
   alert: { driver: "volumen", text: L("Vigor del cultivo 16% bajo lo normal: volumen esperado 10% menor", "Crop vigour 16% below normal: expected volume 10% lower") },
@@ -248,7 +252,7 @@ const ICA_0188: Loan = withBuild({
     },
   ],
   auditLog: [
-    { date: "2026-11-08", event: L("Estado verde → ámbar", "State green → amber"), responsible: L("Motor · confirmado por analista TM", "Engine · confirmed by TM analyst"), rule: L("Vigor -15% vs línea base", "Vigour -15% vs baseline"), evidence: L("Sentinel-2 08 nov", "Sentinel-2 08 Nov"), engineVersion: ENGINE },
+    { date: "2026-11-08", event: VIGOUR_SETS_STATE ? L("Estado verde → ámbar", "State green → amber") : L("Seguimiento TruMarket por vigor", "TruMarket follow-up on vigour"), responsible: L("Motor · confirmado por analista TM", "Engine · confirmed by TM analyst"), rule: L("Vigor -15% vs línea base", "Vigour -15% vs baseline"), evidence: L("Sentinel-2 08 nov", "Sentinel-2 08 Nov"), engineVersion: ENGINE },
     { date: "2026-11-05", event: L("Central de riesgos re-consultada", "Credit bureau re-checked"), responsible: L("Operaciones TM", "TM Operations"), rule: L("Checklist T2", "T2 checklist"), evidence: L("Reporte de central 05 nov", "Bureau report 05 Nov"), engineVersion: ENGINE },
     { date: "2026-09-15", event: L("T1 liberado · USD 10,800", "T1 released · USD 10,800"), responsible: L("Operaciones TM · conformidad BCP", "TM Operations · BCP conformity"), rule: L("Checklist T1", "T1 checklist"), evidence: L("4 documentos", "4 documents"), engineVersion: ENGINE },
     { date: "2026-09-12", event: L("Tier B confirmado", "Tier B confirmed"), responsible: L("Analista TM", "TM analyst"), rule: L("Score 69", "Score 69"), evidence: L("Memorando de evaluación", "Assessment memo"), engineVersion: ENGINE },
@@ -904,7 +908,7 @@ export const PORTFOLIO: Portfolio = {
       loanId: "ICA-0188",
       date: "2026-11-08",
       from: "verde",
-      to: "ambar",
+      to: VIGOUR_SETS_STATE ? "ambar" : "observacion",
       impact: L("Cobertura de 2.10x a 1.75x. Sigue sobre el umbral.", "Coverage from 2.10x to 1.75x. Still above the threshold."),
       cause: L("vigor del cultivo 16% bajo lo normal para el lote: volumen esperado 10% menor", "crop vigour 16% below normal for the lot: expected volume 10% lower"),
       evidence: { loanId: "ICA-0188", condition: "Vigor del cultivo vs lo normal del lote" },

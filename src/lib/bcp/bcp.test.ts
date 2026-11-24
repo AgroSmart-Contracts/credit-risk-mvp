@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PORTFOLIO } from "../../data/bcp/dataset";
+import { RULINGS } from "../../data/bcp/rulings";
 import { COST_USD_KG, accruedCost, cashCalendar, daysBetween, dueAt, coverageUnder, driverSum, fundsTotals, harvestBuild, priceEffect, scoreOf, stateCause, stressGrid, loanFunds, portfolioFigures, provision, scenarios, stateFromCoverage, SEVERITY, toDisburse, worstOf } from "./calc";
 
 const F = portfolioFigures(PORTFOLIO.loans);
@@ -29,8 +30,10 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
   });
 
   it("exposure by state sums to disbursed", () => {
-    expect(F.byState.verde).toEqual({ usd: 29_400, n: 2 });
-    expect(F.byState.ambar).toEqual({ usd: 20_400, n: 2 });
+    // ICA-0188 (10,800) is amber on vigour only while technical signals may set a state.
+    const v = RULINGS.technicalSignalsSetState ? 0 : 10_800;
+    expect(F.byState.verde).toEqual({ usd: 29_400 + v, n: v ? 3 : 2 });
+    expect(F.byState.ambar).toEqual({ usd: 20_400 - v, n: v ? 1 : 2 });
     expect(F.byState.naranja).toEqual({ usd: 16_800, n: 1 });
     expect(F.byState.rojo).toEqual({ usd: 0, n: 0 });
     expect(Object.values(F.byState).reduce((s, x) => s + x.usd, 0)).toBe(F.disbursed);
@@ -87,7 +90,8 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
       expect(SEVERITY[l.state]).toBeGreaterThanOrEqual(SEVERITY[stateFromCoverage(l.coverageToday)]);
       if (stateCause(l) !== "tecnica") expect(l.state).toBe(worstOf(stateFromCoverage(l.coverageToday), l.controlsState));
     }
-    expect(Object.fromEntries(PORTFOLIO.loans.map((l) => [l.id, stateCause(l)]))).toEqual({ "ICA-0201": "control", "ICA-0188": "tecnica", "ICA-0215": "control", "PIS-0034": null, "ICA-0142": null });
+    expect(Object.fromEntries(PORTFOLIO.loans.map((l) => [l.id, stateCause(l)]))).toEqual({ "ICA-0201": "control", "ICA-0188": RULINGS.technicalSignalsSetState ? "tecnica" : null, "ICA-0215": "control", "PIS-0034": null, "ICA-0142": null });
+    if (!RULINGS.technicalSignalsSetState) for (const l of PORTFOLIO.loans) expect(stateCause(l)).not.toBe("tecnica");
   });
 
   it("the amount due is the full line plus the estimated cost for its tenor (5% at 180 days)", () => {

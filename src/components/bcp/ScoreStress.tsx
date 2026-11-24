@@ -130,8 +130,8 @@ export function StressGrid({ input, state }: { input: HarvestInput; state?: Stat
       </div>
       <p className="lbl mt-2">
         {t(
-          `Umbrales: ámbar bajo ${cov(COVERAGE_BANDS.ambar)}, naranja bajo ${cov(COVERAGE_BANDS.naranja)}, rojo bajo ${cov(COVERAGE_BANDS.rojo)}. Bajo 1.00x la cosecha no alcanza para el repago.`,
-          `Thresholds: amber below ${cov(COVERAGE_BANDS.ambar)}, orange below ${cov(COVERAGE_BANDS.naranja)}, red below ${cov(COVERAGE_BANDS.rojo)}. Below 1.00x the harvest does not cover repayment.`,
+          `Umbrales propuestos: ámbar bajo ${cov(COVERAGE_BANDS.ambar)}, naranja bajo ${cov(COVERAGE_BANDS.naranja)}, rojo bajo ${cov(COVERAGE_BANDS.rojo)}. Bajo 1.00x la cosecha no alcanza para el repago.`,
+          `Proposed thresholds: amber below ${cov(COVERAGE_BANDS.ambar)}, orange below ${cov(COVERAGE_BANDS.naranja)}, red below ${cov(COVERAGE_BANDS.rojo)}. Below 1.00x the harvest does not cover repayment.`,
         )}
       </p>
     </div>

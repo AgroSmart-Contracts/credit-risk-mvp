@@ -14,7 +14,8 @@ const site = readFileSync(path.join(ROOT, "src/lib/pre-harvest/site.ts"), "utf8"
 const coords = [...new Set(site.match(/-1[34]\.\d{3,}|-7[56]\.\d{3,}/g) ?? [])];
 const VM_KEYS = ['"weight"', '"lat"', '"lon"', '"ring"', '"parcelId"', '"today":5', '"reference_x"'];
 // Internal judgements that stay out of the bank's data: the score and per-driver projected ranges.
-const VM_INTERNAL = ['"scoreToday"', '"scoreAtApproval"', '"approvedTier"', '"score":', '"tier":', '"projected"', "-0.40x"];
+const projectionsRuled = /bankSeesDriverProjections:\s*true/.test(readFileSync(path.join(ROOT, "src/data/bcp/rulings.ts"), "utf8"));
+const VM_INTERNAL = ['"scoreToday"', '"scoreAtApproval"', '"approvedTier"', '"score":', '"tier":', ...(projectionsRuled ? [] : ['"projected"', "-0.40x"])];
 
 const problems = [];
 const all = files(PKG);
