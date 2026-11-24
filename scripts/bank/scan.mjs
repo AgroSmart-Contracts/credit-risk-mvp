@@ -13,6 +13,8 @@ const names = [...new Set(list.flatMap((d) => [d.buyerName, d.supplierName]).fil
 const site = readFileSync(path.join(ROOT, "src/lib/pre-harvest/site.ts"), "utf8") + readFileSync(path.join(ROOT, "src/data/bcp/technical.ts"), "utf8");
 const coords = [...new Set(site.match(/-1[34]\.\d{3,}|-7[56]\.\d{3,}/g) ?? [])];
 const VM_KEYS = ['"weight"', '"lat"', '"lon"', '"ring"', '"parcelId"', '"today":5', '"reference_x"'];
+// Internal judgements that stay out of the bank's data: the score and per-driver projected ranges.
+const VM_INTERNAL = ['"scoreToday"', '"scoreAtApproval"', '"approvedTier"', '"score":', '"tier":', '"projected"', "-0.40x"];
 
 const problems = [];
 const all = files(PKG);
@@ -22,9 +24,10 @@ for (const f of all) {
   const s = readFileSync(f, "utf8");
   for (const t of [...TERMS, ...names, ...coords]) if (s.includes(t)) problems.push(`${rel}: contains a blocked term (${names.includes(t) ? "deal party name" : t})`);
   if (rel.endsWith("view-model.json")) for (const k of VM_KEYS.slice(0, 5)) if (s.includes(k)) problems.push(`${rel}: key ${k}`);
+  if (rel.endsWith("view-model.json")) for (const k of VM_INTERNAL) if (s.includes(k)) problems.push(`${rel}: internal ${k}`);
 }
 if (problems.length) {
   console.error(problems.join("\n"));
   process.exit(1);
 }
-console.log(`scan clean: ${all.length} files, ${TERMS.length + names.length + coords.length} blocked terms`);
+console.log(`scan clean: ${all.length} files, ${TERMS.length + names.length + coords.length + VM_INTERNAL.length} blocked terms`);

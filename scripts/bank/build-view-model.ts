@@ -64,16 +64,20 @@ const parcel = monthly(series0177.series as Reading[]);
 const reference = monthly(series0188.series as Reading[]);
 const pattern = parcel.map((value, i) => ({ month: i + 1, value, reference: reference[i] }));
 
-const loans: Loan[] = PORTFOLIO.loans.map((l) => ({
+/** The score stays internal: unexplained to the bank and not what sets a state. */
+const SCORELESS = /\b(score|tier)\b/i;
+const loans: Loan[] = PORTFOLIO.loans.map(({ scoreAtApproval: _a, scoreToday: _b, approvedTier: _c, ...l }) => ({
   ...l,
   zone: region(l.zone),
   areaHa: area(l.areaHa),
   scoreDims: [],
+  // Per-driver projected ranges stay internal until that is ruled on.
+  alert: l.alert && { driver: l.alert.driver, text: l.alert.text },
   conditions: l.conditions.filter(matters).map(condition),
   causes: l.causes.map(cause),
-  auditLog: l.auditLog.map((a) => ({ ...a, rule: /%|semana|week|trigger|gatillo/i.test(a.rule.es + a.rule.en) ? TRIGGER : a.rule })),
-}));
-const applications: Application[] = PORTFOLIO.applications.map((a) => ({
+  auditLog: l.auditLog.filter((a) => !SCORELESS.test(a.event.es + a.rule.es)).map((a) => ({ ...a, rule: /%|semana|week|trigger|gatillo/i.test(a.rule.es + a.rule.en) ? TRIGGER : a.rule })),
+}) as unknown as Loan);
+const applications: Application[] = PORTFOLIO.applications.map(({ score: _s, tier: _t, ...a }) => ({
   ...a,
   zone: region(a.zone),
   areaHa: area(a.areaHa),
@@ -82,7 +86,7 @@ const applications: Application[] = PORTFOLIO.applications.map((a) => ({
     c.label.es === "Área declarada vs medida" ? { ...c, value: { es: "Coincide con lo declarado (diferencia bajo 1%)", en: "Matches the declaration (under 1% difference)" }, source: { es: "Medición satelital", en: "Satellite measurement" } } : hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.state === "observacion" || c.provenance === "estimado") } : c,
   ),
   ...(a.id === "ICA-0177" ? { vigourPattern: pattern } : {}),
-}));
+}) as unknown as Application);
 
 // Only El Niño leaves as a series; crop, water, weather and price histories stay private.
 const series = Object.fromEntries(PORTFOLIO.loans.map((l) => [l.id, { vigor: [], agua: [], enso: technicalSeries(l, PORTFOLIO.cutoff).enso, precio: [], esperado: [], clima: [] }]));
