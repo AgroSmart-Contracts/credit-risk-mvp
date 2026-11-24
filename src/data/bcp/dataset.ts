@@ -928,7 +928,7 @@ export const PORTFOLIO: Portfolio = {
       from: "neutral",
       to: "observacion",
       impact: L("Cobertura podría bajar 0.10x a 0.20x. Aún no confirmado en campo.", "Coverage could fall 0.10x to 0.20x. Not yet confirmed in the field."),
-      cause: L(`El Niño costero de magnitud extraordinaria: el mar frente a la costa estuvo +${OCT_INDEX} °C sobre lo normal (media de agosto a octubre); puede reducir el cuajado de la palta`, `Extraordinary coastal El Niño: the sea off the coast was +${OCT_INDEX} °C above normal (August to October average); it may reduce avocado fruit set`),
+      cause: L(`El Niño costero extraordinario: el mar estuvo +${OCT_INDEX} °C sobre lo normal (media de agosto a octubre); puede reducir el cuajado`, `Extraordinary coastal El Niño: the sea was +${OCT_INDEX} °C above normal (August to October average); it may reduce fruit set`),
       evidence: { loanId: "ICA-0188", condition: "El Niño costero" },
     },
   ],
