@@ -31,6 +31,3 @@ export function ensoAt(d: string): { month: string; v: number; label: Tx } {
   const p = ensoSeries("2000-01-01", d).at(-1)!;
   return { month: p.date.slice(0, 7), v: p.v, label: ensoClass(p.v) };
 }
-
-/** Raw monthly anomaly of a month (for the copy: "+5.3 °C in October"). */
-export const ninoAnomaly = (month: string) => MONTHS.find((m) => m.month === month)?.anom ?? null;

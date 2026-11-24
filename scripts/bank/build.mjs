@@ -10,7 +10,8 @@ import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const OUT = path.join(ROOT, ".bank-build");
-const run = (cmd, args) => execFileSync(cmd, args, { cwd: ROOT, stdio: "inherit" });
+// npx is npx.cmd on Windows, which only runs through a shell.
+const run = (cmd, args) => execFileSync(cmd, args, { cwd: ROOT, stdio: "inherit", shell: process.platform === "win32" });
 
 if (existsSync(OUT)) for (const f of readdirSync(OUT)) if (f !== ".vercel") rmSync(path.join(OUT, f), { recursive: true, force: true });
 run("npx", ["tsx", "scripts/bank/build-view-model.ts"]);
@@ -20,7 +21,7 @@ mkdirSync(path.dirname(keep), { recursive: true });
 renameSync(vm, keep);
 run("npx", ["vite", "build", "--config", "vite.bank.config.ts"]);
 renameSync(path.join(OUT, "public/bank.html"), path.join(OUT, "public/index.html"));
-cpSync(path.join(ROOT, "public/logo.svg"), path.join(OUT, "public/logo.svg"));
+for (const f of ["logo.svg", "logo-mark.svg"]) cpSync(path.join(ROOT, "public", f), path.join(OUT, "public", f));
 cpSync(path.join(ROOT, "bank-server/api"), path.join(OUT, "api"), { recursive: true });
 mkdirSync(path.join(OUT, "private"), { recursive: true });
 renameSync(keep, vm);
@@ -36,7 +37,7 @@ writeFileSync(
       installCommand: "",
       outputDirectory: "public",
       functions: { "api/data.js": { includeFiles: "private/**" } },
-      rewrites: [{ source: "/((?!api/|assets/|logo\\.svg).*)", destination: "/index.html" }],
+      rewrites: [{ source: "/((?!api/|assets/|logo\\.svg|logo-mark\\.svg).*)", destination: "/index.html" }],
       headers: [
         {
           source: "/(.*)",

@@ -1,7 +1,7 @@
 /** Bank edition of the map: exposure by region. Exact locations are for pilot users only. */
 import { cov, usd } from "../lib/bcp/calc";
 import type { Portfolio } from "../lib/bcp/types";
-import { ExampleChip, Card, SectionTitle, StateChip } from "../components/bcp/ui";
+import { ExampleChip, Card, StateChip } from "../components/bcp/ui";
 import { useT } from "../components/bcp/shared";
 
 export function MapView({ data, onOpen }: { data: Portfolio; focus: string | null; onOpen: (id: string) => void }) {
@@ -10,7 +10,6 @@ export function MapView({ data, onOpen }: { data: Portfolio; focus: string | nul
   return (
     <div className="mx-auto max-w-[1000px] space-y-4">
       <ExampleChip kind="portfolio" />
-      <SectionTitle title={t("Vista regional", "Regional view")} sub={t("exposición por región y estado", "exposure by region and state")} />
       {regions.map((r) => {
         const loans = data.loans.filter((l) => t(l.zone) === r);
         return (

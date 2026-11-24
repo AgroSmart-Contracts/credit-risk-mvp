@@ -46,10 +46,11 @@ function axisDates(from: string, to: string, lang: "es" | "en") {
   return { type: "number" as const, scale: "time" as const, domain: [ts(from), ts(to)] as [number, number], tickFormatter: (v: number) => date(new Date(v).toISOString().slice(0, 10), lang, false), tick, minTickGap: 28 };
 }
 
-export function TechChart({ id, s, loan, cutoff }: { id: SeriesId; s: TechSeries; loan: Loan; cutoff: string }) {
+/** `portfolio`: one chart for every loan, so no single approval date is marked. */
+export function TechChart({ id, s, loan, cutoff, portfolio = false }: { id: SeriesId; s: TechSeries; loan: Loan; cutoff: string; portfolio?: boolean }) {
   const t = useT();
   const lang = useLang();
-  const approval = <ReferenceLine x={ts(loan.approvalDate)} stroke={MUTED} strokeDasharray="2 3" label={{ value: t("aprobación", "approval"), position: "insideTopLeft", fontSize: 10, fill: MUTED }} />;
+  const approval = portfolio ? null : <ReferenceLine x={ts(loan.approvalDate)} stroke={MUTED} strokeDasharray="2 3" label={{ value: t("aprobación", "approval"), position: "insideTopLeft", fontSize: 10, fill: MUTED }} />;
   const now = <ReferenceLine x={ts(cutoff)} stroke={INK} strokeDasharray="2 3" label={{ value: t("hoy", "today"), position: "insideTopRight", fontSize: 10, fill: INK }} />;
 
   if (id === "vigor") {

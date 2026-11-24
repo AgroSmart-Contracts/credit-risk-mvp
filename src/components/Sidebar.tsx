@@ -70,7 +70,7 @@ export function Sidebar({
       className={`sticky top-0 hidden h-screen shrink-0 flex-col overflow-y-auto border-r border-tm-border bg-tm-surface py-6 transition-[width] duration-200 lg:flex print:hidden ${collapsed ? "w-[72px] px-2" : "w-64 px-4"}`}
     >
       <button type="button" onClick={onHome} className="mb-6 flex flex-col items-center gap-1" title="TruMarket">
-        <img src="/logo.svg" alt="" className={collapsed ? "h-9 w-auto" : "h-12 w-auto"} />
+        <img src="/logo-mark.svg" alt="" className={collapsed ? "h-9 w-auto" : "h-12 w-auto"} />
         {!collapsed && (
           <>
             <span className="font-display text-xl font-semibold text-tm-primary-dark">TruMarket</span>
@@ -141,7 +141,7 @@ export function TopBar({ title, sub, right }: { title: ReactNode; sub?: ReactNod
     <header className="sticky top-0 z-[900] border-b border-tm-border bg-tm-surface/95 backdrop-blur print:hidden">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-8">
         <div className="flex min-w-0 items-center gap-3">
-          <img src="/logo.svg" alt="TruMarket" className="h-9 w-auto shrink-0 lg:hidden" />
+          <img src="/logo-mark.svg" alt="TruMarket" className="h-9 w-auto shrink-0 lg:hidden" />
           <div className="min-w-0">
             <h1 className="truncate text-lg font-semibold text-tm-black sm:text-xl">{title}</h1>
             {sub && <div className="truncate text-xs text-tm-text-muted sm:text-sm">{sub}</div>}

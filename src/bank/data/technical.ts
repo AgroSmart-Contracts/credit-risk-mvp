@@ -8,7 +8,7 @@ export type { SeriesId, TechSeries };
 
 const ENSO_TEXT = {
   title: { es: "El Niño costero", en: "Coastal El Niño" },
-  sub: { es: "Índice costero de temperatura del mar, media de 3 meses, con las clases oficiales", en: "Coastal sea temperature index, 3-month mean, with the official classes" },
+  sub: { es: "Índice costero de temperatura del mar", en: "Coastal sea temperature index" },
   source: { es: "Datos públicos de temperatura del mar", en: "Public sea temperature data" },
 };
 export const SERIES_TEXT = { vigor: ENSO_TEXT, agua: ENSO_TEXT, enso: ENSO_TEXT, precio: ENSO_TEXT, clima: ENSO_TEXT } as Record<SeriesId, { title: Tx; sub: Tx; source: Tx }>;

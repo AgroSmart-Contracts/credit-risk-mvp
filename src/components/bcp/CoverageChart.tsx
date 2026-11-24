@@ -4,11 +4,13 @@
  * maturity as a dashed median inside a band.
  */
 import { Area, ComposedChart, Line, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { cov, date, range } from "../../lib/bcp/calc";
+import { cov, date, range, stateFromCoverage } from "../../lib/bcp/calc";
 import type { Loan } from "../../lib/bcp/types";
-import { useLang, useT } from "./shared";
+import { STATE_TEXT, useLang, useT } from "./shared";
 
 const INK = "#102a40";
+/** Dark state colours, for values shown as text. */
+const VALUE_COLOR = { verde: "#0b6b48", ambar: "#6e4a00", naranja: "#8a3a0b", rojo: "#9b1c2c" } as const;
 const t2 = (d: string) => Date.parse(`${d}T00:00:00Z`);
 
 export function CoverageChart({ loan, cutoff }: { loan: Loan; cutoff: string }) {
@@ -18,6 +20,7 @@ export function CoverageChart({ loan, cutoff }: { loan: Loan; cutoff: string }) 
   const today = hist.at(-1)!;
   const p = loan.projection;
   const mid = p ? Math.round(((p.low + p.high) / 2) * 100) / 100 : null;
+  const valueColor = (v: number) => VALUE_COLOR[stateFromCoverage(v)];
   // Projection from today to maturity: the band widens from today's value to the range.
   const proj = p
     ? [
@@ -72,11 +75,37 @@ export function CoverageChart({ loan, cutoff }: { loan: Loan; cutoff: string }) 
             label={{ value: `${cov(today.conf)} ${t("hoy", "today")}${today.note ? ` · ${t(today.note as { es: string; en: string })}` : ""}`, position: "bottom", fontSize: 11, fontWeight: 700, fill: INK }}
           />
           {p && (
-            <ReferenceDot x={t2(loan.maturityDate)} y={mid!} r={0} label={{ value: `${t("proyección", "projection")} ${range(p.low, p.high, lang)}`, position: "insideTopRight", fontSize: 11, fill: "#0b6b48" }} />
+            <ReferenceDot x={t2(loan.maturityDate)} y={mid!} r={0} label={{ value: `${t("proyección", "projection")} ${range(p.low, p.high, lang)}`, position: "insideTopRight", fontSize: 11, fontWeight: 700, fill: valueColor(mid!) }} />
           )}
           <Tooltip
-            labelFormatter={(v: number) => date(new Date(v).toISOString().slice(0, 10), lang)}
-            formatter={(v: number | [number, number], n: string) => [Array.isArray(v) ? range(v[0], v[1], lang) : cov(v), n === "conf" ? t("confirmado", "confirmed") : n === "med" ? t("estimado", "estimated") : t("rango", "range")]}
+            content={({ active, payload, label }) => {
+              if (!active || !payload?.length) return null;
+              const of = (k: string) => payload.find((x) => x.dataKey === k)?.value as number | [number, number] | undefined;
+              const confirmed = of("conf") as number | undefined;
+              const est = of("med") as number | undefined;
+              const band = of("band") as [number, number] | undefined;
+              return (
+                <div className="rounded-md border border-bcp-border bg-white px-3 py-2 text-sm shadow-sm">
+                  <p className="mb-1 font-semibold text-bcp-ink">{date(new Date(label as number).toISOString().slice(0, 10), lang)}</p>
+                  {confirmed !== undefined ? (
+                    <p className="text-bcp-ink">{t("confirmado", "confirmed")}: <b>{cov(confirmed)}</b></p>
+                  ) : (
+                    <>
+                      {band && (
+                        <p className="text-bcp-muted">
+                          {t("rango", "range")}: <b style={{ color: valueColor(band[0]) }}>{cov(band[0])}</b> {t("a", "to")} <b style={{ color: valueColor(band[1]) }}>{cov(band[1])}</b>
+                        </p>
+                      )}
+                      {est !== undefined && (
+                        <p className="text-bcp-muted">
+                          {t("estimado", "estimated")}: <b style={{ color: valueColor(est) }}>{cov(est)} · {STATE_TEXT[stateFromCoverage(est)][lang]}</b>
+                        </p>
+                      )}
+                    </>
+                  )}
+                </div>
+              );
+            }}
           />
         </ComposedChart>
       </ResponsiveContainer>

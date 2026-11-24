@@ -1,11 +1,11 @@
 /**
  * Printed reports, designed natively for A4 portrait (spec 7): the two-page
- * monthly portfolio report, the one-page exception notice, the three-page
- * credit memo of a loan and the one-page assessment memo of an application. Fixed 794 × 1123
+ * monthly portfolio report, the one-page exception notice, the credit memo of a
+ * loan (three pages, two in the bank edition) and the one-page assessment memo of an application. Fixed 794 × 1123
  * px pages, 1px rules, numbers right-aligned, readable in grayscale.
  */
 import type { ReactNode } from "react";
-import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, haLabel, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd } from "../../lib/bcp/calc";
+import { COST_USD_KG, DRIVERS, DRIVER_TEXT, accruedCost, bySeverity, cov, coverageUnder, date, daysBetween, fundsTotals, haLabel, harvestBuild, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd, withDate, type HarvestInput } from "../../lib/bcp/calc";
 import type { Application, ExceptionNotice, Loan, Portfolio } from "../../lib/bcp/types";
 import { STATE_TEXT, sourceTx, useLang, useT } from "./shared";
 import { BANK_EDITION, getViewer } from "./edition";
@@ -17,7 +17,7 @@ const shortBasis = (s: string) => s.split(/[:.]\s/)[0];
 function Page({ children, n, of, title, sub }: { children: ReactNode; n: number; of: number; title: string; sub: string }) {
   const t = useT();
   return (
-    <div className="a4 mx-auto mb-6 shadow-[0_1px_8px_rgba(16,42,64,0.12)] text-[12.5px] leading-[1.35] text-bcp-ink print:mb-0">
+    <div translate="no" className="notranslate a4 mx-auto mb-6 shadow-[0_1px_8px_rgba(16,42,64,0.12)] text-[12.5px] leading-[1.35] text-bcp-ink print:mb-0">
       {/* Every printed copy names who it was issued to. */}
       {BANK_EDITION && <p className="lbl absolute right-14 top-5">{t("Copia emitida a", "Copy issued to")} {getViewer()} · {new Date().toISOString().slice(0, 10)}</p>}
       <header className="border-b-2 border-bcp-ink pb-2">
@@ -97,7 +97,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
             <b>{t("Posición", "Position")}:</b> {t(`${usd(F.disbursed)} desembolsados (${pct((F.disbursed / F.line) * 100)} de la línea de ${usd(F.line)}); ${usd(F.frozen)} congelados; ${usd(F.pending)} por desembolsar contra hitos.`, `${usd(F.disbursed)} disbursed (${pct((F.disbursed / F.line) * 100)} of the ${usd(F.line)} line); ${usd(F.frozen)} frozen; ${usd(F.pending)} to disburse against milestones.`)}
           </li>
           <li>
-            <b>{t("Riesgo", "Risk")}:</b> {t(`cobertura de la cartera ${cov(F.coverage)}; proyección ${range(data.projection.low, data.projection.high, "es")} (estimado); ningún préstamo en rojo; provisión ${usd(F.provision)}.`, `portfolio coverage ${cov(F.coverage)}; projection ${range(data.projection.low, data.projection.high, "en")} (estimated); no loan in red; provision ${usd(F.provision)}.`)}
+            <b>{t("Riesgo", "Risk")}:</b> {t(`cobertura de la cartera ${cov(F.coverage)}; proyección ${range(data.projection.low, data.projection.high, "es")} (estimado); si el precio cae 20%, ${cov(F.stress.price.coverage)}; provisión ${usd(F.provision)}.`, `portfolio coverage ${cov(F.coverage)}; projection ${range(data.projection.low, data.projection.high, "en")} (estimated); ${cov(F.stress.price.coverage)} if the price falls 20%; provision ${usd(F.provision)}.`)}
           </li>
           <li>
             <b>{t("Cambios", "Changes")}:</b> {t(`${data.changes.filter((c) => c.to === "naranja").length} a naranja con tramo congelado, ${data.changes.filter((c) => c.to === "ambar").length} a ámbar con seguimiento reforzado; El Niño costero en observación.`, `${data.changes.filter((c) => c.to === "naranja").length} to orange with a frozen tranche, ${data.changes.filter((c) => c.to === "ambar").length} to amber with reinforced follow-up; coastal El Niño under watch.`)}
@@ -119,8 +119,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
           rows={[
             [t("Desembolsado", "Disbursed"), usd(F.disbursed).slice(4), pct((F.disbursed / F.line) * 100), t("capital vigente", "outstanding principal")],
             [t("Congelado", "Frozen"), usd(F.frozen).slice(4), pct((F.frozen / F.line) * 100), frozenLoan ? t(`T3 de ${frozenLoan.id}`, `T3 of ${frozenLoan.id}`) : ""],
-            [t("Por desembolsar", "To disburse"), usd(F.pending).slice(4), pct((F.pending / F.line) * 100), t("contra hitos, nov a feb", "against milestones, Nov to Feb")],
-            [t("Repagado", "Repaid"), usd(F.repaid).slice(4), "0%", t("cosechas desde mar 2027", "harvests from Mar 2027")],
+            [t("Por desembolsar", "To disburse"), usd(F.pending).slice(4), pct((F.pending / F.line) * 100), t("contra hitos, nov a feb; repagos desde mar 2027", "against milestones, Nov to Feb; repayments from Mar 2027")],
             [<b key="l">{t("Línea total", "Total line")}</b>, <b key="v">{usd(F.line).slice(4)}</b>, "100%", F.maturities.map(([m, v]) => `${t("vence", "due")} ${month(`${m}-01`, lang)} ${usd(v)}`).join("; ")],
           ]}
         />
@@ -136,7 +135,8 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
             head={[t("Indicador", "Indicator"), t("Valor", "Value")]}
             right={[1]}
             rows={[
-              [t("Cobertura de la cartera", "Portfolio coverage"), cov(F.coverage)],
+              [t("Cobertura de la cartera", "Portfolio coverage"), t(`${cov(F.coverage)} · ${usd(F.netRevenue)} ÷ ${usd(F.due)}`, `${cov(F.coverage)} · ${usd(F.netRevenue)} ÷ ${usd(F.due)}`)],
+              [t("Precio −20% / volumen −30%", "Price −20% / volume −30%"), `${cov(F.stress.price.coverage)} / ${cov(F.stress.volume.coverage)}`],
               [t("Proyección (estimado)", "Projection (estimated)"), range(data.projection.low, data.projection.high, lang)],
               [t("Clasificación SBS", "SBS rating"), t("5 de 5 Normal", "5 of 5 Normal")],
               [t("Provisión requerida", "Required provision"), usd(F.provision)],
@@ -157,7 +157,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
           head={[t("Préstamo", "Loan"), t("Estado", "State"), t("Desembolsado", "Disbursed"), t("Línea", "Line"), t("Cobertura", "Coverage"), t("Próximo hito", "Next milestone")]}
           nowrap={[0, 1]}
           right={[2, 3, 4]}
-          rows={loans.map((l) => [l.id, stateWord(l.state, lang), usd(l.disbursedUsd).slice(4), usd(l.lineUsd).slice(4), `${cov(l.coverageAtApproval)} → ${cov(l.coverageToday)}`, `${date(l.next.date, lang, false)} · ${t(l.next.label)}`])}
+          rows={loans.map((l) => [l.id, stateWord(l.state, lang), usd(l.disbursedUsd).slice(4), usd(l.lineUsd).slice(4), `${cov(l.coverageAtApproval)} → ${cov(l.coverageToday)}`, withDate(t(l.next.label), l.next.date, lang)])}
         />
         {footer1}
       </Page>
@@ -180,7 +180,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
         <T
           head={[t("Fecha", "Date"), t("Préstamo", "Loan"), t("Decisión", "Decision"), t("Quién", "Who"), t("Base", "Basis")]}
           nowrap={[0, 1]}
-          rows={monthDecisions.filter(({ d }) => d.lane === "tm_contract" || d.date <= data.cutoff).map(({ l, d }) => [date(d.date, lang, false), l.id, t(d.title), d.lane === "bank" ? t("BCP, pendiente", "BCP, pending") : t(d.responsible), shortBasis(t(d.basis))])}
+          rows={monthDecisions.filter(({ d }) => d.lane === "tm_contract" || d.conformityDate).map(({ l, d }) => [date(d.date, lang, false), l.id, t(d.title), t(d.responsible), shortBasis(t(d.basis))])}
         />
         {pendingBank.length > 0 && (
           <p className="mt-1">
@@ -326,111 +326,25 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
     "Uso de fondos y cobranza": t("Uso de fondos y cobranza", "Use of funds and collection"),
   };
   const notGreen = loan.conditions.filter((c) => c.state !== "verde").length;
+  // One history: each decision with its basis, plus audit entries that are not already a decision.
+  const decided = new Set(loan.decisions.map((d) => d.date));
+  const history = [
+    ...loan.decisions.map((d) => ({ date: d.date, event: t(d.title), basis: t(d.basis), who: d.lane === "bank" && !d.conformityDate ? t("BCP, pendiente", "BCP, pending") : t(d.responsible), strong: true })),
+    ...loan.auditLog.filter((a) => !decided.has(a.date)).map((a) => ({ date: a.date, event: t(a.event), basis: t(a.rule), who: t(a.responsible), strong: false })),
+  ].sort((a, b) => b.date.localeCompare(a.date));
+  const [p20, v30] = scenarios(loan).map((x) => x.coverage);
+  const moved = DRIVERS.filter((d) => loan.driverDeltas[d] !== 0).map((d) => `${t(DRIVER_TEXT[d]).toLowerCase()} ${signedCov(loan.driverDeltas[d])}`);
   const footer = (
     <footer className="lbl absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
       {t(
-        `Cobertura de repago = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x. Motor ${data.engineVersion}.`,
-        `Repayment coverage = net harvest revenue ÷ amount due at maturity. Thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x. Engine ${data.engineVersion}.`,
+        `Cobertura de repago = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales propuestos: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x. Motor ${data.engineVersion}.`,
+        `Repayment coverage = net harvest revenue ÷ amount due at maturity. Proposed thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x. Engine ${data.engineVersion}.`,
       )}
     </footer>
   );
 
-  return (
-    <div>
-      <Page n={1} of={3} title={title} sub={sub}>
-        <div className="mt-3 flex items-start gap-3">
-          <div className="shrink-0 rounded border-2 border-bcp-ink px-2 py-1 text-center">
-            <p className="font-[Arial,Helvetica,sans-serif] text-[13px] font-bold uppercase">{stateWord(loan.state, lang)}</p>
-            <p className="lbl">{t("desde", "since")} {date(loan.stateSince, lang, false)}</p>
-          </div>
-          <ul className="list-disc space-y-0.5 pl-4 text-[12.5px]">
-            {loan.situation.map((s, i) => (
-              <li key={i}>
-                <Rich text={t(s)} />
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <H>{t("1. Términos del crédito", "1. Loan terms")}</H>
-        <div className="grid grid-cols-2 items-start gap-6">
-          <KV
-            rows={[
-              [t("Línea aprobada", "Approved line"), usd(loan.lineUsd)],
-              [t("Desembolsado (expuesto)", "Disbursed (exposed)"), usd(loan.disbursedUsd)],
-              [t("Congelado", "Frozen"), usd(loan.frozenUsd)],
-              [t("Por desembolsar", "Undrawn"), usd(toDisburse(loan))],
-            ]}
-          />
-          <KV
-            rows={[
-              [t("Saldo al vencimiento", "Due at maturity"), usd(loan.dueAtMaturityUsd)],
-              [t("Aprobación", "Approval"), date(loan.approvalDate, lang)],
-              [t("Vencimiento", "Maturity"), `${date(loan.maturityDate, lang)} · ${daysLeft} ${t("días", "days")}`],
-              [t("Ciclo", "Cycle"), t(`día ${loan.dayOfCycle} de ${loan.cycleDays}`, `day ${loan.dayOfCycle} of ${loan.cycleDays}`)],
-            ]}
-          />
-        </div>
-        <p className="mt-1 text-[11.5px] text-bcp-muted">{t("Repago desde los pagos del comprador a la cuenta de recaudo, antes de cualquier pago al productor.", "Repaid from the buyer's payments into the collection account, before any payment to the grower.")}</p>
-
-        <H>{t("2. Tramos", "2. Tranches")}</H>
-        <T
-          head={[t("Tramo", "Tranche"), "USD", t("Estado", "Status"), t("Fecha", "Date"), t("Checklist", "Checklist"), t("Conformidad BCP", "BCP conformity")]}
-          right={[1]}
-          nowrap={[0, 2, 3]}
-          rows={loan.tranches.map((tr) => {
-            const ok = tr.checklist.filter((c) => c.status === "ok").length;
-            const statusText = { liberado: t("Liberado", "Released"), pendiente: t("Pendiente", "Pending"), congelado: t("Congelado", "Frozen"), previsto: t("Previsto", "Planned") }[tr.status];
-            const open = tr.checklist.filter((c) => c.status !== "ok");
-            return [
-              `${tr.id} · ${tr.pct}%`,
-              usd(tr.amountUsd).slice(4),
-              statusText,
-              date(tr.milestoneDate, lang, false),
-              <span key="c">
-                {ok} {t("de", "of")} {tr.checklist.length}
-                {open.length > 0 && <span className="text-bcp-muted">: {open.map((c) => `${CHECK_MARK[c.status]} ${t(c.label)}`).join("; ")}</span>}
-              </span>,
-              tr.bankConformityDate ? date(tr.bankConformityDate, lang, false) : "",
-            ];
-          })}
-        />
-
-        <H>{t("3. Evaluación de riesgo", "3. Risk assessment")}</H>
-        <div className="grid grid-cols-2 items-start gap-6">
-          <KV
-            rows={[
-              [t("Cobertura en la aprobación", "Coverage at approval"), cov(loan.coverageAtApproval)],
-              [t("Cobertura hoy (confirmada)", "Coverage today (confirmed)"), cov(loan.coverageToday)],
-              [t("Proyección (estimado)", "Projection (estimated)"), loan.projection ? range(loan.projection.low, loan.projection.high, lang) : t("sin cambio proyectado", "no projected change")],
-              ...scenarios(loan).map((s) => [t(s.label), cov(s.coverage)] as [string, string]),
-              [t("Precio de equilibrio", "Break-even price"), `USD ${loan.breakEvenPriceUsdKg.toFixed(2)}/kg`],
-              [t("Precio esperado a cosecha", "Expected harvest price"), `USD ${loan.expectedPriceUsdKg.toFixed(2)}/kg`],
-            ]}
-          />
-          <KV
-            rows={[
-              [t("Clasificación SBS", "SBS rating"), loan.sbsRating],
-              [t("Provisión requerida", "Required provision"), usd(provision(loan))],
-              [t("Pérdida esperada", "Expected loss"), t("por calibrar", "to be calibrated")],
-              [t("Score aprobación → hoy", "Score approval → today"), `${loan.scoreAtApproval} → ${loan.scoreToday}`],
-              [t("Tramo de riesgo aprobado", "Approved risk tier"), loan.approvedTier],
-            ]}
-          />
-        </div>
-        {loan.projection && <p className="mt-1 text-[11.5px] text-bcp-muted">{t("Proyección", "Projection")}: {t(loan.projection.cause)}.</p>}
-        <T
-          head={[t("Factor", "Driver"), t("Cambio en la cobertura", "Change in coverage")]}
-          right={[1]}
-          rows={[
-            ...DRIVERS.map((d) => [t(DRIVER_TEXT[d]), signedCov(loan.driverDeltas[d])]),
-            [<b key="t">{t("Total desde la aprobación", "Total since approval")}</b>, <b key="v">{signedCov(driverSum(loan))}</b>],
-          ]}
-        />
-        {footer}
-      </Page>
-
-      <Page n={2} of={3} title={title} sub={sub}>
+  const conditionsSection = (
+    <>
         <H>{t("4. Cambios desde la aprobación", "4. Changes since approval")}</H>
         <p className="mb-1 text-[11.5px] text-bcp-muted">
           {t(
@@ -456,53 +370,169 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
           ])}
         />
         <p className="mt-1 text-[11px] text-bcp-muted">{t("Cada fila tiene su fuente y fecha en el expediente.", "Every row has its source and date in the file.")}</p>
-        {footer}
-      </Page>
-
-      <Page n={3} of={3} title={title} sub={sub}>
+    </>
+  );
+  const closingSections = (
+    <>
         <H>{t("5. Uso de fondos", "5. Use of funds")}</H>
         <T
-          head={[t("Tramo", "Tranche"), t("Partida", "Item"), t("Presupuesto", "Budget"), t("Conciliado", "Reconciled"), t("Pago directo", "Direct pay"), t("Sin sustento", "Unexplained"), t("Campo", "Field")]}
-          right={[2, 3, 4, 5]}
-          nowrap={[0]}
-          rows={loan.useOfFunds.flatMap((u) => {
+          head={[t("Tramo", "Tranche"), t("Desembolsado", "Disbursed"), t("Conciliado", "Reconciled"), t("Pago directo", "Direct pay"), t("Sin sustento", "Unexplained"), t("Efectivo", "Cash")]}
+          right={[1, 2, 3, 4, 5]}
+          rows={loan.useOfFunds.map((u) => {
             const tot = fundsTotals(u.lines);
+            const short = tot.reconciledPct < 85;
+            return [u.tranche, usd(tot.budget).slice(4), <span key="r" className={short ? "font-bold" : ""}>{pct(tot.reconciledPct)}</span>, pct(tot.directPct), <span key="u" className={short ? "font-bold" : ""}>{usd(tot.unexplained).slice(4)}</span>, usd(u.cashWithdrawnUsd).slice(4)];
+          })}
+        />
+        <p className="mt-1 text-[11px] text-bcp-muted">{t("Pago directo y conciliado como % de lo desembolsado. El detalle por partida está en el expediente.", "Direct pay and reconciled as a share of what was disbursed. Item detail is in the file.")}</p>
+
+        <H>{t("6. Historial", "6. History")}</H>
+        <T
+          head={[t("Fecha", "Date"), t("Evento", "Event"), t("Base", "Basis"), t("Responsable", "Responsible")]}
+          nowrap={[0]}
+          rows={history.map((h) => [date(h.date, lang, false), h.strong ? <b key="e">{h.event}</b> : h.event, h.basis, h.who])}
+        />
+        <p className="mt-1 text-[11px] text-bcp-muted">{t("Registro de auditoría completo e inmutable en el expediente.", "The full, immutable audit log is in the file.")}</p>
+    </>
+  );
+  const signOff = (
+        <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
+          <p className="lbl">{t(`Próximo hito: ${withDate(loan.next.label.es, loan.next.date, "es", true)}. Motor ${data.engineVersion}.`, `Next milestone: ${withDate(loan.next.label.en, loan.next.date, "en", true)}. Engine ${data.engineVersion}.`)}</p>
+          <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
+        </footer>
+  );
+
+  return (
+    <div>
+      <Page n={1} of={BANK_EDITION ? 2 : 3} title={title} sub={sub}>
+        <div className="mt-3 flex items-start gap-3">
+          <div className="shrink-0 rounded border-2 border-bcp-ink px-2 py-1 text-center">
+            <p className="font-[Arial,Helvetica,sans-serif] text-[13px] font-bold uppercase">{stateWord(loan.state, lang)}</p>
+            <p className="lbl">{t("desde", "since")} {date(loan.stateSince, lang, false)}</p>
+          </div>
+          <ul className="list-disc space-y-0.5 pl-4 text-[12.5px]">
+            {loan.situation.map((s, i) => (
+              <li key={i}>
+                <Rich text={t(s)} />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* The four figures a committee reads first. */}
+        <div className="mt-3 grid grid-cols-4 gap-px overflow-hidden rounded border border-bcp-border bg-bcp-border">
+          {[
+            [t("Expuesto hoy", "Exposed today"), usd(loan.disbursedUsd), t(`+ ${usd(accruedCost(loan, data.cutoff))} devengado · máx. ${usd(loan.dueAtMaturityUsd)}`, `+ ${usd(accruedCost(loan, data.cutoff))} accrued · max ${usd(loan.dueAtMaturityUsd)}`)],
+            [t("Cobertura", "Coverage"), `${cov(loan.coverageAtApproval)} → ${cov(loan.coverageToday)}`, loan.projection ? t(`proyección ${range(loan.projection.low, loan.projection.high, "es")}`, `projection ${range(loan.projection.low, loan.projection.high, "en")}`) : t("sin cambio proyectado", "no projected change")],
+            [t("Estrés estándar", "Standard stress"), `${cov(p20)} / ${cov(v30)}`, t("precio −20% / volumen −30%", "price −20% / volume −30%")],
+            [t("Precio de equilibrio", "Break-even price"), `USD ${loan.breakEvenPriceUsdKg.toFixed(2)}/kg`, t(`esperado USD ${loan.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${loan.expectedPriceUsdKg.toFixed(2)}/kg`)],
+          ].map(([k, v, n]) => (
+            <div key={k} className="bg-white px-2.5 py-2">
+              <p className="lbl">{k}</p>
+              <p className="num text-[15px] font-bold leading-tight">{v}</p>
+              <p className="text-[11px] text-bcp-muted">{n}</p>
+            </div>
+          ))}
+        </div>
+
+        <H>{t("1. Términos del crédito", "1. Loan terms")}</H>
+        <div className="grid grid-cols-2 items-start gap-6">
+          <KV
+            rows={[
+              [t("Línea aprobada", "Approved line"), usd(loan.lineUsd)],
+              [t("Desembolsado · congelado · por desembolsar", "Disbursed · frozen · undrawn"), `${usd(loan.disbursedUsd).slice(4)} · ${usd(loan.frozenUsd).slice(4)} · ${usd(toDisburse(loan)).slice(4)}`],
+            ]}
+          />
+          <KV
+            rows={[
+              [t("Saldo al vencimiento", "Due at maturity"), t(`${usd(loan.dueAtMaturityUsd)} (costo estimado)`, `${usd(loan.dueAtMaturityUsd)} (estimated cost)`)],
+              [t("Plazo", "Term"), `${date(loan.approvalDate, lang, false)} → ${date(loan.maturityDate, lang)} · ${t(`quedan ${daysLeft} días`, `${daysLeft} days left`)}`],
+            ]}
+          />
+        </div>
+        <p className="mt-1 text-[11.5px] text-bcp-muted">{t("Repago desde los pagos del comprador a la cuenta de recaudo, antes de cualquier pago al productor.", "Repaid from the buyer's payments into the collection account, before any payment to the grower.")}</p>
+
+        <H>{t("2. Tramos", "2. Tranches")}</H>
+        <T
+          head={[t("Tramo", "Tranche"), "USD", t("Estado", "Status"), t("Checklist TruMarket", "TruMarket checklist"), t("Conformidad BCP", "BCP conformity")]}
+          right={[1]}
+          nowrap={[0, 2]}
+          rows={loan.tranches.map((tr) => {
+            const ok = tr.checklist.filter((c) => c.status === "ok").length;
+            const statusText = { liberado: t("Liberado", "Released"), pendiente: t("Hito", "Milestone"), congelado: t("Congelado", "Frozen"), previsto: t("Previsto", "Planned") }[tr.status];
+            // Only what failed or needs attention; open items are counted, not listed.
+            const failed = tr.checklist.filter((c) => c.status === "fail" || c.status === "warn");
+            const pending = tr.checklist.filter((c) => c.status === "pending").length;
             return [
-              ...u.lines.map((x, i) => [i === 0 ? u.tranche : "", t(x.item), usd(x.budgetUsd).slice(4), usd(x.reconciledUsd).slice(4), usd(x.directPayUsd).slice(4), usd(x.budgetUsd - x.reconciledUsd).slice(4), t(x.fieldMatch)]),
-              [
-                "",
-                <b key="t">{t(`Total ${u.tranche}`, `${u.tranche} total`)}</b>,
-                <b key="b">{usd(tot.budget).slice(4)}</b>,
-                <b key="r">{pct(tot.reconciledPct)}</b>,
-                <b key="d">{pct(tot.directPct)}</b>,
-                <b key="u">{usd(tot.unexplained).slice(4)}</b>,
-                t(`efectivo ${usd(u.cashWithdrawnUsd)}`, `cash ${usd(u.cashWithdrawnUsd)}`),
-              ],
+              `${tr.id} · ${tr.pct}%`,
+              usd(tr.amountUsd).slice(4),
+              `${statusText} ${date(tr.milestoneDate, lang, false)}`,
+              <span key="c">
+                {ok} {t("de", "of")} {tr.checklist.length}
+                {failed.length > 0 && <b>: {failed.map((c) => `${CHECK_MARK[c.status]} ${t(c.label)}`).join("; ")}</b>}
+                {pending > 0 && <span className="text-bcp-muted">{failed.length ? "; " : ": "}{t(`${pending} por verificar`, `${pending} to verify`)}</span>}
+              </span>,
+              tr.bankConformityDate ? date(tr.bankConformityDate, lang, false) : "",
             ];
           })}
         />
 
-        <H>{t("6. Decisiones", "6. Decisions")}</H>
-        <T
-          head={[t("Fecha", "Date"), t("Decisión", "Decision"), t("Base", "Basis"), t("Responsable", "Responsible")]}
-          nowrap={[0]}
-          rows={[...loan.decisions].sort((a, b) => b.date.localeCompare(a.date)).map((d) => [date(d.date, lang, false), <b key="d">{t(d.title)}</b>, t(d.basis), d.lane === "bank" && !d.conformityDate ? t("BCP, pendiente", "BCP, pending") : t(d.responsible)])}
-        />
-
-        <H>{t("7. Registro de auditoría", "7. Audit log")}</H>
-        <T
-          head={[t("Fecha", "Date"), t("Evento", "Event"), t("Responsable", "Responsible"), t("Regla", "Rule"), t("Evidencia", "Evidence")]}
-          nowrap={[0]}
-          rows={loan.auditLog.map((a) => [date(a.date, lang, false), t(a.event), t(a.responsible), t(a.rule), t(a.evidence)])}
-        />
-        <p className="mt-1 text-[11px] text-bcp-muted">{t("Las entradas son inmutables; las correcciones son entradas nuevas vinculadas.", "Entries are immutable; corrections are new linked entries.")}</p>
-
-        <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
-          <p className="lbl">{t(`Próximo hito: ${date(loan.next.date, "es")} · ${loan.next.label.es}. Motor ${data.engineVersion}.`, `Next milestone: ${date(loan.next.date, "en")} · ${loan.next.label.en}. Engine ${data.engineVersion}.`)}</p>
-          <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
-        </footer>
+        <H>{t("3. Cobertura de repago", "3. Repayment coverage")}</H>
+        <BuildLine x={loan} />
+        <p className="mt-1 text-[12px]">
+          <b>{t("Qué la movió desde la aprobación", "What moved it since approval")}:</b> {moved.length ? moved.join(" · ") : t("nada", "nothing")}
+          {t("; el resto sin cambio.", "; the rest unchanged.")}
+          {loan.alert && (
+            <>
+              {" "}
+              <b>{t("Origen de la alerta", "Behind the alert")}:</b> {t(DRIVER_TEXT[loan.alert.driver]).toLowerCase()}
+              {loan.driverDeltas[loan.alert.driver] === 0 ? t(" (aún sin efecto en la cobertura).", " (no effect on coverage yet).") : "."}
+            </>
+          )}
+        </p>
+        {loan.projection && <p className="mt-1 text-[12px]"><b>{t("Proyección", "Projection")} {range(loan.projection.low, loan.projection.high, lang)}</b> ({t("estimado", "estimated")}): {t(loan.projection.cause)}.</p>}
+        <p className="mt-1 text-[12px]">
+          {t(`Clasificación SBS ${loan.sbsRating} · provisión requerida ${usd(provision(loan))} · pérdida esperada por calibrar`, `SBS rating ${loan.sbsRating} · required provision ${usd(provision(loan))} · expected loss to be calibrated`)}
+          {!BANK_EDITION && t(` · score ${loan.scoreAtApproval} → ${loan.scoreToday}, tier ${loan.approvedTier}`, ` · score ${loan.scoreAtApproval} → ${loan.scoreToday}, tier ${loan.approvedTier}`)}.
+        </p>
+        {footer}
       </Page>
+
+      {BANK_EDITION ? (
+        // The bank's shorter condition list leaves room for one closing page.
+        <Page n={2} of={2} title={title} sub={sub}>
+          {conditionsSection}
+          {closingSections}
+          {signOff}
+        </Page>
+      ) : (
+        <>
+          <Page n={2} of={3} title={title} sub={sub}>
+            {conditionsSection}
+            {footer}
+          </Page>
+          <Page n={3} of={3} title={title} sub={sub}>
+            {closingSections}
+            {signOff}
+          </Page>
+        </>
+      )}
     </div>
+  );
+}
+
+/** The coverage build in one sentence, so a printed memo can be recomputed too. */
+function BuildLine({ x, dueUsd }: { x: HarvestInput; dueUsd?: number }) {
+  const t = useT();
+  const b = harvestBuild(x, {}, dueUsd);
+  const n = (v: number) => Math.round(v).toLocaleString("en-US");
+  return (
+    <p className="mt-1 text-[11.5px] text-bcp-muted">
+      {t(
+        `Construcción: ${n(b.volumeKg)} kg × ${b.exportablePct}% = ${n(b.exportKg)} kg exportables × USD ${b.priceUsdKg.toFixed(2)}/kg = ${usd(b.grossUsd)}; menos ${usd(b.costUsd)} de packing, cosecha, transporte a puerto y comisiones (USD ${COST_USD_KG.toFixed(2)}/kg, estimado) = ${usd(b.netUsd)} de ingreso neto ÷ ${usd(b.dueUsd)} = ${cov(b.coverage)}.`,
+        `Build: ${n(b.volumeKg)} kg × ${b.exportablePct}% = ${n(b.exportKg)} exportable kg × USD ${b.priceUsdKg.toFixed(2)}/kg = ${usd(b.grossUsd)}; less ${usd(b.costUsd)} of packing, harvest, transport to port and fees (USD ${COST_USD_KG.toFixed(2)}/kg, estimated) = ${usd(b.netUsd)} net revenue ÷ ${usd(b.dueUsd)} = ${cov(b.coverage)}.`,
+      )}
+    </p>
   );
 }
 
@@ -514,9 +544,33 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
     `${t(app.crop)} · ${t(app.zone)} · ${haLabel(app.areaHa)} ha · campaña ${app.campaign} · recibida ${date(app.receivedDate, "es")} · datos ilustrativos`,
     `${t(app.crop)} · ${t(app.zone)} · ${haLabel(app.areaHa)} ha · campaign ${app.campaign} · received ${date(app.receivedDate, "en")} · illustrative data`,
   );
-  const rec = app.recommendation === "aprobar" ? t("Aprobar", "Approve") : t("Rechazar", "Decline");
+  const rec = app.recommendation === "aprobar" ? t("Aprobar", "Approve") : app.recommendation === "aprobar_condicion" ? t("Aprobar con condición", "Approve with a condition") : t("Rechazar", "Decline");
+  const cond = app.condition;
+  // With a coverage build and a condition the memo needs a second page; a veto fits on one.
+  const pages = app.coverage === null ? 1 : 2;
+  const basisAndChecks = (
+    <>
+      <H>{t("3. Fundamentos de la recomendación", "3. Basis for the recommendation")}</H>
+      <ul className="list-disc space-y-0.5 pl-4">{app.reasons.map((r, i) => <li key={i}>{t(r)}</li>)}</ul>
+
+      <H>{t("4. Verificaciones", "4. Checks")}</H>
+      <T
+        head={[t("Verificación", "Check"), t("Resultado", "Result"), t("Estado", "State"), t("Antes de", "Before"), t("Efecto", "Effect"), t("Fuente", "Source")]}
+        nowrap={[2, 3]}
+        rows={app.checks.map((c) => [<span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>, t(c.value), stateWord(c.state, lang), c.before ?? "", t(c.effect), <span key="s" className="text-bcp-muted">{t(sourceTx(c))}</span>])}
+      />
+    </>
+  );
+  const committee = (
+    <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
+      <p className="lbl">{t("Decisión del comité:", "Committee decision:")} ☐ {t("Aprobar", "Approve")} &nbsp;{cond && <> ☐ {t(`Aprobar con ${usd(cond.lineUsd)}`, `Approve with ${usd(cond.lineUsd)}`)} &nbsp;</>} ☐ {t("Rechazar", "Decline")} &nbsp; ☐ {t("Pedir información", "Request information")}</p>
+      <p className="lbl mt-1">{t(`La decisión es discrecional del banco. Motor ${data.engineVersion}.`, `The decision is at the bank's discretion. Engine ${data.engineVersion}.`)}</p>
+      <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
+    </footer>
+  );
   return (
-    <Page n={1} of={1} title={title} sub={sub}>
+    <div>
+    <Page n={1} of={pages} title={title} sub={sub}>
       <div className="mt-3 flex items-start gap-3">
         <div className="shrink-0 rounded border-2 border-bcp-ink px-2 py-1 text-center">
           <p className="lbl">{t("Recomendación", "Recommendation")}</p>
@@ -524,6 +578,7 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
         </div>
         <div>
           <p className="text-[13px] font-medium">{t(app.summary)}</p>
+          {cond && <p className="mt-0.5 text-[12px] font-bold">{t("Condición", "Condition")}: {t(cond.text)}.</p>}
           <p className="lbl mt-0.5">{t(`Decidir antes del ${date(app.decisionDueDate, "es")}`, `Decide by ${date(app.decisionDueDate, "en")}`)}</p>
         </div>
       </div>
@@ -549,19 +604,21 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
         <KV
           rows={[
             [t("Cobertura de repago", "Repayment coverage"), app.coverage === null ? t("no medible (veto)", "not measurable (veto)") : cov(app.coverage)],
-            ...(app.coverage === null ? [] : stressCases(app.coverage).map((s) => [t(s.label), cov(s.coverage)] as [string, string])),
+            ...(app.coverage === null ? [] : stressCases(app).map((s) => [t(s.label), cov(s.coverage)] as [string, string])),
+            ...(cond ? [[t(`Con ${usd(cond.lineUsd)}: hoy / −20% / −30%`, `At ${usd(cond.lineUsd)}: today / −20% / −30%`), `${cov(coverageUnder(app, 0, 0, cond.dueAtMaturityUsd))} / ${cov(coverageUnder(app, -0.2, 0, cond.dueAtMaturityUsd))} / ${cov(coverageUnder(app, 0, -0.3, cond.dueAtMaturityUsd))}`] as [string, string]] : []),
             [t("Precio de equilibrio", "Break-even price"), app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`],
             [t("Precio esperado a cosecha", "Expected harvest price"), `USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`],
           ]}
         />
         <KV
           rows={[
-            [t("Score", "Score"), `${app.score} · ${t("tramo", "tier")} ${app.tier}`],
+            ...(BANK_EDITION ? [] : ([[t("Score", "Score"), `${app.score} · ${t("tramo", "tier")} ${app.tier}`]] as [string, string][])),
             [t("Veto", "Veto"), app.veto ? t("Sí", "Yes") : t("No", "No")],
             [t("Pérdida esperada", "Expected loss"), t("por calibrar", "to be calibrated")],
           ]}
         />
       </div>
+      {app.coverage !== null && <BuildLine x={app} />}
       {BANK_EDITION ? (
         null
       ) : (
@@ -572,21 +629,19 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
         />
       )}
 
-      <H>{t("3. Fundamentos de la recomendación", "3. Basis for the recommendation")}</H>
-      <ul className="list-disc space-y-0.5 pl-4">{app.reasons.map((r, i) => <li key={i}>{t(r)}</li>)}</ul>
-
-      <H>{t("4. Verificaciones", "4. Checks")}</H>
-      <T
-        head={[t("Verificación", "Check"), t("Resultado", "Result"), t("Estado", "State"), t("Efecto", "Effect"), t("Fuente", "Source")]}
-        nowrap={[2]}
-        rows={app.checks.map((c) => [<span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>, t(c.value), stateWord(c.state, lang), t(c.effect), <span key="s" className="text-bcp-muted">{t(sourceTx(c))}</span>])}
-      />
-
-      <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
-        <p className="lbl">{t("Decisión del comité:", "Committee decision:")} ☐ {t("Aprobar", "Approve")} &nbsp; ☐ {t("Rechazar", "Decline")} &nbsp; ☐ {t("Pedir información", "Request information")}</p>
-        <p className="lbl mt-1">{t(`La decisión es discrecional del banco. Motor ${data.engineVersion}.`, `The decision is at the bank's discretion. Engine ${data.engineVersion}.`)}</p>
-        <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
-      </footer>
+      {pages === 1 ? (
+        <>
+          {basisAndChecks}
+          {committee}
+        </>
+      ) : null}
     </Page>
+    {pages === 2 && (
+      <Page n={2} of={2} title={title} sub={sub}>
+        {basisAndChecks}
+        {committee}
+      </Page>
+    )}
+    </div>
   );
 }

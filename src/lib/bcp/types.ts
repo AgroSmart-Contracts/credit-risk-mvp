@@ -120,8 +120,18 @@ export interface Loan {
   maturityDate: string;
   state: State;
   stateSince: string;
+  /** Expected yield (t/ha) and exportable share (%): with the area they give the volume. */
+  yieldTHa: number;
+  exportablePct: number;
+  /** Expected harvest volume (kg), kept exact even where the area is rounded. */
+  volumeKg: number;
   coverageAtApproval: number;
+  /** Derived from the harvest inputs (calc `harvestBuild`), never typed in. */
   coverageToday: number;
+  /** Contractual controls today (bureau, invoices, field work, assignment...). State = worst of this and the coverage band. */
+  controlsState: Exclude<State, "veto">;
+  /** The driver behind the current alert, marked on the bridge even when its effect is not yet in coverage. */
+  alert?: { driver: Driver; text: Tx; projected?: Tx };
   /** Estimated, never confirmed: shown as a range with an "Estimado" badge. */
   projection?: { low: number; high: number; cause: Tx };
   driverDeltas: Record<Driver, number>;
@@ -210,6 +220,8 @@ export interface Portfolio {
 /** A row of the application file: a check at application, with its provenance. */
 export interface AppCheck {
   group: Condition["group"];
+  /** Must be in place before this tranche. */
+  before?: "T1" | "T2" | "T3";
   label: Tx;
   value: Tx;
   state: ConditionState;
@@ -233,6 +245,9 @@ export interface Application {
   tenorDays: number;
   dueAtMaturityUsd: number;
   tranches: { id: "T1" | "T2" | "T3"; pct: number; amountUsd: number; milestone: Tx }[];
+  yieldTHa: number;
+  exportablePct: number;
+  volumeKg: number;
   /** Coverage at application; null when a veto makes the harvest unverifiable. */
   coverage: number | null;
   breakEvenPriceUsdKg: number | null;
@@ -241,7 +256,9 @@ export interface Application {
   tier: "A" | "B" | "C" | "D";
   veto: boolean;
   scoreDims: ScoreDim[];
-  recommendation: "aprobar" | "rechazar";
+  recommendation: "aprobar" | "aprobar_condicion" | "rechazar";
+  /** A recommendation that fails the standard stress names the condition that passes it. */
+  condition?: { lineUsd: number; dueAtMaturityUsd: number; text: Tx };
   /** One sentence, money first. */
   summary: Tx;
   reasons: Tx[];

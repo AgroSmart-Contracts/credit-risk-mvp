@@ -8,12 +8,16 @@ import { PORTFOLIO } from "../../src/data/bcp/dataset";
 import { technicalSeries } from "../../src/data/bcp/technical";
 import series0177 from "../../src/data/pre-harvest/sentinel-series-ica-0177.json";
 import series0188 from "../../src/data/pre-harvest/sentinel-series-ica-0188.json";
+import { RULINGS } from "../../src/data/bcp/rulings";
 import type { Application, Cause, Condition, Loan, Tx } from "../../src/lib/bcp/types";
 
 const OUT = path.resolve(import.meta.dirname, "../../.bank-build/private/view-model.json");
 const region = (z: Tx): Tx => (z.es.includes("Pisco") ? { es: "Pisco", en: "Pisco" } : { es: "Ica", en: "Ica" });
 const area = (ha: number) => Math.max(1, Math.round(ha));
-const IN_PROJECTION: Tx = { es: "Incluido en la cobertura y la proyección", en: "Included in coverage and the projection" };
+const IN_COVERAGE: Tx = { es: "Incluido en la cobertura", en: "Included in coverage" };
+const IN_PROJECTION: Tx = { es: "Incluido en la proyección", en: "Included in the projection" };
+/** Confirmed effects are already in today's coverage; estimated ones only in the projection. */
+const effectLabel = (t: Tx, estimated: boolean) => (estimated || /estimad/i.test(t.es) || /x (a|to) -?\d/.test(t.es + t.en) ? IN_PROJECTION : IN_COVERAGE);
 const hasRange = (t: Tx) => /[-+]\d\.\d+x|Volum/.test(t.es + t.en);
 const WORDS: Array<[RegExp, string, string]> = [
   [/Sentinel-2( \+ fotos| \+ photos)?/g, "Satélite", "Satellite"],
@@ -25,7 +29,7 @@ const WORDS: Array<[RegExp, string, string]> = [
   [/Exportaciones de palta Hass \(aduanas\) · ago 2026|Hass avocado exports \(customs\) · Aug 2026/g, "Mercado de exportación", "Export market"],
   [/Contrato ·/g, "Contrato ·", "Contract ·"],
 ];
-const clean = (s: string, lang: "es" | "en") => WORDS.reduce((x, [re, es, en]) => x.replace(re, lang === "es" ? es : en), s).replace(/ \(-?0\.\d+x (a|to) -?0\.\d+x\)/g, "").replace(/: (volumen esperado|expected volume) \d+% (menor|lower)/gi, "").replace(/ \(\d+% gap, orange trigger\)| \(brecha de \d+%, gatillo naranja\)/g, "");
+const clean = (s: string, lang: "es" | "en") => WORDS.reduce((x, [re, es, en]) => x.replace(re, lang === "es" ? es : en), s).replace(/ \(-?0\.\d+x (a|to) -?0\.\d+x\)/g, "").replace(/: (volumen esperado|expected volume) \d+% (menor|lower)/gi, "").replace(/ \([^()]*(?:trigger|gatillo)[^()]*\)/gi, "").replace(/ (?:vs the lot baseline|frente a la línea base del lote)/gi, "");
 /** Every bilingual string: categories instead of source names, no per-risk effect ranges. */
 function scrub<T>(v: T): T {
   if (Array.isArray(v)) return v.map(scrub) as T;
@@ -38,8 +42,8 @@ function scrub<T>(v: T): T {
 }
 const NO_THRESHOLD: Tx = { es: "", en: "" };
 const matters = (c: Condition) => c.state !== "verde" || c.effectOnRepayment.es !== "Ninguno";
-const condition = (c: Condition): Condition => ({ ...c, threshold: NO_THRESHOLD, effectOnRepayment: hasRange(c.effectOnRepayment) ? IN_PROJECTION : c.effectOnRepayment });
-const cause = (c: Cause): Cause => (hasRange(c.effect) ? { ...c, effect: IN_PROJECTION } : c);
+const condition = (c: Condition): Condition => ({ ...c, threshold: NO_THRESHOLD, effectOnRepayment: hasRange(c.effectOnRepayment) ? effectLabel(c.effectOnRepayment, c.state === "observacion" || c.provenance === "estimado") : c.effectOnRepayment });
+const cause = (c: Cause): Cause => (hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.status === "observacion") } : c);
 const TRIGGER: Tx = { es: "Gatillo contractual", en: "Contractual trigger" };
 
 type Reading = { date: string; ndviMean: number; parcelClearPct: number };
@@ -61,25 +65,29 @@ const parcel = monthly(series0177.series as Reading[]);
 const reference = monthly(series0188.series as Reading[]);
 const pattern = parcel.map((value, i) => ({ month: i + 1, value, reference: reference[i] }));
 
-const loans: Loan[] = PORTFOLIO.loans.map((l) => ({
+/** The score stays internal: unexplained to the bank and not what sets a state. */
+const SCORELESS = /\b(score|tier)\b/i;
+const loans: Loan[] = PORTFOLIO.loans.map(({ scoreAtApproval: _a, scoreToday: _b, approvedTier: _c, ...l }) => ({
   ...l,
   zone: region(l.zone),
   areaHa: area(l.areaHa),
   scoreDims: [],
+  // Per-driver projected ranges stay internal unless ruled otherwise (src/data/bcp/rulings.ts).
+  alert: l.alert && (RULINGS.bankSeesDriverProjections ? l.alert : { driver: l.alert.driver, text: l.alert.text }),
   conditions: l.conditions.filter(matters).map(condition),
   causes: l.causes.map(cause),
-  auditLog: l.auditLog.map((a) => ({ ...a, rule: TRIGGER })),
-}));
-const applications: Application[] = PORTFOLIO.applications.map((a) => ({
+  auditLog: l.auditLog.filter((a) => !SCORELESS.test(a.event.es + a.rule.es)).map((a) => ({ ...a, rule: /%|semana|week|trigger|gatillo/i.test(a.rule.es + a.rule.en) ? TRIGGER : a.rule })),
+}) as unknown as Loan);
+const applications: Application[] = PORTFOLIO.applications.map(({ score: _s, tier: _t, ...a }) => ({
   ...a,
   zone: region(a.zone),
   areaHa: area(a.areaHa),
   scoreDims: [],
   checks: a.checks.map((c) =>
-    c.label.es === "Área declarada vs medida" ? { ...c, value: { es: "Coincide con lo declarado (diferencia bajo 1%)", en: "Matches the declaration (under 1% difference)" }, source: { es: "Medición satelital", en: "Satellite measurement" } } : hasRange(c.effect) ? { ...c, effect: IN_PROJECTION } : c,
+    c.label.es === "Área declarada vs medida" ? { ...c, value: { es: "Coincide con lo declarado (diferencia bajo 1%)", en: "Matches the declaration (under 1% difference)" }, source: { es: "Medición satelital", en: "Satellite measurement" } } : hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.state === "observacion" || c.provenance === "estimado") } : c,
   ),
   ...(a.id === "ICA-0177" ? { vigourPattern: pattern } : {}),
-}));
+}) as unknown as Application);
 
 // Only El Niño leaves as a series; crop, water, weather and price histories stay private.
 const series = Object.fromEntries(PORTFOLIO.loans.map((l) => [l.id, { vigor: [], agua: [], enso: technicalSeries(l, PORTFOLIO.cutoff).enso, precio: [], esperado: [], clima: [] }]));

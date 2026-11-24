@@ -13,6 +13,8 @@ const SESSION_SECONDS = 8 * 60 * 60;
 const MAX_FAILURES = 5;
 const LOCK_MS = 15 * 60 * 1000;
 const SCRYPT = { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 };
+const MAX_INPUT = 256;
+const MAX_TRACKED = 5000;
 
 // Per-instance limits. They slow guessing; the password and TOTP are the real barrier.
 const failures = new Map();
@@ -47,9 +49,10 @@ export function totp(secret, step) {
 }
 
 function checkCode(user, code) {
+  if (!/^\d{6}$/.test(String(code))) return false;
   const now = Math.floor(Date.now() / 30000);
   for (const step of [now - 1, now, now + 1]) {
-    if (!same(Buffer.from(totp(user.totp, step)), Buffer.from(String(code).padEnd(6).slice(0, 6)))) continue;
+    if (!same(Buffer.from(totp(user.totp, step)), Buffer.from(String(code)))) continue;
     const key = `${user.id}:${step}`;
     if (usedCodes.has(key)) return false;
     usedCodes.set(key, Date.now());
@@ -72,6 +75,7 @@ export function isLocked(key) {
 }
 
 const fail = (key) => {
+  if (failures.size >= MAX_TRACKED) for (const [k, v] of failures) if (Date.now() > v.until || failures.size >= MAX_TRACKED) failures.delete(k);
   const f = failures.get(key) ?? { count: 0, until: 0 };
   failures.set(key, { count: f.count + 1, until: Date.now() + LOCK_MS });
 };
@@ -81,8 +85,12 @@ const DUMMY_SALT = Buffer.alloc(16).toString("base64");
 /** { user } for valid credentials, { needsCode } when a code is still missing. Unknown accounts take the same time. */
 export async function authenticate(email, password, code, key) {
   const { users } = config();
-  const user = users.find((u) => u.email.toLowerCase() === String(email ?? "").trim().toLowerCase());
-  const derived = await scrypt(String(password ?? ""), user?.salt ?? DUMMY_SALT);
+  if (typeof email !== "string" || typeof password !== "string" || email.length > MAX_INPUT || password.length > MAX_INPUT) {
+    fail(key);
+    return {};
+  }
+  const user = users.find((u) => u.email.toLowerCase() === email.trim().toLowerCase());
+  const derived = await scrypt(password, user?.salt ?? DUMMY_SALT);
   const passwordOk = !!user && same(derived, Buffer.from(user.hash, "base64"));
   if (passwordOk && user.totp && !code) return { needsCode: true };
   if (passwordOk && (!user.totp || checkCode(user, code))) {
