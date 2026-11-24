@@ -63,7 +63,25 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       {/* Headline figures: same structure in every tile, so labels, values and notes line up. */}
       <section aria-label={t("Situación de la cartera", "Portfolio situation")} className="grid gap-px overflow-hidden rounded-xl border border-bcp-border bg-bcp-border sm:grid-cols-2 xl:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
         {[
-          { k: t("Exposición hoy", "Exposure today"), v: usd(F.disbursed), s: t(`${pct((F.disbursed / F.line) * 100)} de ${usd(F.line)} · + ${usd(accrued)} de costo devengado · máximo ${usd(F.due)} con todos los tramos`, `${pct((F.disbursed / F.line) * 100)} of ${usd(F.line)} · + ${usd(accrued)} accrued cost · at most ${usd(F.due)} with every tranche`), go: () => setPage("posicion"), dark: true },
+          {
+            k: t("Exposición hoy", "Exposure today"),
+            v: usd(F.disbursed),
+            // The approved line is the reference for everything else: it gets its own line and a bar.
+            line: (
+              <span className="mt-1 block w-full">
+                <span className="block text-[15px] font-semibold">{t(`de una línea de ${usd(F.line)}`, `of a ${usd(F.line)} line`)}</span>
+                <span className="mt-1.5 flex items-center gap-2">
+                  <span aria-hidden className="block h-1.5 flex-1 overflow-hidden rounded-full bg-white/20">
+                    <span className="block h-full rounded-full bg-white" style={{ width: `${(F.disbursed / F.line) * 100}%` }} />
+                  </span>
+                  <span className="num text-[12px] font-semibold">{pct((F.disbursed / F.line) * 100)}</span>
+                </span>
+              </span>
+            ),
+            s: t(`+ ${usd(accrued)} de costo devengado · máximo ${usd(F.due)} con todos los tramos`, `+ ${usd(accrued)} accrued cost · at most ${usd(F.due)} with every tranche`),
+            go: () => setPage("posicion"),
+            dark: true,
+          },
           { k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage), s: t(`proyectada ${range(data.projection.low, data.projection.high, "es")} · precio −20%: ${cov(F.stress.price.coverage)}`, `projected ${range(data.projection.low, data.projection.high, "en")} · price −20%: ${cov(F.stress.price.coverage)}`), go: () => setPage("riesgo") },
           { k: t("En seguimiento", "On the watchlist"), v: `${watch.length} ${t("de", "of")} ${data.loans.length}`, s: t(`${byCause("control")} por control · ${byCause("tecnica")} por señal técnica · ${byCause("cobertura")} por cobertura`, `${byCause("control")} on a control · ${byCause("tecnica")} on a technical signal · ${byCause("cobertura")} on coverage`), go: () => setPage("resumen") },
           { k: t("Control del dinero", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
@@ -72,6 +90,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           <button key={x.k} type="button" onClick={x.go} className={`flex flex-col items-start justify-start px-4 py-4 text-left ${i === 0 ? "sm:col-span-2 xl:col-span-1" : ""} ${x.dark ? "bg-bcp-ink text-white hover:bg-[#15354f]" : "bg-white hover:bg-bcp-bg"}`}>
             <span className={`font-[Arial,Helvetica,sans-serif] text-[12px] ${x.dark ? "text-bcp-label" : "text-bcp-muted"}`}>{x.k}</span>
             <span className="num mt-1 whitespace-nowrap text-[24px] font-bold leading-tight">{x.v}</span>
+            {"line" in x && x.line}
             <span className={`mt-1 text-[13px] ${x.dark ? "text-white/90" : "text-bcp-muted"}`}>{x.s}</span>
           </button>
         ))}
