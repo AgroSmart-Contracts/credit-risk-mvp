@@ -14,8 +14,11 @@ import { BANK_EDITION } from "./edition";
 export type BcpView = "cartera" | "expedientes" | "expediente" | "solicitudes" | "solicitud" | "decision" | "excepciones" | "excepcion" | "reportes" | "reporte" | "memo" | "evaluacion" | "mapa" | "metodo";
 
 const ALL_VIEWS: BcpView[] = ["cartera", "expedientes", "expediente", "solicitudes", "solicitud", "decision", "excepciones", "excepcion", "reportes", "reporte", "memo", "evaluacion", "mapa", "metodo"];
-/** The methodology page is never part of the bank edition. */
-export const BCP_VIEWS: BcpView[] = BANK_EDITION ? ALL_VIEWS.filter((v) => v !== "metodo") : ALL_VIEWS;
+/**
+ * The methodology page is never part of the bank edition, and neither is the map:
+ * exposure by region is part of the portfolio's concentration card there.
+ */
+export const BCP_VIEWS: BcpView[] = BANK_EDITION ? ALL_VIEWS.filter((v) => v !== "metodo" && v !== "mapa") : ALL_VIEWS;
 
 /** The sidebar item each view belongs to. */
 export const NAV_ACTIVE: Record<BcpView, string> = {
@@ -75,7 +78,7 @@ export function bcpNavItems(lang: Lang, answers: Record<string, Answer>): Sideba
     { id: "excepciones", label: t("Excepciones", "Exceptions"), icon: AlertTriangle, count: PORTFOLIO.exceptions.length, tone: "watch" },
     // Monthly reports and Methodology are hidden from the menu; their pages stay reachable
     // (the portfolio's "Download monthly report" button, direct links).
-    { id: "mapa", label: BANK_EDITION ? t("Vista regional", "Regional view") : t("Mapa de predios", "Parcel map"), icon: MapIcon },
+    ...(BANK_EDITION ? [] : [{ id: "mapa", label: t("Mapa de predios", "Parcel map"), icon: MapIcon }]),
   ];
 }
 

@@ -137,7 +137,7 @@ export function BcpWorkspace({ view, id, go, lang, setLang, answers, setAnswer, 
               </ReportFrame>
             );
           })()}
-          {view === "mapa" && <MapView data={PORTFOLIO} focus={id} onOpen={(x) => go(PORTFOLIO.applications.some((a) => a.id === x) ? "solicitud" : "expediente", x)} />}
+          {!BANK_EDITION && view === "mapa" && <MapView data={PORTFOLIO} focus={id} onOpen={(x) => go(PORTFOLIO.applications.some((a) => a.id === x) ? "solicitud" : "expediente", x)} />}
           {import.meta.env.VITE_BANK_EDITION !== "1" && view === "metodo" && <Method />}
         </Suspense>
       </Frame>
@@ -174,7 +174,7 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
     reporte: t("Reporte mensual", "Monthly report"),
     memo: t("Memorando de crédito", "Credit memo"),
     evaluacion: t("Memorando de evaluación", "Assessment memo"),
-    mapa: BANK_EDITION ? t("Vista regional", "Regional view") : t("Mapa de predios", "Parcel map"),
+    mapa: t("Mapa de predios", "Parcel map"),
     metodo: t("Metodología y umbrales", "Methodology and thresholds"),
   };
   const langToggle = (

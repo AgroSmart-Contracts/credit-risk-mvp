@@ -224,9 +224,12 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         <Card><StressGrid input={loan} state={loan.state} /></Card>
       </div>
 
-      <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
-        {BANK_EDITION ? <TechChart id="enso" s={series} loan={loan} cutoff={data.cutoff} /> : <Card><ScoreBreakdown dims={loan.scoreDims} scores={{ approval: loan.scoreAtApproval, today: loan.scoreToday }} /></Card>}
-      </div>
+      {/* El Niño is one series for the whole portfolio: its chart is on the portfolio's risk tab; here it is one row of the conditions. */}
+      {!BANK_EDITION && (
+        <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
+          <Card><ScoreBreakdown dims={loan.scoreDims} scores={{ approval: loan.scoreAtApproval, today: loan.scoreToday }} /></Card>
+        </div>
+      )}
 
       <SectionTitle title={t("Cambios desde la aprobación", "Changes since approval")}
         sub={t(`aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}`, `approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}`)}

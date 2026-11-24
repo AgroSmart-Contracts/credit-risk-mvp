@@ -3,7 +3,8 @@
  * 30 days), then one tab per kind of data (summary, position and funds, risk,
  * loans, applications). Every figure can be recomputed from the loan files.
  */
-import { useCallback, useState } from "react";
+import { Suspense, lazy, useCallback, useState } from "react";
+import { technicalSeries } from "../../data/bcp/technical";
 import { COVERAGE_BANDS, STANDARD_STRESS, accruedCost, bySeverity, cashCalendar, cov, coverageUnder, date, daysBetween, harvestBuild, month, pct, portfolioFigures, range, stateCause, stateFromCoverage, usd, withDate } from "../../lib/bcp/calc";
 import type { Loan, Portfolio as P, State } from "../../lib/bcp/types";
 import { ApplicationsTable } from "./Applications";
@@ -11,6 +12,9 @@ import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, ExampleChip, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
 import { useEvidence, useLang, useT } from "./shared";
+
+// Charts load with the risk tab, not with the portfolio.
+const TechChart = lazy(() => import("./TechCharts").then((m) => ({ default: m.TechChart })));
 
 type PortfolioTab = "resumen" | "posicion" | "riesgo" | "prestamos" | "solicitudes";
 /** Survives opening a file, so Back returns to the same tab. */
@@ -31,7 +35,6 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   const [causeOf, setCauseOf] = useState<P["changes"][number] | null>(null);
   const closeCause = useCallback(() => setCauseOf(null), []);
   const [season, setSeason] = useState(false);
-  const ica = data.loans.filter((l) => l.id.startsWith("ICA")).reduce((s, l) => s + l.lineUsd, 0);
   const accrued = data.loans.reduce((s, l) => s + accruedCost(l, data.cutoff), 0);
   // Watchlist: every loan not in green, by why it has its colour.
   const watch = [...data.loans].filter((l) => l.state !== "verde").sort(bySeverity);
@@ -219,9 +222,11 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         </Card>
         <Card>
           <h3 className="text-[16px] font-bold">{t("Concentración", "Concentration")}</h3>
-          <Concentration data={data} lines={F.line} ica={ica} />
+          <Concentration data={data} lines={F.line} />
         </Card>
       </div>
+
+      <EnsoOnce data={data} />
 
       <Card>
         <h3 className="text-[16px] font-bold">{t("Cobertura por préstamo: cómo se llega a cada cifra", "Coverage by loan: how each figure is reached")}</h3>
@@ -398,8 +403,23 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   );
 }
 
+/** Coastal El Niño, once for the portfolio: the same sea temperature applies to every loan, from the first approval. */
+function EnsoOnce({ data }: { data: P }) {
+  const t = useT();
+  const first = data.loans.reduce((m, l) => (l.approvalDate < m.approvalDate ? l : m), data.loans[0]);
+  const watched = data.loans.filter((l) => l.conditions.some((c) => c.label.es === "El Niño costero" && c.state === "observacion")).length;
+  return (
+    <Card className="min-w-0">
+      <Suspense fallback={<p className="lbl">{t("Cargando gráfico", "Loading chart")}</p>}>
+        <TechChart id="enso" s={technicalSeries(first, data.cutoff)} loan={first} cutoff={data.cutoff} portfolio />
+      </Suspense>
+      <p className="lbl mt-1.5">{t(`En observación en ${watched} de ${data.loans.length} préstamos: efecto estimado de −0.10x a −0.20x en cada uno, incluido en su proyección y en la de la cartera. No cambia ningún estado por sí solo.`, `Under watch on ${watched} of ${data.loans.length} loans: estimated effect of −0.10x to −0.20x on each, included in its projection and the portfolio's. It does not change any state on its own.`)}</p>
+    </Card>
+  );
+}
+
 /** Largest borrower, maturity month, buyer, packhouse and zone, as shares of the lines. */
-function Concentration({ data, lines, ica }: { data: P; lines: number; ica: number }) {
+function Concentration({ data, lines }: { data: P; lines: number }) {
   const t = useT();
   const lang = useLang();
   const largest = data.loans.reduce((m, l) => (l.lineUsd > m.lineUsd ? l : m), data.loans[0]);
@@ -414,8 +434,13 @@ function Concentration({ data, lines, ica }: { data: P; lines: number; ica: numb
     [t("Mes de vencimiento", "Maturity month"), pct((top.usd / lines) * 100), `${month(`${topMonth}-01`, lang)} · ${usd(top.usd)} (${top.ids.join(", ")})`],
     [t("Comprador", "Buyer"), t("por informar", "to be provided"), t("se completa con los contratos de venta", "completed with the sale contracts")],
     [t("Packing principal", "Main packhouse"), `${data.mainPackhousePct}%`, t("de las líneas", "of the lines")],
-    [t("Zona", "Zone"), `Ica ${pct((ica / lines) * 100)}`, `Pisco ${pct(((lines - ica) / lines) * 100)} · ${t("palta Hass 100%", "Hass avocado 100%")}`],
+    [t("Cultivo", "Crop"), t("palta Hass 100%", "Hass avocado 100%"), ""],
   ];
+  // Exposure by region (what the bank's regional view used to show).
+  const regions = (["Ica", "Pisco"] as const).map((r) => {
+    const ls = data.loans.filter((l) => (r === "Pisco" ? /Pisco/.test(l.zone.es) : !/Pisco/.test(l.zone.es)));
+    return { r, ls, line: ls.reduce((s, l) => s + l.lineUsd, 0), out: ls.reduce((s, l) => s + l.disbursedUsd, 0) };
+  });
   return (
     <table className="mt-2 w-full text-sm">
       <tbody className="divide-y divide-bcp-divider">
@@ -424,6 +449,20 @@ function Concentration({ data, lines, ica }: { data: P; lines: number; ica: numb
             <td className="py-2 pr-3">{k}</td>
             <td className="num whitespace-nowrap py-2 pr-3 text-right font-bold">{v}</td>
             <td className="py-2 text-bcp-muted">{n}</td>
+          </tr>
+        ))}
+        {regions.map((g) => (
+          <tr key={g.r} className="align-top">
+            <td className="py-2 pr-3">{t(`Zona ${g.r}`, `${g.r} zone`)}</td>
+            <td className="num whitespace-nowrap py-2 pr-3 text-right font-bold">{pct((g.line / lines) * 100)}</td>
+            <td className="py-2 text-bcp-muted">
+              {t(`${usd(g.out)} desembolsados`, `${usd(g.out)} disbursed`)} ·{" "}
+              {g.ls.map((l) => (
+                <span key={l.id} className="mr-1 inline-flex items-center gap-1">
+                  {l.id} <StateChip state={l.state} />
+                </span>
+              ))}
+            </td>
           </tr>
         ))}
       </tbody>
