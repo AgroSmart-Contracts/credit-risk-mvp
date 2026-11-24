@@ -5,7 +5,7 @@
  * px pages, 1px rules, numbers right-aligned, readable in grayscale.
  */
 import type { ReactNode } from "react";
-import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, haLabel, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd, withDate } from "../../lib/bcp/calc";
+import { COST_USD_KG, DRIVERS, DRIVER_TEXT, bySeverity, cov, coverageUnder, date, daysBetween, driverSum, fundsTotals, haLabel, harvestBuild, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd, withDate, type HarvestInput } from "../../lib/bcp/calc";
 import type { Application, ExceptionNotice, Loan, Portfolio } from "../../lib/bcp/types";
 import { STATE_TEXT, sourceTx, useLang, useT } from "./shared";
 import { BANK_EDITION, getViewer } from "./edition";
@@ -97,7 +97,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
             <b>{t("Posición", "Position")}:</b> {t(`${usd(F.disbursed)} desembolsados (${pct((F.disbursed / F.line) * 100)} de la línea de ${usd(F.line)}); ${usd(F.frozen)} congelados; ${usd(F.pending)} por desembolsar contra hitos.`, `${usd(F.disbursed)} disbursed (${pct((F.disbursed / F.line) * 100)} of the ${usd(F.line)} line); ${usd(F.frozen)} frozen; ${usd(F.pending)} to disburse against milestones.`)}
           </li>
           <li>
-            <b>{t("Riesgo", "Risk")}:</b> {t(`cobertura de la cartera ${cov(F.coverage)}; proyección ${range(data.projection.low, data.projection.high, "es")} (estimado); ningún préstamo en rojo; provisión ${usd(F.provision)}.`, `portfolio coverage ${cov(F.coverage)}; projection ${range(data.projection.low, data.projection.high, "en")} (estimated); no loan in red; provision ${usd(F.provision)}.`)}
+            <b>{t("Riesgo", "Risk")}:</b> {t(`cobertura de la cartera ${cov(F.coverage)}; proyección ${range(data.projection.low, data.projection.high, "es")} (estimado); si el precio cae 20%, ${cov(F.stress.price.coverage)}; provisión ${usd(F.provision)}.`, `portfolio coverage ${cov(F.coverage)}; projection ${range(data.projection.low, data.projection.high, "en")} (estimated); ${cov(F.stress.price.coverage)} if the price falls 20%; provision ${usd(F.provision)}.`)}
           </li>
           <li>
             <b>{t("Cambios", "Changes")}:</b> {t(`${data.changes.filter((c) => c.to === "naranja").length} a naranja con tramo congelado, ${data.changes.filter((c) => c.to === "ambar").length} a ámbar con seguimiento reforzado; El Niño costero en observación.`, `${data.changes.filter((c) => c.to === "naranja").length} to orange with a frozen tranche, ${data.changes.filter((c) => c.to === "ambar").length} to amber with reinforced follow-up; coastal El Niño under watch.`)}
@@ -136,7 +136,8 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
             head={[t("Indicador", "Indicator"), t("Valor", "Value")]}
             right={[1]}
             rows={[
-              [t("Cobertura de la cartera", "Portfolio coverage"), cov(F.coverage)],
+              [t("Cobertura de la cartera", "Portfolio coverage"), t(`${cov(F.coverage)} · ${usd(F.netRevenue)} ÷ ${usd(F.due)}`, `${cov(F.coverage)} · ${usd(F.netRevenue)} ÷ ${usd(F.due)}`)],
+              [t("Precio −20% / volumen −30%", "Price −20% / volume −30%"), `${cov(F.stress.price.coverage)} / ${cov(F.stress.volume.coverage)}`],
               [t("Proyección (estimado)", "Projection (estimated)"), range(data.projection.low, data.projection.high, lang)],
               [t("Clasificación SBS", "SBS rating"), t("5 de 5 Normal", "5 of 5 Normal")],
               [t("Provisión requerida", "Required provision"), usd(F.provision)],
@@ -489,17 +490,22 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
               [t("Clasificación SBS", "SBS rating"), loan.sbsRating],
               [t("Provisión requerida", "Required provision"), usd(provision(loan))],
               [t("Pérdida esperada", "Expected loss"), t("por calibrar", "to be calibrated")],
-              [t("Score aprobación → hoy", "Score approval → today"), `${loan.scoreAtApproval} → ${loan.scoreToday}`],
-              [t("Tramo de riesgo aprobado", "Approved risk tier"), loan.approvedTier],
+              ...(BANK_EDITION
+                ? []
+                : ([
+                    [t("Score aprobación → hoy", "Score approval → today"), `${loan.scoreAtApproval} → ${loan.scoreToday}`],
+                    [t("Tramo de riesgo aprobado", "Approved risk tier"), loan.approvedTier],
+                  ] as [string, string][])),
             ]}
           />
         </div>
+        <BuildLine x={loan} />
         {loan.projection && <p className="mt-1 text-[11.5px] text-bcp-muted">{t("Proyección", "Projection")}: {t(loan.projection.cause)}.</p>}
         <T
           head={[t("Factor", "Driver"), t("Cambio en la cobertura", "Change in coverage")]}
           right={[1]}
           rows={[
-            ...DRIVERS.map((d) => [t(DRIVER_TEXT[d]), signedCov(loan.driverDeltas[d])]),
+            ...DRIVERS.map((d) => [loan.alert?.driver === d ? <b key={d}>{t(DRIVER_TEXT[d])} · {t("origen de la alerta", "behind the alert")}</b> : t(DRIVER_TEXT[d]), signedCov(loan.driverDeltas[d])]),
             [<b key="t">{t("Total desde la aprobación", "Total since approval")}</b>, <b key="v">{signedCov(driverSum(loan))}</b>],
           ]}
         />
@@ -529,6 +535,21 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
   );
 }
 
+/** The coverage build in one sentence, so a printed memo can be recomputed too. */
+function BuildLine({ x, dueUsd }: { x: HarvestInput; dueUsd?: number }) {
+  const t = useT();
+  const b = harvestBuild(x, {}, dueUsd);
+  const n = (v: number) => Math.round(v).toLocaleString("en-US");
+  return (
+    <p className="mt-1 text-[11.5px] text-bcp-muted">
+      {t(
+        `Construcción: ${n(b.volumeKg)} kg × ${b.exportablePct}% = ${n(b.exportKg)} kg exportables × USD ${b.priceUsdKg.toFixed(2)}/kg = ${usd(b.grossUsd)}; menos ${usd(b.costUsd)} de packing, cosecha, transporte a puerto y comisiones (USD ${COST_USD_KG.toFixed(2)}/kg, estimado) = ${usd(b.netUsd)} de ingreso neto ÷ ${usd(b.dueUsd)} = ${cov(b.coverage)}.`,
+        `Build: ${n(b.volumeKg)} kg × ${b.exportablePct}% = ${n(b.exportKg)} exportable kg × USD ${b.priceUsdKg.toFixed(2)}/kg = ${usd(b.grossUsd)}; less ${usd(b.costUsd)} of packing, harvest, transport to port and fees (USD ${COST_USD_KG.toFixed(2)}/kg, estimated) = ${usd(b.netUsd)} net revenue ÷ ${usd(b.dueUsd)} = ${cov(b.coverage)}.`,
+      )}
+    </p>
+  );
+}
+
 export function AssessmentMemo({ data, app }: { data: Portfolio; app: Application }) {
   const t = useT();
   const lang = useLang();
@@ -537,9 +558,33 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
     `${t(app.crop)} · ${t(app.zone)} · ${haLabel(app.areaHa)} ha · campaña ${app.campaign} · recibida ${date(app.receivedDate, "es")} · datos ilustrativos`,
     `${t(app.crop)} · ${t(app.zone)} · ${haLabel(app.areaHa)} ha · campaign ${app.campaign} · received ${date(app.receivedDate, "en")} · illustrative data`,
   );
-  const rec = app.recommendation === "aprobar" ? t("Aprobar", "Approve") : t("Rechazar", "Decline");
+  const rec = app.recommendation === "aprobar" ? t("Aprobar", "Approve") : app.recommendation === "aprobar_condicion" ? t("Aprobar con condición", "Approve with a condition") : t("Rechazar", "Decline");
+  const cond = app.condition;
+  // With a coverage build and a condition the memo needs a second page; a veto fits on one.
+  const pages = app.coverage === null ? 1 : 2;
+  const basisAndChecks = (
+    <>
+      <H>{t("3. Fundamentos de la recomendación", "3. Basis for the recommendation")}</H>
+      <ul className="list-disc space-y-0.5 pl-4">{app.reasons.map((r, i) => <li key={i}>{t(r)}</li>)}</ul>
+
+      <H>{t("4. Verificaciones", "4. Checks")}</H>
+      <T
+        head={[t("Verificación", "Check"), t("Resultado", "Result"), t("Estado", "State"), t("Antes de", "Before"), t("Efecto", "Effect"), t("Fuente", "Source")]}
+        nowrap={[2, 3]}
+        rows={app.checks.map((c) => [<span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>, t(c.value), stateWord(c.state, lang), c.before ?? "", t(c.effect), <span key="s" className="text-bcp-muted">{t(sourceTx(c))}</span>])}
+      />
+    </>
+  );
+  const committee = (
+    <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
+      <p className="lbl">{t("Decisión del comité:", "Committee decision:")} ☐ {t("Aprobar", "Approve")} &nbsp;{cond && <> ☐ {t(`Aprobar con ${usd(cond.lineUsd)}`, `Approve with ${usd(cond.lineUsd)}`)} &nbsp;</>} ☐ {t("Rechazar", "Decline")} &nbsp; ☐ {t("Pedir información", "Request information")}</p>
+      <p className="lbl mt-1">{t(`La decisión es discrecional del banco. Motor ${data.engineVersion}.`, `The decision is at the bank's discretion. Engine ${data.engineVersion}.`)}</p>
+      <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
+    </footer>
+  );
   return (
-    <Page n={1} of={1} title={title} sub={sub}>
+    <div>
+    <Page n={1} of={pages} title={title} sub={sub}>
       <div className="mt-3 flex items-start gap-3">
         <div className="shrink-0 rounded border-2 border-bcp-ink px-2 py-1 text-center">
           <p className="lbl">{t("Recomendación", "Recommendation")}</p>
@@ -547,6 +592,7 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
         </div>
         <div>
           <p className="text-[13px] font-medium">{t(app.summary)}</p>
+          {cond && <p className="mt-0.5 text-[12px] font-bold">{t("Condición", "Condition")}: {t(cond.text)}.</p>}
           <p className="lbl mt-0.5">{t(`Decidir antes del ${date(app.decisionDueDate, "es")}`, `Decide by ${date(app.decisionDueDate, "en")}`)}</p>
         </div>
       </div>
@@ -572,19 +618,21 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
         <KV
           rows={[
             [t("Cobertura de repago", "Repayment coverage"), app.coverage === null ? t("no medible (veto)", "not measurable (veto)") : cov(app.coverage)],
-            ...(app.coverage === null ? [] : stressCases(app.coverage).map((s) => [t(s.label), cov(s.coverage)] as [string, string])),
+            ...(app.coverage === null ? [] : stressCases(app).map((s) => [t(s.label), cov(s.coverage)] as [string, string])),
+            ...(cond ? [[t(`Con ${usd(cond.lineUsd)}: hoy / −20% / −30%`, `At ${usd(cond.lineUsd)}: today / −20% / −30%`), `${cov(coverageUnder(app, 0, 0, cond.dueAtMaturityUsd))} / ${cov(coverageUnder(app, -0.2, 0, cond.dueAtMaturityUsd))} / ${cov(coverageUnder(app, 0, -0.3, cond.dueAtMaturityUsd))}`] as [string, string]] : []),
             [t("Precio de equilibrio", "Break-even price"), app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`],
             [t("Precio esperado a cosecha", "Expected harvest price"), `USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`],
           ]}
         />
         <KV
           rows={[
-            [t("Score", "Score"), `${app.score} · ${t("tramo", "tier")} ${app.tier}`],
+            ...(BANK_EDITION ? [] : ([[t("Score", "Score"), `${app.score} · ${t("tramo", "tier")} ${app.tier}`]] as [string, string][])),
             [t("Veto", "Veto"), app.veto ? t("Sí", "Yes") : t("No", "No")],
             [t("Pérdida esperada", "Expected loss"), t("por calibrar", "to be calibrated")],
           ]}
         />
       </div>
+      {app.coverage !== null && <BuildLine x={app} />}
       {BANK_EDITION ? (
         null
       ) : (
@@ -595,21 +643,19 @@ export function AssessmentMemo({ data, app }: { data: Portfolio; app: Applicatio
         />
       )}
 
-      <H>{t("3. Fundamentos de la recomendación", "3. Basis for the recommendation")}</H>
-      <ul className="list-disc space-y-0.5 pl-4">{app.reasons.map((r, i) => <li key={i}>{t(r)}</li>)}</ul>
-
-      <H>{t("4. Verificaciones", "4. Checks")}</H>
-      <T
-        head={[t("Verificación", "Check"), t("Resultado", "Result"), t("Estado", "State"), t("Efecto", "Effect"), t("Fuente", "Source")]}
-        nowrap={[2]}
-        rows={app.checks.map((c) => [<span key="l" className={c.state !== "verde" ? "font-bold" : ""}>{t(c.label)}</span>, t(c.value), stateWord(c.state, lang), t(c.effect), <span key="s" className="text-bcp-muted">{t(sourceTx(c))}</span>])}
-      />
-
-      <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
-        <p className="lbl">{t("Decisión del comité:", "Committee decision:")} ☐ {t("Aprobar", "Approve")} &nbsp; ☐ {t("Rechazar", "Decline")} &nbsp; ☐ {t("Pedir información", "Request information")}</p>
-        <p className="lbl mt-1">{t(`La decisión es discrecional del banco. Motor ${data.engineVersion}.`, `The decision is at the bank's discretion. Engine ${data.engineVersion}.`)}</p>
-        <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
-      </footer>
+      {pages === 1 ? (
+        <>
+          {basisAndChecks}
+          {committee}
+        </>
+      ) : null}
     </Page>
+    {pages === 2 && (
+      <Page n={2} of={2} title={title} sub={sub}>
+        {basisAndChecks}
+        {committee}
+      </Page>
+    )}
+    </div>
   );
 }

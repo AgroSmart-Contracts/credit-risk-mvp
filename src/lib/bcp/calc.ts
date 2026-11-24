@@ -56,6 +56,7 @@ export function stateFromCoverage(c: number): Exclude<State, "veto"> {
 }
 
 export const SEVERITY: Record<State, number> = { verde: 0, ambar: 1, naranja: 2, rojo: 3, veto: 4 };
+export const worstOf = <S extends State>(a: S, b: S): S => (SEVERITY[a] >= SEVERITY[b] ? a : b);
 
 // ---------------------------------------------------------------------------
 // Loan figures (5.3)
@@ -63,26 +64,73 @@ export const SEVERITY: Record<State, number> = { verde: 0, ambar: 1, naranja: 2,
 
 export const toDisburse = (l: Loan) => l.lineUsd - l.disbursedUsd - l.frozenUsd;
 
-/** Coverage under a shock: coverage × (1 + shock). */
-// Half-up rounding to two decimals (1.75 × 0.7 = 1.225 → 1.23), robust to binary float error.
-export const shocked = (c: number, shock: number) => Math.round(c * (1 + shock) * 100 + 1e-6) / 100;
+// ---------------------------------------------------------------------------
+// Coverage build (net revenue) and stress
+// ---------------------------------------------------------------------------
 
-/** The two standard stress cases on a coverage figure (loan today, or an application). */
-export function stressCases(c: number): { label: Tx; coverage: number }[] {
+/**
+ * Cost per exportable kg: packing, harvest, transport to port and fees. Estimated
+ * until calibrated. No ocean freight: the price is FOB, which already excludes it.
+ */
+export const COST_USD_KG = 0.57;
+/** The one standard stress, applied everywhere: price −20% and volume −30%, each on its own. */
+export const STANDARD_STRESS = { price: -0.2, volume: -0.3 } as const;
+
+/** What a coverage figure is built from: a loan or an application. */
+export interface HarvestInput {
+  volumeKg: number;
+  exportablePct: number;
+  expectedPriceUsdKg: number;
+  dueAtMaturityUsd: number;
+}
+
+const r2 = (n: number) => Math.round(n * 100 + 1e-9) / 100;
+
+/**
+ * Coverage = net revenue ÷ amount due. A price shock moves the price, not the cost
+ * per kg; a volume shock moves kg, so revenue and cost fall together.
+ */
+export function harvestBuild(x: HarvestInput, shock: { price?: number; volume?: number } = {}, dueUsd = x.dueAtMaturityUsd) {
+  const exportKg = Math.round((x.volumeKg * x.exportablePct) / 100 * (1 + (shock.volume ?? 0)));
+  const priceUsdKg = x.expectedPriceUsdKg * (1 + (shock.price ?? 0));
+  const grossUsd = Math.round(exportKg * priceUsdKg);
+  const costUsd = Math.round(exportKg * COST_USD_KG);
+  const netUsd = grossUsd - costUsd;
+  return { volumeKg: x.volumeKg, exportablePct: x.exportablePct, exportKg, priceUsdKg, grossUsd, costUsd, netUsd, dueUsd, coverage: r2(netUsd / dueUsd), breakEvenUsdKg: r2(COST_USD_KG + dueUsd / exportKg) };
+}
+
+export const coverageUnder = (x: HarvestInput, price = 0, volume = 0, dueUsd?: number) => harvestBuild(x, { price, volume }, dueUsd).coverage;
+
+/** The two standard stress cases (loan today, or an application at an amount due). */
+export function stressCases(x: HarvestInput, dueUsd?: number): { label: Tx; coverage: number }[] {
   return [
-    { label: L("Si el precio cae 20%", "If the price falls 20%"), coverage: shocked(c, -0.2) },
-    { label: L("Si el volumen cae 30%", "If the volume falls 30%"), coverage: shocked(c, -0.3) },
+    { label: L("Si el precio cae 20%", "If the price falls 20%"), coverage: coverageUnder(x, STANDARD_STRESS.price, 0, dueUsd) },
+    { label: L("Si el volumen cae 30%", "If the volume falls 30%"), coverage: coverageUnder(x, 0, STANDARD_STRESS.volume, dueUsd) },
   ];
 }
 
-export const scenarios = (l: Loan) => stressCases(l.coverageToday);
+export const scenarios = (l: Loan) => stressCases(l);
+
+/** Why a loan has its colour: the coverage band, a contractual control, or a technical signal (pending ruling). */
+export type StateCause = "cobertura" | "control" | "tecnica";
+export function stateCause(l: Loan): StateCause | null {
+  if (l.state === "verde" || l.state === "veto") return null;
+  if (SEVERITY[stateFromCoverage(l.coverageToday)] >= SEVERITY[l.state]) return "cobertura";
+  if (SEVERITY[l.controlsState] >= SEVERITY[l.state]) return "control";
+  return "tecnica";
+}
+export const CAUSE_TEXT: Record<StateCause, Tx> = {
+  cobertura: L("por cobertura", "on coverage"),
+  control: L("por control", "on a control"),
+  tecnica: L("por señal técnica", "on a technical signal"),
+};
 
 export const DRIVERS: Driver[] = ["volumen", "precio", "calidad", "cobranza", "prestatario"];
 export const DRIVER_TEXT: Record<Driver, Tx> = {
   volumen: L("Volumen", "Volume"),
   precio: L("Precio", "Price"),
   calidad: L("Calidad", "Quality"),
-  cobranza: L("Cobranza", "Collection"),
+  cobranza: L("Uso de fondos y cobranza", "Use of funds and collection"),
   prestatario: L("Prestatario", "Borrower"),
 };
 export const driverSum = (l: Loan) => Math.round(DRIVERS.reduce((s, d) => s + l.driverDeltas[d], 0) * 100) / 100;
@@ -119,16 +167,24 @@ export function portfolioFigures(loans: Loan[]) {
   const frozen = loans.reduce((s, l) => s + l.frozenUsd, 0);
   const pending = loans.reduce((s, l) => s + toDisburse(l), 0);
   const repaid = 0;
-  // Portfolio coverage = Σ(coverage × disbursed) ÷ Σ disbursed.
-  const coverage = disbursed ? Math.round((loans.reduce((s, l) => s + l.coverageToday * l.disbursedUsd, 0) / disbursed) * 100) / 100 : 0;
+  // Portfolio coverage = Σ net revenue ÷ Σ amount due (the full committed line plus estimated cost).
+  const due = loans.reduce((s, l) => s + l.dueAtMaturityUsd, 0);
+  const netAt = (price = 0, volume = 0) => loans.reduce((s, l) => s + harvestBuild(l, { price, volume }).netUsd, 0);
+  const netRevenue = netAt();
+  const coverage = due ? r2(netRevenue / due) : 0;
+  /** Portfolio and per-loan coverage under a scenario, and how many loans fall under each band. */
+  const scenario = (price: number, volume: number) => {
+    const per = loans.map((l) => coverageUnder(l, price, volume));
+    return { coverage: due ? r2(netAt(price, volume) / due) : 0, below: { ambar: per.filter((c) => c < COVERAGE_BANDS.ambar).length, naranja: per.filter((c) => c < COVERAGE_BANDS.naranja).length, rojo: per.filter((c) => c < COVERAGE_BANDS.rojo).length } };
+  };
   const byState: Record<Exclude<State, "veto">, { usd: number; n: number }> = { verde: { usd: 0, n: 0 }, ambar: { usd: 0, n: 0 }, naranja: { usd: 0, n: 0 }, rojo: { usd: 0, n: 0 } };
   for (const l of loans) if (l.state !== "veto") {
     byState[l.state].usd += l.disbursedUsd;
     byState[l.state].n += 1;
   }
-  // Principal maturities by month: the line less any frozen tranche (as in the cash calendar).
+  // Principal maturities by month, on the full committed line (as coverage and the cash calendar).
   const maturities = new Map<string, number>();
-  for (const l of loans) maturities.set(l.maturityDate.slice(0, 7), (maturities.get(l.maturityDate.slice(0, 7)) ?? 0) + l.lineUsd - l.frozenUsd);
+  for (const l of loans) maturities.set(l.maturityDate.slice(0, 7), (maturities.get(l.maturityDate.slice(0, 7)) ?? 0) + l.lineUsd);
   const funds = loans.map(loanFunds);
   const fundsDisbursed = funds.reduce((s, f) => s + f.budget, 0);
   const reconciled = funds.reduce((s, f) => s + f.reconciled, 0);
@@ -141,7 +197,10 @@ export function portfolioFigures(loans: Loan[]) {
     frozen,
     pending,
     repaid,
+    due,
+    netRevenue,
     coverage,
+    stress: { today: scenario(0, 0), price: scenario(STANDARD_STRESS.price, 0), volume: scenario(0, STANDARD_STRESS.volume), both: scenario(STANDARD_STRESS.price, STANDARD_STRESS.volume) },
     byState,
     maturities: [...maturities.entries()].sort(([a], [b]) => a.localeCompare(b)),
     provision: loans.reduce((s, l) => s + provision(l), 0),
@@ -166,26 +225,26 @@ export function pendingDecisions(loans: Loan[], cutoff: string) {
 
 /**
  * Cash calendar: by month from the cut-off to the last maturity, what leaves the
- * bank (tranches against milestones; frozen money is not counted) and what comes
- * back (amount due at maturity).
+ * bank (tranches against milestones; a frozen tranche counted as if released, the
+ * conservative basis) and what comes back (the amount due: principal plus estimated cost).
  */
 export function cashCalendar(loans: Loan[], cutoff: string) {
   const ym = (d: string) => d.slice(0, 7);
   const start = ym(cutoff);
-  const rows = new Map<string, { out: number; back: number; items: { loanId: string; label: Tx; amount: number; dir: "out" | "back" }[] }>();
-  const row = (m: string) => rows.get(m) ?? rows.set(m, { out: 0, back: 0, items: [] }).get(m)!;
+  const rows = new Map<string, { out: number; back: number; principal: number; items: { loanId: string; label: Tx; amount: number; dir: "out" | "back" }[] }>();
+  const row = (m: string) => rows.get(m) ?? rows.set(m, { out: 0, back: 0, principal: 0, items: [] }).get(m)!;
   for (const l of loans) {
-    for (const t of l.tranches.filter((x) => x.status === "pendiente" || x.status === "previsto")) {
+    for (const t of l.tranches.filter((x) => x.status !== "liberado")) {
       const m = ym(t.milestoneDate) < start ? start : ym(t.milestoneDate);
       const r = row(m);
       r.out += t.amountUsd;
-      r.items.push({ loanId: l.id, label: L(t.id, t.id), amount: t.amountUsd, dir: "out" });
+      r.items.push({ loanId: l.id, label: t.status === "congelado" ? L(`${t.id} congelado, si se libera`, `${t.id} frozen, if released`) : L(t.id, t.id), amount: t.amountUsd, dir: "out" });
     }
-    // Principal back at maturity: what was and will be disbursed (frozen money is not lent).
-    const principal = l.lineUsd - l.frozenUsd;
+    // Back at maturity: the amount due on the full line (principal plus estimated cost).
     const r = row(ym(l.maturityDate));
-    r.back += principal;
-    r.items.push({ loanId: l.id, label: L("capital", "principal"), amount: principal, dir: "back" });
+    r.back += l.dueAtMaturityUsd;
+    r.principal += l.lineUsd;
+    r.items.push({ loanId: l.id, label: L("capital más costo estimado", "principal plus estimated cost"), amount: l.dueAtMaturityUsd, dir: "back" });
   }
   return [...rows.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([m, r]) => ({ month: `${m}-01`, ...r }));
 }
@@ -195,7 +254,10 @@ export const scoreOf = (dims: ScoreDim[], at: "approval" | "today") => Math.roun
 
 export const STRESS_PRICE = [0, -0.1, -0.2, -0.3] as const;
 export const STRESS_VOLUME = [0, -0.15, -0.3] as const;
-/** Coverage under a price shock and a volume shock together. */
-export function stressGrid(c: number) {
-  return STRESS_VOLUME.map((v) => ({ volume: v, cells: STRESS_PRICE.map((p) => ({ price: p, coverage: Math.round(c * (1 + v) * (1 + p) * 100 + 1e-6) / 100 })) }));
+/** Coverage under a price shock and a volume shock together, on net revenue. */
+export function stressGrid(x: HarvestInput) {
+  return STRESS_VOLUME.map((v) => ({ volume: v, cells: STRESS_PRICE.map((p) => ({ price: p, coverage: coverageUnder(x, p, v) })) }));
 }
+
+/** Coverage effect of a change in expected price, at today's exportable volume. */
+export const priceEffect = (x: HarvestInput, fromUsdKg: number) => r2((harvestBuild(x).exportKg * (x.expectedPriceUsdKg - fromUsdKg)) / x.dueAtMaturityUsd);

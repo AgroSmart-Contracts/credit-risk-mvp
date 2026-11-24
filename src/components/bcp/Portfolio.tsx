@@ -1,13 +1,13 @@
 /**
- * Cartera: the four headline figures, then one tab per kind of data
- * (summary, position and funds, risk, loans, applications).
+ * Cartera: five headline figures (exposure, coverage, watchlist, controls, next
+ * 30 days), then one tab per kind of data (summary, position and funds, risk,
+ * loans, applications). Every figure can be recomputed from the loan files.
  */
 import { useCallback, useState } from "react";
-import { bySeverity, cashCalendar, cov, date, month, pct, pendingDecisions, portfolioFigures, range, usd, withDate } from "../../lib/bcp/calc";
+import { COVERAGE_BANDS, STANDARD_STRESS, bySeverity, cashCalendar, cov, coverageUnder, date, daysBetween, harvestBuild, month, pct, portfolioFigures, range, stateCause, stateFromCoverage, usd, withDate } from "../../lib/bcp/calc";
 import type { Loan, Portfolio as P, State } from "../../lib/bcp/types";
 import { ApplicationsTable } from "./Applications";
-import { appKey, decisionKey, type Answer } from "./answers";
-import { DecisionBlock } from "./Decision";
+import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, ExampleChip, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
 import { useEvidence, useLang, useT } from "./shared";
@@ -16,11 +16,10 @@ type PortfolioTab = "resumen" | "posicion" | "riesgo" | "prestamos" | "solicitud
 /** Survives opening a file, so Back returns to the same tab. */
 let lastTab: PortfolioTab = "resumen";
 
-export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answers, onAnswer }: { data: P; onOpen: (id: string) => void; onOpenApp: (id: string) => void; onReport: () => void; onDecisions: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
+export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answers }: { data: P; onOpen: (id: string) => void; onOpenApp: (id: string) => void; onReport: () => void; onDecisions: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
   const lang = useLang();
   const F = portfolioFigures(data.loans);
-  const pending = pendingDecisions(data.loans, data.cutoff);
   const [page, setPageState] = useState<PortfolioTab>(lastTab);
   const setPage = (tab: PortfolioTab) => {
     lastTab = tab;
@@ -32,12 +31,16 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   const [causeOf, setCauseOf] = useState<P["changes"][number] | null>(null);
   const closeCause = useCallback(() => setCauseOf(null), []);
   const [season, setSeason] = useState(false);
-  const appsOpen = data.applications.filter((a) => !answers[appKey(a)]);
-  const openConformities = pending.filter((p) => !answers[decisionKey(p.loan, p.decision)]).length;
-  const loanChanges = data.changes.filter((c) => c.loanId);
-  const toNaranja = loanChanges.filter((c) => c.to === "naranja").length;
-  const toAmbar = loanChanges.filter((c) => c.to === "ambar").length;
   const ica = data.loans.filter((l) => l.id.startsWith("ICA")).reduce((s, l) => s + l.lineUsd, 0);
+  // Watchlist: every loan not in green, by why it has its colour.
+  const watch = [...data.loans].filter((l) => l.state !== "verde").sort(bySeverity);
+  const byCause = (c: ReturnType<typeof stateCause>) => watch.filter((l) => stateCause(l) === c).length;
+  // Next 30 days: tranches against milestones and the bank's own decisions.
+  const within30 = (d: string) => daysBetween(data.cutoff, d) <= 30;
+  const nextTranches = data.loans.flatMap((l) => l.tranches.filter((x) => x.status === "pendiente" && within30(x.milestoneDate)));
+  const bankDecisions = data.loans.flatMap((l) => l.decisions.filter((d) => d.lane === "bank" && !d.conformityDate && within30(d.dueDate ?? d.date))).length + data.applications.filter((a) => !answers[appKey(a)] && within30(a.decisionDueDate)).length;
+  const appsOpen = data.applications.filter((a) => !answers[appKey(a)]);
+  const portfolioWatch = data.changes.find((c) => c.loanId === null);
   const frozenLoan = data.loans.find((l) => l.frozenUsd > 0);
   const sevenOfSeven = `${F.tranchesWithConformity} ${t("de", "of")} ${F.tranchesReleased}`;
 
@@ -56,11 +59,11 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       {/* Headline figures: same structure in every tile, so labels, values and notes line up. */}
       <section aria-label={t("Situación de la cartera", "Portfolio situation")} className="grid gap-px overflow-hidden rounded-xl border border-bcp-border bg-bcp-border sm:grid-cols-2 xl:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
         {[
-          { k: t("Línea total", "Total line"), v: usd(F.line), s: `${data.loans.length} ${t("préstamos", "loans")}`, go: () => setPage("posicion"), dark: true },
-          { k: t("Desembolsado", "Disbursed"), v: usd(F.disbursed), s: t(`${pct((F.disbursed / F.line) * 100)} de la línea`, `${pct((F.disbursed / F.line) * 100)} of the line`), go: () => setPage("posicion") },
-          { k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage), s: F.byState.rojo.n === 0 ? t("Ningún préstamo en rojo", "No loan in red") : t(`${F.byState.rojo.n} en rojo`, `${F.byState.rojo.n} in red`), go: () => setPage("riesgo") },
-          { k: t("Cambios del mes", "Changes this month"), v: `${loanChanges.length} ${t("préstamos", "loans")}`, s: t(`${toNaranja} a naranja · ${toAmbar} a ámbar`, `${toNaranja} to orange · ${toAmbar} to amber`), go: () => setPage("resumen") },
-          { k: t("Decisiones pendientes", "Pending decisions"), v: String(openConformities + appsOpen.length), s: t(`${openConformities} conformidad · ${appsOpen.length} solicitudes`, `${openConformities} conformity · ${appsOpen.length} applications`), go: onDecisions },
+          { k: t("Exposición hoy", "Exposure today"), v: usd(F.disbursed), s: t(`${pct((F.disbursed / F.line) * 100)} de ${usd(F.line)} · máximo ${usd(F.due)} con todos los tramos`, `${pct((F.disbursed / F.line) * 100)} of ${usd(F.line)} · at most ${usd(F.due)} with every tranche`), go: () => setPage("posicion"), dark: true },
+          { k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage), s: t(`proyectada ${range(data.projection.low, data.projection.high, "es")} · precio −20%: ${cov(F.stress.price.coverage)}`, `projected ${range(data.projection.low, data.projection.high, "en")} · price −20%: ${cov(F.stress.price.coverage)}`), go: () => setPage("riesgo") },
+          { k: t("En seguimiento", "On the watchlist"), v: `${watch.length} ${t("de", "of")} ${data.loans.length}`, s: t(`${byCause("control")} por control · ${byCause("tecnica")} por señal técnica · ${byCause("cobertura")} por cobertura`, `${byCause("control")} on a control · ${byCause("tecnica")} on a technical signal · ${byCause("cobertura")} on coverage`), go: () => setPage("resumen") },
+          { k: t("Control del dinero", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
+          { k: t("Próximos 30 días", "Next 30 days"), v: usd(nextTranches.reduce((s, x) => s + x.amountUsd, 0)), s: t(`${nextTranches.length} tramos contra hitos · ${bankDecisions} decisiones del banco`, `${nextTranches.length} tranches against milestones · ${bankDecisions} bank decisions`), go: onDecisions },
         ].map((x, i) => (
           <button key={x.k} type="button" onClick={x.go} className={`flex flex-col items-start justify-start px-4 py-4 text-left ${i === 0 ? "sm:col-span-2 xl:col-span-1" : ""} ${x.dark ? "bg-bcp-ink text-white hover:bg-[#15354f]" : "bg-white hover:bg-bcp-bg"}`}>
             <span className={`font-[Arial,Helvetica,sans-serif] text-[12px] ${x.dark ? "text-bcp-label" : "text-bcp-muted"}`}>{x.k}</span>
@@ -165,130 +168,169 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       </>}
 
       {page === "riesgo" && <>
-      <section className="space-y-3">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Card className="col-span-2 lg:col-span-1">
-            <Lbl>{t("Proyección", "Projection")}</Lbl>
-            <p className="num mt-1 flex flex-wrap items-center gap-2 text-[22px] font-bold">{range(data.projection.low, data.projection.high, lang)} <Estimado /></p>
+      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <Card className="col-span-2 lg:col-span-1">
+          <Lbl>{t("Proyección", "Projection")}</Lbl>
+          <p className="num mt-1 flex flex-wrap items-center gap-2 text-[22px] font-bold">{range(data.projection.low, data.projection.high, lang)} <Estimado /></p>
+        </Card>
+        {[
+          [t("Clasificación SBS", "SBS rating"), t(`${data.loans.filter((l) => l.sbsRating === "Normal").length} de ${data.loans.length} Normal`, `${data.loans.filter((l) => l.sbsRating === "Normal").length} of ${data.loans.length} Normal`)],
+          [t("Provisión requerida", "Required provision"), usd(F.provision)],
+          [t("Pérdida esperada", "Expected loss"), t("Por calibrar", "To be calibrated")],
+        ].map(([k, v]) => (
+          <Card key={k}>
+            <Lbl>{k}</Lbl>
+            <p className="num mt-1 text-[22px] font-bold">{v}</p>
           </Card>
-          {[
-            [t("Clasificación SBS", "SBS rating"), t(`${data.loans.filter((l) => l.sbsRating === "Normal").length} de ${data.loans.length} Normal`, `${data.loans.filter((l) => l.sbsRating === "Normal").length} of ${data.loans.length} Normal`)],
-            [t("Provisión requerida", "Required provision"), usd(F.provision)],
-            [t("Pérdida esperada", "Expected loss"), t("Por calibrar", "To be calibrated")],
-          ].map(([k, v]) => (
-            <Card key={k}>
-              <Lbl>{k}</Lbl>
-              <p className="num mt-1 text-[22px] font-bold">{v}</p>
-            </Card>
-          ))}
-        </div>
-        <p className="text-sm text-bcp-muted">
-          <b className="font-semibold text-bcp-ink">{t("Concentración", "Concentration")}:</b> {t("palta Hass 100%", "Hass avocado 100%")} · Ica {pct((ica / F.line) * 100)} · Pisco {pct(((F.line - ica) / F.line) * 100)} · {t(`packing principal ${data.mainPackhousePct}% de la línea`, `main packhouse ${data.mainPackhousePct}% of the line`)}
-        </p>
+        ))}
       </section>
 
-
-      <Card>
-        <h3 className="text-[16px] font-bold">{t("Cobertura por préstamo", "Coverage by loan")}</h3>
-        <div className="mt-2 overflow-x-auto">
-          <table className="w-full min-w-[620px] text-sm">
-            <thead><tr className="border-b border-bcp-border">{[t("Préstamo", "Loan"), t("Estado", "State"), t("Aprobación", "Approval"), t("Hoy", "Today"), t("Proyección", "Projection")].map((h, i) => <Lbl key={h} as="th" className={`py-1.5 font-normal ${i > 1 ? "text-right" : "text-left"}`}>{h}</Lbl>)}</tr></thead>
+      <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
+        <Card>
+          <h3 className="text-[16px] font-bold">{t("Estrés de la cartera", "Portfolio stress")}</h3>
+          <p className="lbl">{t("Sobre ingreso neto: packing, cosecha, transporte a puerto y comisiones no bajan con el precio.", "On net revenue: packing, harvest, transport to port and fees do not fall with the price.")}</p>
+          <table className="mt-2 w-full text-sm">
+            <thead>
+              <tr className="border-b border-bcp-border">
+                {[t("Escenario", "Scenario"), t("Cobertura", "Coverage"), t(`Bajo ${cov(COVERAGE_BANDS.ambar)}`, `Below ${cov(COVERAGE_BANDS.ambar)}`), t(`Bajo ${cov(COVERAGE_BANDS.naranja)}`, `Below ${cov(COVERAGE_BANDS.naranja)}`), t(`Bajo ${cov(COVERAGE_BANDS.rojo)}`, `Below ${cov(COVERAGE_BANDS.rojo)}`)].map((h, i) => (
+                  <Lbl key={h} as="th" className={`py-1.5 font-normal ${i ? "text-right" : "text-left"}`}>{h}</Lbl>
+                ))}
+              </tr>
+            </thead>
             <tbody className="divide-y divide-bcp-divider">
-              {[...data.loans].sort(bySeverity).map((l) => (
-                <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer hover:bg-bcp-bg">
-                  <td className="py-2 font-semibold">{l.id}</td>
-                  <td className="py-2"><StateChip state={l.state} /></td>
-                  <td className="py-2 text-right">{cov(l.coverageAtApproval)}</td>
-                  <td className="py-2 text-right font-semibold">{cov(l.coverageToday)}</td>
-                  <td className="py-2 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio proyectado", "no projected change")}</td>
+              {([
+                [t("Hoy", "Today"), F.stress.today],
+                [t("Precio −20%", "Price −20%"), F.stress.price],
+                [t("Volumen −30%", "Volume −30%"), F.stress.volume],
+                [t("Ambos a la vez", "Both at once"), F.stress.both],
+              ] as const).map(([k, x]) => (
+                <tr key={k}>
+                  <td className="py-2">{k}</td>
+                  <td className="num py-2 text-right"><StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} /></td>
+                  <td className="num py-2 text-right">{x.below.ambar}</td>
+                  <td className="num py-2 text-right">{x.below.naranja}</td>
+                  <td className="num py-2 text-right">{x.below.rojo}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <p className="lbl mt-2">{t(`Estándar: precio −20% y volumen −30%, cada uno por separado; "ambos" es el caso severo. Cobertura de la cartera = ${usd(F.netRevenue)} de ingreso neto ÷ ${usd(F.due)} de saldos.`, `Standard: price −20% and volume −30%, each on its own; "both" is the severe case. Portfolio coverage = ${usd(F.netRevenue)} net revenue ÷ ${usd(F.due)} amounts due.`)}</p>
+        </Card>
+        <Card>
+          <h3 className="text-[16px] font-bold">{t("Concentración", "Concentration")}</h3>
+          <Concentration data={data} lines={F.line} ica={ica} />
+        </Card>
+      </div>
+
+      <Card>
+        <h3 className="text-[16px] font-bold">{t("Cobertura por préstamo: cómo se llega a cada cifra", "Coverage by loan: how each figure is reached")}</h3>
+        <div className="-mx-4 mt-2 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
+          <table className="w-full min-w-[980px] text-sm">
+            <thead><tr className="border-b border-bcp-border">{[t("Préstamo", "Loan"), t("Estado", "State"), t("Ingreso neto", "Net revenue"), t("Saldo al vencimiento", "Due at maturity"), t("Aprobación → hoy", "Approval → today"), t("Precio −20%", "Price −20%"), t("Volumen −30%", "Volume −30%"), t("Equilibrio", "Break-even"), t("Proyección", "Projection")].map((h, i) => <Lbl key={h} as="th" className={`py-1.5 pr-3 font-normal ${i > 1 ? "text-right" : "text-left"}`}>{h}</Lbl>)}</tr></thead>
+            <tbody className="divide-y divide-bcp-divider">
+              {[...data.loans].sort(bySeverity).map((l) => {
+                const b = harvestBuild(l);
+                const [p, v] = [coverageUnder(l, STANDARD_STRESS.price), coverageUnder(l, 0, STANDARD_STRESS.volume)];
+                return (
+                  <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer hover:bg-bcp-bg">
+                    <td className="py-2 pr-3 font-semibold">{l.id}</td>
+                    <td className="py-2 pr-3"><StateChip state={l.state} cause={stateCause(l)} /></td>
+                    <td className="num py-2 pr-3 text-right">{usd(b.netUsd)}</td>
+                    <td className="num py-2 pr-3 text-right">{usd(l.dueAtMaturityUsd)}</td>
+                    <td className="num whitespace-nowrap py-2 pr-3 text-right">{cov(l.coverageAtApproval)} → <b>{cov(l.coverageToday)}</b></td>
+                    <td className={`num py-2 pr-3 text-right ${p < COVERAGE_BANDS.ambar ? "font-semibold text-bcp-naranja-text" : ""}`}>{cov(p)}</td>
+                    <td className={`num py-2 pr-3 text-right ${v < COVERAGE_BANDS.ambar ? "font-semibold text-bcp-naranja-text" : ""}`}>{cov(v)}</td>
+                    <td className="num whitespace-nowrap py-2 pr-3 text-right">USD {l.breakEvenPriceUsdKg.toFixed(2)}/kg</td>
+                    <td className="num whitespace-nowrap py-2 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio", "no change")}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr className="border-t-2 border-bcp-ink font-bold">
+                <td className="py-2 pr-3">{t("Cartera", "Portfolio")}</td>
+                <td />
+                <td className="num py-2 pr-3 text-right">{usd(F.netRevenue)}</td>
+                <td className="num py-2 pr-3 text-right">{usd(F.due)}</td>
+                <td className="num py-2 pr-3 text-right">{cov(F.coverage)}</td>
+                <td className="num py-2 pr-3 text-right">{cov(F.stress.price.coverage)}</td>
+                <td className="num py-2 pr-3 text-right">{cov(F.stress.volume.coverage)}</td>
+                <td />
+                <td className="num whitespace-nowrap py-2 text-right">{range(data.projection.low, data.projection.high, lang)}</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
         <p className="lbl mt-2">
-          {t("Cobertura = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales propuestos: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x.", "Coverage = net harvest revenue ÷ amount due at maturity. Proposed thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x.")}{" "}
+          {t("Cobertura = ingreso neto de cosecha ÷ saldo al vencimiento (línea completa más costo estimado). Umbrales propuestos: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x. Cada fila abre el expediente con la construcción completa.", "Coverage = net harvest revenue ÷ amount due at maturity (full line plus estimated cost). Proposed thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x. Each row opens the file with the full build.")}{" "}
           {t(data.projection.text).replace(/^(Proyección|Projection) \S+ (a|to) \S+ /, (m) => (m.startsWith("P") && lang === "es" ? "Proyección " : "Projection "))}
         </p>
       </Card>
       </>}
 
       {page === "resumen" && <>
-      <SectionTitle title={t("Cambios del mes", "Changes this month")} sub={t(`${date(data.monthFrom, "es")} a ${date(data.cutoff, "es")}`, `${date(data.monthFrom, "en")} to ${date(data.cutoff, "en")}`)} />
-      <Card className="py-1.5 sm:py-1.5">
-        <ul className="divide-y divide-bcp-divider">
-          {data.changes.map((c, i) => {
-            const loan = c.loanId ? data.loans.find((l) => l.id === c.loanId) ?? null : null;
-            return (
-              <li key={i} className="py-3">
-                <div className="grid gap-2 md:grid-cols-[11rem_13rem_1fr_auto] md:items-start">
-                  <div>
-                    <p className="font-semibold">{c.loanId ?? t("Toda la cartera", "Whole portfolio")}</p>
-                    <p className="lbl">{date(c.date, lang)}</p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1">
-                    <StateChip state={c.from} />
-                    <span aria-hidden>→</span>
-                    <StateChip state={c.to} />
-                  </div>
-                  <p className="text-sm">
-                    <b className="font-semibold">{t(c.impact)}</b>
-                  </p>
-                  <span className="flex flex-wrap items-center gap-3">
-                    <button type="button" onClick={() => setCauseOf(c)} className="min-h-[44px] text-sm font-semibold text-bcp-green-text underline-offset-2 hover:underline">
-                      {t("Ver causa", "View cause")}
-                    </button>
-                    {!BANK_EDITION && c.evidence && (
-                      <button type="button" onClick={() => openEvidence(c.evidence!.loanId, c.evidence!.condition)} className="min-h-[44px] text-sm font-semibold text-bcp-green-text hover:underline">
-                        {t("Evidencia", "Evidence")} ›
-                      </button>
-                    )}
-                    {loan && (
-                      <button type="button" onClick={() => onOpen(loan.id)} className="min-h-[44px] text-sm font-semibold text-bcp-ink hover:underline">
-                        {t("Abrir expediente", "Open file")} →
-                      </button>
-                    )}
-                  </span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+      <SectionTitle title={t("En seguimiento", "On the watchlist")} sub={t("Estado = el peor entre la banda de cobertura de hoy y los controles del contrato. La proyección anticipa; no fija el estado.", "State = the worse of today's coverage band and the contract controls. The projection anticipates; it does not set the state.")} />
+      <Card>
+        <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
+          <table className="w-full min-w-[900px] text-sm">
+            <thead>
+              <tr className="border-b border-bcp-border text-left">
+                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura hoy", "Coverage today"), t("Banda", "Band"), t("Proyección", "Projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "What is next")].map((h, i) => (
+                  <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 2 || i === 4 || i === 5 ? "text-right" : ""}`}>{h}</Lbl>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-bcp-divider">
+              {watch.map((l) => {
+                const p20 = coverageUnder(l, STANDARD_STRESS.price);
+                return (
+                  <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer align-top hover:bg-bcp-bg">
+                    <td className="py-2.5 pr-3">
+                      <button type="button" onClick={(e) => { e.stopPropagation(); onOpen(l.id); }} className="text-left font-semibold hover:underline">{l.id}</button>
+                      <span className="lbl block">{t(l.zone)}</span>
+                    </td>
+                    <td className="py-2.5 pr-3">
+                      <StateChip state={l.state} cause={stateCause(l)} />
+                      {l.alert && <span className="lbl block max-w-[280px]">{t(l.alert.text)}</span>}
+                    </td>
+                    <td className="num py-2.5 pr-3 text-right font-semibold">{cov(l.coverageToday)}</td>
+                    <td className="py-2.5 pr-3"><StateChip state={stateFromCoverage(l.coverageToday)} /></td>
+                    <td className="num whitespace-nowrap py-2.5 pr-3 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio", "no change")}</td>
+                    <td className={`num py-2.5 pr-3 text-right font-semibold ${p20 < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : ""}`}>{cov(p20)}</td>
+                    <td className="py-2.5 pr-3">{withDate(t(l.next.label), l.next.date, lang)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {portfolioWatch && (
+          <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
+            <StateChip state={portfolioWatch.to} /> <b className="font-semibold">{t("Toda la cartera", "Whole portfolio")}:</b> {t(portfolioWatch.impact)}{" "}
+            <button type="button" onClick={() => setCauseOf(portfolioWatch)} className="min-h-[44px] font-semibold text-bcp-green-text underline-offset-2 hover:underline">{t("Ver causa", "View cause")}</button>
+            {!BANK_EDITION && portfolioWatch.evidence && (
+              <button type="button" onClick={() => openEvidence(portfolioWatch.evidence!.loanId, portfolioWatch.evidence!.condition)} className="ml-3 min-h-[44px] font-semibold text-bcp-green-text hover:underline">{t("Evidencia", "Evidence")} ›</button>
+            )}
+          </p>
+        )}
       </Card>
       {causeOf && (
-        <Modal
-          title={t(`Causa · ${causeOf.loanId ?? "Toda la cartera"}`, `Cause · ${causeOf.loanId ?? "Whole portfolio"}`)}
-          onClose={closeCause}
-          footer={
-            <>
-              <Btn onClick={closeCause}>{t("Cerrar", "Close")}</Btn>
-              {causeOf.loanId && <Btn primary onClick={() => onOpen(causeOf.loanId!)}>{t("Abrir expediente", "Open file")}</Btn>}
-            </>
-          }
-        >
-          <div className="flex flex-wrap items-center gap-1">
-            <StateChip state={causeOf.from} />
-            <span aria-hidden>→</span>
-            <StateChip state={causeOf.to} />
-          </div>
-          <p className="mt-3 text-sm font-semibold text-bcp-ink">{t(causeOf.impact)}</p>
+        <Modal title={t("Causa · Toda la cartera", "Cause · Whole portfolio")} onClose={closeCause} footer={<Btn onClick={closeCause}>{t("Cerrar", "Close")}</Btn>}>
+          <p className="text-sm font-semibold text-bcp-ink">{t(causeOf.impact)}</p>
           <p className="mt-2 text-sm text-bcp-ink">{t(causeOf.cause).replace(/^./, (x) => x.toUpperCase())}</p>
         </Modal>
       )}
-
-      {pending.length > 0 && <SectionTitle title={t("Decisiones pendientes", "Pending decisions")} />}
-      {pending.map((p) => (
-        <DecisionBlock
-          key={decisionKey(p.loan, p.decision)}
-          loan={p.loan}
-          decision={p.decision}
-          cutoff={data.cutoff}
-          answer={answers[decisionKey(p.loan, p.decision)]}
-          onAnswer={(a) => onAnswer(decisionKey(p.loan, p.decision), a)}
-          onOpen={() => onOpen(p.loan.id)}
-        />
-      ))}
-
+      {bankDecisions > 0 && (
+        <Card tone="decision">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm">
+              <b className="font-semibold">{t(`${bankDecisions} decisiones del banco en los próximos 30 días`, `${bankDecisions} bank decisions in the next 30 days`)}</b>
+              <span className="lbl block">{t(`${appsOpen.length} solicitudes y las conformidades de tramo`, `${appsOpen.length} applications and the tranche conformities`)}</span>
+            </p>
+            <Btn primary onClick={onDecisions}>{t("Ir a Decisiones", "Go to Decisions")}</Btn>
+          </div>
+        </Card>
+      )}
       </>}
 
       {page === "prestamos" && <>
@@ -333,8 +375,8 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         {!BANK_EDITION && (
         <p className="lbl mt-3">
           {t(
-            "Cada dato muestra su fuente y fecha en el expediente. Estado = el más severo entre cobertura de repago y los gatillos acordados (vigor, facturas, labores, cuajado, aforo, deuda).",
-            "Each figure shows its source and date in the file. State = the most severe of repayment coverage and the agreed triggers (vigour, invoices, field work, fruit set, field estimate, debt).",
+            "Cada dato muestra su fuente y fecha en el expediente. Estado = el peor entre la banda de cobertura y los controles del contrato; las señales técnicas (vigor, clima) mueven la cobertura y no fijan el color por sí solas.",
+            "Each figure shows its source and date in the file. State = the worse of the coverage band and the contract controls; technical signals (vigour, weather) move coverage and do not set the colour on their own.",
           )}
         </p>
         )}
@@ -352,6 +394,39 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       )}
       </>}
     </div>
+  );
+}
+
+/** Largest borrower, maturity month, buyer, packhouse and zone, as shares of the lines. */
+function Concentration({ data, lines, ica }: { data: P; lines: number; ica: number }) {
+  const t = useT();
+  const lang = useLang();
+  const largest = data.loans.reduce((m, l) => (l.lineUsd > m.lineUsd ? l : m), data.loans[0]);
+  const byMonth = new Map<string, { usd: number; ids: string[] }>();
+  for (const l of data.loans) {
+    const m = byMonth.get(l.maturityDate.slice(0, 7)) ?? { usd: 0, ids: [] };
+    byMonth.set(l.maturityDate.slice(0, 7), { usd: m.usd + l.lineUsd, ids: [...m.ids, l.id] });
+  }
+  const [topMonth, top] = [...byMonth.entries()].sort((a, b) => b[1].usd - a[1].usd)[0];
+  const rows: [string, string, string][] = [
+    [t("Mayor prestatario", "Largest borrower"), pct((largest.lineUsd / lines) * 100), t(`${largest.id} · ${usd(largest.lineUsd)} de ${usd(lines)}`, `${largest.id} · ${usd(largest.lineUsd)} of ${usd(lines)}`)],
+    [t("Mes de vencimiento", "Maturity month"), pct((top.usd / lines) * 100), `${month(`${topMonth}-01`, lang)} · ${usd(top.usd)} (${top.ids.join(", ")})`],
+    [t("Comprador", "Buyer"), t("por informar", "to be provided"), t("se completa con los contratos de venta", "completed with the sale contracts")],
+    [t("Packing principal", "Main packhouse"), `${data.mainPackhousePct}%`, t("de las líneas", "of the lines")],
+    [t("Zona", "Zone"), `Ica ${pct((ica / lines) * 100)}`, `Pisco ${pct(((lines - ica) / lines) * 100)} · ${t("palta Hass 100%", "Hass avocado 100%")}`],
+  ];
+  return (
+    <table className="mt-2 w-full text-sm">
+      <tbody className="divide-y divide-bcp-divider">
+        {rows.map(([k, v, n]) => (
+          <tr key={k} className="align-top">
+            <td className="py-2 pr-3">{k}</td>
+            <td className="num whitespace-nowrap py-2 pr-3 text-right font-bold">{v}</td>
+            <td className="py-2 text-bcp-muted">{n}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
@@ -391,7 +466,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
                 </button>
                 <span className="lbl block">{t(l.zone)}</span>
               </td>
-              <td className="py-2.5 pr-3"><StateChip state={l.state} /></td>
+              <td className="py-2.5 pr-3"><StateChip state={l.state} cause={stateCause(l)} /></td>
               <td className="whitespace-nowrap py-2.5 pr-3 text-right">
                 <span className="font-semibold">{usd(l.disbursedUsd)}</span>
                 <span className="lbl block">{t("de", "of")} {usd(l.lineUsd)}</span>
@@ -425,7 +500,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
             </>
           }
         >
-          <StateChip state={situationOf.state} />
+          <StateChip state={situationOf.state} cause={stateCause(situationOf)} />
           <p className="mt-3 text-sm text-bcp-ink">{t(situationOf.summary)}</p>
           <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
             <span className="lbl block">{t("Próximo hito", "Next milestone")}</span>
@@ -507,7 +582,7 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
   const [movesOf, setMovesOf] = useState<(typeof rows)[number] | null>(null);
   const closeMoves = useCallback(() => setMovesOf(null), []);
   let bal = F.disbursed;
-  const pts = rows.map((r) => (bal = bal + r.out - r.back));
+  const pts = rows.map((r) => (bal = bal + r.out - r.principal));
   const peak = Math.max(F.disbursed, ...pts);
   const peakMonth = rows[pts.indexOf(peak)]?.month;
   const W = 620, H = 260, L = 48, R = 12, T = 14, B = 32;
@@ -561,7 +636,7 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
         </svg>
         <p className="lbl mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
           <span><span className="mr-1 inline-block h-2.5 w-2.5 bg-bcp-ink align-[-1px]" />{t("desembolso contra hito", "disbursement against a milestone")}</span>
-          <span><span className="mr-1 inline-block h-2.5 w-2.5 bg-bcp-green align-[-1px]" />{t("repago de capital al vencimiento", "principal repaid at maturity")}</span>
+          <span><span className="mr-1 inline-block h-2.5 w-2.5 bg-bcp-green align-[-1px]" />{t("repago al vencimiento: capital más costo estimado", "repaid at maturity: principal plus estimated cost")}</span>
           <span><span className="mr-1 inline-block h-0.5 w-3 bg-bcp-ambar align-middle" />{t("saldo expuesto", "balance exposed")}</span>
         </p>
       </div>
@@ -593,8 +668,8 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
         </table>
         <p className="lbl mt-2">
           {t(
-            `El congelado de ${usd(F.frozen)} no entra al calendario hasta verificar la remediación. El costo del banco se cobra con el capital al vencimiento.`,
-            `The ${usd(F.frozen)} frozen stays out of the calendar until remediation is verified. The bank's cost is collected with the principal at maturity.`,
+            `Misma base que la cobertura: el congelado de ${usd(F.frozen)} figura como si se liberara y cada vencimiento es el saldo completo (capital más costo estimado). El saldo expuesto sigue el capital.`,
+            `Same basis as coverage: the ${usd(F.frozen)} frozen is shown as if released and each maturity is the full amount due (principal plus estimated cost). The balance exposed follows principal.`,
           )}
         </p>
         {movesOf && (
@@ -604,7 +679,7 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
                 {movesOf.items.map((x, i) => (
                   <tr key={i}>
                     <td className="py-2 pr-3 font-semibold">{x.loanId}</td>
-                    <td className="py-2 pr-3 text-bcp-muted">{x.dir === "out" ? `${t("Desembolso", "Disbursement")} ${t(x.label)}` : t("Repago de capital", "Principal repayment")}</td>
+                    <td className="py-2 pr-3 text-bcp-muted">{x.dir === "out" ? `${t("Desembolso", "Disbursement")} ${t(x.label)}` : `${t("Repago", "Repayment")}: ${t(x.label)}`}</td>
                     <td className={`whitespace-nowrap py-2 text-right font-semibold ${x.dir === "back" ? "text-bcp-green-text" : ""}`}>{usd(x.amount)}</td>
                   </tr>
                 ))}

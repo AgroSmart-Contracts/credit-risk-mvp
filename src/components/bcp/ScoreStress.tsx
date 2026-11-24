@@ -3,8 +3,8 @@
  * with its weight) and the stress test of repayment coverage under price and
  * volume shocks. Every cell is labelled with its state in words.
  */
-import { COVERAGE_BANDS, STRESS_PRICE, cov, scoreOf, stateFromCoverage, stressGrid } from "../../lib/bcp/calc";
-import type { ScoreDim } from "../../lib/bcp/types";
+import { COVERAGE_BANDS, STRESS_PRICE, cov, scoreOf, stateFromCoverage, stressGrid, type HarvestInput } from "../../lib/bcp/calc";
+import type { ScoreDim, State } from "../../lib/bcp/types";
 import { STATE_TEXT, useT } from "./shared";
 import { BANK_EDITION } from "./edition";
 import { Lbl } from "./ui";
@@ -80,13 +80,17 @@ const CELL: Record<string, string> = {
   rojo: "bg-bcp-rojo-bg text-bcp-rojo-text",
 };
 
-export function StressGrid({ coverage }: { coverage: number }) {
+/**
+ * Coverage under price and volume shocks, on net revenue. Cells are coloured by the
+ * coverage band; the "today" cell also names the loan's state when a control sets it.
+ */
+export function StressGrid({ input, state }: { input: HarvestInput; state?: State }) {
   const t = useT();
-  const grid = stressGrid(coverage);
+  const grid = stressGrid(input);
   return (
     <div>
       <h3 className="text-[16px] font-bold">{t("Prueba de estrés de la cobertura", "Coverage stress test")}</h3>
-      <p className="lbl">{t("Cobertura de repago si el precio y el volumen caen a la vez", "Repayment coverage if price and volume fall together")}</p>
+      <p className="lbl">{t("Cobertura sobre ingreso neto si el precio y el volumen caen; los costos por kg no bajan con el precio", "Coverage on net revenue if price and volume fall; costs per kg do not fall with the price")}</p>
       <div className="mt-2 overflow-x-auto">
         <table className="w-full min-w-[440px] text-center text-sm">
           <thead>
@@ -105,11 +109,16 @@ export function StressGrid({ coverage }: { coverage: number }) {
                 <td className="py-1 text-left text-xs text-bcp-muted">{row.volume === 0 ? t("volumen esperado", "expected volume") : `${Math.round(row.volume * 100)}%`}</td>
                 {row.cells.map((c) => {
                   const s = stateFromCoverage(c.coverage);
+                  const today = row.volume === 0 && c.price === 0;
+                  // Today's cell: the band, labelled as such, and the loan's state when a control makes it worse.
+                  const band = today ? `${t("banda", "band")} ${t(STATE_TEXT[s]).toLowerCase()}` : t(STATE_TEXT[s]);
+                  const stateNote = today && state && state !== s && state !== "veto" ? `${t("estado", "state")} ${t(STATE_TEXT[state]).toLowerCase()}` : null;
                   return (
                     <td key={c.price} className="p-1">
                       <span className={`block rounded-md px-1 py-1.5 ${CELL[s]}`}>
                         <b className="num">{cov(c.coverage)}</b>
-                        <span className="block font-[Arial,Helvetica,sans-serif] text-[11px]">{t(STATE_TEXT[s])}</span>
+                        <span className="block font-[Arial,Helvetica,sans-serif] text-[11px]">{band}</span>
+                        {stateNote && <span className="block font-[Arial,Helvetica,sans-serif] text-[11px] font-bold">{stateNote}</span>}
                       </span>
                     </td>
                   );

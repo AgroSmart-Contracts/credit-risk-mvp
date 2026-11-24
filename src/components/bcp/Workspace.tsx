@@ -417,7 +417,7 @@ function Method() {
           <li className="flex gap-2"><StateChip state="rojo" /> <span>{t("Financiamiento detenido y cascada de recuperación; decide el banco con la recomendación escrita de TruMarket.", "Financing stopped and recovery cascade; the bank decides on TruMarket's written recommendation.")}</span></li>
           <li className="flex gap-2"><StateChip state="observacion" /> <span>{t("Alertas tempranas de TruMarket (clima, El Niño, temperatura): no cambian el estado por sí solas; producen un rango estimado de impacto hasta confirmarse en campo.", "TruMarket early warnings (weather, El Niño, temperature): they never change the state on their own; they produce an estimated impact range until confirmed in the field.")}</span></li>
         </ul>
-        <p className="lbl mt-3">{t("La exposición queda siempre limitada a lo desembolsado. Umbrales propuestos, pendientes de aprobación con BCP Riesgos.", "Exposure always stays limited to what was disbursed. Proposed thresholds, pending approval with BCP Risk.")}</p>
+        <p className="lbl mt-3">{t("La exposición hoy es lo desembolsado; el máximo es la línea completa más el costo estimado. Umbrales propuestos, pendientes de aprobación con BCP Riesgos.", "Exposure today is what was disbursed; at most, the full line plus the estimated cost. Proposed thresholds, pending approval with BCP Risk.")}</p>
       </Card>
     </div>
   );

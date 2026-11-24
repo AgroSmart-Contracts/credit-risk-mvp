@@ -4,6 +4,7 @@
  * badge, buttons, and a stacked bar with its numbers stated for screen readers.
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { CAUSE_TEXT, type StateCause } from "../../lib/bcp/calc";
 import type { ConditionState, Provenance } from "../../lib/bcp/types";
 import { BANK_EDITION } from "./edition";
 import { PROV_TEXT, STATE_TEXT, useT } from "./shared";
@@ -131,13 +132,15 @@ const STATE_CHIP: Record<ConditionState | "neutral", { bg: string; text: string;
   neutral: { bg: "bg-bcp-divider", text: "text-bcp-muted", dot: "bg-bcp-fill-strong" },
 };
 /** State chip: tinted pill, dot, and the state named in words. */
-export function StateChip({ state, suffix }: { state: ConditionState | "neutral"; suffix?: string }) {
+/** A state, optionally with why it has that colour ("Naranja por control"). */
+export function StateChip({ state, suffix, cause }: { state: ConditionState | "neutral"; suffix?: string; cause?: StateCause | null }) {
   const t = useT();
   const c = STATE_CHIP[state];
   return (
     <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-[3px] font-[Arial,Helvetica,sans-serif] text-[12px] font-bold ${c.bg} ${c.text}`}>
       <span className={`h-2 w-2 rounded-full ${c.dot}`} aria-hidden />
       {t(STATE_TEXT[state])}
+      {cause && ` ${t(CAUSE_TEXT[cause])}`}
       {suffix && <span className="font-normal">{suffix}</span>}
     </span>
   );

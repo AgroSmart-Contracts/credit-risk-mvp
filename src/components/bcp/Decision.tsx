@@ -4,7 +4,7 @@
  * "Dar conformidad" or "Pedir información"; the answer is recorded with its date.
  */
 import { useState } from "react";
-import { COVERAGE_BANDS, cov, date, shocked, usd } from "../../lib/bcp/calc";
+import { COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, usd } from "../../lib/bcp/calc";
 import type { Decision, Loan } from "../../lib/bcp/types";
 import type { Answer } from "./answers";
 import { useLang, useT, useToast } from "./shared";
@@ -22,8 +22,9 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
   const toast = useToast();
   // What the decision does to the money: exposure after the release, and a price-drop check.
   const after = loan.disbursedUsd + (tranche?.amountUsd ?? 0);
-  const p20 = shocked(loan.coverageToday, -0.2);
-  const ready = !!tranche && tranche.checklist.every((c) => c.status === "ok" || /conformidad del banco|bank conformity/i.test(c.label.es));
+  const p20 = coverageUnder(loan, STANDARD_STRESS.price);
+  // TruMarket's checklist only; the bank's conformity is the decision itself, not an item on it.
+  const ready = !!tranche && done === tranche.checklist.length;
   const answerWith = (kind: Answer["kind"]) => {
     onAnswer({ kind, at: new Date().toISOString() });
     toast(
@@ -48,7 +49,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
       <p className="mt-2 text-sm text-bcp-ink">{t(decision.basis)}</p>
       <dl className="mt-3 grid gap-4 border-y border-bcp-divider py-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <dt className="lbl">{t("Checklist", "Checklist")}</dt>
+          <dt className="lbl">{t("Checklist TruMarket", "TruMarket checklist")}</dt>
           <dd className="num font-semibold">
             {tranche ? `${done} ${t("de", "of")} ${tranche.checklist.length}` : t("n/d", "n/a")}
             {tranche && (
@@ -74,11 +75,16 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
           <dd className="lbl">{ready ? t("por el monto completo", "for the full amount") : t("monto final sobre el volumen verificado", "final amount on the verified volume")}</dd>
         </div>
       </dl>
+      {tranche && ready && <p className="mt-3 text-sm font-semibold">{t("Falta: su conformidad", "Missing: your conformity")}</p>}
       {tranche && (
         <p className="mt-3 text-sm">
           {t(
-            `Si el precio cae 20%, la cobertura queda en ${cov(p20)}${p20 >= COVERAGE_BANDS.ambar ? ", aún sobre el umbral" : ", bajo el umbral ámbar"}.`,
-            `If the price falls 20%, coverage would be ${cov(p20)}${p20 >= COVERAGE_BANDS.ambar ? ", still above the threshold" : ", below the amber threshold"}.`,
+            p20 >= COVERAGE_BANDS.ambar
+              ? `Si el precio cae 20%, la cobertura queda en ${cov(p20)}, aún sobre ${cov(COVERAGE_BANDS.ambar)}.`
+              : `Si el precio cae 20%, la cobertura queda en ${cov(p20)}, bajo ${cov(COVERAGE_BANDS.ambar)}. Condición propuesta: el monto del T3 se ajusta al precio esperado vigente en su hito.`,
+            p20 >= COVERAGE_BANDS.ambar
+              ? `If the price falls 20%, coverage would be ${cov(p20)}, still above ${cov(COVERAGE_BANDS.ambar)}.`
+              : `If the price falls 20%, coverage would be ${cov(p20)}, below ${cov(COVERAGE_BANDS.ambar)}. Proposed condition: the T3 amount is resized to the expected price at its milestone.`,
           )}
         </p>
       )}

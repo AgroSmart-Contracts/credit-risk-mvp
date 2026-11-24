@@ -7,7 +7,8 @@ import { GEO, technicalSeries } from "../../data/bcp/technical";
 import { FieldImages } from "./FieldImages";
 import { TechChart } from "./TechCharts";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { DRIVERS, DRIVER_TEXT, date, daysBetween, fundsTotals, haLabel, pct, provision, signedCov, toDisburse, usd, withDate } from "../../lib/bcp/calc";
+import { CoverageBuild, DriverBridge } from "./CoverageBuild";
+import { COVERAGE_BANDS, cov, date, daysBetween, fundsTotals, haLabel, pct, provision, stateCause, stateFromCoverage, toDisburse, usd, withDate } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Condition, Loan, Portfolio } from "../../lib/bcp/types";
 import { CoverageChart } from "./CoverageChart";
@@ -67,7 +68,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
           ← {t("Cartera", "Portfolio")}
         </button>
         <div className="flex flex-wrap items-center gap-2">
-          <StateChip state={loan.state} suffix={` ${t("desde", "since")} ${date(loan.stateSince, lang)}`} />
+          <StateChip state={loan.state} cause={stateCause(loan)} suffix={` · ${t("desde", "since")} ${date(loan.stateSince, lang)}`} />
           <ExampleChip kind="file" />
         </div>
         <div className="flex flex-wrap items-end justify-between gap-3">
@@ -117,6 +118,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
           ))}
         </ul>
       </Card>
+      <TwoSignals loan={loan} />
       {bankDecision && <DecisionBlock loan={loan} decision={bankDecision} cutoff={data.cutoff} answer={answers[decisionKey(loan, bankDecision)]} onAnswer={(a) => onAnswer(decisionKey(loan, bankDecision), a)} />}
       <section>
         <SectionTitle title={t("Posición financiera", "Financial position")} />
@@ -188,13 +190,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
             <div className="mt-2">
               <CoverageChart loan={loan} cutoff={data.cutoff} />
             </div>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {DRIVERS.filter((d) => loan.driverDeltas[d] !== 0).map((d) => (
-                <span key={d} className="rounded-full border border-bcp-border px-2.5 py-[3px] font-[Arial,Helvetica,sans-serif] text-[12px] font-bold">
-                  {t(DRIVER_TEXT[d])} {signedCov(loan.driverDeltas[d]).replace(/^0/, "0")}
-                </span>
-              ))}
-            </div>
             <p className="lbl mt-2">{t("Línea sólida: confirmado · línea punteada: estimado", "Solid line: confirmed · dotted line: estimated")}</p>
           </Card>
           <Card>
@@ -204,7 +199,8 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                 [t("Precio esperado a cosecha", "Expected harvest price"), `USD ${loan.expectedPriceUsdKg.toFixed(2)}/kg`],
                 [t("Clasificación SBS", "SBS rating"), loan.sbsRating],
                 [t("Provisión requerida", "Required provision"), usd(provision(loan))],
-                ["Score", t(`${loan.scoreAtApproval} → ${loan.scoreToday} · tier aprobado ${loan.approvedTier}`, `${loan.scoreAtApproval} → ${loan.scoreToday} · approved tier ${loan.approvedTier}`)],
+                // The score is internal: unexplained to the bank and not what sets the state.
+                ...(BANK_EDITION ? [] : [["Score", t(`${loan.scoreAtApproval} → ${loan.scoreToday} · tier aprobado ${loan.approvedTier}`, `${loan.scoreAtApproval} → ${loan.scoreToday} · approved tier ${loan.approvedTier}`)]]),
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-3 py-1.5">
                   <dt className="lbl">{k}</dt>
@@ -212,21 +208,24 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                 </div>
               ))}
             </dl>
-            {!BANK_EDITION && (
-              <p className="lbl mt-3">
-              {t(
-                "Ingreso neto = volumen verificado × % exportable × precio, menos packing, flete y comisiones. El tier aprobado solo cambia con revisión humana registrada.",
-                "Net revenue = verified volume × exportable share × price, less packing, freight and fees. The approved tier only changes with a recorded human review.",
-              )}
-            </p>
-            )}
+            {!BANK_EDITION && <p className="lbl mt-3">{t("El tier aprobado solo cambia con revisión humana registrada.", "The approved tier only changes with a recorded human review.")}</p>}
           </Card>
         </div>
       </section>
 
+      <Card>
+        <h3 className="text-[16px] font-bold">{t(`Qué movió la cobertura: ${cov(loan.coverageAtApproval)} a la aprobación → ${cov(loan.coverageToday)} hoy`, `What moved coverage: ${cov(loan.coverageAtApproval)} at approval → ${cov(loan.coverageToday)} today`)}</h3>
+        <div className="mt-2"><DriverBridge loan={loan} /></div>
+        <p className="lbl mt-2">{t("El factor que origina la alerta se marca aunque su efecto aún no esté en la cobertura. La proyección anticipa; no fija el estado.", "The driver behind the alert is marked even when its effect is not yet in coverage. The projection anticipates; it does not set the state.")}</p>
+      </Card>
+
+      <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
+        <Card><CoverageBuild input={loan} areaHa={loan.areaHa} yieldTHa={loan.yieldTHa} /></Card>
+        <Card><StressGrid input={loan} state={loan.state} /></Card>
+      </div>
+
       <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
         {BANK_EDITION ? <TechChart id="enso" s={series} loan={loan} cutoff={data.cutoff} /> : <Card><ScoreBreakdown dims={loan.scoreDims} scores={{ approval: loan.scoreAtApproval, today: loan.scoreToday }} /></Card>}
-        <Card><StressGrid coverage={loan.coverageToday} /></Card>
       </div>
 
       <SectionTitle title={t("Cambios desde la aprobación", "Changes since approval")}
@@ -461,6 +460,42 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
 
       </>}
 
+    </div>
+  );
+}
+
+/** Two signals behind the state: the coverage band and the contractual controls; the state is the worse of the two. */
+function TwoSignals({ loan }: { loan: Loan }) {
+  const t = useT();
+  const band = stateFromCoverage(loan.coverageToday);
+  const cause = stateCause(loan);
+  const alert = loan.alert;
+  return (
+    <div className="grid gap-3 md:grid-cols-3">
+      <Card>
+        <Lbl>{t("Señal 1 · Banda de cobertura", "Signal 1 · Coverage band")}</Lbl>
+        <div className="mt-1 flex items-center justify-between gap-2">
+          <p className="text-[15px]">
+            <b className="num">{cov(loan.coverageToday)}</b> {t("hoy", "today")}, {loan.coverageToday >= COVERAGE_BANDS.ambar ? t(`sobre ${cov(COVERAGE_BANDS.ambar)}`, `above ${cov(COVERAGE_BANDS.ambar)}`) : t(`bajo ${cov(COVERAGE_BANDS.ambar)}`, `below ${cov(COVERAGE_BANDS.ambar)}`)}
+          </p>
+          <StateChip state={band} />
+        </div>
+      </Card>
+      <Card>
+        <Lbl>{t("Señal 2 · Controles del contrato", "Signal 2 · Contract controls")}</Lbl>
+        <div className="mt-1 flex items-center justify-between gap-2">
+          <p className="text-[15px]">{loan.controlsState === "verde" ? t("En orden", "In order") : alert && alert.driver !== "volumen" ? t(alert.text) : t("En seguimiento", "Under follow-up")}</p>
+          <StateChip state={loan.controlsState} />
+        </div>
+      </Card>
+      <Card>
+        <Lbl>{t("Estado = la peor de las dos", "State = the worse of the two")}</Lbl>
+        <div className="mt-1 flex flex-wrap items-center gap-2">
+          <StateChip state={loan.state} cause={cause} />
+        </div>
+        {cause === "tecnica" && alert && <p className="lbl mt-1">{t(`${alert.text.es}. Seguimiento TruMarket; criterio sobre señales técnicas pendiente.`, `${alert.text.en}. TruMarket follow-up; ruling on technical signals pending.`)}</p>}
+        {cause === null && <p className="lbl mt-1">{t("Cobertura y controles en orden.", "Coverage and controls in order.")}</p>}
+      </Card>
     </div>
   );
 }
