@@ -75,7 +75,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
           <dd className="lbl">{ready ? t("por el monto completo", "for the full amount") : t("monto final sobre el volumen verificado", "final amount on the verified volume")}</dd>
         </div>
       </dl>
-      {tranche && ready && <p className="mt-3 text-sm font-semibold">{t("Falta: su conformidad", "Missing: your conformity")}</p>}
+      {tranche && ready && !answer && <p className="mt-3 text-sm font-semibold">{t("Falta: su conformidad", "Missing: your conformity")}</p>}
       {tranche && (
         <p className="mt-3 text-sm">
           {t(
