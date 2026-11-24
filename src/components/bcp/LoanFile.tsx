@@ -143,7 +143,8 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
           <div role="img" aria-label={t(`${released}% de la línea desembolsado`, `${released}% of the line disbursed`)} className="mt-3 h-1.5 overflow-hidden rounded-full bg-bcp-fill">
             <span className="block h-full bg-bcp-ink" style={{ width: `${released}%` }} />
           </div>
-          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {/* One column per tranche, so the row is always full (every line has three). */}
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
             {loan.tranches.map((tr) => {
               const top = tr.status === "congelado" ? "border-t-bcp-naranja" : tr.checklist.some((c) => c.status === "warn") ? "border-t-bcp-ambar" : tr.status === "liberado" ? "border-t-bcp-green" : "border-t-bcp-border";
               const chip =
