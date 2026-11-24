@@ -6,7 +6,7 @@
  * use of funds 93% reconciled, 72% paid direct, 4,930 unexplained.
  */
 import type { Application, Condition, ConditionState, Loan, Portfolio, Provenance, Tx } from "../../lib/bcp/types";
-import { ensoAt, ninoAnomaly } from "./enso";
+import { ensoAt, ensoIndex } from "./enso";
 
 const L = (es: string, en: string): Tx => ({ es, en });
 const ENGINE = "pre-harvest-v0.1";
@@ -15,7 +15,8 @@ const CUTOFF = "2026-11-10";
 // Real readings: the coastal El Niño class (NOAA Niño 1+2, ENFEN classes) and export prices (customs).
 const ENSO_SOURCE = L("ENFEN, comunicado 19-2026 · Niño 1+2 (NOAA) oct 2026", "ENFEN, communiqué 19-2026 · Niño 1+2 (NOAA) Oct 2026");
 const PRICE_SOURCE = L("Exportaciones de palta Hass (aduanas) · ago 2026", "Hass avocado exports (customs) · Aug 2026");
-const OCT_ANOM = ninoAnomaly("2026-10")!.toFixed(1);
+/** The coastal index used everywhere: 3-month mean anomaly to October (the chart and classes use the same). */
+const OCT_INDEX = ensoIndex("2026-10")!.toFixed(1);
 
 // ---------------------------------------------------------------------------
 // Conditions: one table per loan, grouped as in the spec (9.3).
@@ -216,7 +217,7 @@ const ICA_0188: Loan = {
       basis: L("Vigor -16% vs línea base del lote (gatillo ámbar -15%)", "Vigour -16% vs the lot baseline (amber trigger -15%)"),
       evidence: [L("Sentinel-2 08 nov", "Sentinel-2 08 Nov")],
       engineVersion: ENGINE,
-      responsible: L("TruMarket, mecánica", "TruMarket, mechanical"),
+      responsible: L("TruMarket, según contrato", "TruMarket, per the contract"),
     },
     {
       date: "2026-09-15",
@@ -346,7 +347,7 @@ const ICA_0201: Loan = {
       basis: L("Facturas de fase 2 conciliadas solo al 68% (brecha de 32%, gatillo naranja) y fertilización 3 semanas fuera de ventana", "Phase 2 invoices only 68% reconciled (32% gap, orange trigger) and fertilisation 3 weeks outside the window"),
       evidence: [L("Facturas electrónicas 04 nov", "E-invoices 04 Nov"), L("Sentinel-2 + fotos 08 nov", "Sentinel-2 + photos 08 Nov")],
       engineVersion: ENGINE,
-      responsible: L("TruMarket, mecánica · reportado el mismo día", "TruMarket, mechanical · reported the same day"),
+      responsible: L("TruMarket, según contrato · reportado el mismo día", "TruMarket, per the contract · reported the same day"),
     },
     {
       date: "2026-10-20",
@@ -468,7 +469,7 @@ const ICA_0215: Loan = {
       basis: L("Deuda nueva por 24% de la línea (gatillo ámbar 20%)", "New debt of 24% of the line (amber trigger 20%)"),
       evidence: [L("Central de riesgos 03 nov", "Credit bureau 03 Nov")],
       engineVersion: ENGINE,
-      responsible: L("TruMarket, mecánica", "TruMarket, mechanical"),
+      responsible: L("TruMarket, según contrato", "TruMarket, per the contract"),
     },
     {
       date: "2026-10-01",
@@ -885,7 +886,7 @@ export const PORTFOLIO: Portfolio = {
       from: "neutral",
       to: "observacion",
       impact: L("Cobertura podría bajar 0.10x a 0.20x. Aún no confirmado en campo.", "Coverage could fall 0.10x to 0.20x. Not yet confirmed in the field."),
-      cause: L(`El Niño costero de magnitud extraordinaria: el mar frente a la costa estuvo +${OCT_ANOM} °C sobre lo normal en octubre; puede reducir el cuajado de la palta`, `Extraordinary coastal El Niño: the sea off the coast was +${OCT_ANOM} °C above normal in October; it may reduce avocado fruit set`),
+      cause: L(`El Niño costero de magnitud extraordinaria: el mar frente a la costa estuvo +${OCT_INDEX} °C sobre lo normal (media de agosto a octubre); puede reducir el cuajado de la palta`, `Extraordinary coastal El Niño: the sea off the coast was +${OCT_INDEX} °C above normal (August to October average); it may reduce avocado fruit set`),
       evidence: { loanId: "ICA-0188", condition: "El Niño costero" },
     },
   ],

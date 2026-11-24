@@ -3,7 +3,7 @@
  * (summary, position and funds, risk, loans, applications).
  */
 import { useCallback, useState } from "react";
-import { bySeverity, cashCalendar, cov, date, month, pct, pendingDecisions, portfolioFigures, range, usd } from "../../lib/bcp/calc";
+import { bySeverity, cashCalendar, cov, date, month, pct, pendingDecisions, portfolioFigures, range, usd, withDate } from "../../lib/bcp/calc";
 import type { Loan, Portfolio as P, State } from "../../lib/bcp/types";
 import { ApplicationsTable } from "./Applications";
 import { appKey, decisionKey, type Answer } from "./answers";
@@ -429,7 +429,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
           <p className="mt-3 text-sm text-bcp-ink">{t(situationOf.summary)}</p>
           <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
             <span className="lbl block">{t("Próximo hito", "Next milestone")}</span>
-            <b className="font-semibold">{t(situationOf.next.label)}</b> · {date(situationOf.next.date, lang)}
+            <b className="font-semibold">{withDate(t(situationOf.next.label), situationOf.next.date, lang, true)}</b>
           </p>
         </Modal>
       )}

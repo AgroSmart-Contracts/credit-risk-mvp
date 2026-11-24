@@ -5,7 +5,7 @@
  * px pages, 1px rules, numbers right-aligned, readable in grayscale.
  */
 import type { ReactNode } from "react";
-import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, haLabel, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd } from "../../lib/bcp/calc";
+import { DRIVERS, DRIVER_TEXT, bySeverity, cov, date, daysBetween, driverSum, fundsTotals, haLabel, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd, withDate } from "../../lib/bcp/calc";
 import type { Application, ExceptionNotice, Loan, Portfolio } from "../../lib/bcp/types";
 import { STATE_TEXT, sourceTx, useLang, useT } from "./shared";
 import { BANK_EDITION, getViewer } from "./edition";
@@ -157,7 +157,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
           head={[t("Préstamo", "Loan"), t("Estado", "State"), t("Desembolsado", "Disbursed"), t("Línea", "Line"), t("Cobertura", "Coverage"), t("Próximo hito", "Next milestone")]}
           nowrap={[0, 1]}
           right={[2, 3, 4]}
-          rows={loans.map((l) => [l.id, stateWord(l.state, lang), usd(l.disbursedUsd).slice(4), usd(l.lineUsd).slice(4), `${cov(l.coverageAtApproval)} → ${cov(l.coverageToday)}`, `${date(l.next.date, lang, false)} · ${t(l.next.label)}`])}
+          rows={loans.map((l) => [l.id, stateWord(l.state, lang), usd(l.disbursedUsd).slice(4), usd(l.lineUsd).slice(4), `${cov(l.coverageAtApproval)} → ${cov(l.coverageToday)}`, withDate(t(l.next.label), l.next.date, lang)])}
         />
         {footer1}
       </Page>
@@ -180,7 +180,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
         <T
           head={[t("Fecha", "Date"), t("Préstamo", "Loan"), t("Decisión", "Decision"), t("Quién", "Who"), t("Base", "Basis")]}
           nowrap={[0, 1]}
-          rows={monthDecisions.filter(({ d }) => d.lane === "tm_contract" || d.date <= data.cutoff).map(({ l, d }) => [date(d.date, lang, false), l.id, t(d.title), d.lane === "bank" ? t("BCP, pendiente", "BCP, pending") : t(d.responsible), shortBasis(t(d.basis))])}
+          rows={monthDecisions.filter(({ d }) => d.lane === "tm_contract" || d.conformityDate).map(({ l, d }) => [date(d.date, lang, false), l.id, t(d.title), t(d.responsible), shortBasis(t(d.basis))])}
         />
         {pendingBank.length > 0 && (
           <p className="mt-1">
@@ -406,7 +406,7 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
   );
   const signOff = (
         <footer className="absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
-          <p className="lbl">{t(`Próximo hito: ${date(loan.next.date, "es")} · ${loan.next.label.es}. Motor ${data.engineVersion}.`, `Next milestone: ${date(loan.next.date, "en")} · ${loan.next.label.en}. Engine ${data.engineVersion}.`)}</p>
+          <p className="lbl">{t(`Próximo hito: ${withDate(loan.next.label.es, loan.next.date, "es", true)}. Motor ${data.engineVersion}.`, `Next milestone: ${withDate(loan.next.label.en, loan.next.date, "en", true)}. Engine ${data.engineVersion}.`)}</p>
           <Signatures left={t("Analista de riesgos TruMarket", "TruMarket risk analyst")} right={t("BCP Riesgos", "BCP Risk")} when={t(`Emitido el ${date(data.cutoff, "es")}`, `Issued on ${date(data.cutoff, "en")}`)} />
         </footer>
   );

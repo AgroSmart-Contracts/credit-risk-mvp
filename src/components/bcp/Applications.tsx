@@ -163,7 +163,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           {[
             { k: t("Línea solicitada", "Requested line"), v: usd(app.requestedUsd), s: t(`${app.tenorDays} días · 3 tramos`, `${app.tenorDays} days · 3 tranches`) },
             { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "T1" },
-            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: t("capital más costo del banco", "principal plus bank cost") },
+            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: t("capital más costo estimado del banco", "principal plus estimated bank cost") },
             { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("veto", "veto") : t("cosecha esperada ÷ saldo", "expected harvest ÷ amount due") },
             { k: t("Precio de equilibrio", "Break-even price"), v: app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`, s: t(`esperado USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`) },
           ].map((c) => (

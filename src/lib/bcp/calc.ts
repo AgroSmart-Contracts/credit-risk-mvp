@@ -31,6 +31,11 @@ export function date(d: string, lang: Lang, withYear = true): string {
   return `${String(day).padStart(2, "0")} ${mon}${withYear ? ` ${y}` : ""}`;
 }
 /** "mar 2027" / "Mar 2027". */
+/** "label · date", unless the label already names that date (no "aforo 15 nov (15 nov)"). */
+export function withDate(label: string, d: string, lang: Lang, withYear = false): string {
+  return label.includes(date(d, lang, false)) ? label : `${label} · ${date(d, lang, withYear)}`;
+}
+
 export function month(d: string, lang: Lang): string {
   const [y, m] = d.split("-").map(Number);
   return `${(lang === "es" ? MES : MON)[m - 1]} ${y}`;

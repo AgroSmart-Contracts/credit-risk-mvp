@@ -7,7 +7,7 @@ import { GEO, technicalSeries } from "../../data/bcp/technical";
 import { FieldImages } from "./FieldImages";
 import { TechChart } from "./TechCharts";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { DRIVERS, DRIVER_TEXT, date, daysBetween, fundsTotals, pct, provision, signedCov, toDisburse, usd, haLabel } from "../../lib/bcp/calc";
+import { DRIVERS, DRIVER_TEXT, date, daysBetween, fundsTotals, haLabel, pct, provision, signedCov, toDisburse, usd, withDate } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Condition, Loan, Portfolio } from "../../lib/bcp/types";
 import { CoverageChart } from "./CoverageChart";
@@ -80,7 +80,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
             </p>
             {/* Freshness without animation: the last reading and the next one expected. */}
             <p className="lbl mt-0.5">
-              {t("Próximo hito", "Next milestone")}: {t(loan.next.label)} ({date(loan.next.date, lang, false)})
+              {t("Próximo hito", "Next milestone")}: {withDate(t(loan.next.label), loan.next.date, lang)}
             </p>
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
@@ -125,7 +125,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
             { k: t("Línea aprobada", "Approved line"), v: usd(loan.lineUsd), s: t(`${loan.cycleDays} días · 3 tramos`, `${loan.cycleDays} days · 3 tranches`), kind: "line" as const },
             { k: t("Desembolsado", "Disbursed"), v: usd(loan.disbursedUsd), s: t(`${loan.tranches.filter((x) => x.status === "liberado").length} de ${loan.tranches.length} tramos`, `${loan.tranches.filter((x) => x.status === "liberado").length} of ${loan.tranches.length} tranches`), kind: "disbursed" as const },
             { k: loan.frozenUsd ? t("Congelado", "Frozen") : t("Por desembolsar", "Undrawn"), v: usd(loan.frozenUsd || toDisburse(loan)), s: loan.frozenUsd ? t(`por desembolsar ${usd(toDisburse(loan))}`, `undrawn ${usd(toDisburse(loan))}`) : t("contra hitos verificados", "against verified milestones"), kind: "undrawn" as const },
-            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(loan.dueAtMaturityUsd), s: t("capital más costo del banco", "principal plus bank cost"), kind: "due" as const },
+            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(loan.dueAtMaturityUsd), s: t("capital más costo estimado del banco", "principal plus estimated bank cost"), kind: "due" as const },
             { k: t("Vence", "Maturity"), v: date(loan.maturityDate, lang), s: t(`${daysLeft} días`, `${daysLeft} days`), kind: "maturity" as const },
           ].map((c) => (
             <div key={c.k} className="rounded-xl border border-bcp-border bg-white p-4 sm:p-5">
@@ -313,7 +313,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               <table className="w-full min-w-[620px] text-sm">
                 <thead>
                   <tr className="border-b border-bcp-border">
-                    {[t("Partida", "Item"), t("Presupuesto", "Budget"), t("Facturas conciliadas", "Reconciled invoices"), t("Pago directo", "Direct pay"), t("Concuerda con campo", "Matches the field")].map((h, i) => (
+                    {[t("Partida", "Item"), t("Presupuesto", "Budget"), t("Facturas conciliadas", "Reconciled invoices"), t("Pago directo (% del presupuesto)", "Direct pay (% of budget)"), t("Concuerda con campo", "Matches the field")].map((h, i) => (
                       <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i > 0 && i < 4 ? "text-right" : "text-left"}`}>
                         {h}
                       </Lbl>
@@ -326,7 +326,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                       <td className="py-2 pr-3">{t(x.item)}</td>
                       <td className="py-2 pr-3 text-right">{usd(x.budgetUsd)}</td>
                       <td className="py-2 pr-3 text-right">{usd(x.reconciledUsd)}</td>
-                      <td className="py-2 pr-3 text-right">{pct(x.reconciledUsd ? (x.directPayUsd / x.reconciledUsd) * 100 : 0)}</td>
+                      <td className="py-2 pr-3 text-right">{pct(x.budgetUsd ? (x.directPayUsd / x.budgetUsd) * 100 : 0)}</td>
                       <td className="py-2 pr-3">{t(x.fieldMatch)}</td>
                     </tr>
                   ))}
@@ -341,10 +341,10 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               </table>
             </div>
             <div className="rounded-lg bg-bcp-bg p-4">
-              <Lbl>{t("Conciliado", "Reconciled")}</Lbl>
+              <Lbl>{t(`Conciliado · ${funds.tranche}`, `Reconciled · ${funds.tranche}`)}</Lbl>
               <p className="num text-[36px] font-bold leading-tight">{pct(ft.reconciledPct)}</p>
               <dl className="mt-2 space-y-1 text-sm">
-                <div className="flex justify-between"><dt>{t("Sin sustento", "Unexplained")}</dt><dd className="num font-semibold">{usd(ft.unexplained)}</dd></div>
+                <div className="flex justify-between"><dt>{t(`Sin sustento · ${funds.tranche}`, `Unexplained · ${funds.tranche}`)}</dt><dd className="num font-semibold">{usd(ft.unexplained)}</dd></div>
                 <div className="flex justify-between"><dt>{t("Pagado directo a proveedores", "Paid directly to suppliers")}</dt><dd className="num font-semibold">{pct(ft.directPct)}</dd></div>
                 <div className="flex justify-between"><dt>{t("Retirado en efectivo", "Withdrawn in cash")}</dt><dd className="num font-semibold">{usd(funds.cashWithdrawnUsd)}</dd></div>
               </dl>
