@@ -10,7 +10,8 @@ import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const OUT = path.join(ROOT, ".bank-build");
-const run = (cmd, args) => execFileSync(cmd, args, { cwd: ROOT, stdio: "inherit" });
+// npx is npx.cmd on Windows, which only runs through a shell.
+const run = (cmd, args) => execFileSync(cmd, args, { cwd: ROOT, stdio: "inherit", shell: process.platform === "win32" });
 
 if (existsSync(OUT)) for (const f of readdirSync(OUT)) if (f !== ".vercel") rmSync(path.join(OUT, f), { recursive: true, force: true });
 run("npx", ["tsx", "scripts/bank/build-view-model.ts"]);
