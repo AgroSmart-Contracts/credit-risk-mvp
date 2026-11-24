@@ -5,7 +5,7 @@
  * px pages, 1px rules, numbers right-aligned, readable in grayscale.
  */
 import type { ReactNode } from "react";
-import { COST_USD_KG, DRIVERS, DRIVER_TEXT, bySeverity, cov, coverageUnder, date, daysBetween, driverSum, fundsTotals, haLabel, harvestBuild, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd, withDate, type HarvestInput } from "../../lib/bcp/calc";
+import { COST_USD_KG, DRIVERS, DRIVER_TEXT, accruedCost, bySeverity, cov, coverageUnder, date, daysBetween, driverSum, fundsTotals, haLabel, harvestBuild, loanFunds, month, pct, pendingDecisions, portfolioFigures, provision, range, scenarios, signedCov, stressCases, toDisburse, usd, withDate, type HarvestInput } from "../../lib/bcp/calc";
 import type { Application, ExceptionNotice, Loan, Portfolio } from "../../lib/bcp/types";
 import { STATE_TEXT, sourceTx, useLang, useT } from "./shared";
 import { BANK_EDITION, getViewer } from "./edition";
@@ -434,14 +434,14 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
           <KV
             rows={[
               [t("Línea aprobada", "Approved line"), usd(loan.lineUsd)],
-              [t("Desembolsado (expuesto)", "Disbursed (exposed)"), usd(loan.disbursedUsd)],
+              [t("Desembolsado (expuesto)", "Disbursed (exposed)"), t(`${usd(loan.disbursedUsd)} + ${usd(accruedCost(loan, data.cutoff))} devengado`, `${usd(loan.disbursedUsd)} + ${usd(accruedCost(loan, data.cutoff))} accrued`)],
               [t("Congelado", "Frozen"), usd(loan.frozenUsd)],
               [t("Por desembolsar", "Undrawn"), usd(toDisburse(loan))],
             ]}
           />
           <KV
             rows={[
-              [t("Saldo al vencimiento", "Due at maturity"), usd(loan.dueAtMaturityUsd)],
+              [t("Saldo al vencimiento (costo estimado)", "Due at maturity (estimated cost)"), usd(loan.dueAtMaturityUsd)],
               [t("Aprobación", "Approval"), date(loan.approvalDate, lang)],
               [t("Vencimiento", "Maturity"), `${date(loan.maturityDate, lang)} · ${daysLeft} ${t("días", "days")}`],
               [t("Ciclo", "Cycle"), t(`día ${loan.dayOfCycle} de ${loan.cycleDays}`, `day ${loan.dayOfCycle} of ${loan.cycleDays}`)],

@@ -43,6 +43,22 @@ export function month(d: string, lang: Lang): string {
 export const daysBetween = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000);
 
 // ---------------------------------------------------------------------------
+// The bank's cost, by tenor
+// ---------------------------------------------------------------------------
+
+/**
+ * Reference annual rate for the bank's cost, act/360. Estimated until pricing is
+ * agreed with BCP: shown only inside the amount due, never as a rate. At 10% a
+ * 180-day line costs 5%; longer tenors cost proportionally more.
+ */
+export const BANK_COST_RATE = 0.1;
+/** Amount due at maturity: the full line plus the estimated cost for its tenor. */
+export const dueAt = (lineUsd: number, tenorDays: number) => Math.round(lineUsd * (1 + (BANK_COST_RATE * tenorDays) / 360));
+/** Estimated cost accrued to date on what has been disbursed, tranche by tranche. */
+export const accruedCost = (l: { tranches: { status: string; amountUsd: number; milestoneDate: string }[] }, cutoff: string) =>
+  l.tranches.filter((x) => x.status === "liberado" && x.milestoneDate <= cutoff).reduce((s, x) => s + Math.round((x.amountUsd * BANK_COST_RATE * daysBetween(x.milestoneDate, cutoff)) / 360), 0);
+
+// ---------------------------------------------------------------------------
 // States (5.2)
 // ---------------------------------------------------------------------------
 

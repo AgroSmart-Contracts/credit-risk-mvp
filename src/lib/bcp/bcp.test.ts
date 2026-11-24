@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PORTFOLIO } from "../../data/bcp/dataset";
-import { COST_USD_KG, cashCalendar, coverageUnder, driverSum, fundsTotals, harvestBuild, priceEffect, scoreOf, stateCause, stressGrid, loanFunds, portfolioFigures, provision, scenarios, stateFromCoverage, SEVERITY, toDisburse, worstOf } from "./calc";
+import { COST_USD_KG, accruedCost, cashCalendar, daysBetween, dueAt, coverageUnder, driverSum, fundsTotals, harvestBuild, priceEffect, scoreOf, stateCause, stressGrid, loanFunds, portfolioFigures, provision, scenarios, stateFromCoverage, SEVERITY, toDisburse, worstOf } from "./calc";
 
 const F = portfolioFigures(PORTFOLIO.loans);
 const loan = (id: string) => PORTFOLIO.loans.find((l) => l.id === id)!;
@@ -15,7 +15,7 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
   });
 
   it("portfolio coverage is total net revenue over total amount due: 1.78x", () => {
-    expect(F.due).toBe(157_500);
+    expect(F.due).toBe(158_085);
     expect(F.netRevenue).toBe(PORTFOLIO.loans.reduce((s, l) => s + harvestBuild(l).netUsd, 0));
     expect(F.coverage).toBe(1.78);
   });
@@ -90,6 +90,17 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
     expect(Object.fromEntries(PORTFOLIO.loans.map((l) => [l.id, stateCause(l)]))).toEqual({ "ICA-0201": "control", "ICA-0188": "tecnica", "ICA-0215": "control", "PIS-0034": null, "ICA-0142": null });
   });
 
+  it("the amount due is the full line plus the estimated cost for its tenor (5% at 180 days)", () => {
+    for (const l of PORTFOLIO.loans) expect(l.dueAtMaturityUsd).toBe(dueAt(l.lineUsd, daysBetween(l.approvalDate, l.maturityDate)));
+    expect(dueAt(36_000, 180)).toBe(37_800);
+    expect(dueAt(24_000, 200)).toBe(25_333);
+  });
+
+  it("cost accrued to date on what was disbursed: 797 across the portfolio, 210 on ICA-0201", () => {
+    expect(accruedCost(loan("ICA-0201"), PORTFOLIO.cutoff)).toBe(210);
+    expect(PORTFOLIO.loans.reduce((s, l) => s + accruedCost(l, PORTFOLIO.cutoff), 0)).toBe(797);
+  });
+
   it("every coverage figure is rebuilt from its harvest inputs", () => {
     for (const l of PORTFOLIO.loans) {
       const b = harvestBuild(l);
@@ -143,10 +154,10 @@ describe("cash calendar", () => {
   it("one basis with coverage: the frozen tranche counts as if released and the amount due comes back", () => {
     const cal = cashCalendar(PORTFOLIO.loans, PORTFOLIO.cutoff);
     expect(cal.reduce((s, r) => s + r.out, 0)).toBe(76_200 + 7_200);
-    expect(cal.reduce((s, r) => s + r.back, 0)).toBe(157_500);
+    expect(cal.reduce((s, r) => s + r.back, 0)).toBe(158_085);
     expect(cal.reduce((s, r) => s + r.principal, 0)).toBe(150_000);
     const ica0201 = cal.flatMap((r) => r.items).find((x) => x.loanId === "ICA-0201" && x.dir === "back")!;
-    expect(ica0201.amount).toBe(25_200);
+    expect(ica0201.amount).toBe(25_333);
     expect(cal[0].month.slice(0, 7)).toBe("2026-11");
   });
 });
@@ -162,7 +173,7 @@ describe("score breakdowns and applications", () => {
   it("applications: tranches add up to the request, due includes the bank cost, score adds up", () => {
     for (const a of PORTFOLIO.applications) {
       expect(a.tranches.reduce((s, t) => s + t.amountUsd, 0)).toBe(a.requestedUsd);
-      expect(a.dueAtMaturityUsd).toBe(Math.round(a.requestedUsd * 1.05));
+      expect(a.dueAtMaturityUsd).toBe(dueAt(a.requestedUsd, a.tenorDays));
       expect(scoreOf(a.scoreDims, "today")).toBe(a.score);
       if (a.veto) expect(a.recommendation).toBe("rechazar");
     }
@@ -170,13 +181,13 @@ describe("score breakdowns and applications", () => {
   it("a recommendation that fails the standard stress carries a condition that passes it (ICA-0244)", () => {
     const a = PORTFOLIO.applications.find((x) => x.id === "ICA-0244")!;
     expect(a.coverage).toBe(1.85);
-    expect([coverageUnder(a, -0.2), coverageUnder(a, 0, -0.3)]).toEqual([1.33, 1.3]);
+    expect([coverageUnder(a, -0.2), coverageUnder(a, 0, -0.3)]).toEqual([1.33, 1.29]);
     expect(a.recommendation).toBe("aprobar_condicion");
     const due = a.condition!.dueAtMaturityUsd;
-    expect(due).toBe(Math.round(a.condition!.lineUsd * 1.05));
+    expect(due).toBe(dueAt(a.condition!.lineUsd, a.tenorDays));
     expect([coverageUnder(a, 0, 0, due), coverageUnder(a, -0.2, 0, due), coverageUnder(a, 0, -0.3, due)]).toEqual([2.18, 1.56, 1.52]);
     // The largest line in thousands that passes both cases.
-    expect(coverageUnder(a, 0, -0.3, Math.round((a.condition!.lineUsd + 1000) * 1.05))).toBeLessThan(1.5);
+    expect(coverageUnder(a, 0, -0.3, dueAt(a.condition!.lineUsd + 1000, a.tenorDays))).toBeLessThan(1.5);
   });
   it("stress grid on net revenue: today's coverage at no shock; ICA-0201 worst corner 0.63x", () => {
     const l = loan("ICA-0201");

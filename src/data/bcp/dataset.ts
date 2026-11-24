@@ -8,7 +8,7 @@
  * Coverage is never typed in: each loan carries its harvest inputs (area, t/ha,
  * exportable %) and the expected price, and `harvestBuild` turns them into net revenue.
  */
-import { harvestBuild } from "../../lib/bcp/calc";
+import { daysBetween, dueAt, harvestBuild } from "../../lib/bcp/calc";
 import type { Application, Condition, ConditionState, Loan, Portfolio, Provenance, Tx } from "../../lib/bcp/types";
 import { ensoAt, ensoIndex } from "./enso";
 
@@ -141,7 +141,7 @@ const ICA_0188: Loan = withBuild({
   lineUsd: 36_000,
   disbursedUsd: 10_800,
   frozenUsd: 0,
-  dueAtMaturityUsd: 37_800,
+  dueAtMaturityUsd: dueAt(36_000, daysBetween("2026-09-15", "2027-03-14")),
   maturityDate: "2027-03-14",
   state: "ambar",
   stateSince: "2026-11-08",
@@ -277,7 +277,7 @@ const ICA_0201: Loan = withBuild({
   id: "ICA-0201",
   crop: L("Palta Hass", "Hass avocado"),
   zone: L("Santiago, Ica", "Santiago, Ica"),
-  ...harvest(3.4, 10.89, 78),
+  ...harvest(3.4, 10.95, 78),
   campaign: "2026-27",
   approvalDate: "2026-08-25",
   dayOfCycle: 77,
@@ -285,7 +285,7 @@ const ICA_0201: Loan = withBuild({
   lineUsd: 24_000,
   disbursedUsd: 16_800,
   frozenUsd: 7_200,
-  dueAtMaturityUsd: 25_200,
+  dueAtMaturityUsd: dueAt(24_000, daysBetween("2026-08-25", "2027-03-13")),
   maturityDate: "2027-03-13",
   state: "naranja",
   stateSince: "2026-11-06",
@@ -398,7 +398,7 @@ const ICA_0201: Loan = withBuild({
   situation: [
     L("**T3 de USD 7,200 congelado** el 06 nov, el mismo día del desvío", "**T3 of USD 7,200 frozen** on 06 Nov, the day of the deviation"),
     L("Cobertura **1.57x** confirmada; estimado **0.95x a 1.20x** si no se remedia y El Niño reduce el cuajado", "Coverage **1.57x** confirmed; estimated **0.95x to 1.20x** if not remedied and El Niño reduces fruit set"),
-    L("Expuesto hoy: **USD 16,800**; máximo **USD 25,200** si se libera el T3, con el costo estimado", "Exposed today: **USD 16,800**; at most **USD 25,200** if the T3 is released, with the estimated cost"),
+    L("Expuesto hoy: **USD 16,800**; máximo **USD 25,333** si se libera el T3, con el costo estimado", "Exposed today: **USD 16,800**; at most **USD 25,333** if the T3 is released, with the estimated cost"),
     L("Plan de remediación al 05 dic. **No requiere decisión del banco hoy**", "Remediation plan due 05 Dec. **No bank decision required today**"),
   ],
 });
@@ -411,7 +411,7 @@ const ICA_0215: Loan = withBuild({
   id: "ICA-0215",
   crop: L("Palta Hass", "Hass avocado"),
   zone: L("Pueblo Nuevo, Ica", "Pueblo Nuevo, Ica"),
-  ...harvest(4.3, 11.55, 79),
+  ...harvest(4.3, 11.6, 79),
   campaign: "2026-27",
   approvalDate: "2026-10-01",
   dayOfCycle: 40,
@@ -419,7 +419,7 @@ const ICA_0215: Loan = withBuild({
   lineUsd: 32_000,
   disbursedUsd: 9_600,
   frozenUsd: 0,
-  dueAtMaturityUsd: 33_600,
+  dueAtMaturityUsd: dueAt(32_000, daysBetween("2026-10-01", "2027-04-14")),
   maturityDate: "2027-04-14",
   state: "ambar",
   stateSince: "2026-11-03",
@@ -518,7 +518,7 @@ const ICA_0215: Loan = withBuild({
   situation: [
     L("Nueva deuda del productor: **24% de la línea**", "New grower debt: **24% of the line**"),
     L("Cobertura **1.60x**, sobre el umbral de 1.50x", "Coverage **1.60x**, above the 1.50x threshold"),
-    L("Expuesto hoy: **USD 9,600**; máximo **USD 33,600** con todos los tramos y el costo estimado", "Exposed today: **USD 9,600**; at most **USD 33,600** with every tranche and the estimated cost"),
+    L("Expuesto hoy: **USD 9,600**; máximo **USD 33,733** con todos los tramos y el costo estimado", "Exposed today: **USD 9,600**; at most **USD 33,733** with every tranche and the estimated cost"),
     L("Cultivo, agua y uso de fondos en orden. **No requiere decisión del banco hoy**", "Crop, water and use of funds in order. **No bank decision required today**"),
   ],
 });
@@ -527,7 +527,7 @@ const PIS_0034: Loan = withBuild({
   id: "PIS-0034",
   crop: L("Palta Hass", "Hass avocado"),
   zone: L("Pisco", "Pisco"),
-  ...harvest(3.9, 12.91, 81),
+  ...harvest(3.9, 13.0, 81),
   campaign: "2026-27",
   approvalDate: "2026-09-22",
   dayOfCycle: 49,
@@ -535,7 +535,7 @@ const PIS_0034: Loan = withBuild({
   lineUsd: 28_000,
   disbursedUsd: 8_400,
   frozenUsd: 0,
-  dueAtMaturityUsd: 29_400,
+  dueAtMaturityUsd: dueAt(28_000, daysBetween("2026-09-22", "2027-04-15")),
   maturityDate: "2027-04-15",
   state: "verde",
   stateSince: "2026-09-22",
@@ -636,7 +636,7 @@ const PIS_0034: Loan = withBuild({
   situation: [
     L("Aforo del 07 nov: **volumen declarado confirmado**", "07 Nov field estimate: **declared volume confirmed**"),
     L("Cobertura **1.90x**, sobre el umbral de 1.50x", "Coverage **1.90x**, above the 1.50x threshold"),
-    L("Expuesto hoy: **USD 8,400**; T2 de USD 11,200 listo para liberar; máximo **USD 29,400** con el costo estimado", "Exposed today: **USD 8,400**; T2 of USD 11,200 ready to release; at most **USD 29,400** with the estimated cost"),
+    L("Expuesto hoy: **USD 8,400**; T2 de USD 11,200 listo para liberar; máximo **USD 29,594** con el costo estimado", "Exposed today: **USD 8,400**; T2 of USD 11,200 ready to release; at most **USD 29,594** with the estimated cost"),
     L("**Requiere la conformidad del banco antes del 12 nov**", "**Bank conformity required by 12 Nov**"),
   ],
 });
@@ -645,7 +645,7 @@ const ICA_0142: Loan = withBuild({
   id: "ICA-0142",
   crop: L("Palta Hass", "Hass avocado"),
   zone: L("Villacurí, Ica", "Villacurí, Ica"),
-  ...harvest(9.28, 6.19, 82),
+  ...harvest(9.28, 6.21, 82),
   campaign: "2026-27",
   approvalDate: "2026-09-01",
   dayOfCycle: 70,
@@ -653,7 +653,7 @@ const ICA_0142: Loan = withBuild({
   lineUsd: 30_000,
   disbursedUsd: 21_000,
   frozenUsd: 0,
-  dueAtMaturityUsd: 31_500,
+  dueAtMaturityUsd: dueAt(30_000, daysBetween("2026-09-01", "2027-03-15")),
   maturityDate: "2027-03-15",
   state: "verde",
   stateSince: "2026-09-01",
@@ -749,7 +749,7 @@ const ICA_0142: Loan = withBuild({
   situation: [
     L("Aforo **3% sobre lo declarado**", "Field estimate **3% above declared**"),
     L("Cobertura **2.05x**, sobre el umbral de 1.50x", "Coverage **2.05x**, above the 1.50x threshold"),
-    L("Expuesto hoy: **USD 21,000**; máximo **USD 31,500** con el T3 del 15 feb y el costo estimado", "Exposed today: **USD 21,000**; at most **USD 31,500** with the 15 Feb T3 and the estimated cost"),
+    L("Expuesto hoy: **USD 21,000**; máximo **USD 31,625** con el T3 del 15 feb y el costo estimado", "Exposed today: **USD 21,000**; at most **USD 31,625** with the 15 Feb T3 and the estimated cost"),
     L("Todo en orden. **No requiere decisión del banco hoy**", "All in order. **No bank decision required today**"),
   ],
 });
@@ -777,7 +777,7 @@ const ICA_0177_APP: Application = {
   decisionDueDate: "2026-11-14",
   requestedUsd: 66_000,
   tenorDays: 180,
-  dueAtMaturityUsd: 69_300,
+  dueAtMaturityUsd: dueAt(66_000, 180),
   tranches: [
     { id: "T1", pct: 30, amountUsd: 19_800, milestone: L("a la firma", "at signing") },
     { id: "T2", pct: 40, amountUsd: 26_400, milestone: L("cuajado verificado", "verified fruit set") },
@@ -818,13 +818,13 @@ const ICA_0244_APP: Application = {
   id: "ICA-0244",
   crop: L("Palta Hass", "Hass avocado"),
   zone: L("Ocucaje, Ica", "Ocucaje, Ica"),
-  ...harvest(5.6, 12.66, 80),
+  ...harvest(5.6, 12.69, 80),
   campaign: "2026-27",
   receivedDate: "2026-11-04",
   decisionDueDate: "2026-11-21",
   requestedUsd: 40_000,
   tenorDays: 190,
-  dueAtMaturityUsd: 42_000,
+  dueAtMaturityUsd: dueAt(40_000, 190),
   tranches: [
     { id: "T1", pct: 30, amountUsd: 12_000, milestone: L("a la firma", "at signing") },
     { id: "T2", pct: 40, amountUsd: 16_000, milestone: L("cuajado verificado", "verified fruit set") },
@@ -844,16 +844,16 @@ const ICA_0244_APP: Application = {
   recommendation: "aprobar_condicion",
   condition: {
     lineUsd: 34_000,
-    dueAtMaturityUsd: 35_700,
+    dueAtMaturityUsd: dueAt(34_000, 190),
     text: L("Aprobar con una línea de USD 34,000 (tramos de USD 10,200, 13,600 y 10,200)", "Approve with a line of USD 34,000 (tranches of USD 10,200, 13,600 and 10,200)"),
   },
   summary: L(
-    "A USD 40,000 la cobertura es 1.85x pero no pasa el estrés estándar: si el precio cae 20% queda en 1.33x y si el volumen cae 30%, en 1.30x. Con una línea de USD 34,000 se mantiene sobre 1.50x en ambos casos.",
-    "At USD 40,000 coverage is 1.85x but it fails the standard stress: 1.33x if the price falls 20% and 1.30x if volume falls 30%. With a USD 34,000 line it stays above 1.50x in both cases.",
+    "A USD 40,000 la cobertura es 1.85x pero no pasa el estrés estándar: si el precio cae 20% queda en 1.33x y si el volumen cae 30%, en 1.29x. Con una línea de USD 34,000 se mantiene sobre 1.50x en ambos casos.",
+    "At USD 40,000 coverage is 1.85x but it fails the standard stress: 1.33x if the price falls 20% and 1.29x if volume falls 30%. With a USD 34,000 line it stays above 1.50x in both cases.",
   ),
   reasons: [
     L("Huerto de 7 años con vigor 4% sobre lo normal del lote y cosechas verificadas en dos campañas.", "7-year orchard with vigour 4% above the lot's normal and harvests verified in two campaigns."),
-    L("Estrés estándar a USD 40,000: precio -20% 1.33x y volumen -30% 1.30x, bajo 1.50x. A USD 34,000: 1.56x y 1.52x.", "Standard stress at USD 40,000: price -20% 1.33x and volume -30% 1.30x, below 1.50x. At USD 34,000: 1.56x and 1.52x."),
+    L("Estrés estándar a USD 40,000: precio -20% 1.33x y volumen -30% 1.29x, bajo 1.50x. A USD 34,000: 1.56x y 1.52x.", "Standard stress at USD 40,000: price -20% 1.33x and volume -30% 1.29x, below 1.50x. At USD 34,000: 1.56x and 1.52x."),
     L("Productor en Normal, título propio sin gravámenes y packing contratado.", "Grower rated Normal, own title with no liens and packhouse contracted."),
   ],
   checks: [

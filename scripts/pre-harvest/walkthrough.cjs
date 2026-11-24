@@ -62,7 +62,7 @@ const STEPS = [
     secs: 30,
     point: () => [text(L("Estrés de la cartera", "Portfolio stress"))],
     say: "Portfolio coverage is 1.78x: total net revenue over total amounts due, and every loan file shows how its figure is built, from kilos to net revenue. Stress is on net revenue, because packing and freight to port don't fall with the price: a 20% price drop takes the portfolio to 1.27x, a 30% volume drop to 1.24x. Coastal El Niño is at Extraordinary, from real sea temperature data; with it and ICA-0201's late fertilisation we project 1.51 to 1.63x. A forecast moves the projection, never a loan's state. The thresholds of 1.50, 1.30 and 1.10 are a proposal we want to agree with you.",
-    coach: "Costs are USD 0.57 per exportable kg, estimated: packing, harvest, transport to port and fees. No ocean freight, because the price is FOB. If asked where 5 to 10% comes from: a conservative starting assumption, calibrated with the first real campaigns.",
+    coach: "Costs are USD 0.57 per exportable kg, estimated: packing, harvest, transport to port and fees. No ocean freight, because the price is FOB. The bank's cost in the amount due is estimated by tenor until pricing is agreed. If asked where 5 to 10% comes from: a conservative starting assumption, calibrated with the first real campaigns.",
   },
   {
     scene: "3 · Watchlist",
@@ -83,7 +83,7 @@ const STEPS = [
     secs: 25,
     click: () => button(L("Abrir expediente", "Open file")),
     point: () => [text(L("congelado", "frozen"), false)],
-    say: "On 6 November, phase-2 invoices were only 68% reconciled and fertilisation was 3 weeks late. That same day we froze the T3 tranche of 7,200 and reported it to you. The bank's exposure today is 16,800; at most 25,200 if T3 is ever released, with the estimated cost. No decision is needed today: the remediation plan is due on 5 December.",
+    say: "On 6 November, phase-2 invoices were only 68% reconciled and fertilisation was 3 weeks late. That same day we froze the T3 tranche of 7,200 and reported it to you. The bank's exposure today is 16,800 plus 210 of accrued cost; at most 25,333 if T3 is ever released, with the estimated cost. No decision is needed today: the remediation plan is due on 5 December.",
   },
   {
     scene: "5 · ICA-0201: tranches",
@@ -97,8 +97,8 @@ const STEPS = [
     click: () => tab("Riesgo", "Risk"),
     secs: 25,
     point: () => [text(L("Cobertura de repago en el tiempo", "Repayment coverage over time"))],
-    say: "Coverage today is 1.57x, and you can rebuild it here: 3.4 hectares, about 29 tonnes exportable at 1.94, less costs, is 39,565 of net revenue over 25,200 due. On coverage alone it's green, but the state is the worse of coverage and controls, and the invoice control is orange. The bridge marks use of funds as the driver behind the alert, even though its effect isn't in coverage yet. Break-even is 1.44 a kilo.",
-    coach: "If asked why 'due at maturity' is 25,200 with T3 frozen: it's the conservative figure, and the cash calendar uses the same one.",
+    say: "Coverage today is 1.57x, and you can rebuild it here: 3.4 hectares, about 29 tonnes exportable at 1.94, less costs, is 39,784 of net revenue over 25,333 due. On coverage alone it's green, but the state is the worse of coverage and controls, and the invoice control is orange. The bridge marks use of funds as the driver behind the alert, even though its effect isn't in coverage yet. Break-even is 1.44 a kilo.",
+    coach: "If asked why 'due at maturity' is 25,333 with T3 frozen: it's the conservative figure, and the cash calendar uses the same one.",
   },
   {
     scene: "5 · ICA-0201: what affects repayment",
@@ -150,7 +150,7 @@ const STEPS = [
       return page.locator("tr", { hasText: "ICA-0244" }).first();
     },
     point: () => [heading(L("Exposición si se aprueba", "Exposure if approved"))],
-    say: "A 7-year orchard with two verified campaigns, its own title with no liens, and coverage of 1.85x. But at 40,000 it fails our standard stress: 1.33x if the price falls 20%, 1.30x if volume falls 30%. So we recommend approving with a 34,000 line, which stays above 1.50 in both cases.",
+    say: "A 7-year orchard with two verified campaigns, its own title with no liens, and coverage of 1.85x. But at 40,000 it fails our standard stress: 1.33x if the price falls 20%, 1.29x if volume falls 30%. So we recommend approving with a 34,000 line, which stays above 1.50 in both cases.",
     coach: "The memo shows both amounts side by side. Whether the 150,000 is a programme limit is still to be confirmed with BCP.",
   },
   {
