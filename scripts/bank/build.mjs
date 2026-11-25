@@ -27,7 +27,7 @@ mkdirSync(path.join(OUT, "private"), { recursive: true });
 renameSync(keep, vm);
 
 writeFileSync(path.join(OUT, "package.json"), JSON.stringify({ name: "trumarket-bank", private: true, type: "module", engines: { node: "24.x" } }, null, 2));
-const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 writeFileSync(
   path.join(OUT, "vercel.json"),
   JSON.stringify(
