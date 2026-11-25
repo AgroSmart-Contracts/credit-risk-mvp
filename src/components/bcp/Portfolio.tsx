@@ -237,12 +237,12 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 <Lbl as="th" className="py-1.5 pr-2 text-right font-normal">{t("Cobertura de la cartera", "Portfolio coverage")}</Lbl>
                 {/* Loans by risk level: each loan in exactly one column, so a row adds up to the portfolio. */}
                 {([
-                  [t("Bajo", "Low"), `≥ ${cov(COVERAGE_BANDS.ambar)}`],
-                  [t("Medio", "Medium"), t(`${cov(COVERAGE_BANDS.naranja)} a ${cov(COVERAGE_BANDS.ambar)}`, `${cov(COVERAGE_BANDS.naranja)} to ${cov(COVERAGE_BANDS.ambar)}`)],
-                  [t("Elevado", "Elevated"), t(`${cov(COVERAGE_BANDS.rojo)} a ${cov(COVERAGE_BANDS.naranja)}`, `${cov(COVERAGE_BANDS.rojo)} to ${cov(COVERAGE_BANDS.naranja)}`)],
-                  [t("Alto", "High"), `< ${cov(COVERAGE_BANDS.rojo)}`],
+                  [t("Bajo", "Low"), `≥${cov(COVERAGE_BANDS.ambar)}`],
+                  [t("Medio", "Medium"), t(`${COVERAGE_BANDS.naranja.toFixed(2)} a ${cov(COVERAGE_BANDS.ambar)}`, `${COVERAGE_BANDS.naranja.toFixed(2)} to ${cov(COVERAGE_BANDS.ambar)}`)],
+                  [t("Elevado", "Elevated"), t(`${COVERAGE_BANDS.rojo.toFixed(2)} a ${cov(COVERAGE_BANDS.naranja)}`, `${COVERAGE_BANDS.rojo.toFixed(2)} to ${cov(COVERAGE_BANDS.naranja)}`)],
+                  [t("Alto", "High"), `<${cov(COVERAGE_BANDS.rojo)}`],
                 ] as const).map(([k, r]) => (
-                  <Lbl key={k} as="th" className="py-1.5 pl-2 text-right font-normal">
+                  <Lbl key={k} as="th" className="whitespace-nowrap py-1.5 pl-2 text-right font-normal">
                     <span className="block font-semibold text-bcp-ink">{k}</span>
                     {r}
                   </Lbl>
@@ -257,7 +257,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 [t("Ambos a la vez", "Both at once"), F.stress.both],
               ] as const).map(([k, x]) => (
                 <tr key={k}>
-                  <td className="py-2">{k}</td>
+                  <td className="whitespace-nowrap py-2 pr-2">{k}</td>
                   <td className="num py-2 pr-2 text-right"><StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} /></td>
                   {(["verde", "ambar", "naranja", "rojo"] as const).map((lv) => (
                     <td key={lv} className={`num py-2 pl-2 text-right ${x.levels[lv] ? "font-semibold text-bcp-ink" : "text-bcp-muted/60"}`}>{x.levels[lv]}</td>
