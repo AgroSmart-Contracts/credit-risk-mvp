@@ -7,20 +7,20 @@ export type SeriesId = "vigor" | "agua" | "enso" | "precio" | "clima";
 
 /** Which condition row opens which series. */
 export const SERIES_OF_CONDITION: Record<string, SeriesId> = {
-  "Vigor del cultivo vs lo normal del lote": "vigor",
-  "Agua disponible vs necesidad": "agua",
+  "Vigor del cultivo frente a lo normal del lote": "vigor",
+  "Agua disponible frente a la necesidad": "agua",
   "El Niño costero": "enso",
   "Precio esperado a cosecha": "precio",
 };
 
 export const SERIES_TEXT: Record<SeriesId, { title: Tx; sub: Tx; source: Tx }> = {
   vigor: {
-    title: L("Vigor del cultivo vs lo normal del lote", "Crop vigour vs the lot's normal"),
+    title: L("Vigor del cultivo frente a lo normal del lote", "Crop vigour vs the lot's normal"),
     sub: L("Diferencia semanal del índice de vigor frente a la mediana de 5 años del mismo lote", "Weekly vigour index difference against the lot's own 5-year median"),
     source: L("Satelital · Sentinel-2 · serie de ejemplo calibrada al expediente", "Satellite · Sentinel-2 · example series calibrated to the file"),
   },
   agua: {
-    title: L("Agua disponible vs necesidad del cultivo", "Water available vs crop need"),
+    title: L("Agua disponible frente a la necesidad del cultivo", "Water available vs crop need"),
     sub: L("Dotación de la licencia frente a la demanda del cultivo (evapotranspiración)", "Licensed allocation against crop demand (evapotranspiration)"),
     source: L("Satelital · ERA5 + licencia ANA · serie de ejemplo calibrada al expediente", "Satellite · ERA5 + ANA licence · example series calibrated to the file"),
   },

@@ -69,7 +69,7 @@ export interface Decision {
   responsible: Tx;
   /** Bank lane only. */
   dueDate?: string;
-  /** Bank lane: the bank's conformity date once given. */
+  /** Bank lane: the bank's sign-off date once given. */
   conformityDate?: string;
 }
 

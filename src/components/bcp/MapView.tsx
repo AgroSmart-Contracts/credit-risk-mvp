@@ -132,7 +132,7 @@ export function MapView({ data, focus, onOpen }: { data: Portfolio; focus: strin
               </ul>
             </>
           )}
-          <p className="lbl mt-3">{t("Contorno: predio medido. Punto con borde discontinuo: zona aproximada.", "Outline: surveyed parcel. Dashed point: approximate zone.")}</p>
+          <p className="lbl mt-3">{t("Contorno: predio medido. Punto con borde discontinuo: zona aproximada.", "Outline: surveyed parcel. Dot with a dashed outline: approximate zone.")}</p>
         </Card>
       </div>
     </div>

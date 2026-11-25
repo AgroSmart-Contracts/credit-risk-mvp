@@ -1,5 +1,5 @@
 /**
- * A pending bank conformity, with what is at stake, the
+ * A pending bank sign-off, with what is at stake, the
  * checklist, the coverage and TruMarket's recommendation. The bank answers with
  * "Dar conformidad" or "Pedir información"; the answer is recorded with its date.
  */
@@ -23,13 +23,13 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
   // What the decision does to the money: exposure after the release, and a price-drop check.
   const after = loan.disbursedUsd + (tranche?.amountUsd ?? 0);
   const p20 = coverageUnder(loan, STANDARD_STRESS.price);
-  // TruMarket's checklist only; the bank's conformity is the decision itself, not an item on it.
+  // TruMarket's checklist only; the bank's sign-off is the decision itself, not an item on it.
   const ready = !!tranche && done === tranche.checklist.length;
   const answerWith = (kind: Answer["kind"]) => {
     onAnswer({ kind, at: new Date().toISOString() });
     toast(
       kind === "conformidad"
-        ? t(`Conformidad registrada · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`, `Conformity recorded · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`)
+        ? t(`Conformidad registrada · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`, `Sign-off recorded · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`)
         : t(`Solicitud enviada a TruMarket · ${loan.id}`, `Request sent to TruMarket · ${loan.id}`),
     );
   };
@@ -71,11 +71,11 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
         </div>
         <div>
           <dt className="lbl">{t("Recomendación TruMarket", "TruMarket recommendation")}</dt>
-          <dd className={`text-[20px] font-bold ${ready ? "text-bcp-green-text" : "text-bcp-ink"}`}>{ready ? t("Conformidad", "Conformity") : t("Esperar el aforo", "Wait for the estimate")}</dd>
+          <dd className={`text-[20px] font-bold ${ready ? "text-bcp-green-text" : "text-bcp-ink"}`}>{ready ? t("Conformidad", "Sign-off") : t("Esperar el aforo", "Wait for the estimate")}</dd>
           <dd className="lbl">{ready ? t("por el monto completo", "for the full amount") : t("monto final sobre el volumen verificado", "final amount on the verified volume")}</dd>
         </div>
       </dl>
-      {tranche && ready && !answer && <p className="mt-3 text-sm font-semibold">{t("Falta: su conformidad", "Missing: your conformity")}</p>}
+      {tranche && ready && !answer && <p className="mt-3 text-sm font-semibold">{t("Falta: su conformidad", "Missing: your sign-off")}</p>}
       {tranche && (
         <p className="mt-3 text-sm">
           {t(
@@ -100,14 +100,14 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
       )}
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {answer ? (
-          <Stamp text={answer.kind === "conformidad" ? t("Conformidad registrada", "Conformity recorded") : t("Información solicitada", "Information requested")} when={date(answer.at.slice(0, 10), lang)} />
+          <Stamp text={answer.kind === "conformidad" ? t("Conformidad registrada", "Sign-off recorded") : t("Información solicitada", "Information requested")} when={date(answer.at.slice(0, 10), lang)} />
         ) : BANK_EDITION ? null : (
           <>
             <Btn disabled={!open} onClick={() => answerWith("info")}>
               {t("Pedir información", "Request information")}
             </Btn>
             <Btn primary disabled={!open} onClick={() => answerWith("conformidad")}>
-              {t("Dar conformidad", "Give conformity")}
+              {t("Dar conformidad", "Give sign-off")}
             </Btn>
             {!open && <span className="lbl">{t(`Se habilita el ${date(decision.date, "es", false)}`, `Opens on ${date(decision.date, "en", false)}`)}</span>}
           </>

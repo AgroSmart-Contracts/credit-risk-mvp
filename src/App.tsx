@@ -111,7 +111,7 @@ function App() {
   return (
     <div className="flex min-h-screen bg-tm-neutral-light">
       <Sidebar
-        product={section === "bcp" ? t("Pre-cosecha · BCP", "Pre-harvest · BCP") : "Credit risk"}
+        product={section === "bcp" ? t("Precosecha · BCP", "Pre-harvest · BCP") : "Credit risk"}
         active={active}
         onHome={() => goBcp("cartera")}
         toggleLabels={{ collapse: t("Contraer menú", "Collapse menu"), expand: t("Expandir menú", "Expand menu") }}
@@ -120,7 +120,7 @@ function App() {
           if (!(BCP_VIEWS as string[]).includes(id)) void loadInternal();
         }}
         groups={[
-          { label: t("Pre-cosecha · BCP", "Pre-harvest · BCP"), items: bcpNavItems(lang, answers) },
+          { label: t("Precosecha · BCP", "Pre-harvest · BCP"), items: bcpNavItems(lang, answers) },
           { label: t("TruMarket interno", "TruMarket internal"), items: internalItems },
         ]}
         footer={

@@ -65,7 +65,7 @@ export function ScoreBreakdown({ dims, scores, single = false }: { dims: ScoreDi
       </table>
       <p className="lbl mt-2">
         {t(
-          "Puntos de 0 a 100 por dimensión. Motor de reglas determinístico y versionado; el tier aprobado solo cambia con revisión humana registrada.",
+          "Puntos de 0 a 100 por dimensión. Motor de reglas determinista y versionado; el tier aprobado solo cambia con revisión humana registrada.",
           "Points from 0 to 100 per dimension. Deterministic, versioned rules engine; the approved tier only changes with a recorded human review.",
         )}
       </p>

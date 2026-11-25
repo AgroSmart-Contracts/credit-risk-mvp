@@ -140,7 +140,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
 
         <Card className="mt-3">
           <h3 className="text-[16px] font-bold">{t("Tramos", "Tranches")}</h3>
-          <div role="img" aria-label={t(`${released}% de la línea desembolsado`, `${released}% of the line disbursed`)} className="mt-3 h-1.5 overflow-hidden rounded-full bg-bcp-fill">
+          <div role="img" aria-label={t(`${released}% de la línea desembolsada`, `${released}% of the line disbursed`)} className="mt-3 h-1.5 overflow-hidden rounded-full bg-bcp-fill">
             <span className="block h-full bg-bcp-ink" style={{ width: `${released}%` }} />
           </div>
           {/* One column per tranche, so the row is always full (every line has three). */}
@@ -170,13 +170,13 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                       </li>
                     ))}
                   </ul>
-                  {tr.bankConformityDate && <p className="lbl mt-2">{t(`Conformidad del banco ${date(tr.bankConformityDate, "es", false)}`, `Bank conformity ${date(tr.bankConformityDate, "en", false)}`)}</p>}
+                  {tr.bankConformityDate && <p className="lbl mt-2">{t(`Conformidad del banco ${date(tr.bankConformityDate, "es", false)}`, `Bank sign-off ${date(tr.bankConformityDate, "en", false)}`)}</p>}
                   {tr.note && <p className="lbl mt-2">{t(tr.note)}</p>}
                 </div>
               );
             })}
           </div>
-        <p className="lbl mt-3">{t("Repago desde los cobros del comprador, antes que cualquier pago al productor.", "Repaid from the buyer's payments, before any payment to the grower.")}</p>
+        <p className="lbl mt-3">{t("Repago desde los cobros del comprador, antes de cualquier pago al productor.", "Repaid from the buyer's payments, before any payment to the grower.")}</p>
         </Card>
       </section>
 
@@ -316,7 +316,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               <table className="w-full min-w-[620px] text-sm">
                 <thead>
                   <tr className="border-b border-bcp-border">
-                    {[t("Partida", "Item"), t("Presupuesto", "Budget"), t("Facturas conciliadas", "Reconciled invoices"), t("Pago directo (% del presupuesto)", "Direct pay (% of budget)"), t("Concuerda con campo", "Matches the field")].map((h, i) => (
+                    {[t("Partida", "Item"), t("Presupuesto", "Budget"), t("Facturas conciliadas", "Reconciled invoices"), t("Pago directo (% del presupuesto)", "Direct pay (% of budget)"), t("Concuerda con el campo", "Matches the field")].map((h, i) => (
                       <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i > 0 && i < 4 ? "text-right" : "text-left"}`}>
                         {h}
                       </Lbl>
@@ -357,7 +357,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                 <li className="flex gap-1.5"><CheckIcon status={funds.threeSources.satelite ? "ok" : "fail"} />{t("Satélite: labores visibles", "Satellite: field work visible")}</li>
                 <li className="flex gap-1.5"><CheckIcon status={funds.threeSources.aforo === "ok" ? "ok" : funds.threeSources.aforo === "fail" ? "fail" : "pending"} />{t(`Aforo en campo · ${date(funds.threeSources.aforoDate, "es", false)}`, `Field estimate · ${date(funds.threeSources.aforoDate, "en", false)}`)}</li>
               </ul>
-              {!BANK_EDITION && <p className="lbl mt-3">{t("Brecha de facturas vs presupuesto de la fase: 15% ámbar, 30% naranja.", "Invoice gap vs phase budget: 15% amber, 30% orange.")}</p>}
+              {!BANK_EDITION && <p className="lbl mt-3">{t("Brecha de facturas frente al presupuesto de la fase: 15% ámbar, 30% naranja.", "Invoice gap vs phase budget: 15% amber, 30% orange.")}</p>}
             </div>
           </div>
         </Card>
@@ -445,14 +445,14 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                   {(tab === "campo"
                     ? [
                         t("Informe de visita, Formato JRA-AGRIND y memorando de evaluación", "Visit report, JRA-AGRIND form and assessment memo"),
-                        t("Fotos georreferenciadas y laboratorio de suelo y agua", "Geotagged photos and soil and water lab"),
+                        t("Fotos georreferenciadas y laboratorio de suelo y agua", "Geotagged photos and soil and water lab results"),
                         geo?.parcelId || BANK_EDITION ? t("Histórico de cosechas verificado", "Verified harvest history") : t("Imagen del predio e histórico de cosechas verificado", "Parcel image and verified harvest history"),
                       ]
                     : [t("Instrumentos firmados e inscritos", "Signed and registered instruments"), t("Facturas electrónicas conciliadas", "Reconciled e-invoices"), t("Póliza de seguro agrícola y cesión de cobros", "Crop insurance policy and assignment of receivables")]
                   ).map((x) => (
                     <div key={x} className="rounded-lg border border-bcp-border p-3 text-sm">
                       {x}
-                      <p className="lbl mt-1">{t(`Actualizado al ${date(data.cutoff, "es")}`, `Updated to ${date(data.cutoff, "en")}`)}</p>
+                      <p className="lbl mt-1">{t(`Actualizado al ${date(data.cutoff, "es")}`, `Updated as of ${date(data.cutoff, "en")}`)}</p>
                     </div>
                   ))}
                 </div>

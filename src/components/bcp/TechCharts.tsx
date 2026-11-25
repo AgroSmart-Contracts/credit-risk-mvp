@@ -69,7 +69,7 @@ export function TechChart({ id, s, loan, cutoff, portfolio = false }: { id: Seri
             {approval}
             {now}
             <Line dataKey="v" stroke={INK} strokeWidth={2} dot={{ r: 2.5, fill: INK }} isAnimationActive={false} />
-            <Tooltip labelFormatter={(v: number) => date(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`${v}%`, t("vs lo normal", "vs normal")]} />
+            <Tooltip labelFormatter={(v: number) => date(new Date(v).toISOString().slice(0, 10), lang)} formatter={(v: number) => [`${v}%`, t("frente a lo normal", "vs normal")]} />
           </ComposedChart>
         </ResponsiveContainer>
       </Frame>

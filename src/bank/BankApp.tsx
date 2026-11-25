@@ -34,12 +34,12 @@ export function BankApp({ onLogout }: { onLogout: () => void }) {
   return (
     <div className="flex min-h-screen bg-tm-neutral-light">
       <Sidebar
-        product={t("Pre-cosecha · BCP", "Pre-harvest · BCP")}
+        product={t("Precosecha · BCP", "Pre-harvest · BCP")}
         active={NAV_ACTIVE[page.view]}
         onHome={() => go("cartera")}
         toggleLabels={{ collapse: t("Contraer menú", "Collapse menu"), expand: t("Expandir menú", "Expand menu") }}
         onSelect={(id) => go(id as BcpView)}
-        groups={[{ label: t("Pre-cosecha · BCP", "Pre-harvest · BCP"), items: bcpNavItems(lang, answers) }]}
+        groups={[{ label: t("Precosecha · BCP", "Pre-harvest · BCP"), items: bcpNavItems(lang, answers) }]}
         footer={
           <div className="space-y-1 border-t border-tm-border pt-3 text-xs">
             <p className="truncate font-semibold text-tm-black">{getViewer()}</p>

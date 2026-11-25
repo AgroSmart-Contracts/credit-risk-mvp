@@ -188,7 +188,7 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
   );
   return (
     <div className="bcp min-w-0 flex-1 bg-bcp-bg print:bg-white">
-      <TopBar title={titles[view]} sub={`${t(`TruMarket · Pre-cosecha · datos al ${date(PORTFOLIO.cutoff, "es")}`, `TruMarket · Pre-harvest · data as of ${date(PORTFOLIO.cutoff, "en")}`)}${BANK_EDITION ? ` · ${t("cartera ilustrativa", "illustrative portfolio")}` : ""}`} right={langToggle} />
+      <TopBar title={titles[view]} sub={`${t(`TruMarket · Precosecha · datos al ${date(PORTFOLIO.cutoff, "es")}`, `TruMarket · Pre-harvest · data as of ${date(PORTFOLIO.cutoff, "en")}`)}${BANK_EDITION ? ` · ${t("cartera ilustrativa", "illustrative portfolio")}` : ""}`} right={langToggle} />
       {/* Phones: the sidebar becomes a row of tabs. */}
       <nav className="flex gap-1 overflow-x-auto border-b border-bcp-border bg-white px-3 [scrollbar-width:none] lg:hidden print:hidden">
         {items.map((it) => (
@@ -226,7 +226,7 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
   // Status of each upcoming milestone, in words: is the bank needed, and when.
   const status = (u: (typeof PORTFOLIO.upcoming)[number]) => {
     const loan = loanById(u.loanId);
-    if (all.some((p) => p.loan.id === u.loanId && /conformidad/i.test(u.milestone.es))) return <Chip tone="ink">{t("Pendiente de conformidad del banco", "Awaiting bank conformity")}</Chip>;
+    if (all.some((p) => p.loan.id === u.loanId && /conformidad/i.test(u.milestone.es))) return <Chip tone="ink">{t("Pendiente de conformidad del banco", "Awaiting bank sign-off")}</Chip>;
     if (loan && loan.frozenUsd > 0) return <StateChip state="naranja" suffix={` · ${t("plan en curso", "plan in progress")}`} />;
     if (/aforo/i.test(u.milestone.es)) return <Chip tone="ambar">{t("Se habilita tras el aforo", "Opens after the estimate")}</Chip>;
     return <Chip>{t("Previsto", "Planned")}</Chip>;
@@ -328,7 +328,7 @@ function Reports({ go }: { go: (v: View, id?: string | null) => void }) {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="font-semibold">{t("Noviembre 2026", "November 2026")}</p>
-            <p className="lbl">{t(`corte ${date(PORTFOLIO.cutoff, "es")} · 2 páginas · datos de ejemplo`, `cut-off ${date(PORTFOLIO.cutoff, "en")} · 2 pages · example data`)}</p>
+            <p className="lbl">{t(`corte ${date(PORTFOLIO.cutoff, "es")} · 2 páginas · datos ilustrativos`, `cut-off ${date(PORTFOLIO.cutoff, "en")} · 2 pages · illustrative data`)}</p>
           </div>
           <Btn primary onClick={() => go("reporte")}>{t("Ver y descargar (PDF)", "View and download (PDF)")}</Btn>
         </div>
@@ -382,7 +382,7 @@ function Method() {
   const pick = (s: string) => (s.includes("|") ? t(s.split("|")[0], s.split("|")[1]) : s);
   return (
     <div className="mx-auto max-w-[1000px] space-y-4">
-      <SectionTitle title={t("Metodología y umbrales", "Methodology and thresholds")} sub={t(`Motor de reglas determinístico y versionado · ${PORTFOLIO.engineVersion}`, `Deterministic, versioned rules engine · ${PORTFOLIO.engineVersion}`)} />
+      <SectionTitle title={t("Metodología y umbrales", "Methodology and thresholds")} sub={t(`Motor de reglas determinista y versionado · ${PORTFOLIO.engineVersion}`, `Deterministic, versioned rules engine · ${PORTFOLIO.engineVersion}`)} />
       <Card>
         <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
           <table className="w-full min-w-[720px] text-sm">
@@ -413,7 +413,7 @@ function Method() {
         <h3 className="text-[16px] font-bold">{t("Efectos", "Effects")}</h3>
         <ul className="mt-2 space-y-2 text-sm">
           <li className="flex gap-2"><StateChip state="ambar" /> <span>{t("Seguimiento reforzado y evidencia adicional.", "Reinforced follow-up and extra evidence.")}</span></li>
-          <li className="flex gap-2"><StateChip state="naranja" /> <span>{t("El siguiente tramo se congela mecánicamente y se reporta el mismo día; investigación obligatoria, plan de remediación con plazo y ajuste de estructura.", "The next tranche is frozen mechanically and reported the same day; mandatory investigation, remediation plan with a deadline and structure adjustment.")}</span></li>
+          <li className="flex gap-2"><StateChip state="naranja" /> <span>{t("El siguiente tramo se congela automáticamente y se reporta el mismo día; investigación obligatoria, plan de remediación con plazo y ajuste de estructura.", "The next tranche is frozen automatically and reported the same day; mandatory investigation, remediation plan with a deadline and structure adjustment.")}</span></li>
           <li className="flex gap-2"><StateChip state="rojo" /> <span>{t("Financiamiento detenido y cascada de recuperación; decide el banco con la recomendación escrita de TruMarket.", "Financing stopped and recovery cascade; the bank decides on TruMarket's written recommendation.")}</span></li>
           <li className="flex gap-2"><StateChip state="observacion" /> <span>{t("Alertas tempranas de TruMarket (clima, El Niño, temperatura): no cambian el estado por sí solas; producen un rango estimado de impacto hasta confirmarse en campo.", "TruMarket early warnings (weather, El Niño, temperature): they never change the state on their own; they produce an estimated impact range until confirmed in the field.")}</span></li>
         </ul>

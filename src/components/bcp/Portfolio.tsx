@@ -84,7 +84,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           },
           { k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage), s: t(`proyectada ${range(data.projection.low, data.projection.high, "es")} · precio −20%: ${cov(F.stress.price.coverage)}`, `projected ${range(data.projection.low, data.projection.high, "en")} · price −20%: ${cov(F.stress.price.coverage)}`), go: () => setPage("riesgo") },
           { k: t("En seguimiento", "On the watchlist"), v: `${watch.length} ${t("de", "of")} ${data.loans.length}`, s: t(`${byCause("control")} por control · ${byCause("tecnica")} por señal técnica · ${byCause("cobertura")} por cobertura`, `${byCause("control")} on a control · ${byCause("tecnica")} on a technical signal · ${byCause("cobertura")} on coverage`), go: () => setPage("resumen") },
-          { k: t("Control del dinero", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
+          { k: t("Control de fondos", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
           { k: t("Próximos 30 días", "Next 30 days"), v: usd(nextTranches.reduce((s, x) => s + x.amountUsd, 0)), s: t(`${nextTranches.length} tramos contra hitos · ${bankDecisions} decisiones del banco`, `${nextTranches.length} tranches against milestones · ${bankDecisions} bank decisions`), go: onDecisions },
         ].map((x, i) => (
           <button key={x.k} type="button" onClick={x.go} className={`flex flex-col items-start justify-start px-4 py-4 text-left ${i === 0 ? "sm:col-span-2 xl:col-span-1" : ""} ${x.dark ? "bg-bcp-ink text-white hover:bg-[#15354f]" : "bg-white hover:bg-bcp-bg"}`}>
@@ -145,11 +145,11 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       <Card tone="control">
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
           <h2 className="text-[20px] font-bold">{t("Control de fondos", "Control of funds")}</h2>
-          <Lbl>{t(`controles verificados al ${date(data.cutoff, "es")}`, `controls verified at ${date(data.cutoff, "en")}`)}</Lbl>
+          <Lbl>{t(`controles verificados al ${date(data.cutoff, "es")}`, `controls verified as of ${date(data.cutoff, "en")}`)}</Lbl>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {[
-            { big: sevenOfSeven, s: t("tramos liberados con checklist completo y conformidad del banco", "tranches released with a complete checklist and the bank's conformity") },
+            { big: sevenOfSeven, s: t("tramos liberados con checklist completo y conformidad del banco", "tranches released with a complete checklist and the bank's sign-off") },
             { big: pct(F.reconciledPct), s: t(`de los fondos con factura conciliada · ${usd(F.unexplained)} en revisión`, `of funds with a reconciled invoice · ${usd(F.unexplained)} under review`) },
             { big: pct(F.directPct), s: t(`pagado directo a proveedores · ${usd(F.cash)} retirado en efectivo`, `paid directly to suppliers · ${usd(F.cash)} withdrawn in cash`) },
             { big: t("Mismo día", "Same day"), s: t(`congelamiento ejecutado y reportado al detectar el desvío (${frozenLoan?.id ?? ""})`, `freeze executed and reported when the deviation was detected (${frozenLoan?.id ?? ""})`) },
@@ -161,7 +161,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           ))}
         </div>
         <ul className="mt-4 list-disc gap-x-8 pl-5 text-[13px] text-bcp-ink sm:columns-2">
-          <li>{t(`Central de riesgos re-consultada en el mes: ${data.controls.bureauRechecked[0]} de ${data.controls.bureauRechecked[1]} deudores`, `Credit bureau re-checked this month: ${data.controls.bureauRechecked[0]} of ${data.controls.bureauRechecked[1]} borrowers`)}</li>
+          <li>{t(`Central de riesgos reconsultada en el mes: ${data.controls.bureauRechecked[0]} de ${data.controls.bureauRechecked[1]} deudores`, `Credit bureau rechecked this month: ${data.controls.bureauRechecked[0]} of ${data.controls.bureauRechecked[1]} borrowers`)}</li>
           <li>{t(`Cesión de cobros inscrita y sin cesiones a terceros: ${data.controls.assignmentRegistered[0]} de ${data.controls.assignmentRegistered[1]}`, `Assignment of receivables registered, no third-party assignments: ${data.controls.assignmentRegistered[0]} of ${data.controls.assignmentRegistered[1]}`)}</li>
           <li>{t(`Seguro agrícola vigente: ${data.controls.insuranceInForce[0]} de ${data.controls.insuranceInForce[1]}`, `Crop insurance in force: ${data.controls.insuranceInForce[0]} of ${data.controls.insuranceInForce[1]}`)}</li>
         </ul>
@@ -300,7 +300,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           <table className="w-full min-w-[900px] text-sm">
             <thead>
               <tr className="border-b border-bcp-border text-left">
-                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura hoy", "Coverage today"), t("Banda", "Band"), t("Proyección", "Projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "What is next")].map((h, i) => (
+                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura hoy", "Coverage today"), t("Banda", "Band"), t("Proyección", "Projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "Next step")].map((h, i) => (
                   <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 2 || i === 4 || i === 5 ? "text-right" : ""}`}>{h}</Lbl>
                 ))}
               </tr>
@@ -350,7 +350,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm">
               <b className="font-semibold">{t(`${bankDecisions} decisiones del banco en los próximos 30 días`, `${bankDecisions} bank decisions in the next 30 days`)}</b>
-              <span className="lbl block">{t(`${appsOpen.length} solicitudes y las conformidades de tramo`, `${appsOpen.length} applications and the tranche conformities`)}</span>
+              <span className="lbl block">{t(`${appsOpen.length} solicitudes y las conformidades de tramo`, `${appsOpen.length} applications and the tranche sign-offs`)}</span>
             </p>
             <Btn primary onClick={onDecisions}>{t("Ir a Decisiones", "Go to Decisions")}</Btn>
           </div>
@@ -451,7 +451,7 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
   const rows: [string, string, string][] = [
     [t("Mayor prestatario", "Largest borrower"), pct((largest.lineUsd / lines) * 100), t(`${largest.id} · ${usd(largest.lineUsd)} de ${usd(lines)}`, `${largest.id} · ${usd(largest.lineUsd)} of ${usd(lines)}`)],
     [t("Mes de vencimiento", "Maturity month"), pct((top.usd / lines) * 100), `${month(`${topMonth}-01`, lang)} · ${usd(top.usd)} (${top.ids.join(", ")})`],
-    [t("Comprador", "Buyer"), t("por informar", "to be provided"), t("se completa con los contratos de venta", "completed with the sale contracts")],
+    [t("Comprador", "Buyer"), t("por informar", "to be provided"), t("se completa con los contratos de venta", "to be completed from the sale contracts")],
     [t("Packing principal", "Main packhouse"), `${data.mainPackhousePct}%`, t("de las líneas", "of the lines")],
     [t("Cultivo", "Crop"), t("palta Hass 100%", "Hass avocado 100%"), ""],
   ];

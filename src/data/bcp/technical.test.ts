@@ -10,8 +10,8 @@ describe("technical series never contradict the file", () => {
     const s = technicalSeries(loan, PORTFOLIO.cutoff);
     it(`${loan.id}: vigour, water and price start at approval and end at today's value`, () => {
       for (const [series, label] of [
-        [s.vigor, "Vigor del cultivo vs lo normal del lote"],
-        [s.agua, "Agua disponible vs necesidad"],
+        [s.vigor, "Vigor del cultivo frente a lo normal del lote"],
+        [s.agua, "Agua disponible frente a la necesidad"],
         [s.esperado, "Precio esperado a cosecha"],
       ] as const) {
         const c = cond(loan.id, label);
