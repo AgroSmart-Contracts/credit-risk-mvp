@@ -25,7 +25,7 @@ const TILE_TAB: Record<Tile, { tab: PortfolioTab; section?: string }> = {
 };
 /** Survive opening a file, so Back returns to the same tab and figure. */
 let lastTab: PortfolioTab = "resumen";
-let lastTile: Tile | null = "seguimiento";
+let lastTile: Tile | null = null;
 
 export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answers }: { data: P; onOpen: (id: string) => void; onOpenApp: (id: string) => void; onReport: () => void; onDecisions: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
@@ -33,13 +33,12 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   const F = portfolioFigures(data.loans);
   const [page, setPageState] = useState<PortfolioTab>(lastTab);
   const [tile, setTileState] = useState<Tile | null>(lastTile);
-  // A tab chosen directly highlights the first figure that opens it (none for loans and applications).
+  // Choosing a tab never moves the figure highlight; it only clears a figure picked earlier.
   const setPage = (tab: PortfolioTab) => {
     lastTab = tab;
     setPageState(tab);
-    const first = (Object.keys(TILE_TAB) as Tile[]).find((k) => TILE_TAB[k].tab === tab && !TILE_TAB[k].section) ?? null;
-    lastTile = first;
-    setTileState(first);
+    lastTile = null;
+    setTileState(null);
   };
   const openTile = (k: Tile) => {
     const { tab, section } = TILE_TAB[k];
