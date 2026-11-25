@@ -108,8 +108,8 @@ const cond = (loan: Loan, es: string) => loan.conditions.find((c) => c.label.es 
 
 export function technicalSeries(loan: Loan, cutoff: string): TechSeries {
   const seed = seedOf(loan.id);
-  const vig = cond(loan, "Vigor del cultivo vs lo normal del lote");
-  const water = cond(loan, "Agua disponible vs necesidad");
+  const vig = cond(loan, "Vigor del cultivo frente a lo normal del lote");
+  const water = cond(loan, "Agua disponible frente a la necesidad");
   const price = cond(loan, "Precio esperado a cosecha");
   const sharp = num(vig.today.es) - num(vig.atApproval.es) < -10;
 

@@ -84,7 +84,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           },
           { k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage), s: t(`proyectada ${range(data.projection.low, data.projection.high, "es")} · precio −20%: ${cov(F.stress.price.coverage)}`, `projected ${range(data.projection.low, data.projection.high, "en")} · price −20%: ${cov(F.stress.price.coverage)}`), go: () => setPage("riesgo") },
           { k: t("En seguimiento", "On the watchlist"), v: `${watch.length} ${t("de", "of")} ${data.loans.length}`, s: t(`${byCause("control")} por control · ${byCause("tecnica")} por señal técnica · ${byCause("cobertura")} por cobertura`, `${byCause("control")} on a control · ${byCause("tecnica")} on a technical signal · ${byCause("cobertura")} on coverage`), go: () => setPage("resumen") },
-          { k: t("Control del dinero", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
+          { k: t("Control de fondos", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
           { k: t("Próximos 30 días", "Next 30 days"), v: usd(nextTranches.reduce((s, x) => s + x.amountUsd, 0)), s: t(`${nextTranches.length} tramos contra hitos · ${bankDecisions} decisiones del banco`, `${nextTranches.length} tranches against milestones · ${bankDecisions} bank decisions`), go: onDecisions },
         ].map((x, i) => (
           <button key={x.k} type="button" onClick={x.go} className={`flex flex-col items-start justify-start px-4 py-4 text-left ${i === 0 ? "sm:col-span-2 xl:col-span-1" : ""} ${x.dark ? "bg-bcp-ink text-white hover:bg-[#15354f]" : "bg-white hover:bg-bcp-bg"}`}>
@@ -161,7 +161,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           ))}
         </div>
         <ul className="mt-4 list-disc gap-x-8 pl-5 text-[13px] text-bcp-ink sm:columns-2">
-          <li>{t(`Central de riesgos re-consultada en el mes: ${data.controls.bureauRechecked[0]} de ${data.controls.bureauRechecked[1]} deudores`, `Credit bureau re-checked this month: ${data.controls.bureauRechecked[0]} of ${data.controls.bureauRechecked[1]} borrowers`)}</li>
+          <li>{t(`Central de riesgos reconsultada en el mes: ${data.controls.bureauRechecked[0]} de ${data.controls.bureauRechecked[1]} deudores`, `Credit bureau re-checked this month: ${data.controls.bureauRechecked[0]} of ${data.controls.bureauRechecked[1]} borrowers`)}</li>
           <li>{t(`Cesión de cobros inscrita y sin cesiones a terceros: ${data.controls.assignmentRegistered[0]} de ${data.controls.assignmentRegistered[1]}`, `Assignment of receivables registered, no third-party assignments: ${data.controls.assignmentRegistered[0]} of ${data.controls.assignmentRegistered[1]}`)}</li>
           <li>{t(`Seguro agrícola vigente: ${data.controls.insuranceInForce[0]} de ${data.controls.insuranceInForce[1]}`, `Crop insurance in force: ${data.controls.insuranceInForce[0]} of ${data.controls.insuranceInForce[1]}`)}</li>
         </ul>

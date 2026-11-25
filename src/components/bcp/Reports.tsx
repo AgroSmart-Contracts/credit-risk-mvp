@@ -71,7 +71,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
   const lang = useLang();
   const F = portfolioFigures(data.loans);
   const sub = t(`${"Noviembre 2026"} · corte ${date(data.cutoff, "es")} · datos ilustrativos`, `November 2026 · cut-off ${date(data.cutoff, "en")} · illustrative data`);
-  const title = t("Reporte mensual de cartera pre-cosecha", "Monthly pre-harvest portfolio report");
+  const title = t("Reporte mensual de cartera precosecha", "Monthly pre-harvest portfolio report");
   const loans = [...data.loans].sort(bySeverity);
   const frozenLoan = data.loans.find((l) => l.frozenUsd > 0);
   const monthDecisions = data.loans

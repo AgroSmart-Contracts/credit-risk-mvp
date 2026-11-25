@@ -84,7 +84,7 @@ const applications: Application[] = PORTFOLIO.applications.map(({ score: _s, tie
   areaHa: area(a.areaHa),
   scoreDims: [],
   checks: a.checks.map((c) =>
-    c.label.es === "Área declarada vs medida" ? { ...c, value: { es: "Coincide con lo declarado (diferencia bajo 1%)", en: "Matches the declaration (under 1% difference)" }, source: { es: "Medición satelital", en: "Satellite measurement" } } : hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.state === "observacion" || c.provenance === "estimado") } : c,
+    c.label.es === "Área declarada frente a la medida" ? { ...c, value: { es: "Coincide con lo declarado (diferencia menor al 1%)", en: "Matches the declaration (under 1% difference)" }, source: { es: "Medición satelital", en: "Satellite measurement" } } : hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.state === "observacion" || c.provenance === "estimado") } : c,
   ),
   ...(a.id === "ICA-0177" ? { vigourPattern: pattern } : {}),
 }) as unknown as Application);

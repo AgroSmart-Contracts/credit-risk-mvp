@@ -77,7 +77,7 @@ export function Gate() {
       <form onSubmit={submit} className="w-full max-w-sm space-y-4 rounded-xl border border-tm-border bg-white p-6">
         <div className="text-center">
           <img src="/logo-mark.svg" alt="TruMarket" className="mx-auto h-12 w-auto" />
-          <h1 className="mt-3 text-lg font-bold">{t("Pre-cosecha", "Pre-harvest")}</h1>
+          <h1 className="mt-3 text-lg font-bold">{t("Precosecha", "Pre-harvest")}</h1>
           <p className="text-sm text-tm-text-muted">{t("Acceso solo por invitación", "Invitation-only access")}</p>
         </div>
         <label className="block text-sm font-semibold">
