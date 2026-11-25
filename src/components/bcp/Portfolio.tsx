@@ -11,7 +11,9 @@ import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
-import { useEvidence, useLang, useT } from "./shared";
+import { STATE_SOLID, STATE_TEXT, useEvidence, useLang, useT } from "./shared";
+
+const STRESS_LEVELS = ["verde", "ambar", "naranja", "rojo"] as const;
 
 type PortfolioTab = "resumen" | "posicion" | "riesgo" | "prestamos" | "solicitudes";
 type Tile = "exposicion" | "cobertura" | "seguimiento" | "control" | "proximos";
@@ -228,44 +230,42 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
         <Card>
           <h3 className="text-[16px] font-bold">{t("Estrés de la cartera", "Portfolio stress")}</h3>
-          <div className="mt-2 overflow-x-auto">
-          <table className="w-full min-w-[460px] text-sm">
-            <thead>
-              <tr className="border-b border-bcp-border align-bottom">
-                <Lbl as="th" className="py-1.5 text-left font-normal">{t("Escenario", "Scenario")}</Lbl>
-                <Lbl as="th" className="py-1.5 pr-2 text-right font-normal">{t("Cobertura de la cartera", "Portfolio coverage")}</Lbl>
-                {/* Loans by risk level: each loan in exactly one column, so a row adds up to the portfolio. */}
-                {([
-                  [t("Bajo", "Low"), `≥${cov(COVERAGE_BANDS.ambar)}`],
-                  [t("Medio", "Medium"), t(`${COVERAGE_BANDS.naranja.toFixed(2)} a ${cov(COVERAGE_BANDS.ambar)}`, `${COVERAGE_BANDS.naranja.toFixed(2)} to ${cov(COVERAGE_BANDS.ambar)}`)],
-                  [t("Elevado", "Elevated"), t(`${COVERAGE_BANDS.rojo.toFixed(2)} a ${cov(COVERAGE_BANDS.naranja)}`, `${COVERAGE_BANDS.rojo.toFixed(2)} to ${cov(COVERAGE_BANDS.naranja)}`)],
-                  [t("Alto", "High"), `<${cov(COVERAGE_BANDS.rojo)}`],
-                ] as const).map(([k, r]) => (
-                  <Lbl key={k} as="th" className="whitespace-nowrap py-1.5 pl-2 text-right font-normal">
-                    <span className="block font-semibold text-bcp-ink">{k}</span>
-                    {r}
-                  </Lbl>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-bcp-divider">
-              {([
-                [t("Hoy", "Today"), F.stress.today],
-                [t("Precio −20%", "Price −20%"), F.stress.price],
-                [t("Volumen −30%", "Volume −30%"), F.stress.volume],
-                [t("Ambos a la vez", "Both at once"), F.stress.both],
-              ] as const).map(([k, x]) => (
-                <tr key={k}>
-                  <td className="whitespace-nowrap py-2 pr-2">{k}</td>
-                  <td className="num py-2 pr-2 text-right"><StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} /></td>
-                  {(["verde", "ambar", "naranja", "rojo"] as const).map((lv) => (
-                    <td key={lv} className={`num py-2 pl-2 text-right ${x.levels[lv] ? "font-semibold text-bcp-ink" : "text-bcp-muted/60"}`}>{x.levels[lv]}</td>
+          {/* One bar per scenario: the five loans, each in exactly one risk level. */}
+          <ul className="mt-3 space-y-3">
+            {([
+              [t("Hoy", "Today"), F.stress.today],
+              [t("Precio −20%", "Price −20%"), F.stress.price],
+              [t("Volumen −30%", "Volume −30%"), F.stress.volume],
+              [t("Ambos a la vez", "Both at once"), F.stress.both],
+            ] as const).map(([k, x]) => (
+              <li key={k}>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm">{k}</span>
+                  <StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} />
+                </div>
+                <div className="mt-1.5 flex h-7 gap-0.5 overflow-hidden rounded-md" role="img" aria-label={STRESS_LEVELS.filter((lv) => x.levels[lv]).map((lv) => `${t(STATE_TEXT[lv])}: ${x.levels[lv]}`).join(", ")}>
+                  {STRESS_LEVELS.filter((lv) => x.levels[lv]).map((lv) => (
+                    <div key={lv} style={{ flexGrow: x.levels[lv], background: STATE_SOLID[lv] }} className={`num flex items-center justify-center text-[13px] font-semibold ${lv === "ambar" ? "text-bcp-ink" : "text-white"}`}>
+                      {x.levels[lv]}
+                    </div>
                   ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-bcp-divider pt-3">
+            {([
+              ["verde", `≥${cov(COVERAGE_BANDS.ambar)}`],
+              ["ambar", t(`${COVERAGE_BANDS.naranja.toFixed(2)} a ${cov(COVERAGE_BANDS.ambar)}`, `${COVERAGE_BANDS.naranja.toFixed(2)} to ${cov(COVERAGE_BANDS.ambar)}`)],
+              ["naranja", t(`${COVERAGE_BANDS.rojo.toFixed(2)} a ${cov(COVERAGE_BANDS.naranja)}`, `${COVERAGE_BANDS.rojo.toFixed(2)} to ${cov(COVERAGE_BANDS.naranja)}`)],
+              ["rojo", `<${cov(COVERAGE_BANDS.rojo)}`],
+            ] as const).map(([lv, r]) => (
+              <li key={lv} className="flex items-center gap-1.5 text-[12px] text-bcp-muted">
+                <span aria-hidden className="size-2.5 rounded-sm" style={{ background: STATE_SOLID[lv] }} />
+                <b className="font-semibold text-bcp-ink">{t(STATE_TEXT[lv])}</b> <span className="num">{r}</span>
+              </li>
+            ))}
+          </ul>
         </Card>
         <Card>
           <h3 className="text-[16px] font-bold">{t("Concentración", "Concentration")}</h3>
