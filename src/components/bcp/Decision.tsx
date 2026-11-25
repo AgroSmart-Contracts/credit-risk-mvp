@@ -114,7 +114,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
         )}
         {onOpen && (
           <span className="ml-auto">
-            <Btn onClick={onOpen}>{t("Abrir expediente", "Open file")} →</Btn>
+            <Btn primary onClick={onOpen}>{t("Abrir expediente", "Open file")} →</Btn>
           </span>
         )}
       </div>
@@ -170,7 +170,7 @@ export function AppDecisionBlock({ app, answered, onOpen }: { app: Application; 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {answered && <Stamp text={answered} when="" />}
         <span className="ml-auto">
-          <Btn onClick={onOpen}>{t("Abrir solicitud", "Open application")} →</Btn>
+          <Btn primary onClick={onOpen}>{t("Abrir solicitud", "Open application")} →</Btn>
         </span>
       </div>
     </Card>
