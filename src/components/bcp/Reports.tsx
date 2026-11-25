@@ -103,7 +103,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
             <b>{t("Cambios", "Changes")}:</b> {t(`${data.changes.filter((c) => c.to === "naranja").length} a naranja con tramo congelado, ${data.changes.filter((c) => c.to === "ambar").length} a ámbar con seguimiento reforzado; El Niño costero en observación.`, `${data.changes.filter((c) => c.to === "naranja").length} to orange with a frozen tranche, ${data.changes.filter((c) => c.to === "ambar").length} to amber with reinforced follow-up; coastal El Niño under watch.`)}
           </li>
           <li>
-            <b>{t("Control", "Control")}:</b> {t(`${F.tranchesWithConformity} de ${F.tranchesReleased} tramos con checklist y conformidad del banco; ${pct(F.reconciledPct)} de los fondos con factura conciliada; congelamiento ejecutado el mismo día.`, `${F.tranchesWithConformity} of ${F.tranchesReleased} tranches with checklist and the bank's conformity; ${pct(F.reconciledPct)} of funds with a reconciled invoice; freeze executed the same day.`)}
+            <b>{t("Control", "Control")}:</b> {t(`${F.tranchesWithConformity} de ${F.tranchesReleased} tramos con checklist y conformidad del banco; ${pct(F.reconciledPct)} de los fondos con factura conciliada; congelamiento ejecutado el mismo día.`, `${F.tranchesWithConformity} of ${F.tranchesReleased} tranches with checklist and the bank's sign-off; ${pct(F.reconciledPct)} of funds with a reconciled invoice; freeze executed the same day.`)}
           </li>
         </ul>
 
@@ -454,7 +454,7 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
 
         <H>{t("2. Tramos", "2. Tranches")}</H>
         <T
-          head={[t("Tramo", "Tranche"), "USD", t("Estado", "Status"), t("Checklist TruMarket", "TruMarket checklist"), t("Conformidad BCP", "BCP conformity")]}
+          head={[t("Tramo", "Tranche"), "USD", t("Estado", "Status"), t("Checklist TruMarket", "TruMarket checklist"), t("Conformidad BCP", "BCP sign-off")]}
           right={[1]}
           nowrap={[0, 2]}
           rows={loan.tranches.map((tr) => {

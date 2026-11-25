@@ -170,7 +170,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                       </li>
                     ))}
                   </ul>
-                  {tr.bankConformityDate && <p className="lbl mt-2">{t(`Conformidad del banco ${date(tr.bankConformityDate, "es", false)}`, `Bank conformity ${date(tr.bankConformityDate, "en", false)}`)}</p>}
+                  {tr.bankConformityDate && <p className="lbl mt-2">{t(`Conformidad del banco ${date(tr.bankConformityDate, "es", false)}`, `Bank sign-off ${date(tr.bankConformityDate, "en", false)}`)}</p>}
                   {tr.note && <p className="lbl mt-2">{t(tr.note)}</p>}
                 </div>
               );
@@ -445,14 +445,14 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
                   {(tab === "campo"
                     ? [
                         t("Informe de visita, Formato JRA-AGRIND y memorando de evaluación", "Visit report, JRA-AGRIND form and assessment memo"),
-                        t("Fotos georreferenciadas y laboratorio de suelo y agua", "Geotagged photos and soil and water lab"),
+                        t("Fotos georreferenciadas y laboratorio de suelo y agua", "Geotagged photos and soil and water lab results"),
                         geo?.parcelId || BANK_EDITION ? t("Histórico de cosechas verificado", "Verified harvest history") : t("Imagen del predio e histórico de cosechas verificado", "Parcel image and verified harvest history"),
                       ]
                     : [t("Instrumentos firmados e inscritos", "Signed and registered instruments"), t("Facturas electrónicas conciliadas", "Reconciled e-invoices"), t("Póliza de seguro agrícola y cesión de cobros", "Crop insurance policy and assignment of receivables")]
                   ).map((x) => (
                     <div key={x} className="rounded-lg border border-bcp-border p-3 text-sm">
                       {x}
-                      <p className="lbl mt-1">{t(`Actualizado al ${date(data.cutoff, "es")}`, `Updated to ${date(data.cutoff, "en")}`)}</p>
+                      <p className="lbl mt-1">{t(`Actualizado al ${date(data.cutoff, "es")}`, `Updated as of ${date(data.cutoff, "en")}`)}</p>
                     </div>
                   ))}
                 </div>

@@ -64,7 +64,7 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
     expect(per["ICA-0142"].unexplained).toBe(630);
   });
 
-  it("7 of 7 tranches released with a complete checklist and the bank's conformity", () => {
+  it("7 of 7 tranches released with a complete checklist and the bank's sign-off", () => {
     expect(F.tranchesReleased).toBe(7);
     expect(F.tranchesWithConformity).toBe(7);
   });

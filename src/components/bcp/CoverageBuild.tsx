@@ -68,7 +68,7 @@ export function StressCompare({ input, cols }: { input: HarvestInput; cols: { la
     [t("Saldo al vencimiento", "Amount due at maturity"), (d) => usd(d)],
     [t("Cobertura hoy", "Coverage today"), (d) => toned(at(d))],
     [t("Si el precio cae 20%", "If the price falls 20%"), (d) => toned(at(d, STANDARD_STRESS.price))],
-    [t("Si el volumen cae 30%", "If volume falls 30%"), (d) => toned(at(d, 0, STANDARD_STRESS.volume))],
+    [t("Si el volumen cae 30%", "If the volume falls 30%"), (d) => toned(at(d, 0, STANDARD_STRESS.volume))],
     [t("Ambos a la vez (caso severo)", "Both at once (severe case)"), (d) => toned(at(d, STANDARD_STRESS.price, STANDARD_STRESS.volume))],
     [t("Precio de equilibrio", "Break-even price"), (d) => perKg(harvestBuild(input, {}, d).breakEvenUsdKg)],
   ];

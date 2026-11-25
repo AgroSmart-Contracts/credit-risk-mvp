@@ -13,7 +13,7 @@
  *   node scripts/pre-harvest/walkthrough.cjs --url https://<deployment>
  *
  * Needs Playwright (`npx playwright install chromium` once). It never clicks Approve,
- * Decline, Give conformity or Request information: nothing is recorded.
+ * Decline, Give sign-off or Request information: nothing is recorded.
  */
 const { chromium } = require("playwright");
 
@@ -47,14 +47,14 @@ const STEPS = [
     click: () => tab("Posición y fondos", "Position and funds"),
     secs: 25,
     point: () => [text(L("Calendario de caja", "Cash calendar"))],
-    say: "Of a USD 150,000 line, 66,600 is disbursed. The rest is released only against verified milestones and with your conformity. This calendar shows disbursements and repayments by month on the same basis as coverage: the frozen tranche counted as if released, and each maturity as the full amount due. Exposure peaks before harvest and comes back from March.",
+    say: "Of a USD 150,000 line, 66,600 is disbursed. The rest is released only against verified milestones and with your sign-off. This calendar shows disbursements and repayments by month on the same basis as coverage: the frozen tranche counted as if released, and each maturity as the full amount due. Exposure peaks before harvest and comes back from March.",
     coach: "If asked about the new applications: they would need a line increase or a second line.",
   },
   {
     scene: "2 · Control of funds",
     secs: 20,
     point: () => [heading(L("Control de fondos", "Control of funds"))],
-    say: "All 7 tranches released so far had a complete checklist and your conformity. 93% of the funds have a reconciled invoice, 72% was paid directly to suppliers, zero cash withdrawals, and receivables are assigned on all 5 loans.",
+    say: "All 7 tranches released so far had a complete checklist and your sign-off. 93% of the funds have a reconciled invoice, 72% was paid directly to suppliers, zero cash withdrawals, and receivables are assigned on all 5 loans.",
   },
   {
     scene: "3 · Coverage and El Niño",
@@ -90,7 +90,7 @@ const STEPS = [
     secs: 20,
     // The frozen tranche's checklist is open by default.
     point: () => [text(L("Congelado el 06 nov", "Frozen on 06 Nov"), false)],
-    say: "T1 and T2 went out with a complete checklist and your conformity. T3 shows exactly what failed: the invoices and the late fertilisation.",
+    say: "T1 and T2 went out with a complete checklist and your sign-off. T3 shows exactly what failed: the invoices and the late fertilisation.",
   },
   {
     scene: "5 · ICA-0201: risk",
@@ -120,7 +120,7 @@ const STEPS = [
     secs: 25,
     click: () => nav(L("Decisiones", "Decisions")),
     point: () => [text("PIS-0034", false)],
-    say: "This one does need your conformity: T2 for 11,200. Our checklist is 4 of 4: invoices 99% reconciled, the 7 November field estimate confirms the volume, bureau unchanged. Coverage is 1.90x. With the price down 20% it would be 1.36x, below 1.50, so we propose resizing T3 to the price at its milestone.",
+    say: "This one does need your sign-off: T2 for 11,200. Our checklist is 4 of 4: invoices 99% reconciled, the 7 November field estimate confirms the volume, bureau unchanged. Coverage is 1.90x. With the price down 20% it would be 1.36x, below 1.50, so we propose resizing T3 to the price at its milestone.",
     coach: "This view is read-only until the pilot. If asked about the date: we're showing the November cut-off; live, you'd have 72 hours.",
   },
   {
@@ -181,7 +181,7 @@ const STEPS = [
     go: url(),
     click: () => button(L("Descargar reporte mensual (PDF)", "Download monthly report (PDF)")),
     point: () => [page.locator(".a4").first()],
-    say: "And here's the monthly report you'd receive. To run the first real files, we need to agree on three things today: the thresholds, the 72-hour deadline for your conformity, and this monthly report format.",
+    say: "And here's the monthly report you'd receive. To run the first real files, we need to agree on three things today: the thresholds, the 72-hour deadline for your sign-off, and this monthly report format.",
     coach: "End on the three agreements. Then stop talking. Expected loss: 'por calibrar', calibrated with the first campaigns.",
   },
 ];
