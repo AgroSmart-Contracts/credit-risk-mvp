@@ -5,6 +5,8 @@
  */
 import { useState, type ReactNode } from "react";
 import { Lock, PanelLeftClose, PanelLeftOpen, type LucideIcon } from "lucide-react";
+// The TruMarket wordmark ("TRU / MARKET") as drawn in the brand logo (trumarket/web/public/assets/logo.svg).
+import wordmark from "../assets/brand/trumarket-wordmark.png";
 
 export interface SidebarItem {
   id: string;
@@ -71,14 +73,13 @@ export function Sidebar({
     <aside
       className={`sticky top-0 hidden h-screen shrink-0 flex-col overflow-y-auto border-r border-tm-border bg-tm-surface py-6 transition-[width] duration-200 lg:flex print:hidden ${collapsed ? "w-[72px] px-2" : "w-64 px-4"}`}
     >
-      <button type="button" onClick={onHome} className="mb-6 flex flex-col items-center gap-1" title="TruMarket">
-        <img src="/logo-mark.svg" alt="" className={collapsed ? "h-9 w-auto" : "h-12 w-auto"} />
-        {!collapsed && (
-          <>
-            <span className="text-xl font-semibold text-tm-primary-dark [font-family:'DM_Serif_Display',Georgia,serif]">TruMarket</span>
-            <span className="text-[11px] text-tm-text-muted">{product}</span>
-          </>
-        )}
+      <button type="button" onClick={onHome} className="mb-6 flex flex-col items-center gap-1.5" title="TruMarket">
+        {/* The brand lockup, as on trumarket.tech: the mark with the wordmark beside it. */}
+        <span className="flex items-center gap-2">
+          <img src="/logo-mark.svg" alt="" className={collapsed ? "h-9 w-auto" : "h-12 w-auto"} />
+          {!collapsed && <img src={wordmark} alt="TruMarket" width={66} height={43} className="h-[43px] w-auto" />}
+        </span>
+        {!collapsed && <span className="text-[11px] text-tm-text-muted">{product}</span>}
       </button>
       <nav className="space-y-5">
         {groups.map((g, i) => (
