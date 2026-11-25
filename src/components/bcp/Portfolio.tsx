@@ -138,7 +138,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
             { k: t("Desembolsado", "Disbursed"), v: usd(F.disbursed), n: "", rule: "border-bcp-ink", sw: "bg-bcp-ink" },
             { k: t("Congelado", "Frozen"), v: usd(F.frozen), n: "", rule: "border-bcp-naranja", sw: "hatch" },
             { k: t("Por desembolsar", "Undrawn"), v: usd(F.pending), n: "", rule: "border-bcp-fill-strong", sw: "bg-bcp-fill" },
-            { k: t("Vencimientos de capital", "Principal maturities"), v: "", n: F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} ${usd(v)}`).join(" · "), rule: "border-bcp-green", sw: "" },
+            { k: t("Vencimientos de capital", "Principal maturities"), v: "", n: F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} · ${usd(v)}`).join("\n"), rule: "border-bcp-green", sw: "" },
           ].map((x) => (
             <div key={x.k} className={`border-l-[3px] pl-3.5 pr-4 ${x.rule}`}>
               <span className="lbl block">
@@ -146,7 +146,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 {x.k}
               </span>
               {x.v && <span className="num block text-[22px] font-bold">{x.v}</span>}
-              {x.n && <span className={x.v ? "lbl block" : "block text-[15px] font-bold"}>{x.n}</span>}
+              {x.n && <span className={x.v ? "lbl block" : "block whitespace-pre-line text-[15px] font-bold"}>{x.n}</span>}
             </div>
           ))}
         </div>
@@ -490,7 +490,6 @@ function RiskTiers({ F, n, by, setBy, filter, setFilter }: { F: ReturnType<typeo
               <span className="flex items-center justify-between gap-2">
                 <span className="flex flex-wrap items-center gap-1.5">
                   <span className={`rounded-full px-2.5 py-[3px] text-[12px] font-bold ${x.chip}`}>{t(x.label)}</span>
-                  <StateChip state={x.state} />
                 </span>
                 {!empty && <ChevronRight className="h-4 w-4 text-bcp-muted" aria-hidden />}
               </span>

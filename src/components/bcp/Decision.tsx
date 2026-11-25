@@ -151,10 +151,17 @@ export function AppDecisionBlock({ app, answered, onOpen }: { app: Application; 
           <dt className="lbl">{t("Cobertura a la solicitud", "Coverage at application")}</dt>
           <dd className="num text-[20px] font-bold">{app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage)}</dd>
         </div>
-        <div>
-          <dt className="lbl">{t("Si el precio cae 20%", "If the price falls 20%")}</dt>
-          <dd className="num text-[20px] font-bold">{p20 === null ? "n/d" : cov(p20)}</dd>
-        </div>
+        {app.veto ? (
+          <div>
+            <dt className="lbl">{t("Motivo del veto", "Reason for the veto")}</dt>
+            <dd className="text-[16px] font-bold">{t(app.checks.find((c) => c.state === "veto")?.value ?? { es: "Cosecha no verificable", en: "Harvest cannot be verified" })}</dd>
+          </div>
+        ) : (
+          <div>
+            <dt className="lbl">{t("Si el precio cae 20%", "If the price falls 20%")}</dt>
+            <dd className="num text-[20px] font-bold">{p20 === null ? "n/d" : cov(p20)}</dd>
+          </div>
+        )}
         <div>
           <dt className="lbl">{t("Recomendación TruMarket", "TruMarket recommendation")}</dt>
           <dd className="text-[16px] font-bold">{app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : app.recommendation === "rechazar" ? t("Rechazar", "Decline") : t("Aprobar", "Approve")}</dd>
@@ -163,7 +170,7 @@ export function AppDecisionBlock({ app, answered, onOpen }: { app: Application; 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {answered && <Stamp text={answered} when="" />}
         <span className="ml-auto">
-          <Btn primary onClick={onOpen}>{t("Abrir solicitud", "Open application")} →</Btn>
+          <Btn onClick={onOpen}>{t("Abrir solicitud", "Open application")} →</Btn>
         </span>
       </div>
     </Card>
