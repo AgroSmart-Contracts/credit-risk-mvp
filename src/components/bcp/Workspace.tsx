@@ -218,11 +218,14 @@ function Files({ go }: { go: (v: View, id?: string | null) => void }) {
   );
 }
 
+/** Critical: a veto, or a decision already past its due date. */
+const isCritical = (x: QueueItem) => x.kind === "veto" || x.due < PORTFOLIO.cutoff;
+
 /** Queue filters: everything, what needs the bank's sign-off, what is critical, what carries a condition. */
 const FILTERS = [
   { id: "todas", label: { es: "Todas", en: "All" }, match: () => true },
   { id: "conformidad", label: { es: "Requieren conformidad", en: "Sign-off required" }, match: (x: QueueItem) => x.kind === "signoff" },
-  { id: "criticas", label: { es: "Críticas", en: "Critical" }, match: (x: QueueItem) => x.kind === "veto" },
+  { id: "criticas", label: { es: "Críticas", en: "Critical" }, match: (x: QueueItem) => isCritical(x) },
   { id: "condicion", label: { es: "Con condición", en: "Conditional" }, match: (x: QueueItem) => x.kind === "condition" },
 ] as const;
 
@@ -286,7 +289,7 @@ function Decisions({ go, answers }: { go: (v: View, id?: string | null) => void;
   ].sort((x, y) => x.due.localeCompare(y.due));
   const tranchesUsd = items.filter((x) => x.kind === "signoff").reduce((s, x) => s + x.amount, 0);
   const appsUsd = items.filter((x) => x.kind !== "signoff").reduce((s, x) => s + x.amount, 0);
-  const critical = items.filter((x) => x.kind === "veto" || x.due < PORTFOLIO.cutoff).length;
+  const critical = items.filter(isCritical).length;
   const shown = items.filter(FILTERS.find((f) => f.id === filter)!.match);
   // Status of each upcoming milestone, in words: is the bank needed, and when.
   const status = (u: (typeof PORTFOLIO.upcoming)[number]) => {
@@ -305,7 +308,7 @@ function Decisions({ go, answers }: { go: (v: View, id?: string | null) => void;
           [t("Decisiones pendientes", "Pending decisions"), String(items.length)],
           [t("En tramos", "In tranches"), usd(tranchesUsd)],
           [t("En solicitudes", "In applications"), usd(appsUsd)],
-          [t("Vencidas o con veto", "Overdue or vetoed"), String(critical)],
+          [t("Críticas · vencidas o con veto", "Critical · overdue or vetoed"), String(critical)],
         ].map(([k, v]) => (
           <div key={k} className="bg-white px-5 py-4">
             <p className="lbl">{k}</p>
