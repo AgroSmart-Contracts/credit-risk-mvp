@@ -4,7 +4,7 @@
  * style and header, so moving between them never changes the chrome.
  */
 import { useState, type ReactNode } from "react";
-import { PanelLeftClose, PanelLeftOpen, type LucideIcon } from "lucide-react";
+import { Lock, PanelLeftClose, PanelLeftOpen, type LucideIcon } from "lucide-react";
 
 export interface SidebarItem {
   id: string;
@@ -13,6 +13,8 @@ export interface SidebarItem {
   count?: number;
   /** Badge tone: neutral for plain counts, attention colours for work waiting. */
   tone?: "neutral" | "watch" | "high";
+  /** Shown but not selectable (e.g. a pilot-only page); the text is the tooltip. */
+  locked?: string;
 }
 
 export interface SidebarGroup {
@@ -73,7 +75,7 @@ export function Sidebar({
         <img src="/logo-mark.svg" alt="" className={collapsed ? "h-9 w-auto" : "h-12 w-auto"} />
         {!collapsed && (
           <>
-            <span className="font-display text-xl font-semibold text-tm-primary-dark">TruMarket</span>
+            <span className="text-xl font-semibold text-tm-primary-dark [font-family:'DM_Serif_Display',Georgia,serif]">TruMarket</span>
             <span className="text-[11px] text-tm-text-muted">{product}</span>
           </>
         )}
@@ -95,18 +97,20 @@ export function Sidebar({
                   <button
                     key={it.id}
                     type="button"
-                    onClick={() => onSelect(it.id)}
-                    onPointerEnter={() => onPrefetch?.(it.id)}
-                    onFocus={() => onPrefetch?.(it.id)}
+                    onClick={() => !it.locked && onSelect(it.id)}
+                    onPointerEnter={() => !it.locked && onPrefetch?.(it.id)}
+                    onFocus={() => !it.locked && onPrefetch?.(it.id)}
                     aria-current={on ? "page" : undefined}
+                    aria-disabled={it.locked ? true : undefined}
                     aria-label={collapsed ? `${it.label}${it.count ? ` (${it.count})` : ""}` : undefined}
-                    title={it.label}
+                    title={it.locked ?? it.label}
                     className={`relative flex w-full items-center rounded-lg py-2.5 text-left text-sm font-medium transition-colors ${collapsed ? "justify-center px-0" : "gap-3 px-3"} ${
-                      on ? "bg-tm-primary/10 text-tm-primary-dark" : "text-tm-text-light hover:bg-tm-neutral-light hover:text-tm-black"
+                      it.locked ? "cursor-not-allowed text-tm-text-muted/70" : on ? "bg-tm-primary/10 text-tm-primary-dark" : "text-tm-text-light hover:bg-tm-neutral-light hover:text-tm-black"
                     }`}
                   >
                     <Icon className="h-[18px] w-[18px] shrink-0" />
                     {!collapsed && <span className="min-w-0 flex-1 truncate">{it.label}</span>}
+                    {!collapsed && it.locked && <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden />}
                     {it.count !== undefined && it.count > 0 && (
                       <span className={`rounded-full px-1.5 text-[10px] font-semibold ${BADGE[it.tone ?? "neutral"]} ${collapsed ? "absolute right-1 top-1" : ""}`}>{it.count}</span>
                     )}
