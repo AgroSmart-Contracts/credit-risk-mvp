@@ -14,7 +14,7 @@ import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { CoverageBuild, StressCompare } from "./CoverageBuild";
 import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
-import { Btn, Card, Chip, ExampleChip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
+import { Btn, Card, Chip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
 import { PILOT_NOTE } from "./nav";
 
 
@@ -159,7 +159,6 @@ export function ApplicationsTable({ apps, onOpen, answers }: { apps: Application
 export function ApplicationsPage({ data, onOpen, answers }: { data: Portfolio; onOpen: (id: string) => void; answers: Record<string, Answer> }) {
   return (
     <div className="mx-auto max-w-[1200px] space-y-4">
-      <ExampleChip kind="portfolio" />
       <Card>
         <ApplicationsTable apps={data.applications} onOpen={onOpen} answers={answers} />
       </Card>
@@ -189,7 +188,6 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           <Chip tone="ink">{t("Solicitud", "Application")}</Chip>
           <RecommendationChip a={app} />
           {app.veto && <StateChip state="veto" />}
-          <ExampleChip kind="file" />
         </div>
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -216,9 +214,9 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { k: t("Línea solicitada", "Requested line"), v: usd(app.requestedUsd), s: t(`${app.tenorDays} días · 3 tramos`, `${app.tenorDays} days · 3 tranches`) },
-            { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "T1" },
+            { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "" },
             { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: "" },
-            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("veto", "veto") : "" },
+            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: "" },
             { k: t("Precio de equilibrio", "Break-even price"), v: app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`, s: t(`esperado USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`) },
           ].map((c) => (
             <Card key={c.k}>

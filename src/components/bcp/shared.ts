@@ -15,10 +15,10 @@ export function useT() {
 }
 
 export const STATE_TEXT: Record<ConditionState | "neutral", Tx> = {
-  verde: L("Verde", "Green"),
-  ambar: L("Ámbar", "Amber"),
-  naranja: L("Naranja", "Orange"),
-  rojo: L("Rojo", "Red"),
+  verde: L("Riesgo bajo", "Low risk"),
+  ambar: L("Riesgo medio", "Medium risk"),
+  naranja: L("Riesgo elevado", "Elevated risk"),
+  rojo: L("Riesgo alto", "High risk"),
   veto: L("Veto", "Veto"),
   observacion: L("En observación", "Under watch"),
   neutral: L("Neutral", "Neutral"),
@@ -40,9 +40,8 @@ export const PROV_TEXT: Record<Provenance, Tx> = {
 };
 
 
-/** A row's source, marked as illustrative data unless the row is backed by real data (`real`). */
-export const sourceTx = (row: { source: Tx; real?: boolean }): Tx =>
-  row.real ? row.source : { es: `${row.source.es} · dato ilustrativo`, en: `${row.source.en} · illustrative data` };
+/** A row's source. The portfolio is disclosed as illustrative once, in the top bar and on printed documents. */
+export const sourceTx = (row: { source: Tx; real?: boolean }): Tx => row.source;
 
 /** Opens the evidence drawer for a loan's condition row (Spanish label). */
 export const EvidenceContext = createContext<(loanId: string, condition: string) => void>(() => {});

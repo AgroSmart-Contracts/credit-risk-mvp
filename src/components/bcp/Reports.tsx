@@ -82,8 +82,8 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
   const footer1 = (
     <footer className="lbl absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
       {t(
-        `Cobertura de repago = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales propuestos: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x. Motor ${data.engineVersion}.`,
-        `Repayment coverage = net harvest revenue ÷ amount due at maturity. Proposed thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x. Engine ${data.engineVersion}.`,
+        `Cobertura de repago = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales propuestos: 1.50x riesgo medio, 1.30x riesgo elevado, 1.10x riesgo alto. Motor ${data.engineVersion}.`,
+        `Repayment coverage = net harvest revenue ÷ amount due at maturity. Proposed thresholds: 1.50x medium risk, 1.30x elevated risk, 1.10x high risk. Engine ${data.engineVersion}.`,
       )}
     </footer>
   );
@@ -100,7 +100,7 @@ export function MonthlyReport({ data }: { data: Portfolio }) {
             <b>{t("Riesgo", "Risk")}:</b> {t(`cobertura de la cartera ${cov(F.coverage)}; proyección ${range(data.projection.low, data.projection.high, "es")} (estimado); si el precio cae 20%, ${cov(F.stress.price.coverage)}; provisión ${usd(F.provision)}.`, `portfolio coverage ${cov(F.coverage)}; projection ${range(data.projection.low, data.projection.high, "en")} (estimated); ${cov(F.stress.price.coverage)} if the price falls 20%; provision ${usd(F.provision)}.`)}
           </li>
           <li>
-            <b>{t("Cambios", "Changes")}:</b> {t(`${data.changes.filter((c) => c.to === "naranja").length} a naranja con tramo congelado, ${data.changes.filter((c) => c.to === "ambar").length} a ámbar con seguimiento reforzado; El Niño costero en observación.`, `${data.changes.filter((c) => c.to === "naranja").length} to orange with a frozen tranche, ${data.changes.filter((c) => c.to === "ambar").length} to amber with reinforced follow-up; coastal El Niño under watch.`)}
+            <b>{t("Cambios", "Changes")}:</b> {t(`${data.changes.filter((c) => c.to === "naranja").length} a riesgo elevado con tramo congelado, ${data.changes.filter((c) => c.to === "ambar").length} a riesgo medio con seguimiento reforzado; El Niño costero en observación.`, `${data.changes.filter((c) => c.to === "naranja").length} to elevated risk with a frozen tranche, ${data.changes.filter((c) => c.to === "ambar").length} to medium risk with reinforced follow-up; coastal El Niño under watch.`)}
           </li>
           <li>
             <b>{t("Control", "Control")}:</b> {t(`${F.tranchesWithConformity} de ${F.tranchesReleased} tramos con checklist y conformidad del banco; ${pct(F.reconciledPct)} de los fondos con factura conciliada; congelamiento ejecutado el mismo día.`, `${F.tranchesWithConformity} of ${F.tranchesReleased} tranches with checklist and the bank's sign-off; ${pct(F.reconciledPct)} of funds with a reconciled invoice; freeze executed the same day.`)}
@@ -337,8 +337,8 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
   const footer = (
     <footer className="lbl absolute bottom-10 left-14 right-14 border-t border-bcp-border pt-1.5">
       {t(
-        `Cobertura de repago = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales propuestos: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x. Motor ${data.engineVersion}.`,
-        `Repayment coverage = net harvest revenue ÷ amount due at maturity. Proposed thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x. Engine ${data.engineVersion}.`,
+        `Cobertura de repago = ingreso neto de cosecha ÷ saldo al vencimiento. Umbrales propuestos: 1.50x riesgo medio, 1.30x riesgo elevado, 1.10x riesgo alto. Motor ${data.engineVersion}.`,
+        `Repayment coverage = net harvest revenue ÷ amount due at maturity. Proposed thresholds: 1.50x medium risk, 1.30x elevated risk, 1.10x high risk. Engine ${data.engineVersion}.`,
       )}
     </footer>
   );
@@ -348,8 +348,8 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
         <H>{t("4. Cambios desde la aprobación", "4. Changes since approval")}</H>
         <p className="mb-1 text-[11.5px] text-bcp-muted">
           {t(
-            `${BANK_EDITION ? `${loan.conditions.length} condiciones que afectan el repago` : `${loan.conditions.length} condiciones monitoreadas; ${notGreen} fuera de verde`}. Aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}.`,
-            `${BANK_EDITION ? `${loan.conditions.length} conditions affecting repayment` : `${loan.conditions.length} conditions monitored; ${notGreen} not green`}. Approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}.`,
+            `${BANK_EDITION ? `${loan.conditions.length} condiciones que afectan el repago` : `${loan.conditions.length} condiciones monitoreadas; ${notGreen} con desvío`}. Aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}.`,
+            `${BANK_EDITION ? `${loan.conditions.length} conditions affecting repayment` : `${loan.conditions.length} conditions monitored; ${notGreen} with a deviation`}. Approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}.`,
           )}
         </p>
         <T

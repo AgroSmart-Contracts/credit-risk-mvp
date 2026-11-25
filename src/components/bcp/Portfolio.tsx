@@ -10,7 +10,7 @@ import type { Loan, Portfolio as P, State } from "../../lib/bcp/types";
 import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
-import { Btn, Card, Estimado, ExampleChip, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
+import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
 import { useEvidence, useLang, useT } from "./shared";
 
 type PortfolioTab = "resumen" | "posicion" | "riesgo" | "prestamos" | "solicitudes";
@@ -68,7 +68,6 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   return (
     <div className="mx-auto max-w-[1200px] space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
-        <ExampleChip kind="portfolio" />
         <Btn onClick={onReport}>{t("Descargar reporte mensual (PDF)", "Download monthly report (PDF)")}</Btn>
       </header>
 
@@ -420,7 +419,8 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
     return { r, ls, line: ls.reduce((s, l) => s + l.lineUsd, 0), out: ls.reduce((s, l) => s + l.disbursedUsd, 0) };
   });
   return (
-    <table className="mt-2 w-full text-sm">
+    <div className="mt-2 overflow-x-auto">
+    <table className="w-full text-sm">
       <tbody className="divide-y divide-bcp-divider">
         {rows.map(([k, v, n]) => (
           <tr key={k} className="align-top">
@@ -436,7 +436,7 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
             <td className="py-2 text-bcp-muted">
               {t(`${usd(g.out)} desembolsados`, `${usd(g.out)} disbursed`)} ·{" "}
               {g.ls.map((l) => (
-                <span key={l.id} className="mr-1 inline-flex items-center gap-1">
+                <span key={l.id} className="mr-1 inline-flex flex-wrap items-center gap-1">
                   {l.id} <StateChip state={l.state} />
                 </span>
               ))}
@@ -445,6 +445,7 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
 

@@ -5,11 +5,11 @@
  */
 import { useState } from "react";
 import { COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, usd } from "../../lib/bcp/calc";
-import type { Application, Decision, Loan } from "../../lib/bcp/types";
+import type { Decision, Loan, State } from "../../lib/bcp/types";
 import type { Answer } from "./answers";
 import { useLang, useT, useToast } from "./shared";
 import { BANK_EDITION } from "./edition";
-import { Btn, Card, CheckIcon, Chip, StateChip } from "./ui";
+import { Btn, Card, CheckIcon, StateChip } from "./ui";
 
 export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen }: { loan: Loan; decision: Decision; answer?: Answer; onAnswer: (a: Answer) => void; cutoff: string; onOpen?: () => void }) {
   const t = useT();
@@ -122,58 +122,80 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
   );
 }
 
-/** An application waiting for the bank: what approving puts at stake and TruMarket's recommendation. */
-export function AppDecisionBlock({ app, answered, onOpen }: { app: Application; answered?: string; onOpen: () => void }) {
+/** One row of the decision queue: the same structure for a tranche sign-off and an application. */
+export interface QueueItem {
+  key: string;
+  ref: string;
+  type: string;
+  due: string;
+  /** Risk level (coverage band and controls, or a veto), kept apart from the recommendation. */
+  state: State;
+  situation: string;
+  amount: number;
+  coverage: number | null;
+  stressed: number | null;
+  exposureAfter: number | null;
+  exposureLabel: string;
+  rec: { text: string; detail: string; tone: "green" | "amber" | "red" };
+  /** What the bank is asked to do. */
+  action: string;
+  kind: "signoff" | "veto" | "condition" | "plain";
+  open: () => void;
+}
+
+const REC_TONE = { green: "text-bcp-green-text", amber: "text-bcp-ambar-text", red: "text-bcp-rojo-text" } as const;
+const EDGE: Record<State, string> = { verde: "border-l-bcp-green", ambar: "border-l-bcp-ambar", naranja: "border-l-bcp-naranja", rojo: "border-l-bcp-rojo", veto: "border-l-bcp-rojo" };
+
+export function QueueCard({ item, cutoff }: { item: QueueItem; cutoff: string }) {
   const t = useT();
-  const rec =
-    app.recommendation === "rechazar" ? <Chip tone="naranja">{t("Rechazo recomendado", "Decline recommended")}</Chip>
-    : app.recommendation === "aprobar_condicion" ? <Chip tone="ambar">{t("Aprobación con condición", "Approval with a condition")}</Chip>
-    : <Chip tone="green">{t("Aprobación recomendada", "Approval recommended")}</Chip>;
-  const p20 = app.coverage === null ? null : coverageUnder(app, STANDARD_STRESS.price);
+  const lang = useLang();
+  const na = t("N/D", "N/A");
+  const overdue = item.due < cutoff;
+  const cells: [string, string][] = [
+    [t("Monto", "Amount"), usd(item.amount)],
+    [t("Cobertura hoy", "Coverage today"), item.coverage === null ? na : cov(item.coverage)],
+    [t("Con precio −20%", "With price −20%"), item.stressed === null ? na : cov(item.stressed)],
+    [item.exposureLabel, item.exposureAfter === null ? na : usd(item.exposureAfter)],
+  ];
   return (
-    <Card tone="decision">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="text-[16px] font-bold text-bcp-ink">
-            {app.id} · {t(`Aprobar o rechazar ${usd(app.requestedUsd)}`, `Approve or decline ${usd(app.requestedUsd)}`)}
-          </h3>
-          <p className="lbl mt-0.5">{t(`Vence ${date(app.decisionDueDate, "es")}`, `Due ${date(app.decisionDueDate, "en")}`)}</p>
+    <article className={`rounded-lg border border-l-4 border-bcp-border bg-white ${EDGE[item.state]}`}>
+      <div className="flex flex-wrap items-center justify-between gap-2 px-5 pt-4">
+        <h3 className="text-[15px] font-bold text-bcp-ink">
+          {item.ref} <span className="font-normal text-bcp-muted">· {item.type}</span>
+        </h3>
+        <div className="flex items-center gap-3">
+          <span className={`text-[13px] ${overdue ? "font-semibold text-bcp-rojo-text" : "text-bcp-muted"}`}>
+            {overdue ? t("Vencida", "Overdue") : t("Vence", "Due")} {date(item.due, lang)}
+          </span>
+          <StateChip state={item.state} />
         </div>
-        {app.veto ? <StateChip state="veto" /> : rec}
       </div>
-      <p className="mt-2 text-sm text-bcp-ink">{t(app.summary)}</p>
-      <dl className="mt-3 grid gap-4 border-y border-bcp-divider py-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <dt className="lbl">{t("Solicitado", "Requested")}</dt>
-          <dd className="num text-[20px] font-bold">{usd(app.requestedUsd)}</dd>
-        </div>
-        <div>
-          <dt className="lbl">{t("Cobertura a la solicitud", "Coverage at application")}</dt>
-          <dd className="num text-[20px] font-bold">{app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage)}</dd>
-        </div>
-        {app.veto ? (
-          <div>
-            <dt className="lbl">{t("Motivo del veto", "Reason for the veto")}</dt>
-            <dd className="text-[16px] font-bold">{t(app.checks.find((c) => c.state === "veto")?.value ?? { es: "Cosecha no verificable", en: "Harvest cannot be verified" })}</dd>
+      {item.situation && <p className="px-5 pt-1.5 text-[14px] text-bcp-muted">{item.situation}</p>}
+      <dl className="mx-5 mt-3 grid grid-cols-2 gap-x-6 gap-y-3 rounded-md bg-bcp-bg px-4 py-3 lg:grid-cols-4">
+        {cells.map(([k, v]) => (
+          <div key={k}>
+            <dt className="lbl">{k}</dt>
+            <dd className={`num text-[18px] font-bold ${v === na ? "text-bcp-muted" : "text-bcp-ink"}`}>{v}</dd>
           </div>
-        ) : (
-          <div>
-            <dt className="lbl">{t("Si el precio cae 20%", "If the price falls 20%")}</dt>
-            <dd className="num text-[20px] font-bold">{p20 === null ? "n/d" : cov(p20)}</dd>
-          </div>
-        )}
-        <div>
-          <dt className="lbl">{t("Recomendación TruMarket", "TruMarket recommendation")}</dt>
-          <dd className="text-[16px] font-bold">{app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : app.recommendation === "rechazar" ? t("Rechazar", "Decline") : t("Aprobar", "Approve")}</dd>
-        </div>
+        ))}
       </dl>
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        {answered && <Stamp text={answered} when="" />}
-        <span className="ml-auto">
-          <Btn primary onClick={onOpen}>{t("Abrir solicitud", "Open application")} →</Btn>
-        </span>
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+        <div className="grid gap-x-8 gap-y-1 sm:grid-cols-[auto_auto]">
+          <div>
+            <p className="lbl">{t("Recomendación TruMarket", "TruMarket recommendation")}</p>
+            <p className={`text-[15px] font-bold ${REC_TONE[item.rec.tone]}`}>{item.rec.text}</p>
+            <p className="text-[13px] text-bcp-muted">{item.rec.detail}</p>
+          </div>
+          <div>
+            <p className="lbl">{t("Acción requerida", "Action required")}</p>
+            <p className="text-[15px] font-semibold text-bcp-ink">{item.action}</p>
+          </div>
+        </div>
+        <Btn primary onClick={item.open}>
+          {t("Revisar decisión", "Review decision")} →
+        </Btn>
       </div>
-    </Card>
+    </article>
   );
 }
 
