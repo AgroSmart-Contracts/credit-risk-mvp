@@ -8,13 +8,14 @@ import { FieldImages } from "./FieldImages";
 import { TechChart } from "./TechCharts";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { CoverageBuild, DriverBridge } from "./CoverageBuild";
-import { COVERAGE_BANDS, accruedCost, cov, date, daysBetween, fundsTotals, haLabel, pct, provision, stateCause, stateFromCoverage, toDisburse, usd, withDate } from "../../lib/bcp/calc";
+import { COVERAGE_BANDS, cov, date, daysBetween, fundsTotals, haLabel, pct, provision, stateCause, stateFromCoverage, toDisburse, usd, withDate } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Condition, Loan, Portfolio } from "../../lib/bcp/types";
 import { CoverageChart } from "./CoverageChart";
 import { decisionKey, type Answer } from "./answers";
 import { DecisionBlock } from "./Decision";
-import { Btn, Card, CheckIcon, Chip, ExampleChip, Lbl, PageTabs, Prov, Rich, SectionTitle, StateChip } from "./ui";
+import { Btn, Card, CheckIcon, Chip, ExampleChip, Lbl, LockedBtn, PageTabs, Prov, Rich, SectionTitle, StateChip } from "./ui";
+import { PILOT_NOTE } from "./nav";
 import { sourceTx, useEvidence, useLang, useT } from "./shared";
 
 const GROUPS: Condition["group"][] = ["Prestatario", "Cultivo y volumen", "Precio y calidad", "Uso de fondos y cobranza"];
@@ -87,7 +88,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
           <div className="flex flex-wrap gap-2 print:hidden">
             <Btn onClick={onMemo}>{t("Memorando de crédito (PDF)", "Credit memo (PDF)")}</Btn>
             {!BANK_EDITION && <Btn onClick={exportCsv}>{t("Exportar registro (CSV)", "Export log (CSV)")}</Btn>}
-            {!BANK_EDITION && <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
+            {BANK_EDITION ? <LockedBtn note={t(PILOT_NOTE)}>{t("Ver en el mapa", "View on the map")}</LockedBtn> : <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
           </div>
         </div>
       </header>
@@ -101,7 +102,8 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
           { id: "riesgo", label: t("Riesgo", "Risk") },
           { id: "fondos", label: t("Uso de fondos", "Use of funds") },
           { id: "historial", label: t("Decisiones e historial", "Decisions and history") },
-          ...(BANK_EDITION ? [] : [{ id: "evidencia" as const, label: t("Evidencia", "Evidence") }]),
+          // Field evidence and satellite images open with the pilot.
+          { id: "evidencia" as const, label: t("Evidencia", "Evidence"), ...(BANK_EDITION ? { locked: t(PILOT_NOTE) } : {}) },
         ]}
       />
 
@@ -125,15 +127,15 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { k: t("Línea aprobada", "Approved line"), v: usd(loan.lineUsd), s: t(`${loan.cycleDays} días · 3 tramos`, `${loan.cycleDays} days · 3 tranches`), kind: "line" as const },
-            { k: t("Desembolsado", "Disbursed"), v: usd(loan.disbursedUsd), s: t(`${loan.tranches.filter((x) => x.status === "liberado").length} de ${loan.tranches.length} tramos · + ${usd(accruedCost(loan, data.cutoff))} de costo devengado (estimado)`, `${loan.tranches.filter((x) => x.status === "liberado").length} of ${loan.tranches.length} tranches · + ${usd(accruedCost(loan, data.cutoff))} accrued cost (estimated)`), kind: "disbursed" as const },
+            { k: t("Desembolsado", "Disbursed"), v: usd(loan.disbursedUsd), s: t(`${loan.tranches.filter((x) => x.status === "liberado").length} de ${loan.tranches.length} tramos`, `${loan.tranches.filter((x) => x.status === "liberado").length} of ${loan.tranches.length} tranches`), kind: "disbursed" as const },
             { k: loan.frozenUsd ? t("Congelado", "Frozen") : t("Por desembolsar", "Undrawn"), v: usd(loan.frozenUsd || toDisburse(loan)), s: loan.frozenUsd ? t(`por desembolsar ${usd(toDisburse(loan))}`, `undrawn ${usd(toDisburse(loan))}`) : t("contra hitos verificados", "against verified milestones"), kind: "undrawn" as const },
-            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(loan.dueAtMaturityUsd), s: t("capital más costo estimado del banco", "principal plus estimated bank cost"), kind: "due" as const },
+            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(loan.dueAtMaturityUsd), s: "", kind: "due" as const },
             { k: t("Vence", "Maturity"), v: date(loan.maturityDate, lang), s: t(`${daysLeft} días`, `${daysLeft} days`), kind: "maturity" as const },
           ].map((c) => (
             <div key={c.k} className="rounded-xl border border-bcp-border bg-white p-4 sm:p-5">
               <Lbl>{c.k}</Lbl>
               <p className="num text-[22px] font-bold">{c.v}</p>
-              <p className="text-sm text-bcp-muted">{c.s}</p>
+              {c.s && <p className="text-sm text-bcp-muted">{c.s}</p>}
             </div>
           ))}
         </div>
@@ -176,7 +178,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               );
             })}
           </div>
-        <p className="lbl mt-3">{t("Repago desde los cobros del comprador, antes de cualquier pago al productor.", "Repaid from the buyer's payments, before any payment to the grower.")}</p>
         </Card>
       </section>
 
@@ -217,7 +218,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
       <Card>
         <h3 className="text-[16px] font-bold">{t(`Qué movió la cobertura: ${cov(loan.coverageAtApproval)} a la aprobación → ${cov(loan.coverageToday)} hoy`, `What moved coverage: ${cov(loan.coverageAtApproval)} at approval → ${cov(loan.coverageToday)} today`)}</h3>
         <div className="mt-2"><DriverBridge loan={loan} /></div>
-        <p className="lbl mt-2">{t("El factor que origina la alerta se marca aunque su efecto aún no esté en la cobertura. La proyección anticipa; no fija el estado.", "The driver behind the alert is marked even when its effect is not yet in coverage. The projection anticipates; it does not set the state.")}</p>
       </Card>
 
       <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
@@ -232,9 +232,7 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         </div>
       )}
 
-      <SectionTitle title={t("Cambios desde la aprobación", "Changes since approval")}
-        sub={t(`aprobación ${date(loan.approvalDate, "es")} · hoy ${date(data.cutoff, "es")}`, `approval ${date(loan.approvalDate, "en")} · today ${date(data.cutoff, "en")}`)}
-      />
+      <SectionTitle title={t("Cambios desde la aprobación", "Changes since approval")} />
       <Card>
         {!BANK_EDITION && <p className="mb-2 text-sm text-bcp-ink">
           {allConds
@@ -395,9 +393,6 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
               </tbody>
             </table>
           </div>
-          <p className="lbl mt-2">
-            {t(`Entradas inmutables; las correcciones son nuevas entradas vinculadas. Motor ${data.engineVersion}.`, `Entries are immutable; corrections are new linked entries. Engine ${data.engineVersion}.`)}
-          </p>
         </Card>
       )}
 
@@ -497,8 +492,6 @@ function TwoSignals({ loan }: { loan: Loan }) {
         <div className="mt-1 flex flex-wrap items-center gap-2">
           <StateChip state={loan.state} cause={cause} />
         </div>
-        {cause === "tecnica" && alert && <p className="lbl mt-1">{t(`${alert.text.es}. Seguimiento TruMarket; criterio sobre señales técnicas pendiente.`, `${alert.text.en}. TruMarket follow-up; ruling on technical signals pending.`)}</p>}
-        {cause === null && <p className="lbl mt-1">{t("Cobertura y controles en orden.", "Coverage and controls in order.")}</p>}
       </Card>
     </div>
   );

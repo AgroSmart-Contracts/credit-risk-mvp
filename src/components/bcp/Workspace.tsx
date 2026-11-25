@@ -11,8 +11,8 @@ import { PORTFOLIO, applicationById, loanById } from "../../data/bcp/dataset";
 import { bySeverity, cov, date, pendingDecisions, usd } from "../../lib/bcp/calc";
 import type { Lang } from "../../lib/bcp/types";
 import { appKey, decisionKey, type Answer } from "./answers";
-import { ApplicationFile, ApplicationsPage, ApplicationsTable } from "./Applications";
-import { DecisionBlock } from "./Decision";
+import { ApplicationFile, ApplicationsPage } from "./Applications";
+import { AppDecisionBlock, DecisionBlock } from "./Decision";
 import { BANK_EDITION } from "./edition";
 import { NAV_ACTIVE, bcpNavItems, bcpUrl, type BcpView as View } from "./nav";
 import { loadLoanFile, loadMap, loadReports } from "./pages";
@@ -234,8 +234,13 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
   return (
     <div className="mx-auto max-w-[1100px] space-y-4">
       {all.length === 0 && PORTFOLIO.applications.length === 0 && <p className="text-sm text-bcp-muted">{t("Nada pendiente.", "Nothing pending.")}</p>}
+      {/* Every open decision, one card each: tranche sign-offs first, then applications. */}
+      <SectionTitle title={t(`Decisiones abiertas (${all.length + PORTFOLIO.applications.length})`, `Open decisions (${all.length + PORTFOLIO.applications.length})`)} />
       {all.map((p) => (
         <DecisionBlock key={decisionKey(p.loan, p.decision)} loan={p.loan} decision={p.decision} cutoff={PORTFOLIO.cutoff} answer={answers[decisionKey(p.loan, p.decision)]} onAnswer={(a) => onAnswer(decisionKey(p.loan, p.decision), a)} onOpen={() => go("expediente", p.loan.id)} />
+      ))}
+      {PORTFOLIO.applications.map((a) => (
+        <AppDecisionBlock key={a.id} app={a} answered={answers[appKey(a)] ? t("Decisión registrada", "Decision recorded") : undefined} onOpen={() => go("solicitud", a.id)} />
       ))}
 
       <SectionTitle title={t("Próximos 30 días", "Next 30 days")} />
@@ -270,14 +275,6 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
         </div>
       </Card>
 
-      {PORTFOLIO.applications.length > 0 && (
-        <>
-          <SectionTitle title={t("Solicitudes por aprobar o rechazar", "Applications to approve or decline")} />
-          <Card>
-            <ApplicationsTable apps={PORTFOLIO.applications} onOpen={(x) => go("solicitud", x)} answers={answers} />
-          </Card>
-        </>
-      )}
     </div>
   );
 }
@@ -323,7 +320,7 @@ function Reports({ go }: { go: (v: View, id?: string | null) => void }) {
   const t = useT();
   return (
     <div className="mx-auto max-w-[1000px] space-y-4">
-      <SectionTitle title={t("Reportes mensuales", "Monthly reports")} sub={t("Para el comité de crédito y la SBS · A4", "For the credit committee and the SBS · A4")} />
+      <SectionTitle title={t("Reportes mensuales", "Monthly reports")} />
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>

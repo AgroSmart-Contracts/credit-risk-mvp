@@ -90,7 +90,6 @@ export function StressGrid({ input, state }: { input: HarvestInput; state?: Stat
   return (
     <div>
       <h3 className="text-[16px] font-bold">{t("Prueba de estrés de la cobertura", "Coverage stress test")}</h3>
-      <p className="lbl">{t("Cobertura sobre ingreso neto si el precio y el volumen caen; los costos por kg no bajan con el precio", "Coverage on net revenue if price and volume fall; costs per kg do not fall with the price")}</p>
       <div className="mt-2 overflow-x-auto">
         <table className="w-full min-w-[440px] text-center text-sm">
           <thead>

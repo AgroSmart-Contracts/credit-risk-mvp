@@ -10,12 +10,12 @@ import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
 import { appKey, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
-import { VigourPattern } from "./VigourPattern";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { CoverageBuild, StressCompare } from "./CoverageBuild";
 import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
-import { Btn, Card, Chip, ExampleChip, Lbl, Modal, Prov, SectionTitle, StateChip } from "./ui";
+import { Btn, Card, Chip, ExampleChip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
+import { PILOT_NOTE } from "./nav";
 
 
 const ANSWER_TEXT = {
@@ -202,7 +202,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
             <Btn onClick={onMemo}>{t("Memorando de evaluación (PDF)", "Assessment memo (PDF)")}</Btn>
-            {!BANK_EDITION && <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
+            {BANK_EDITION ? <LockedBtn note={t(PILOT_NOTE)}>{t("Ver en el mapa", "View on the map")}</LockedBtn> : <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
           </div>
         </div>
       </header>
@@ -217,18 +217,17 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           {[
             { k: t("Línea solicitada", "Requested line"), v: usd(app.requestedUsd), s: t(`${app.tenorDays} días · 3 tramos`, `${app.tenorDays} days · 3 tranches`) },
             { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "T1" },
-            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: t("capital más costo estimado del banco", "principal plus estimated bank cost") },
-            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("veto", "veto") : t("cosecha esperada ÷ saldo", "expected harvest ÷ amount due") },
+            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: "" },
+            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("veto", "veto") : "" },
             { k: t("Precio de equilibrio", "Break-even price"), v: app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`, s: t(`esperado USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`) },
           ].map((c) => (
             <Card key={c.k}>
               <Lbl>{c.k}</Lbl>
               <p className="num text-[22px] font-bold">{c.v}</p>
-              <p className="text-sm text-bcp-muted">{c.s}</p>
+              {c.s && <p className="text-sm text-bcp-muted">{c.s}</p>}
             </Card>
           ))}
         </div>
-        <p className="lbl mt-2">{app.tranches.map((x) => `${x.id} ${x.pct}% · ${usd(x.amountUsd)} · ${t(x.milestone)}`).join("   |   ")}</p>
       </section>
 
       <div className="grid gap-3 lg:grid-cols-2">
@@ -250,7 +249,14 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
             <p className="mt-3">
               <Stamp text={ANSWER_TEXT[answer.kind as keyof typeof ANSWER_TEXT]?.[lang] ?? ""} when={date(answer.at.slice(0, 10), lang)} />
             </p>
-          ) : BANK_EDITION ? null : (
+          ) : BANK_EDITION ? (
+            // Read-only for the bank until the pilot: TruMarket's recommendation, in place of the buttons.
+            <div className="mt-3">
+              <Lbl>{t("Recomendación TruMarket", "TruMarket recommendation")}</Lbl>
+              <p className="text-[20px] font-bold">{app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : app.recommendation === "rechazar" ? t("Rechazar", "Decline") : t("Aprobar", "Approve")}</p>
+              <div className="mt-2"><RecommendationChip a={app} /></div>
+            </div>
+          ) : (
             <div className="mt-3 flex flex-wrap gap-2">
               {kinds.map((k) => (
                 <Btn key={k} primary={recommended(k)} onClick={() => {
@@ -329,17 +335,16 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         )}
       </div>
 
-      {app.vigourPattern && (
-        <Card>
-          <VigourPattern points={app.vigourPattern} />
-        </Card>
-      )}
-
-      {geo?.parcelId && geo.ring && (
-        <Card>
-          <SectionTitle title={t("Imagen del predio", "Parcel image")} sub={t("evidencia satelital de la solicitud", "satellite evidence for the application")} />
-          <FieldImages parcelId={geo.parcelId} ring={geo.ring} cutoff={data.cutoff} />
-        </Card>
+      {BANK_EDITION ? (
+        <PilotLocked title={t("Imagen satelital del predio", "Satellite image of the parcel")} note={t(PILOT_NOTE)} />
+      ) : (
+        geo?.parcelId &&
+        geo.ring && (
+          <Card>
+            <SectionTitle title={t("Imagen del predio", "Parcel image")} />
+            <FieldImages parcelId={geo.parcelId} ring={geo.ring} cutoff={data.cutoff} />
+          </Card>
+        )
       )}
     </div>
   );

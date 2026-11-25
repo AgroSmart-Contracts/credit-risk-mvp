@@ -5,11 +5,11 @@
  */
 import { useState } from "react";
 import { COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, usd } from "../../lib/bcp/calc";
-import type { Decision, Loan } from "../../lib/bcp/types";
+import type { Application, Decision, Loan } from "../../lib/bcp/types";
 import type { Answer } from "./answers";
 import { useLang, useT, useToast } from "./shared";
 import { BANK_EDITION } from "./edition";
-import { Btn, Card, CheckIcon, StateChip } from "./ui";
+import { Btn, Card, CheckIcon, Chip, StateChip } from "./ui";
 
 export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen }: { loan: Loan; decision: Decision; answer?: Answer; onAnswer: (a: Answer) => void; cutoff: string; onOpen?: () => void }) {
   const t = useT();
@@ -113,10 +113,58 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
           </>
         )}
         {onOpen && (
-          <button type="button" onClick={onOpen} className="ml-auto min-h-[44px] text-sm font-semibold text-bcp-ink hover:underline">
-            {t("Abrir expediente", "Open file")} →
-          </button>
+          <span className="ml-auto">
+            <Btn onClick={onOpen}>{t("Abrir expediente", "Open file")} →</Btn>
+          </span>
         )}
+      </div>
+    </Card>
+  );
+}
+
+/** An application waiting for the bank: what approving puts at stake and TruMarket's recommendation. */
+export function AppDecisionBlock({ app, answered, onOpen }: { app: Application; answered?: string; onOpen: () => void }) {
+  const t = useT();
+  const rec =
+    app.recommendation === "rechazar" ? <Chip tone="naranja">{t("Rechazo recomendado", "Decline recommended")}</Chip>
+    : app.recommendation === "aprobar_condicion" ? <Chip tone="ambar">{t("Aprobación con condición", "Approval with a condition")}</Chip>
+    : <Chip tone="green">{t("Aprobación recomendada", "Approval recommended")}</Chip>;
+  const p20 = app.coverage === null ? null : coverageUnder(app, STANDARD_STRESS.price);
+  return (
+    <Card tone="decision">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h3 className="text-[16px] font-bold text-bcp-ink">
+            {app.id} · {t(`Aprobar o rechazar ${usd(app.requestedUsd)}`, `Approve or decline ${usd(app.requestedUsd)}`)}
+          </h3>
+          <p className="lbl mt-0.5">{t(`Vence ${date(app.decisionDueDate, "es")}`, `Due ${date(app.decisionDueDate, "en")}`)}</p>
+        </div>
+        {app.veto ? <StateChip state="veto" /> : rec}
+      </div>
+      <p className="mt-2 text-sm text-bcp-ink">{t(app.summary)}</p>
+      <dl className="mt-3 grid gap-4 border-y border-bcp-divider py-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <dt className="lbl">{t("Solicitado", "Requested")}</dt>
+          <dd className="num text-[20px] font-bold">{usd(app.requestedUsd)}</dd>
+        </div>
+        <div>
+          <dt className="lbl">{t("Cobertura a la solicitud", "Coverage at application")}</dt>
+          <dd className="num text-[20px] font-bold">{app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage)}</dd>
+        </div>
+        <div>
+          <dt className="lbl">{t("Si el precio cae 20%", "If the price falls 20%")}</dt>
+          <dd className="num text-[20px] font-bold">{p20 === null ? "n/d" : cov(p20)}</dd>
+        </div>
+        <div>
+          <dt className="lbl">{t("Recomendación TruMarket", "TruMarket recommendation")}</dt>
+          <dd className="text-[16px] font-bold">{app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : app.recommendation === "rechazar" ? t("Rechazar", "Decline") : t("Aprobar", "Approve")}</dd>
+        </div>
+      </dl>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {answered && <Stamp text={answered} when="" />}
+        <span className="ml-auto">
+          <Btn primary onClick={onOpen}>{t("Abrir solicitud", "Open application")} →</Btn>
+        </span>
       </div>
     </Card>
   );
@@ -126,7 +174,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
 export function Stamp({ text, when }: { text: string; when: string }) {
   return (
     <span className="inline-flex -rotate-2 items-center gap-2 rounded-md border-2 border-bcp-green-text px-2.5 py-1.5 font-[Arial,Helvetica,sans-serif] text-[12px] font-bold uppercase tracking-wide text-bcp-green-text">
-      ✓ {text} · {when}
+      ✓ {text}{when ? ` · ${when}` : ""}
     </span>
   );
 }

@@ -263,6 +263,4 @@ export interface Application {
   summary: Tx;
   reasons: Tx[];
   checks: AppCheck[];
-  /** Bank edition: anonymised seasonal vigour by calendar month, instead of parcel imagery. */
-  vigourPattern?: { month: number; value: number; reference: number }[];
 }
