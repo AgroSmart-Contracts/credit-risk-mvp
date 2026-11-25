@@ -229,11 +229,23 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
         <Card>
           <h3 className="text-[16px] font-bold">{t("Estrés de la cartera", "Portfolio stress")}</h3>
-          <table className="mt-2 w-full text-sm">
+          <div className="mt-2 overflow-x-auto">
+          <table className="w-full min-w-[460px] text-sm">
             <thead>
-              <tr className="border-b border-bcp-border">
-                {[t("Escenario", "Scenario"), t("Cobertura", "Coverage"), t(`Bajo ${cov(COVERAGE_BANDS.ambar)}`, `Below ${cov(COVERAGE_BANDS.ambar)}`), t(`Bajo ${cov(COVERAGE_BANDS.naranja)}`, `Below ${cov(COVERAGE_BANDS.naranja)}`), t(`Bajo ${cov(COVERAGE_BANDS.rojo)}`, `Below ${cov(COVERAGE_BANDS.rojo)}`)].map((h, i) => (
-                  <Lbl key={h} as="th" className={`py-1.5 font-normal ${i ? "text-right" : "text-left"}`}>{h}</Lbl>
+              <tr className="border-b border-bcp-border align-bottom">
+                <Lbl as="th" className="py-1.5 text-left font-normal">{t("Escenario", "Scenario")}</Lbl>
+                <Lbl as="th" className="py-1.5 pr-2 text-right font-normal">{t("Cobertura de la cartera", "Portfolio coverage")}</Lbl>
+                {/* Loans by risk level: each loan in exactly one column, so a row adds up to the portfolio. */}
+                {([
+                  [t("Bajo", "Low"), `≥ ${cov(COVERAGE_BANDS.ambar)}`],
+                  [t("Medio", "Medium"), t(`${cov(COVERAGE_BANDS.naranja)} a ${cov(COVERAGE_BANDS.ambar)}`, `${cov(COVERAGE_BANDS.naranja)} to ${cov(COVERAGE_BANDS.ambar)}`)],
+                  [t("Elevado", "Elevated"), t(`${cov(COVERAGE_BANDS.rojo)} a ${cov(COVERAGE_BANDS.naranja)}`, `${cov(COVERAGE_BANDS.rojo)} to ${cov(COVERAGE_BANDS.naranja)}`)],
+                  [t("Alto", "High"), `< ${cov(COVERAGE_BANDS.rojo)}`],
+                ] as const).map(([k, r]) => (
+                  <Lbl key={k} as="th" className="py-1.5 pl-2 text-right font-normal">
+                    <span className="block font-semibold text-bcp-ink">{k}</span>
+                    {r}
+                  </Lbl>
                 ))}
               </tr>
             </thead>
@@ -246,14 +258,15 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
               ] as const).map(([k, x]) => (
                 <tr key={k}>
                   <td className="py-2">{k}</td>
-                  <td className="num py-2 text-right"><StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} /></td>
-                  <td className="num py-2 text-right">{x.below.ambar}</td>
-                  <td className="num py-2 text-right">{x.below.naranja}</td>
-                  <td className="num py-2 text-right">{x.below.rojo}</td>
+                  <td className="num py-2 pr-2 text-right"><StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} /></td>
+                  {(["verde", "ambar", "naranja", "rojo"] as const).map((lv) => (
+                    <td key={lv} className={`num py-2 pl-2 text-right ${x.levels[lv] ? "font-semibold text-bcp-ink" : "text-bcp-muted/60"}`}>{x.levels[lv]}</td>
+                  ))}
                 </tr>
               ))}
             </tbody>
           </table>
+          </div>
         </Card>
         <Card>
           <h3 className="text-[16px] font-bold">{t("Concentración", "Concentration")}</h3>

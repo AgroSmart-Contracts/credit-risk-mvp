@@ -188,10 +188,11 @@ export function portfolioFigures(loans: Loan[]) {
   const netAt = (price = 0, volume = 0) => loans.reduce((s, l) => s + harvestBuild(l, { price, volume }).netUsd, 0);
   const netRevenue = netAt();
   const coverage = due ? r2(netRevenue / due) : 0;
-  /** Portfolio and per-loan coverage under a scenario, and how many loans fall under each band. */
+  /** Portfolio coverage under a scenario, and how many loans land in each risk level (each loan counted once). */
   const scenario = (price: number, volume: number) => {
-    const per = loans.map((l) => coverageUnder(l, price, volume));
-    return { coverage: due ? r2(netAt(price, volume) / due) : 0, below: { ambar: per.filter((c) => c < COVERAGE_BANDS.ambar).length, naranja: per.filter((c) => c < COVERAGE_BANDS.naranja).length, rojo: per.filter((c) => c < COVERAGE_BANDS.rojo).length } };
+    const levels: Record<Exclude<State, "veto">, number> = { verde: 0, ambar: 0, naranja: 0, rojo: 0 };
+    for (const l of loans) levels[stateFromCoverage(coverageUnder(l, price, volume))] += 1;
+    return { coverage: due ? r2(netAt(price, volume) / due) : 0, levels };
   };
   const byState: Record<Exclude<State, "veto">, { usd: number; n: number }> = { verde: { usd: 0, n: 0 }, ambar: { usd: 0, n: 0 }, naranja: { usd: 0, n: 0 }, rojo: { usd: 0, n: 0 } };
   for (const l of loans) if (l.state !== "veto") {
