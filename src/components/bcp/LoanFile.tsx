@@ -8,7 +8,8 @@ import { FieldImages } from "./FieldImages";
 import { TechChart } from "./TechCharts";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { CoverageBuild, DriverBridge } from "./CoverageBuild";
-import { COVERAGE_BANDS, cov, date, range, daysBetween, fundsTotals, haLabel, pct, provision, stateCause, toDisburse, usd, withDate } from "../../lib/bcp/calc";
+import { RepaymentCard } from "./Repayment";
+import { COVERAGE_BANDS, cov, date, daysBetween, fundsTotals, haLabel, pct, provision, stateCause, toDisburse, usd, withDate } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Condition, Loan, Portfolio } from "../../lib/bcp/types";
 import { CoverageChart } from "./CoverageChart";
@@ -105,6 +106,17 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
 
       {page === "resumen" && <>
       <FileSummary loan={loan} />
+      <RepaymentCard
+        input={loan}
+        cutoff={data.cutoff}
+        approval={loan.coverageAtApproval}
+        low={loan.projection?.low}
+        high={loan.projection?.high}
+        lowHighLabel={loan.controlsState !== "verde" ? t("Si no se remedia", "If not remedied") : undefined}
+        areaHa={BANK_EDITION ? undefined : loan.areaHa}
+        yieldTHa={BANK_EDITION ? undefined : loan.yieldTHa}
+        onCalc={() => { setPage("riesgo"); requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" })); }}
+      />
       <Card>
         <h3 className="text-[16px] font-bold">{t("Situación", "Situation")}</h3>
         {/* What happened and what is needed: coverage and exposure are already in the summary above. */}
@@ -480,7 +492,6 @@ function FileSummary({ loan }: { loan: Loan }) {
     cobertura: t("Por la cobertura", "On coverage"),
     none: t("Controles en orden", "Controls in order"),
   };
-  const issue = loan.controlsState !== "verde";
   const DOT: Record<string, string> = { verde: "bg-bcp-green", ambar: "bg-bcp-ambar", naranja: "bg-bcp-naranja", rojo: "bg-bcp-rojo", veto: "bg-bcp-rojo" };
   const TEXT: Record<string, string> = { verde: "text-bcp-green-text", ambar: "text-bcp-ambar-text", naranja: "text-bcp-naranja-text", rojo: "text-bcp-rojo-text", veto: "text-bcp-rojo-text" };
   const RULE: Record<string, string> = { verde: "border-l-bcp-green", ambar: "border-l-bcp-ambar", naranja: "border-l-bcp-naranja", rojo: "border-l-bcp-rojo", veto: "border-l-bcp-rojo" };
@@ -500,19 +511,9 @@ function FileSummary({ loan }: { loan: Loan }) {
       v: usd(loan.disbursedUsd),
       s: loan.frozenUsd ? t(`máximo ${usd(loan.dueAtMaturityUsd)} si se libera el congelado`, `at most ${usd(loan.dueAtMaturityUsd)} if the frozen tranche is released`) : t(`máximo ${usd(loan.dueAtMaturityUsd)} con todos los tramos`, `at most ${usd(loan.dueAtMaturityUsd)} with every tranche`),
     },
-    {
-      k: t("Cobertura de repago", "Repayment coverage"),
-      v: cov(loan.coverageToday),
-      s: t(`aprobación ${cov(loan.coverageAtApproval)} · umbral ${cov(COVERAGE_BANDS.ambar)}`, `approval ${cov(loan.coverageAtApproval)} · threshold ${cov(COVERAGE_BANDS.ambar)}`),
-    },
-    {
-      k: issue ? t("Si no se remedia", "If not remedied") : t("Proyección", "Projection"),
-      v: loan.projection ? range(loan.projection.low, loan.projection.high, lang) : t("sin cambio", "no change"),
-      s: t("estimado al vencimiento", "estimated at maturity"),
-    },
   ];
   return (
-    <section aria-label={t("Resumen del expediente", "File summary")} className={`grid gap-px overflow-hidden rounded-lg border border-l-4 border-bcp-border bg-bcp-border sm:grid-cols-2 lg:grid-cols-4 ${RULE[loan.state]}`}>
+    <section aria-label={t("Resumen del expediente", "File summary")} className={`grid gap-px overflow-hidden rounded-lg border border-l-4 border-bcp-border bg-bcp-border sm:grid-cols-2 ${RULE[loan.state]}`}>
       {cells.map((c) => (
         <div key={c.k} className="bg-white px-5 py-4">
           <p className="lbl">{c.k}</p>

@@ -5,13 +5,14 @@
  */
 import { useCallback, useState } from "react";
 import { GEO } from "../../data/bcp/technical";
-import { cov, date, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
+import { cov, date, harvestBuild, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
 import { appKey, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { CoverageBuild, StressCompare } from "./CoverageBuild";
+import { CoverageBuild } from "./CoverageBuild";
+import { LineCompare, RepaymentCard } from "./Repayment";
 import { sourceTx, useLang, useT, useToast } from "./shared";
 import { Stamp } from "./Decision";
 import { Btn, Card, Chip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
@@ -209,15 +210,35 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         <p className="text-[16px] font-medium leading-snug">{t(app.summary)}</p>
       </Card>
 
-      <section>
+      {app.coverage !== null && (
+        <RepaymentCard
+          input={app}
+          cutoff={data.cutoff}
+          middle={app.condition
+            ? { label: t("Con la condición", "On the condition"), value: cov(harvestBuild(app, {}, app.condition.dueAtMaturityUsd).coverage), sub: t(`línea de ${usd(app.condition.lineUsd)}`, `line of ${usd(app.condition.lineUsd)}`) }
+            : { label: t("Línea solicitada", "Requested line"), value: usd(app.requestedUsd), sub: t(`${app.tenorDays} días · ${usd(t1.amountUsd)} a la firma`, `${app.tenorDays} days · ${usd(t1.amountUsd)} at signing`) }}
+          areaHa={BANK_EDITION ? undefined : app.areaHa}
+          yieldTHa={BANK_EDITION ? undefined : app.yieldTHa}
+          chip={<RecommendationChip a={app} />}
+          onCalc={() => document.getElementById("calculo-cobertura")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+        />
+      )}
+
+      {app.condition && (
+        <section>
+          <SectionTitle title={t("Línea solicitada y línea recomendada", "Requested line and recommended line")} />
+          <LineCompare input={app} tenorDays={app.tenorDays} requestedUsd={app.requestedUsd} requestedDueUsd={app.dueAtMaturityUsd} condition={app.condition} />
+        </section>
+      )}
+
+      {app.coverage === null && <section>
         <SectionTitle title={t("Exposición si se aprueba", "Exposure if approved")} />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { k: t("Línea solicitada", "Requested line"), v: usd(app.requestedUsd), s: t(`${app.tenorDays} días · 3 tramos`, `${app.tenorDays} days · 3 tranches`) },
             { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "" },
             { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: "" },
-            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: "" },
-            { k: t("Precio de equilibrio", "Break-even price"), v: app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`, s: t(`esperado USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`) },
+            { k: t("Cobertura a la solicitud", "Coverage at application"), v: t("No verificable", "Not verifiable"), s: "" },
           ].map((c) => (
             <Card key={c.k}>
               <Lbl>{c.k}</Lbl>
@@ -226,7 +247,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
             </Card>
           ))}
         </div>
-      </section>
+      </section>}
 
       <div className="grid gap-3 lg:grid-cols-2">
         <Card>
@@ -304,14 +325,11 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
 
       {app.coverage !== null && (
         <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
-          <Card><CoverageBuild input={app} areaHa={app.areaHa} yieldTHa={app.yieldTHa} /></Card>
+          <Card><div id="calculo-cobertura" className="scroll-mt-32"><CoverageBuild input={app} areaHa={app.areaHa} yieldTHa={app.yieldTHa} /></div></Card>
           <Card>
-            <h3 className="text-[16px] font-bold">{app.condition ? t("Estrés estándar: solicitado y con la condición", "Standard stress: as requested and on the condition") : t("Estrés estándar", "Standard stress")}</h3>
-            <div className="mt-2">
-              <StressCompare input={app} cols={[{ label: usd(app.requestedUsd), dueUsd: app.dueAtMaturityUsd }, ...(app.condition ? [{ label: usd(app.condition.lineUsd), dueUsd: app.condition.dueAtMaturityUsd }] : [])]} />
-            </div>
+            <h3 className="text-[16px] font-bold">{t("Precio y volumen a la vez", "Price and volume together")}</h3>
             {stress ? (
-              <div className="mt-4"><StressGrid input={app} /></div>
+              <div className="mt-3"><StressGrid input={app} /></div>
             ) : (
               <button type="button" onClick={() => setStress(true)} className="mt-2 min-h-[44px] text-sm font-semibold text-bcp-green-text hover:underline">
                 {t("Ver la grilla de precio y volumen", "View the price and volume grid")} →

@@ -11,6 +11,7 @@ import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
+import { CoverageRange, SourceStrip } from "./Repayment";
 import { useEvidence, useLang, useT } from "./shared";
 
 const STRESS_LEVELS = ["verde", "ambar", "naranja", "rojo"] as const;
@@ -71,6 +72,8 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       <header className="flex flex-wrap items-end justify-between gap-3">
         <Btn onClick={onReport}>{t("Descargar reporte mensual (PDF)", "Download monthly report (PDF)")}</Btn>
       </header>
+
+      <SourceStrip cutoff={data.cutoff} />
 
       {/* Headline figures: label and figure; the one in view is highlighted. */}
       <section aria-label={t("Situación de la cartera", "Portfolio situation")} className="grid gap-px overflow-hidden rounded-xl border border-bcp-border bg-bcp-border sm:grid-cols-2 xl:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
@@ -314,14 +317,80 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       </>}
 
       {page === "resumen" && <>
+      {/* Capital and repayment at a glance; the detail sits in Position and Risk. */}
+      <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
+        <Card>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="text-[16px] font-bold">{t("Capital y vencimientos", "Capital and maturities")}</h3>
+            <button type="button" onClick={() => setPage("posicion")} className="min-h-[36px] text-sm font-semibold text-bcp-green-text hover:underline">{t("Ver calendario", "View calendar")} ›</button>
+          </div>
+          <div className="mt-3">
+            <StackBar
+              height="h-[14px]"
+              total={F.line}
+              label={t(`Línea de ${usd(F.line)}: desembolsado ${usd(F.disbursed)}, congelado ${usd(F.frozen)}, por desembolsar ${usd(F.pending)}`, `Line of ${usd(F.line)}: disbursed ${usd(F.disbursed)}, frozen ${usd(F.frozen)}, to disburse ${usd(F.pending)}`)}
+              segments={[
+                { value: F.disbursed, className: "bg-bcp-ink", label: "desembolsado" },
+                { value: F.frozen, className: "hatch", label: "congelado" },
+                { value: F.pending, className: "bg-bcp-fill", label: "por desembolsar" },
+              ]}
+            />
+          </div>
+          <dl className="mt-3 grid grid-cols-3 gap-3">
+            {[
+              [t("Desembolsado", "Disbursed"), usd(F.disbursed), ""],
+              [t("Congelado", "Frozen"), usd(F.frozen), "text-bcp-naranja-text"],
+              [t("Por desembolsar", "Undrawn"), usd(F.pending), ""],
+            ].map(([k, v, c]) => (
+              <div key={k}>
+                <dt className="lbl">{k}</dt>
+                <dd className={`num text-[17px] font-bold ${c}`}>{v}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
+            <span className="text-bcp-muted">{t("Vencimientos de capital", "Principal maturities")}:</span>{" "}
+            <b className="num font-semibold">{F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} ${usd(v)}`).join(" · ")}</b>
+          </p>
+        </Card>
+        <Card>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="text-[16px] font-bold">{t("Cobertura y estrés estándar", "Coverage and standard stress")}</h3>
+            <button type="button" onClick={() => setPage("riesgo")} className="min-h-[36px] text-sm font-semibold text-bcp-green-text hover:underline">{t("Ver riesgo", "View risk")} ›</button>
+          </div>
+          <table className="mt-2 w-full text-sm">
+            <tbody className="divide-y divide-bcp-divider">
+              {([
+                [t("Hoy", "Today"), F.stress.today],
+                [t("Precio −20%", "Price −20%"), F.stress.price],
+                [t("Volumen −30%", "Volume −30%"), F.stress.volume],
+                [t("Ambos a la vez", "Both at once"), F.stress.both],
+              ] as const).map(([k, x]) => {
+                const below = data.loans.length - x.levels.verde;
+                return (
+                  <tr key={k}>
+                    <td className="whitespace-nowrap py-2 pr-3">{k}</td>
+                    <td className={`num py-2 pr-3 text-right font-semibold ${LEVEL_INK[stateFromCoverage(x.coverage)]}`}>{cov(x.coverage)}</td>
+                    <td className="py-2 text-right text-[13px] text-bcp-muted">
+                      {below ? t(`${below} de ${data.loans.length} préstamos bajo ${cov(COVERAGE_BANDS.ambar)}`, `${below} of ${data.loans.length} loans below ${cov(COVERAGE_BANDS.ambar)}`) : t(`todos sobre ${cov(COVERAGE_BANDS.ambar)}`, `all above ${cov(COVERAGE_BANDS.ambar)}`)}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <p className="mt-2 text-[13px] text-bcp-muted">{t(`Proyección ${range(data.projection.low, data.projection.high, "es")} (estimado)`, `Projection ${range(data.projection.low, data.projection.high, "en")} (estimate)`)}</p>
+        </Card>
+      </div>
+
       <SectionTitle title={t("En seguimiento", "On the watchlist")} />
       <Card>
         <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
           <table className="w-full min-w-[900px] text-sm">
             <thead>
               <tr className="border-b border-bcp-border text-left">
-                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura hoy", "Coverage today"), t("Banda", "Band"), t("Proyección", "Projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "Next step")].map((h, i) => (
-                  <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 2 || i === 4 || i === 5 ? "text-right" : ""}`}>{h}</Lbl>
+                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura: aprobación, hoy y proyección", "Coverage: approval, today and projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "Next step")].map((h, i) => (
+                  <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 3 ? "text-right" : ""}`}>{h}</Lbl>
                 ))}
               </tr>
             </thead>
@@ -330,15 +399,20 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 const p20 = coverageUnder(l, STANDARD_STRESS.price);
                 return (
                   <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer align-top hover:bg-bcp-bg">
-                    <td className="py-2.5 pr-3">
+                    <td className="whitespace-nowrap py-2.5 pr-3">
                       <button type="button" onClick={(e) => { e.stopPropagation(); onOpen(l.id); }} className="text-left font-semibold hover:underline">{l.id}</button>
                     </td>
-                    <td className="py-2.5 pr-3">
+                    <td className="max-w-[300px] py-2.5 pr-3">
                       <StateChip state={l.state} cause={stateCause(l)} />
+                      <p className="mt-1 text-[13px] text-bcp-muted">{t(l.summary)}</p>
                     </td>
-                    <td className="num py-2.5 pr-3 text-right font-semibold">{cov(l.coverageToday)}</td>
-                    <td className="py-2.5 pr-3"><StateChip state={stateFromCoverage(l.coverageToday)} /></td>
-                    <td className="num whitespace-nowrap py-2.5 pr-3 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio", "no change")}</td>
+                    <td className="w-[240px] py-2.5 pr-4">
+                      <CoverageRange compact today={l.coverageToday} approval={l.coverageAtApproval} low={l.projection?.low} high={l.projection?.high} />
+                      <p className="num mt-1.5 whitespace-nowrap text-[12px] text-bcp-muted">
+                        <b className="font-semibold text-bcp-ink">{cov(l.coverageToday)}</b> · {t("aprob.", "appr.")} {cov(l.coverageAtApproval)}
+                        {l.projection && <> · {t("proy.", "proj.")} {range(l.projection.low, l.projection.high, lang)}</>}
+                      </p>
+                    </td>
                     <td className={`num py-2.5 pr-3 text-right font-semibold ${p20 < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : ""}`}>{cov(p20)}</td>
                     <td className="py-2.5 pr-3">{withDate(t(l.next.label), l.next.date, lang)}</td>
                   </tr>
@@ -569,9 +643,12 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
                 {nextTranche(l).main}
                 <span className="lbl block">{nextTranche(l).note}</span>
               </td>
-              <td className="py-2.5 pr-3 whitespace-nowrap">
-                {cov(l.coverageAtApproval)} → <b>{cov(l.coverageToday)}</b>
-                <span className="lbl block">{l.projection ? `${t("proyección", "projection")} ${range(l.projection.low, l.projection.high, lang)}` : t("sin cambio proyectado", "no projected change")}</span>
+              <td className="w-[230px] py-2.5 pr-4">
+                <CoverageRange compact today={l.coverageToday} approval={l.coverageAtApproval} low={l.projection?.low} high={l.projection?.high} />
+                <span className="lbl mt-1.5 block whitespace-nowrap">
+                  <b className="font-semibold text-bcp-ink">{cov(l.coverageToday)}</b> · {t("aprob.", "appr.")} {cov(l.coverageAtApproval)}
+                  {l.projection && <> · {t("proy.", "proj.")} {range(l.projection.low, l.projection.high, lang)}</>}
+                </span>
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">{date(l.maturityDate, lang)}</td>
               <td className="whitespace-nowrap py-2.5 text-right">
