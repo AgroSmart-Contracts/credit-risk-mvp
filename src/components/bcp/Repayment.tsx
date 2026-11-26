@@ -40,20 +40,26 @@ export function SourceStrip({ cutoff, compact = false }: { cutoff: string; compa
   );
 }
 
+const SCALE_MIN = 0.8;
+const SCALE_MAX = 2.4;
+
 /** Coverage on a scale with the proposed bands: approval (ring), today (bar), estimated range (band). */
 export function CoverageRange({ today, approval, low, high, compact = false }: { today: number; approval?: number; low?: number; high?: number; compact?: boolean }) {
   const t = useT();
   const lang = useLang();
-  const values = [today, approval, low, high].filter((v): v is number => v !== undefined);
-  const min = Math.min(0.8, Math.floor(Math.min(...values) * 10) / 10 - 0.1);
-  const max = Math.max(2.3, Math.ceil(Math.max(...values) * 10) / 10 + 0.1);
-  const at = (v: number) => `${((v - min) / (max - min)) * 100}%`;
+  // One fixed scale everywhere, so 1.50x sits at the same place on every row and rows compare.
+  const clamp = (v: number) => Math.min(SCALE_MAX, Math.max(SCALE_MIN, v));
+  const pos = (v: number) => ((clamp(v) - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
+  const at = (v: number) => `${pos(v)}%`;
+  const min = SCALE_MIN;
+  const max = SCALE_MAX;
   const zones = [
     { from: min, to: COVERAGE_BANDS.rojo, cls: "bg-bcp-rojo-bg" },
     { from: COVERAGE_BANDS.rojo, to: COVERAGE_BANDS.naranja, cls: "bg-bcp-naranja-bg" },
     { from: COVERAGE_BANDS.naranja, to: COVERAGE_BANDS.ambar, cls: "bg-bcp-ambar-bg" },
-    { from: COVERAGE_BANDS.ambar, to: max, cls: "bg-bcp-verde-bg/60" },
+    { from: COVERAGE_BANDS.ambar, to: max, cls: "bg-bcp-verde-bg/70" },
   ];
+  const ticks: [number, string][] = [[COVERAGE_BANDS.rojo, "bg-bcp-rojo/50"], [COVERAGE_BANDS.naranja, "bg-bcp-naranja/50"], [COVERAGE_BANDS.ambar, "bg-bcp-ambar/60"]];
   const label = [
     `${t("Hoy", "Today")} ${cov(today)}`,
     approval !== undefined ? `${t("aprobación", "approval")} ${cov(approval)}` : "",
@@ -68,19 +74,25 @@ export function CoverageRange({ today, approval, low, high, compact = false }: {
           ))}
         </div>
       )}
-      <div className={`relative ${compact ? "h-3" : "h-5"} overflow-visible rounded-full`} aria-hidden>
+      <div className={`relative ${compact ? "h-3.5" : "h-5"}`} aria-hidden>
         <div className="absolute inset-0 flex overflow-hidden rounded-full">
           {zones.map((z) => (
             <span key={z.from} className={z.cls} style={{ width: `${((z.to - z.from) / (max - min)) * 100}%` }} />
           ))}
         </div>
+        {ticks.map(([v, c]) => (
+          <span key={v} className={`absolute inset-y-0 w-px ${c}`} style={{ left: at(v) }} />
+        ))}
         {low !== undefined && high !== undefined && (
-          <span className="absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-bcp-ink/30" style={{ left: at(low), width: `calc(${at(high)} - ${at(low)})` }} />
+          <span className="absolute inset-y-[20%] rounded-full border border-bcp-ink/30 bg-bcp-ink/15" style={{ left: at(low), width: `max(6px, ${pos(high) - pos(low)}%)` }} />
+        )}
+        {approval !== undefined && (
+          <span className="absolute top-1/2 h-0.5 -translate-y-1/2 bg-bcp-ink/45" style={{ left: at(Math.min(approval, today)), width: `${Math.abs(pos(approval) - pos(today))}%` }} />
         )}
         {approval !== undefined && (
           <span className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-bcp-ink bg-white ${compact ? "h-2.5 w-2.5" : "h-3.5 w-3.5"}`} style={{ left: at(approval) }} />
         )}
-        <span className={`absolute top-1/2 w-1 -translate-x-1/2 -translate-y-1/2 rounded-sm bg-bcp-ink ${compact ? "h-4" : "h-7"}`} style={{ left: at(today) }} />
+        <span className={`absolute top-1/2 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-sm bg-bcp-ink ${compact ? "h-5" : "h-7"}`} style={{ left: at(today) }} />
       </div>
       {!compact && (
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-bcp-muted" aria-hidden>
