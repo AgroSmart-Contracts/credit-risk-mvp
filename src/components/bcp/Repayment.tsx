@@ -185,6 +185,18 @@ function BellCurve({ mean, sd, fmt, shadeBelow, warnBelow, shadeLabel, lines, ti
   );
 }
 
+/** What the two shaded zones under a curve mean, shown with their swatches rather than colour names. */
+function ZoneKey({ what }: { what: string }) {
+  const t = useT();
+  return (
+    <p className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-bcp-muted">
+      <span>{what}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 rounded-sm bg-bcp-ambar-bg ring-1 ring-bcp-ambar/40" />{t(`bajo el umbral ${cov(COVERAGE_BANDS.ambar)}`, `below the ${cov(COVERAGE_BANDS.ambar)} threshold`)}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 rounded-sm bg-bcp-rojo-bg ring-1 ring-bcp-rojo/40" />{t("bajo el equilibrio (1.00x)", "below break-even (1.00x)")}</span>
+    </p>
+  );
+}
+
 /** Coverage percentiles on the band scale: P10-P90 light, P25-P75 dark, P50 ring, approval above. */
 function DistributionBar({ d, approval }: { d: ReturnType<typeof coverageDistribution>; approval?: number }) {
   const t = useT();
@@ -328,7 +340,7 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
         <button type="button" onClick={() => toggle("q")} aria-expanded={panel === "q"} className={card(panel === "q")}>
           <span className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-[13px] font-semibold text-bcp-muted">{t("Volumen exportable (Q)", "Exportable volume (Q)")}</span>
-            <span className="text-[13px] font-semibold text-bcp-ink">{t("Campo y lo que lo mueve", "Field and drivers")} {panel === "q" ? "▴" : "›"}</span>
+            <span className="text-[13px] font-semibold text-bcp-ink">{t("Campo y factores", "Field and drivers")} {panel === "q" ? "▴" : "›"}</span>
           </span>
           <span className="num mt-1 block text-[24px] font-bold">{kg(b.exportKg)}</span>
           <span className="block text-[13px] text-bcp-muted">
@@ -342,7 +354,7 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
         <button type="button" onClick={() => toggle("p")} aria-expanded={panel === "p"} className={card(panel === "p")}>
           <span className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-[13px] font-semibold text-bcp-muted">{t("Precio FOB esperado (P)", "Expected FOB price (P)")}</span>
-            <span className="text-[13px] font-semibold text-bcp-ink">{t("Mercado y lo que lo mueve", "Market and drivers")} {panel === "p" ? "▴" : "›"}</span>
+            <span className="text-[13px] font-semibold text-bcp-ink">{t("Mercado y factores", "Market and drivers")} {panel === "p" ? "▴" : "›"}</span>
           </span>
           <span className="num mt-1 block text-[24px] font-bold">{perKg(b.priceUsdKg)}</span>
           <span className="block text-[13px] text-bcp-muted">
@@ -359,7 +371,7 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
             <span className="text-[12px] text-bcp-muted">{estimate}</span>
           </div>
           <div className="rounded-lg bg-bcp-bg/60 p-3">
-            <p className="mb-1 text-[12px] text-bcp-muted">{t("Volumen exportable (t) · ámbar: bajo el umbral 1.50x · rojo: bajo el equilibrio (1.00x)", "Exportable volume (t) · amber: below the 1.50x threshold · red: below break-even (1.00x)")}</p>
+            <ZoneKey what={t("Volumen exportable (t)", "Exportable volume (t)")} />
             <div className="mx-auto max-w-[620px]">
               <BellCurve mean={b.exportKg} sd={d.volume.sd} fmt={(n) => `${(n / 1000).toFixed(1)} t`} shadeBelow={breakEvenKg} warnBelow={head.q.t150} shadeLabel={t("bajo equilibrio", "below break-even")}
                 lines={[{ v: breakEvenKg, label: t("equilibrio", "break-even"), cls: "stroke-bcp-rojo" }, { v: vb.exportKg, label: "−30%", cls: "stroke-bcp-naranja" }]}
@@ -379,7 +391,7 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
             <span className="text-[12px] text-bcp-muted">{estimate}</span>
           </div>
           <div className="rounded-lg bg-bcp-bg/60 p-3">
-            <p className="mb-1 text-[12px] text-bcp-muted">{t("Precio FOB (USD/kg) · ámbar: bajo el umbral 1.50x · rojo: bajo el equilibrio del préstamo (1.00x)", "FOB price (USD/kg) · amber: below the 1.50x threshold · red: below the loan's break-even (1.00x)")}</p>
+            <ZoneKey what={t("Precio FOB (USD/kg)", "FOB price (USD/kg)")} />
             <div className="mx-auto max-w-[620px]">
               <BellCurve mean={b.priceUsdKg} sd={d.price.sd} fmt={(n) => n.toFixed(2)} shadeBelow={b.breakEvenUsdKg} warnBelow={head.p.t150} shadeLabel={t("bajo equilibrio", "below break-even")}
                 lines={[{ v: b.breakEvenUsdKg, label: t("equilibrio", "break-even"), cls: "stroke-bcp-rojo" }, { v: pb.priceUsdKg, label: "−20%", cls: "stroke-bcp-naranja" }]}
@@ -433,7 +445,7 @@ export function LineCompare({ input, tenorDays, requestedUsd, requestedDueUsd, c
         <div className="flex flex-wrap items-start justify-between gap-2">
           <Lbl>{label}</Lbl>
           <span className={`rounded-full px-2.5 py-0.5 text-[12px] font-semibold ${passes ? "bg-bcp-verde-bg text-bcp-green-text" : "bg-bcp-naranja-bg text-bcp-naranja-text"}`}>
-            {passes ? t(`Pasa ambos estrés ≥${cov(COVERAGE_BANDS.ambar)}`, `Passes both stresses ≥${cov(COVERAGE_BANDS.ambar)}`) : t("No pasa el estrés estándar", "Fails the standard stress")}
+            {passes ? t(`Pasa ambos escenarios de estrés ≥${cov(COVERAGE_BANDS.ambar)}`, `Passes both stresses ≥${cov(COVERAGE_BANDS.ambar)}`) : t("No pasa el estrés estándar", "Fails the standard stress")}
           </span>
         </div>
         <p className={`num mt-1 text-[28px] font-bold ${recommended ? "text-bcp-green-text" : "text-bcp-ink"}`}>{usd(line)}</p>

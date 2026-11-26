@@ -411,7 +411,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
             // TruMarket's next milestone, in its own words (the field estimate), not the tranche it unlocks.
             const tmStep = data.upcoming.find((u) => u.loanId === l.id && u.date === l.next.date && !/conformidad|remedia/i.test(u.milestone.es));
             const bankStep = frozen
-              ? t(`Decide sobre el ${frozen.id} congelado (${usd(frozen.amountUsd)}) si no se remedia`, `Decides on the frozen ${frozen.id} (${usd(frozen.amountUsd)}) if not remedied`)
+              ? t(`Decidir sobre el ${frozen.id} congelado (${usd(frozen.amountUsd)}) si no se remedia`, `Decide on the frozen ${frozen.id} (${usd(frozen.amountUsd)}) if not remedied`)
               : pending
                 ? t(`Conformidad del ${pending.id} hasta ${usd(pending.amountUsd)}, tras el aforo`, `Sign-off on ${pending.id} up to ${usd(pending.amountUsd)}, after the estimate`)
                 : null;
