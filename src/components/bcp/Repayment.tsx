@@ -44,7 +44,7 @@ const SCALE_MIN = 0.8;
 const SCALE_MAX = 2.4;
 
 /** Coverage on a scale with the proposed bands: approval (ring), today (bar), estimated range (band). */
-export function CoverageRange({ today, approval, low, high, compact = false }: { today: number; approval?: number; low?: number; high?: number; compact?: boolean }) {
+export function CoverageRange({ today, approval, low, high, stress, compact = false }: { today: number; approval?: number; low?: number; high?: number; stress?: number; compact?: boolean }) {
   const t = useT();
   const lang = useLang();
   // One fixed scale everywhere, so 1.50x sits at the same place on every row and rows compare.
@@ -64,6 +64,7 @@ export function CoverageRange({ today, approval, low, high, compact = false }: {
     `${t("Hoy", "Today")} ${cov(today)}`,
     approval !== undefined ? `${t("aprobación", "approval")} ${cov(approval)}` : "",
     low !== undefined && high !== undefined ? `${t("proyección estimada", "estimated projection")} ${range(low, high, lang)}` : "",
+    stress !== undefined ? `${t("estrés estándar", "standard stress")} ${cov(stress)}` : "",
   ].filter(Boolean).join(" · ");
   return (
     <div role="img" aria-label={label} className="w-full">
@@ -83,8 +84,12 @@ export function CoverageRange({ today, approval, low, high, compact = false }: {
         {ticks.map(([v, c]) => (
           <span key={v} className={`absolute inset-y-0 w-px ${c}`} style={{ left: at(v) }} />
         ))}
+        {/* Light green: how far the standard stress takes coverage; dark green: the estimated projection. */}
+        {stress !== undefined && (
+          <span className="absolute inset-y-[22%] rounded-full bg-bcp-green/25" style={{ left: at(Math.min(stress, today)), width: `${Math.abs(pos(today) - pos(stress))}%` }} />
+        )}
         {low !== undefined && high !== undefined && (
-          <span className="absolute inset-y-[20%] rounded-full border border-bcp-ink/30 bg-bcp-ink/15" style={{ left: at(low), width: `max(6px, ${pos(high) - pos(low)}%)` }} />
+          <span className="absolute inset-y-[22%] rounded-full bg-bcp-green/60" style={{ left: at(low), width: `max(6px, ${pos(high) - pos(low)}%)` }} />
         )}
         {approval !== undefined && (
           <span className="absolute top-1/2 h-0.5 -translate-y-1/2 bg-bcp-ink/45" style={{ left: at(Math.min(approval, today)), width: `${Math.abs(pos(approval) - pos(today))}%` }} />
@@ -98,7 +103,8 @@ export function CoverageRange({ today, approval, low, high, compact = false }: {
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-bcp-muted" aria-hidden>
           <span className="flex items-center gap-1.5"><span className="h-3 w-1 rounded-sm bg-bcp-ink" />{t("Hoy", "Today")}</span>
           {approval !== undefined && <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full border-2 border-bcp-ink" />{t("Aprobación", "Approval")}</span>}
-          {low !== undefined && <span className="flex items-center gap-1.5"><span className="h-1.5 w-4 rounded-full bg-bcp-ink/30" />{t("Proyección (estimado)", "Projection (estimate)")}</span>}
+          {stress !== undefined && <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-bcp-green/25" />{t("Estrés estándar", "Standard stress")} {cov(stress)}</span>}
+          {low !== undefined && <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-bcp-green/60" />{t("Proyección (estimado)", "Projection (estimate)")}</span>}
         </div>
       )}
     </div>
@@ -229,7 +235,7 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
         {chip && <div className="flex items-start md:justify-end">{chip}</div>}
       </div>
 
-      <CoverageRange today={b.coverage} approval={approval} low={low} high={high} />
+      <CoverageRange today={b.coverage} approval={approval} low={low} high={high} stress={Math.min(price, volume)} />
 
       <div className="grid gap-3 md:grid-cols-2">
         <div className="rounded-lg border border-bcp-border p-4">
