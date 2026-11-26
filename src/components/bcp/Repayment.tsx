@@ -41,14 +41,15 @@ export function SourceStrip({ cutoff, compact = false }: { cutoff: string; compa
   );
 }
 
-/** The key for the small coverage bars in tables (the cards carry their own). */
+/** The key for the small coverage trend charts in tables (the cards carry their own). */
 export function CoverageLegend() {
   const t = useT();
   return (
     <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-bcp-muted">
-      <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-bcp-ink" />{t("Cobertura hoy", "Coverage today")}</span>
-      <span className="flex items-center gap-1.5"><span className="h-2.5 w-5 rounded-sm border border-dashed border-bcp-ink/70 bg-bcp-ink/10" />{t("Proyección al vencimiento (estimado)", "Projection at maturity (estimate)")}</span>
-      <span className="flex items-center gap-1.5">{t("la flecha indica hacia dónde va", "the arrow shows where it is heading")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full border-2 border-bcp-ink bg-white" />{t("Aprobación", "Approval")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-bcp-ink" />{t("Hoy", "Today")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-3 w-1.5 rounded-sm border border-dashed border-bcp-ink/70 bg-bcp-ink/10" />{t("Al vencimiento (estimado)", "At maturity (estimate)")}</span>
+      <span className="flex items-center gap-1.5"><span className="w-4 border-t border-dashed border-bcp-ambar" />{t(`Umbral ${cov(COVERAGE_BANDS.ambar)}`, `Threshold ${cov(COVERAGE_BANDS.ambar)}`)}</span>
     </p>
   );
 }
@@ -57,82 +58,43 @@ const SCALE_MIN = 0.8;
 const SCALE_MAX = 2.4;
 
 /**
- * Coverage against the proposed bands: where it is today (dot) and where it is
- * heading (dashed estimate, with an arrow from today). The large version adds
- * approval above the bar and the two standard stresses below it.
+ * Coverage over the campaign, for tables: time left to right (approval, today,
+ * maturity), coverage bottom to top on one fixed scale with the risk bands and
+ * the 1.50x threshold. Solid line: what happened; dashed: the estimate.
  */
-export function CoverageRange({ today, approval, low, high, stress, compact = false }: { today: number; approval?: number; low?: number; high?: number; stress?: { price: number; volume: number }; compact?: boolean }) {
+export function CoverageTrend({ approval, today, low, high, day, days }: { approval: number; today: number; low?: number; high?: number; day: number; days: number }) {
   const t = useT();
   const lang = useLang();
-  // One fixed scale everywhere, so 1.50x sits at the same place on every row and rows compare.
-  const pos = (v: number) => ((Math.min(SCALE_MAX, Math.max(SCALE_MIN, v)) - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
-  const at = (v: number) => `${pos(v)}%`;
-  const zones = [
-    { from: SCALE_MIN, to: COVERAGE_BANDS.rojo, cls: "bg-bcp-rojo-bg" },
-    { from: COVERAGE_BANDS.rojo, to: COVERAGE_BANDS.naranja, cls: "bg-bcp-naranja-bg" },
-    { from: COVERAGE_BANDS.naranja, to: COVERAGE_BANDS.ambar, cls: "bg-bcp-ambar-bg" },
-    { from: COVERAGE_BANDS.ambar, to: SCALE_MAX, cls: "bg-bcp-verde-bg" },
-  ];
+  const W = 220;
+  const H = 64;
+  const L = 6;
+  const R = W - 12;
+  const TOP = 2.2;
+  const BOT = 0.9;
+  const y = (v: number) => H - 4 - ((Math.min(TOP, Math.max(BOT, v)) - BOT) / (TOP - BOT)) * (H - 8);
+  const xToday = L + ((R - L) * Math.min(1, Math.max(0, day / days)));
   const proj = low !== undefined && high !== undefined;
-  // The arrow runs from today to the nearest edge of the projection; none if today is inside it.
-  const target = !proj ? null : today > high! ? high! : today < low! ? low! : null;
-  const label = [
-    `${t("Hoy", "Today")} ${cov(today)}`,
-    proj ? `${t("proyección estimada", "estimated projection")} ${range(low!, high!, lang)}` : "",
-    approval !== undefined ? `${t("aprobación", "approval")} ${cov(approval)}` : "",
-    stress ? `${t("precio −20%", "price −20%")} ${cov(stress.price)}, ${t("volumen −30%", "volume −30%")} ${cov(stress.volume)}` : "",
-  ].filter(Boolean).join(" · ");
-  const track = compact ? "h-3" : "h-4";
+  const mid = proj ? (low! + high!) / 2 : today;
+  const bands: [number, number, string][] = [
+    [BOT, COVERAGE_BANDS.rojo, "fill-bcp-rojo-bg"],
+    [COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, "fill-bcp-naranja-bg"],
+    [COVERAGE_BANDS.naranja, COVERAGE_BANDS.ambar, "fill-bcp-ambar-bg"],
+    [COVERAGE_BANDS.ambar, TOP, "fill-bcp-verde-bg"],
+  ];
+  const label = `${t("Aprobación", "Approval")} ${cov(approval)} → ${t("hoy", "today")} ${cov(today)}${proj ? ` → ${t("al vencimiento", "at maturity")} ${range(low!, high!, lang)} (${t("estimado", "estimate")})` : ""}`;
   return (
-    <div role="img" aria-label={label} className="w-full">
-      {!compact && (
-        <div className="relative mb-1 h-4 text-[11px] text-bcp-muted" aria-hidden>
-          {[COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, COVERAGE_BANDS.ambar].map((b) => (
-            <span key={b} className="num absolute -translate-x-1/2" style={{ left: at(b) }}>{cov(b)}</span>
-          ))}
-          {approval !== undefined && (
-            <span className="absolute -translate-x-1/2 text-bcp-ink" style={{ left: at(approval), top: 2 }}>▼</span>
-          )}
-        </div>
-      )}
-      <div className={`relative ${track}`} aria-hidden>
-        <div className="absolute inset-0 flex overflow-hidden rounded-full">
-          {zones.map((z) => (
-            <span key={z.from} className={z.cls} style={{ width: `${((z.to - z.from) / (SCALE_MAX - SCALE_MIN)) * 100}%` }} />
-          ))}
-        </div>
-        {[COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, COVERAGE_BANDS.ambar].map((v) => (
-          <span key={v} className="absolute inset-y-0 w-px bg-white" style={{ left: at(v) }} />
-        ))}
-        {proj && (
-          <span className="absolute -inset-y-0.5 rounded-md border border-dashed border-bcp-ink/70 bg-bcp-ink/10" style={{ left: at(low!), width: `max(8px, ${pos(high!) - pos(low!)}%)` }} />
-        )}
-        {target !== null && (
-          <span className="absolute top-1/2 -translate-y-1/2" style={{ left: at(Math.min(today, target)), width: `${Math.abs(pos(today) - pos(target))}%` }}>
-            <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t-2 border-dotted border-bcp-ink/70" />
-            <span className={`absolute top-1/2 -translate-y-1/2 border-y-[4px] border-y-transparent ${target < today ? "left-0 border-r-[6px] border-r-bcp-ink/80" : "right-0 border-l-[6px] border-l-bcp-ink/80"}`} />
-          </span>
-        )}
-        <span className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-bcp-ink ring-2 ring-white ${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} style={{ left: at(today) }} />
-      </div>
-      {!compact && stress && (
-        <div className="relative mt-0.5 h-3 text-[10px] leading-none text-bcp-naranja-text" aria-hidden>
-          {[stress.price, stress.volume].map((v, k) => (
-            <span key={k} className="absolute -translate-x-1/2" style={{ left: at(v) }}>▲</span>
-          ))}
-        </div>
-      )}
-      {!compact && (
-        <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-bcp-muted" aria-hidden>
-          <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-bcp-ink" />{t("Hoy", "Today")} <b className="num font-semibold text-bcp-ink">{cov(today)}</b></span>
-          {proj && <span className="flex items-center gap-1.5"><span className="h-2.5 w-5 rounded-sm border border-dashed border-bcp-ink/70 bg-bcp-ink/10" />{t("Proyección (estimado)", "Projection (estimate)")} <b className="num font-semibold text-bcp-ink">{range(low!, high!, lang)}</b></span>}
-          {approval !== undefined && <span className="flex items-center gap-1.5"><span className="text-bcp-ink">▼</span>{t("Aprobación", "Approval")} <b className="num font-semibold text-bcp-ink">{cov(approval)}</b></span>}
-          {stress && <span className="flex items-center gap-1.5"><span className="text-bcp-naranja-text">▲</span>{t("Estrés: precio −20%", "Stress: price −20%")} <b className="num font-semibold text-bcp-ink">{cov(stress.price)}</b> · {t("volumen −30%", "volume −30%")} <b className="num font-semibold text-bcp-ink">{cov(stress.volume)}</b></span>}
-        </div>
-      )}
-    </div>
+    <svg viewBox={`0 0 ${W} ${H}`} className="h-[64px] w-full max-w-[240px]" role="img" aria-label={label}>
+      {bands.map(([a, b, c]) => <rect key={a} x={L} width={R - L} y={y(b)} height={y(a) - y(b)} className={c} opacity={0.7} />)}
+      <line x1={L} x2={R} y1={y(COVERAGE_BANDS.ambar)} y2={y(COVERAGE_BANDS.ambar)} className="stroke-bcp-ambar" strokeDasharray="3 2" strokeWidth={1} />
+      <line x1={L} x2={xToday} y1={y(approval)} y2={y(today)} className="stroke-bcp-ink" strokeWidth={2} />
+      {proj && <line x1={xToday} x2={R} y1={y(today)} y2={y(mid)} className="stroke-bcp-ink" strokeWidth={1.5} strokeDasharray="3 3" opacity={0.7} />}
+      {proj && <rect x={R - 4} width={8} y={y(high!) - 1} height={Math.max(3, y(low!) - y(high!) + 2)} rx={2} className="fill-bcp-ink/10 stroke-bcp-ink" strokeDasharray="2 1.5" strokeWidth={1} opacity={0.9} />}
+      <circle cx={L} cy={y(approval)} r={3.5} className="fill-white stroke-bcp-ink" strokeWidth={1.75} />
+      <circle cx={xToday} cy={y(today)} r={4} className="fill-bcp-ink stroke-white" strokeWidth={1.5} />
+    </svg>
   );
 }
+
 
 /** A reading behind volume or price: value, effect on repayment, provenance and source. */
 export type DriverRow = { label: string; value: string; effect: string; state: ConditionState; provenance: Provenance; source: string };

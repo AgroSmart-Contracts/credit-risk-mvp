@@ -11,7 +11,7 @@ import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
-import { CoverageLegend, CoverageRange, SourceStrip } from "./Repayment";
+import { CoverageLegend, CoverageTrend, SourceStrip } from "./Repayment";
 import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
@@ -413,7 +413,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                       <p className="mt-1 text-[13px] text-bcp-muted">{t(l.summary)}</p>
                     </td>
                     <td className="w-[240px] py-2.5 pr-4">
-                      <CoverageRange compact today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} />
+                      <CoverageTrend approval={l.coverageAtApproval} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} day={l.dayOfCycle} days={l.cycleDays} />
                       <p className="num mt-1.5 whitespace-nowrap text-[12px] text-bcp-muted">
                         <b className="font-semibold text-bcp-ink">{cov(l.coverageToday)}</b> · {t("aprob.", "appr.")} {cov(l.coverageAtApproval)}
                         {l.projection && <> · {t("proy.", "proj.")} {range(l.projection.low, l.projection.high, lang)}</>}
@@ -651,7 +651,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
                 <span className="lbl block">{nextTranche(l).note}</span>
               </td>
               <td className="w-[230px] py-2.5 pr-4">
-                <CoverageRange compact today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} />
+                <CoverageTrend approval={l.coverageAtApproval} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} day={l.dayOfCycle} days={l.cycleDays} />
                 <span className="lbl mt-1.5 block whitespace-nowrap">
                   <b className="font-semibold text-bcp-ink">{cov(l.coverageToday)}</b> · {t("aprob.", "appr.")} {cov(l.coverageAtApproval)}
                   {l.projection && <> · {t("proy.", "proj.")} {range(l.projection.low, l.projection.high, lang)}</>}
