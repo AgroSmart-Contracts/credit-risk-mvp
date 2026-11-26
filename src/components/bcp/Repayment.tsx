@@ -43,6 +43,19 @@ export function SourceStrip({ cutoff, compact = false }: { cutoff: string; compa
 const SCALE_MIN = 0.8;
 const SCALE_MAX = 2.4;
 
+/** The key for the small coverage bars in tables (the cards carry their own). */
+export function CoverageLegend() {
+  const t = useT();
+  return (
+    <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-bcp-muted">
+      <span className="flex items-center gap-1.5"><span className="h-3 w-[3px] rounded-sm bg-bcp-ink" />{t("Hoy", "Today")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full border-2 border-bcp-ink" />{t("Aprobación (la línea marca el cambio)", "Approval (the line shows the change)")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-bcp-green/25" />{t("Estrés estándar, hasta hoy", "Standard stress, up to today")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-bcp-green/60" />{t("Proyección (estimado)", "Projection (estimate)")}</span>
+    </p>
+  );
+}
+
 /** Coverage on a scale with the proposed bands: approval (ring), today (bar), estimated range (band). */
 export function CoverageRange({ today, approval, low, high, stress, compact = false }: { today: number; approval?: number; low?: number; high?: number; stress?: number; compact?: boolean }) {
   const t = useT();

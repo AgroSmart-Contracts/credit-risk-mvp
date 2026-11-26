@@ -4,13 +4,14 @@
  * a sign-off, a conditioned sign-off or a request for information, always with a
  * written reason; the answer is recorded with its date and that reason.
  */
-import { useId, useState } from "react";
+import { useState } from "react";
 import { COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, usd } from "../../lib/bcp/calc";
 import type { Decision, Loan, State } from "../../lib/bcp/types";
-import type { Answer } from "./answers";
+import { useReason, type Answer, type Reason } from "./answers";
 import { useLang, useT, useToast } from "./shared";
 import { BANK_EDITION } from "./edition";
-import { Btn, Card, CheckIcon, StateChip } from "./ui";
+import { Btn, Card, CheckIcon, LockedBtn, StateChip } from "./ui";
+import { PILOT_NOTE } from "./nav";
 
 export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen }: { loan: Loan; decision: Decision; answer?: Answer; onAnswer: (a: Answer) => void; cutoff: string; onOpen?: () => void }) {
   const t = useT();
@@ -26,7 +27,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
   const p20 = coverageUnder(loan, STANDARD_STRESS.price);
   // TruMarket's checklist only; the bank's sign-off is the decision itself, not an item on it.
   const ready = !!tranche && done === tranche.checklist.length;
-  const [note, setNote] = useState("");
+  const reason = useReason();
   const suggestion = !tranche
     ? t("Sin tramo pendiente.", "No tranche pending.")
     : !ready
@@ -35,14 +36,14 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
         ? t(`Checklist ${done} de ${tranche.checklist.length} completo; cobertura ${cov(loan.coverageToday)} y ${cov(p20)} con precio −20%. Conformidad por ${usd(tranche.amountUsd)}.`, `Checklist ${done} of ${tranche.checklist.length} complete; coverage ${cov(loan.coverageToday)} and ${cov(p20)} at price −20%. Sign-off for ${usd(tranche.amountUsd)}.`)
         : t(`Checklist ${done} de ${tranche.checklist.length} completo; con precio −20% la cobertura queda en ${cov(p20)}. Conformidad condicionada: el T3 se ajusta al precio esperado vigente en su hito.`, `Checklist ${done} of ${tranche.checklist.length} complete; at price −20% coverage would be ${cov(p20)}. Conditioned sign-off: T3 is resized to the expected price at its milestone.`);
   const answerWith = (kind: Answer["kind"]) => {
-    onAnswer({ kind, at: new Date().toISOString(), note: note.trim() });
+    if (!reason.ok()) return;
+    onAnswer({ kind, at: new Date().toISOString(), note: reason.note });
     toast(
       kind === "info"
         ? t(`Solicitud enviada a TruMarket · ${loan.id}`, `Request sent to TruMarket · ${loan.id}`)
         : t(`${kind === "conformidad" ? "Conformidad" : "Conformidad condicionada"} registrada · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`, `${kind === "conformidad" ? "Sign-off" : "Conditioned sign-off"} recorded · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`),
     );
   };
-  const canAnswer = open && note.trim().length > 0;
   const stampText = answer?.kind === "conformidad" ? t("Conformidad registrada", "Sign-off recorded") : answer?.kind === "conformidad_condicion" ? t("Conformidad condicionada registrada", "Conditioned sign-off recorded") : t("Información solicitada", "Information requested");
   return (
     <Card tone="decision">
@@ -111,7 +112,7 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
       )}
       {!answer && !BANK_EDITION && (
         <div className="mt-4">
-          <Rationale value={note} onChange={setNote} suggestion={suggestion} disabled={!open} placeholder={t("p. ej. Aforo y facturas del T1 conciliados; conformidad con T3 sujeto al precio FOB en su hito.", "e.g. Field estimate and T1 invoices reconciled; sign-off with T3 subject to the FOB price at its milestone.")} />
+          <Rationale reason={reason} suggestion={suggestion} disabled={!open} placeholder={t("p. ej. Aforo y facturas del T1 conciliados; conformidad con T3 sujeto al precio FOB en su hito.", "e.g. Field estimate and T1 invoices reconciled; sign-off with T3 subject to the FOB price at its milestone.")} />
         </div>
       )}
       <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -120,15 +121,17 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
             <Stamp text={stampText} when={date(answer.at.slice(0, 10), lang)} />
             {answer.note && <p className="mt-2 text-sm text-bcp-ink"><b className="font-semibold">{t("Motivo del analista BCP", "BCP analyst's reason")}:</b> {answer.note}</p>}
           </div>
-        ) : BANK_EDITION ? null : (
+        ) : BANK_EDITION ? (
+          <LockedDecision labels={[t("Pedir información", "Request information"), t("Conformidad condicionada", "Conditioned sign-off"), t("Dar conformidad", "Give sign-off")]} />
+        ) : (
           <>
-            <Btn disabled={!canAnswer} onClick={() => answerWith("info")}>
+            <Btn disabled={!open} onClick={() => answerWith("info")}>
               {t("Pedir información", "Request information")}
             </Btn>
-            <Btn disabled={!canAnswer || !ready} onClick={() => answerWith("conformidad_condicion")}>
+            <Btn disabled={!open || !ready} onClick={() => answerWith("conformidad_condicion")}>
               {t("Conformidad condicionada", "Conditioned sign-off")}
             </Btn>
-            <Btn primary disabled={!canAnswer || !ready} onClick={() => answerWith("conformidad")}>
+            <Btn primary disabled={!open || !ready} onClick={() => answerWith("conformidad")}>
               {t("Dar conformidad", "Give sign-off")}
             </Btn>
             {!open && <span className="lbl">{t(`Se habilita el ${date(decision.date, "es", false)}`, `Opens on ${date(decision.date, "en", false)}`)}</span>}
@@ -163,6 +166,17 @@ export interface QueueItem {
   action: string;
   kind: "signoff" | "veto" | "condition" | "plain";
   open: () => void;
+  openLabel?: string;
+  /** The decision itself, recorded from the queue (internal edition; the bank's is read-only). */
+  form?: {
+    options: { kind: Answer["kind"]; label: string; primary?: boolean; disabled?: boolean }[];
+    suggestion: string;
+    placeholder: string;
+    disabled?: boolean;
+    answer?: Answer;
+    record: (a: Answer) => void;
+    done: (kind: Answer["kind"]) => string;
+  };
 }
 
 const REC_TONE = { green: "text-bcp-green-text", amber: "text-bcp-ambar-text", red: "text-bcp-rojo-text" } as const;
@@ -171,6 +185,9 @@ const EDGE: Record<State, string> = { verde: "border-l-bcp-green", ambar: "borde
 export function QueueCard({ item, cutoff }: { item: QueueItem; cutoff: string }) {
   const t = useT();
   const lang = useLang();
+  const toast = useToast();
+  const reason = useReason();
+  const form = BANK_EDITION ? undefined : item.form;
   const na = t("N/D", "N/A");
   const overdue = item.due < cutoff;
   const cells: [string, string][] = [
@@ -213,31 +230,74 @@ export function QueueCard({ item, cutoff }: { item: QueueItem; cutoff: string })
             <p className="text-[15px] font-semibold text-bcp-ink">{item.action}</p>
           </div>
         </div>
-        <Btn primary onClick={item.open}>
-          {t("Revisar decisión", "Review decision")} →
-        </Btn>
+        {!form && (
+          <Btn primary onClick={item.open}>
+            {t("Revisar decisión", "Review decision")} →
+          </Btn>
+        )}
       </div>
+      {form && (
+        <div className="border-t border-bcp-divider px-5 py-4">
+          {form.answer ? (
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <Stamp text={form.done(form.answer.kind)} when={date(form.answer.at.slice(0, 10), lang)} />
+                {form.answer.note && <p className="mt-2 text-sm"><b className="font-semibold">{t("Motivo del analista BCP", "BCP analyst's reason")}:</b> {form.answer.note}</p>}
+              </div>
+              <button type="button" onClick={item.open} className="min-h-[40px] text-sm font-semibold text-bcp-ink hover:underline">{item.openLabel ?? t("Abrir expediente", "Open file")} →</button>
+            </div>
+          ) : (
+            <>
+              <Rationale reason={reason} suggestion={form.suggestion} placeholder={form.placeholder} disabled={form.disabled} />
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {form.options.map((o) => (
+                  <Btn key={o.kind} primary={o.primary} disabled={o.disabled || form.disabled} onClick={() => {
+                    if (!reason.ok()) return;
+                    form.record({ kind: o.kind, at: new Date().toISOString(), note: reason.note });
+                    toast(`${form.done(o.kind)} · ${item.ref}`);
+                  }}>
+                    {o.label}
+                  </Btn>
+                ))}
+                <button type="button" onClick={item.open} className="ml-auto min-h-[40px] text-sm font-semibold text-bcp-ink hover:underline">{item.openLabel ?? t("Abrir expediente", "Open file")} →</button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </article>
   );
 }
 
 /** The bank's answer, shown as a stamp on the decision. */
 /** The analyst's written reason: required before any decision, with TruMarket's draft one click away. */
-export function Rationale({ value, onChange, suggestion, placeholder, disabled = false }: { value: string; onChange: (v: string) => void; suggestion: string; placeholder: string; disabled?: boolean }) {
+export function Rationale({ reason, suggestion, placeholder, disabled = false }: { reason: Reason; suggestion: string; placeholder: string; disabled?: boolean }) {
   const t = useT();
-  const id = useId();
   return (
     <div>
-      <label htmlFor={id} className="text-[13px] font-semibold text-bcp-muted">
-        {t("Motivo o condición del analista BCP (obligatorio para la trazabilidad)", "BCP analyst's reason or condition (required for the audit trail)")}
-      </label>
-      <div className="mt-1.5 flex flex-wrap items-start gap-2 sm:flex-nowrap">
-        <textarea id={id} rows={2} value={value} disabled={disabled} maxLength={400} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="min-h-[44px] w-full min-w-0 flex-1 resize-y rounded-lg border border-bcp-border bg-white px-3 py-2 text-sm text-bcp-ink placeholder:text-bcp-muted/70 focus:border-bcp-ink focus:outline-none disabled:bg-bcp-bg" />
-        <button type="button" disabled={disabled} onClick={() => onChange(suggestion)} className="min-h-[44px] shrink-0 rounded-lg border border-bcp-border bg-bcp-bg px-3 text-sm font-semibold text-bcp-ink hover:border-bcp-ink disabled:opacity-50">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <label htmlFor={reason.id} className="text-[13px] font-semibold text-bcp-muted">
+          {t("Motivo del analista BCP (obligatorio)", "BCP analyst's reason (required)")}
+        </label>
+        <button type="button" disabled={disabled} onClick={() => reason.setNote(suggestion)} className="text-[13px] font-semibold text-bcp-green-text hover:underline disabled:opacity-50">
           {t("Usar texto sugerido", "Use suggested text")}
         </button>
       </div>
-      {!disabled && !value.trim() && <p className="lbl mt-1">{t("Escriba un motivo para registrar la decisión.", "Write a reason to record the decision.")}</p>}
+      <textarea id={reason.id} rows={2} value={reason.raw} disabled={disabled} maxLength={400} aria-invalid={reason.missing} onChange={(e) => reason.setNote(e.target.value)} placeholder={placeholder} className={`mt-1.5 min-h-[56px] w-full resize-y rounded-lg border bg-white px-3 py-2 text-sm text-bcp-ink placeholder:text-bcp-muted/70 focus:outline-none disabled:bg-bcp-bg ${reason.missing ? "border-bcp-rojo focus:border-bcp-rojo" : "border-bcp-border focus:border-bcp-ink"}`} />
+      {reason.missing && <p role="alert" className="mt-1 text-[13px] font-semibold text-bcp-rojo-text">{t("Escriba un motivo antes de registrar la decisión.", "Write a reason before recording the decision.")}</p>}
+    </div>
+  );
+}
+
+/** The decision buttons as the bank sees them before the pilot: visible, locked. */
+export function LockedDecision({ labels }: { labels: string[] }) {
+  const t = useT();
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {labels.map((l) => (
+        <LockedBtn key={l} note={t(PILOT_NOTE)}>{l}</LockedBtn>
+      ))}
+      <span className="lbl">{t("La decisión se registra aquí desde el piloto.", "Decisions are recorded here from the pilot.")}</span>
     </div>
   );
 }

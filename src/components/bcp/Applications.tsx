@@ -8,13 +8,13 @@ import { GEO } from "../../data/bcp/technical";
 import { COVERAGE_BANDS, L, cov, date, harvestBuild, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
-import { appKey, type Answer } from "./answers";
+import { appKey, useReason, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { CoverageBuild } from "./CoverageBuild";
 import { LineCompare, RepaymentCard } from "./Repayment";
 import { sourceTx, useLang, useT, useToast } from "./shared";
-import { Rationale, Stamp } from "./Decision";
+import { LockedDecision, Rationale, Stamp } from "./Decision";
 import { Btn, Card, Chip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
 import { PILOT_NOTE } from "./nav";
 
@@ -176,8 +176,8 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
   const t1 = app.tranches[0];
   // Fixed order on every application, so a button is never in a different place; the recommended one is highlighted.
   const kinds = ["aprobar", "rechazar", "info"] as const;
-  const label = { aprobar: app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or information") };
-  const [note, setNote] = useState("");
+  const label = { aprobar: app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or info") };
+  const reason = useReason();
   // TruMarket's draft reason, from the recommendation and the standard stress.
   const suggestion = app.recommendation === "rechazar"
     ? L(`Rechazada según la recomendación de TruMarket: ${app.veto ? "veto técnico." : "no cumple el estrés estándar."}`, `Declined per TruMarket's recommendation: ${app.veto ? "technical veto." : "fails the standard stress."}`)
@@ -263,7 +263,6 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
       <div className="grid gap-3 lg:grid-cols-2">
         <Card>
           <h2 className="text-[20px] font-bold">{app.recommendation === "rechazar" ? t("Por qué TruMarket recomienda rechazar", "Why TruMarket recommends declining") : app.recommendation === "aprobar_condicion" ? t("Por qué TruMarket recomienda aprobar con condición", "Why TruMarket recommends approval with a condition") : t("Por qué TruMarket recomienda aprobar", "Why TruMarket recommends approving")}</h2>
-          {app.condition && <p className="mt-2 rounded-md bg-bcp-ambar-bg px-3 py-2 text-sm font-semibold text-bcp-ambar-text">{t("Condición", "Condition")}: {t(app.condition.text)}</p>}
           <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm">
             {app.reasons.map((r, i) => (
               <li key={i}>{t(r)}</li>
@@ -272,7 +271,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         </Card>
         {/* The decision is the bank's: discretionary, on TruMarket's written recommendation. */}
         <Card tone="decision">
-          <Lbl>{t("Decisiones pendientes", "Pending decisions")}</Lbl>
+          <Lbl>{t("Su decisión", "Your decision")}</Lbl>
           <h2 className="text-[16px] font-bold">{t(`Aprobar o rechazar ${usd(app.requestedUsd)}`, `Approve or decline ${usd(app.requestedUsd)}`)}</h2>
           <p className="lbl">{t(`Vence ${date(app.decisionDueDate, "es")}`, `Due ${date(app.decisionDueDate, "en")}`)}</p>
           {answer ? (
@@ -286,16 +285,18 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
               <Lbl>{t("Recomendación TruMarket", "TruMarket recommendation")}</Lbl>
               <p className="text-[20px] font-bold">{app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : app.recommendation === "rechazar" ? t("Rechazar", "Decline") : t("Aprobar", "Approve")}</p>
               <div className="mt-2"><RecommendationChip a={app} /></div>
+              <div className="mt-4"><LockedDecision labels={kinds.map((k) => label[k])} /></div>
             </div>
           ) : (
             <>
             <div className="mt-3">
-              <Rationale value={note} onChange={setNote} suggestion={t(suggestion)} placeholder={app.recommendation === "rechazar" ? t("p. ej. Rechazada por veto técnico: cultivo no verificable.", "e.g. Declined on a technical veto: crop cannot be verified.") : t("p. ej. Aprobada según la evaluación de crédito y técnica.", "e.g. Approved per the credit and technical assessment.")} />
+              <Rationale reason={reason} suggestion={t(suggestion)} placeholder={app.recommendation === "rechazar" ? t("p. ej. Rechazada por veto técnico: cultivo no verificable.", "e.g. Declined on a technical veto: crop cannot be verified.") : t("p. ej. Aprobada según la evaluación de crédito y técnica.", "e.g. Approved per the credit and technical assessment.")} />
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2 [&>*]:flex-auto [&>*]:justify-center">
               {kinds.map((k) => (
-                <Btn key={k} primary={recommended(k)} disabled={!note.trim()} onClick={() => {
-                  onAnswer({ kind: k as Answer["kind"], at: new Date().toISOString(), note: note.trim() });
+                <Btn key={k} primary={recommended(k)} onClick={() => {
+                  if (!reason.ok()) return;
+                  onAnswer({ kind: k as Answer["kind"], at: new Date().toISOString(), note: reason.note });
                   toast(`${ANSWER_TEXT[k][lang]} · ${app.id} ${usd(app.requestedUsd)}`);
                 }}>
                   {label[k]}

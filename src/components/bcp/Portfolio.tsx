@@ -11,7 +11,7 @@ import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
-import { CoverageRange, SourceStrip } from "./Repayment";
+import { CoverageLegend, CoverageRange, SourceStrip } from "./Repayment";
 import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
@@ -389,7 +389,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         </Card>
       </div>
 
-      <SectionTitle title={t("En seguimiento", "On the watchlist")} />
+      <SectionTitle title={t("En seguimiento", "On the watchlist")} right={<CoverageLegend />} />
       <Card>
         <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
           <table className="w-full min-w-[900px] text-sm">
@@ -621,6 +621,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
   };
   return (
     <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
+      <div className="mb-2 flex justify-end"><CoverageLegend /></div>
       <table className="w-full min-w-[860px] text-sm">
         <thead>
           <tr className="border-b border-bcp-border text-left">

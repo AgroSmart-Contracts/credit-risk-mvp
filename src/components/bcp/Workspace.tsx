@@ -229,14 +229,14 @@ const FILTERS = [
   { id: "condicion", label: { es: "Con condición", en: "Conditional" }, match: (x: QueueItem) => x.kind === "condition" },
 ] as const;
 
-function Decisions({ go, answers }: { go: (v: View, id?: string | null) => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
+function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null) => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
   const lang = t("es", "en") as Lang;
   const all = pendingDecisions(PORTFOLIO.loans, PORTFOLIO.cutoff);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("todas");
   // One queue, one structure: tranche sign-offs and applications, sorted by due date.
   const items: QueueItem[] = [
-    ...all.map(({ loan, decision }): QueueItem => {
+    ...all.filter(({ loan, decision }) => !answers[decisionKey(loan, decision)]).map(({ loan, decision }): QueueItem => {
       const tr = loan.tranches.find((x) => x.status === "pendiente");
       const amount = tr?.amountUsd ?? loan.next.amountUsd;
       const ready = !!tr && tr.checklist.every((c) => c.status === "ok");
@@ -259,6 +259,23 @@ function Decisions({ go, answers }: { go: (v: View, id?: string | null) => void;
         action: t("Su conformidad", "Your sign-off"),
         kind: "signoff",
         open: () => go("expediente", loan.id),
+        form: {
+          options: [
+            { kind: "info", label: t("Pedir información", "Request information") },
+            { kind: "conformidad_condicion", label: t("Conformidad condicionada", "Conditioned sign-off"), disabled: !ready },
+            { kind: "conformidad", label: t("Dar conformidad", "Give sign-off"), primary: true, disabled: !ready },
+          ],
+          suggestion: !ready
+            ? t(`Se espera el aforo del ${date(decision.date, "es", false)}; el monto final se fija sobre el volumen verificado.`, `Waiting for the ${date(decision.date, "en", false)} field estimate; the final amount is set on the verified volume.`)
+            : p20 >= COVERAGE_BANDS.ambar
+              ? t(`Checklist completo; cobertura ${cov(loan.coverageToday)} y ${cov(p20)} con precio −20%. Conformidad por ${usd(amount)}.`, `Checklist complete; coverage ${cov(loan.coverageToday)} and ${cov(p20)} at price −20%. Sign-off for ${usd(amount)}.`)
+              : t(`Checklist completo; con precio −20% la cobertura queda en ${cov(p20)}. Conformidad condicionada: el T3 se ajusta al precio esperado vigente en su hito.`, `Checklist complete; at price −20% coverage would be ${cov(p20)}. Conditioned sign-off: T3 is resized to the expected price at its milestone.`),
+          placeholder: t("p. ej. Aforo y facturas del T1 conciliados; conformidad con T3 sujeto al precio FOB en su hito.", "e.g. Field estimate and T1 invoices reconciled; sign-off with T3 subject to the FOB price at its milestone."),
+          disabled: decision.date > PORTFOLIO.cutoff,
+          answer: answers[decisionKey(loan, decision)],
+          record: (a) => onAnswer(decisionKey(loan, decision), a),
+          done: (k) => (k === "conformidad" ? t("Conformidad registrada", "Sign-off recorded") : k === "conformidad_condicion" ? t("Conformidad condicionada registrada", "Conditioned sign-off recorded") : t("Información solicitada", "Information requested")),
+        },
       };
     }),
     ...PORTFOLIO.applications.filter((a) => !answers[appKey(a)]).map((a): QueueItem => {
@@ -284,6 +301,22 @@ function Decisions({ go, answers }: { go: (v: View, id?: string | null) => void;
         action: t("Su decisión de crédito", "Your credit decision"),
         kind: a.veto ? "veto" : a.condition ? "condition" : "plain",
         open: () => go("solicitud", a.id),
+        openLabel: t("Abrir solicitud", "Open application"),
+        form: {
+          options: [
+            { kind: "aprobar", label: a.condition ? t(`Aprobar con ${usd(a.condition.lineUsd)}`, `Approve with ${usd(a.condition.lineUsd)}`) : t("Aprobar", "Approve"), primary: a.recommendation !== "rechazar" },
+            { kind: "rechazar", label: t("Rechazar", "Decline"), primary: a.recommendation === "rechazar" },
+            { kind: "info", label: t("Pedir inspección o información", "Request inspection or information") },
+          ],
+          suggestion: a.recommendation === "rechazar"
+            ? t(`Rechazada según la recomendación de TruMarket: ${a.veto ? "veto técnico." : "no cumple el estrés estándar."}`, `Declined per TruMarket's recommendation: ${a.veto ? "technical veto." : "fails the standard stress."}`)
+            : a.condition
+              ? t(`Aprobada con una línea de ${usd(a.condition.lineUsd)}: pasa el estrés estándar (precio −20% y volumen −30%) sobre ${cov(COVERAGE_BANDS.ambar)}.`, `Approved with a line of ${usd(a.condition.lineUsd)}: passes the standard stress (price −20% and volume −30%) above ${cov(COVERAGE_BANDS.ambar)}.`)
+              : t("Aprobada según la evaluación de crédito y técnica.", "Approved per the credit and technical assessment."),
+          placeholder: a.recommendation === "rechazar" ? t("p. ej. Rechazada por veto técnico: cultivo no verificable.", "e.g. Declined on a technical veto: crop cannot be verified.") : t("p. ej. Aprobada según la evaluación de crédito y técnica.", "e.g. Approved per the credit and technical assessment."),
+          record: (ans) => onAnswer(appKey(a), ans),
+          done: (k) => (k === "aprobar" ? t("Aprobación registrada", "Approval recorded") : k === "rechazar" ? t("Rechazo registrado", "Decline recorded") : t("Inspección o información solicitada", "Inspection or information requested")),
+        },
       };
     }),
   ].sort((x, y) => x.due.localeCompare(y.due));
