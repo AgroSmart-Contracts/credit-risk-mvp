@@ -62,7 +62,18 @@ function checkCode(user, code) {
   return false;
 }
 
-export const clientIp = (req) => String(req.headers["x-forwarded-for"] ?? req.socket?.remoteAddress ?? "").split(",")[0].trim();
+/**
+ * The caller's IP for sign-in throttling. Vercel sets x-vercel-forwarded-for and
+ * x-real-ip itself; the first entry of x-forwarded-for is whatever the client sent,
+ * so it is used last and only its final (proxy-added) entry is trusted.
+ */
+export const clientIp = (req) => {
+  const platformIp = req.headers["x-vercel-forwarded-for"] ?? req.headers["x-real-ip"];
+  if (platformIp) return String(platformIp).split(",")[0].trim();
+  if (req.socket?.remoteAddress) return String(req.socket.remoteAddress).trim();
+  const forwarded = String(req.headers["x-forwarded-for"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  return forwarded.at(-1) ?? "";
+};
 
 export function isLocked(key) {
   const f = failures.get(key);
@@ -128,10 +139,13 @@ export function currentUser(req) {
 
 /** Requests that change state must come from this site. */
 export function sameOrigin(req) {
-  const origin = req.headers.origin;
-  if (!origin) return true;
+  const expectedHost = req.headers["x-forwarded-host"] ?? req.headers.host;
+  if (!expectedHost) return false;
+  // Browsers send Origin (or at least Referer) on a POST; a request with neither is refused.
+  const source = req.headers.origin || req.headers.referer;
+  if (!source) return false;
   try {
-    return new URL(origin).host === (req.headers["x-forwarded-host"] ?? req.headers.host);
+    return new URL(source).host === expectedHost;
   } catch {
     return false;
   }
