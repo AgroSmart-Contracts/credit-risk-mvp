@@ -37,9 +37,9 @@ function H({ children }: { children: ReactNode }) {
   return <h2 className="mb-0.5 mt-2 text-[13.5px] font-bold">{children}</h2>;
 }
 
-function T({ head, rows, right = [], nowrap = [0] }: { head: string[]; rows: ReactNode[][]; right?: number[]; nowrap?: number[] }) {
+function T({ head, rows, right = [], nowrap = [0], dense = false }: { head: string[]; rows: ReactNode[][]; right?: number[]; nowrap?: number[]; dense?: boolean }) {
   return (
-    <table className="w-full border-collapse text-[11.5px]">
+    <table className={`w-full border-collapse ${dense ? "text-[10.5px] leading-[1.3]" : "text-[11.5px]"}`}>
       <thead>
         <tr className="border-b border-bcp-ink">
           {head.map((h, i) => (
@@ -53,7 +53,7 @@ function T({ head, rows, right = [], nowrap = [0] }: { head: string[]; rows: Rea
         {rows.map((r, i) => (
           <tr key={i} className="border-b border-bcp-border align-top">
             {r.map((c, j) => (
-              <td key={j} className={`py-[3px] pr-2 ${right.includes(j) ? "whitespace-nowrap text-right tabular-nums" : ""} ${nowrap.includes(j) ? "whitespace-nowrap" : ""}`}>
+              <td key={j} className={`${dense ? "py-[2px]" : "py-[3px]"} pr-2 ${right.includes(j) ? "whitespace-nowrap text-right tabular-nums" : ""} ${nowrap.includes(j) ? "whitespace-nowrap" : ""}`}>
                 {c}
               </td>
             ))}
@@ -355,6 +355,7 @@ export function CreditMemo({ data, loan }: { data: Portfolio; loan: Loan }) {
         <T
           head={[t("Condición", "Condition"), t("Aprobación", "Approval"), t("Hoy", "Today"), ...(BANK_EDITION ? [] : [t("Umbral", "Threshold")]), t("Estado", "State"), t("Efecto en el repago", "Effect on repayment")]}
           nowrap={[BANK_EDITION ? 3 : 4]}
+          dense={!BANK_EDITION}
           rows={groups.flatMap((g) => [
             [<b key="g">{groupText[g]}</b>, ...Array(BANK_EDITION ? 4 : 5).fill("")],
             ...loan.conditions
