@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import type { Application, Decision, Loan } from "../../lib/bcp/types";
 
-export type Answer = { kind: "conformidad" | "info" | "aprobar" | "rechazar"; at: string };
+/** A bank answer, with the analyst's written reason (required for the audit trail). */
+export type Answer = { kind: "conformidad" | "conformidad_condicion" | "info" | "aprobar" | "rechazar"; at: string; note?: string };
 const KEY = "bcp-decisions";
 
 /** Bank answers kept in this browser (per analyst); the audit trail of record is TruMarket's. */

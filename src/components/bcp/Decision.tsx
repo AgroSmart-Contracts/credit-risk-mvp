@@ -1,9 +1,10 @@
 /**
  * A pending bank sign-off, with what is at stake, the
  * checklist, the coverage and TruMarket's recommendation. The bank answers with
- * "Dar conformidad" or "Pedir información"; the answer is recorded with its date.
+ * a sign-off, a conditioned sign-off or a request for information, always with a
+ * written reason; the answer is recorded with its date and that reason.
  */
-import { useState } from "react";
+import { useId, useState } from "react";
 import { COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, usd } from "../../lib/bcp/calc";
 import type { Decision, Loan, State } from "../../lib/bcp/types";
 import type { Answer } from "./answers";
@@ -25,14 +26,24 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
   const p20 = coverageUnder(loan, STANDARD_STRESS.price);
   // TruMarket's checklist only; the bank's sign-off is the decision itself, not an item on it.
   const ready = !!tranche && done === tranche.checklist.length;
+  const [note, setNote] = useState("");
+  const suggestion = !tranche
+    ? t("Sin tramo pendiente.", "No tranche pending.")
+    : !ready
+      ? t(`Se espera el aforo del ${date(decision.date, "es", false)}; el monto final se fija sobre el volumen verificado.`, `Waiting for the ${date(decision.date, "en", false)} field estimate; the final amount is set on the verified volume.`)
+      : p20 >= COVERAGE_BANDS.ambar
+        ? t(`Checklist ${done} de ${tranche.checklist.length} completo; cobertura ${cov(loan.coverageToday)} y ${cov(p20)} con precio −20%. Conformidad por ${usd(tranche.amountUsd)}.`, `Checklist ${done} of ${tranche.checklist.length} complete; coverage ${cov(loan.coverageToday)} and ${cov(p20)} at price −20%. Sign-off for ${usd(tranche.amountUsd)}.`)
+        : t(`Checklist ${done} de ${tranche.checklist.length} completo; con precio −20% la cobertura queda en ${cov(p20)}. Conformidad condicionada: el T3 se ajusta al precio esperado vigente en su hito.`, `Checklist ${done} of ${tranche.checklist.length} complete; at price −20% coverage would be ${cov(p20)}. Conditioned sign-off: T3 is resized to the expected price at its milestone.`);
   const answerWith = (kind: Answer["kind"]) => {
-    onAnswer({ kind, at: new Date().toISOString() });
+    onAnswer({ kind, at: new Date().toISOString(), note: note.trim() });
     toast(
-      kind === "conformidad"
-        ? t(`Conformidad registrada · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`, `Sign-off recorded · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`)
-        : t(`Solicitud enviada a TruMarket · ${loan.id}`, `Request sent to TruMarket · ${loan.id}`),
+      kind === "info"
+        ? t(`Solicitud enviada a TruMarket · ${loan.id}`, `Request sent to TruMarket · ${loan.id}`)
+        : t(`${kind === "conformidad" ? "Conformidad" : "Conformidad condicionada"} registrada · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`, `${kind === "conformidad" ? "Sign-off" : "Conditioned sign-off"} recorded · ${loan.id} ${tranche?.id ?? ""} ${tranche ? usd(tranche.amountUsd) : ""}`),
     );
   };
+  const canAnswer = open && note.trim().length > 0;
+  const stampText = answer?.kind === "conformidad" ? t("Conformidad registrada", "Sign-off recorded") : answer?.kind === "conformidad_condicion" ? t("Conformidad condicionada registrada", "Conditioned sign-off recorded") : t("Información solicitada", "Information requested");
   return (
     <Card tone="decision">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -98,15 +109,26 @@ export function DecisionBlock({ loan, decision, answer, onAnswer, cutoff, onOpen
           ))}
         </ul>
       )}
-      <div className="mt-4 flex flex-wrap items-center gap-2">
+      {!answer && !BANK_EDITION && (
+        <div className="mt-4">
+          <Rationale value={note} onChange={setNote} suggestion={suggestion} disabled={!open} placeholder={t("p. ej. Aforo y facturas del T1 conciliados; conformidad con T3 sujeto al precio FOB en su hito.", "e.g. Field estimate and T1 invoices reconciled; sign-off with T3 subject to the FOB price at its milestone.")} />
+        </div>
+      )}
+      <div className="mt-3 flex flex-wrap items-center gap-2">
         {answer ? (
-          <Stamp text={answer.kind === "conformidad" ? t("Conformidad registrada", "Sign-off recorded") : t("Información solicitada", "Information requested")} when={date(answer.at.slice(0, 10), lang)} />
+          <div>
+            <Stamp text={stampText} when={date(answer.at.slice(0, 10), lang)} />
+            {answer.note && <p className="mt-2 text-sm text-bcp-ink"><b className="font-semibold">{t("Motivo del analista BCP", "BCP analyst's reason")}:</b> {answer.note}</p>}
+          </div>
         ) : BANK_EDITION ? null : (
           <>
-            <Btn disabled={!open} onClick={() => answerWith("info")}>
+            <Btn disabled={!canAnswer} onClick={() => answerWith("info")}>
               {t("Pedir información", "Request information")}
             </Btn>
-            <Btn primary disabled={!open} onClick={() => answerWith("conformidad")}>
+            <Btn disabled={!canAnswer || !ready} onClick={() => answerWith("conformidad_condicion")}>
+              {t("Conformidad condicionada", "Conditioned sign-off")}
+            </Btn>
+            <Btn primary disabled={!canAnswer || !ready} onClick={() => answerWith("conformidad")}>
               {t("Dar conformidad", "Give sign-off")}
             </Btn>
             {!open && <span className="lbl">{t(`Se habilita el ${date(decision.date, "es", false)}`, `Opens on ${date(decision.date, "en", false)}`)}</span>}
@@ -200,6 +222,26 @@ export function QueueCard({ item, cutoff }: { item: QueueItem; cutoff: string })
 }
 
 /** The bank's answer, shown as a stamp on the decision. */
+/** The analyst's written reason: required before any decision, with TruMarket's draft one click away. */
+export function Rationale({ value, onChange, suggestion, placeholder, disabled = false }: { value: string; onChange: (v: string) => void; suggestion: string; placeholder: string; disabled?: boolean }) {
+  const t = useT();
+  const id = useId();
+  return (
+    <div>
+      <label htmlFor={id} className="text-[13px] font-semibold text-bcp-muted">
+        {t("Motivo o condición del analista BCP (obligatorio para la trazabilidad)", "BCP analyst's reason or condition (required for the audit trail)")}
+      </label>
+      <div className="mt-1.5 flex flex-wrap items-start gap-2 sm:flex-nowrap">
+        <textarea id={id} rows={2} value={value} disabled={disabled} maxLength={400} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="min-h-[44px] w-full min-w-0 flex-1 resize-y rounded-lg border border-bcp-border bg-white px-3 py-2 text-sm text-bcp-ink placeholder:text-bcp-muted/70 focus:border-bcp-ink focus:outline-none disabled:bg-bcp-bg" />
+        <button type="button" disabled={disabled} onClick={() => onChange(suggestion)} className="min-h-[44px] shrink-0 rounded-lg border border-bcp-border bg-bcp-bg px-3 text-sm font-semibold text-bcp-ink hover:border-bcp-ink disabled:opacity-50">
+          {t("Usar texto sugerido", "Use suggested text")}
+        </button>
+      </div>
+      {!disabled && !value.trim() && <p className="lbl mt-1">{t("Escriba un motivo para registrar la decisión.", "Write a reason to record the decision.")}</p>}
+    </div>
+  );
+}
+
 export function Stamp({ text, when }: { text: string; when: string }) {
   return (
     <span className="inline-flex -rotate-2 items-center gap-2 rounded-md border-2 border-bcp-green-text px-2.5 py-1.5 font-[Arial,Helvetica,sans-serif] text-[12px] font-bold uppercase tracking-wide text-bcp-green-text">

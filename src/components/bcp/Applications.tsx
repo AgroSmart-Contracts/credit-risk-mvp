@@ -5,7 +5,7 @@
  */
 import { useCallback, useState } from "react";
 import { GEO } from "../../data/bcp/technical";
-import { cov, date, harvestBuild, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
+import { COVERAGE_BANDS, L, cov, date, harvestBuild, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
 import { appKey, type Answer } from "./answers";
@@ -14,7 +14,7 @@ import { ScoreBreakdown, StressGrid } from "./ScoreStress";
 import { CoverageBuild } from "./CoverageBuild";
 import { LineCompare, RepaymentCard } from "./Repayment";
 import { sourceTx, useLang, useT, useToast } from "./shared";
-import { Stamp } from "./Decision";
+import { Rationale, Stamp } from "./Decision";
 import { Btn, Card, Chip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
 import { PILOT_NOTE } from "./nav";
 
@@ -177,6 +177,13 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
   // Fixed order on every application, so a button is never in a different place; the recommended one is highlighted.
   const kinds = ["aprobar", "rechazar", "info"] as const;
   const label = { aprobar: app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or information") };
+  const [note, setNote] = useState("");
+  // TruMarket's draft reason, from the recommendation and the standard stress.
+  const suggestion = app.recommendation === "rechazar"
+    ? L(`Rechazada según la recomendación de TruMarket: ${app.veto ? "veto técnico." : "no cumple el estrés estándar."}`, `Declined per TruMarket's recommendation: ${app.veto ? "technical veto." : "fails the standard stress."}`)
+    : app.condition
+      ? L(`Aprobada con una línea de ${usd(app.condition.lineUsd)}: pasa el estrés estándar (precio −20% y volumen −30%) sobre ${cov(COVERAGE_BANDS.ambar)}.`, `Approved with a line of ${usd(app.condition.lineUsd)}: passes the standard stress (price −20% and volume −30%) above ${cov(COVERAGE_BANDS.ambar)}.`)
+      : L("Aprobada según la evaluación de crédito y técnica.", "Approved per the credit and technical assessment.");
   const recommended = (k: (typeof kinds)[number]) => k === app.recommendation || (k === "aprobar" && app.recommendation === "aprobar_condicion");
 
   return (
@@ -265,9 +272,10 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           <h2 className="text-[16px] font-bold">{t(`Aprobar o rechazar ${usd(app.requestedUsd)}`, `Approve or decline ${usd(app.requestedUsd)}`)}</h2>
           <p className="lbl">{t(`Vence ${date(app.decisionDueDate, "es")}`, `Due ${date(app.decisionDueDate, "en")}`)}</p>
           {answer ? (
-            <p className="mt-3">
+            <div className="mt-3">
               <Stamp text={ANSWER_TEXT[answer.kind as keyof typeof ANSWER_TEXT]?.[lang] ?? ""} when={date(answer.at.slice(0, 10), lang)} />
-            </p>
+              {answer.note && <p className="mt-2 text-sm"><b className="font-semibold">{t("Motivo del analista BCP", "BCP analyst's reason")}:</b> {answer.note}</p>}
+            </div>
           ) : BANK_EDITION ? (
             // Read-only for the bank until the pilot: TruMarket's recommendation, in place of the buttons.
             <div className="mt-3">
@@ -276,10 +284,14 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
               <div className="mt-2"><RecommendationChip a={app} /></div>
             </div>
           ) : (
+            <>
+            <div className="mt-3">
+              <Rationale value={note} onChange={setNote} suggestion={t(suggestion)} placeholder={app.recommendation === "rechazar" ? t("p. ej. Rechazada por veto técnico: cultivo no verificable.", "e.g. Declined on a technical veto: crop cannot be verified.") : t("p. ej. Aprobada según la evaluación de crédito y técnica.", "e.g. Approved per the credit and technical assessment.")} />
+            </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {kinds.map((k) => (
-                <Btn key={k} primary={recommended(k)} onClick={() => {
-                  onAnswer({ kind: k as Answer["kind"], at: new Date().toISOString() });
+                <Btn key={k} primary={recommended(k)} disabled={!note.trim()} onClick={() => {
+                  onAnswer({ kind: k as Answer["kind"], at: new Date().toISOString(), note: note.trim() });
                   toast(`${ANSWER_TEXT[k][lang]} · ${app.id} ${usd(app.requestedUsd)}`);
                 }}>
                   {label[k]}
@@ -287,6 +299,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
                 </Btn>
               ))}
             </div>
+            </>
           )}
         </Card>
       </div>
