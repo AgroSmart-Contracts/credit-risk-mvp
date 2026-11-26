@@ -185,6 +185,45 @@ function BellCurve({ mean, sd, fmt, shadeBelow, warnBelow, shadeLabel, lines, ti
   );
 }
 
+/**
+ * Compact P10-P90 bar for tables (as in the credit-files list): risk bands,
+ * P10-P90 light, P25-P75 dark, coverage today marked; the internal edition adds
+ * the repayment index. Distribution from the stated assumption, labelled estimate.
+ */
+export function PercentileCell({ input, controls }: { input: HarvestInput; controls: Exclude<State, "veto"> }) {
+  const t = useT();
+  const d = coverageDistribution(input);
+  const index = BANK_EDITION ? null : repaymentIndex(d, controls);
+  const pos = (v: number) => ((Math.min(SCALE_MAX, Math.max(SCALE_MIN, v)) - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
+  const at = (v: number) => `${pos(v)}%`;
+  const zones: [number, number, string][] = [
+    [SCALE_MIN, COVERAGE_BANDS.rojo, "bg-bcp-rojo-bg"],
+    [COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, "bg-bcp-naranja-bg"],
+    [COVERAGE_BANDS.naranja, COVERAGE_BANDS.ambar, "bg-bcp-ambar-bg"],
+    [COVERAGE_BANDS.ambar, SCALE_MAX, "bg-bcp-bg"],
+  ];
+  return (
+    <div className="flex items-center gap-3">
+      {index !== null && <span className="num w-14 shrink-0 text-[15px] font-bold text-bcp-ink" title={t("Índice interno, no visible para el banco", "Internal index, not shown to the bank")}>{index}<span className="text-[11px] font-semibold text-bcp-muted">/100</span></span>}
+      <div className="min-w-0 flex-1" role="img" aria-label={`P10 ${cov(d.p10)} · ${t("hoy", "today")} ${cov(d.p50)} · P90 ${cov(d.p90)} (${t("estimado", "estimate")})`}>
+        <div className="relative h-3.5 rounded-full border border-bcp-border" aria-hidden>
+          <div className="absolute inset-0 flex overflow-hidden rounded-full">
+            {zones.map(([a, b, c]) => <span key={a} className={c} style={{ width: `${((b - a) / (SCALE_MAX - SCALE_MIN)) * 100}%` }} />)}
+          </div>
+          <span className="absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-bcp-green/30" style={{ left: at(d.p10), width: `${pos(d.p90) - pos(d.p10)}%` }} />
+          <span className="absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-bcp-green/70" style={{ left: at(d.p25), width: `${pos(d.p75) - pos(d.p25)}%` }} />
+          <span className="absolute top-1/2 h-4 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-sm bg-bcp-ink" style={{ left: at(d.p50) }} />
+        </div>
+        <p className="num mt-1 flex justify-between gap-2 whitespace-nowrap text-[11px] text-bcp-muted" aria-hidden>
+          <span>P10 {cov(d.p10)}</span>
+          <b className="font-semibold text-bcp-ink">{t("Hoy", "Today")} {cov(d.p50)}</b>
+          <span>P90 {cov(d.p90)}</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 /** What the two shaded zones under a curve mean, shown with their swatches rather than colour names. */
 function ZoneKey({ what }: { what: string }) {
   const t = useT();

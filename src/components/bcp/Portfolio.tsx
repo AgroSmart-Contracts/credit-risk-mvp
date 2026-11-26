@@ -11,7 +11,7 @@ import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
-import { CoverageLegend, CoverageTrend, SourceStrip } from "./Repayment";
+import { CoverageLegend, CoverageTrend, PercentileCell, SourceStrip } from "./Repayment";
 import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
@@ -667,11 +667,10 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
   };
   return (
     <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
-      <div className="mb-2 flex justify-end"><CoverageLegend /></div>
       <table className="w-full min-w-[860px] text-sm">
         <thead>
           <tr className="border-b border-bcp-border text-left">
-            {[t("Cliente", "Client"), t("Estado", "State"), t("Desembolsado", "Disbursed"), t("Próximo tramo", "Next tranche"), t("Cobertura", "Coverage"), t("Vence", "Due"), ""].map((h, i) => (
+            {[t("Cliente", "Client"), t("Estado", "State"), t("Desembolsado", "Disbursed"), t("Próximo tramo", "Next tranche"), BANK_EDITION ? t("Cobertura P10–P90 (estimado)", "Coverage P10–P90 (estimate)") : t("Índice y P10–P90 (estimado)", "Index & P10–P90 (estimate)"), t("Vence", "Due"), ""].map((h, i) => (
               <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 2 ? "text-right" : ""}`}>
                 {h}
               </Lbl>
@@ -696,12 +695,8 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
                 {nextTranche(l).main}
                 <span className="lbl block">{nextTranche(l).note}</span>
               </td>
-              <td className="w-[230px] py-2.5 pr-4">
-                <CoverageTrend history={l.coverageHistory} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} from={l.approvalDate} to={l.maturityDate} cutoff={data.cutoff} />
-                <span className="lbl mt-1.5 block whitespace-nowrap">
-                  <b className="font-semibold text-bcp-ink">{cov(l.coverageToday)}</b> · {t("aprob.", "appr.")} {cov(l.coverageAtApproval)}
-                  {l.projection && <> · {t("proy.", "proj.")} {range(l.projection.low, l.projection.high, lang)}</>}
-                </span>
+              <td className="w-[300px] py-2.5 pr-4">
+                <PercentileCell input={l} controls={l.controlsState} />
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">{date(l.maturityDate, lang)}</td>
               <td className="whitespace-nowrap py-2.5 text-right">
