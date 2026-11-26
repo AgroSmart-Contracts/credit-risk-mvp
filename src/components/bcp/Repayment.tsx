@@ -5,8 +5,9 @@
  */
 import { useState, type ReactNode } from "react";
 import { Lock, RefreshCw } from "lucide-react";
-import { COST_USD_KG, COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, harvestBuild, range, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
+import { COST_USD_KG, COVERAGE_BANDS, DISPERSION, STANDARD_STRESS, cov, coverageDistribution, coverageUnder, date, harvestBuild, range, repaymentIndex, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
 import type { ConditionState, Provenance, State } from "../../lib/bcp/types";
+import { BANK_EDITION } from "./edition";
 import { PILOT_NOTE } from "./nav";
 import { STATE_TEXT, useLang, useT } from "./shared";
 import { Lbl, Prov } from "./ui";
@@ -133,77 +134,116 @@ export function CoverageRange({ today, approval, low, high, stress, compact = fa
   );
 }
 
-/**
- * Where repayment breaks, on one axis: the break-even point (coverage 1.00x),
- * the proposed threshold (1.50x), the standard stress and the expected value.
- * Every marker follows from the coverage build, so the bank can check each one.
- */
-function BreakLine({ expected, stressed, breakEven, threshold, fmt, stressLabel }: { expected: number; stressed: number; breakEven: number; threshold: number; fmt: (n: number) => string; stressLabel: string }) {
-  const t = useT();
-  const max = Math.max(expected, threshold) * 1.12;
-  const at = (v: number) => `${Math.min(100, Math.max(0, (v / max) * 100))}%`;
-  const marks: { v: number; label: string; cls: string }[] = [
-    { v: breakEven, label: `${t("equilibrio (1.00x)", "break-even (1.00x)")} ${fmt(breakEven)}`, cls: "bg-bcp-rojo" },
-    { v: threshold, label: `${t("umbral", "threshold")} ${cov(COVERAGE_BANDS.ambar)}: ${fmt(threshold)}`, cls: "bg-bcp-ambar" },
-    { v: stressed, label: `${stressLabel} ${fmt(stressed)}`, cls: "bg-bcp-naranja" },
-    { v: expected, label: `${t("esperado", "expected")} ${fmt(expected)}`, cls: "bg-bcp-ink" },
-  ];
-  return (
-    <div className="mt-3" role="img" aria-label={marks.map((m) => m.label).join(" · ")}>
-      <div className="relative h-2.5 rounded-full" aria-hidden>
-        <div className="absolute inset-0 flex overflow-hidden rounded-full">
-          <span className="bg-bcp-rojo-bg" style={{ width: at(breakEven) }} />
-          <span className="bg-bcp-ambar-bg" style={{ width: `calc(${at(threshold)} - ${at(breakEven)})` }} />
-          <span className="flex-1 bg-bcp-verde-bg/70" />
-        </div>
-        {marks.map((m) => (
-          <span key={m.label} className={`absolute top-1/2 h-4 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-sm ${m.cls}`} style={{ left: at(m.v) }} />
-        ))}
-      </div>
-      <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[12px] text-bcp-muted" aria-hidden>
-        {marks.map((m) => (
-          <li key={m.label} className={`num flex items-center gap-1.5 ${m.v === expected ? "font-semibold text-bcp-ink" : ""}`}>
-            <span className={`h-3 w-[3px] rounded-sm ${m.cls}`} />
-            {m.label}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 /** A reading behind volume or price: value, effect on repayment, provenance and source. */
 export type DriverRow = { label: string; value: string; effect: string; state: ConditionState; provenance: Provenance; source: string };
 
-function Drivers({ rows }: { rows: DriverRow[] }) {
+function DriverList({ rows }: { rows: DriverRow[] }) {
   const t = useT();
-  const [open, setOpen] = useState(false);
   if (!rows.length) return null;
   return (
-    <div className="mt-2 border-t border-bcp-divider pt-2">
-      <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} className="min-h-[32px] text-[13px] font-semibold text-bcp-green-text hover:underline">
-        {open ? t("Ocultar lo que lo mueve", "Hide what moves it") : t(`Qué lo mueve (${rows.length})`, `What moves it (${rows.length})`)} {open ? "▴" : "▾"}
-      </button>
-      {open && (
-        <ul className="mt-1 divide-y divide-bcp-divider text-[13px]">
-          {rows.map((r) => (
-            <li key={r.label} className="py-2">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-                <span className="font-semibold text-bcp-ink">{r.label}</span>
-                <span className="num font-semibold">{r.value}</span>
-              </div>
-              <p className="text-bcp-muted">{r.effect} · {t(STATE_TEXT[r.state])}</p>
-              <p className="mt-1 flex flex-wrap items-center gap-1.5 text-bcp-muted"><Prov p={r.provenance} /> {r.source}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
+      {rows.map((r) => (
+        <div key={r.label} className="rounded-lg border border-bcp-divider bg-bcp-bg/60 p-3 text-[13px]">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+            <span className="font-semibold text-bcp-ink">{r.label}</span>
+            <span className="num font-semibold">{r.value}</span>
+          </div>
+          <p className="text-bcp-muted">{r.effect} · {t(STATE_TEXT[r.state])}</p>
+          <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-bcp-muted"><Prov p={r.provenance} /> {r.source}</p>
+        </div>
+      ))}
     </div>
   );
 }
 
-/** Headline card: coverage today, its projection and the standard stress, then volume and price. */
-export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel, middle, yieldTHa, areaHa, chip, onCalc, footnote, drivers }: {
+/**
+ * The estimated distribution of one input as a bell curve: the tail below a
+ * line is shaded (below break-even, or below the standard stress), with
+ * P10, P50 and P90 marked. A picture of the stated assumption, not of data.
+ */
+function BellCurve({ mean, sd, fmt, shadeBelow, shadeLabel, lines, ticks }: {
+  mean: number;
+  sd: number;
+  fmt: (n: number) => string;
+  shadeBelow: number;
+  shadeLabel: string;
+  lines: { v: number; label: string; cls: string }[];
+  ticks: { v: number; label: string; strong?: boolean }[];
+}) {
+  const W = 560;
+  const H = 120;
+  const lo = Math.min(mean - 3 * sd, shadeBelow - sd * 0.3, ...lines.map((l) => l.v - sd * 0.3));
+  const hi = mean + 3 * sd;
+  const PAD = 70;
+  const x = (v: number) => PAD + ((v - lo) / (hi - lo)) * (W - PAD * 2);
+  const y = (v: number) => H - 22 - Math.exp(-((v - mean) ** 2) / (2 * sd * sd)) * (H - 36);
+  const pts = Array.from({ length: 81 }, (_, k) => lo + ((hi - lo) * k) / 80);
+  const path = pts.map((v, k) => `${k ? "L" : "M"}${x(v).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const tail = pts.filter((v) => v <= shadeBelow);
+  const tailPath = tail.length ? `M${x(lo)},${H - 22} ` + tail.map((v) => `L${x(v).toFixed(1)},${y(v).toFixed(1)}`).join(" ") + ` L${x(Math.min(shadeBelow, hi)).toFixed(1)},${H - 22} Z` : "";
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`${ticks.map((k) => `${k.label} ${fmt(k.v)}`).join(" · ")} · ${shadeLabel}`}>
+      <path d={`${path} L${x(hi)},${H - 22} L${x(lo)},${H - 22} Z`} className="fill-bcp-verde-bg" />
+      {tailPath && <path d={tailPath} className="fill-bcp-naranja-bg" />}
+      <path d={path} className="fill-none stroke-bcp-green-text" strokeWidth={2} />
+      <line x1={x(lo)} x2={x(hi)} y1={H - 22} y2={H - 22} className="stroke-bcp-border" />
+      {[...lines].sort((a, b) => a.v - b.v).map((l, k, all) => {
+        // Labels never leave the chart, and two close lines read outward from each other.
+        const lx = x(l.v);
+        const near = all.length > 1 && Math.abs(x(all[1].v) - x(all[0].v)) < 90;
+        const anchor = lx < 50 || (near && k === 0) ? "end" : lx > W - 50 || (near && k === all.length - 1) ? "start" : "middle";
+        const tx = anchor === "end" ? Math.max(lx - 4, 60) : anchor === "start" ? Math.min(lx + 4, W - 60) : lx;
+        return (
+          <g key={l.label}>
+            <line x1={lx} x2={lx} y1={14} y2={H - 22} strokeDasharray="4 3" className={l.cls} strokeWidth={1.5} />
+            <text x={tx} y={10} textAnchor={anchor === "end" && lx < 60 ? "start" : anchor} className="fill-bcp-naranja-text text-[11px] font-semibold">{l.label}</text>
+          </g>
+        );
+      })}
+      {ticks.map((k) => (
+        <g key={k.label}>
+          <line x1={x(k.v)} x2={x(k.v)} y1={k.strong ? y(k.v) : H - 26} y2={H - 18} className={k.strong ? "stroke-bcp-ink" : "stroke-bcp-muted"} strokeWidth={k.strong ? 2 : 1} />
+          <text x={x(k.v)} y={H - 5} textAnchor="middle" className={`text-[11px] ${k.strong ? "fill-bcp-ink font-semibold" : "fill-bcp-muted"}`}>{k.label} {fmt(k.v)}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/** Coverage percentiles on the band scale: P10-P90 light, P25-P75 dark, P50 ring, approval above. */
+function DistributionBar({ d, approval }: { d: ReturnType<typeof coverageDistribution>; approval?: number }) {
+  const t = useT();
+  const pos = (v: number) => ((Math.min(SCALE_MAX, Math.max(SCALE_MIN, v)) - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
+  const at = (v: number) => `${pos(v)}%`;
+  const zones = [
+    { from: SCALE_MIN, to: COVERAGE_BANDS.rojo, cls: "bg-bcp-rojo-bg" },
+    { from: COVERAGE_BANDS.rojo, to: COVERAGE_BANDS.naranja, cls: "bg-bcp-naranja-bg" },
+    { from: COVERAGE_BANDS.naranja, to: COVERAGE_BANDS.ambar, cls: "bg-bcp-ambar-bg" },
+    { from: COVERAGE_BANDS.ambar, to: SCALE_MAX, cls: "bg-bcp-bg" },
+  ];
+  return (
+    <div>
+      <div className="relative mb-1 h-4 text-[11px]" aria-hidden>
+        {[[COVERAGE_BANDS.rojo, "text-bcp-rojo-text"], [COVERAGE_BANDS.naranja, "text-bcp-naranja-text"], [COVERAGE_BANDS.ambar, "text-bcp-ambar-text"]].map(([b, c]) => (
+          <span key={b} className={`num absolute -translate-x-1/2 font-semibold ${c}`} style={{ left: at(b as number) }}>{cov(b as number)}</span>
+        ))}
+        {approval !== undefined && <span className="absolute -translate-x-1/2 text-bcp-ink" style={{ left: at(approval), top: 2 }} title={t("Aprobación", "Approval")}>▼</span>}
+      </div>
+      <div className="relative h-6 rounded-lg border border-bcp-border" role="img" aria-label={`P10 ${cov(d.p10)} · P25 ${cov(d.p25)} · P50 ${cov(d.p50)} · P75 ${cov(d.p75)} · P90 ${cov(d.p90)}`}>
+        <div className="absolute inset-0 flex overflow-hidden rounded-lg">
+          {zones.map((z) => <span key={z.from} className={z.cls} style={{ width: `${((z.to - z.from) / (SCALE_MAX - SCALE_MIN)) * 100}%` }} />)}
+        </div>
+        {[COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, COVERAGE_BANDS.ambar].map((v) => <span key={v} className="absolute inset-y-0 border-l border-dashed border-bcp-naranja/60" style={{ left: at(v) }} />)}
+        <span className="absolute top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-bcp-green/30" style={{ left: at(d.p10), width: `${pos(d.p90) - pos(d.p10)}%` }} />
+        <span className="absolute top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-bcp-green/70" style={{ left: at(d.p25), width: `${pos(d.p75) - pos(d.p25)}%` }} />
+        <span className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-bcp-green-text bg-white" style={{ left: at(d.p50) }} />
+      </div>
+    </div>
+  );
+}
+
+/** Headline card: repayment at a glance, the estimated distribution, then volume (Q) and price (P). */
+export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel, middle, yieldTHa, areaHa, chip, onCalc, footnote, drivers, controls }: {
   input: HarvestInput;
   cutoff: string;
   approval?: number;
@@ -219,78 +259,143 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
   footnote?: string;
   /** The readings behind each of the two inputs (loan conditions or application checks). */
   drivers?: { volume: DriverRow[]; price: DriverRow[] };
+  /** Controls state, for the internal index. */
+  controls?: Exclude<State, "veto">;
 }) {
   const t = useT();
   const lang = useLang();
+  const [panel, setPanel] = useState<"q" | "p" | null>(null);
   const b = harvestBuild(input);
-  const margin = b.priceUsdKg - COST_USD_KG;
-  // Volume and price at which coverage is exactly 1.00x and the 1.50x threshold, other things equal.
-  const kgAt = (c: number) => (c * b.dueUsd) / margin;
-  const priceAt = (c: number) => COST_USD_KG + (c * b.dueUsd) / b.exportKg;
+  const d = coverageDistribution(input);
   const price = coverageUnder(input, STANDARD_STRESS.price);
   const volume = coverageUnder(input, 0, STANDARD_STRESS.volume);
   const pb = harvestBuild(input, { price: STANDARD_STRESS.price });
   const vb = harvestBuild(input, { volume: STANDARD_STRESS.volume });
-  const cushion = Math.round(((b.priceUsdKg - b.breakEvenUsdKg) / b.priceUsdKg) * 100);
+  const breakEvenKg = b.dueUsd / (b.priceUsdKg - COST_USD_KG);
+  const index = BANK_EDITION ? null : repaymentIndex(d, controls ?? "verde");
+  const estimate = t("Estimado · supuesto a calibrar en el piloto", "Estimate · assumption to calibrate in the pilot");
+  const assumption = t(`Supuesto: volumen ±${DISPERSION.volume * 100}% y precio ±${DISPERSION.price * 100}% (1 desv. estándar)`, `Assumption: volume ±${DISPERSION.volume * 100}% and price ±${DISPERSION.price * 100}% (1 standard deviation)`);
+  const toggle = (k: "q" | "p") => setPanel((v) => (v === k ? null : k));
+  const card = (on: boolean) => `rounded-xl border p-4 text-left transition-colors ${on ? "border-bcp-ink bg-bcp-bg/60" : "border-bcp-border bg-white hover:border-bcp-ink"}`;
   return (
     <section aria-label={t("Capacidad de repago", "Repayment capacity")} className="space-y-4 rounded-xl border border-bcp-border bg-white p-4 sm:p-5">
       <SourceStrip cutoff={cutoff} compact />
-      <div className="grid gap-4 md:grid-cols-[1fr_1fr_1fr_auto] md:divide-x md:divide-bcp-divider [&>*]:md:px-4 [&>*:first-child]:md:pl-0">
+      <div className={`grid gap-4 md:divide-x md:divide-bcp-divider [&>*]:md:px-4 [&>*:first-child]:md:pl-0 ${index !== null ? "md:grid-cols-[1fr_1.2fr_1.2fr_auto]" : "md:grid-cols-[1.2fr_1.2fr_auto]"}`}>
+        {index !== null && (
+          <div>
+            <Lbl>{t("Índice de capacidad de repago (interno)", "Repayment capacity index (internal)")}</Lbl>
+            <p className={`num mt-1 text-[36px] font-bold leading-none ${index >= 70 ? "text-bcp-green-text" : index >= 45 ? "text-bcp-ambar-text" : "text-bcp-naranja-text"}`}>{index}<span className="text-[16px] font-semibold text-bcp-muted"> / 100</span></p>
+            <p className="mt-1.5 text-[13px] text-bcp-muted">{t("Distribución y controles · no visible para el banco", "Distribution and controls · not shown to the bank")}</p>
+          </div>
+        )}
         <div>
-          <Lbl>{t("Cobertura de repago hoy", "Repayment coverage today")}</Lbl>
-          <p className={`num mt-1 text-[32px] font-bold leading-none ${INK[stateFromCoverage(b.coverage)]}`}>{cov(b.coverage)}</p>
+          <Lbl>{t("Cobertura esperada (P50)", "Expected coverage (P50)")}</Lbl>
+          <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
+            <span className={`num text-[36px] font-bold leading-none ${INK[stateFromCoverage(d.p50)]}`}>{cov(d.p50)}</span>
+            <span className="num text-[13px] text-bcp-muted">P10 {cov(d.p10)} · P90 {cov(d.p90)}</span>
+          </p>
           <p className="mt-1.5 text-[13px] text-bcp-muted">
             {approval !== undefined ? t(`aprobación ${cov(approval)} · `, `approval ${cov(approval)} · `) : ""}
-            {t(`umbral ${cov(COVERAGE_BANDS.ambar)}`, `threshold ${cov(COVERAGE_BANDS.ambar)}`)}
+            {t(`equilibrio ${perKg(b.breakEvenUsdKg)}`, `break-even ${perKg(b.breakEvenUsdKg)}`)}
           </p>
         </div>
         <div>
           <Lbl>{middle?.label ?? lowHighLabel ?? t("Proyección al vencimiento", "Projection at maturity")}</Lbl>
-          <p className="num mt-1 text-[24px] font-bold leading-tight text-bcp-ink">{middle ? middle.value : low !== undefined && high !== undefined ? range(low, high, lang) : t("Sin cambio", "No change")}</p>
+          <p className="num mt-1 text-[28px] font-bold leading-tight text-bcp-ink">{middle ? middle.value : low !== undefined && high !== undefined ? range(low, high, lang) : t("Sin cambio", "No change")}</p>
           <p className="mt-1.5 text-[13px] text-bcp-muted">{middle?.sub ?? t("estimado", "estimate")}</p>
-        </div>
-        <div>
-          <Lbl>{t("Estrés estándar", "Standard stress")}</Lbl>
-          <p className="mt-1 text-[15px]">{t("Precio −20%", "Price −20%")} {inked(price)}</p>
-          <p className="text-[15px]">{t("Volumen −30%", "Volume −30%")} {inked(volume)}</p>
         </div>
         {chip && <div className="flex items-start md:justify-end">{chip}</div>}
       </div>
 
-      <CoverageRange today={b.coverage} approval={approval} low={low} high={high} stress={{ price, volume }} />
-
-      <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-lg border border-bcp-border p-4">
-          <Lbl>{t("Volumen exportable", "Exportable volume")}</Lbl>
-          <p className="num mt-1 text-[22px] font-bold">{kg(b.exportKg)}</p>
-          <p className="text-[13px] text-bcp-muted">
-            {areaHa !== undefined && yieldTHa !== undefined
-              ? t(`${areaHa.toFixed(2)} ha × ${yieldTHa.toFixed(1)} t/ha × ${b.exportablePct}% exportable`, `${areaHa.toFixed(2)} ha × ${yieldTHa.toFixed(1)} t/ha × ${b.exportablePct}% exportable`)
-              : t(`${kg(b.volumeKg)} × ${b.exportablePct}% exportable`, `${kg(b.volumeKg)} × ${b.exportablePct}% exportable`)}
+      <div className="border-t border-bcp-divider pt-4">
+        <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
+          <p className="text-[13px] text-bcp-muted">{t("Distribución estimada P10–P90 de la cobertura", "Estimated P10–P90 distribution of coverage")} · {assumption}</p>
+          <p className="flex flex-wrap items-center gap-3 text-[12px] text-bcp-muted">
+            <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-bcp-green/30" />P10–P90</span>
+            <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-bcp-green/70" />P25–P75</span>
+            <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded-full border-2 border-bcp-green-text" />P50</span>
+            {approval !== undefined && <span className="flex items-center gap-1.5"><span className="text-bcp-ink">▼</span>{t("Aprobación", "Approval")}</span>}
           </p>
-          <p className="mt-2 border-t border-bcp-divider pt-2 text-[13px]">
-            {t("Con −30%", "At −30%")}: <span className="num">{kg(vb.exportKg)}</span> → {inked(volume)}
-          </p>
-          <BreakLine expected={b.exportKg} stressed={vb.exportKg} breakEven={kgAt(1)} threshold={kgAt(COVERAGE_BANDS.ambar)} fmt={(n) => `${(n / 1000).toFixed(1)} t`} stressLabel="−30%" />
-          <Drivers rows={drivers?.volume ?? []} />
         </div>
-        <div className="rounded-lg border border-bcp-border p-4">
-          <Lbl>{t("Precio esperado a cosecha (FOB)", "Expected harvest price (FOB)")}</Lbl>
-          <p className="num mt-1 text-[22px] font-bold">{perKg(b.priceUsdKg)}</p>
-          <p className="text-[13px] text-bcp-muted">
-            {t(`equilibrio ${perKg(b.breakEvenUsdKg)} · margen ${cushion}% · costos ${perKg(COST_USD_KG)}`, `break-even ${perKg(b.breakEvenUsdKg)} · cushion ${cushion}% · costs ${perKg(COST_USD_KG)}`)}
+        <DistributionBar d={d} approval={approval} />
+        <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2 text-[13px]">
+          <p className="num flex flex-wrap gap-x-4">
+            {([["P10", d.p10], ["P25", d.p25], ["P50", d.p50], ["P75", d.p75], ["P90", d.p90]] as const).map(([k, v]) => (
+              <span key={k} className={k === "P50" ? "font-semibold text-bcp-green-text" : "text-bcp-muted"}><b className="font-semibold text-bcp-ink">{k}</b> {cov(v)}</span>
+            ))}
           </p>
-          <p className="mt-2 border-t border-bcp-divider pt-2 text-[13px]">
-            {t("Con −20%", "At −20%")}: <span className="num">{perKg(pb.priceUsdKg)}</span> → {inked(price)}
-          </p>
-          <BreakLine expected={b.priceUsdKg} stressed={pb.priceUsdKg} breakEven={priceAt(1)} threshold={priceAt(COVERAGE_BANDS.ambar)} fmt={(n) => `${n.toFixed(2)}`} stressLabel="−20%" />
-          <Drivers rows={drivers?.price ?? []} />
+          <p><b className="font-semibold">{t(`Cola bajo ${cov(COVERAGE_BANDS.naranja)}`, `Tail below ${cov(COVERAGE_BANDS.naranja)}`)}:</b> <span className={`num font-semibold ${d.tailBelow130 >= 10 ? "text-bcp-naranja-text" : "text-bcp-green-text"}`}>{d.tailBelow130}%</span> <span className="text-bcp-muted">({t("estimado", "estimate")})</span></p>
         </div>
       </div>
 
+      <div className="grid gap-3 md:grid-cols-2">
+        <button type="button" onClick={() => toggle("q")} aria-expanded={panel === "q"} className={card(panel === "q")}>
+          <span className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-[13px] font-semibold text-bcp-muted">{t("Volumen exportable (Q)", "Exportable volume (Q)")}</span>
+            <span className="text-[13px] font-semibold text-bcp-ink">{t("Campo y lo que lo mueve", "Field and drivers")} {panel === "q" ? "▴" : "›"}</span>
+          </span>
+          <span className="num mt-1 block text-[24px] font-bold">{kg(b.exportKg)}</span>
+          <span className="block text-[13px] text-bcp-muted">
+            {areaHa !== undefined && yieldTHa !== undefined
+              ? t(`${areaHa.toFixed(2)} ha × ${yieldTHa.toFixed(1)} t/ha × ${b.exportablePct}% exportable`, `${areaHa.toFixed(2)} ha × ${yieldTHa.toFixed(1)} t/ha × ${b.exportablePct}% exportable`)
+              : t(`${kg(b.volumeKg)} × ${b.exportablePct}% exportable`, `${kg(b.volumeKg)} × ${b.exportablePct}% exportable`)}
+            {" · "}P10–P90 {kg(d.volume.p10)} {t("a", "to")} {kg(d.volume.p90)}
+          </span>
+          <span className="mt-2 block border-t border-bcp-divider pt-2 text-[13px]">{t("Con −30%", "At −30%")}: <span className="num">{kg(vb.exportKg)}</span> → {inked(volume)}</span>
+        </button>
+        <button type="button" onClick={() => toggle("p")} aria-expanded={panel === "p"} className={card(panel === "p")}>
+          <span className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-[13px] font-semibold text-bcp-muted">{t("Precio FOB esperado (P)", "Expected FOB price (P)")}</span>
+            <span className="text-[13px] font-semibold text-bcp-ink">{t("Mercado y lo que lo mueve", "Market and drivers")} {panel === "p" ? "▴" : "›"}</span>
+          </span>
+          <span className="num mt-1 block text-[24px] font-bold">{perKg(b.priceUsdKg)}</span>
+          <span className="block text-[13px] text-bcp-muted">
+            {t(`equilibrio ${perKg(b.breakEvenUsdKg)}`, `break-even ${perKg(b.breakEvenUsdKg)}`)} · P10–P90 USD {d.price.p10.toFixed(2)} {t("a", "to")} {d.price.p90.toFixed(2)}
+          </span>
+          <span className="mt-2 block border-t border-bcp-divider pt-2 text-[13px]">{t("Con −20%", "At −20%")}: <span className="num">{perKg(pb.priceUsdKg)}</span> → {inked(price)}</span>
+        </button>
+      </div>
+
+      {panel === "q" && (
+        <div className="space-y-3 rounded-xl border border-bcp-border p-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h4 className="text-[16px] font-bold">{t("Volumen exportable (Q): distribución estimada", "Exportable volume (Q): estimated distribution")}</h4>
+            <span className="text-[12px] text-bcp-muted">{estimate}</span>
+          </div>
+          <div className="rounded-lg bg-bcp-bg/60 p-3">
+            <p className="mb-1 text-[12px] text-bcp-muted">{t("Volumen exportable (t) · zona sombreada bajo el volumen de equilibrio (cobertura 1.00x)", "Exportable volume (t) · shaded below the break-even volume (coverage 1.00x)")}</p>
+            <div className="mx-auto max-w-[620px]">
+              <BellCurve mean={b.exportKg} sd={d.volume.sd} fmt={(n) => `${(n / 1000).toFixed(1)} t`} shadeBelow={breakEvenKg} shadeLabel={t("bajo equilibrio", "below break-even")}
+                lines={[{ v: breakEvenKg, label: t("equilibrio", "break-even"), cls: "stroke-bcp-rojo" }, { v: vb.exportKg, label: "−30%", cls: "stroke-bcp-naranja" }]}
+                ticks={[{ v: d.volume.p10, label: "P10" }, { v: d.volume.p50, label: "P50", strong: true }, { v: d.volume.p90, label: "P90" }]} />
+            </div>
+          </div>
+          <p className="text-[13px] font-semibold text-bcp-muted">{t("Lo que mueve el volumen", "What moves the volume")}</p>
+          <DriverList rows={drivers?.volume ?? []} />
+        </div>
+      )}
+      {panel === "p" && (
+        <div className="space-y-3 rounded-xl border border-bcp-border p-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h4 className="text-[16px] font-bold">{t("Precio FOB (P): distribución estimada", "FOB price (P): estimated distribution")}</h4>
+            <span className="text-[12px] text-bcp-muted">{estimate}</span>
+          </div>
+          <div className="rounded-lg bg-bcp-bg/60 p-3">
+            <p className="mb-1 text-[12px] text-bcp-muted">{t("Precio FOB (USD/kg) · zona sombreada bajo el precio de equilibrio del préstamo", "FOB price (USD/kg) · shaded below the loan's break-even price")}</p>
+            <div className="mx-auto max-w-[620px]">
+              <BellCurve mean={b.priceUsdKg} sd={d.price.sd} fmt={(n) => n.toFixed(2)} shadeBelow={b.breakEvenUsdKg} shadeLabel={t("bajo equilibrio", "below break-even")}
+                lines={[{ v: b.breakEvenUsdKg, label: t("equilibrio", "break-even"), cls: "stroke-bcp-rojo" }, { v: pb.priceUsdKg, label: "−20%", cls: "stroke-bcp-naranja" }]}
+                ticks={[{ v: d.price.p10, label: "P10" }, { v: d.price.p50, label: "P50", strong: true }, { v: d.price.p90, label: "P90" }]} />
+            </div>
+          </div>
+          <p className="text-[13px] font-semibold text-bcp-muted">{t("Lo que mueve el precio", "What moves the price")}</p>
+          <DriverList rows={drivers?.price ?? []} />
+        </div>
+      )}
+
       {(onCalc || footnote) && (
         <div className="flex flex-wrap items-center justify-between gap-2 border-t border-bcp-divider pt-3">
-          <p className="text-[13px] text-bcp-muted">{footnote ?? t(`Saldo al vencimiento ${usd(b.dueUsd)} · ingreso neto ${usd(b.netUsd)}`, `Due at maturity ${usd(b.dueUsd)} · net revenue ${usd(b.netUsd)}`)}</p>
+          <p className="text-[13px] text-bcp-muted">{footnote ?? t(`Saldo al vencimiento ${usd(b.dueUsd)} · ingreso neto ${usd(b.netUsd)} · bandas, tramos y decisiones son deterministas y auditables`, `Due at maturity ${usd(b.dueUsd)} · net revenue ${usd(b.netUsd)} · bands, tranches and decisions are deterministic and auditable`)}</p>
           {onCalc && (
             <button type="button" onClick={onCalc} className="min-h-[40px] rounded-lg border border-bcp-border bg-white px-3 text-sm font-semibold text-bcp-ink hover:border-bcp-ink">
               {t("Ver el cálculo", "See the calculation")} →

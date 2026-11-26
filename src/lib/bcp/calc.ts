@@ -117,6 +117,60 @@ export function harvestBuild(x: HarvestInput, shock: { price?: number; volume?: 
 
 export const coverageUnder = (x: HarvestInput, price = 0, volume = 0, dueUsd?: number) => harvestBuild(x, { price, volume }, dueUsd).coverage;
 
+// ---------------------------------------------------------------------------
+// Estimated distribution (assumptions shown on screen, to calibrate in the pilot)
+// ---------------------------------------------------------------------------
+
+/**
+ * Assumed dispersion (one standard deviation) of the two inputs: the field
+ * estimate's error on exportable volume, and the FOB price in the harvest
+ * window. Stated on screen as assumptions; the pilot calibrates them.
+ */
+export const DISPERSION = { volume: 0.12, price: 0.1 } as const;
+const Z = { p10: -1.2816, p25: -0.6745, p75: 0.6745, p90: 1.2816 } as const;
+
+/** Standard normal CDF (Abramowitz and Stegun 26.2.17). */
+export function normCdf(z: number): number {
+  const t = 1 / (1 + 0.2316419 * Math.abs(z));
+  const d = 0.39894228 * Math.exp((-z * z) / 2);
+  const p = d * t * (0.31938153 + t * (-0.35656378 + t * (1.78147794 + t * (-1.82125598 + t * 1.33027443))));
+  return z >= 0 ? 1 - p : p;
+}
+
+/**
+ * Coverage percentiles from the two assumed dispersions around today's build
+ * (P50 = today's coverage). Volume and price are taken as independent; the
+ * price term is scaled by price ÷ margin because costs do not fall with price.
+ */
+export function coverageDistribution(x: HarvestInput, dueUsd = x.dueAtMaturityUsd) {
+  const b = harvestBuild(x, {}, dueUsd);
+  const margin = b.priceUsdKg - COST_USD_KG;
+  const rel = Math.sqrt(DISPERSION.volume ** 2 + ((DISPERSION.price * b.priceUsdKg) / margin) ** 2);
+  const sd = b.coverage * rel;
+  const at = (z: number) => r2(Math.max(0, b.coverage + z * sd));
+  const kgAt = (z: number) => Math.round(b.exportKg * (1 + z * DISPERSION.volume));
+  const priceAt = (z: number) => r2(b.priceUsdKg * (1 + z * DISPERSION.price));
+  return {
+    p10: at(Z.p10), p25: at(Z.p25), p50: b.coverage, p75: at(Z.p75), p90: at(Z.p90), sd,
+    /** Share of the estimated distribution below the orange band (1.30x), in %. */
+    tailBelow130: Math.round(normCdf((COVERAGE_BANDS.naranja - b.coverage) / sd) * 100),
+    volume: { p10: kgAt(Z.p10), p50: b.exportKg, p90: kgAt(Z.p90), sd: b.exportKg * DISPERSION.volume },
+    price: { p10: priceAt(Z.p10), p50: b.priceUsdKg, p90: priceAt(Z.p90), sd: b.priceUsdKg * DISPERSION.price },
+  };
+}
+
+/**
+ * Internal repayment index (0-100) from the distribution and the controls: the
+ * cushion at P50, the floor at P10 and the state of the controls. Internal
+ * edition only; the bank never sees a score.
+ */
+export function repaymentIndex(d: { p10: number; p50: number }, controls: Exclude<State, "veto">): number {
+  const base = Math.min(60, Math.max(0, ((d.p50 - 1) / 1.1) * 60));
+  const floor = Math.min(30, Math.max(0, ((d.p10 - 0.9) / 0.8) * 30));
+  const adj = { verde: 10, ambar: 4, naranja: -6, rojo: -16 }[controls];
+  return Math.round(Math.min(98, Math.max(15, base + floor + adj)));
+}
+
 /** The two standard stress cases (loan today, or an application at an amount due). */
 export function stressCases(x: HarvestInput, dueUsd?: number): { label: Tx; coverage: number }[] {
   return [
