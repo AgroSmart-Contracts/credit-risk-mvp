@@ -5,7 +5,7 @@
  */
 import { useState, type ReactNode } from "react";
 import { Lock, RefreshCw } from "lucide-react";
-import { COST_USD_KG, COVERAGE_BANDS, DISPERSION, STANDARD_STRESS, cov, coverageDistribution, coverageUnder, date, daysBetween, harvestBuild, range, repaymentIndex, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
+import { COST_USD_KG, COVERAGE_BANDS, DISPERSION, STANDARD_STRESS, cov, coverageDistribution, coverageUnder, date, harvestBuild, range, repaymentIndex, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
 import type { ConditionState, Provenance, State } from "../../lib/bcp/types";
 import { BANK_EDITION } from "./edition";
 import { PILOT_NOTE } from "./nav";
