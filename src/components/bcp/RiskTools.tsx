@@ -59,7 +59,7 @@ export function BankCostCard({ loans }: { loans: Loan[] }) {
           <thead>
             <tr className="border-b border-bcp-border">
               {[t("Préstamo", "Loan"), t("Saldo al vencimiento", "Due at maturity"), t(`Cobertura a ${pct(BANK_COST_RATE * 100)}`, `Coverage at ${pct(BANK_COST_RATE * 100)}`), t(`Cobertura a ${pct(rate * 100)}`, `Coverage at ${pct(rate * 100)}`), t("Nivel de riesgo", "Risk level")].map((h, i) => (
-                <Lbl key={h} as="th" className={`py-1.5 pr-3 font-normal ${i === 0 || i === 4 ? "text-left" : "text-right"}`}>{h}</Lbl>
+                <Lbl key={i} as="th" className={`py-1.5 pr-3 font-normal ${i === 0 || i === 4 ? "text-left" : "text-right"}`}>{h}</Lbl>
               ))}
             </tr>
           </thead>
