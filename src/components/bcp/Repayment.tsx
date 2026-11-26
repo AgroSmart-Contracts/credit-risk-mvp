@@ -3,13 +3,13 @@
  * proposed bands, and the two things repayment depends on (volume and price).
  * Every figure is recomputable from the coverage build; ranges are estimates.
  */
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Lock, RefreshCw } from "lucide-react";
 import { COST_USD_KG, COVERAGE_BANDS, STANDARD_STRESS, cov, coverageUnder, date, harvestBuild, range, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
-import type { State } from "../../lib/bcp/types";
+import type { ConditionState, Provenance, State } from "../../lib/bcp/types";
 import { PILOT_NOTE } from "./nav";
-import { useLang, useT } from "./shared";
-import { Lbl } from "./ui";
+import { STATE_TEXT, useLang, useT } from "./shared";
+import { Lbl, Prov } from "./ui";
 
 const kg = (n: number) => `${Math.round(n).toLocaleString("en-US")} kg`;
 const perKg = (n: number) => `USD ${n.toFixed(2)}/kg`;
@@ -105,8 +105,77 @@ export function CoverageRange({ today, approval, low, high, compact = false }: {
   );
 }
 
+/**
+ * Where repayment breaks, on one axis: the break-even point (coverage 1.00x),
+ * the proposed threshold (1.50x), the standard stress and the expected value.
+ * Every marker follows from the coverage build, so the bank can check each one.
+ */
+function BreakLine({ expected, stressed, breakEven, threshold, fmt, stressLabel }: { expected: number; stressed: number; breakEven: number; threshold: number; fmt: (n: number) => string; stressLabel: string }) {
+  const t = useT();
+  const max = Math.max(expected, threshold) * 1.12;
+  const at = (v: number) => `${Math.min(100, Math.max(0, (v / max) * 100))}%`;
+  const marks: { v: number; label: string; cls: string }[] = [
+    { v: breakEven, label: `${t("equilibrio (1.00x)", "break-even (1.00x)")} ${fmt(breakEven)}`, cls: "bg-bcp-rojo" },
+    { v: threshold, label: `${t("umbral", "threshold")} ${cov(COVERAGE_BANDS.ambar)}: ${fmt(threshold)}`, cls: "bg-bcp-ambar" },
+    { v: stressed, label: `${stressLabel} ${fmt(stressed)}`, cls: "bg-bcp-naranja" },
+    { v: expected, label: `${t("esperado", "expected")} ${fmt(expected)}`, cls: "bg-bcp-ink" },
+  ];
+  return (
+    <div className="mt-3" role="img" aria-label={marks.map((m) => m.label).join(" · ")}>
+      <div className="relative h-2.5 rounded-full" aria-hidden>
+        <div className="absolute inset-0 flex overflow-hidden rounded-full">
+          <span className="bg-bcp-rojo-bg" style={{ width: at(breakEven) }} />
+          <span className="bg-bcp-ambar-bg" style={{ width: `calc(${at(threshold)} - ${at(breakEven)})` }} />
+          <span className="flex-1 bg-bcp-verde-bg/70" />
+        </div>
+        {marks.map((m) => (
+          <span key={m.label} className={`absolute top-1/2 h-4 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-sm ${m.cls}`} style={{ left: at(m.v) }} />
+        ))}
+      </div>
+      <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[12px] text-bcp-muted" aria-hidden>
+        {marks.map((m) => (
+          <li key={m.label} className={`num flex items-center gap-1.5 ${m.v === expected ? "font-semibold text-bcp-ink" : ""}`}>
+            <span className={`h-3 w-[3px] rounded-sm ${m.cls}`} />
+            {m.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/** A reading behind volume or price: value, effect on repayment, provenance and source. */
+export type DriverRow = { label: string; value: string; effect: string; state: ConditionState; provenance: Provenance; source: string };
+
+function Drivers({ rows }: { rows: DriverRow[] }) {
+  const t = useT();
+  const [open, setOpen] = useState(false);
+  if (!rows.length) return null;
+  return (
+    <div className="mt-2 border-t border-bcp-divider pt-2">
+      <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} className="min-h-[32px] text-[13px] font-semibold text-bcp-green-text hover:underline">
+        {open ? t("Ocultar lo que lo mueve", "Hide what moves it") : t(`Qué lo mueve (${rows.length})`, `What moves it (${rows.length})`)} {open ? "▴" : "▾"}
+      </button>
+      {open && (
+        <ul className="mt-1 divide-y divide-bcp-divider text-[13px]">
+          {rows.map((r) => (
+            <li key={r.label} className="py-2">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+                <span className="font-semibold text-bcp-ink">{r.label}</span>
+                <span className="num font-semibold">{r.value}</span>
+              </div>
+              <p className="text-bcp-muted">{r.effect} · {t(STATE_TEXT[r.state])}</p>
+              <p className="mt-1 flex flex-wrap items-center gap-1.5 text-bcp-muted"><Prov p={r.provenance} /> {r.source}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 /** Headline card: coverage today, its projection and the standard stress, then volume and price. */
-export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel, middle, yieldTHa, areaHa, chip, onCalc, footnote }: {
+export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel, middle, yieldTHa, areaHa, chip, onCalc, footnote, drivers }: {
   input: HarvestInput;
   cutoff: string;
   approval?: number;
@@ -120,10 +189,16 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
   chip?: ReactNode;
   onCalc?: () => void;
   footnote?: string;
+  /** The readings behind each of the two inputs (loan conditions or application checks). */
+  drivers?: { volume: DriverRow[]; price: DriverRow[] };
 }) {
   const t = useT();
   const lang = useLang();
   const b = harvestBuild(input);
+  const margin = b.priceUsdKg - COST_USD_KG;
+  // Volume and price at which coverage is exactly 1.00x and the 1.50x threshold, other things equal.
+  const kgAt = (c: number) => (c * b.dueUsd) / margin;
+  const priceAt = (c: number) => COST_USD_KG + (c * b.dueUsd) / b.exportKg;
   const price = coverageUnder(input, STANDARD_STRESS.price);
   const volume = coverageUnder(input, 0, STANDARD_STRESS.volume);
   const pb = harvestBuild(input, { price: STANDARD_STRESS.price });
@@ -168,6 +243,8 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
           <p className="mt-2 border-t border-bcp-divider pt-2 text-[13px]">
             {t("Con −30%", "At −30%")}: <span className="num">{kg(vb.exportKg)}</span> → {inked(volume)}
           </p>
+          <BreakLine expected={b.exportKg} stressed={vb.exportKg} breakEven={kgAt(1)} threshold={kgAt(COVERAGE_BANDS.ambar)} fmt={(n) => `${(n / 1000).toFixed(1)} t`} stressLabel="−30%" />
+          <Drivers rows={drivers?.volume ?? []} />
         </div>
         <div className="rounded-lg border border-bcp-border p-4">
           <Lbl>{t("Precio esperado a cosecha (FOB)", "Expected harvest price (FOB)")}</Lbl>
@@ -178,6 +255,8 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
           <p className="mt-2 border-t border-bcp-divider pt-2 text-[13px]">
             {t("Con −20%", "At −20%")}: <span className="num">{perKg(pb.priceUsdKg)}</span> → {inked(price)}
           </p>
+          <BreakLine expected={b.priceUsdKg} stressed={pb.priceUsdKg} breakEven={priceAt(1)} threshold={priceAt(COVERAGE_BANDS.ambar)} fmt={(n) => `${n.toFixed(2)}`} stressLabel="−20%" />
+          <Drivers rows={drivers?.price ?? []} />
         </div>
       </div>
 

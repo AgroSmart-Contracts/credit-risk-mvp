@@ -227,6 +227,10 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           areaHa={BANK_EDITION ? undefined : app.areaHa}
           yieldTHa={BANK_EDITION ? undefined : app.yieldTHa}
           chip={<RecommendationChip a={app} />}
+          drivers={{
+            volume: app.checks.filter((c) => c.group === "Cultivo y volumen" && !c.before).map((c) => ({ label: t(c.label), value: t(c.value), effect: t(c.effect), state: c.state, provenance: c.provenance, source: t(sourceTx(c)) })),
+            price: app.checks.filter((c) => c.group === "Precio y calidad" && !c.before).map((c) => ({ label: t(c.label), value: t(c.value), effect: t(c.effect), state: c.state, provenance: c.provenance, source: t(sourceTx(c)) })),
+          }}
           onCalc={() => document.getElementById("calculo-cobertura")?.scrollIntoView({ behavior: "smooth", block: "start" })}
         />
       )}

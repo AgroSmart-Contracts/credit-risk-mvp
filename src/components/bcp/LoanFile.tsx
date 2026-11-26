@@ -115,6 +115,10 @@ export function LoanFile({ loan, data, onBack, onMap, onMemo, answers, onAnswer 
         lowHighLabel={loan.controlsState !== "verde" ? t("Si no se remedia", "If not remedied") : undefined}
         areaHa={BANK_EDITION ? undefined : loan.areaHa}
         yieldTHa={BANK_EDITION ? undefined : loan.yieldTHa}
+        drivers={{
+          volume: loan.conditions.filter((c) => c.group === "Cultivo y volumen").map((c) => ({ label: t(c.label), value: t(c.today), effect: t(c.effectOnRepayment), state: c.state, provenance: c.provenance, source: t(sourceTx(c)) })),
+          price: loan.conditions.filter((c) => c.group === "Precio y calidad").map((c) => ({ label: t(c.label), value: t(c.today), effect: t(c.effectOnRepayment), state: c.state, provenance: c.provenance, source: t(sourceTx(c)) })),
+        }}
         onCalc={() => { setPage("riesgo"); requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" })); }}
       />
       <Card>

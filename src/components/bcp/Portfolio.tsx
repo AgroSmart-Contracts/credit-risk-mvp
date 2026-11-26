@@ -12,6 +12,7 @@ import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
 import { CoverageRange, SourceStrip } from "./Repayment";
+import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
 const STRESS_LEVELS = ["verde", "ambar", "naranja", "rojo"] as const;
@@ -229,6 +230,11 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
           </Card>
         ))}
       </section>
+
+      <div className="grid gap-3 xl:grid-cols-2 [&>*]:min-w-0">
+        <BankCostCard loans={data.loans} />
+        <SbsSimulator loans={data.loans} />
+      </div>
 
       <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
         <Card>
