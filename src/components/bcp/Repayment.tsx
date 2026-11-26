@@ -5,7 +5,7 @@
  */
 import { useState, type ReactNode } from "react";
 import { Lock, RefreshCw } from "lucide-react";
-import { COST_USD_KG, COVERAGE_BANDS, DISPERSION, STANDARD_STRESS, cov, coverageDistribution, coverageUnder, date, harvestBuild, range, repaymentIndex, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
+import { COST_USD_KG, COVERAGE_BANDS, DISPERSION, STANDARD_STRESS, cov, coverageDistribution, coverageUnder, date, daysBetween, harvestBuild, range, repaymentIndex, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
 import type { ConditionState, Provenance, State } from "../../lib/bcp/types";
 import { BANK_EDITION } from "./edition";
 import { PILOT_NOTE } from "./nav";
@@ -58,23 +58,29 @@ const SCALE_MIN = 0.8;
 const SCALE_MAX = 2.4;
 
 /**
- * Coverage over the campaign, for tables: time left to right (approval, today,
+ * Coverage over the campaign, for tables: time left to right (approval to
  * maturity), coverage bottom to top on one fixed scale with the risk bands and
- * the 1.50x threshold. Solid line: what happened; dashed: the estimate.
+ * the 1.50x threshold. Solid: the recorded weekly history up to today; dashed:
+ * the estimated range at maturity.
  */
-export function CoverageTrend({ approval, today, low, high, day, days }: { approval: number; today: number; low?: number; high?: number; day: number; days: number }) {
+export function CoverageTrend({ history, today, low, high, from, to, cutoff }: { history: { date: string; value: number }[]; today: number; low?: number; high?: number; from: string; to: string; cutoff: string }) {
   const t = useT();
   const lang = useLang();
   const W = 220;
   const H = 64;
-  const L = 6;
-  const R = W - 12;
+  const L = 8;
+  const R = W - 10;
   const TOP = 2.2;
   const BOT = 0.9;
-  const y = (v: number) => H - 4 - ((Math.min(TOP, Math.max(BOT, v)) - BOT) / (TOP - BOT)) * (H - 8);
-  const xToday = L + ((R - L) * Math.min(1, Math.max(0, day / days)));
+  const y = (v: number) => H - 5 - ((Math.min(TOP, Math.max(BOT, v)) - BOT) / (TOP - BOT)) * (H - 10);
+  const span = Math.max(1, daysBetween(from, to));
+  const x = (d: string) => L + ((R - L) * Math.min(1, Math.max(0, daysBetween(from, d) / span)));
+  const pts = [...history.filter((p) => p.date <= cutoff), { date: cutoff, value: today }];
+  const line = pts.map((p, k) => `${k ? "L" : "M"}${x(p.date).toFixed(1)},${y(p.value).toFixed(1)}`).join(" ");
+  const xToday = x(cutoff);
   const proj = low !== undefined && high !== undefined;
   const mid = proj ? (low! + high!) / 2 : today;
+  const approval = history[0]?.value ?? today;
   const bands: [number, number, string][] = [
     [BOT, COVERAGE_BANDS.rojo, "fill-bcp-rojo-bg"],
     [COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, "fill-bcp-naranja-bg"],
@@ -84,9 +90,9 @@ export function CoverageTrend({ approval, today, low, high, day, days }: { appro
   const label = `${t("Aprobación", "Approval")} ${cov(approval)} → ${t("hoy", "today")} ${cov(today)}${proj ? ` → ${t("al vencimiento", "at maturity")} ${range(low!, high!, lang)} (${t("estimado", "estimate")})` : ""}`;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="h-[64px] w-full max-w-[240px]" role="img" aria-label={label}>
-      {bands.map(([a, b, c]) => <rect key={a} x={L} width={R - L} y={y(b)} height={y(a) - y(b)} className={c} opacity={0.7} />)}
-      <line x1={L} x2={R} y1={y(COVERAGE_BANDS.ambar)} y2={y(COVERAGE_BANDS.ambar)} className="stroke-bcp-ambar" strokeDasharray="3 2" strokeWidth={1} />
-      <line x1={L} x2={xToday} y1={y(approval)} y2={y(today)} className="stroke-bcp-ink" strokeWidth={2} />
+      {bands.map(([a, b, c]) => <rect key={a} x={0} width={W} y={y(b)} height={y(a) - y(b)} rx={0} className={c} opacity={0.7} />)}
+      <line x1={0} x2={W} y1={y(COVERAGE_BANDS.ambar)} y2={y(COVERAGE_BANDS.ambar)} className="stroke-bcp-ambar" strokeDasharray="3 2" strokeWidth={1} />
+      <path d={line} className="fill-none stroke-bcp-ink" strokeWidth={2} strokeLinejoin="round" />
       {proj && <line x1={xToday} x2={R} y1={y(today)} y2={y(mid)} className="stroke-bcp-ink" strokeWidth={1.5} strokeDasharray="3 3" opacity={0.7} />}
       {proj && <rect x={R - 4} width={8} y={y(high!) - 1} height={Math.max(3, y(low!) - y(high!) + 2)} rx={2} className="fill-bcp-ink/10 stroke-bcp-ink" strokeDasharray="2 1.5" strokeWidth={1} opacity={0.9} />}
       <circle cx={L} cy={y(approval)} r={3.5} className="fill-white stroke-bcp-ink" strokeWidth={1.75} />
