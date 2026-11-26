@@ -16,6 +16,7 @@ import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
 const STRESS_LEVELS = ["verde", "ambar", "naranja", "rojo"] as const;
+const WATCH_EDGE: Record<State, string> = { verde: "border-l-bcp-green", ambar: "border-l-bcp-ambar", naranja: "border-l-bcp-naranja", rojo: "border-l-bcp-rojo", veto: "border-l-bcp-rojo" };
 const LEVEL_SHORT = { verde: { es: "Bajo", en: "Low" }, ambar: { es: "Medio", en: "Medium" }, naranja: { es: "Elevado", en: "Elevated" }, rojo: { es: "Alto", en: "High" } } as const;
 const LEVEL_INK: Record<State, string> = { verde: "text-bcp-green-text", ambar: "text-bcp-ambar-text", naranja: "text-bcp-naranja-text", rojo: "text-bcp-rojo-text", veto: "text-bcp-rojo-text" };
 
@@ -389,54 +390,89 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         </Card>
       </div>
 
-      <SectionTitle title={t("En seguimiento", "On the watchlist")} right={<CoverageLegend />} />
-      <Card>
-        <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
-          <table className="w-full min-w-[900px] text-sm">
-            <thead>
-              <tr className="border-b border-bcp-border text-left">
-                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura: aprobación, hoy y proyección", "Coverage: approval, today and projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "Next step")].map((h, i) => (
-                  <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 3 ? "text-right" : ""}`}>{h}</Lbl>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-bcp-divider">
-              {watch.map((l) => {
-                const p20 = coverageUnder(l, STANDARD_STRESS.price);
-                return (
-                  <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer align-top hover:bg-bcp-bg">
-                    <td className="whitespace-nowrap py-2.5 pr-3">
-                      <button type="button" onClick={(e) => { e.stopPropagation(); onOpen(l.id); }} className="text-left font-semibold hover:underline">{l.id}</button>
-                    </td>
-                    <td className="max-w-[300px] py-2.5 pr-3">
-                      <StateChip state={l.state} cause={stateCause(l)} />
-                      <p className="mt-1 text-[13px] text-bcp-muted">{t(l.summary)}</p>
-                    </td>
-                    <td className="w-[240px] py-2.5 pr-4">
-                      <CoverageTrend history={l.coverageHistory} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} from={l.approvalDate} to={l.maturityDate} cutoff={data.cutoff} />
-                      <p className="num mt-1.5 whitespace-nowrap text-[12px] text-bcp-muted">
-                        <b className="font-semibold text-bcp-ink">{cov(l.coverageToday)}</b> · {t("aprob.", "appr.")} {cov(l.coverageAtApproval)}
-                        {l.projection && <> · {t("proy.", "proj.")} {range(l.projection.low, l.projection.high, lang)}</>}
-                      </p>
-                    </td>
-                    <td className={`num py-2.5 pr-3 text-right font-semibold ${p20 < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : ""}`}>{cov(p20)}</td>
-                    <td className="py-2.5 pr-3">{withDate(t(l.next.label), l.next.date, lang)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+      <SectionTitle
+        title={t("En seguimiento", "On the watchlist")}
+        sub={t(`${watch.length} préstamos · ${usd(watch.reduce((a, l) => a + l.disbursedUsd, 0))} de exposición`, `${watch.length} loans · ${usd(watch.reduce((a, l) => a + l.disbursedUsd, 0))} exposed`)}
+        right={<CoverageLegend />}
+      />
+      <div className="overflow-hidden rounded-xl border border-bcp-border bg-white">
+        <ul className="divide-y divide-bcp-divider">
+          {watch.map((l) => {
+            const price = coverageUnder(l, STANDARD_STRESS.price);
+            const volume = coverageUnder(l, 0, STANDARD_STRESS.volume);
+            const worst = Math.min(price, volume);
+            const delta = Math.round((l.coverageToday - l.coverageAtApproval) * 100) / 100;
+            // The reading behind the level, in one line: the worst control or signal (not the portfolio-wide watch).
+            const RANK: Record<string, number> = { verde: 0, observacion: 1, ambar: 2, naranja: 3, rojo: 4, veto: 5 };
+            const why = [...l.conditions].filter((c) => c.state !== "verde" && c.state !== "observacion").sort((a, b) => RANK[b.state] - RANK[a.state])[0];
+            const frozen = l.tranches.find((x) => x.status === "congelado");
+            const pending = l.tranches.find((x) => x.status === "pendiente");
+            const deadline = data.upcoming.find((u) => u.loanId === l.id && /remedia/i.test(u.milestone.es));
+            // TruMarket's next milestone, in its own words (the field estimate), not the tranche it unlocks.
+            const tmStep = data.upcoming.find((u) => u.loanId === l.id && u.date === l.next.date && !/conformidad|remedia/i.test(u.milestone.es));
+            const bankStep = frozen
+              ? t(`Decide sobre el ${frozen.id} congelado (${usd(frozen.amountUsd)}) si no se remedia`, `Decides on the frozen ${frozen.id} (${usd(frozen.amountUsd)}) if not remedied`)
+              : pending
+                ? t(`Conformidad del ${pending.id} hasta ${usd(pending.amountUsd)}, tras el aforo`, `Sign-off on ${pending.id} up to ${usd(pending.amountUsd)}, after the estimate`)
+                : null;
+            return (
+              <li key={l.id}>
+                <button type="button" onClick={() => onOpen(l.id)} className={`grid w-full gap-x-6 gap-y-3 border-l-4 px-4 py-4 text-left transition-colors hover:bg-bcp-bg/70 sm:px-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.8fr)_minmax(0,1.25fr)_minmax(0,1.3fr)] ${WATCH_EDGE[l.state]}`}>
+                  <div className="min-w-0">
+                    <p className="flex flex-wrap items-baseline gap-x-2"><span className="text-[16px] font-bold text-bcp-ink">{l.id}</span><span className="text-[13px] text-bcp-muted">{t(l.zone)}</span></p>
+                    <div className="mt-1.5"><StateChip state={l.state} cause={stateCause(l)} /></div>
+                    {why && <p className="mt-1.5 text-[13px] text-bcp-muted"><span className="text-bcp-ink">{t(why.label)}</span> · {t(why.today)}</p>}
+                  </div>
+                  <div>
+                    <Lbl>{t("Exposición hoy", "Exposure today")}</Lbl>
+                    <p className="num text-[18px] font-bold leading-tight text-bcp-ink">{usd(l.disbursedUsd)}</p>
+                    <p className="text-[12px] text-bcp-muted">{t(`de una línea de ${usd(l.lineUsd)}`, `of a ${usd(l.lineUsd)} line`)}</p>
+                    <p className="mt-2 text-[12px] text-bcp-muted">{t("Peor estrés", "Worst stress")} <b className={`num font-semibold ${worst < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : "text-bcp-ink"}`}>{cov(worst)}</b> · {volume < price ? t("volumen −30%", "volume −30%") : t("precio −20%", "price −20%")}</p>
+                  </div>
+                  <div className="min-w-0">
+                    <Lbl>{t("Cobertura de repago", "Repayment coverage")}</Lbl>
+                    <div className="flex items-center gap-3">
+                      <div className="shrink-0">
+                        <p className="num text-[22px] font-bold leading-none text-bcp-ink">{cov(l.coverageToday)}</p>
+                        <p className={`num mt-1 text-[12px] font-semibold ${delta < 0 ? "text-bcp-naranja-text" : "text-bcp-green-text"}`}>{delta < 0 ? "▼" : delta > 0 ? "▲" : "="} {Math.abs(delta).toFixed(2)} {t("desde aprob.", "since appr.")}</p>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <CoverageTrend history={l.coverageHistory} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} from={l.approvalDate} to={l.maturityDate} cutoff={data.cutoff} />
+                      </div>
+                    </div>
+                    {l.projection && <p className="num mt-1 text-[12px] text-bcp-muted">{l.controlsState !== "verde" ? t("Si no se remedia", "If not remedied") : t("Al vencimiento", "At maturity")} {range(l.projection.low, l.projection.high, lang)} · {t("estimado", "estimate")}</p>}
+                  </div>
+                  <div className="min-w-0">
+                    <Lbl>{t("Qué sigue", "What's next")}</Lbl>
+                    <ol className="mt-0.5 space-y-1.5 text-[13px]">
+                      <li className="flex gap-2">
+                        <span className="num w-12 shrink-0 font-semibold text-bcp-ink">{date(l.next.date, lang, false)}</span>
+                        <span><span className="mr-1.5 rounded bg-bcp-fill px-1.5 py-0.5 text-[11px] font-semibold text-bcp-ink">TruMarket</span>{tmStep ? t(tmStep.milestone) : t(l.next.label).split(" · ")[0]}</span>
+                      </li>
+                      {bankStep && (
+                        <li className="flex gap-2">
+                          <span className="num w-12 shrink-0 font-semibold text-bcp-ink">{deadline && frozen ? date(deadline.date, lang, false) : pending ? date(pending.milestoneDate, lang, false) : ""}</span>
+                          <span><span className="mr-1.5 rounded bg-bcp-ink px-1.5 py-0.5 text-[11px] font-semibold text-white">{t("Su decisión", "Your decision")}</span>{bankStep}</span>
+                        </li>
+                      )}
+                    </ol>
+                    <p className="mt-2 text-right text-[13px] font-semibold text-bcp-green-text">{t("Abrir expediente", "Open file")} ›</p>
+                  </div>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
         {portfolioWatch && (
-          <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
-            <StateChip state={portfolioWatch.to} /> <b className="font-semibold">{t("Toda la cartera", "Whole portfolio")}:</b> {t(portfolioWatch.impact)}{" "}
-            <button type="button" onClick={() => setCauseOf(portfolioWatch)} className="min-h-[44px] font-semibold text-bcp-green-text underline-offset-2 hover:underline">{t("Ver causa", "View cause")}</button>
+          <p className="border-t border-bcp-divider px-4 py-3 text-sm sm:px-5">
+            <StateChip state={portfolioWatch.to} /> <b className="font-semibold">{t("Toda la cartera", "Whole portfolio")} · {t(portfolioWatch.cause).split(":")[0]}.</b> {t(portfolioWatch.impact)}{" "}
+            <button type="button" onClick={() => setCauseOf(portfolioWatch)} className="inline font-semibold text-bcp-green-text underline-offset-2 hover:underline">{t("Ver causa", "View cause")}</button>
             {!BANK_EDITION && portfolioWatch.evidence && (
-              <button type="button" onClick={() => openEvidence(portfolioWatch.evidence!.loanId, portfolioWatch.evidence!.condition)} className="ml-3 min-h-[44px] font-semibold text-bcp-green-text hover:underline">{t("Evidencia", "Evidence")} ›</button>
+              <button type="button" onClick={() => openEvidence(portfolioWatch.evidence!.loanId, portfolioWatch.evidence!.condition)} className="ml-3 inline font-semibold text-bcp-green-text hover:underline">{t("Evidencia", "Evidence")} ›</button>
             )}
           </p>
         )}
-      </Card>
+      </div>
       {causeOf && (
         <Modal title={t("Causa · Toda la cartera", "Cause · Whole portfolio")} onClose={closeCause} footer={<Btn onClick={closeCause}>{t("Cerrar", "Close")}</Btn>}>
           <p className="text-sm font-semibold text-bcp-ink">{t(causeOf.impact)}</p>
