@@ -396,68 +396,78 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         right={<CoverageLegend />}
       />
       <div className="overflow-hidden rounded-xl border border-bcp-border bg-white">
+        {/* One header for every row (wide screens); on phones each row is its own card. */}
+        <div className="hidden grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,0.7fr)_minmax(0,1.2fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] gap-x-5 border-b border-bcp-border px-5 py-2.5 lg:grid">
+          {[t("Préstamo y causa", "Loan and cause"), t("Exposición", "Exposure"), t("Cobertura", "Coverage"), t("Aprobación → hoy → vencimiento", "Approval → today → maturity"), t("Peor estrés", "Worst stress"), t("Qué sigue", "What's next"), ""].map((h, k) => (
+            <Lbl key={k} as="span">{h}</Lbl>
+          ))}
+        </div>
         <ul className="divide-y divide-bcp-divider">
           {watch.map((l) => {
             const price = coverageUnder(l, STANDARD_STRESS.price);
             const volume = coverageUnder(l, 0, STANDARD_STRESS.volume);
             const worst = Math.min(price, volume);
             const delta = Math.round((l.coverageToday - l.coverageAtApproval) * 100) / 100;
-            // The reading behind the level, in one line: the worst control or signal (not the portfolio-wide watch).
+            // A change worth flagging: a large drop, or one that crossed the threshold.
+            const flagDelta = delta <= -0.2 || (l.coverageAtApproval >= COVERAGE_BANDS.ambar && l.coverageToday < COVERAGE_BANDS.ambar);
             const RANK: Record<string, number> = { verde: 0, observacion: 1, ambar: 2, naranja: 3, rojo: 4, veto: 5 };
             const why = [...l.conditions].filter((c) => c.state !== "verde" && c.state !== "observacion").sort((a, b) => RANK[b.state] - RANK[a.state])[0];
             const frozen = l.tranches.find((x) => x.status === "congelado");
             const pending = l.tranches.find((x) => x.status === "pendiente");
             const deadline = data.upcoming.find((u) => u.loanId === l.id && /remedia/i.test(u.milestone.es));
-            // TruMarket's next milestone, in its own words (the field estimate), not the tranche it unlocks.
             const tmStep = data.upcoming.find((u) => u.loanId === l.id && u.date === l.next.date && !/conformidad|remedia/i.test(u.milestone.es));
-            const bankStep = frozen
-              ? t(`Decidir sobre el ${frozen.id} congelado (${usd(frozen.amountUsd)}) si no se remedia`, `Decide on the frozen ${frozen.id} (${usd(frozen.amountUsd)}) if not remedied`)
-              : pending
-                ? t(`Conformidad del ${pending.id} hasta ${usd(pending.amountUsd)}, tras el aforo`, `Sign-off on ${pending.id} up to ${usd(pending.amountUsd)}, after the estimate`)
-                : null;
+            const steps: { date: string; who: "tm" | "bank"; text: string }[] = [
+              { date: l.next.date, who: "tm", text: tmStep ? t(tmStep.milestone).split(" · ")[0] : t(l.next.label).split(" · ")[0] },
+              ...(frozen && deadline
+                ? [{ date: deadline.date, who: "bank" as const, text: t(`${frozen.id} congelado · ${usd(frozen.amountUsd).replace(" ", "\u00a0")}`, `Frozen ${frozen.id} · ${usd(frozen.amountUsd).replace(" ", "\u00a0")}`) }]
+                : pending
+                  ? [{ date: pending.milestoneDate, who: "bank" as const, text: t(`Conformidad ${pending.id} hasta ${usd(pending.amountUsd).replace(" ", "\u00a0")}`, `${pending.id} sign-off up to ${usd(pending.amountUsd).replace(" ", "\u00a0")}`) }]
+                  : []),
+            ];
             return (
               <li key={l.id}>
-                <button type="button" onClick={() => onOpen(l.id)} className={`grid w-full gap-x-6 gap-y-3 border-l-4 px-4 py-4 text-left transition-colors hover:bg-bcp-bg/70 sm:px-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.8fr)_minmax(0,1.25fr)_minmax(0,1.3fr)] ${WATCH_EDGE[l.state]}`}>
-                  <div className="min-w-0">
-                    <p className="flex flex-wrap items-baseline gap-x-2"><span className="text-[16px] font-bold text-bcp-ink">{l.id}</span><span className="text-[13px] text-bcp-muted">{t(l.zone)}</span></p>
-                    <div className="mt-1.5"><StateChip state={l.state} cause={stateCause(l)} /></div>
-                    {why && <p className="mt-1.5 text-[13px] text-bcp-muted"><span className="text-bcp-ink">{t(why.label)}</span> · {t(why.today)}</p>}
+                <button type="button" onClick={() => onOpen(l.id)} aria-label={`${t("Abrir expediente", "Open file")} ${l.id}`} className={`group grid w-full grid-cols-2 gap-x-5 gap-y-3 border-l-4 px-4 py-3.5 text-left transition-colors hover:bg-bcp-bg/70 sm:px-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,0.7fr)_minmax(0,1.2fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] lg:items-center ${WATCH_EDGE[l.state]}`}>
+                  <div className="col-span-2 min-w-0 lg:col-span-1">
+                    <p className="flex flex-wrap items-baseline gap-x-2"><span className="text-[15px] font-bold text-bcp-ink">{l.id}</span><span className="text-[12px] text-bcp-muted">{t(l.zone)}</span></p>
+                    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <StateChip state={l.state} cause={stateCause(l)} />
+                    </div>
+                    {why && <p className="mt-1 line-clamp-2 text-[12px] text-bcp-muted">{t(why.label)} · <span className="text-bcp-ink">{t(why.today)}</span></p>}
                   </div>
                   <div>
-                    <Lbl>{t("Exposición hoy", "Exposure today")}</Lbl>
-                    <p className="num text-[18px] font-bold leading-tight text-bcp-ink">{usd(l.disbursedUsd)}</p>
-                    <p className="text-[12px] text-bcp-muted">{t(`de una línea de ${usd(l.lineUsd)}`, `of a ${usd(l.lineUsd)} line`)}</p>
-                    <p className="mt-2 text-[12px] text-bcp-muted">{t("Peor estrés", "Worst stress")} <b className={`num font-semibold ${worst < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : "text-bcp-ink"}`}>{cov(worst)}</b> · {volume < price ? t("volumen −30%", "volume −30%") : t("precio −20%", "price −20%")}</p>
+                    <Lbl as="span" className="lg:hidden">{t("Exposición", "Exposure")} </Lbl>
+                    <p className="num text-[16px] font-bold text-bcp-ink">{usd(l.disbursedUsd)}</p>
+                    <p className="num text-[12px] text-bcp-muted">{t(`de ${usd(l.lineUsd)}`, `of ${usd(l.lineUsd)}`)}</p>
                   </div>
-                  <div className="min-w-0">
-                    <Lbl>{t("Cobertura de repago", "Repayment coverage")}</Lbl>
-                    <div className="flex items-center gap-3">
-                      <div className="shrink-0">
-                        <p className="num text-[22px] font-bold leading-none text-bcp-ink">{cov(l.coverageToday)}</p>
-                        <p className={`num mt-1 text-[12px] font-semibold ${delta < 0 ? "text-bcp-naranja-text" : "text-bcp-green-text"}`}>{delta < 0 ? "▼" : delta > 0 ? "▲" : "="} {Math.abs(delta).toFixed(2)} {t("desde aprob.", "since appr.")}</p>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <CoverageTrend history={l.coverageHistory} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} from={l.approvalDate} to={l.maturityDate} cutoff={data.cutoff} />
-                      </div>
-                    </div>
-                    {l.projection && <p className="num mt-1 text-[12px] text-bcp-muted">{l.controlsState !== "verde" ? t("Si no se remedia", "If not remedied") : t("Al vencimiento", "At maturity")} {range(l.projection.low, l.projection.high, lang)} · {t("estimado", "estimate")}</p>}
+                  <div>
+                    <Lbl as="span" className="lg:hidden">{t("Cobertura", "Coverage")} </Lbl>
+                    <p className="num text-[16px] font-bold text-bcp-ink">{cov(l.coverageToday)}</p>
+                    <p className={`num text-[12px] ${flagDelta ? "font-semibold text-bcp-naranja-text" : "text-bcp-muted"}`}>{delta < 0 ? "▼" : delta > 0 ? "▲" : "="} {Math.abs(delta).toFixed(2)}<span className="lg:hidden"> {t("desde aprob.", "since appr.")}</span></p>
                   </div>
-                  <div className="min-w-0">
-                    <Lbl>{t("Qué sigue", "What's next")}</Lbl>
-                    <ol className="mt-0.5 space-y-1.5 text-[13px]">
-                      <li className="flex gap-2">
-                        <span className="num w-12 shrink-0 font-semibold text-bcp-ink">{date(l.next.date, lang, false)}</span>
-                        <span><span className="mr-1.5 rounded bg-bcp-fill px-1.5 py-0.5 text-[11px] font-semibold text-bcp-ink">TruMarket</span>{tmStep ? t(tmStep.milestone) : t(l.next.label).split(" · ")[0]}</span>
+                  <div className="col-span-2 min-w-0 lg:col-span-1">
+                    <CoverageTrend history={l.coverageHistory} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} from={l.approvalDate} to={l.maturityDate} cutoff={data.cutoff} />
+                    {l.projection && <p className="num text-[11px] text-bcp-muted">{l.controlsState !== "verde" ? t("si no se remedia", "if not remedied") : t("al vencimiento", "at maturity")} {range(l.projection.low, l.projection.high, lang)}</p>}
+                  </div>
+                  <div>
+                    <Lbl as="span" className="lg:hidden">{t("Peor estrés", "Worst stress")} </Lbl>
+                    <p className={`num text-[16px] font-bold ${worst < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : "text-bcp-ink"}`}>{cov(worst)}</p>
+                    <p className="text-[12px] text-bcp-muted">{volume < price ? t("volumen −30%", "volume −30%") : t("precio −20%", "price −20%")}</p>
+                  </div>
+                  <ol className="col-span-2 min-w-0 space-y-1 text-[13px] lg:col-span-1">
+                    {steps.map((st, k) => (
+                      <li key={k} className="flex items-baseline gap-2">
+                        <span className={`num w-[3.25rem] shrink-0 whitespace-nowrap font-semibold ${k > 0 && st.date === steps[k - 1].date ? "text-transparent" : "text-bcp-ink"}`}>{date(st.date, lang, false)}</span>
+                        <span className="min-w-0">
+                          {st.who === "bank"
+                            ? <span className="mr-1.5 rounded bg-bcp-ink px-1.5 py-px text-[11px] font-semibold text-white">{t("Su decisión", "Your decision")}</span>
+                            : <span className="mr-1.5 rounded bg-bcp-fill px-1.5 py-px text-[11px] font-semibold text-bcp-ink">TruMarket</span>}
+                          {st.text}
+                        </span>
                       </li>
-                      {bankStep && (
-                        <li className="flex gap-2">
-                          <span className="num w-12 shrink-0 font-semibold text-bcp-ink">{deadline && frozen ? date(deadline.date, lang, false) : pending ? date(pending.milestoneDate, lang, false) : ""}</span>
-                          <span><span className="mr-1.5 rounded bg-bcp-ink px-1.5 py-0.5 text-[11px] font-semibold text-white">{t("Su decisión", "Your decision")}</span>{bankStep}</span>
-                        </li>
-                      )}
-                    </ol>
-                    <p className="mt-2 text-right text-[13px] font-semibold text-bcp-green-text">{t("Abrir expediente", "Open file")} ›</p>
-                  </div>
+                    ))}
+                  </ol>
+                  <span aria-hidden className="hidden text-[20px] text-bcp-muted transition-transform group-hover:translate-x-0.5 group-hover:text-bcp-ink lg:block">›</span>
+                  <span className="col-span-2 text-right text-[13px] font-semibold text-bcp-green-text lg:hidden">{t("Abrir expediente", "Open file")} ›</span>
                 </button>
               </li>
             );
