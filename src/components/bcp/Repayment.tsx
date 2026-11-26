@@ -123,11 +123,13 @@ function DriverList({ rows }: { rows: DriverRow[] }) {
  * line is shaded (below break-even, or below the standard stress), with
  * P10, P50 and P90 marked. A picture of the stated assumption, not of data.
  */
-function BellCurve({ mean, sd, fmt, shadeBelow, shadeLabel, lines, ticks }: {
+function BellCurve({ mean, sd, fmt, shadeBelow, warnBelow, shadeLabel, lines, ticks }: {
   mean: number;
   sd: number;
   fmt: (n: number) => string;
   shadeBelow: number;
+  /** Second, lighter zone: below the 1.50x threshold. */
+  warnBelow?: number;
   shadeLabel: string;
   lines: { v: number; label: string; cls: string }[];
   ticks: { v: number; label: string; strong?: boolean }[];
@@ -141,12 +143,17 @@ function BellCurve({ mean, sd, fmt, shadeBelow, shadeLabel, lines, ticks }: {
   const y = (v: number) => H - 22 - Math.exp(-((v - mean) ** 2) / (2 * sd * sd)) * (H - 36);
   const pts = Array.from({ length: 81 }, (_, k) => lo + ((hi - lo) * k) / 80);
   const path = pts.map((v, k) => `${k ? "L" : "M"}${x(v).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-  const tail = pts.filter((v) => v <= shadeBelow);
-  const tailPath = tail.length ? `M${x(lo)},${H - 22} ` + tail.map((v) => `L${x(v).toFixed(1)},${y(v).toFixed(1)}`).join(" ") + ` L${x(Math.min(shadeBelow, hi)).toFixed(1)},${H - 22} Z` : "";
+  const area = (cut: number) => {
+    const tail = pts.filter((v) => v <= cut);
+    return tail.length ? `M${x(lo)},${H - 22} ` + tail.map((v) => `L${x(v).toFixed(1)},${y(v).toFixed(1)}`).join(" ") + ` L${x(Math.min(cut, hi)).toFixed(1)},${y(Math.min(cut, hi)).toFixed(1)} L${x(Math.min(cut, hi)).toFixed(1)},${H - 22} Z` : "";
+  };
+  const tailPath = area(shadeBelow);
+  const warnPath = warnBelow !== undefined ? area(warnBelow) : "";
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`${ticks.map((k) => `${k.label} ${fmt(k.v)}`).join(" · ")} · ${shadeLabel}`}>
       <path d={`${path} L${x(hi)},${H - 22} L${x(lo)},${H - 22} Z`} className="fill-bcp-verde-bg" />
-      {tailPath && <path d={tailPath} className="fill-bcp-naranja-bg" />}
+      {warnPath && <path d={warnPath} className="fill-bcp-ambar-bg" />}
+      {tailPath && <path d={tailPath} className="fill-bcp-rojo-bg" />}
       <path d={path} className="fill-none stroke-bcp-green-text" strokeWidth={2} />
       <line x1={x(lo)} x2={x(hi)} y1={H - 22} y2={H - 22} className="stroke-bcp-border" />
       {[...lines].sort((a, b) => a.v - b.v).map((l, k, all) => {
@@ -234,10 +241,31 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
   const pb = harvestBuild(input, { price: STANDARD_STRESS.price });
   const vb = harvestBuild(input, { volume: STANDARD_STRESS.volume });
   const breakEvenKg = b.dueUsd / (b.priceUsdKg - COST_USD_KG);
+  // Headroom without any assumption: how far each input can fall, the other held, before 1.50x and 1.00x.
+  const kgAt = (c: number) => (c * b.dueUsd) / (b.priceUsdKg - COST_USD_KG);
+  const priceAt = (c: number) => COST_USD_KG + (c * b.dueUsd) / b.exportKg;
+  const fall = (from: number, to: number) => Math.max(0, Math.round((1 - to / from) * 1000) / 10);
+  const head = {
+    q: { t150: kgAt(COVERAGE_BANDS.ambar), be: breakEvenKg, f150: fall(b.exportKg, kgAt(COVERAGE_BANDS.ambar)), fbe: fall(b.exportKg, breakEvenKg) },
+    p: { t150: priceAt(COVERAGE_BANDS.ambar), be: priceAt(1), f150: fall(b.priceUsdKg, priceAt(COVERAGE_BANDS.ambar)), fbe: fall(b.priceUsdKg, priceAt(1)) },
+  };
   const index = BANK_EDITION ? null : repaymentIndex(d, controls ?? "verde");
   const estimate = t("Estimado · supuesto a calibrar en el piloto", "Estimate · assumption to calibrate in the pilot");
   const assumption = t(`Supuesto: volumen ±${DISPERSION.volume * 100}% y precio ±${DISPERSION.price * 100}% (1 desv. estándar)`, `Assumption: volume ±${DISPERSION.volume * 100}% and price ±${DISPERSION.price * 100}% (1 standard deviation)`);
   const toggle = (k: "q" | "p") => setPanel((v) => (v === k ? null : k));
+  const Headroom = ({ h, unit, what }: { h: (typeof head)["q"]; unit: (n: number) => string; what: string }) => (
+    <div className="grid gap-2 sm:grid-cols-2">
+      {[
+        [h.f150, h.t150, t(`hasta el umbral ${cov(COVERAGE_BANDS.ambar)}`, `to the ${cov(COVERAGE_BANDS.ambar)} threshold`), "border-bcp-ambar"],
+        [h.fbe, h.be, t("hasta el equilibrio (1.00x)", "to break-even (1.00x)"), "border-bcp-rojo"],
+      ].map(([f, v, k, c]) => (
+        <div key={k as string} className={`rounded-lg border border-l-4 border-bcp-divider bg-white px-3 py-2 ${c}`}>
+          <p className="text-[12px] text-bcp-muted">{t(`Margen ${k as string}`, `Headroom ${k as string}`)}</p>
+          <p className="text-[15px]"><b className="num font-bold">{(f as number) === 0 ? t("ya bajo", "already below") : `−${(f as number).toFixed(1)}%`}</b> <span className="text-bcp-muted">{t(`de ${what} · ${unit(v as number)}`, `of ${what} · ${unit(v as number)}`)}</span></p>
+        </div>
+      ))}
+    </div>
+  );
   const card = (on: boolean) => `rounded-xl border p-4 text-left transition-colors ${on ? "border-bcp-ink bg-bcp-bg/60" : "border-bcp-border bg-white hover:border-bcp-ink"}`;
   return (
     <section aria-label={t("Capacidad de repago", "Repayment capacity")} className="space-y-4 rounded-xl border border-bcp-border bg-white p-4 sm:p-5">
@@ -325,13 +353,15 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
             <span className="text-[12px] text-bcp-muted">{estimate}</span>
           </div>
           <div className="rounded-lg bg-bcp-bg/60 p-3">
-            <p className="mb-1 text-[12px] text-bcp-muted">{t("Volumen exportable (t) · zona sombreada bajo el volumen de equilibrio (cobertura 1.00x)", "Exportable volume (t) · shaded below the break-even volume (coverage 1.00x)")}</p>
+            <p className="mb-1 text-[12px] text-bcp-muted">{t("Volumen exportable (t) · ámbar: bajo el umbral 1.50x · rojo: bajo el equilibrio (1.00x)", "Exportable volume (t) · amber: below the 1.50x threshold · red: below break-even (1.00x)")}</p>
             <div className="mx-auto max-w-[620px]">
-              <BellCurve mean={b.exportKg} sd={d.volume.sd} fmt={(n) => `${(n / 1000).toFixed(1)} t`} shadeBelow={breakEvenKg} shadeLabel={t("bajo equilibrio", "below break-even")}
+              <BellCurve mean={b.exportKg} sd={d.volume.sd} fmt={(n) => `${(n / 1000).toFixed(1)} t`} shadeBelow={breakEvenKg} warnBelow={head.q.t150} shadeLabel={t("bajo equilibrio", "below break-even")}
                 lines={[{ v: breakEvenKg, label: t("equilibrio", "break-even"), cls: "stroke-bcp-rojo" }, { v: vb.exportKg, label: "−30%", cls: "stroke-bcp-naranja" }]}
                 ticks={[{ v: d.volume.p10, label: "P10" }, { v: d.volume.p50, label: "P50", strong: true }, { v: d.volume.p90, label: "P90" }]} />
             </div>
           </div>
+          <Headroom h={head.q} unit={(n) => `${(n / 1000).toFixed(1)} t`} what={t("volumen, con el precio constante", "volume, price held")} />
+          <p className="text-[12px] text-bcp-muted">{t("P50 = volumen esperado hoy. Los factores aún no confirmados (como El Niño) están en la proyección, no en la curva. Una curva normal subestima los choques extremos; por eso rige el estrés estándar.", "P50 = expected volume today. Factors not yet confirmed (such as El Niño) are in the projection, not in the curve. A normal curve understates extreme shocks; that is why the standard stress applies.")}</p>
           <p className="text-[13px] font-semibold text-bcp-muted">{t("Lo que mueve el volumen", "What moves the volume")}</p>
           <DriverList rows={drivers?.volume ?? []} />
         </div>
@@ -343,13 +373,15 @@ export function RepaymentCard({ input, cutoff, approval, low, high, lowHighLabel
             <span className="text-[12px] text-bcp-muted">{estimate}</span>
           </div>
           <div className="rounded-lg bg-bcp-bg/60 p-3">
-            <p className="mb-1 text-[12px] text-bcp-muted">{t("Precio FOB (USD/kg) · zona sombreada bajo el precio de equilibrio del préstamo", "FOB price (USD/kg) · shaded below the loan's break-even price")}</p>
+            <p className="mb-1 text-[12px] text-bcp-muted">{t("Precio FOB (USD/kg) · ámbar: bajo el umbral 1.50x · rojo: bajo el equilibrio del préstamo (1.00x)", "FOB price (USD/kg) · amber: below the 1.50x threshold · red: below the loan's break-even (1.00x)")}</p>
             <div className="mx-auto max-w-[620px]">
-              <BellCurve mean={b.priceUsdKg} sd={d.price.sd} fmt={(n) => n.toFixed(2)} shadeBelow={b.breakEvenUsdKg} shadeLabel={t("bajo equilibrio", "below break-even")}
+              <BellCurve mean={b.priceUsdKg} sd={d.price.sd} fmt={(n) => n.toFixed(2)} shadeBelow={b.breakEvenUsdKg} warnBelow={head.p.t150} shadeLabel={t("bajo equilibrio", "below break-even")}
                 lines={[{ v: b.breakEvenUsdKg, label: t("equilibrio", "break-even"), cls: "stroke-bcp-rojo" }, { v: pb.priceUsdKg, label: "−20%", cls: "stroke-bcp-naranja" }]}
                 ticks={[{ v: d.price.p10, label: "P10" }, { v: d.price.p50, label: "P50", strong: true }, { v: d.price.p90, label: "P90" }]} />
             </div>
           </div>
+          <Headroom h={head.p} unit={(n) => `USD ${n.toFixed(2)}`} what={t("precio, con el volumen constante", "price, volume held")} />
+          <p className="text-[12px] text-bcp-muted">{t("P50 = precio esperado a cosecha hoy. Una curva normal subestima los choques extremos; por eso rige el estrés estándar.", "P50 = expected harvest price today. A normal curve understates extreme shocks; that is why the standard stress applies.")}</p>
           <p className="text-[13px] font-semibold text-bcp-muted">{t("Lo que mueve el precio", "What moves the price")}</p>
           <DriverList rows={drivers?.price ?? []} />
         </div>
