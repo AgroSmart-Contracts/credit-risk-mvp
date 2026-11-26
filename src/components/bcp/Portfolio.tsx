@@ -11,7 +11,7 @@ import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
 import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
-import { CoverageLegend, CoverageTrend, PercentileCell, SourceStrip } from "./Repayment";
+import { PercentileCell, PercentileLegend, SourceStrip } from "./Repayment";
 import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
@@ -393,12 +393,12 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       <SectionTitle
         title={t("En seguimiento", "On the watchlist")}
         sub={t(`${watch.length} préstamos · ${usd(watch.reduce((a, l) => a + l.disbursedUsd, 0))} de exposición`, `${watch.length} loans · ${usd(watch.reduce((a, l) => a + l.disbursedUsd, 0))} exposed`)}
-        right={<CoverageLegend />}
+        right={<PercentileLegend />}
       />
       <div className="overflow-hidden rounded-xl border border-bcp-border bg-white">
         {/* One header for every row (wide screens); on phones each row is its own card. */}
-        <div className="hidden grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,0.7fr)_minmax(0,1.2fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] gap-x-5 border-b border-bcp-border px-5 py-2.5 lg:grid">
-          {[t("Préstamo y causa", "Loan and cause"), t("Exposición", "Exposure"), t("Cobertura", "Coverage"), t("Aprobación → hoy → vencimiento", "Approval → today → maturity"), t("Peor estrés", "Worst stress"), t("Qué sigue", "What's next"), ""].map((h, k) => (
+        <div className="hidden grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,1.9fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] gap-x-5 border-b border-bcp-border px-5 py-2.5 lg:grid">
+          {[t("Préstamo y causa", "Loan and cause"), t("Exposición", "Exposure"), BANK_EDITION ? t("Cobertura P10–P90 (estimado)", "Coverage P10–P90 (estimate)") : t("Índice y P10–P90 (estimado)", "Index & P10–P90 (estimate)"), t("Peor estrés", "Worst stress"), t("Qué sigue", "What's next"), ""].map((h, k) => (
             <Lbl key={k} as="span">{h}</Lbl>
           ))}
         </div>
@@ -426,7 +426,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
             ];
             return (
               <li key={l.id}>
-                <button type="button" onClick={() => onOpen(l.id)} aria-label={`${t("Abrir expediente", "Open file")} ${l.id}`} className={`group grid w-full grid-cols-2 gap-x-5 gap-y-3 border-l-4 px-4 py-3.5 text-left transition-colors hover:bg-bcp-bg/70 sm:px-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,0.7fr)_minmax(0,1.2fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] lg:items-center ${WATCH_EDGE[l.state]}`}>
+                <button type="button" onClick={() => onOpen(l.id)} aria-label={`${t("Abrir expediente", "Open file")} ${l.id}`} className={`group grid w-full grid-cols-2 gap-x-5 gap-y-3 border-l-4 px-4 py-3.5 text-left transition-colors hover:bg-bcp-bg/70 sm:px-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,1.9fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] lg:items-center ${WATCH_EDGE[l.state]}`}>
                   <div className="col-span-2 min-w-0 lg:col-span-1">
                     <p className="flex flex-wrap items-baseline gap-x-2"><span className="text-[15px] font-bold text-bcp-ink">{l.id}</span><span className="text-[12px] text-bcp-muted">{t(l.zone)}</span></p>
                     <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -439,14 +439,13 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                     <p className="num text-[16px] font-bold text-bcp-ink">{usd(l.disbursedUsd)}</p>
                     <p className="num text-[12px] text-bcp-muted">{t(`de ${usd(l.lineUsd)}`, `of ${usd(l.lineUsd)}`)}</p>
                   </div>
-                  <div>
-                    <Lbl as="span" className="lg:hidden">{t("Cobertura", "Coverage")} </Lbl>
-                    <p className="num text-[16px] font-bold text-bcp-ink">{cov(l.coverageToday)}</p>
-                    <p className={`num text-[12px] ${flagDelta ? "font-semibold text-bcp-naranja-text" : "text-bcp-muted"}`}>{delta < 0 ? "▼" : delta > 0 ? "▲" : "="} {Math.abs(delta).toFixed(2)}<span className="lg:hidden"> {t("desde aprob.", "since appr.")}</span></p>
-                  </div>
                   <div className="col-span-2 min-w-0 lg:col-span-1">
-                    <CoverageTrend history={l.coverageHistory} today={l.coverageToday} low={l.projection?.low} high={l.projection?.high} from={l.approvalDate} to={l.maturityDate} cutoff={data.cutoff} />
-                    {l.projection && <p className="num text-[11px] text-bcp-muted">{l.controlsState !== "verde" ? t("si no se remedia", "if not remedied") : t("al vencimiento", "at maturity")} {range(l.projection.low, l.projection.high, lang)}</p>}
+                    <Lbl as="span" className="lg:hidden">{t("Cobertura P10–P90 (estimado)", "Coverage P10–P90 (estimate)")}</Lbl>
+                    <PercentileCell input={l} controls={l.controlsState} />
+                    <p className="num mt-1 text-[11px] text-bcp-muted">
+                      <span className={flagDelta ? "font-semibold text-bcp-naranja-text" : ""}>{delta < 0 ? "▼" : delta > 0 ? "▲" : "="} {Math.abs(delta).toFixed(2)} {t("desde aprob.", "since appr.")}</span>
+                      {l.projection && <> · {l.controlsState !== "verde" ? t("si no se remedia", "if not remedied") : t("al vencimiento", "at maturity")} {range(l.projection.low, l.projection.high, lang)}</>}
+                    </p>
                   </div>
                   <div>
                     <Lbl as="span" className="lg:hidden">{t("Peor estrés", "Worst stress")} </Lbl>

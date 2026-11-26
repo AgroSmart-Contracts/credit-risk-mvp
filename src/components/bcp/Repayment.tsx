@@ -41,66 +41,8 @@ export function SourceStrip({ cutoff, compact = false }: { cutoff: string; compa
   );
 }
 
-/** The key for the small coverage trend charts in tables (the cards carry their own). */
-export function CoverageLegend() {
-  const t = useT();
-  return (
-    <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-bcp-muted">
-      <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full border-2 border-bcp-ink bg-white" />{t("Aprobación", "Approval")}</span>
-      <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-bcp-ink" />{t("Hoy", "Today")}</span>
-      <span className="flex items-center gap-1.5"><span className="h-3 w-1.5 rounded-sm border border-dashed border-bcp-ink/70 bg-bcp-ink/10" />{t("Al vencimiento (estimado)", "At maturity (estimate)")}</span>
-      <span className="flex items-center gap-1.5"><span className="w-4 border-t border-dashed border-bcp-ambar" />{t(`Umbral ${cov(COVERAGE_BANDS.ambar)}`, `Threshold ${cov(COVERAGE_BANDS.ambar)}`)}</span>
-    </p>
-  );
-}
-
 const SCALE_MIN = 0.8;
 const SCALE_MAX = 2.4;
-
-/**
- * Coverage over the campaign, for tables: time left to right (approval to
- * maturity), coverage bottom to top on one fixed scale with the risk bands and
- * the 1.50x threshold. Solid: the recorded weekly history up to today; dashed:
- * the estimated range at maturity.
- */
-export function CoverageTrend({ history, today, low, high, from, to, cutoff }: { history: { date: string; value: number }[]; today: number; low?: number; high?: number; from: string; to: string; cutoff: string }) {
-  const t = useT();
-  const lang = useLang();
-  const W = 220;
-  const H = 64;
-  const L = 8;
-  const R = W - 10;
-  const TOP = 2.2;
-  const BOT = 0.9;
-  const y = (v: number) => H - 5 - ((Math.min(TOP, Math.max(BOT, v)) - BOT) / (TOP - BOT)) * (H - 10);
-  const span = Math.max(1, daysBetween(from, to));
-  const x = (d: string) => L + ((R - L) * Math.min(1, Math.max(0, daysBetween(from, d) / span)));
-  const pts = [...history.filter((p) => p.date <= cutoff), { date: cutoff, value: today }];
-  const line = pts.map((p, k) => `${k ? "L" : "M"}${x(p.date).toFixed(1)},${y(p.value).toFixed(1)}`).join(" ");
-  const xToday = x(cutoff);
-  const proj = low !== undefined && high !== undefined;
-  const mid = proj ? (low! + high!) / 2 : today;
-  const approval = history[0]?.value ?? today;
-  const bands: [number, number, string][] = [
-    [BOT, COVERAGE_BANDS.rojo, "fill-bcp-rojo-bg"],
-    [COVERAGE_BANDS.rojo, COVERAGE_BANDS.naranja, "fill-bcp-naranja-bg"],
-    [COVERAGE_BANDS.naranja, COVERAGE_BANDS.ambar, "fill-bcp-ambar-bg"],
-    [COVERAGE_BANDS.ambar, TOP, "fill-bcp-verde-bg"],
-  ];
-  const label = `${t("Aprobación", "Approval")} ${cov(approval)} → ${t("hoy", "today")} ${cov(today)}${proj ? ` → ${t("al vencimiento", "at maturity")} ${range(low!, high!, lang)} (${t("estimado", "estimate")})` : ""}`;
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="h-[64px] w-full max-w-[240px]" role="img" aria-label={label}>
-      {bands.map(([a, b, c]) => <rect key={a} x={0} width={W} y={y(b)} height={y(a) - y(b)} rx={0} className={c} opacity={0.7} />)}
-      <line x1={0} x2={W} y1={y(COVERAGE_BANDS.ambar)} y2={y(COVERAGE_BANDS.ambar)} className="stroke-bcp-ambar" strokeDasharray="3 2" strokeWidth={1} />
-      <path d={line} className="fill-none stroke-bcp-ink" strokeWidth={2} strokeLinejoin="round" />
-      {proj && <line x1={xToday} x2={R} y1={y(today)} y2={y(mid)} className="stroke-bcp-ink" strokeWidth={1.5} strokeDasharray="3 3" opacity={0.7} />}
-      {proj && <rect x={R - 4} width={8} y={y(high!) - 1} height={Math.max(3, y(low!) - y(high!) + 2)} rx={2} className="fill-bcp-ink/10 stroke-bcp-ink" strokeDasharray="2 1.5" strokeWidth={1} opacity={0.9} />}
-      <circle cx={L} cy={y(approval)} r={3.5} className="fill-white stroke-bcp-ink" strokeWidth={1.75} />
-      <circle cx={xToday} cy={y(today)} r={4} className="fill-bcp-ink stroke-white" strokeWidth={1.5} />
-    </svg>
-  );
-}
-
 
 /** A reading behind volume or price: value, effect on repayment, provenance and source. */
 export type DriverRow = { label: string; value: string; effect: string; state: ConditionState; provenance: Provenance; source: string };
@@ -182,6 +124,19 @@ function BellCurve({ mean, sd, fmt, shadeBelow, warnBelow, shadeLabel, lines, ti
         </g>
       ))}
     </svg>
+  );
+}
+
+/** Key for the compact P10-P90 bars in tables. */
+export function PercentileLegend() {
+  const t = useT();
+  return (
+    <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-bcp-muted">
+      <span className="flex items-center gap-1.5"><span className="h-3 w-[3px] rounded-sm bg-bcp-ink" />{t("Cobertura hoy", "Coverage today")}</span>
+      <span className="flex items-center gap-1.5"><span className="h-1.5 w-4 rounded-full bg-bcp-green/70" />P25–P75</span>
+      <span className="flex items-center gap-1.5"><span className="h-1.5 w-4 rounded-full bg-bcp-green/30" />P10–P90</span>
+      <span>{t("Supuesto a calibrar en el piloto", "Assumption to calibrate in the pilot")}</span>
+    </p>
   );
 }
 
