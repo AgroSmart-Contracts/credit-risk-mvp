@@ -4,7 +4,7 @@
  * standard stress side by side for two amounts due, and the driver bridge.
  */
 import type { ReactNode } from "react";
-import { COST_USD_KG, COVERAGE_BANDS, DRIVERS, DRIVER_TEXT, STANDARD_STRESS, cov, coverageUnder, harvestBuild, signedCov, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
+import { COST_USD_KG, DRIVERS, DRIVER_TEXT, STANDARD_STRESS, cov, coverageUnder, harvestBuild, signedCov, stateFromCoverage, usd, type HarvestInput } from "../../lib/bcp/calc";
 import type { Loan } from "../../lib/bcp/types";
 import { BANK_EDITION } from "./edition";
 import { useT } from "./shared";
@@ -50,12 +50,6 @@ export function CoverageBuild({ input, areaHa, yieldTHa, title }: { input: Harve
           ))}
         </tbody>
       </table>
-      <p className="lbl mt-2">
-        {t(
-          `Precio de equilibrio: ${perKg(b.breakEvenUsdKg)} (costo por kg + saldo ÷ volumen exportable). El precio FOB ya excluye el flete marítimo.`,
-          `Break-even price: ${perKg(b.breakEvenUsdKg)} (cost per kg + amount due ÷ exportable volume). The FOB price already excludes ocean freight.`,
-        )}
-      </p>
     </div>
   );
 }
@@ -94,12 +88,6 @@ export function StressCompare({ input, cols }: { input: HarvestInput; cols: { la
           ))}
         </tbody>
       </table>
-      <p className="lbl mt-2">
-        {t(
-          `Estrés estándar: precio −20% y volumen −30%, cada uno por separado, sobre 1.50x. "Ambos" se muestra como caso severo. Umbrales propuestos: ${cov(COVERAGE_BANDS.ambar)} / ${cov(COVERAGE_BANDS.naranja)} / ${cov(COVERAGE_BANDS.rojo)}.`,
-          `Standard stress: price −20% and volume −30%, each on its own, above 1.50x. "Both" is shown as the severe case. Proposed thresholds: ${cov(COVERAGE_BANDS.ambar)} / ${cov(COVERAGE_BANDS.naranja)} / ${cov(COVERAGE_BANDS.rojo)}.`,
-        )}
-      </p>
     </div>
   );
 }

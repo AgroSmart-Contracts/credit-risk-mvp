@@ -3,47 +3,68 @@
  * 30 days), then one tab per kind of data (summary, position and funds, risk,
  * loans, applications). Every figure can be recomputed from the loan files.
  */
-import { Suspense, lazy, useCallback, useState } from "react";
-import { technicalSeries } from "../../data/bcp/technical";
-import { COVERAGE_BANDS, STANDARD_STRESS, accruedCost, bySeverity, cashCalendar, cov, coverageUnder, date, daysBetween, harvestBuild, month, pct, portfolioFigures, range, stateCause, stateFromCoverage, usd, withDate } from "../../lib/bcp/calc";
+import { useCallback, useState, type ReactNode } from "react";
+import { ChevronRight, FilterX } from "lucide-react";
+import { COVERAGE_BANDS, STANDARD_STRESS, bySeverity, cashCalendar, cov, coverageUnder, date, daysBetween, harvestBuild, month, pct, portfolioFigures, range, stateCause, stateFromCoverage, usd, withDate } from "../../lib/bcp/calc";
 import type { Loan, Portfolio as P, State } from "../../lib/bcp/types";
 import { ApplicationsTable } from "./Applications";
 import { appKey, type Answer } from "./answers";
 import { BANK_EDITION } from "./edition";
-import { Btn, Card, Estimado, ExampleChip, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
+import { Btn, Card, Estimado, Lbl, Modal, PageTabs, SectionTitle, StackBar, StateChip } from "./ui";
+import { PercentileCell, PercentileLegend, SourceStrip } from "./Repayment";
+import { BankCostCard, SbsSimulator } from "./RiskTools";
 import { useEvidence, useLang, useT } from "./shared";
 
-// Charts load with the risk tab, not with the portfolio.
-const TechChart = lazy(() => import("./TechCharts").then((m) => ({ default: m.TechChart })));
+const STRESS_LEVELS = ["verde", "ambar", "naranja", "rojo"] as const;
+const WATCH_EDGE: Record<State, string> = { verde: "border-l-bcp-green", ambar: "border-l-bcp-ambar", naranja: "border-l-bcp-naranja", rojo: "border-l-bcp-rojo", veto: "border-l-bcp-rojo" };
+const LEVEL_SHORT = { verde: { es: "Bajo", en: "Low" }, ambar: { es: "Medio", en: "Medium" }, naranja: { es: "Elevado", en: "Elevated" }, rojo: { es: "Alto", en: "High" } } as const;
+const LEVEL_INK: Record<State, string> = { verde: "text-bcp-green-text", ambar: "text-bcp-ambar-text", naranja: "text-bcp-naranja-text", rojo: "text-bcp-rojo-text", veto: "text-bcp-rojo-text" };
 
 type PortfolioTab = "resumen" | "posicion" | "riesgo" | "prestamos" | "solicitudes";
-/** Survives opening a file, so Back returns to the same tab. */
+type Tile = "exposicion" | "cobertura" | "seguimiento" | "control" | "proximos";
+/** Each headline figure opens a tab (and, for two of them, a section in it). */
+const TILE_TAB: Record<Tile, { tab: PortfolioTab; section?: string }> = {
+  exposicion: { tab: "posicion" },
+  cobertura: { tab: "riesgo" },
+  seguimiento: { tab: "resumen" },
+  control: { tab: "posicion", section: "control-de-fondos" },
+  proximos: { tab: "resumen", section: "proximos-30-dias" },
+};
+/** Survive opening a file, so Back returns to the same tab and figure. */
 let lastTab: PortfolioTab = "resumen";
+let lastTile: Tile | null = "seguimiento";
 
 export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answers }: { data: P; onOpen: (id: string) => void; onOpenApp: (id: string) => void; onReport: () => void; onDecisions: () => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
   const lang = useLang();
   const F = portfolioFigures(data.loans);
   const [page, setPageState] = useState<PortfolioTab>(lastTab);
+  const [tile, setTileState] = useState<Tile | null>(lastTile);
+  // One way only: a figure opens its tab, but choosing a tab leaves the figure highlight as it is.
   const setPage = (tab: PortfolioTab) => {
     lastTab = tab;
     setPageState(tab);
+  };
+  const openTile = (k: Tile) => {
+    const { tab, section } = TILE_TAB[k];
+    lastTab = tab;
+    lastTile = k;
+    setPageState(tab);
+    setTileState(k);
+    if (section) requestAnimationFrame(() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
   const openEvidence = useEvidence();
   // Clicking a state in "exposure by state" filters the loans table.
   const [stateFilter, setStateFilter] = useState<State | null>(null);
   const [causeOf, setCauseOf] = useState<P["changes"][number] | null>(null);
   const closeCause = useCallback(() => setCauseOf(null), []);
-  const [season, setSeason] = useState(false);
-  const accrued = data.loans.reduce((s, l) => s + accruedCost(l, data.cutoff), 0);
+  const [tierBy, setTierBy] = useState<"count" | "volume">("count");
   // Watchlist: every loan not in green, by why it has its colour.
   const watch = [...data.loans].filter((l) => l.state !== "verde").sort(bySeverity);
-  const byCause = (c: ReturnType<typeof stateCause>) => watch.filter((l) => stateCause(l) === c).length;
   // Next 30 days: tranches against milestones and the bank's own decisions.
   const within30 = (d: string) => daysBetween(data.cutoff, d) <= 30;
   const nextTranches = data.loans.flatMap((l) => l.tranches.filter((x) => x.status === "pendiente" && within30(x.milestoneDate)));
-  const bankDecisions = data.loans.flatMap((l) => l.decisions.filter((d) => d.lane === "bank" && !d.conformityDate && within30(d.dueDate ?? d.date))).length + data.applications.filter((a) => !answers[appKey(a)] && within30(a.decisionDueDate)).length;
-  const appsOpen = data.applications.filter((a) => !answers[appKey(a)]);
+  const appsDue = data.applications.filter((a) => !answers[appKey(a)] && within30(a.decisionDueDate));
   const portfolioWatch = data.changes.find((c) => c.loanId === null);
   const frozenLoan = data.loans.find((l) => l.frozenUsd > 0);
   const sevenOfSeven = `${F.tranchesWithConformity} ${t("de", "of")} ${F.tranchesReleased}`;
@@ -51,19 +72,16 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   return (
     <div className="mx-auto max-w-[1200px] space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <ExampleChip kind="portfolio" />
-          <p className="text-sm text-bcp-muted">
-            {t("Palta Hass · Ica y Pisco", "Hass avocado · Ica and Pisco")}
-          </p>
-        </div>
         <Btn onClick={onReport}>{t("Descargar reporte mensual (PDF)", "Download monthly report (PDF)")}</Btn>
       </header>
 
-      {/* Headline figures: same structure in every tile, so labels, values and notes line up. */}
+      <SourceStrip cutoff={data.cutoff} />
+
+      {/* Headline figures: label and figure; the one in view is highlighted. */}
       <section aria-label={t("Situación de la cartera", "Portfolio situation")} className="grid gap-px overflow-hidden rounded-xl border border-bcp-border bg-bcp-border sm:grid-cols-2 xl:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
-        {[
+        {([
           {
+            id: "exposicion",
             k: t("Exposición hoy", "Exposure today"),
             v: usd(F.disbursed),
             // The approved line is the reference for everything else: it gets its own line and a bar.
@@ -71,29 +89,28 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
               <span className="mt-1 block w-full">
                 <span className="block text-[15px] font-semibold">{t(`de una línea de ${usd(F.line)}`, `of a ${usd(F.line)} line`)}</span>
                 <span className="mt-1.5 flex items-center gap-2">
-                  <span aria-hidden className="block h-1.5 flex-1 overflow-hidden rounded-full bg-white/20">
-                    <span className="block h-full rounded-full bg-white" style={{ width: `${(F.disbursed / F.line) * 100}%` }} />
+                  <span aria-hidden className="block h-1.5 flex-1 overflow-hidden rounded-full bg-current/20">
+                    <span className="block h-full rounded-full bg-current" style={{ width: `${(F.disbursed / F.line) * 100}%` }} />
                   </span>
                   <span className="num text-[12px] font-semibold">{pct((F.disbursed / F.line) * 100)}</span>
                 </span>
               </span>
             ),
-            s: t(`+ ${usd(accrued)} de costo devengado · máximo ${usd(F.due)} con todos los tramos`, `+ ${usd(accrued)} accrued cost · at most ${usd(F.due)} with every tranche`),
-            go: () => setPage("posicion"),
-            dark: true,
           },
-          { k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage), s: t(`proyectada ${range(data.projection.low, data.projection.high, "es")} · precio −20%: ${cov(F.stress.price.coverage)}`, `projected ${range(data.projection.low, data.projection.high, "en")} · price −20%: ${cov(F.stress.price.coverage)}`), go: () => setPage("riesgo") },
-          { k: t("En seguimiento", "On the watchlist"), v: `${watch.length} ${t("de", "of")} ${data.loans.length}`, s: t(`${byCause("control")} por control · ${byCause("tecnica")} por señal técnica · ${byCause("cobertura")} por cobertura`, `${byCause("control")} on a control · ${byCause("tecnica")} on a technical signal · ${byCause("cobertura")} on coverage`), go: () => setPage("resumen") },
-          { k: t("Control de fondos", "Control of funds"), v: pct(F.reconciledPct), s: t(`conciliado · ${pct(F.directPct)} pagado directo · ${usd(F.unexplained)} sin sustento`, `reconciled · ${pct(F.directPct)} paid direct · ${usd(F.unexplained)} unexplained`), go: () => setPage("posicion") },
-          { k: t("Próximos 30 días", "Next 30 days"), v: usd(nextTranches.reduce((s, x) => s + x.amountUsd, 0)), s: t(`${nextTranches.length} tramos contra hitos · ${bankDecisions} decisiones del banco`, `${nextTranches.length} tranches against milestones · ${bankDecisions} bank decisions`), go: onDecisions },
-        ].map((x, i) => (
-          <button key={x.k} type="button" onClick={x.go} className={`flex flex-col items-start justify-start px-4 py-4 text-left ${i === 0 ? "sm:col-span-2 xl:col-span-1" : ""} ${x.dark ? "bg-bcp-ink text-white hover:bg-[#15354f]" : "bg-white hover:bg-bcp-bg"}`}>
-            <span className={`font-[Arial,Helvetica,sans-serif] text-[12px] ${x.dark ? "text-bcp-label" : "text-bcp-muted"}`}>{x.k}</span>
-            <span className="num mt-1 whitespace-nowrap text-[24px] font-bold leading-tight">{x.v}</span>
-            {"line" in x && x.line}
-            <span className={`mt-1 text-[13px] ${x.dark ? "text-white/90" : "text-bcp-muted"}`}>{x.s}</span>
-          </button>
-        ))}
+          { id: "cobertura", k: t("Cobertura de repago", "Repayment coverage"), v: cov(F.coverage) },
+          { id: "seguimiento", k: t("Préstamos en seguimiento", "Loans on the watchlist"), v: `${watch.length} ${t("de", "of")} ${data.loans.length}` },
+          { id: "control", k: t("Fondos conciliados", "Funds reconciled"), v: pct(F.reconciledPct) },
+          { id: "proximos", k: t("Tramos en los próximos 30 días", "Tranches in the next 30 days"), v: usd(nextTranches.reduce((s, x) => s + x.amountUsd, 0)) },
+        ] as { id: Tile; k: string; v: string; line?: ReactNode }[]).map((x, i) => {
+          const on = tile === x.id;
+          return (
+            <button key={x.id} type="button" aria-pressed={on} onClick={() => openTile(x.id)} className={`flex flex-col items-start justify-start px-4 py-4 text-left transition-colors ${i === 0 ? "sm:col-span-2 xl:col-span-1" : ""} ${on ? "bg-bcp-ink text-white" : "bg-white text-bcp-ink hover:bg-bcp-bg"}`}>
+              <span className={`font-[Arial,Helvetica,sans-serif] text-[12px] ${on ? "text-bcp-label" : "text-bcp-muted"}`}>{x.k}</span>
+              <span className="num mt-1 whitespace-nowrap text-[24px] font-bold leading-tight">{x.v}</span>
+              {x.line}
+            </button>
+          );
+        })}
       </section>
 
       <PageTabs
@@ -121,13 +138,12 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
             { value: F.pending, className: "bg-bcp-fill", label: "por desembolsar" },
           ]}
         />
-        <div className="mt-4 grid gap-y-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-4 grid gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { k: t("Desembolsado", "Disbursed"), v: usd(F.disbursed), n: "", rule: "border-bcp-ink", sw: "bg-bcp-ink" },
-            { k: t("Congelado", "Frozen"), v: usd(F.frozen), n: frozenLoan ? t(`T3 de ${frozenLoan.id}`, `T3 of ${frozenLoan.id}`) : "", rule: "border-bcp-naranja", sw: "hatch" },
-            { k: t("Por desembolsar", "Undrawn"), v: usd(F.pending), n: t("nov a feb", "Nov to Feb"), rule: "border-bcp-fill-strong", sw: "bg-bcp-fill" },
-            { k: t("Repagado", "Repaid"), v: usd(F.repaid), n: t("cosechas desde mar 2027", "harvests from Mar 2027"), rule: "border-bcp-green", sw: "" },
-            { k: t("Vencimientos de capital", "Principal maturities"), v: "", n: F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} ${usd(v)}`).join(" · "), rule: "border-bcp-green", sw: "" },
+            { k: t("Congelado", "Frozen"), v: usd(F.frozen), n: "", rule: "border-bcp-naranja", sw: "hatch" },
+            { k: t("Por desembolsar", "Undrawn"), v: usd(F.pending), n: "", rule: "border-bcp-fill-strong", sw: "bg-bcp-fill" },
+            { k: t("Vencimientos de capital", "Principal maturities"), v: "", n: F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} · ${usd(v)}`).join("\n"), rule: "border-bcp-green", sw: "" },
           ].map((x) => (
             <div key={x.k} className={`border-l-[3px] pl-3.5 pr-4 ${x.rule}`}>
               <span className="lbl block">
@@ -135,7 +151,7 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 {x.k}
               </span>
               {x.v && <span className="num block text-[22px] font-bold">{x.v}</span>}
-              {x.n && <span className={x.v ? "lbl block" : "block text-[15px] font-bold"}>{x.n}</span>}
+              {x.n && <span className={x.v ? "lbl block" : "block whitespace-pre-line text-[15px] font-bold"}>{x.n}</span>}
             </div>
           ))}
         </div>
@@ -143,9 +159,8 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
       </Card>
 
       <Card tone="control">
-        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+        <div id="control-de-fondos" className="mb-3 scroll-mt-40">
           <h2 className="text-[20px] font-bold">{t("Control de fondos", "Control of funds")}</h2>
-          <Lbl>{t(`controles verificados al ${date(data.cutoff, "es")}`, `controls verified as of ${date(data.cutoff, "en")}`)}</Lbl>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {[
@@ -185,20 +200,29 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr className="border-t-2 border-bcp-ink font-bold">
+                <td className="py-2">{t("Total", "Total")}</td>
+                <td className="py-2 text-right">{usd(F.line)}</td>
+                <td className="py-2 text-right">{usd(F.disbursed)}</td>
+                <td className="py-2 text-right">{usd(F.frozen)}</td>
+                <td className="py-2 text-right">{usd(F.pending)}</td>
+                <td />
+              </tr>
+            </tfoot>
           </table>
         </div>
       </Card>
       </>}
 
       {page === "riesgo" && <>
-      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 lg:grid-cols-3">
         <Card className="col-span-2 lg:col-span-1">
           <Lbl>{t("Proyección", "Projection")}</Lbl>
           <p className="num mt-1 flex flex-wrap items-center gap-2 text-[22px] font-bold">{range(data.projection.low, data.projection.high, lang)} <Estimado /></p>
         </Card>
         {[
           [t("Clasificación SBS", "SBS rating"), t(`${data.loans.filter((l) => l.sbsRating === "Normal").length} de ${data.loans.length} Normal`, `${data.loans.filter((l) => l.sbsRating === "Normal").length} of ${data.loans.length} Normal`)],
-          [t("Provisión requerida", "Required provision"), usd(F.provision)],
           [t("Pérdida esperada", "Expected loss"), t("Por calibrar", "To be calibrated")],
         ].map(([k, v]) => (
           <Card key={k}>
@@ -208,36 +232,53 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         ))}
       </section>
 
+      <div className="grid gap-3 xl:grid-cols-2 [&>*]:min-w-0">
+        <BankCostCard loans={data.loans} />
+        <SbsSimulator loans={data.loans} />
+      </div>
+
       <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
         <Card>
           <h3 className="text-[16px] font-bold">{t("Estrés de la cartera", "Portfolio stress")}</h3>
-          <p className="lbl">{t("Sobre ingreso neto: packing, cosecha, transporte a puerto y comisiones no bajan con el precio.", "On net revenue: packing, harvest, transport to port and fees do not fall with the price.")}</p>
-          <table className="mt-2 w-full text-sm">
-            <thead>
-              <tr className="border-b border-bcp-border">
-                {[t("Escenario", "Scenario"), t("Cobertura", "Coverage"), t(`Bajo ${cov(COVERAGE_BANDS.ambar)}`, `Below ${cov(COVERAGE_BANDS.ambar)}`), t(`Bajo ${cov(COVERAGE_BANDS.naranja)}`, `Below ${cov(COVERAGE_BANDS.naranja)}`), t(`Bajo ${cov(COVERAGE_BANDS.rojo)}`, `Below ${cov(COVERAGE_BANDS.rojo)}`)].map((h, i) => (
-                  <Lbl key={h} as="th" className={`py-1.5 font-normal ${i ? "text-right" : "text-left"}`}>{h}</Lbl>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-bcp-divider">
-              {([
-                [t("Hoy", "Today"), F.stress.today],
-                [t("Precio −20%", "Price −20%"), F.stress.price],
-                [t("Volumen −30%", "Volume −30%"), F.stress.volume],
-                [t("Ambos a la vez", "Both at once"), F.stress.both],
-              ] as const).map(([k, x]) => (
-                <tr key={k}>
-                  <td className="py-2">{k}</td>
-                  <td className="num py-2 text-right"><StateChip state={stateFromCoverage(x.coverage)} suffix={` ${cov(x.coverage)}`} /></td>
-                  <td className="num py-2 text-right">{x.below.ambar}</td>
-                  <td className="num py-2 text-right">{x.below.naranja}</td>
-                  <td className="num py-2 text-right">{x.below.rojo}</td>
+          <div className="mt-2 overflow-x-auto">
+            <table className="w-full min-w-[440px] text-sm">
+              <thead>
+                <tr className="border-b border-bcp-border align-bottom">
+                  <Lbl as="th" className="py-1.5 pr-2 text-left font-normal">{t("Escenario", "Scenario")}</Lbl>
+                  <Lbl as="th" className="py-1.5 pr-2 text-right font-normal">{t("Cobertura", "Coverage")}</Lbl>
+                  {/* Loans by risk level: each loan in exactly one column, so a row adds up to the portfolio. */}
+                  {([
+                    ["verde", `≥${cov(COVERAGE_BANDS.ambar)}`],
+                    ["ambar", t(`${COVERAGE_BANDS.naranja.toFixed(2)} a ${cov(COVERAGE_BANDS.ambar)}`, `${COVERAGE_BANDS.naranja.toFixed(2)} to ${cov(COVERAGE_BANDS.ambar)}`)],
+                    ["naranja", t(`${COVERAGE_BANDS.rojo.toFixed(2)} a ${cov(COVERAGE_BANDS.naranja)}`, `${COVERAGE_BANDS.rojo.toFixed(2)} to ${cov(COVERAGE_BANDS.naranja)}`)],
+                    ["rojo", `<${cov(COVERAGE_BANDS.rojo)}`],
+                  ] as const).map(([lv, r]) => (
+                    <Lbl key={lv} as="th" className="whitespace-nowrap py-1.5 pl-2 text-right font-normal">
+                      <span className="block">{t(LEVEL_SHORT[lv])}</span>
+                      <span className="num">{r}</span>
+                    </Lbl>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="lbl mt-2">{t(`Estándar: precio −20% y volumen −30%, cada uno por separado; "ambos" es el caso severo. Cobertura de la cartera = ${usd(F.netRevenue)} de ingreso neto ÷ ${usd(F.due)} de saldos.`, `Standard: price −20% and volume −30%, each on its own; "both" is the severe case. Portfolio coverage = ${usd(F.netRevenue)} net revenue ÷ ${usd(F.due)} amounts due.`)}</p>
+              </thead>
+              <tbody className="divide-y divide-bcp-divider">
+                {([
+                  [t("Hoy", "Today"), F.stress.today],
+                  [t("Precio −20%", "Price −20%"), F.stress.price],
+                  [t("Volumen −30%", "Volume −30%"), F.stress.volume],
+                  [t("Ambos a la vez", "Both at once"), F.stress.both],
+                ] as const).map(([k, x]) => (
+                  <tr key={k}>
+                    <td className="whitespace-nowrap py-2 pr-2">{k}</td>
+                    <td className={`num py-2 pr-2 text-right font-semibold ${LEVEL_INK[stateFromCoverage(x.coverage)]}`}>{cov(x.coverage)}</td>
+                    {STRESS_LEVELS.map((lv) => (
+                      <td key={lv} className={`num py-2 pl-2 text-right ${x.levels[lv] ? "font-semibold" : "text-bcp-muted/50"}`}>{x.levels[lv]}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <Lbl className="mt-2">{t("Número de préstamos en cada nivel de riesgo.", "Number of loans at each risk level.")}</Lbl>
         </Card>
         <Card>
           <h3 className="text-[16px] font-bold">{t("Concentración", "Concentration")}</h3>
@@ -245,17 +286,14 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
         </Card>
       </div>
 
-      <EnsoOnce data={data} />
-
       <Card>
         <h3 className="text-[16px] font-bold">{t("Cobertura por préstamo: cómo se llega a cada cifra", "Coverage by loan: how each figure is reached")}</h3>
         <div className="-mx-4 mt-2 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
-          <table className="w-full min-w-[980px] text-sm">
-            <thead><tr className="border-b border-bcp-border">{[t("Préstamo", "Loan"), t("Estado", "State"), t("Ingreso neto", "Net revenue"), t("Saldo al vencimiento", "Due at maturity"), t("Aprobación → hoy", "Approval → today"), t("Precio −20%", "Price −20%"), t("Volumen −30%", "Volume −30%"), t("Equilibrio", "Break-even"), t("Proyección", "Projection")].map((h, i) => <Lbl key={h} as="th" className={`py-1.5 pr-3 font-normal ${i > 1 ? "text-right" : "text-left"}`}>{h}</Lbl>)}</tr></thead>
+          <table className="w-full min-w-[820px] text-sm">
+            <thead><tr className="border-b border-bcp-border">{[t("Préstamo", "Loan"), t("Estado", "State"), t("Ingreso neto", "Net revenue"), t("Saldo al vencimiento", "Due at maturity"), t("Aprobación → hoy", "Approval → today"), t("Equilibrio", "Break-even"), t("Proyección", "Projection")].map((h, i) => <Lbl key={h} as="th" className={`py-1.5 pr-3 font-normal ${i > 1 ? "text-right" : "text-left"}`}>{h}</Lbl>)}</tr></thead>
             <tbody className="divide-y divide-bcp-divider">
               {[...data.loans].sort(bySeverity).map((l) => {
                 const b = harvestBuild(l);
-                const [p, v] = [coverageUnder(l, STANDARD_STRESS.price), coverageUnder(l, 0, STANDARD_STRESS.volume)];
                 return (
                   <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer hover:bg-bcp-bg">
                     <td className="py-2 pr-3 font-semibold">{l.id}</td>
@@ -263,8 +301,6 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                     <td className="num py-2 pr-3 text-right">{usd(b.netUsd)}</td>
                     <td className="num py-2 pr-3 text-right">{usd(l.dueAtMaturityUsd)}</td>
                     <td className="num whitespace-nowrap py-2 pr-3 text-right">{cov(l.coverageAtApproval)} → <b>{cov(l.coverageToday)}</b></td>
-                    <td className={`num py-2 pr-3 text-right ${p < COVERAGE_BANDS.ambar ? "font-semibold text-bcp-naranja-text" : ""}`}>{cov(p)}</td>
-                    <td className={`num py-2 pr-3 text-right ${v < COVERAGE_BANDS.ambar ? "font-semibold text-bcp-naranja-text" : ""}`}>{cov(v)}</td>
                     <td className="num whitespace-nowrap py-2 pr-3 text-right">USD {l.breakEvenPriceUsdKg.toFixed(2)}/kg</td>
                     <td className="num whitespace-nowrap py-2 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio", "no change")}</td>
                   </tr>
@@ -278,133 +314,220 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
                 <td className="num py-2 pr-3 text-right">{usd(F.netRevenue)}</td>
                 <td className="num py-2 pr-3 text-right">{usd(F.due)}</td>
                 <td className="num py-2 pr-3 text-right">{cov(F.coverage)}</td>
-                <td className="num py-2 pr-3 text-right">{cov(F.stress.price.coverage)}</td>
-                <td className="num py-2 pr-3 text-right">{cov(F.stress.volume.coverage)}</td>
                 <td />
                 <td className="num whitespace-nowrap py-2 text-right">{range(data.projection.low, data.projection.high, lang)}</td>
               </tr>
             </tfoot>
           </table>
         </div>
-        <p className="lbl mt-2">
-          {t("Cobertura = ingreso neto de cosecha ÷ saldo al vencimiento (línea completa más costo estimado). Umbrales propuestos: ámbar bajo 1.50x, naranja bajo 1.30x, rojo bajo 1.10x. Cada fila abre el expediente con la construcción completa.", "Coverage = net harvest revenue ÷ amount due at maturity (full line plus estimated cost). Proposed thresholds: amber below 1.50x, orange below 1.30x, red below 1.10x. Each row opens the file with the full build.")}{" "}
-          {t(data.projection.text).replace(/^(Proyección|Projection) \S+ (a|to) \S+ /, (m) => (m.startsWith("P") && lang === "es" ? "Proyección " : "Projection "))}
-        </p>
       </Card>
       </>}
 
       {page === "resumen" && <>
-      <SectionTitle title={t("En seguimiento", "On the watchlist")} sub={t("Estado = el peor entre la banda de cobertura de hoy y los controles del contrato. La proyección anticipa; no fija el estado.", "State = the worse of today's coverage band and the contract controls. The projection anticipates; it does not set the state.")} />
-      <Card>
-        <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
-          <table className="w-full min-w-[900px] text-sm">
-            <thead>
-              <tr className="border-b border-bcp-border text-left">
-                {[t("Préstamo", "Loan"), t("Estado y causa", "State and cause"), t("Cobertura hoy", "Coverage today"), t("Banda", "Band"), t("Proyección", "Projection"), t("Precio −20%", "Price −20%"), t("Qué sigue", "Next step")].map((h, i) => (
-                  <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 2 || i === 4 || i === 5 ? "text-right" : ""}`}>{h}</Lbl>
-                ))}
-              </tr>
-            </thead>
+      {/* Capital and repayment at a glance; the detail sits in Position and Risk. */}
+      <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
+        <Card>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="text-[16px] font-bold">{t("Capital y vencimientos", "Capital and maturities")}</h3>
+            <button type="button" onClick={() => setPage("posicion")} className="min-h-[36px] text-sm font-semibold text-bcp-green-text hover:underline">{t("Ver calendario", "View calendar")} ›</button>
+          </div>
+          <div className="mt-3">
+            <StackBar
+              height="h-[14px]"
+              total={F.line}
+              label={t(`Línea de ${usd(F.line)}: desembolsado ${usd(F.disbursed)}, congelado ${usd(F.frozen)}, por desembolsar ${usd(F.pending)}`, `Line of ${usd(F.line)}: disbursed ${usd(F.disbursed)}, frozen ${usd(F.frozen)}, to disburse ${usd(F.pending)}`)}
+              segments={[
+                { value: F.disbursed, className: "bg-bcp-ink", label: "desembolsado" },
+                { value: F.frozen, className: "hatch", label: "congelado" },
+                { value: F.pending, className: "bg-bcp-fill", label: "por desembolsar" },
+              ]}
+            />
+          </div>
+          <dl className="mt-3 grid grid-cols-3 gap-3">
+            {[
+              [t("Desembolsado", "Disbursed"), usd(F.disbursed), ""],
+              [t("Congelado", "Frozen"), usd(F.frozen), "text-bcp-naranja-text"],
+              [t("Por desembolsar", "Undrawn"), usd(F.pending), ""],
+            ].map(([k, v, c]) => (
+              <div key={k}>
+                <dt className="lbl">{k}</dt>
+                <dd className={`num text-[17px] font-bold ${c}`}>{v}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
+            <span className="text-bcp-muted">{t("Vencimientos de capital", "Principal maturities")}:</span>{" "}
+            <b className="num font-semibold">{F.maturities.map(([m, v]) => `${month(`${m}-01`, lang)} ${usd(v)}`).join(" · ")}</b>
+          </p>
+        </Card>
+        <Card>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="text-[16px] font-bold">{t("Cobertura y estrés estándar", "Coverage and standard stress")}</h3>
+            <button type="button" onClick={() => setPage("riesgo")} className="min-h-[36px] text-sm font-semibold text-bcp-green-text hover:underline">{t("Ver riesgo", "View risk")} ›</button>
+          </div>
+          <table className="mt-2 w-full text-sm">
             <tbody className="divide-y divide-bcp-divider">
-              {watch.map((l) => {
-                const p20 = coverageUnder(l, STANDARD_STRESS.price);
+              {([
+                [t("Hoy", "Today"), F.stress.today],
+                [t("Precio −20%", "Price −20%"), F.stress.price],
+                [t("Volumen −30%", "Volume −30%"), F.stress.volume],
+                [t("Ambos a la vez", "Both at once"), F.stress.both],
+              ] as const).map(([k, x]) => {
+                const below = data.loans.length - x.levels.verde;
                 return (
-                  <tr key={l.id} onClick={() => onOpen(l.id)} className="cursor-pointer align-top hover:bg-bcp-bg">
-                    <td className="py-2.5 pr-3">
-                      <button type="button" onClick={(e) => { e.stopPropagation(); onOpen(l.id); }} className="text-left font-semibold hover:underline">{l.id}</button>
-                      <span className="lbl block">{t(l.zone)}</span>
+                  <tr key={k}>
+                    <td className="whitespace-nowrap py-2 pr-3">{k}</td>
+                    <td className={`num py-2 pr-3 text-right font-semibold ${LEVEL_INK[stateFromCoverage(x.coverage)]}`}>{cov(x.coverage)}</td>
+                    <td className="py-2 text-right text-[13px] text-bcp-muted">
+                      {below ? t(`${below} de ${data.loans.length} préstamos bajo ${cov(COVERAGE_BANDS.ambar)}`, `${below} of ${data.loans.length} loans below ${cov(COVERAGE_BANDS.ambar)}`) : t(`todos sobre ${cov(COVERAGE_BANDS.ambar)}`, `all above ${cov(COVERAGE_BANDS.ambar)}`)}
                     </td>
-                    <td className="py-2.5 pr-3">
-                      <StateChip state={l.state} cause={stateCause(l)} />
-                      {l.alert && <span className="lbl block max-w-[280px]">{t(l.alert.text)}</span>}
-                    </td>
-                    <td className="num py-2.5 pr-3 text-right font-semibold">{cov(l.coverageToday)}</td>
-                    <td className="py-2.5 pr-3"><StateChip state={stateFromCoverage(l.coverageToday)} /></td>
-                    <td className="num whitespace-nowrap py-2.5 pr-3 text-right">{l.projection ? range(l.projection.low, l.projection.high, lang) : t("sin cambio", "no change")}</td>
-                    <td className={`num py-2.5 pr-3 text-right font-semibold ${p20 < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : ""}`}>{cov(p20)}</td>
-                    <td className="py-2.5 pr-3">{withDate(t(l.next.label), l.next.date, lang)}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          <p className="mt-2 text-[13px] text-bcp-muted">{t(`Proyección ${range(data.projection.low, data.projection.high, "es")} (estimado)`, `Projection ${range(data.projection.low, data.projection.high, "en")} (estimate)`)}</p>
+        </Card>
+      </div>
+
+      <SectionTitle
+        title={t("En seguimiento", "On the watchlist")}
+        sub={t(`${watch.length} préstamos · ${usd(watch.reduce((a, l) => a + l.disbursedUsd, 0))} de exposición`, `${watch.length} loans · ${usd(watch.reduce((a, l) => a + l.disbursedUsd, 0))} exposed`)}
+        right={<PercentileLegend />}
+      />
+      <div className="overflow-hidden rounded-xl border border-bcp-border bg-white">
+        {/* One header for every row (wide screens); on phones each row is its own card. */}
+        <div className="hidden grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,1.9fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] gap-x-5 border-b border-bcp-border px-5 py-2.5 lg:grid">
+          {[t("Préstamo y causa", "Loan and cause"), t("Exposición", "Exposure"), BANK_EDITION ? t("Cobertura P10–P90 (estimado)", "Coverage P10–P90 (estimate)") : t("Índice y P10–P90 (estimado)", "Index & P10–P90 (estimate)"), t("Peor estrés", "Worst stress"), t("Qué sigue", "What's next"), ""].map((h, k) => (
+            <Lbl key={k} as="span">{h}</Lbl>
+          ))}
         </div>
+        <ul className="divide-y divide-bcp-divider">
+          {watch.map((l) => {
+            const price = coverageUnder(l, STANDARD_STRESS.price);
+            const volume = coverageUnder(l, 0, STANDARD_STRESS.volume);
+            const worst = Math.min(price, volume);
+            const delta = Math.round((l.coverageToday - l.coverageAtApproval) * 100) / 100;
+            // A change worth flagging: a large drop, or one that crossed the threshold.
+            const flagDelta = delta <= -0.2 || (l.coverageAtApproval >= COVERAGE_BANDS.ambar && l.coverageToday < COVERAGE_BANDS.ambar);
+            const RANK: Record<string, number> = { verde: 0, observacion: 1, ambar: 2, naranja: 3, rojo: 4, veto: 5 };
+            const why = [...l.conditions].filter((c) => c.state !== "verde" && c.state !== "observacion").sort((a, b) => RANK[b.state] - RANK[a.state])[0];
+            const frozen = l.tranches.find((x) => x.status === "congelado");
+            const pending = l.tranches.find((x) => x.status === "pendiente");
+            const deadline = data.upcoming.find((u) => u.loanId === l.id && /remedia/i.test(u.milestone.es));
+            const tmStep = data.upcoming.find((u) => u.loanId === l.id && u.date === l.next.date && !/conformidad|remedia/i.test(u.milestone.es));
+            const steps: { date: string; who: "tm" | "bank"; text: string }[] = [
+              { date: l.next.date, who: "tm", text: tmStep ? t(tmStep.milestone).split(" · ")[0] : t(l.next.label).split(" · ")[0] },
+              ...(frozen && deadline
+                ? [{ date: deadline.date, who: "bank" as const, text: t(`${frozen.id} congelado · ${usd(frozen.amountUsd).replace(" ", "\u00a0")}`, `Frozen ${frozen.id} · ${usd(frozen.amountUsd).replace(" ", "\u00a0")}`) }]
+                : pending
+                  ? [{ date: pending.milestoneDate, who: "bank" as const, text: t(`Conformidad ${pending.id} hasta ${usd(pending.amountUsd).replace(" ", "\u00a0")}`, `${pending.id} sign-off up to ${usd(pending.amountUsd).replace(" ", "\u00a0")}`) }]
+                  : []),
+            ];
+            return (
+              <li key={l.id}>
+                <button type="button" onClick={() => onOpen(l.id)} aria-label={`${t("Abrir expediente", "Open file")} ${l.id}`} className={`group grid w-full grid-cols-2 gap-x-5 gap-y-3 border-l-4 px-4 py-3.5 text-left transition-colors hover:bg-bcp-bg/70 sm:px-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,1.9fr)_minmax(0,0.75fr)_minmax(0,1.9fr)_20px] lg:items-center ${WATCH_EDGE[l.state]}`}>
+                  <div className="col-span-2 min-w-0 lg:col-span-1">
+                    <p className="flex flex-wrap items-baseline gap-x-2"><span className="text-[15px] font-bold text-bcp-ink">{l.id}</span><span className="text-[12px] text-bcp-muted">{t(l.zone)}</span></p>
+                    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <StateChip state={l.state} cause={stateCause(l)} />
+                    </div>
+                    {why && <p className="mt-1 line-clamp-2 text-[12px] text-bcp-muted">{t(why.label)} · <span className="text-bcp-ink">{t(why.today)}</span></p>}
+                  </div>
+                  <div>
+                    <Lbl as="span" className="lg:hidden">{t("Exposición", "Exposure")} </Lbl>
+                    <p className="num text-[16px] font-bold text-bcp-ink">{usd(l.disbursedUsd)}</p>
+                    <p className="num text-[12px] text-bcp-muted">{t(`de ${usd(l.lineUsd)}`, `of ${usd(l.lineUsd)}`)}</p>
+                  </div>
+                  <div className="col-span-2 min-w-0 lg:col-span-1">
+                    <Lbl as="span" className="lg:hidden">{t("Cobertura P10–P90 (estimado)", "Coverage P10–P90 (estimate)")}</Lbl>
+                    <PercentileCell input={l} controls={l.controlsState} />
+                    <p className="num mt-1 text-[11px] text-bcp-muted">
+                      <span className={flagDelta ? "font-semibold text-bcp-naranja-text" : ""}>{delta < 0 ? "▼" : delta > 0 ? "▲" : "="} {Math.abs(delta).toFixed(2)} {t("desde aprob.", "since appr.")}</span>
+                      {l.projection && <> · {l.controlsState !== "verde" ? t("si no se remedia", "if not remedied") : t("al vencimiento", "at maturity")} {range(l.projection.low, l.projection.high, lang)}</>}
+                    </p>
+                  </div>
+                  <div>
+                    <Lbl as="span" className="lg:hidden">{t("Peor estrés", "Worst stress")} </Lbl>
+                    <p className={`num text-[16px] font-bold ${worst < COVERAGE_BANDS.ambar ? "text-bcp-naranja-text" : "text-bcp-ink"}`}>{cov(worst)}</p>
+                    <p className="text-[12px] text-bcp-muted">{volume < price ? t("volumen −30%", "volume −30%") : t("precio −20%", "price −20%")}</p>
+                  </div>
+                  <ol className="col-span-2 min-w-0 space-y-1 text-[13px] lg:col-span-1">
+                    {steps.map((st, k) => (
+                      <li key={k} className="flex items-baseline gap-2">
+                        <span className={`num w-[3.25rem] shrink-0 whitespace-nowrap font-semibold ${k > 0 && st.date === steps[k - 1].date ? "text-transparent" : "text-bcp-ink"}`}>{date(st.date, lang, false)}</span>
+                        <span className="min-w-0">
+                          {st.who === "bank"
+                            ? <span className="mr-1.5 rounded bg-bcp-ink px-1.5 py-px text-[11px] font-semibold text-white">{t("Su decisión", "Your decision")}</span>
+                            : <span className="mr-1.5 rounded bg-bcp-fill px-1.5 py-px text-[11px] font-semibold text-bcp-ink">TruMarket</span>}
+                          {st.text}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                  <span aria-hidden className="hidden text-[20px] text-bcp-muted transition-transform group-hover:translate-x-0.5 group-hover:text-bcp-ink lg:block">›</span>
+                  <span className="col-span-2 text-right text-[13px] font-semibold text-bcp-green-text lg:hidden">{t("Abrir expediente", "Open file")} ›</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
         {portfolioWatch && (
-          <p className="mt-3 border-t border-bcp-divider pt-3 text-sm">
-            <StateChip state={portfolioWatch.to} /> <b className="font-semibold">{t("Toda la cartera", "Whole portfolio")}:</b> {t(portfolioWatch.impact)}{" "}
-            <button type="button" onClick={() => setCauseOf(portfolioWatch)} className="min-h-[44px] font-semibold text-bcp-green-text underline-offset-2 hover:underline">{t("Ver causa", "View cause")}</button>
+          <p className="border-t border-bcp-divider px-4 py-3 text-sm sm:px-5">
+            <StateChip state={portfolioWatch.to} /> <b className="font-semibold">{t("Toda la cartera", "Whole portfolio")} · {t(portfolioWatch.cause).split(":")[0]}.</b> {t(portfolioWatch.impact)}{" "}
+            <button type="button" onClick={() => setCauseOf(portfolioWatch)} className="inline font-semibold text-bcp-green-text underline-offset-2 hover:underline">{t("Ver causa", "View cause")}</button>
             {!BANK_EDITION && portfolioWatch.evidence && (
-              <button type="button" onClick={() => openEvidence(portfolioWatch.evidence!.loanId, portfolioWatch.evidence!.condition)} className="ml-3 min-h-[44px] font-semibold text-bcp-green-text hover:underline">{t("Evidencia", "Evidence")} ›</button>
+              <button type="button" onClick={() => openEvidence(portfolioWatch.evidence!.loanId, portfolioWatch.evidence!.condition)} className="ml-3 inline font-semibold text-bcp-green-text hover:underline">{t("Evidencia", "Evidence")} ›</button>
             )}
           </p>
         )}
-      </Card>
+      </div>
       {causeOf && (
         <Modal title={t("Causa · Toda la cartera", "Cause · Whole portfolio")} onClose={closeCause} footer={<Btn onClick={closeCause}>{t("Cerrar", "Close")}</Btn>}>
           <p className="text-sm font-semibold text-bcp-ink">{t(causeOf.impact)}</p>
           <p className="mt-2 text-sm text-bcp-ink">{t(causeOf.cause).replace(/^./, (x) => x.toUpperCase())}</p>
         </Modal>
       )}
-      {bankDecisions > 0 && (
-        <Card tone="decision">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm">
-              <b className="font-semibold">{t(`${bankDecisions} decisiones del banco en los próximos 30 días`, `${bankDecisions} bank decisions in the next 30 days`)}</b>
-              <span className="lbl block">{t(`${appsOpen.length} solicitudes y las conformidades de tramo`, `${appsOpen.length} applications and the tranche sign-offs`)}</span>
-            </p>
-            <Btn primary onClick={onDecisions}>{t("Ir a Decisiones", "Go to Decisions")}</Btn>
-          </div>
-        </Card>
-      )}
+      <div id="proximos-30-dias" className="scroll-mt-40">
+        <SectionTitle title={t("Próximos 30 días", "Next 30 days")} right={<Btn onClick={onDecisions}>{t("Ir a Decisiones", "Go to Decisions")}</Btn>} />
+      </div>
+      <Card>
+        <div className="-mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5">
+          <table className="w-full min-w-[640px] text-sm">
+            <thead>
+              <tr className="border-b border-bcp-border text-left">
+                {[t("Fecha", "Date"), t("Préstamo o solicitud", "Loan or application"), t("Hito", "Milestone"), t("Monto en juego", "Amount at stake")].map((h, i) => (
+                  <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 3 ? "text-right" : ""}`}>{h}</Lbl>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-bcp-divider">
+              {[
+                ...data.upcoming.filter((u) => within30(u.date)).map((u) => ({ date: u.date, id: u.loanId, what: t(u.milestone), usd: u.amountUsd, open: () => onOpen(u.loanId) })),
+                ...appsDue.map((a) => ({ date: a.decisionDueDate, id: a.id, what: t("Decisión de la solicitud", "Application decision"), usd: a.requestedUsd, open: () => onOpenApp(a.id) })),
+              ]
+                .sort((a, b) => a.date.localeCompare(b.date))
+                .map((r, i) => (
+                  <tr key={i} onClick={r.open} className="cursor-pointer hover:bg-bcp-bg">
+                    <td className="whitespace-nowrap py-2.5 pr-3">{date(r.date, lang, false)}</td>
+                    <td className="py-2.5 pr-3 font-semibold">{r.id}</td>
+                    <td className="py-2.5 pr-3">{r.what}</td>
+                    <td className="num whitespace-nowrap py-2.5 pr-3 text-right font-semibold">{usd(r.usd)}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
       </>}
 
       {page === "prestamos" && <>
-      <section aria-label={t("Exposición por estado", "Exposure by state")} className="mt-2">
-        <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-[20px] font-bold leading-tight">{t("Exposición por estado", "Exposure by state")}</h2>
-          <Lbl>{t(`${usd(F.disbursed)} desembolsados · seleccione un estado para filtrar`, `${usd(F.disbursed)} disbursed · select a state to filter`)}</Lbl>
-        </div>
-        <StackBar
-          total={F.disbursed}
-          label={(["verde", "ambar", "naranja", "rojo"] as const).map((x) => `${x} ${usd(F.byState[x].usd)}`).join(", ")}
-          segments={[
-            { value: F.byState.verde.usd, className: "bg-bcp-green", label: "verde" },
-            { value: F.byState.ambar.usd, className: "bg-bcp-ambar", label: "ámbar" },
-            { value: F.byState.naranja.usd, className: "bg-bcp-naranja", label: "naranja" },
-            { value: F.byState.rojo.usd, className: "bg-bcp-rojo", label: "rojo" },
-          ]}
-        />
-        <div className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {(["verde", "ambar", "naranja", "rojo"] as const).map((x) => {
-            const { usd: amount, n } = F.byState[x];
-            const on = stateFilter === x;
-            return (
-              <button key={x} type="button" disabled={!n} aria-pressed={on} onClick={() => setStateFilter(on ? null : x)} className={`rounded-xl border bg-white p-4 text-left ${on ? "border-bcp-ink shadow-[inset_0_0_0_1px_#102a40]" : "border-bcp-border"} ${n ? "hover:border-bcp-ink" : "cursor-default"}`}>
-                <StateChip state={x} />
-                <span className="num mt-2 block text-[22px] font-bold">{usd(amount)}</span>
-                <span className="lbl block">
-                  {n} {n === 1 ? t("préstamo", "loan") : t("préstamos", "loans")} · {pct(F.disbursed ? (amount / F.disbursed) * 100 : 0)}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </section>
+      <RiskTiers F={F} n={data.loans.length} by={tierBy} setBy={setTierBy} filter={stateFilter} setFilter={setStateFilter} />
 
       <Card>
         <LoansTable data={stateFilter ? { ...data, loans: data.loans.filter((l) => l.state === stateFilter) } : data} onOpen={onOpen} />
-        <button type="button" onClick={() => setSeason((v) => !v)} aria-expanded={season} className="mt-2 min-h-[44px] text-sm font-semibold text-bcp-green-text hover:underline print:hidden">
-          {season ? t("Ocultar calendario de campaña", "Hide campaign calendar") : t("Ver calendario de campaña: tramos, cosecha y vencimiento de cada préstamo", "View campaign calendar: each loan's tranches, harvest and maturity")}
-        </button>
-        {season && <SeasonCalendar data={data} onOpen={onOpen} />}
-        {!BANK_EDITION && (
-        <p className="lbl mt-3">
-          {t(
-            "Cada dato muestra su fuente y fecha en el expediente. Estado = el peor entre la banda de cobertura y los controles del contrato; las señales técnicas (vigor, clima) mueven la cobertura y no fijan el color por sí solas.",
-            "Each figure shows its source and date in the file. State = the worse of the coverage band and the contract controls; technical signals (vigour, weather) move coverage and do not set the colour on their own.",
-          )}
-        </p>
-        )}
+        <h3 className="mt-6 text-[16px] font-bold">{t("Calendario de campaña", "Campaign calendar")}</h3>
+        <SeasonCalendar data={data} onOpen={onOpen} />
       </Card>
 
       </>}
@@ -422,37 +545,12 @@ export function Portfolio({ data, onOpen, onOpenApp, onReport, onDecisions, answ
   );
 }
 
-/** Coastal El Niño, once for the portfolio: the same sea temperature applies to every loan, from the first approval. */
-function EnsoOnce({ data }: { data: P }) {
-  const t = useT();
-  const first = data.loans.reduce((m, l) => (l.approvalDate < m.approvalDate ? l : m), data.loans[0]);
-  const watched = data.loans.filter((l) => l.conditions.some((c) => c.label.es === "El Niño costero" && c.state === "observacion")).length;
-  return (
-    <Card className="min-w-0">
-      <Suspense fallback={<p className="lbl">{t("Cargando gráfico", "Loading chart")}</p>}>
-        <TechChart id="enso" s={technicalSeries(first, data.cutoff)} loan={first} cutoff={data.cutoff} portfolio />
-      </Suspense>
-      <p className="lbl mt-1.5">{t(`En observación en ${watched} de ${data.loans.length} préstamos: efecto estimado de −0.10x a −0.20x en cada uno, incluido en su proyección y en la de la cartera. No cambia ningún estado por sí solo.`, `Under watch on ${watched} of ${data.loans.length} loans: estimated effect of −0.10x to −0.20x on each, included in its projection and the portfolio's. It does not change any state on its own.`)}</p>
-    </Card>
-  );
-}
-
-/** Largest borrower, maturity month, buyer, packhouse and zone, as shares of the lines. */
+/** Largest borrower, crop and zones, as shares of the lines. */
 function Concentration({ data, lines }: { data: P; lines: number }) {
   const t = useT();
-  const lang = useLang();
   const largest = data.loans.reduce((m, l) => (l.lineUsd > m.lineUsd ? l : m), data.loans[0]);
-  const byMonth = new Map<string, { usd: number; ids: string[] }>();
-  for (const l of data.loans) {
-    const m = byMonth.get(l.maturityDate.slice(0, 7)) ?? { usd: 0, ids: [] };
-    byMonth.set(l.maturityDate.slice(0, 7), { usd: m.usd + l.lineUsd, ids: [...m.ids, l.id] });
-  }
-  const [topMonth, top] = [...byMonth.entries()].sort((a, b) => b[1].usd - a[1].usd)[0];
   const rows: [string, string, string][] = [
     [t("Mayor prestatario", "Largest borrower"), pct((largest.lineUsd / lines) * 100), t(`${largest.id} · ${usd(largest.lineUsd)} de ${usd(lines)}`, `${largest.id} · ${usd(largest.lineUsd)} of ${usd(lines)}`)],
-    [t("Mes de vencimiento", "Maturity month"), pct((top.usd / lines) * 100), `${month(`${topMonth}-01`, lang)} · ${usd(top.usd)} (${top.ids.join(", ")})`],
-    [t("Comprador", "Buyer"), t("por informar", "to be provided"), t("se completa con los contratos de venta", "to be completed from the sale contracts")],
-    [t("Packing principal", "Main packhouse"), `${data.mainPackhousePct}%`, t("de las líneas", "of the lines")],
     [t("Cultivo", "Crop"), t("palta Hass 100%", "Hass avocado 100%"), ""],
   ];
   // Exposure by region (what the bank's regional view used to show).
@@ -461,7 +559,8 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
     return { r, ls, line: ls.reduce((s, l) => s + l.lineUsd, 0), out: ls.reduce((s, l) => s + l.disbursedUsd, 0) };
   });
   return (
-    <table className="mt-2 w-full text-sm">
+    <div className="mt-2 overflow-x-auto">
+    <table className="w-full text-sm">
       <tbody className="divide-y divide-bcp-divider">
         {rows.map(([k, v, n]) => (
           <tr key={k} className="align-top">
@@ -477,7 +576,7 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
             <td className="py-2 text-bcp-muted">
               {t(`${usd(g.out)} desembolsados`, `${usd(g.out)} disbursed`)} ·{" "}
               {g.ls.map((l) => (
-                <span key={l.id} className="mr-1 inline-flex items-center gap-1">
+                <span key={l.id} className="mr-1 inline-flex flex-wrap items-center gap-1">
                   {l.id} <StateChip state={l.state} />
                 </span>
               ))}
@@ -486,6 +585,67 @@ function Concentration({ data, lines }: { data: P; lines: number }) {
         ))}
       </tbody>
     </table>
+    </div>
+  );
+}
+
+/** Loans by risk level: count or volume, with the share of the portfolio; a tier filters the table. */
+const TIERS: { state: Exclude<State, "veto">; label: { es: string; en: string }; bar: string; chip: string }[] = [
+  { state: "verde", label: { es: "Riesgo bajo", en: "Low risk" }, bar: "bg-bcp-green", chip: "bg-bcp-verde-bg text-bcp-green-text" },
+  { state: "ambar", label: { es: "Riesgo medio", en: "Medium risk" }, bar: "bg-bcp-ambar", chip: "bg-bcp-ambar-bg text-bcp-ambar-text" },
+  { state: "naranja", label: { es: "Riesgo elevado", en: "Elevated risk" }, bar: "bg-bcp-naranja", chip: "bg-bcp-naranja-bg text-bcp-naranja-text" },
+  { state: "rojo", label: { es: "Riesgo alto", en: "High risk" }, bar: "bg-bcp-rojo", chip: "bg-bcp-rojo-bg text-bcp-rojo-text" },
+];
+function RiskTiers({ F, n, by, setBy, filter, setFilter }: { F: ReturnType<typeof portfolioFigures>; n: number; by: "count" | "volume"; setBy: (b: "count" | "volume") => void; filter: State | null; setFilter: (s: State | null) => void }) {
+  const t = useT();
+  const share = (x: { usd: number; n: number }) => (by === "count" ? (n ? (x.n / n) * 100 : 0) : F.disbursed ? (x.usd / F.disbursed) * 100 : 0);
+  return (
+    <section aria-label={t("Préstamos por nivel de riesgo", "Loans by risk level")} className="mt-2 space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 className="text-[20px] font-bold leading-tight">{t("Préstamos por nivel de riesgo", "Loans by risk level")}</h2>
+          <div role="group" aria-label={t("Medir por", "Measure by")} className="inline-flex overflow-hidden rounded-md border border-bcp-border text-sm font-semibold">
+            {(["count", "volume"] as const).map((b) => (
+              <button key={b} type="button" aria-pressed={by === b} onClick={() => setBy(b)} className={`min-h-[36px] px-3 ${by === b ? "bg-bcp-ink text-white" : "bg-white text-bcp-ink hover:bg-bcp-bg"}`}>
+                {b === "count" ? t("Cantidad", "Count") : t("Volumen (USD)", "Volume (USD)")}
+              </button>
+            ))}
+          </div>
+        </div>
+        {filter && (
+          <button type="button" onClick={() => setFilter(null)} className="inline-flex min-h-[36px] items-center gap-1.5 text-sm font-semibold text-bcp-ink hover:underline">
+            <FilterX className="h-4 w-4" aria-hidden /> {t("Quitar filtro", "Clear filter")}
+          </button>
+        )}
+      </div>
+      <div className="flex h-3 overflow-hidden rounded-full bg-bcp-fill" role="img" aria-label={TIERS.map((x) => `${t(x.label)} ${Math.round(share(F.byState[x.state]))}%`).join(", ")}>
+        {TIERS.map((x) => <span key={x.state} className={x.bar} style={{ width: `${share(F.byState[x.state])}%` }} />)}
+      </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {TIERS.map((x) => {
+          const b = F.byState[x.state];
+          const on = filter === x.state;
+          const empty = b.n === 0;
+          return (
+            <button key={x.state} type="button" disabled={empty} aria-pressed={on} onClick={() => setFilter(on ? null : x.state)} className={`relative rounded-xl border bg-white p-4 text-left ${empty ? "cursor-default border-dashed border-bcp-border opacity-60" : on ? "border-bcp-ink shadow-[inset_0_0_0_1px_#102a40]" : "border-bcp-border hover:border-bcp-ink"}`}>
+              <span className="flex items-center justify-between gap-2">
+                <span className="flex flex-wrap items-center gap-1.5">
+                  <span className={`rounded-full px-2.5 py-[3px] text-[12px] font-bold ${x.chip}`}>{t(x.label)}</span>
+                </span>
+                {!empty && <ChevronRight className="h-4 w-4 text-bcp-muted" aria-hidden />}
+              </span>
+              <span className="mt-3 flex items-baseline justify-between gap-2">
+                <span className="num text-[28px] font-bold leading-none">{b.n} {b.n === 1 ? t("préstamo", "loan") : t("préstamos", "loans")}</span>
+                <span className="num text-[15px] font-semibold text-bcp-muted">{pct(share(b))}</span>
+              </span>
+              <span className="num mt-2 block text-sm text-bcp-ink">
+                {usd(b.usd)} ({F.disbursed ? (Math.round((b.usd / F.disbursed) * 1000) / 10).toFixed(1) : "0.0"}% {t("del desembolsado", "of disbursed")})
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -509,7 +669,7 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
       <table className="w-full min-w-[860px] text-sm">
         <thead>
           <tr className="border-b border-bcp-border text-left">
-            {[t("Cliente", "Client"), t("Estado", "State"), t("Desembolsado", "Disbursed"), t("Próximo tramo", "Next tranche"), t("Cobertura", "Coverage"), t("Vence", "Due"), ""].map((h, i) => (
+            {[t("Cliente", "Client"), t("Estado", "State"), t("Desembolsado", "Disbursed"), t("Próximo tramo", "Next tranche"), BANK_EDITION ? t("Cobertura P10–P90 (estimado)", "Coverage P10–P90 (estimate)") : t("Índice y P10–P90 (estimado)", "Index & P10–P90 (estimate)"), t("Vence", "Due"), ""].map((h, i) => (
               <Lbl key={h} as="th" className={`py-2 pr-3 font-normal ${i === 2 ? "text-right" : ""}`}>
                 {h}
               </Lbl>
@@ -534,9 +694,8 @@ export function LoansTable({ data, onOpen }: { data: P; onOpen: (id: string) => 
                 {nextTranche(l).main}
                 <span className="lbl block">{nextTranche(l).note}</span>
               </td>
-              <td className="py-2.5 pr-3 whitespace-nowrap">
-                {cov(l.coverageAtApproval)} → <b>{cov(l.coverageToday)}</b>
-                <span className="lbl block">{l.projection ? `${t("proyección", "projection")} ${range(l.projection.low, l.projection.high, lang)}` : t("sin cambio proyectado", "no projected change")}</span>
+              <td className="w-[300px] py-2.5 pr-4">
+                <PercentileCell input={l} controls={l.controlsState} />
               </td>
               <td className="py-2.5 pr-3 whitespace-nowrap">{date(l.maturityDate, lang)}</td>
               <td className="whitespace-nowrap py-2.5 text-right">
@@ -640,6 +799,8 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
   const rows = cashCalendar(data.loans, data.cutoff);
   const [movesOf, setMovesOf] = useState<(typeof rows)[number] | null>(null);
   const closeMoves = useCallback(() => setMovesOf(null), []);
+  // The balance point under the pointer (or keyboard focus): its exact value in a tooltip.
+  const [hover, setHover] = useState<number | null>(null);
   let bal = F.disbursed;
   const pts = rows.map((r) => (bal = bal + r.out - r.principal));
   const peak = Math.max(F.disbursed, ...pts);
@@ -690,8 +851,38 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
           })}
           <polyline fill="none" stroke="#d9a93b" strokeWidth={2} points={line.map((p) => p.join(",")).join(" ")} />
           {line.slice(1).map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r={3.5} fill="#fff" stroke="#d9a93b" strokeWidth={2} />
+            <g key={i}>
+              <circle cx={x} cy={y} r={hover === i ? 5 : 3.5} fill="#fff" stroke="#d9a93b" strokeWidth={2} />
+              {/* A larger invisible target, so the point is easy to hover or tab to. */}
+              <circle
+                cx={x}
+                cy={y}
+                r={12}
+                fill="transparent"
+                tabIndex={0}
+                role="img"
+                aria-label={`${month(rows[i].month, lang)}: ${t("saldo expuesto", "balance exposed")} ${usd(pts[i])}`}
+                onMouseEnter={() => setHover(i)}
+                onMouseLeave={() => setHover(null)}
+                onFocus={() => setHover(i)}
+                onBlur={() => setHover(null)}
+                className="cursor-pointer outline-none"
+              />
+            </g>
           ))}
+          {hover !== null && (() => {
+            const [x, y] = line[hover + 1];
+            const label = `${month(rows[hover].month, lang)} · ${usd(pts[hover])}`;
+            const w = label.length * 6.6 + 16;
+            const bx = Math.min(Math.max(x - w / 2, L), W - R - w);
+            const by = y - 34 < T ? y + 12 : y - 34;
+            return (
+              <g pointerEvents="none">
+                <rect x={bx} y={by} width={w} height={24} rx={4} fill="#102a40" />
+                <text x={bx + w / 2} y={by + 16} textAnchor="middle" fontFamily="Arial" fontSize="12" fontWeight="700" fill="#fff">{label}</text>
+              </g>
+            );
+          })()}
         </svg>
         <p className="lbl mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
           <span><span className="mr-1 inline-block h-2.5 w-2.5 bg-bcp-ink align-[-1px]" />{t("desembolso contra hito", "disbursement against a milestone")}</span>
@@ -725,12 +916,6 @@ function CashCalendar({ data, F }: { data: P; F: ReturnType<typeof portfolioFigu
             ))}
           </tbody>
         </table>
-        <p className="lbl mt-2">
-          {t(
-            `Misma base que la cobertura: el congelado de ${usd(F.frozen)} figura como si se liberara y cada vencimiento es el saldo completo (capital más costo estimado). El saldo expuesto sigue el capital.`,
-            `Same basis as coverage: the ${usd(F.frozen)} frozen is shown as if released and each maturity is the full amount due (principal plus estimated cost). The balance exposed follows principal.`,
-          )}
-        </p>
         {movesOf && (
           <Modal title={t(`Movimientos · ${month(movesOf.month, "es")}`, `Movements · ${month(movesOf.month, "en")}`)} onClose={closeMoves} footer={<Btn onClick={closeMoves}>{t("Cerrar", "Close")}</Btn>}>
             <table className="w-full text-sm">

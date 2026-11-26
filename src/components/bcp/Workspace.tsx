@@ -8,16 +8,16 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react"
 import { Printer } from "lucide-react";
 import { TopBar } from "../Sidebar";
 import { PORTFOLIO, applicationById, loanById } from "../../data/bcp/dataset";
-import { bySeverity, cov, date, pendingDecisions, usd } from "../../lib/bcp/calc";
+import { COVERAGE_BANDS, STANDARD_STRESS, bySeverity, cov, coverageUnder, date, pendingDecisions, stateFromCoverage, usd } from "../../lib/bcp/calc";
 import type { Lang } from "../../lib/bcp/types";
 import { appKey, decisionKey, type Answer } from "./answers";
-import { ApplicationFile, ApplicationsPage, ApplicationsTable } from "./Applications";
-import { DecisionBlock } from "./Decision";
+import { ApplicationFile, ApplicationsPage } from "./Applications";
+import { QueueCard, type QueueItem } from "./Decision";
 import { BANK_EDITION } from "./edition";
 import { NAV_ACTIVE, bcpNavItems, bcpUrl, type BcpView as View } from "./nav";
 import { loadLoanFile, loadMap, loadReports } from "./pages";
 import { LoansTable, Portfolio } from "./Portfolio";
-import { Btn, Card, Chip, ExampleChip, Lbl, SectionTitle, StateChip } from "./ui";
+import { Btn, Card, Chip, Lbl, SectionTitle, StateChip } from "./ui";
 import { EvidenceContext, LangContext, ToastContext, useT } from "./shared";
 
 // Recharts and Leaflet are only needed on these pages.
@@ -211,7 +211,6 @@ function Frame({ view, go, lang, setLang, answers, onExit, children }: { view: V
 function Files({ go }: { go: (v: View, id?: string | null) => void }) {
   return (
     <div className="mx-auto max-w-[1200px] space-y-4">
-      <ExampleChip kind="portfolio" />
       <Card>
         <LoansTable data={{ ...PORTFOLIO, loans: [...PORTFOLIO.loans].sort(bySeverity) }} onOpen={(x) => go("expediente", x)} />
       </Card>
@@ -219,10 +218,112 @@ function Files({ go }: { go: (v: View, id?: string | null) => void }) {
   );
 }
 
+/** Critical: a veto, or a decision already past its due date. */
+const isCritical = (x: QueueItem) => x.kind === "veto" || x.due < PORTFOLIO.cutoff;
+
+/** Queue filters: everything, what needs the bank's sign-off, what is critical, what carries a condition. */
+const FILTERS = [
+  { id: "todas", label: { es: "Todas", en: "All" }, match: () => true },
+  { id: "conformidad", label: { es: "Requieren conformidad", en: "Sign-off required" }, match: (x: QueueItem) => x.kind === "signoff" },
+  { id: "criticas", label: { es: "Críticas", en: "Critical" }, match: (x: QueueItem) => isCritical(x) },
+  { id: "condicion", label: { es: "Con condición", en: "Conditional" }, match: (x: QueueItem) => x.kind === "condition" },
+] as const;
+
 function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null) => void; answers: Record<string, Answer>; onAnswer: (k: string, a: Answer) => void }) {
   const t = useT();
   const lang = t("es", "en") as Lang;
   const all = pendingDecisions(PORTFOLIO.loans, PORTFOLIO.cutoff);
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("todas");
+  // One queue, one structure: tranche sign-offs and applications, sorted by due date.
+  const items: QueueItem[] = [
+    ...all.filter(({ loan, decision }) => !answers[decisionKey(loan, decision)]).map(({ loan, decision }): QueueItem => {
+      const tr = loan.tranches.find((x) => x.status === "pendiente");
+      const amount = tr?.amountUsd ?? loan.next.amountUsd;
+      const ready = !!tr && tr.checklist.every((c) => c.status === "ok");
+      const p20 = coverageUnder(loan, STANDARD_STRESS.price);
+      return {
+        key: decisionKey(loan, decision),
+        ref: loan.id,
+        type: t(`Conformidad del ${tr?.id ?? "tramo"}`, `${tr?.id ?? "Tranche"} sign-off`),
+        due: decision.dueDate ?? decision.date,
+        state: loan.state,
+        situation: t(decision.basis),
+        amount,
+        coverage: loan.coverageToday,
+        stressed: p20,
+        exposureAfter: loan.disbursedUsd + amount,
+        exposureLabel: t("Exposición tras liberar", "Exposure after release"),
+        rec: ready
+          ? { text: t(`Dar conformidad por ${usd(amount)}`, `Sign off ${usd(amount)}`), detail: p20 < COVERAGE_BANDS.ambar ? t("Con condición: el T3 se ajusta al precio vigente en su hito", "With a condition: the T3 is resized to the price at its milestone") : t("Monto completo", "Full amount"), tone: "green" }
+          : { text: t("Esperar el aforo", "Wait for the field estimate"), detail: t("El monto final se calcula sobre el volumen verificado", "The final amount is sized on the verified volume"), tone: "amber" },
+        action: t("Su conformidad", "Your sign-off"),
+        kind: "signoff",
+        open: () => go("expediente", loan.id),
+        form: {
+          options: [
+            { kind: "info", label: t("Pedir información", "Request information") },
+            { kind: "conformidad_condicion", label: t("Conformidad condicionada", "Conditioned sign-off"), disabled: !ready },
+            { kind: "conformidad", label: t("Dar conformidad", "Give sign-off"), primary: true, disabled: !ready },
+          ],
+          suggestion: !ready
+            ? t(`Se espera el aforo del ${date(decision.date, "es", false)}; el monto final se fija sobre el volumen verificado.`, `Waiting for the ${date(decision.date, "en", false)} field estimate; the final amount is set on the verified volume.`)
+            : p20 >= COVERAGE_BANDS.ambar
+              ? t(`Checklist completo; cobertura ${cov(loan.coverageToday)} y ${cov(p20)} con precio −20%. Conformidad por ${usd(amount)}.`, `Checklist complete; coverage ${cov(loan.coverageToday)} and ${cov(p20)} at price −20%. Sign-off for ${usd(amount)}.`)
+              : t(`Checklist completo; con precio −20% la cobertura queda en ${cov(p20)}. Conformidad condicionada: el T3 se ajusta al precio esperado vigente en su hito.`, `Checklist complete; at price −20% coverage would be ${cov(p20)}. Conditioned sign-off: T3 is resized to the expected price at its milestone.`),
+          placeholder: t("p. ej. Aforo y facturas del T1 conciliados; conformidad con T3 sujeto al precio FOB en su hito.", "e.g. Field estimate and T1 invoices reconciled; sign-off with T3 subject to the FOB price at its milestone."),
+          disabled: decision.date > PORTFOLIO.cutoff,
+          answer: answers[decisionKey(loan, decision)],
+          record: (a) => onAnswer(decisionKey(loan, decision), a),
+          done: (k) => (k === "conformidad" ? t("Conformidad registrada", "Sign-off recorded") : k === "conformidad_condicion" ? t("Conformidad condicionada registrada", "Conditioned sign-off recorded") : t("Información solicitada", "Information requested")),
+        },
+      };
+    }),
+    ...PORTFOLIO.applications.filter((a) => !answers[appKey(a)]).map((a): QueueItem => {
+      const vetoCheck = a.checks.find((c) => c.state === "veto");
+      return {
+        key: a.id,
+        ref: a.id,
+        type: t("Solicitud de crédito", "Credit application"),
+        due: a.decisionDueDate,
+        state: a.veto || a.coverage === null ? "veto" : stateFromCoverage(a.coverage),
+        situation: "",
+        amount: a.requestedUsd,
+        coverage: a.coverage,
+        stressed: a.coverage === null ? null : coverageUnder(a, STANDARD_STRESS.price),
+        exposureAfter: a.veto ? null : a.tranches[0].amountUsd,
+        exposureLabel: t("Exposición tras aprobar (T1)", "Exposure after approval (T1)"),
+        rec:
+          a.recommendation === "rechazar"
+            ? { text: t("Rechazar", "Decline"), detail: vetoCheck ? t(`Cultivo no verificable · ${t(vetoCheck.value)}`, `Crop not verifiable · ${t(vetoCheck.value)}`) : t("Cosecha no verificable", "Harvest cannot be verified"), tone: "red" }
+            : a.condition
+              ? { text: t(`Aprobar ${usd(a.condition.lineUsd)} en lugar de ${usd(a.requestedUsd)}`, `Approve ${usd(a.condition.lineUsd)} instead of ${usd(a.requestedUsd)}`), detail: t("Así la cobertura se mantiene sobre 1.50x con precio −20% y con volumen −30%", "That keeps coverage above 1.50x with price −20% and with volume −30%"), tone: "amber" }
+              : { text: t(`Aprobar ${usd(a.requestedUsd)}`, `Approve ${usd(a.requestedUsd)}`), detail: t("Monto solicitado", "Requested amount"), tone: "green" },
+        action: t("Su decisión de crédito", "Your credit decision"),
+        kind: a.veto ? "veto" : a.condition ? "condition" : "plain",
+        open: () => go("solicitud", a.id),
+        openLabel: t("Abrir solicitud", "Open application"),
+        form: {
+          options: [
+            { kind: "aprobar", label: a.condition ? t(`Aprobar con ${usd(a.condition.lineUsd)}`, `Approve with ${usd(a.condition.lineUsd)}`) : t("Aprobar", "Approve"), primary: a.recommendation !== "rechazar" },
+            { kind: "rechazar", label: t("Rechazar", "Decline"), primary: a.recommendation === "rechazar" },
+            { kind: "info", label: t("Pedir inspección o información", "Request inspection or information") },
+          ],
+          suggestion: a.recommendation === "rechazar"
+            ? t(`Rechazada según la recomendación de TruMarket: ${a.veto ? "veto técnico." : "no cumple el estrés estándar."}`, `Declined per TruMarket's recommendation: ${a.veto ? "technical veto." : "fails the standard stress."}`)
+            : a.condition
+              ? t(`Aprobada con una línea de ${usd(a.condition.lineUsd)}: pasa el estrés estándar (precio −20% y volumen −30%) sobre ${cov(COVERAGE_BANDS.ambar)}.`, `Approved with a line of ${usd(a.condition.lineUsd)}: passes the standard stress (price −20% and volume −30%) above ${cov(COVERAGE_BANDS.ambar)}.`)
+              : t("Aprobada según la evaluación de crédito y técnica.", "Approved per the credit and technical assessment."),
+          placeholder: a.recommendation === "rechazar" ? t("p. ej. Rechazada por veto técnico: cultivo no verificable.", "e.g. Declined on a technical veto: crop cannot be verified.") : t("p. ej. Aprobada según la evaluación de crédito y técnica.", "e.g. Approved per the credit and technical assessment."),
+          record: (ans) => onAnswer(appKey(a), ans),
+          done: (k) => (k === "aprobar" ? t("Aprobación registrada", "Approval recorded") : k === "rechazar" ? t("Rechazo registrado", "Decline recorded") : t("Inspección o información solicitada", "Inspection or information requested")),
+        },
+      };
+    }),
+  ].sort((x, y) => x.due.localeCompare(y.due));
+  const tranchesUsd = items.filter((x) => x.kind === "signoff").reduce((s, x) => s + x.amount, 0);
+  const appsUsd = items.filter((x) => x.kind !== "signoff").reduce((s, x) => s + x.amount, 0);
+  const critical = items.filter(isCritical).length;
+  const shown = items.filter(FILTERS.find((f) => f.id === filter)!.match);
   // Status of each upcoming milestone, in words: is the bank needed, and when.
   const status = (u: (typeof PORTFOLIO.upcoming)[number]) => {
     const loan = loanById(u.loanId);
@@ -233,10 +334,41 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
   };
   return (
     <div className="mx-auto max-w-[1100px] space-y-4">
-      {all.length === 0 && PORTFOLIO.applications.length === 0 && <p className="text-sm text-bcp-muted">{t("Nada pendiente.", "Nothing pending.")}</p>}
-      {all.map((p) => (
-        <DecisionBlock key={decisionKey(p.loan, p.decision)} loan={p.loan} decision={p.decision} cutoff={PORTFOLIO.cutoff} answer={answers[decisionKey(p.loan, p.decision)]} onAnswer={(a) => onAnswer(decisionKey(p.loan, p.decision), a)} onOpen={() => go("expediente", p.loan.id)} />
-      ))}
+      {items.length === 0 && <p className="text-sm text-bcp-muted">{t("Nada pendiente.", "Nothing pending.")}</p>}
+      {/* Overview: how many, what is at stake (tranches and new lines kept apart), and what needs attention first. */}
+      <section aria-label={t("Resumen de decisiones", "Decisions overview")} className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-bcp-border bg-bcp-border lg:grid-cols-4">
+        {[
+          [t("Decisiones pendientes", "Pending decisions"), String(items.length)],
+          [t("En tramos", "In tranches"), usd(tranchesUsd)],
+          [t("En solicitudes", "In applications"), usd(appsUsd)],
+          [t("Críticas · vencidas o con veto", "Critical · overdue or vetoed"), String(critical)],
+        ].map(([k, v]) => (
+          <div key={k} className="bg-white px-5 py-4">
+            <p className="lbl">{k}</p>
+            <p className="num mt-1 text-[22px] font-bold text-bcp-ink">{v}</p>
+          </div>
+        ))}
+      </section>
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div role="group" aria-label={t("Filtrar decisiones", "Filter decisions")} className="flex flex-wrap gap-1.5">
+          {FILTERS.map((f) => {
+            const n = items.filter(f.match).length;
+            return (
+              <button key={f.id} type="button" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)} className={`min-h-[36px] rounded-full border px-3.5 text-sm font-semibold ${filter === f.id ? "border-bcp-ink bg-bcp-ink text-white" : "border-bcp-border bg-white text-bcp-ink hover:border-bcp-ink"}`}>
+                {t(f.label)} <span className="num ml-1 opacity-70">{n}</span>
+              </button>
+            );
+          })}
+        </div>
+        <span className="lbl">{t("Ordenadas por fecha de vencimiento", "Sorted by due date")}</span>
+      </div>
+
+      <div className="space-y-3">
+        {shown.map((x) => (
+          <QueueCard key={x.key} item={x} cutoff={PORTFOLIO.cutoff} />
+        ))}
+      </div>
 
       <SectionTitle title={t("Próximos 30 días", "Next 30 days")} />
       <Card>
@@ -270,14 +402,6 @@ function Decisions({ go, answers, onAnswer }: { go: (v: View, id?: string | null
         </div>
       </Card>
 
-      {PORTFOLIO.applications.length > 0 && (
-        <>
-          <SectionTitle title={t("Solicitudes por aprobar o rechazar", "Applications to approve or decline")} />
-          <Card>
-            <ApplicationsTable apps={PORTFOLIO.applications} onOpen={(x) => go("solicitud", x)} answers={answers} />
-          </Card>
-        </>
-      )}
     </div>
   );
 }
@@ -323,12 +447,12 @@ function Reports({ go }: { go: (v: View, id?: string | null) => void }) {
   const t = useT();
   return (
     <div className="mx-auto max-w-[1000px] space-y-4">
-      <SectionTitle title={t("Reportes mensuales", "Monthly reports")} sub={t("Para el comité de crédito y la SBS · A4", "For the credit committee and the SBS · A4")} />
+      <SectionTitle title={t("Reportes mensuales", "Monthly reports")} />
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="font-semibold">{t("Noviembre 2026", "November 2026")}</p>
-            <p className="lbl">{t(`corte ${date(PORTFOLIO.cutoff, "es")} · 2 páginas · datos ilustrativos`, `cut-off ${date(PORTFOLIO.cutoff, "en")} · 2 pages · illustrative data`)}</p>
+            <p className="lbl">{t(`corte ${date(PORTFOLIO.cutoff, "es")} · 2 páginas`, `cut-off ${date(PORTFOLIO.cutoff, "en")} · 2 pages`)}</p>
           </div>
           <Btn primary onClick={() => go("reporte")}>{t("Ver y descargar (PDF)", "View and download (PDF)")}</Btn>
         </div>
@@ -388,7 +512,7 @@ function Method() {
           <table className="w-full min-w-[720px] text-sm">
             <thead>
               <tr className="border-b border-bcp-border text-left">
-                {[t("Señal", "Signal"), t("Ámbar", "Amber"), t("Naranja", "Orange"), t("Rojo", "Red"), t("Fuente", "Source")].map((h) => (
+                {[t("Señal", "Signal"), t("Riesgo medio", "Medium risk"), t("Riesgo elevado", "Elevated risk"), t("Riesgo alto", "High risk"), t("Fuente", "Source")].map((h) => (
                   <Lbl key={h} as="th" className="py-2 pr-3 font-normal">
                     {h}
                   </Lbl>

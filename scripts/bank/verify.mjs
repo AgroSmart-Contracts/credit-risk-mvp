@@ -34,7 +34,8 @@ const check = (name, ok) => {
   if (!ok) failed++;
   log(`${ok ? "pass" : "FAIL"}  ${name}`);
 };
-const post = (u, body, h = {}) => fetch(base + u, { method: "POST", headers: { "Content-Type": "application/json", ...h }, body: JSON.stringify(body) });
+// Browsers send Origin on a POST; the default here is this site, as a browser would.
+const post = (u, body, h = {}) => fetch(base + u, { method: "POST", headers: { "Content-Type": "application/json", Origin: base, ...h }, body: JSON.stringify(body) });
 const step = Math.floor(Date.now() / 30000);
 
 check("data without a session is refused", (await fetch(`${base}/api/data`)).status === 401);
@@ -42,6 +43,7 @@ check("forged cookie is refused", (await fetch(`${base}/api/data`, { headers: { 
 for (const u of ["/private/view-model.json", "/api/private/view-model.json", "/pre-harvest/sentinel-ica-0177.json", "/api/market-intel-rate", "/api/pre-harvest-data"]) check(`${u} is not served`, (await fetch(base + u)).status === 404);
 check("wrong password is refused", (await post("/api/login", { email: "verify@bank.test", password: "wrong", code: totp(b32, step) })).status === 401);
 check("right password with a wrong code is refused", (await post("/api/login", { email: "verify@bank.test", password, code: "000000" })).status === 401);
+check("login with no Origin or Referer is refused", (await fetch(`${base}/api/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: "verify@bank.test", password, code: totp(b32, step) }) })).status === 405);
 check("login from another site is refused", (await post("/api/login", { email: "verify@bank.test", password, code: totp(b32, step) }, { Origin: "https://evil.test" })).status === 405);
 const ok = await post("/api/login", { email: "verify@bank.test", password, code: totp(b32, step) });
 const cookie = ok.headers.get("set-cookie") ?? "";
@@ -50,7 +52,7 @@ check("cookie is HttpOnly, Secure, SameSite=Strict", /HttpOnly/.test(cookie) && 
 check("a used code cannot be replayed", (await post("/api/login", { email: "verify@bank.test", password, code: totp(b32, step) })).status === 401);
 check("password-only account signs in", (await post("/api/login", { email: "password@bank.test", password })).status === 200);
 check("password-only account refuses a wrong password", (await post("/api/login", { email: "password@bank.test", password: "wrong" })).status === 401);
-check("malformed login body is rejected", (await fetch(`${base}/api/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{nope" })).status === 400);
+check("malformed login body is rejected", (await fetch(`${base}/api/login`, { method: "POST", headers: { "Content-Type": "application/json", Origin: base }, body: "{nope" })).status === 400);
 check("non-text credentials are rejected", (await post("/api/login", { email: { a: 1 }, password: ["x"] })).status === 401);
 check("oversized password is rejected", (await post("/api/login", { email: "password@bank.test", password: "x".repeat(300) })).status === 401);
 const session = cookie.split(";")[0];
@@ -62,6 +64,9 @@ const [p, s] = session.split("=")[1].split(".");
 check("tampered session is refused", (await fetch(`${base}/api/data`, { headers: { cookie: `__Host-tm_session=${p}x.${s}` } })).status === 401);
 for (let i = 0; i < 6; i++) await post("/api/login", { email: "lock@bank.test", password: "x", code: "000000" });
 check("repeated failures are locked out", (await post("/api/login", { email: "lock@bank.test", password: "x", code: "000000" })).status === 429);
+// A client-set X-Forwarded-For must not buy fresh attempts.
+for (let i = 0; i < 6; i++) await post("/api/login", { email: "spoof@bank.test", password: "x", code: "000000" }, { "X-Forwarded-For": `203.0.113.${i}` });
+check("a forged X-Forwarded-For does not reset the lockout", (await post("/api/login", { email: "spoof@bank.test", password: "x", code: "000000" }, { "X-Forwarded-For": "198.51.100.7" })).status === 429);
 server.close();
 log(failed ? `${failed} FAILED` : "all checks passed");
 process.exit(failed ? 1 : 0);

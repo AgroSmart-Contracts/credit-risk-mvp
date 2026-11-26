@@ -5,17 +5,18 @@
  */
 import { useCallback, useState } from "react";
 import { GEO } from "../../data/bcp/technical";
-import { cov, date, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
+import { COVERAGE_BANDS, L, cov, date, harvestBuild, pct, stateFromCoverage, usd, haLabel } from "../../lib/bcp/calc";
 import { BANK_EDITION } from "./edition";
 import type { Application, Portfolio } from "../../lib/bcp/types";
-import { appKey, type Answer } from "./answers";
+import { appKey, useReason, type Answer } from "./answers";
 import { FieldImages } from "./FieldImages";
-import { VigourPattern } from "./VigourPattern";
 import { ScoreBreakdown, StressGrid } from "./ScoreStress";
-import { CoverageBuild, StressCompare } from "./CoverageBuild";
+import { CoverageBuild } from "./CoverageBuild";
+import { LineCompare, RepaymentCard } from "./Repayment";
 import { sourceTx, useLang, useT, useToast } from "./shared";
-import { Stamp } from "./Decision";
-import { Btn, Card, Chip, ExampleChip, Lbl, Modal, Prov, SectionTitle, StateChip } from "./ui";
+import { LockedDecision, Rationale, Stamp } from "./Decision";
+import { Btn, Card, Chip, Lbl, LockedBtn, Modal, PilotLocked, Prov, SectionTitle, StateChip } from "./ui";
+import { PILOT_NOTE } from "./nav";
 
 
 const ANSWER_TEXT = {
@@ -159,7 +160,6 @@ export function ApplicationsTable({ apps, onOpen, answers }: { apps: Application
 export function ApplicationsPage({ data, onOpen, answers }: { data: Portfolio; onOpen: (id: string) => void; answers: Record<string, Answer> }) {
   return (
     <div className="mx-auto max-w-[1200px] space-y-4">
-      <ExampleChip kind="portfolio" />
       <Card>
         <ApplicationsTable apps={data.applications} onOpen={onOpen} answers={answers} />
       </Card>
@@ -176,7 +176,14 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
   const t1 = app.tranches[0];
   // Fixed order on every application, so a button is never in a different place; the recommended one is highlighted.
   const kinds = ["aprobar", "rechazar", "info"] as const;
-  const label = { aprobar: app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or information") };
+  const label = { aprobar: app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : t("Aprobar", "Approve"), rechazar: t("Rechazar", "Decline"), info: t("Pedir inspección o información", "Request inspection or info") };
+  const reason = useReason();
+  // TruMarket's draft reason, from the recommendation and the standard stress.
+  const suggestion = app.recommendation === "rechazar"
+    ? L(`Rechazada según la recomendación de TruMarket: ${app.veto ? "veto técnico." : "no cumple el estrés estándar."}`, `Declined per TruMarket's recommendation: ${app.veto ? "technical veto." : "fails the standard stress."}`)
+    : app.condition
+      ? L(`Aprobada con una línea de ${usd(app.condition.lineUsd)}: pasa el estrés estándar (precio −20% y volumen −30%) sobre ${cov(COVERAGE_BANDS.ambar)}.`, `Approved with a line of ${usd(app.condition.lineUsd)}: passes the standard stress (price −20% and volume −30%) above ${cov(COVERAGE_BANDS.ambar)}.`)
+      : L("Aprobada según la evaluación de crédito y técnica.", "Approved per the credit and technical assessment.");
   const recommended = (k: (typeof kinds)[number]) => k === app.recommendation || (k === "aprobar" && app.recommendation === "aprobar_condicion");
 
   return (
@@ -189,7 +196,6 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           <Chip tone="ink">{t("Solicitud", "Application")}</Chip>
           <RecommendationChip a={app} />
           {app.veto && <StateChip state="veto" />}
-          <ExampleChip kind="file" />
         </div>
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -202,7 +208,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
             <Btn onClick={onMemo}>{t("Memorando de evaluación (PDF)", "Assessment memo (PDF)")}</Btn>
-            {!BANK_EDITION && <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
+            {BANK_EDITION ? <LockedBtn note={t(PILOT_NOTE)}>{t("Ver en el mapa", "View on the map")}</LockedBtn> : <Btn onClick={onMap}>{t("Ver en el mapa", "View on the map")}</Btn>}
           </div>
         </div>
       </header>
@@ -211,30 +217,52 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         <p className="text-[16px] font-medium leading-snug">{t(app.summary)}</p>
       </Card>
 
-      <section>
+      {app.coverage !== null && (
+        <RepaymentCard
+          input={app}
+          cutoff={data.cutoff}
+          middle={app.condition
+            ? { label: t("Con la condición", "On the condition"), value: cov(harvestBuild(app, {}, app.condition.dueAtMaturityUsd).coverage), sub: t(`línea de ${usd(app.condition.lineUsd)}`, `line of ${usd(app.condition.lineUsd)}`) }
+            : { label: t("Línea solicitada", "Requested line"), value: usd(app.requestedUsd), sub: t(`${app.tenorDays} días · ${usd(t1.amountUsd)} a la firma`, `${app.tenorDays} days · ${usd(t1.amountUsd)} at signing`) }}
+          areaHa={BANK_EDITION ? undefined : app.areaHa}
+          yieldTHa={BANK_EDITION ? undefined : app.yieldTHa}
+          chip={<RecommendationChip a={app} />}
+          drivers={{
+            volume: app.checks.filter((c) => c.group === "Cultivo y volumen" && !c.before).map((c) => ({ label: t(c.label), value: t(c.value), effect: t(c.effect), state: c.state, provenance: c.provenance, source: t(sourceTx(c)) })),
+            price: app.checks.filter((c) => c.group === "Precio y calidad" && !c.before).map((c) => ({ label: t(c.label), value: t(c.value), effect: t(c.effect), state: c.state, provenance: c.provenance, source: t(sourceTx(c)) })),
+          }}
+          onCalc={() => document.getElementById("calculo-cobertura")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+        />
+      )}
+
+      {app.condition && (
+        <section>
+          <SectionTitle title={t("Línea solicitada y línea recomendada", "Requested line and recommended line")} />
+          <LineCompare input={app} tenorDays={app.tenorDays} requestedUsd={app.requestedUsd} requestedDueUsd={app.dueAtMaturityUsd} condition={app.condition} />
+        </section>
+      )}
+
+      {app.coverage === null && <section>
         <SectionTitle title={t("Exposición si se aprueba", "Exposure if approved")} />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { k: t("Línea solicitada", "Requested line"), v: usd(app.requestedUsd), s: t(`${app.tenorDays} días · 3 tramos`, `${app.tenorDays} days · 3 tranches`) },
-            { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "T1" },
-            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: t("capital más costo estimado del banco", "principal plus estimated bank cost") },
-            { k: t("Cobertura a la solicitud", "Coverage at application"), v: app.coverage === null ? t("No verificable", "Not verifiable") : cov(app.coverage), s: app.coverage === null ? t("veto", "veto") : t("cosecha esperada ÷ saldo", "expected harvest ÷ amount due") },
-            { k: t("Precio de equilibrio", "Break-even price"), v: app.breakEvenPriceUsdKg === null ? t("n/d", "n/a") : `USD ${app.breakEvenPriceUsdKg.toFixed(2)}/kg`, s: t(`esperado USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`, `expected USD ${app.expectedPriceUsdKg.toFixed(2)}/kg`) },
+            { k: t("Desembolso a la firma", "Disbursed at signing"), v: usd(t1.amountUsd), s: "" },
+            { k: t("Saldo al vencimiento", "Due at maturity"), v: usd(app.dueAtMaturityUsd), s: "" },
+            { k: t("Cobertura a la solicitud", "Coverage at application"), v: t("No verificable", "Not verifiable"), s: "" },
           ].map((c) => (
             <Card key={c.k}>
               <Lbl>{c.k}</Lbl>
               <p className="num text-[22px] font-bold">{c.v}</p>
-              <p className="text-sm text-bcp-muted">{c.s}</p>
+              {c.s && <p className="text-sm text-bcp-muted">{c.s}</p>}
             </Card>
           ))}
         </div>
-        <p className="lbl mt-2">{app.tranches.map((x) => `${x.id} ${x.pct}% · ${usd(x.amountUsd)} · ${t(x.milestone)}`).join("   |   ")}</p>
-      </section>
+      </section>}
 
       <div className="grid gap-3 lg:grid-cols-2">
         <Card>
           <h2 className="text-[20px] font-bold">{app.recommendation === "rechazar" ? t("Por qué TruMarket recomienda rechazar", "Why TruMarket recommends declining") : app.recommendation === "aprobar_condicion" ? t("Por qué TruMarket recomienda aprobar con condición", "Why TruMarket recommends approval with a condition") : t("Por qué TruMarket recomienda aprobar", "Why TruMarket recommends approving")}</h2>
-          {app.condition && <p className="mt-2 rounded-md bg-bcp-ambar-bg px-3 py-2 text-sm font-semibold text-bcp-ambar-text">{t("Condición", "Condition")}: {t(app.condition.text)}</p>}
           <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm">
             {app.reasons.map((r, i) => (
               <li key={i}>{t(r)}</li>
@@ -243,18 +271,32 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         </Card>
         {/* The decision is the bank's: discretionary, on TruMarket's written recommendation. */}
         <Card tone="decision">
-          <Lbl>{t("Decisiones pendientes", "Pending decisions")}</Lbl>
+          <Lbl>{t("Su decisión", "Your decision")}</Lbl>
           <h2 className="text-[16px] font-bold">{t(`Aprobar o rechazar ${usd(app.requestedUsd)}`, `Approve or decline ${usd(app.requestedUsd)}`)}</h2>
           <p className="lbl">{t(`Vence ${date(app.decisionDueDate, "es")}`, `Due ${date(app.decisionDueDate, "en")}`)}</p>
           {answer ? (
-            <p className="mt-3">
+            <div className="mt-3">
               <Stamp text={ANSWER_TEXT[answer.kind as keyof typeof ANSWER_TEXT]?.[lang] ?? ""} when={date(answer.at.slice(0, 10), lang)} />
-            </p>
-          ) : BANK_EDITION ? null : (
-            <div className="mt-3 flex flex-wrap gap-2">
+              {answer.note && <p className="mt-2 text-sm"><b className="font-semibold">{t("Motivo del analista BCP", "BCP analyst's reason")}:</b> {answer.note}</p>}
+            </div>
+          ) : BANK_EDITION ? (
+            // Read-only for the bank until the pilot: TruMarket's recommendation, in place of the buttons.
+            <div className="mt-3">
+              <Lbl>{t("Recomendación TruMarket", "TruMarket recommendation")}</Lbl>
+              <p className="text-[20px] font-bold">{app.condition ? t(`Aprobar con ${usd(app.condition.lineUsd)}`, `Approve with ${usd(app.condition.lineUsd)}`) : app.recommendation === "rechazar" ? t("Rechazar", "Decline") : t("Aprobar", "Approve")}</p>
+              <div className="mt-2"><RecommendationChip a={app} /></div>
+              <div className="mt-4"><LockedDecision labels={kinds.map((k) => label[k])} /></div>
+            </div>
+          ) : (
+            <>
+            <div className="mt-3">
+              <Rationale reason={reason} suggestion={t(suggestion)} placeholder={app.recommendation === "rechazar" ? t("p. ej. Rechazada por veto técnico: cultivo no verificable.", "e.g. Declined on a technical veto: crop cannot be verified.") : t("p. ej. Aprobada según la evaluación de crédito y técnica.", "e.g. Approved per the credit and technical assessment.")} />
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2 [&>*]:flex-auto [&>*]:justify-center">
               {kinds.map((k) => (
                 <Btn key={k} primary={recommended(k)} onClick={() => {
-                  onAnswer({ kind: k as Answer["kind"], at: new Date().toISOString() });
+                  if (!reason.ok()) return;
+                  onAnswer({ kind: k as Answer["kind"], at: new Date().toISOString(), note: reason.note });
                   toast(`${ANSWER_TEXT[k][lang]} · ${app.id} ${usd(app.requestedUsd)}`);
                 }}>
                   {label[k]}
@@ -262,6 +304,7 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
                 </Btn>
               ))}
             </div>
+            </>
           )}
         </Card>
       </div>
@@ -300,14 +343,11 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
 
       {app.coverage !== null && (
         <div className="grid gap-3 lg:grid-cols-2 [&>*]:min-w-0">
-          <Card><CoverageBuild input={app} areaHa={app.areaHa} yieldTHa={app.yieldTHa} /></Card>
+          <Card><div id="calculo-cobertura" className="scroll-mt-32"><CoverageBuild input={app} areaHa={app.areaHa} yieldTHa={app.yieldTHa} /></div></Card>
           <Card>
-            <h3 className="text-[16px] font-bold">{app.condition ? t("Estrés estándar: solicitado y con la condición", "Standard stress: as requested and on the condition") : t("Estrés estándar", "Standard stress")}</h3>
-            <div className="mt-2">
-              <StressCompare input={app} cols={[{ label: usd(app.requestedUsd), dueUsd: app.dueAtMaturityUsd }, ...(app.condition ? [{ label: usd(app.condition.lineUsd), dueUsd: app.condition.dueAtMaturityUsd }] : [])]} />
-            </div>
+            <h3 className="text-[16px] font-bold">{t("Precio y volumen a la vez", "Price and volume together")}</h3>
             {stress ? (
-              <div className="mt-4"><StressGrid input={app} /></div>
+              <div className="mt-3"><StressGrid input={app} /></div>
             ) : (
               <button type="button" onClick={() => setStress(true)} className="mt-2 min-h-[44px] text-sm font-semibold text-bcp-green-text hover:underline">
                 {t("Ver la grilla de precio y volumen", "View the price and volume grid")} →
@@ -329,17 +369,16 @@ export function ApplicationFile({ app, data, onBack, onMap, onMemo, answer, onAn
         )}
       </div>
 
-      {app.vigourPattern && (
-        <Card>
-          <VigourPattern points={app.vigourPattern} />
-        </Card>
-      )}
-
-      {geo?.parcelId && geo.ring && (
-        <Card>
-          <SectionTitle title={t("Imagen del predio", "Parcel image")} sub={t("evidencia satelital de la solicitud", "satellite evidence for the application")} />
-          <FieldImages parcelId={geo.parcelId} ring={geo.ring} cutoff={data.cutoff} />
-        </Card>
+      {BANK_EDITION ? (
+        <PilotLocked title={t("Imagen satelital del predio", "Satellite image of the parcel")} note={t(PILOT_NOTE)} />
+      ) : (
+        geo?.parcelId &&
+        geo.ring && (
+          <Card>
+            <SectionTitle title={t("Imagen del predio", "Parcel image")} />
+            <FieldImages parcelId={geo.parcelId} ring={geo.ring} cutoff={data.cutoff} />
+          </Card>
+        )
       )}
     </div>
   );

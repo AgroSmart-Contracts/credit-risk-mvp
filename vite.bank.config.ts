@@ -13,6 +13,8 @@ const SWAP: Record<string, string> = {
   "src/data/bcp/technical.ts": "src/bank/data/technical.ts",
   "src/components/bcp/MapView.tsx": "src/bank/RegionView.tsx",
   "src/components/bcp/FieldImages.tsx": "src/bank/NoFieldImages.tsx",
+  "src/components/bcp/EvidenceDrawer.tsx": "src/bank/NoEvidenceDrawer.tsx",
+  "src/components/bcp/TechCharts.tsx": "src/bank/NoTechCharts.tsx",
 };
 const BLOCKED =
   /^src\/(App\.tsx|InternalApp|components\/pre-harvest|data\/(?!bcp\/(series-text|enso-classes))|lib\/(?!bcp\/)|types\/)/;

@@ -25,8 +25,11 @@ describe("BCP portfolio reconciles (spec 9.1)", () => {
     expect(F.stress.price.coverage).toBe(1.27);
     expect(F.stress.volume.coverage).toBe(1.24);
     expect(F.stress.both.coverage).toBe(0.89);
-    expect(F.stress.price.below).toEqual({ ambar: 5, naranja: 3, rojo: 0 });
-    expect(F.stress.both.below.rojo).toBe(5);
+    // Each loan counted once, in its own risk level: every scenario adds up to the 5 loans.
+    expect(F.stress.today.levels).toEqual({ verde: 5, ambar: 0, naranja: 0, rojo: 0 });
+    expect(F.stress.price.levels).toEqual({ verde: 0, ambar: 2, naranja: 3, rojo: 0 });
+    expect(F.stress.volume.levels).toEqual({ verde: 0, ambar: 2, naranja: 3, rojo: 0 });
+    expect(F.stress.both.levels).toEqual({ verde: 0, ambar: 0, naranja: 0, rojo: 5 });
   });
 
   it("exposure by state sums to disbursed", () => {

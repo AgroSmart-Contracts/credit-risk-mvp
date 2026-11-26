@@ -11,7 +11,7 @@ import { GEO } from "../../data/bcp/technical";
 import { bySeverity, cov, usd } from "../../lib/bcp/calc";
 import type { Portfolio } from "../../lib/bcp/types";
 import { STATE_SOLID, STATE_TEXT, useLang, useT } from "./shared";
-import { Card, ExampleChip, Lbl, StateChip } from "./ui";
+import { Card, Lbl, StateChip } from "./ui";
 
 /** Label offset from its marker, by side. */
 const LABEL_OFFSET: Record<"left" | "right" | "top" | "bottom", [number, number]> = { left: [-10, 0], right: [10, 0], top: [0, -10], bottom: [0, 10] };
@@ -94,7 +94,6 @@ export function MapView({ data, focus, onOpen }: { data: Portfolio; focus: strin
   const t = useT();
   return (
     <div className="mx-auto max-w-[1200px] space-y-4">
-      <ExampleChip kind="portfolio" />
       <div className="grid gap-3 lg:grid-cols-[1fr_20rem]">
         <LeafletMap data={data} focus={focus} onOpen={onOpen} />
         <Card>

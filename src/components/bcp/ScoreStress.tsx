@@ -90,7 +90,6 @@ export function StressGrid({ input, state }: { input: HarvestInput; state?: Stat
   return (
     <div>
       <h3 className="text-[16px] font-bold">{t("Prueba de estrés de la cobertura", "Coverage stress test")}</h3>
-      <p className="lbl">{t("Cobertura sobre ingreso neto si el precio y el volumen caen; los costos por kg no bajan con el precio", "Coverage on net revenue if price and volume fall; costs per kg do not fall with the price")}</p>
       <div className="mt-2 overflow-x-auto">
         <table className="w-full min-w-[440px] text-center text-sm">
           <thead>
@@ -111,8 +110,8 @@ export function StressGrid({ input, state }: { input: HarvestInput; state?: Stat
                   const s = stateFromCoverage(c.coverage);
                   const today = row.volume === 0 && c.price === 0;
                   // Today's cell: the band, labelled as such, and the loan's state when a control makes it worse.
-                  const band = today ? `${t("banda", "band")} ${t(STATE_TEXT[s]).toLowerCase()}` : t(STATE_TEXT[s]);
-                  const stateNote = today && state && state !== s && state !== "veto" ? `${t("estado", "state")} ${t(STATE_TEXT[state]).toLowerCase()}` : null;
+                  const band = t(STATE_TEXT[s]);
+                  const stateNote = today && state && state !== s && state !== "veto" ? `${t("expediente", "file")}: ${t(STATE_TEXT[state]).toLowerCase()}` : null;
                   return (
                     <td key={c.price} className="p-1">
                       <span className={`block rounded-md px-1 py-1.5 ${CELL[s]}`}>
@@ -130,8 +129,8 @@ export function StressGrid({ input, state }: { input: HarvestInput; state?: Stat
       </div>
       <p className="lbl mt-2">
         {t(
-          `Umbrales propuestos: ámbar bajo ${cov(COVERAGE_BANDS.ambar)}, naranja bajo ${cov(COVERAGE_BANDS.naranja)}, rojo bajo ${cov(COVERAGE_BANDS.rojo)}. Bajo 1.00x la cosecha no alcanza para el repago.`,
-          `Proposed thresholds: amber below ${cov(COVERAGE_BANDS.ambar)}, orange below ${cov(COVERAGE_BANDS.naranja)}, red below ${cov(COVERAGE_BANDS.rojo)}. Below 1.00x the harvest does not cover repayment.`,
+          `Umbrales propuestos: ${cov(COVERAGE_BANDS.ambar)} riesgo medio, ${cov(COVERAGE_BANDS.naranja)} riesgo elevado, ${cov(COVERAGE_BANDS.rojo)} riesgo alto. Bajo 1.00x la cosecha no alcanza para el repago.`,
+          `Proposed thresholds: ${cov(COVERAGE_BANDS.ambar)} medium risk, ${cov(COVERAGE_BANDS.naranja)} elevated risk, ${cov(COVERAGE_BANDS.rojo)} high risk. Below 1.00x the harvest does not cover repayment.`,
         )}
       </p>
     </div>

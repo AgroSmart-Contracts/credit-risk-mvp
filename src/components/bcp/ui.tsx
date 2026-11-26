@@ -4,9 +4,9 @@
  * badge, buttons, and a stacked bar with its numbers stated for screen readers.
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Lock } from "lucide-react";
 import { CAUSE_TEXT, type StateCause } from "../../lib/bcp/calc";
 import type { ConditionState, Provenance } from "../../lib/bcp/types";
-import { BANK_EDITION } from "./edition";
 import { PROV_TEXT, STATE_TEXT, useT } from "./shared";
 
 export function Card({ children, className = "", tone = "plain" }: { children: ReactNode; className?: string; tone?: "plain" | "dark" | "control" | "decision" }) {
@@ -26,7 +26,7 @@ export function Lbl({ children, className = "", as: As = "p" }: { children: Reac
 }
 
 /** Page-level tabs: every kind of data has one fixed place on the page. */
-export function PageTabs<T extends string>({ tabs, value, onChange, label }: { tabs: { id: T; label: string; count?: number }[]; value: T; onChange: (id: T) => void; label: string }) {
+export function PageTabs<T extends string>({ tabs, value, onChange, label }: { tabs: { id: T; label: string; count?: number; locked?: string; pilot?: boolean }[]; value: T; onChange: (id: T) => void; label: string }) {
   const anchor = useRef<HTMLDivElement>(null);
   const [top, setTop] = useState(0);
   // The bar sticks right below the app header, whose height depends on the screen width.
@@ -49,7 +49,8 @@ export function PageTabs<T extends string>({ tabs, value, onChange, label }: { t
       <div ref={anchor} aria-hidden />
       <div role="tablist" aria-label={label} style={{ top }} className="sticky z-20 -mx-4 flex gap-1 overflow-x-auto border-b border-bcp-border bg-bcp-bg px-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 print:hidden">
         {tabs.map((x) => (
-          <button key={x.id} type="button" role="tab" aria-selected={value === x.id} onClick={() => select(x.id)} className={`-mb-px min-h-[46px] shrink-0 whitespace-nowrap border-b-2 px-3.5 text-sm font-semibold ${value === x.id ? "border-bcp-ink text-bcp-ink" : "border-transparent text-bcp-muted hover:text-bcp-ink"}`}>
+          <button key={x.id} type="button" role="tab" aria-selected={value === x.id} aria-disabled={x.locked ? true : undefined} title={x.locked} onClick={() => !x.locked && select(x.id)} className={`-mb-px inline-flex min-h-[46px] shrink-0 items-center gap-1.5 whitespace-nowrap border-b-2 px-3.5 text-sm font-semibold ${x.locked ? "cursor-not-allowed border-transparent text-bcp-muted/60" : value === x.id ? "border-bcp-ink text-bcp-ink" : "border-transparent text-bcp-muted hover:text-bcp-ink"}`}>
+            {(x.locked || x.pilot) && <Lock className="h-3.5 w-3.5" aria-hidden />}
             {x.label}
             {x.count !== undefined && <span className="ml-1.5 rounded-full bg-bcp-fill px-1.5 py-[1px] text-[11px]">{x.count}</span>}
           </button>
@@ -240,10 +241,26 @@ export function CheckIcon({ status }: { status: "ok" | "pending" | "warn" | "fai
   );
 }
 
-/** The example-data chips required on every screen (spec 2.6). */
-export function ExampleChip({ kind }: { kind: "portfolio" | "file" }) {
-  const t = useT();
-  // Bank edition: stated once, in the header of every page.
-  if (BANK_EDITION) return null;
-  return <Chip>{kind === "portfolio" ? t("Cartera de ejemplo · datos ilustrativos", "Example portfolio · illustrative data") : t("Expediente de ejemplo", "Example file")}</Chip>;
+
+/** A pilot-only feature: shown so the bank knows it exists, locked until the pilot. */
+export function PilotLocked({ title, note }: { title: string; note: string }) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-dashed border-bcp-border bg-bcp-bg px-5 py-6 text-bcp-muted">
+      <Lock className="h-5 w-5 shrink-0" aria-hidden />
+      <div>
+        <p className="text-[15px] font-semibold text-bcp-ink">{title}</p>
+        <p className="text-sm">{note}</p>
+      </div>
+    </div>
+  );
+}
+
+/** A button for a pilot-only action: visible, disabled, with a lock. */
+export function LockedBtn({ children, note }: { children: ReactNode; note: string }) {
+  return (
+    <button type="button" disabled title={note} aria-label={`${typeof children === "string" ? children : ""} · ${note}`} className="inline-flex min-h-[44px] cursor-not-allowed items-center gap-1.5 rounded-lg border border-dashed border-bcp-border bg-white px-4 text-sm font-semibold text-bcp-muted">
+      <Lock className="h-3.5 w-3.5" aria-hidden />
+      {children}
+    </button>
+  );
 }

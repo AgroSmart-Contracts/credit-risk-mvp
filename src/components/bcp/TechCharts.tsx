@@ -57,7 +57,7 @@ export function TechChart({ id, s, loan, cutoff, portfolio = false }: { id: Seri
     const data = s.vigor.map((p) => ({ t: ts(p.date), v: p.v }));
     const last = s.vigor.at(-1)!.v;
     return (
-      <Frame id={id} today={`${last > 0 ? "+" : ""}${last}%`} aria={t(`Vigor del cultivo: ${last}% frente a lo normal del lote. Ámbar bajo -15%, naranja bajo -30%.`, `Crop vigour: ${last}% against the lot's normal. Amber below -15%, orange below -30%.`)}>
+      <Frame id={id} today={`${last > 0 ? "+" : ""}${last}%`} aria={t(`Vigor del cultivo: ${last}% frente a lo normal del lote. Riesgo medio bajo -15%, riesgo elevado bajo -30%.`, `Crop vigour: ${last}% against the lot's normal. Medium risk below -15%, elevated risk below -30%.`)}>
         <ResponsiveContainer>
           <ComposedChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
             <CartesianGrid stroke={GRID} vertical={false} />

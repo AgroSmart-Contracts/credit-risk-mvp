@@ -63,6 +63,9 @@ export function readLang(): Lang {
   return "es";
 }
 
+/** Why a feature is locked in the bank edition. */
+export const PILOT_NOTE = { es: "Disponible en el piloto", en: "Available in the pilot" } as const;
+
 /** Decisions still open for the bank: conformities due now and applications. */
 export const pendingCount = (answers: Record<string, Answer>) =>
   pendingDecisions(PORTFOLIO.loans, PORTFOLIO.cutoff).filter((p) => !answers[decisionKey(p.loan, p.decision)]).length +
@@ -78,7 +81,7 @@ export function bcpNavItems(lang: Lang, answers: Record<string, Answer>): Sideba
     { id: "excepciones", label: t("Excepciones", "Exceptions"), icon: AlertTriangle, count: PORTFOLIO.exceptions.length, tone: "watch" },
     // Monthly reports and Methodology are hidden from the menu; their pages stay reachable
     // (the portfolio's "Download monthly report" button, direct links).
-    ...(BANK_EDITION ? [] : [{ id: "mapa", label: t("Mapa de predios", "Parcel map"), icon: MapIcon }]),
+    { id: "mapa", label: t("Mapa de predios", "Parcel map"), icon: MapIcon, ...(BANK_EDITION ? { locked: PILOT_NOTE[lang] } : {}) },
   ];
 }
 

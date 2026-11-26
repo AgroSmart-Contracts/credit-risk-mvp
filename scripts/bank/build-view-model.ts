@@ -6,8 +6,6 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { PORTFOLIO } from "../../src/data/bcp/dataset";
 import { technicalSeries } from "../../src/data/bcp/technical";
-import series0177 from "../../src/data/pre-harvest/sentinel-series-ica-0177.json";
-import series0188 from "../../src/data/pre-harvest/sentinel-series-ica-0188.json";
 import { RULINGS } from "../../src/data/bcp/rulings";
 import type { Application, Cause, Condition, Loan, Tx } from "../../src/lib/bcp/types";
 
@@ -24,6 +22,9 @@ const WORDS: Array<[RegExp, string, string]> = [
   [/ERA5 \+ (licencia|licence)/g, "Clima y licencia", "Climate and licence"],
   [/ERA5/g, "Clima", "Climate"],
   [/ENFEN, (comunicado|communiqué) 19-2026 · Niño 1\+2 \(NOAA\) (oct|Oct) 2026/g, "Fuente pública · oct 2026", "Public source · Oct 2026"],
+  [/\b(NOAA|ENFEN|OISST)\b/g, "Fuente pública", "Public source"],
+  [/\b(Coface)\b/gi, "Aseguradora de crédito", "Credit insurer"],
+  [/\b(Veritrade|Comtrade)\b/gi, "Mercado de exportación", "Export market"],
   [/SUNARP/g, "Registro público", "Public registry"],
   [/\bANA\b/g, "Registro de agua", "Water registry"],
   [/Exportaciones de palta Hass \(aduanas\) · ago 2026|Hass avocado exports \(customs\) · Aug 2026/g, "Mercado de exportación", "Export market"],
@@ -46,24 +47,6 @@ const condition = (c: Condition): Condition => ({ ...c, threshold: NO_THRESHOLD,
 const cause = (c: Cause): Cause => (hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.status === "observacion") } : c);
 const TRIGGER: Tx = { es: "Gatillo contractual", en: "Contractual trigger" };
 
-type Reading = { date: string; ndviMean: number; parcelClearPct: number };
-function monthly(series: Reading[]) {
-  const by = new Map<number, number[]>();
-  for (const p of series) {
-    if (p.date < "2022-01-01" || p.parcelClearPct < 80) continue;
-    const m = Number(p.date.slice(5, 7));
-    by.set(m, [...(by.get(m) ?? []), p.ndviMean]);
-  }
-  // Rounded medians by calendar month: the shape of the season, not a traceable series.
-  return Array.from({ length: 12 }, (_, i) => {
-    const v = [...(by.get(i + 1) ?? [])].sort((a, b) => a - b);
-    return Math.round(v[Math.floor(v.length / 2)] * 20) / 20;
-  });
-}
-
-const parcel = monthly(series0177.series as Reading[]);
-const reference = monthly(series0188.series as Reading[]);
-const pattern = parcel.map((value, i) => ({ month: i + 1, value, reference: reference[i] }));
 
 /** The score stays internal: unexplained to the bank and not what sets a state. */
 const SCORELESS = /\b(score|tier)\b/i;
@@ -86,7 +69,6 @@ const applications: Application[] = PORTFOLIO.applications.map(({ score: _s, tie
   checks: a.checks.map((c) =>
     c.label.es === "Área declarada frente a la medida" ? { ...c, value: { es: "Coincide con lo declarado (diferencia menor al 1%)", en: "Matches the declaration (under 1% difference)" }, source: { es: "Medición satelital", en: "Satellite measurement" } } : hasRange(c.effect) ? { ...c, effect: effectLabel(c.effect, c.state === "observacion" || c.provenance === "estimado") } : c,
   ),
-  ...(a.id === "ICA-0177" ? { vigourPattern: pattern } : {}),
 }) as unknown as Application);
 
 // Only El Niño leaves as a series; crop, water, weather and price histories stay private.
